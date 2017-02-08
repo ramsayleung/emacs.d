@@ -1,7 +1,12 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
-(use-package counsel)
+(use-package counsel
+  :ensure t
+  )
+
+(use-package avy
+  :ensure t)
 (use-package ivy :ensure t
   :diminish (ivy-mode . "")
   :bind
@@ -21,5 +26,8 @@
   (setq ivy-re-builders-alist
 	;; allow input not in order
         '((t   . ivy--regex-ignore-order))))
+(use-package counsel-projectile
+  :ensure t
+  :config(counsel-projectile-on))
 (provide 'init-ivy)
 ;;; init-ivy.el ends here

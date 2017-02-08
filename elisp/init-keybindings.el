@@ -36,13 +36,16 @@
 (with-eval-after-load 'dired-mode
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
+;;; which-key prefix
+
+;;move evil keybindings to init-evil.el
 
 ;; Evil mode module
 ;; (evil-leader/set-key
 ;;   "ad" 'dired
 ;;   "bb" 'switch-to-buffer
 ;;   "bo" 'occur-dwim
-;;   "el" 'flycheck-list-errors 
+;;   "el" 'flycheck-list-errors
 ;;   "en" 'flycheck-next-error 
 ;;   "ep" 'flycheck-previous-error
 ;;   "ff" 'find-file

@@ -2,19 +2,22 @@
 ;;; Code:
 ;;; Commentary:
 (use-package evil
-  :config
-  (evil-mode t))
+  :ensure t
+  :config(evil-mode t)
+  )
 ;; (evil-mode 1)
 (use-package evil-surround
+  :ensure t
   :config
   (global-evil-surround-mode t))
 
 (use-package evil-leader
+  :ensure t
   :config(progn
 	   (global-evil-leader-mode)
 	   (evil-leader/set-leader "<SPC>")
 	   (evil-leader/set-key
-	     "; ;" 'evilnc-comment-or-uncomment-lines
+	     ";" 'evilnc-comment-operator
 	     "a d" 'dired
 	     "b b" 'ivy-switch-buffer
 	     "b l" 'switch-to-buffer
@@ -26,14 +29,20 @@
 	     "f f" 'counsel-find-file
 	     "f r" 'recentf-open-files
 	     "f s" 'save-buffer
-	     "h d k" 'describe-key
-	     "h d f" 'describe-function
 	     "h d d" 'apropos-documentation
+	     "h d f" 'counsel-describe-function
+	     "h d k" 'describe-key
+	     "h d v" 'counsel-describe-variable
 	     "g s" 'magit-status
 	     "j j" 'avy-goto-char
 	     "o a" 'org-agenda
 	     "q s" 'save-buffers-kill-terminal
-	     "p s" 'helm-ag-project-root
+	     "p a" 'helm-ag-project-root
+	     "p f" 'counsel-projectile-find-file
+	     "p d" 'counsel-projectile-find-dir
+	     "p b" 'counsel-projectile-switch-to-buffer
+	     "p s s" 'counsel-projectile-ag
+	     "p p" 'counsel-projectile-switch-project
 	     "v" 'er/expand-region
 	     "s a" 'counsel-ag
 	     "s g" 'counsel-git
@@ -51,6 +60,8 @@
 	     "1"  'select-window-1
 	     "2"  'select-window-2
 	     "3"  'select-window-3
+	     "4"  'select-window-4
+	     "5"  'select-window-5
 	     )
 	   (evil-add-hjkl-bindings occur-mode-map 'emacs
 	     (kbd "/")       'evil-search-forward
@@ -74,6 +85,7 @@
 	     ("C-a" . evil-beginning-of-line))
   )
 (use-package evil-nerd-commenter
+  :ensure t
   :config
   (evil-leader/set-key
     "cl" 'evilnc-quick-comment-or-uncomment-to-the-line

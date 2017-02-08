@@ -11,7 +11,10 @@
  '(eldoc-idle-delay 0.08)
  '(evil-leader/leader "SPC")
  '(evil-want-C-u-scroll t)
- '(expand-region-contract-fast-key "V"))
+ '(expand-region-contract-fast-key "V")
+ '(package-selected-packages
+   (quote
+    (counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -5,9 +5,8 @@
 
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
-
+(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+			 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 (package-initialize)
 
 ;; Bootstrap `use-package'
@@ -30,12 +29,6 @@
 ;; (package-refresh-contents)
 ;; (package-install 'use-package))
 ;;org
-(use-package which-key
-  :config
-  (which-key-mode))
-(use-package avy
-  :config
-  (global-set-key (kbd "C-:") 'avy-goto-char))
 
 (defvar my/packages '(;;org
 		      org-pomodoro

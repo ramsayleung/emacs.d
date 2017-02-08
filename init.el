@@ -23,7 +23,6 @@
 (add-to-list 'load-path "~/.emacs.d/elisp")
 
 (require 'init-evil)
-(require 'init-helm)
 (require 'init-ui)
 (require 'init-keybindings)
 (require 'init-better-default)
