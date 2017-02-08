@@ -25,6 +25,8 @@
   (powerline-default-theme)
   (setq powerline-default-separator 'nil)
   )
-
+;; customize font
+(add-to-list 'default-frame-alist
+	     '(font . "Source Code Pro-12"))
 (provide 'init-ui)
 ;;; init-ui.el ends here

@@ -10,12 +10,6 @@
 (defun open-my-file()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-;;(require 'hungry-delete)
-;; delete spaces at once
-;;(global-hungry-delete-mode t)
-(use-package hungry-delete
-  :ensure t
-  :config(global-hungry-delete-mode t))
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
 (ivy-mode 1)
