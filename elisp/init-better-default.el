@@ -63,35 +63,18 @@
 
 
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq dired-recursive-copies 'alway)
-(setq dired-recursive-deletes 'alway)
-
+(setq dired-recursive-copies 'always)
+(setq dired-recursive-deletes 'always)
 
 
 (require 'dired-x)
 
 (setq dired-dwim-target t)
 
-;;(define-advice show-paren-funtion (:around (fn) fix-show-paren-function)
-;;"Highlight enclosing parens"
-;;(cond ((looking-at-p "\\s(")(funcall fn))
-;;	(t (save-excursion
-;;	     (ignore-errors (backward-up-list))
-;;	     (funcall fn)))))
-;;(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-;;  "Highlight enclosing parens."
-;;  (cond ((looking-at-p "\\s(") (funcall fn))
-;;	(t (save-excursion
-;;	     (ignore-errors (backward-up-list))
-;;	     (funcall fn)))))
-;; remove windows end of line identiter
 (defun remove-dos-eol ()
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t)(replace-match "")))
-
-
-
 ;; dwim=do what i mean
 
 (defun occur-dwim()
@@ -107,9 +90,51 @@
 	regexp-history)
   (call-interactively 'occur))
 (set-language-environment "UTF-8")
-(setq show-paren-style 'expression)            ; Highlight text between parens
-
-(put 'dired-find-alternate-file 'disabled nil)
 (setq x-select-enable-clipboard-manager nil)
+(defun af-eshell-here ()
+  "Go to eshell and set current directory to the buffer's directory."
+  (interactive)
+  (let ((dir (file-name-directory (or (buffer-file-name)
+                                      default-directory))))
+    (if (get-buffer "*eshell*")
+	(if (string= (buffer-name) "*eshell*")(delete-window (selected-window))
+	  (progn
+	    (switch-to-buffer "*eshell*"))
+	  )
+      (progn
+	(split-window-vertically)
+	(other-window 1)
+	(eshell)
+	(eshell/pushd ".")
+	(cd dir)
+	(goto-char (point-max))
+	(eshell-kill-input)
+	(eshell-send-input)
+	))))
+(defadvice pop-to-buffer (before cancel-other-window first)
+  (ad-set-arg 1 nil))
+
+(ad-activate 'pop-to-buffer)
+
+;; Toggle window dedication
+(defun toggle-window-dedicated ()
+  "Toggle whether the current active window is dedicated or not"
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         (set-window-dedicated-p window 
+                                 (not (window-dedicated-p window))))
+       "Window '%s' is dedicated"
+     "Window '%s' is normal")
+   (current-buffer)))
+
+;; Press [pause] key in each window you want to "freeze"
+(global-set-key [pause] 'toggle-window-dedicated)
+(add-hook 'eshell-mode-hook
+	  (lambda ()
+	    (interactive)
+	    (set-window-dedicated-p (selected-window) 1)))
+(use-package shell-pop
+  :ensure t)
 (provide 'init-better-default)
 ;;; init-better-default.el ends here

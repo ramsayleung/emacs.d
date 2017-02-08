@@ -18,8 +18,10 @@
 	   (evil-leader/set-leader "<SPC>")
 	   (evil-leader/set-key
 	     ";" 'evilnc-comment-operator
+	     "'" 'shell-pop
 	     "a d" 'dired
 	     "b b" 'ivy-switch-buffer
+	     "b d" 'kill-this-buffer
 	     "b l" 'switch-to-buffer
 	     "b o" 'occur-dwim
 	     "e l" 'flycheck-list-errors

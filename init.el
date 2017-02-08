@@ -22,14 +22,18 @@
 (require 'cl)
 (add-to-list 'load-path "~/.emacs.d/elisp")
 
+
+(require 'init-packages)
 (require 'init-evil)
 (require 'init-ui)
 (require 'init-keybindings)
 (require 'init-better-default)
 (require 'init-better-editing)
-(require 'init-packages)
 (require 'init-ivy)
 (require 'init-org)
+(require 'init-web)
+(require 'init-python)
+(require 'init-elisp)
 
 (setq custom-file (expand-file-name "elisp/custom.el" user-emacs-directory))
 (load-file custom-file)

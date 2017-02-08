@@ -14,7 +14,10 @@
  '(expand-region-contract-fast-key "V")
  '(package-selected-packages
    (quote
-    (counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package))))
+    (counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
+ '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
+ '(shell-pop-window-size 75)
+ '(shell-pop-window-position "top"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
