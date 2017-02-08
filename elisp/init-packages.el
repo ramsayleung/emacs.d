@@ -56,7 +56,7 @@
 		      ;; hungry-delete
 		      swiper
 		      counsel
-		      ;; smartparens
+		      smartparens
 		      expand-region
 		      iedit
 		      ;;which-key
@@ -146,8 +146,6 @@
 	 ("\\.html\\'" . web-mode))
        auto-mode-alist))
 
-;; show single quote "'" in emacs and lisp-interaction-mode instead of single quote pair "''"
-(sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
 
 ;; reload all snippet and rebuild yasippet menu
 ;;(yas-reload-all) 

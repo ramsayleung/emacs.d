@@ -16,7 +16,7 @@
 	   (evil-leader/set-key
 	     "; ;" 'evilnc-comment-or-uncomment-lines
 	     "a d" 'dired
-	     "b b" 'helm-mini
+	     "b b" 'ivy-switch-buffer
 	     "b l" 'switch-to-buffer
 	     "b o" 'occur-dwim
 	     "e l" 'flycheck-list-errors
@@ -35,6 +35,8 @@
 	     "q s" 'save-buffers-kill-terminal
 	     "p s" 'helm-ag-project-root
 	     "v" 'er/expand-region
+	     "s a" 'counsel-ag
+	     "s g" 'counsel-git
 	     "s i" 'iedit-mode
 	     "s s" 'swiper
 	     "w d" 'delete-window
@@ -43,7 +45,7 @@
 	     "w /" 'split-window-right
 	     "w h" 'evil-window-left
 	     "w j" 'evil-window-down
-	     "w k" 'evil-window-up 
+	     "w k" 'evil-window-up
 	     "w l" 'evil-window-right
 	     "0"  'select-window-0
 	     "1"  'select-window-1
