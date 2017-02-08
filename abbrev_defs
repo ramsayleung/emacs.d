@@ -15,8 +15,6 @@
   '(
    ))
 
-(define-abbrev-table 'comint-mode-abbrev-table '())
-
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
@@ -40,13 +38,9 @@
     ("8sa" "samray" nil 0)
    ))
 
-(define-abbrev-table 'grep-mode-abbrev-table '())
-
 (define-abbrev-table 'help-mode-abbrev-table '())
 
 (define-abbrev-table 'html-mode-abbrev-table '())
-
-(define-abbrev-table 'ibuffer-mode-abbrev-table '())
 
 (define-abbrev-table 'idl-mode-abbrev-table '())
 
