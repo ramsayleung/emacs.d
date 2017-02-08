@@ -15,6 +15,11 @@
     (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
     )
   )
+
+;; delete spaces at once
+(use-package hungry-delete
+  :ensure t
+  :config(global-hungry-delete-mode t))
 (use-package hungry-delete
   :ensure t
   :config(hungry-delete-mode t))
@@ -30,6 +35,7 @@
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " f") "files")
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " g") "git/version-control")
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " h") "help")
+	   (which-key-add-key-based-replacements (concat evil-leader/leader " h d") "describe")
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " j") "jump/join/split")
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " p") "projects")
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " s") "search/symbol")
