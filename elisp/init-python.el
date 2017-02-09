@@ -31,5 +31,13 @@
 	   (add-hook 'python-mode-hook
 		     (lambda()(add-to-list 'company-backends 'company-jedi)))
 	   ))
+(use-package jedi
+  :ensure t
+  :config(add-hook 'python-mode-hook 'jedi:setup))
+
+;; Sort import with isort
+(use-package py-isort
+  :ensure t
+  :config(add-hook 'before-save-hook 'py-isort-before-save))
 (provide 'init-python)
 ;;; init-python.el ends here

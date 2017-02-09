@@ -50,7 +50,7 @@
 (require 'init-web)
 (require 'init-python)
 (require 'init-elisp)
-(require 'init-company)
+(require 'init-auto-completion)
 (require 'init-syntax-checking)
 
 (setq custom-file (expand-file-name "elisp/custom.el" user-emacs-directory))

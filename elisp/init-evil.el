@@ -56,6 +56,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	   (evil-leader/set-key
 	     ";" 'evilnc-comment-operator
 	     "'" 'shell-pop
+	     "TAB" 'samray/alternate-buffer
 	     "a d" 'dired
 	     "b b" 'ivy-switch-buffer
 	     "b d" 'kill-this-buffer
