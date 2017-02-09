@@ -1,15 +1,52 @@
 ;;; package --- Summary
 ;;; Code:
 ;;; Commentary:
+;;; esc quits
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 (use-package evil
   :ensure t
-  :config(evil-mode t)
+  :config
+  (progn
+    (evil-mode t)
+    (define-key evil-normal-state-map "\C-e" 'evil-end-of-line)
+    (define-key evil-insert-state-map "\C-e" 'end-of-line)
+    (define-key evil-visual-state-map "\C-e" 'evil-end-of-line)
+    (define-key evil-motion-state-map "\C-e" 'evil-end-of-line)
+    (define-key evil-normal-state-map "\C-a" 'evil-beginning-of-line)
+    (define-key evil-insert-state-map "\C-a" 'beginning-of-line)
+    (define-key evil-visual-state-map "\C-a" 'evil-beginning-of-line)
+    (define-key evil-motion-state-map "\C-a" 'evil-beginning-of-line)
+    (define-key evil-normal-state-map [escape] 'keyboard-quit)
+    (define-key evil-visual-state-map [escape] 'keyboard-quit)
+    (define-key evil-insert-state-map [escape] 'evil-normal-state)
+    (define-key evil-normal-state-map "\C-y" 'yank)
+    (define-key evil-insert-state-map "\C-y" 'yank)
+    (define-key evil-visual-state-map "\C-y" 'yank)
+    (define-key evil-normal-state-map "\C-w" 'evil-delete)
+    (define-key evil-insert-state-map "\C-w" 'evil-delete)
+    (define-key evil-visual-state-map "\C-w" 'evil-delete)
+    (define-key evil-insert-state-map "\C-r" 'search-backward)
+    )
   )
-;; (evil-mode 1)
+
 (use-package evil-surround
   :ensure t
   :config
-  (global-evil-surround-mode t))
+  (global-evil-surround-mode t)
+  )
 
 (use-package evil-leader
   :ensure t
@@ -72,19 +109,19 @@
 	     (kbd "C-d")     'evil-scroll-down
 	     (kbd "C-u")     'evil-scroll-up
 	     (kbd "C-w C-w") 'other-window))
-  :bind(
-	:map evil-normal-state-map
-	     ("C-e" . evil-end-of-line)
-	     ("C-a" . evil-beginnin-of-line)
-	     :map evil-visual-state-map
-	     ("C-e" . evil-end-of-line)
-	     ("C-a" . evil-beginning-of-line)
-	     :map evil-insert-state-map
-	     ("C-e" . end-of-line)
-	     ("C-a" . beginning-of-line)
-	     :map evil-motion-state-map
-	     ("C-e" . evil-end-of-line)
-	     ("C-a" . evil-beginning-of-line))
+  ;; :bind(
+  ;; 	:map evil-normal-state-map
+  ;; 	     ("C-e" . evil-end-of-line)
+  ;; 	     ("C-a" . evil-beginnin-of-line)
+  ;; 	     :map evil-visual-state-map
+  ;; 	     ("C-e" . evil-end-of-line)
+  ;; 	     ("C-a" . evil-beginning-of-line)
+  ;; 	     :map evil-insert-state-map
+  ;; 	     ("C-e" . end-of-line)
+  ;; 	     ("C-a" . beginning-of-line)
+  ;; 	     :map evil-motion-state-map
+  ;; 	     ("C-e" . evil-end-of-line)
+  ;; 	     ("C-a" . evil-beginning-of-line))
   )
 (use-package evil-nerd-commenter
   :ensure t
@@ -97,6 +134,13 @@
     "cr" 'comment-or-uncomment-region
     "cv" 'evilnc-toggle-invert-comment-line-by-line
     ))
+;; evil keybinding in magit
+(use-package evil-magit
+  :ensure t)
+
+;; Vim matchit ported into Emacs
+(use-package evil-matchit
+  :ensure t)
 (setcdr evil-insert-state-map nil)
 (define-key evil-insert-state-map [escape] 'evil-normal-state)
 (evilnc-default-hotkeys)

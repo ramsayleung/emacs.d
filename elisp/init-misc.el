@@ -1,6 +1,51 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
+
+;; make Emacs use the $PATH set up by the user's shell
+(use-package exec-path-from-shell
+  :ensure t)
+
+;; help you use shell easily on Emacs
+(use-package shell-pop
+  :ensure t)
+
+;; enhance dired
+;; (require 'dired+)
+;; (diredp-toggle-find-file-reuse-dir t)
+
+;; dired reuse directory buffer https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer
+(put 'dired-find-alternate-file 'disabled nil)
+(add-hook 'dired-mode-hook
+	  (lambda ()
+	    (define-key dired-mode-map (kbd "^")
+	      (lambda () (interactive) (find-alternate-file "..")))
+					; was dired-up-directory
+	    ))
+(eval-after-load "dired"
+  '(progn
+     (defadvice dired-advertised-find-file (around dired-subst-directory activate)
+       "Replace current buffer if file is a directory."
+       (interactive)
+       (let* ((orig (current-buffer))
+	      ;; (filename (dired-get-filename))
+	      (filename (dired-get-filename t t))
+	      (bye-p (file-directory-p filename)))
+	 ad-do-it
+	 (when (and bye-p (not (string-match "[/\\\\]\\.$" filename)))
+	   (kill-buffer orig))))))
+
+;; Emacs extension to increate selected region by semantic units
+(use-package expand-region
+  :ensure t
+  :config())
+
+;; popwin is a popup window manager for Emacs which makes you free from the hell
+;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
+(use-package popwin
+  :ensure t
+  :config(popwin-mode t))
+
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
@@ -10,18 +55,15 @@
 (defun open-my-file()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
-(ivy-mode 1)
+
 (define-advice show-paren-function (:around (fn) fix-show-paren-function)
   "Highlight enclosing parens."
   (cond ((looking-at-p "\\s(") (funcall fn))
         (t (save-excursion
              (ignore-errors (backward-up-list))
              (funcall fn)))))
-(setq ivy-use-virtual-buffers t)
 
-(setq make-backup-files nil)
 (abbrev-mode t)
 (define-abbrev-table 'global-abbrev-table '(
 					    ;; signature
@@ -60,12 +102,10 @@
 
 
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq dired-recursive-copies 'always)
-(setq dired-recursive-deletes 'always)
-
 
 (require 'dired-x)
-
+(setq dired-recursive-copies 'always)
+(setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)
 
 (defun remove-dos-eol ()
@@ -108,30 +148,28 @@
 	(eshell-kill-input)
 	(eshell-send-input)
 	))))
-(defadvice pop-to-buffer (before cancel-other-window first)
-  (ad-set-arg 1 nil))
+;; (defadvice pop-to-buffer (before cancel-other-window first)
+;;   (ad-set-arg 1 nil))
 
-(ad-activate 'pop-to-buffer)
+;; (ad-activate 'pop-to-buffer)
 
-;; Toggle window dedication
-(defun toggle-window-dedicated ()
-  "Toggle whether the current active window is dedicated or not"
-  (interactive)
-  (message
-   (if (let (window (get-buffer-window (current-buffer)))
-         (set-window-dedicated-p window 
-                                 (not (window-dedicated-p window))))
-       "Window '%s' is dedicated"
-     "Window '%s' is normal")
-   (current-buffer)))
+;; ;; Toggle window dedication
+;; (defun toggle-window-dedicated ()
+;;   "Toggle whether the current active window is dedicated or not."
+;;   (interactive)
+;;   (message
+;;    (if (let (window (get-buffer-window (current-buffer)))
+;;          (set-window-dedicated-p window 
+;;                                  (not (window-dedicated-p window))))
+;;        "Window '%s' is dedicated"
+;;      "Window '%s' is normal")
+;;    (current-buffer)))
 
 ;; Press [pause] key in each window you want to "freeze"
 (global-set-key [pause] 'toggle-window-dedicated)
-(add-hook 'eshell-mode-hook
-	  (lambda ()
-	    (interactive)
-	    (set-window-dedicated-p (selected-window) 1)))
-(use-package shell-pop
-  :ensure t)
-(provide 'init-better-default)
-;;; init-better-default.el ends here
+;; (add-hook 'eshell-mode-hook
+;; 	  (lambda ()
+;; 	    (interactive)
+;; 	    (set-window-dedicated-p (selected-window) 1)))
+(provide 'init-misc)
+;;; init-misc.el ends here

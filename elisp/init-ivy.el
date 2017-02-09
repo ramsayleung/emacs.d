@@ -4,7 +4,8 @@
 (use-package counsel
   :ensure t
   )
-
+(use-package swiper
+  :ensure t)
 (use-package avy
   :ensure t)
 (use-package ivy :ensure t
