@@ -26,6 +26,7 @@
 	   (which-key-mode t)
 	   (setq which-key-idle-delay 0.3)
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " a") "applications")
+	   (which-key-add-key-based-replacements (concat evil-leader/leader " a o") "org-mode")
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " b") "buffers")
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " c") "compile/comments")
 	   (which-key-add-key-based-replacements (concat evil-leader/leader " e") "errors")

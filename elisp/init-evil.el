@@ -58,6 +58,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	     "'" 'shell-pop
 	     "TAB" 'samray/alternate-buffer
 	     "a d" 'dired
+	     "a o a" 'org-agenda
 	     "b b" 'ivy-switch-buffer
 	     "b d" 'kill-this-buffer
 	     "b l" 'switch-to-buffer
@@ -78,7 +79,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	     "h d v" 'counsel-describe-variable
 	     "g s" 'magit-status
 	     "j j" 'avy-goto-char
-	     "o a" 'org-agenda
 	     "q s" 'save-buffers-kill-terminal
 	     "p a" 'helm-ag-project-root
 	     "p f" 'counsel-projectile-find-file
@@ -91,6 +91,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	     "s g" 'counsel-git
 	     "s i" 'iedit-mode
 	     "s s" 'swiper
+	     "t f" 'fci-mode
 	     "w d" 'delete-window
 	     "w D" 'delete-other-windows
 	     "w -" 'split-window-below

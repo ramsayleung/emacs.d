@@ -39,5 +39,17 @@
 (use-package py-isort
   :ensure t
   :config(add-hook 'before-save-hook 'py-isort-before-save))
+
+(use-package fill-column-indicator
+  :ensure t
+  :config (progn
+	    (setq fci-rule-width 1)
+	    (setq fci-rule-color "skyblue")
+	    (setq-default fill-column 79)
+	    (add-hook 'python-mode-hook 'fci-mode)))
+
+;;; To fix issue that there is weird eshell output with ipython
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt -i")
 (provide 'init-python)
 ;;; init-python.el ends here

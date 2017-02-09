@@ -18,9 +18,13 @@
  '(package-selected-packages
    (quote
     (wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
- '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
+ '(shell-pop-shell-type
+   (quote
+    ("ansi-term" "*ansi-term*"
+     (lambda nil
+       (ansi-term shell-pop-term-shell)))))
  '(shell-pop-window-position "bottom")
- '(shell-pop-window-size 30)
+ '(shell-pop-window-size 35)
  '(wakatime-api-key "df5310e6-9d1f-4cf6-bd9a-fd6a417a6c93")
  '(wakatime-python-bin "/usr/bin/python"))
 ;;; custom.el ends here
