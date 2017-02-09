@@ -328,8 +328,20 @@ removal."
                 (insert (format "|sudo:%s" (or last-ssh-hostname "localhost"))))
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
+(defun samray/toggle-maximize-buffer ()
+  "Maximize buffer"
+  (interactive)
+  (if (and (= 1 (length (window-list)))
+           (assoc ?_ register-alist))
+      (jump-to-register ?_)
+    (progn
+      (window-configuration-to-register ?_)
+      (delete-other-windows))))
 
-
+;;; record how much time i use to programming with wakatimw
+(use-package wakatime-mode
+  :ensure t
+  :config (global-wakatime-mode))
 
 ;; (defadvice pop-to-buffer (before cancel-other-window first)
 ;;   (ad-set-arg 1 nil))

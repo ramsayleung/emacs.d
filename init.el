@@ -36,6 +36,7 @@
 (setq auto-mode-alist
       (append
        '(("\\.js\\'" . js2-mode)
+	 ("\\.vue\\'" . vue-mode)
 	 ("\\.py\\'" . python-mode)
 	 ("\\.md\\'" . markdown-mode)
 	 ("\\.html\\'" . web-mode))

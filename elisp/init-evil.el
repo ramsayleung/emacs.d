@@ -99,6 +99,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	     "w j" 'evil-window-down
 	     "w k" 'evil-window-up
 	     "w l" 'evil-window-right
+	     "w m" 'samray/toggle-maximize-buffer
 	     "0"  'select-window-0
 	     "1"  'select-window-1
 	     "2"  'select-window-2

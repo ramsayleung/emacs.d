@@ -135,5 +135,13 @@
 	    (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 	    (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 	    ))
+
+;;;----------------;;;
+;;;   Vue Mode    ;;;
+;;;----------------;;;
+
+(use-package vue-mode
+  :ensure t
+  :config (setq mmm-submode-decoration-level 0))
 (provide 'init-web)
 ;;; init-web.el ends here
