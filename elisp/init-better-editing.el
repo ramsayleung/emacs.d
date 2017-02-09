@@ -19,7 +19,7 @@
 ;; delete spaces at once
 (use-package hungry-delete
   :ensure t
-  :config(global-hungry-delete-mode t))
+  :config (global-hungry-delete-mode t))
 (use-package which-key
   :ensure t
   :config(progn

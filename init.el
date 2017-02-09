@@ -37,6 +37,7 @@
       (append
        '(("\\.js\\'" . js2-mode)
 	 ("\\.py\\'" . python-mode)
+	 ("\\.md\\'" . markdown-mode)
 	 ("\\.html\\'" . web-mode))
        auto-mode-alist))
 ;; (require 'init-packages)
@@ -44,7 +45,6 @@
 (require 'init-ui)
 (require 'init-keybindings)
 (require 'init-misc)
-(require 'init-better-editing)
 (require 'init-ivy)
 (require 'init-org)
 (require 'init-web)
@@ -52,6 +52,8 @@
 (require 'init-elisp)
 (require 'init-auto-completion)
 (require 'init-syntax-checking)
+(require 'init-programming)
+(require 'init-better-editing)
 
 (setq custom-file (expand-file-name "elisp/custom.el" user-emacs-directory))
 (load-file custom-file)

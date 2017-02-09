@@ -129,7 +129,7 @@
 ;;;----------------;;;
 
 ;;; Generate Html and Css code 
-(use-package emment-mode
+(use-package emmet-mode
   :ensure t
   :config (progn
 	    (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes

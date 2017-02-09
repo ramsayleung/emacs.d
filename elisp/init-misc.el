@@ -10,6 +10,34 @@
 (use-package shell-pop
   :ensure t)
 
+(use-package youdao-dictionary
+  :ensure t
+  :config (progn
+	    (setq url-automatic-caching t)
+	    (evil-leader/set-key
+	      "o y" 'youdao-dictionary-search-at-point)
+	    ))
+
+;;; read pdf file in Emacs
+(use-package pdf-tools
+  :ensure t)
+
+;;; use Irc in Emacs
+(use-package circe
+  :ensure t
+  :config (progn
+	    (setq circe-network-options
+		  '(("Freenode"
+		     :tls t
+		     :nick "SamrayL"
+		     :sasl-username "SamrayL"
+		     :sasl-password "123456"
+		     :channels ("#emacs")
+		     )))
+	    (evil-leader/set-key
+	      "o c" 'circe)
+	    ))
+
 ;; enhance dired
 ;; (require 'dired+)
 ;; (diredp-toggle-find-file-reuse-dir t)
