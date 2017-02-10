@@ -35,16 +35,13 @@
 
 (setq auto-mode-alist
       (append
-       '(("\\.js\\'" . js2-mode)
-	 ("\\.vue\\'" . vue-mode)
+       '(
 	 ("\\.py\\'" . python-mode)
-	 ("\\.md\\'" . markdown-mode)
-	 ("\\.html\\'" . web-mode))
+	 )
        auto-mode-alist))
 ;; (require 'init-packages)
 (require 'init-evil)
 (require 'init-ui)
-(require 'init-keybindings)
 (require 'init-misc)
 (require 'init-ivy)
 (require 'init-org)
@@ -55,6 +52,8 @@
 (require 'init-syntax-checking)
 (require 'init-programming)
 (require 'init-better-editing)
+(require 'init-markdown)
+(require 'init-keybindings)
 
 (setq custom-file (expand-file-name "elisp/custom.el" user-emacs-directory))
 (load-file custom-file)

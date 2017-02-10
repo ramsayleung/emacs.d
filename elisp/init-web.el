@@ -29,38 +29,41 @@
 	     '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
 	   (eval-after-load 'js2-mode
 	     '(add-hook 'js2-mode-hook
-			(lambda ()
-			  (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+			(lambda () (unless (derived-mode-p 'vue-mode)
+				     (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))))
 	   ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
 	   (eval-after-load 'js
 	     '(add-hook 'js-mode-hook
-			(lambda ()
-			  (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+			(lambda () (unless (derived-mode-p 'vue-mode)
+				     (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))))
 
 	   (eval-after-load 'json-mode
 	     '(add-hook 'json-mode-hook
-			(lambda ()
-			  (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+			(lambda () (unless (derived-mode-p 'vue-mode)
+				     (add-hook 'before-save-hook 'web-beautify-js-buffer t t)))))
 
 	   (eval-after-load 'sgml-mode
 	     '(add-hook 'html-mode-hook
-			(lambda ()
-			  (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+			(lambda () (unless (derived-mode-p 'vue-mode)
+				     (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))))
 
 	   (eval-after-load 'web-mode
 	     '(add-hook 'web-mode-hook
-			(lambda ()
-			  (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+			(lambda () (unless (derived-mode-p 'vue-mode)
+				     (add-hook 'before-save-hook 'web-beautify-html-buffer t t)))))
 
 	   (eval-after-load 'css-mode
 	     '(add-hook 'css-mode-hook
-			(lambda ()
-			  (add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
+			(lambda () (unless (derived-mode-p 'vue-mode)
+				     (add-hook 'before-save-hook 'web-beautify-css-buffer t t)))))
 	   ))
 ;;  an autonomous emacs major-mode for editing web template
 ;; Html documents can embed parts (css/javascript) and blocks(client/server side)
 (use-package web-mode
   :ensure t
+  :mode (
+	 ("\\.html\\'" . web-mode)
+	 )
   :config(progn
 	   (add-hook 'web-mode-hook 'my-web-mode-indent-setup)
 	   ))
@@ -95,6 +98,7 @@
 ;; improved Javascript editing mode
 (use-package js2-mode
   :ensure t
+  :mode ("\\.js\\'" . js2-mode)
   :config(progn
 	   (add-hook 'js2-mode-hook 'js2-refactor-mode)
 	   ))
@@ -142,6 +146,10 @@
 
 (use-package vue-mode
   :ensure t
-  :config (setq mmm-submode-decoration-level 0))
+  :mode ("\\.vue\\'" . vue-mode)
+  :config (progn
+	    (setq mmm-submode-decoration-level 0)
+	    (add-hook 'vue-mode-hook 'auto-complete-mode)
+	    ))
 (provide 'init-web)
 ;;; init-web.el ends here

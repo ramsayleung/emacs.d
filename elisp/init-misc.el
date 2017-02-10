@@ -117,7 +117,7 @@
 	(indent-buffer)
 	(message "Indented buffer")))))
 (add-hook 'prog-mode-hook (lambda ()
-			    (unless (derived-mode-p 'python-mode)
+			    (unless (derived-mode-p '(python-mode markdown-mode))
 			      (add-hook 'before-save-hook 'indent-region-or-buffer))))
 
 ;; enable hippie-mode to enhance auto-completion
@@ -343,28 +343,32 @@ removal."
   :ensure t
   :config (global-wakatime-mode))
 
-;; (defadvice pop-to-buffer (before cancel-other-window first)
-;;   (ad-set-arg 1 nil))
+;;; Chinese input method ,clone from https://github.com/tumashu/chinese-pyim
+(use-package chinese-pyim
+  :ensure t
+  :config
+  ;; 激活 basedict 拼音词库
+  (use-package chinese-pyim-basedict
+    :ensure t
+    :config (chinese-pyim-basedict-enable))
 
-;; (ad-activate 'pop-to-buffer)
 
-;; ;; Toggle window dedication
-;; (defun toggle-window-dedicated ()
-;;   "Toggle whether the current active window is dedicated or not."
-;;   (interactive)
-;;   (message
-;;    (if (let (window (get-buffer-window (current-buffer)))
-;;          (set-window-dedicated-p window 
-;;                                  (not (window-dedicated-p window))))
-;;        "Window '%s' is dedicated"
-;;      "Window '%s' is normal")
-;;    (current-buffer)))
+  (setq default-input-method "chinese-pyim")
 
-;; Press [pause] key in each window you want to "freeze"
-(global-set-key [pause] 'toggle-window-dedicated)
-;; (add-hook 'eshell-mode-hook
-;; 	  (lambda ()
-;; 	    (interactive)
-;; 	    (set-window-dedicated-p (selected-window) 1)))
+  ;; 使用全拼
+  (setq pyim-default-scheme 'quanpin)
+  ;; 开启拼音搜索功能
+  (setq pyim-isearch-enable-pinyin-search t)
+
+  ;; 使用 pupup-el 来绘制选词框
+  (setq pyim-page-tooltip 'popup)
+
+  ;; 选词框显示5个候选词
+  (setq pyim-page-length 8)
+
+  ;; 让 Emacs 启动时自动加载 pyim 词库
+  (add-hook 'emacs-startup-hook
+            #'(lambda () (pyim-restart-1 t)))
+  )
 (provide 'init-misc)
 ;;; init-misc.el ends here
