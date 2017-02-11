@@ -7,3 +7,4 @@ anaconda-mode/
 ac-comphist.dat
 url/
 pyim/
+*cache*

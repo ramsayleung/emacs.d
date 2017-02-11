@@ -1,17 +1,14 @@
 ;;; package --- summary
 ;;; code:
 ;;; Commentary:
-;; define-key module
-(define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-(define-key isearch-mode-map [escape] 'isearch-abort)   ;; isearch
-(define-key isearch-mode-map "\e" 'isearch-abort)   ;; \e seems to work better for terminals
 (with-eval-after-load 'dired-mode
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
-In Delete Selection mode, if the mark is active, just deactivate it;
-then it takes a second \\[keyboard-quit] to abort the minibuffer."
+In Delete Selection mode, if the mark is active, just deactivate
+it then it takes a second \\[keyboard-quit] to abort them
+inibuffer."
   (interactive)
   (if (and delete-selection-mode transient-mark-mode mark-active)
       (setq deactivate-mark  t)
@@ -29,14 +26,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   :config (progn
 	    (general-evil-setup t)
 	    (defvar my-leader-key "SPC")
-	    (general-define-key :states '(normal visual emacs motion)
+	    (general-define-key :states '(normal visual motion emacs)
 				:prefix my-leader-key
 				";" 'evilnc-comment-operator
 				"'" 'shell-pop
 				"TAB" 'samray/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
-				"a o a" 'org-agenda
+				"a e" 'circe
 				"b" '(:ignore t :which-key "buffers")
 				"b b" 'ivy-switch-buffer
 				"b d" 'kill-this-buffer
@@ -71,36 +68,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 				"g s" 'magit-status
 				"j" '(:ignore t :which-key "jump/join/split")
 				"j j" 'avy-goto-char
-				"m" '(:ignore t :which-key "markdown")
-				"m -" 'markdown-insert-hr
-				"m h" '(:ignore t :which-key "markdown/header")
-				"m h i" 'markdown-insert-header-dwim
-				"m h I" 'markdown-insert-header-setext-dwim
-				"m h 1" 'markdown-insert-header-atx-1
-				"m h 2" 'markdown-insert-header-atx-2
-				"m h 3" 'markdown-insert-header-atx-3
-				"m h 4" 'markdown-insert-header-atx-4
-				"m h 5" 'markdown-insert-header-atx-5
-				"m h 6" 'markdown-insert-header-atx-6
-				"m h !" 'markdown-insert-header-setext-1
-				"m h @" 'markdown-insert-header-setext-2
-				"m i" '(:ignore t :which-key "markdown/insert")
-				"m i l" 'markdown-insert-link
-				"m i L" 'markdown-insert-reference-link-dwim
-				"m i u" 'markdown-insert-uri
-				"m i f" 'markdown-insert-footnote
-				"m i w" 'markdown-insert-wiki-link
-				"m i i" 'markdown-insert-image
-				"m i I" 'markdown-insert-reference-image
-				"m x" '(:ignore t :which-key "markdown/text")
-				"m x b" 'markdown-insert-bold
-				"m x i" 'markdown-insert-italic
-				"m x c" 'markdown-insert-code
-				"m x C" 'markdown-insert-gfm-code-block
-				"m x q" 'markdown-insert-blockquote
-				"m x Q" 'markdown-blockquote-region
-				"m x p" 'markdown-insert-pre
-				"m x P" 'markdown-pre-region
 				"p" '(:ignore t :which-key "projects")
 				"p a" 'helm-ag-project-root
 				"p f" 'counsel-projectile-find-file
@@ -138,12 +105,88 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 				"4"  'select-window-4
 				"5"  'select-window-5
 				)
-	    (general-define-key :states '(normal visual insert ) 
+	    (general-define-key :states '(normal visual insert )
 				"C-e" 'evil-end-of-line
 				"C-a" 'evil-beginning-of-line
 				"C-y" 'yank
 				"C-w" 'evil-delete
 				)
+	    ;; org-mode
+	    (general-define-key :states '(normal visual motion emacs)
+				:keymaps 'org-mode-map
+				:prefix my-leader-key
+				"a o" '(:ignore t :which-key "org-mode" )
+				"a o a" 'org-agenda-list
+				"a o i" 'org-clock-in
+				"a o o" 'org-agenda
+				"a o O" 'org-clock-out
+				"a o p" 'org-pomodoro
+				)
+	    (general-define-key :states '(normal insert emacs visual motion)
+				:keymaps 'org-mode-map
+				"M-l" '(org-metaright)
+				"M-h" '(org-metaleft)
+				"M-k" '(org-metaup)
+				"M-j" '(org-metadown)
+				"M-L" '(org-shiftmetaright)
+				"M-H" '(org-shiftmetaleft)
+				"M-K" '(org-shiftup)
+				"M-J" '(org-shiftdown)
+				"M-o" '(org-insert-heading)
+				"M-t" '(org-insert-todo-heading)
+				)
+	    (general-define-key :states 'normal
+				:keymaps 'org-mode-map
+				"TAB" 'org-cycle
+				"$" 'org-end-of-line
+				"^" 'org-beginning-of-line
+				;; "<" 'org-metaleft
+				;; ">" 'org-metaright
+				"gh" 'outline-up-heading
+				"gj" 'org-forward-heading-same-level
+				"gk" 'org-backward-heading-same-level
+				"gl" 'outline-next-visible-heading
+				"t" 'org-todo
+				"H" 'org-beginning-of-line
+				"L" 'org-end-of-line)
+
+	    ;; markdown-mode
+	    (general-define-key :states '(normal visual motion emacs)
+				:keymaps 'markdown-mode-map
+				:prefix my-leader-key
+				"m" '(:ignore t :which-key "markdown")
+				"m -" 'markdown-insert-hr
+				"m h" '(:ignore t :which-key "markdown/header")
+				"m h i" 'markdown-insert-header-dwim
+				"m h I" 'markdown-insert-header-setext-dwim
+				"m h 1" 'markdown-insert-header-atx-1
+				"m h 2" 'markdown-insert-header-atx-2
+				"m h 3" 'markdown-insert-header-atx-3
+				"m h 4" 'markdown-insert-header-atx-4
+				"m h 5" 'markdown-insert-header-atx-5
+				"m h 6" 'markdown-insert-header-atx-6
+				"m h !" 'markdown-insert-header-setext-1
+				"m h @" 'markdown-insert-header-setext-2
+				"m i" '(:ignore t :which-key "markdown/insert")
+				"m i l" 'markdown-insert-link
+				"m i L" 'markdown-insert-reference-link-dwim
+				"m i u" 'markdown-insert-uri
+				"m i f" 'markdown-insert-footnote
+				"m i w" 'markdown-insert-wiki-link
+				"m i i" 'markdown-insert-image
+				"m i I" 'markdown-insert-reference-image
+				"m x" '(:ignore t :which-key "markdown/text")
+				"m x b" 'markdown-insert-bold
+				"m x i" 'markdown-insert-italic
+				"m x c" 'markdown-insert-code
+				"m x C" 'markdown-insert-gfm-code-block
+				"m x q" 'markdown-insert-blockquote
+				"m x Q" 'markdown-blockquote-region
+				"m x p" 'markdown-insert-pre
+				"m x P" 'markdown-pre-region
+				)
+	    (general-define-key :keymaps 'company-active-map
+				"<tab>" 'company-complete-common-or-cycle)
 	    (general-nvmap
 	     "R" 'evil-multiedit-match-all
 	     "C-<" 'evil-multiedit-match-and-next
@@ -186,6 +229,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	     )
 	    )
   )
+(message "load init-keybinds")
 (js2r-add-keybindings-with-prefix "C-c C-m")
 (provide 'init-keybindings)
 ;;; init-keybindings.el ends here

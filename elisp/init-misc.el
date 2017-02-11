@@ -8,7 +8,11 @@
 
 ;; help you use shell easily on Emacs
 (use-package shell-pop
-  :ensure t)
+  :ensure t
+  :config (setq
+	   shell-pop-window-position "bottom"
+	   shell-pop-window-size 35
+	   ))
 
 (use-package youdao-dictionary
   :ensure t
@@ -40,10 +44,17 @@
 ;;; treat undo history as a tree
 (use-package undo-tree
   :ensure t
+  :diminish (undo-tree-mode . "")
   :config (global-undo-tree-mode t))
 ;; enhance dired
 ;; (require 'dired+)
 ;; (diredp-toggle-find-file-reuse-dir t)
+
+;;; File encoding system
+;;; UTF-8 works for most of the files i tend to used
+(prefer-coding-system 'utf-8)
+(setq-default buffer-file-coding-system 'utf-8-auto-unix)
+
 
 ;; dired reuse directory buffer https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer
 (put 'dired-find-alternate-file 'disabled nil)
@@ -95,7 +106,9 @@
              (ignore-errors (backward-up-list))
              (funcall fn)))))
 
-(abbrev-mode t)
+;;; abbrev-mode or abbreviation mode is a built-in mode that auto-corrects the
+;;; word you mistype on pressing space.For how I practically use it
+(setq abbrev-mode 'silently)
 (setq save-abbrevs t)
 (define-abbrev-table 'global-abbrev-table '(
 					    ;; signature
@@ -116,10 +129,19 @@
       (progn
 	(indent-buffer)
 	(message "Indented buffer")))))
-(add-hook 'prog-mode-hook (lambda ()
-			    (unless (derived-mode-p '(python-mode markdown-mode))
-			      (add-hook 'before-save-hook 'indent-region-or-buffer))))
+;; (add-hook 'prog-mode-hook (lambda ()
+;; 			    (unless (derived-mode-p '(python-mode ))
+;; 			      (add-hook 'before-save-hook 'indent-region-or-buffer))))
+(add-hook 'emacs-lisp-mode-hook (lambda ()
+				  (add-hook 'before-save-hook
+					    'indent-region-or-buffer)))
 
+(add-hook 'lisp-mode-hook (lambda ()
+			    (add-hook 'before-save-hook
+				      'indent-region-or-buffer)))
+(add-hook 'sh-mode-hook (lambda ()
+			  (add-hook 'before-save-hook
+				    'indent-region-or-buffer)))
 ;; enable hippie-mode to enhance auto-completion
 
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
@@ -135,6 +157,9 @@
 					 ))
 
 
+;;; While we are in the topic of prompting, a lot of the default prompts ask
+;;; for a yes or a no. I’m lazy and so I don’t want to type the full words.
+;;; Let’s just make it accept y or n
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (require 'dired-x)
@@ -220,11 +245,7 @@ debug-init and load the given list of packages."
 			     "(require 'use-package)"
 			     load-packages-string ")"))
 	       args))))
-  (evil-leader/set-key
-    "qd" 'samray/restart-emacs-debug-init
-    "qD" 'samray/restart-stock-emacs-with-packages
-    "qr" 'samray/restart-emacs-resume-layouts
-    "qR" 'samray/restart-emacs))
+  )
 
 (defun samray/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the
@@ -341,6 +362,7 @@ removal."
 ;;; record how much time i use to programming with wakatimw
 (use-package wakatime-mode
   :ensure t
+  :diminish (wakatime-mode . " ω")
   :config (global-wakatime-mode))
 
 ;;; Chinese input method ,clone from https://github.com/tumashu/chinese-pyim
@@ -367,8 +389,8 @@ removal."
   (setq pyim-page-length 8)
 
   ;; 让 Emacs 启动时自动加载 pyim 词库
-  (add-hook 'emacs-startup-hook
-            #'(lambda () (pyim-restart-1 t)))
+  ;; (add-hook 'emacs-startup-hook
+  ;;           #'(lambda () (pyim-restart-1 t)))
   )
 (provide 'init-misc)
 ;;; init-misc.el ends here

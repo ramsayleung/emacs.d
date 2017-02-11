@@ -14,7 +14,17 @@
 	     )
 	   )
   )
+
+;;; pomodoro tech
 (use-package org-pomodoro
   :ensure t)
+
+;;; show org-mode bullets as UTF-8 character
+(use-package org-bullets
+  :ensure t
+  :config (progn
+	    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+		(setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
+		 ))
 (provide 'init-org)
 ;;; init-org.el ends here
