@@ -3,7 +3,7 @@
 ;;; Code:
 (use-package flycheck
   :ensure t
-  ;; :diminish (flycheck-mode . " φ")
+  :diminish (flycheck-mode . "φ")
   :config(global-flycheck-mode t))
 
 (provide 'init-syntax-checking)

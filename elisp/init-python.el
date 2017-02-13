@@ -24,13 +24,6 @@
 (use-package py-autopep8
   :ensure t
   :config(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
-;; company-mode completion back-end for python JEDI
-(use-package company-jedi
-  :ensure t
-  :config(progn
-	   (add-hook 'python-mode-hook
-		     (lambda()(add-to-list 'company-backends 'company-jedi)))
-	   ))
 ;; (use-package jedi
 ;;   :ensure t
 ;;   :config(add-hook 'python-mode-hook 'jedi:setup))
@@ -43,10 +36,19 @@
   :ensure t
   :config (progn
 	    (setq fci-rule-width 1)
-	    (setq fci-rule-color "skyblue")
+	    (setq fci-rule-color "darkblue")
 	    (setq-default fill-column 79)
 	    (add-hook 'python-mode-hook 'fci-mode)))
 
+;;; similar with fill-column-indicator,but a little bit different
+(use-package column-enforce-mode
+  :ensure t
+  :diminish column-enforce-mode
+  :init
+  (setq column-enforce-column 79)
+  :config
+  (progn
+    (add-hook 'prog-mode-hook 'column-enforce-mode)))
 ;;; To fix issue that there is weird eshell output with ipython
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt -i")

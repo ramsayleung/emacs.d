@@ -17,6 +17,9 @@
 			  (add-hook 'after-save-hook
 				    'check-parens
 				    nil t))))))
+(use-package pandoc-mode
+  :ensure t
+  :mode ("\\.markdown\\'" "\\.mkd\\'" "\\.md\\'"))
 
 ;;; preview markdown file on the fly on my browser
 (use-package flymd

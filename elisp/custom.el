@@ -15,9 +15,16 @@
  '(evil-want-C-u-scroll t)
  '(expand-region-contract-fast-key "V")
  '(nil nil t)
+ '(org-capture-templates
+   (quote
+    (("t" "Todo" entry
+      (file+headline "~/.emacs.d/gtd.org" "Daily Todo List:")
+      "* TODO [#B] %?
+  %i
+" :empty-lines 1))) t)
  '(package-selected-packages
    (quote
-    (company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
+    (org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
  '(shell-pop-shell-type
    (quote
     ("ansi-term" "*ansi-term*"

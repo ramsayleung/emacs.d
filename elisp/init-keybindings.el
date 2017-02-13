@@ -1,25 +1,6 @@
 ;;; package --- summary
 ;;; code:
-;;; Commentary:
-(with-eval-after-load 'dired-mode
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
-
-(defun minibuffer-keyboard-quit ()
-  "Abort recursive edit.
-In Delete Selection mode, if the mark is active, just deactivate
-it then it takes a second \\[keyboard-quit] to abort them
-inibuffer."
-  (interactive)
-  (if (and delete-selection-mode transient-mark-mode mark-active)
-      (setq deactivate-mark  t)
-    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-    (abort-recursive-edit)))
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-
+;;; commentary:
 
 (use-package general
   :ensure t
@@ -34,6 +15,9 @@ inibuffer."
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
 				"a e" 'circe
+				"a z" '(:ignore t :which-key "ztree")
+				"a z d" 'ztree-dir
+				"a z c" 'ztree-diff
 				"b" '(:ignore t :which-key "buffers")
 				"b b" 'ivy-switch-buffer
 				"b d" 'kill-this-buffer
@@ -45,12 +29,15 @@ inibuffer."
 				"cp" 'evilnc-comment-or-uncomment-paragraphs
 				"cr" 'comment-or-uncomment-region
 				"cv" 'evilnc-toggle-invert-comment-line-by-line
-				"e" '(:ignore t :which-key "errors")
+				"e" '(:ignore t :which-key "errors/edit")
 				"e l" 'flycheck-list-errors
+				"e j" 'samray/move-text-down
+				"e k" 'samray/move-text-up
 				"e n" 'flycheck-next-error
 				"e p" 'flycheck-previous-error
 				"f" '(:ignore t :which-key "files")
-				"f D" 'samray/delete-current-buffer-file
+				"f c" 'samray/copy-current-file-path
+				"f d" 'samray/delete-current-buffer-file
 				"f E" 'samray/sudo-edit
 				"f f" 'counsel-find-file
 				"f r" 'recentf-open-files
@@ -66,10 +53,12 @@ inibuffer."
 				"h d v" 'counsel-describe-variable
 				"g" '(:ignore t :which-key "git/version-control")
 				"g s" 'magit-status
+				"g m" 'magit-dispatch-popup
+				"g t" 'git-timemachine-switch-branch
 				"j" '(:ignore t :which-key "jump/join/split")
 				"j j" 'avy-goto-char
+				"j l" 'avy-goto-line
 				"p" '(:ignore t :which-key "projects")
-				"p a" 'helm-ag-project-root
 				"p f" 'counsel-projectile-find-file
 				"p d" 'counsel-projectile-find-dir
 				"p b" 'counsel-projectile-switch-to-buffer
@@ -88,11 +77,18 @@ inibuffer."
 				"s s" 'swiper
 				"t" '(:ignore t :which-key "toggle")
 				"t f" 'fci-mode
+				"t g" 'git-timemachine-toggle
+				"t o" 'origami-toggle-mode
+				"t h" '(:ignore t :which-key "highlight-indentation")
+				"t h i" 'highlight-indentation-mode
+				"t h c" 'highlight-indentation-current-column-mode
 				"w" '(:ignore t :which-key "windows")
 				"w d" 'delete-window
 				"w D" 'delete-other-windows
-				"w -" 'split-window-below
-				"w /" 'split-window-right
+				"w h" 'winner-undo
+				"w l" 'winner-redo
+				"w -" 'samray/split-window-below-and-move
+				"w /" 'samray/split-window-right-and-move
 				"w h" 'evil-window-left
 				"w j" 'evil-window-down
 				"w k" 'evil-window-up
@@ -107,7 +103,7 @@ inibuffer."
 				)
 	    (general-define-key :states '(normal visual insert )
 				"C-e" 'evil-end-of-line
-				"C-a" 'evil-beginning-of-line
+				"C-a" 'samray/smarter-move-beginning-of-line
 				"C-y" 'yank
 				"C-w" 'evil-delete
 				)
@@ -117,10 +113,16 @@ inibuffer."
 				:prefix my-leader-key
 				"a o" '(:ignore t :which-key "org-mode" )
 				"a o a" 'org-agenda-list
+				"a o c" 'org-capture
+				"a o l" 'org-store-link
 				"a o i" 'org-clock-in
+				"a o m" 'org-tags-view
 				"a o o" 'org-agenda
 				"a o O" 'org-clock-out
-				"a o p" 'org-pomodoro
+				"a o s" 'org-search-view
+				"a o t" 'org-todo-list
+				"a o p" 'samray/org-publish-buffer
+				"a o P" 'org-pomodoro
 				)
 	    (general-define-key :states '(normal insert emacs visual motion)
 				:keymaps 'org-mode-map
@@ -137,7 +139,7 @@ inibuffer."
 				)
 	    (general-define-key :states 'normal
 				:keymaps 'org-mode-map
-				"TAB" 'org-cycle
+				"tab" 'org-cycle
 				"$" 'org-end-of-line
 				"^" 'org-beginning-of-line
 				;; "<" 'org-metaleft
@@ -147,8 +149,8 @@ inibuffer."
 				"gk" 'org-backward-heading-same-level
 				"gl" 'outline-next-visible-heading
 				"t" 'org-todo
-				"H" 'org-beginning-of-line
-				"L" 'org-end-of-line)
+				"h" 'org-beginning-of-line
+				"l" 'org-end-of-line)
 
 	    ;; markdown-mode
 	    (general-define-key :states '(normal visual motion emacs)
@@ -158,7 +160,7 @@ inibuffer."
 				"m -" 'markdown-insert-hr
 				"m h" '(:ignore t :which-key "markdown/header")
 				"m h i" 'markdown-insert-header-dwim
-				"m h I" 'markdown-insert-header-setext-dwim
+				"m h i" 'markdown-insert-header-setext-dwim
 				"m h 1" 'markdown-insert-header-atx-1
 				"m h 2" 'markdown-insert-header-atx-2
 				"m h 3" 'markdown-insert-header-atx-3
@@ -169,25 +171,26 @@ inibuffer."
 				"m h @" 'markdown-insert-header-setext-2
 				"m i" '(:ignore t :which-key "markdown/insert")
 				"m i l" 'markdown-insert-link
-				"m i L" 'markdown-insert-reference-link-dwim
+				"m i l" 'markdown-insert-reference-link-dwim
 				"m i u" 'markdown-insert-uri
 				"m i f" 'markdown-insert-footnote
 				"m i w" 'markdown-insert-wiki-link
 				"m i i" 'markdown-insert-image
-				"m i I" 'markdown-insert-reference-image
+				"m i i" 'markdown-insert-reference-image
 				"m x" '(:ignore t :which-key "markdown/text")
 				"m x b" 'markdown-insert-bold
 				"m x i" 'markdown-insert-italic
 				"m x c" 'markdown-insert-code
-				"m x C" 'markdown-insert-gfm-code-block
+				"m x c" 'markdown-insert-gfm-code-block
 				"m x q" 'markdown-insert-blockquote
-				"m x Q" 'markdown-blockquote-region
+				"m x q" 'markdown-blockquote-region
 				"m x p" 'markdown-insert-pre
-				"m x P" 'markdown-pre-region
+				"m x p" 'markdown-pre-region
 				)
 	    (general-define-key :keymaps 'company-active-map
 				"<tab>" 'company-complete-common-or-cycle)
 	    (general-nvmap
+	     "Y" 'samray/copy-to-end-of-line
 	     "R" 'evil-multiedit-match-all
 	     "C-<" 'evil-multiedit-match-and-next
 	     "C->" 'evil-multiedit-match-and-prev
@@ -205,8 +208,10 @@ inibuffer."
 				)
 	    (general-mmap
 	     "RET" 'evil-multiedit-toggle-or-restrict-region)
-	    ;; Non-evil ,without a prefix
+	    ;; non-evil ,without a prefix
 	    (general-define-key
+	     ;; remap c-a to `samray/smarter-move-beginning-of-line
+	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     "C-c a" 'org-agenda
 	     "C-c g" 'counsel-git
 	     "C-c j" 'counsel-grep
@@ -218,7 +223,10 @@ inibuffer."
 	     "C-h l" 'counsel-find-library
 	     "C-x C-f" 'counsel-find-file
 	     "C-x l" 'counsel-locate
+	     "C-x k" 'kill-this-buffer
 	     "C-x C-r" 'recentf-open-files
+	     "C-x 2" 'samray/split-window-below-and-move
+	     "C-x 3" 'samray/split-window-right-and-move
 	     "C-s" 'swiper
 	     "C-=" 'er/expand-region
 	     "M-x" 'counsel-M-x
@@ -228,8 +236,13 @@ inibuffer."
 	     "<f6>" 'ivy-resume
 	     )
 	    )
+  (general-define-key :states 'insert
+		      "DEL" 'hungry-delete-backward)
   )
+(general-define-key :keymaps 'emacs-lisp-mode-map
+		    "C-c s" 'find-function-at-point)
+(general-define-key :keymaps 'term-raw-map
+		    "C-y" 'samray/term-paste)
 (message "load init-keybinds")
-(js2r-add-keybindings-with-prefix "C-c C-m")
 (provide 'init-keybindings)
 ;;; init-keybindings.el ends here

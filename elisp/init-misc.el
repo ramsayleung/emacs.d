@@ -2,17 +2,6 @@
 ;;; code:
 ;;; Commentary:
 
-;; make Emacs use the $PATH set up by the user's shell
-(use-package exec-path-from-shell
-  :ensure t)
-
-;; help you use shell easily on Emacs
-(use-package shell-pop
-  :ensure t
-  :config (setq
-	   shell-pop-window-position "bottom"
-	   shell-pop-window-size 35
-	   ))
 
 (use-package youdao-dictionary
   :ensure t
@@ -41,46 +30,80 @@
 	    (evil-leader/set-key
 	      "o c" 'circe)
 	    ))
-;;; treat undo history as a tree
-(use-package undo-tree
+;;; Get weather status
+(use-package wttrin
   :ensure t
-  :diminish (undo-tree-mode . "")
-  :config (global-undo-tree-mode t))
-;; enhance dired
-;; (require 'dired+)
-;; (diredp-toggle-find-file-reuse-dir t)
+  :commands (wttrin)
+  :init
+  (setq wttrin-default-cities '("GuangZhou"
+                                "ZhaoQing")))
 
+;;; Defining and querying search engine(for example:Google) through Emacs
+(use-package  engine-mode
+  :ensure t
+  :diminish
+  :config (progn
+	    (engine-mode t)
+	    (defengine amazon
+	      "http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=%s")
+
+	    (defengine duckduckgo
+	      "https://duckduckgo.com/?q=%s"
+	      :keybinding "d")
+
+	    (defengine github
+	      "https://github.com/search?ref=simplesearch&q=%s")
+
+	    (defengine google
+	      "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s"
+	      :keybinding "g")
+
+	    (defengine google-images
+	      "http://www.google.com/images?hl=en&source=hp&biw=1440&bih=795&gbv=2&aq=f&aqi=&aql=&oq=&q=%s")
+
+	    (defengine google-maps
+	      "http://maps.google.com/maps?q=%s"
+	      :docstring "Mappin' it up.")
+
+	    (defengine project-gutenberg
+	      "http://www.gutenberg.org/ebooks/search/?query=%s")
+
+	    (defengine rfcs
+	      "http://pretty-rfc.herokuapp.com/search?q=%s")
+
+	    (defengine stack-overflow
+	      "https://stackoverflow.com/search?q=%s")
+
+	    (defengine twitter
+	      "https://twitter.com/search?q=%s")
+
+	    (defengine wikipedia
+	      "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
+	      :keybinding "w"
+	      :docstring "Searchin' the wikis.")
+
+	    (defengine wiktionary
+	      "https://www.wikipedia.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=%s")
+
+	    (defengine wolfram-alpha
+	      "http://www.wolframalpha.com/input/?i=%s")
+
+	    (defengine youtube
+	      "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
+	    ))
+;;;enhance dired
+(require 'dired+)
+(diredp-toggle-find-file-reuse-dir t)
+(setq dired-open-extensions
+      '(("mkv" . "vlc")
+        ("mp4" . "vlc")
+        ("avi" . "vlc")))
 ;;; File encoding system
 ;;; UTF-8 works for most of the files i tend to used
 (prefer-coding-system 'utf-8)
 (setq-default buffer-file-coding-system 'utf-8-auto-unix)
 
 
-;; dired reuse directory buffer https://www.emacswiki.org/emacs/DiredReuseDirectoryBuffer
-(put 'dired-find-alternate-file 'disabled nil)
-(add-hook 'dired-mode-hook
-	  (lambda ()
-	    (define-key dired-mode-map (kbd "^")
-	      (lambda () (interactive) (find-alternate-file "..")))
-					; was dired-up-directory
-	    ))
-(eval-after-load "dired"
-  '(progn
-     (defadvice dired-advertised-find-file (around dired-subst-directory activate)
-       "Replace current buffer if file is a directory."
-       (interactive)
-       (let* ((orig (current-buffer))
-	      ;; (filename (dired-get-filename))
-	      (filename (dired-get-filename t t))
-	      (bye-p (file-directory-p filename)))
-	 ad-do-it
-	 (when (and bye-p (not (string-match "[/\\\\]\\.$" filename)))
-	   (kill-buffer orig))))))
-
-;; Emacs extension to increate selected region by semantic units
-(use-package expand-region
-  :ensure t
-  :config())
 
 ;; popwin is a popup window manager for Emacs which makes you free from the hell
 ;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
@@ -88,125 +111,7 @@
   :ensure t
   :config(popwin-mode t))
 
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(delete-selection-mode t)
-(setq make-backup-files nil)
-;; open init file quickly by binding key
-(defun open-my-file()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
-
-
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-        (t (save-excursion
-             (ignore-errors (backward-up-list))
-             (funcall fn)))))
-
-;;; abbrev-mode or abbreviation mode is a built-in mode that auto-corrects the
-;;; word you mistype on pressing space.For how I practically use it
-(setq abbrev-mode 'silently)
-(setq save-abbrevs t)
-(define-abbrev-table 'global-abbrev-table '(
-					    ;; signature
-					    ("8sa" "samray")
- 					    ))
-;; auto indent file before save file
-(defun indent-buffer()
-  (interactive)
-  (indent-region (point-min)(point-max)))
-
-(defun indent-region-or-buffer()
-  (interactive)
-  (save-excursion
-    (if (region-active-p)
-	(progn
-	  (indent-region (region-beginning) (region-end))
-	  (message "Indented selected region"))
-      (progn
-	(indent-buffer)
-	(message "Indented buffer")))))
-;; (add-hook 'prog-mode-hook (lambda ()
-;; 			    (unless (derived-mode-p '(python-mode ))
-;; 			      (add-hook 'before-save-hook 'indent-region-or-buffer))))
-(add-hook 'emacs-lisp-mode-hook (lambda ()
-				  (add-hook 'before-save-hook
-					    'indent-region-or-buffer)))
-
-(add-hook 'lisp-mode-hook (lambda ()
-			    (add-hook 'before-save-hook
-				      'indent-region-or-buffer)))
-(add-hook 'sh-mode-hook (lambda ()
-			  (add-hook 'before-save-hook
-				    'indent-region-or-buffer)))
-;; enable hippie-mode to enhance auto-completion
-
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev
-					 try-expand-dabbrev-all-buffers
-					 try-expand-dabbrev-from-kill
-					 try-complete-file-name-partially
-					 try-complete-file-name
-					 try-expand-all-abbrevs
-					 try-expand-list
-					 try-expand-line
-					 try-complete-lisp-symbol-partially
-					 try-complete-lisp-symbol
-					 ))
-
-
-;;; While we are in the topic of prompting, a lot of the default prompts ask
-;;; for a yes or a no. I’m lazy and so I don’t want to type the full words.
-;;; Let’s just make it accept y or n
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(require 'dired-x)
-(setq dired-recursive-copies 'always)
-(setq dired-recursive-deletes 'always)
-(setq dired-dwim-target t)
-
-(defun remove-dos-eol ()
-  (interactive)
-  (goto-char (point-min))
-  (while (search-forward "\r" nil t)(replace-match "")))
-;; dwim=do what i mean
-
-(defun occur-dwim()
-  "Call `occur` with a sane default"
-  (interactive)
-  (push (if (region-active-p)
-	    (buffer-substring-no-properties
-	     (region-beginning)
-	     (region-end))
-	  (let ((sym (thing-at-point 'symbol)))
-	    (when (stringp sym)
-	      (regexp-quote sym))))
-	regexp-history)
-  (call-interactively 'occur))
-(set-language-environment "UTF-8")
-(setq x-select-enable-clipboard-manager nil)
-(defun af-eshell-here ()
-  "Go to eshell and set current directory to the buffer's directory."
-  (interactive)
-  (let ((dir (file-name-directory (or (buffer-file-name)
-                                      default-directory))))
-    (if (get-buffer "*eshell*")
-	(if (string= (buffer-name) "*eshell*")(delete-window (selected-window))
-	  (progn
-	    (switch-to-buffer "*eshell*"))
-	  )
-      (progn
-	(split-window-vertically)
-	(other-window 1)
-	(eshell)
-	(eshell/pushd ".")
-	(cd dir)
-	(goto-char (point-max))
-	(eshell-kill-input)
-	(eshell-send-input)
-	))))
+;;; code  from spacemacs
 (use-package restart-emacs
   :ensure t
   :init
@@ -246,6 +151,171 @@ debug-init and load the given list of packages."
 			     load-packages-string ")"))
 	       args))))
   )
+
+;;; record how much time i use to programming with wakatimw
+(use-package wakatime-mode
+  :ensure t
+  :diminish (wakatime-mode . " ω")
+  :config (global-wakatime-mode))
+
+;;; Chinese input method ,clone from https://github.com/tumashu/chinese-pyim
+(use-package chinese-pyim
+  :ensure t
+  :config
+  ;; 激活 basedict 拼音词库
+  (use-package chinese-pyim-basedict
+    :ensure t
+    :config (chinese-pyim-basedict-enable))
+
+
+  (setq default-input-method "chinese-pyim")
+
+  ;; 使用全拼
+  (setq pyim-default-scheme 'quanpin)
+  ;; 开启拼音搜索功能
+  (setq pyim-isearch-enable-pinyin-search t)
+
+  ;; 使用 pupup-el 来绘制选词框
+  (setq pyim-page-tooltip 'popup)
+
+  ;; 选词框显示5个候选词
+  (setq pyim-page-length 8)
+
+  ;; 让 Emacs 启动时自动加载 pyim 词库
+  ;; (add-hook 'emacs-startup-hook
+  ;;           #'(lambda () (pyim-restart-1 t)))
+  )
+
+
+(set-language-environment "UTF-8")
+(setq x-select-enable-clipboard-manager nil)
+
+;;; Emacs takes regular backups of once you switch on auto-saving
+;;; and by default,put backups in the same directory,honestly,sometimes
+;;; it is essential useful,but most of time the backups in the same directory
+;;; is annoying,there is a good solution from Emacswiki
+;;; https://www.emacswiki.org/emacs/BackupDirectory
+;; Backups at .saves folder in the current folder
+(setq backup-by-copying t      ; don't clobber symlinks
+      backup-directory-alist
+      '(("." . "~/.emacs.d/backups"))    ; don't litter my fs tree
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)       ; use versioned backups
+
+;;; Emacs auto saves ofter,but it always messes up my file tree.
+;;; So,let's Emacs to store its auto-save file in temporary directory
+;;; https://www.emacswiki.org/emacs/BackupDirectory
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+      create-lockfiles nil)
+
+(delete-selection-mode t)
+;; open init file quickly by binding key
+(defun open-my-file()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcall fn))
+        (t (save-excursion
+             (ignore-errors (backward-up-list))
+             (funcall fn)))))
+
+;;; abbrev-mode or abbreviation mode is a built-in mode that auto-corrects the
+;;; word you mistype on pressing space.For how I practically use it
+(setq abbrev-mode 'silently)
+(setq save-abbrevs t)
+
+(define-abbrev-table 'global-abbrev-table '(
+					    ;; signature
+					    ("8sa" "samray")
+ 					    ))
+;; auto indent file before save file
+(defun indent-buffer()
+  (interactive)
+  (indent-region (point-min)(point-max)))
+
+(defun indent-region-or-buffer()
+  (interactive)
+  (save-excursion
+    (if (region-active-p)
+	(progn
+	  (indent-region (region-beginning) (region-end))
+	  (message "Indented selected region"))
+      (progn
+	(indent-buffer)
+	(message "Indented buffer")))))
+(add-hook 'prog-mode-hook (lambda ()
+			    (unless (derived-mode-p '(python-mode ))
+			      (add-hook 'before-save-hook 'indent-region-or-buffer))))
+
+;; enable hippie-mode to enhance auto-completion
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+					 try-expand-dabbrev-all-buffers
+					 try-expand-dabbrev-from-kill
+					 try-complete-file-name-partially
+					 try-complete-file-name
+					 try-expand-all-abbrevs
+					 try-expand-list
+					 try-expand-line
+					 try-complete-lisp-symbol-partially
+					 try-complete-lisp-symbol
+					 ))
+
+
+;;; While we are in the topic of prompting, a lot of the default prompts ask
+;;; for a yes or a no. I’m lazy and so I don’t want to type the full words.
+;;; Let’s just make it accept y or n
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(require 'dired-x)
+(setq dired-recursive-copies 'always)
+(setq dired-recursive-deletes 'always)
+(setq dired-dwim-target t)
+
+;;; remove windows end-of-line delimiter
+(defun remove-dos-eol ()
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\r" nil t)(replace-match "")))
+
+;; dwim=do what i mean
+(defun occur-dwim()
+  "Call `occur` with a sane default"
+  (interactive)
+  (push (if (region-active-p)
+	    (buffer-substring-no-properties
+	     (region-beginning)
+	     (region-end))
+	  (let ((sym (thing-at-point 'symbol)))
+	    (when (stringp sym)
+	      (regexp-quote sym))))
+	regexp-history)
+  (call-interactively 'occur))
+(defun af-eshell-here ()
+  "Go to eshell and set current directory to the buffer's directory."
+  (interactive)
+  (let ((dir (file-name-directory (or (buffer-file-name)
+                                      default-directory))))
+    (if (get-buffer "*eshell*")
+	(if (string= (buffer-name) "*eshell*")(delete-window (selected-window))
+	  (progn
+	    (switch-to-buffer "*eshell*"))
+	  )
+      (progn
+	(split-window-vertically)
+	(other-window 1)
+	(eshell)
+	(eshell/pushd ".")
+	(cd dir)
+	(goto-char (point-max))
+	(eshell-kill-input)
+	(eshell-send-input)
+	))))
+
 
 (defun samray/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the
@@ -359,38 +429,5 @@ removal."
       (window-configuration-to-register ?_)
       (delete-other-windows))))
 
-;;; record how much time i use to programming with wakatimw
-(use-package wakatime-mode
-  :ensure t
-  :diminish (wakatime-mode . " ω")
-  :config (global-wakatime-mode))
-
-;;; Chinese input method ,clone from https://github.com/tumashu/chinese-pyim
-(use-package chinese-pyim
-  :ensure t
-  :config
-  ;; 激活 basedict 拼音词库
-  (use-package chinese-pyim-basedict
-    :ensure t
-    :config (chinese-pyim-basedict-enable))
-
-
-  (setq default-input-method "chinese-pyim")
-
-  ;; 使用全拼
-  (setq pyim-default-scheme 'quanpin)
-  ;; 开启拼音搜索功能
-  (setq pyim-isearch-enable-pinyin-search t)
-
-  ;; 使用 pupup-el 来绘制选词框
-  (setq pyim-page-tooltip 'popup)
-
-  ;; 选词框显示5个候选词
-  (setq pyim-page-length 8)
-
-  ;; 让 Emacs 启动时自动加载 pyim 词库
-  ;; (add-hook 'emacs-startup-hook
-  ;;           #'(lambda () (pyim-restart-1 t)))
-  )
 (provide 'init-misc)
 ;;; init-misc.el ends here

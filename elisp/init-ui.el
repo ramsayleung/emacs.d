@@ -41,6 +41,10 @@
 ;; (setq truncate-partial-width-windows nil)
 ;; make emacs full-screen at startup
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
+;;; show customized phrase in scratch
+;;; From Purcell https://github.com/purcell/emacs.d
+(setq-default initial-scratch-message
+              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
 
 ;;----------;;
 ;;  Cursor  ;;
@@ -53,9 +57,9 @@
 (setq hl-line-face (quote highlight))
 
 ;; don't blink the cursor
-(blink-cursor-mode nil)
+(blink-cursor-mode -1)
 
-;;set the cursor type to bar
+;;set the cursor shape to bar
 (setq-default cursor-type 'bar)
 ;; make sure transient mark mode is enabled (it should be by default,
 ;; but just in case)
@@ -90,31 +94,41 @@
 (use-package zenburn-theme
   :ensure t
   :config(load-theme 'zenburn t))
-(use-package powerline
-  :ensure t
-  :config(progn
-	   (powerline-default-theme)
-	   (setq powerline-default-separator 'nil))
-  )
+
 
 ;;---------------;;
 ;;      Font     ;;
 ;;---------------;;
 
 ;; customize font
-(add-to-list 'default-frame-alist
-	     '(font . "Source Code Pro-12"))
+(cond ((eq system-type 'gnu/linux)
+       (set-frame-font "Source Code Pro-12"))
+      ((eq system-type 'darwin)
+       (set-frame-font "Monaco"))
+      ((eq system-type 'windows-nt)
+       (set-frame-font "Consolas")))
 
 
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;
+
+(use-package spaceline
+  :ensure t
+  :init
+  (setq powerline-default-separator 'nil)
+  :config
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme)
+  )
 ;;; Use Miminish minor modes to change the mode line
 ;;; The mode line map:
-;;; paredit-mode -> "(e)"
+;;; paredit-mode -> "π"
 ;;; wakatime-mode -> "ω"
+;;; flycheck-mode -> "φ"
 ;;; smarthparence-mode -> "(s)"
-;;; hungrydelete-mode -> "hd"
+;;; hungrydelete-mode -> ""
+;;; lisp-interaction-mode -> "λ"
 ;;; abbrev-mode -> ""  "" means hide this minor mode from mode line
 ;;; undo-tree-mode -> ""
 ;;; whichkey-mode -> ""
@@ -123,9 +137,25 @@
   :demand t
   :diminish hs-minor-mode
   :diminish abbrev-mode
+  :diminish auto-revert-mode
   :diminish auto-fill-function
   :diminish mail-abbrevs-mode
   :diminish subword-mode)
+;;; Stolen From https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
+(defmacro diminish-minor-mode (filename mode &optional abbrev)
+  `(eval-after-load (symbol-name ,filename)
+     '(diminish ,mode ,abbrev)))
 
+(defmacro diminish-major-mode (mode-hook abbrev)
+  `(add-hook ,mode-hook
+             (lambda () (setq mode-name ,abbrev))))
+(diminish-minor-mode 'mail-abbrevs 'mail-abbrevs-mode )
+(diminish-minor-mode 'simple 'auto-fill-function )
+(diminish-minor-mode 'eldoc 'eldoc-mode)
+;; (diminish-minor-mode 'global-whitespace 'global-whitespace-mode)
+;; (diminish-minor-mode 'subword 'subword-mode)
+(diminish-major-mode 'emacs-lisp-mode-hook "el")
+(diminish-major-mode 'lisp-interaction-mode-hook "λ")
+(diminish-major-mode 'python-mode-hook "Py")
 (provide 'init-ui)
 ;;; init-ui.el ends here
