@@ -1,7 +1,6 @@
 ;;; package --- summary
 ;;; code:
 ;;; commentary:
-
 (use-package general
   :ensure t
   :config (progn
@@ -15,6 +14,10 @@
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
 				"a e" 'circe
+				"a w" 'wttrin
+				"a y" '(:ignore t :which-key "youdao-dictionary")
+				"a y i" 'youdao-dictionary-search-from-input
+				"a y p" 'youdao-dictionary-search-at-point+
 				"a z" '(:ignore t :which-key "ztree")
 				"a z d" 'ztree-dir
 				"a z c" 'ztree-diff
@@ -79,6 +82,7 @@
 				"t f" 'fci-mode
 				"t g" 'git-timemachine-toggle
 				"t o" 'origami-toggle-mode
+				"t w" 'samray/toggle-window-split
 				"t h" '(:ignore t :which-key "highlight-indentation")
 				"t h i" 'highlight-indentation-mode
 				"t h c" 'highlight-indentation-current-column-mode
@@ -142,8 +146,6 @@
 				"tab" 'org-cycle
 				"$" 'org-end-of-line
 				"^" 'org-beginning-of-line
-				;; "<" 'org-metaleft
-				;; ">" 'org-metaright
 				"gh" 'outline-up-heading
 				"gj" 'org-forward-heading-same-level
 				"gk" 'org-backward-heading-same-level
@@ -188,7 +190,10 @@
 				"m x p" 'markdown-pre-region
 				)
 	    (general-define-key :keymaps 'company-active-map
-				"<tab>" 'company-complete-common-or-cycle)
+				"<tab>" 'company-complete-common-or-cycle
+				"C-j" 'company-select-next
+				"C-k" 'company-select-previous
+				)
 	    (general-nvmap
 	     "Y" 'samray/copy-to-end-of-line
 	     "R" 'evil-multiedit-match-all
@@ -233,6 +238,7 @@
 	     "<f1>" 'open-my-file
 	     "<f2> i" 'counsel-info-lookup-symbol
 	     "<f2> u" 'counsel-unicode-char
+	     "<f5>" 'revert-buffer
 	     "<f6>" 'ivy-resume
 	     )
 	    )
@@ -243,6 +249,9 @@
 		    "C-c s" 'find-function-at-point)
 (general-define-key :keymaps 'term-raw-map
 		    "C-y" 'samray/term-paste)
+(general-define-key :states '(normal)
+		    :keymaps 'youdao-dictionary-mode-map
+		    "q" 'samray/youdao-dictionary-buffer-quit)
 (message "load init-keybinds")
 (provide 'init-keybindings)
 ;;; init-keybindings.el ends here

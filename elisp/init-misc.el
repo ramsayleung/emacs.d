@@ -5,12 +5,16 @@
 
 (use-package youdao-dictionary
   :ensure t
+  :init
+  (defun samray/youdao-dictionary-buffer-quit ()
+    "Quit youdao-dictionary Buffer and delete window"
+    (interactive)
+    (kill-this-buffer)
+    (delete-window)
+    )
   :config (progn
 	    (setq url-automatic-caching t)
-	    (evil-leader/set-key
-	      "o y" 'youdao-dictionary-search-at-point)
 	    ))
-
 ;;; read pdf file in Emacs
 (use-package pdf-tools
   :ensure t)
@@ -30,6 +34,10 @@
 	    (evil-leader/set-key
 	      "o c" 'circe)
 	    ))
+;;; Try out Emacs Package without install
+(use-package try
+  :ensure t)
+
 ;;; Get weather status
 (use-package wttrin
   :ensure t
@@ -52,7 +60,8 @@
 	      :keybinding "d")
 
 	    (defengine github
-	      "https://github.com/search?ref=simplesearch&q=%s")
+	      "https://github.com/search?ref=simplesearch&q=%s"
+	      :keybinding "h")
 
 	    (defengine google
 	      "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s"

@@ -53,7 +53,11 @@
 
 	     ;;Its default value is (ascii html icalendar latex)
 	     (setq org-export-backends '(latex icalendar))
+	     ;; Show org-edit-special in the other-window
+	     (setq org-src-window-setup 'other-window)
 	     (require 'ox-md nil t)
+	     (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
+	     (add-hook 'org-mode-hook #'samray/complete-for-org-mode)
 	     )
 	   )
   )
@@ -85,6 +89,16 @@
   :config (with-eval-after-load 'org
 	    (require 'ox-twbs nil t))
   )
+;;; Export to reveal for presentation
+(use-package ox-reveal
+  :ensure ox-reveal)
+
+(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+(setq org-reveal-mathjax t)
+
+;;; Syntax Highlight in html file
+(use-package htmlize
+  :ensure t)
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
@@ -95,5 +109,11 @@
   "Return the absolute address of an org file FILENAME, given its relative name."
   (concat (file-name-as-directory org-directory) filename))
 
+(defun samray/disable-flycheck-in-org-src-block ()
+  "Disable emacs-lisp-checkdoc in org-src-mode."
+  (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+(defun samray/complete-for-org-mode ()
+  "Org mode has completion for all keywords via pcomplete,start it."
+  (add-hook 'completion-at-point 'pcomplete-completions-at-point nil t))
 (provide 'init-org)
 ;;; init-org.el ends here

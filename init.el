@@ -31,6 +31,7 @@
 (let ((file-name-handler-alist nil))
   (package-initialize)
   (require 'package)
+  (setq package-enable-at-startup nil)
   ;; For God' sake,there are a lot of site you cannot reach in China
   ;; this is mirror of melpa and gnu
   (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")

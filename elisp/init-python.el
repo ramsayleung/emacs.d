@@ -49,6 +49,14 @@
   :config
   (progn
     (add-hook 'prog-mode-hook 'column-enforce-mode)))
+
+;;; virtualenvwrapper for virtualenv
+(use-package virtualenvwrapper
+  :ensure t
+  :config
+  (venv-initialize-interactive-shells)
+  (venv-initialize-eshell))
+
 ;;; To fix issue that there is weird eshell output with ipython
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt -i")
