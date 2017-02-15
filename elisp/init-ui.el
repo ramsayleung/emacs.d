@@ -12,7 +12,40 @@
 ;;; Windows & Frames ;;;
 ;;;------------------;;;
 ;; language
+;;; always split windows horizontally rather than vertically
+;; (setq split-height-threshold nil)
 (setq current-language-environment "English")
+
+;; popwin is a popup window manager for Emacs which makes you free from the hell
+;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
+(use-package popwin
+  :ensure t
+  :config (progn
+	    (popwin-mode t)
+	    (push '(compilation-mode :noselect t) popwin:special-display-config)
+	    (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
+	    (push "*slime-apropos*" popwin:special-display-config)
+	    (push "*slime-macroexpansion*" popwin:special-display-config)
+	    (push "*slime-description*" popwin:special-display-config)
+	    (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
+	    (push "*slime-xref*" popwin:special-display-config)
+	    (push '(sldb-mode :stick t) popwin:special-display-config)
+	    (push 'slime-repl-mode popwin:special-display-config)
+	    (push 'slime-connection-list-mode popwin:special-display-config)
+	    (push "*vc-diff*" popwin:special-display-config)
+	    (push "*vc-change-log*" popwin:special-display-config)
+	    (push '(org-src-mode :position right) popwin:special-display-config)
+	    (push '(magit-diff-mode :position left) popwin:special-display-config)
+	    ))
+
+;;; Enfore rules for popup window
+(use-package shackle
+  :ensure t
+  :config (progn
+	    (setq shackle-rules '((org-src-mode :align right)))
+	    (setq shackle-rules '(("\\`\\*Org Src*?\\*\\'" :regexp t :align right :size 0.4)))
+	    )
+  )
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()

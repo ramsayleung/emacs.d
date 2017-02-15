@@ -103,29 +103,6 @@
 
 
 
-;; popwin is a popup window manager for Emacs which makes you free from the hell
-;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
-(use-package popwin
-  :ensure t
-  :config (progn
-	    (popwin-mode t)
-	    (push '(compilation-mode :noselect t) popwin:special-display-config)
-	    (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
-	    (push "*slime-apropos*" popwin:special-display-config)
-	    (push "*slime-macroexpansion*" popwin:special-display-config)
-	    (push "*slime-description*" popwin:special-display-config)
-	    (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
-	    (push "*slime-xref*" popwin:special-display-config)
-	    (push '(sldb-mode :stick t) popwin:special-display-config)
-	    (push 'slime-repl-mode popwin:special-display-config)
-	    (push 'slime-connection-list-mode popwin:special-display-config)
-	    (push "*vc-diff*" popwin:special-display-config)
-	    (push "*vc-change-log*" popwin:special-display-config)
-	    (push '(org-src-mode :position right) popwin:special-display-config)
-	    ))
-
-
-
 ;;; code  from spacemacs
 (use-package restart-emacs
   :ensure t
