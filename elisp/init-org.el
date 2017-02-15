@@ -4,20 +4,43 @@
 (use-package org
   :ensure t
   :config(progn
+	   (defun samray/org-skip-subtree-if-priority (priority)
+	     "Skip an agenda subtree if it has a priority of PRIORITY.
+PRIORITY may be one of the characters ?A, ?B, or ?C."
+	     (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+		   (pri-value (* 1000 (- org-lowest-priority priority)))
+		   (pri-current (org-get-priority (thing-at-point 'line t))))
+	       (if (= pri-value pri-current)
+		   subtree-end
+		 nil)))
 	   (with-eval-after-load 'org
-	     (setq org-agenda-files '("~/Documents/Org/Agenda"))
+	     (setq org-agenda-files '("~/SyncDirectory/Org/agenda.org"))
+	     (setq org-agenda-custom-commands
+		   '(("c" "agenda view with alltodo sorted by priorities"
+		      ((tags "PRIORITY=\"A\""
+			     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+			      (org-agenda-overriding-header "High-priority unfinished tasks:")))
+		       (agenda "")
+		       (alltodo ""
+				((org-agenda-skip-function
+				  '(or (samray/org-skip-subtree-if-priority ?A)
+				       (org-agenda-skip-if nil '(scheduled deadline))))))))))
+	     ;;each time you turn an entry from a TODO (not-done) state
+	     ;;into any of the DONE states, a line ‘CLOSED: [timestamp]’ will
+	     ;;be inserted just after the headline
+	     (setq org-log-done 'time)
 	     (setq org-capture-templates
-		   '(("a" "Agenda" entry (file  "~/Documents/Org/agenga.org" "Agenda")
+		   '(("a" "Agenda" entry (file  "~/SyncDirectory/Org/agenda.org" "Agenda")
 		      "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
-		     ("n" "Note" entry (file+headline "~/Documents/Org/notes.org" "Notes")
+		     ("n" "Note" entry (file+headline "~/SyncDirectory/Org/notes.org" "Notes")
 		      "* Note %?\n%T")
-		     ("l" "Link" entry (file+headline "~/Documents/Org/links.org" "Links")
+		     ("l" "Link" entry (file+headline "~/SyncDirectory/Org/links.org" "Links")
 		      "* %? %^L %^g \n%T" :prepend t)
-		     ("b" "Blog idea" entry (file+headline "~/Documents/Org/i.org" "Blog Topics:")
+		     ("b" "Blog idea" entry (file+headline "~/SyncDirectory/Org/blog.org" "Blog Topics:")
 		      "* %?\n%T" :prepend t)
-		     ("t" "To Do Item" entry (file+headline "~/Documents/Org/i.org" "To Do Items")
+		     ("t" "To Do Item" entry (file+headline "~/SyncDirectory/Org/todo.org" "To Do Items")
 		      "* %?\n%T" :prepend t)
-		     ("j" "Journal" entry (file+datetree "~/Documents/Org/journal.org")
+		     ("j" "Journal" entry (file+datetree "~/SyncDirectory/Org/journal.org")
 		      "* %?\nEntered on %U\n  %i\n  %a")
 		     ))
 	     ;;GUI Emacs could display image.But if the image is too large,
@@ -36,7 +59,7 @@
 	     ;; a header.
 	     (setq org-publish-project-alist
 		   '(("org-notes"
-		      :base-directory "~/Documents/Org/"
+		      :base-directory "~/SyncDirectory/Org/"
 		      :publishing-directory "~/Documents/Programming/Html+Css/"
 		      :with-sub-superscript nil
 		      )))

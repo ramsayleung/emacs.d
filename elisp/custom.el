@@ -17,8 +17,8 @@
  '(nil nil t)
  '(org-capture-templates
    (quote
-    (("a" "Appointment" entry
-      (file "~/Documents/Org/gcal.org" "Appointments")
+    (("a" "Agenda" entry
+      (file "~/SyncDirectory/Org/agenda.org" "Agenda")
       "* TODO %?
 :PROPERTIES:
 
@@ -27,32 +27,27 @@ DEADLINE: %^T
  %i
 ")
      ("n" "Note" entry
-      (file+headline "~/Documents/Org/notes.org" "Notes")
+      (file+headline "~/SyncDirectory/Org/notes.org" "Notes")
       "* Note %?
 %T")
      ("l" "Link" entry
-      (file+headline "~/Documents/Org/links.org" "Links")
+      (file+headline "~/SyncDirectory/Org/links.org" "Links")
       "* %? %^L %^g 
 %T" :prepend t)
      ("b" "Blog idea" entry
-      (file+headline "~/Documents/Org/i.org" "Blog Topics:")
+      (file+headline "~/SyncDirectory/Org/blog.org" "Blog Topics:")
       "* %?
 %T" :prepend t)
      ("t" "To Do Item" entry
-      (file+headline "~/Documents/Org/i.org" "To Do Items")
+      (file+headline "~/SyncDirectory/Org/todo.org" "To Do Items")
       "* %?
 %T" :prepend t)
      ("j" "Journal" entry
-      (file+datetree "~/Documents/Org/journal.org")
+      (file+datetree "~/SyncDirectory/Org/journal.org")
       "* %?
 Entered on %U
   %i
-  %a")
-     ("s" "Screencast" entry
-      (file "~/Documents/Org/screencastnotes.org")
-      "* %?
-%i
-"))) t)
+  %a"))))
  '(package-selected-packages
    (quote
     (selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))

@@ -7,6 +7,7 @@
   :config
   (progn
     (evil-mode t)
+    (evil-set-initial-state 'calendar-mode 'emacs)
     )
   )
 

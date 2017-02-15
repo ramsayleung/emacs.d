@@ -26,7 +26,19 @@
   ;; configure regexp engine.
   (setq ivy-re-builders-alist
 	;; allow input not in order
-        '((t   . ivy--regex-ignore-order))))
+        '((t   . ivy--regex-ignore-order)))
+  (defun samray/counsel-goto-recent-directory ()
+    "Open recent directory with dired"
+    (interactive)
+    (unless recentf-mode (recentf-mode 1))
+    (let ((collection
+	   (delete-dups
+	    (append (mapcar 'file-name-directory recentf-list)
+		    ;; fasd history
+		    (if (executable-find "fasd")
+			(split-string (shell-command-to-string "fasd -ld") "\n" t))))))
+      (ivy-read "directories:" collection :action 'dired)))
+  )
 (use-package counsel-projectile
   :ensure t
   :config(counsel-projectile-on))

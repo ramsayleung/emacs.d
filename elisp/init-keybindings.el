@@ -43,6 +43,7 @@
 				"f d" 'samray/delete-current-buffer-file
 				"f E" 'samray/sudo-edit
 				"f f" 'counsel-find-file
+				"f g" 'samray/counsel-goto-recent-directory
 				"f r" 'recentf-open-files
 				"f R" 'samray/rename-current-buffer-file
 				"f s" 'save-buffer
@@ -296,18 +297,18 @@
   (general-define-key :states 'insert
 		      "DEL" 'hungry-delete-backward)
   (general-define-key :keymaps 'emacs-lisp-mode-map
-		      "C-c s" 'find-function-at-point)
+  		      "C-c s" 'find-function-at-point)
   (general-define-key :keymaps 'term-raw-map
-		      "C-y" 'samray/term-paste)
+  		      "C-y" 'samray/term-paste)
   (general-define-key :states '(normal emacs)
-		      :keymaps 'youdao-dictionary-mode-map
-		      "q" 'samray/youdao-dictionary-buffer-quit)
+  		      :keymaps 'youdao-dictionary-mode-map
+  		      "q" 'samray/youdao-dictionary-buffer-quit)
   (general-define-key :states '(normal emacs)
-		      :keymaps 'geiser-repl-mode-map
-		      "q" 'delete-window)
+  		      :keymaps 'geiser-repl-mode-map
+  		      "q" 'delete-window)
   (general-define-key :states '(normal emacs)
-		      :keymaps 'inferior-python-mode-map
-		      "q" 'delete-window)
+  		      :keymaps 'inferior-python-mode-map
+  		      "q" 'delete-window)
   )
 (with-eval-after-load 'popwin
   (general-define-key

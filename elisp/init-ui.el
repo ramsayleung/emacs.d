@@ -34,18 +34,9 @@
 	    (push 'slime-connection-list-mode popwin:special-display-config)
 	    (push "*vc-diff*" popwin:special-display-config)
 	    (push "*vc-change-log*" popwin:special-display-config)
-	    (push '(org-src-mode :position right) popwin:special-display-config)
-	    (push '(magit-diff-mode :position left) popwin:special-display-config)
 	    ))
 
-;;; Enfore rules for popup window
-(use-package shackle
-  :ensure t
-  :config (progn
-	    (setq shackle-rules '((org-src-mode :align right)))
-	    (setq shackle-rules '(("\\`\\*Org Src*?\\*\\'" :regexp t :align right :size 0.4)))
-	    )
-  )
+
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
