@@ -61,6 +61,7 @@
 				"j" '(:ignore t :which-key "jump/join/split")
 				"j j" 'avy-goto-char
 				"j l" 'avy-goto-line
+				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
 				"p f" 'counsel-projectile-find-file
 				"p d" 'counsel-projectile-find-dir
@@ -82,6 +83,7 @@
 				"t f" 'fci-mode
 				"t g" 'git-timemachine-toggle
 				"t o" 'origami-toggle-mode
+				"t s" 'selectric-mode
 				"t w" 'samray/toggle-window-split
 				"t h" '(:ignore t :which-key "highlight-indentation")
 				"t h i" 'highlight-indentation-mode
@@ -158,7 +160,6 @@
 	    (general-define-key :states '(normal visual motion emacs)
 				:keymaps 'markdown-mode-map
 				:prefix my-leader-key
-				"m" '(:ignore t :which-key "markdown")
 				"m -" 'markdown-insert-hr
 				"m h" '(:ignore t :which-key "markdown/header")
 				"m h i" 'markdown-insert-header-dwim
@@ -188,6 +189,52 @@
 				"m x q" 'markdown-blockquote-region
 				"m x p" 'markdown-insert-pre
 				"m x p" 'markdown-pre-region
+				)
+	    ;; Python mode
+	    (general-define-key :states '(normal visual emacs motion)
+				:keymaps 'python-mode-map
+				:prefix my-leader-key
+				"m c" '(:ignore t :which-key "excute")
+				"m c c" 'samray/python-execute-file
+				"m c C" 'samray/python-execute-file-focus
+				"m s" '(:ignore t :which-key "Send to REPL")
+				"m s b" 'python-shell-send-buffer
+				"m s B" 'samray/python-shell-send-buffer-switch
+				"m s f" 'python-shell-send-defun
+				"m s F" 'samray/python-shell-send-defun-switch
+				"m s i" 'samray/python-start-or-switch-repl
+				"m s r" 'python-shell-send-region
+				"m s R" 'samray/python-shell-send-region-switch
+				)
+	    ;; Scheme mode
+	    (general-define-key :states '(normal visual emacs motion)
+				:keymaps 'scheme-mode-map
+				:prefix my-leader-key
+				"m c" '(:ignore t :which-key "compiling")
+				"m c c" 'geiser-compile-current-buffer
+				"m c p" 'geiser-add-to-path
+				"m i" '(:ignore t :which-key "insertion")
+				"m i l" 'geiser-insert-lambda
+				"m s" '(:ignore t :which-key "repl")
+				"m s i" 'geiser-switch-to-repl
+				"m s s" 'geiser-set-scheme
+				"m s b" 'geiser-eval-buffer
+				"m s B" 'geiser-eval-buffer-and-go
+				"m s f" 'geiser-eval-definition
+				"m s F" 'geiser-eval-definition-and-go
+				"m s e" 'geiser-eval-last-sexp
+				"m s r" 'geiser-eval-region
+				"m s R" 'geiser-eval-region-and-go
+				"m e" '(:ignore t :which-key "Evaluation")
+				"m e b" 'geiser-eval-buffer
+				"m e e" 'geiser-eval-last-sexp
+				"m e f" 'geiser-eval-definition
+				"m e l" 'lisp-state-eval-sexp-end-of-line
+				"m e r" 'geiser-eval-region
+				"m m" '(:ignore t :which-key "macroexpansion")
+				"m m e" 'geiser-expand-last-sexp
+				"m m f" 'geiser-expand-definition
+				"m m r" 'geiser-expand-region
 				)
 	    (general-define-key :keymaps 'company-active-map
 				"<tab>" 'company-complete-common-or-cycle
@@ -242,16 +289,31 @@
 	     "<f6>" 'ivy-resume
 	     )
 	    )
+  (general-define-key :keymaps 'counsel-find-file-map
+  		      "C-j" 'ivy-next-line
+  		      "C-k" 'ivy-previous-line)
+
   (general-define-key :states 'insert
 		      "DEL" 'hungry-delete-backward)
+  (general-define-key :keymaps 'emacs-lisp-mode-map
+		      "C-c s" 'find-function-at-point)
+  (general-define-key :keymaps 'term-raw-map
+		      "C-y" 'samray/term-paste)
+  (general-define-key :states '(normal emacs)
+		      :keymaps 'youdao-dictionary-mode-map
+		      "q" 'samray/youdao-dictionary-buffer-quit)
+  (general-define-key :states '(normal emacs)
+		      :keymaps 'geiser-repl-mode-map
+		      "q" 'delete-window)
+  (general-define-key :states '(normal emacs)
+		      :keymaps 'inferior-python-mode-map
+		      "q" 'delete-window)
   )
-(general-define-key :keymaps 'emacs-lisp-mode-map
-		    "C-c s" 'find-function-at-point)
-(general-define-key :keymaps 'term-raw-map
-		    "C-y" 'samray/term-paste)
-(general-define-key :states '(normal)
-		    :keymaps 'youdao-dictionary-mode-map
-		    "q" 'samray/youdao-dictionary-buffer-quit)
+(with-eval-after-load 'popwin
+  (general-define-key
+   "C-c C-z" popwin:keymap
+   ))
+
 (message "load init-keybinds")
 (provide 'init-keybindings)
 ;;; init-keybindings.el ends here

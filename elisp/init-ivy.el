@@ -9,7 +9,7 @@
 (use-package avy
   :ensure t)
 (use-package ivy :ensure t
-  :diminish (ivy-mode . "")
+  :diminish ivy-mode
   :bind
   (:map ivy-mode-map
 	("C-'" . ivy-avy))

@@ -1,24 +1,13 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
-
-
-(use-package youdao-dictionary
-  :ensure t
-  :init
-  (defun samray/youdao-dictionary-buffer-quit ()
-    "Quit youdao-dictionary Buffer and delete window"
-    (interactive)
-    (kill-this-buffer)
-    (delete-window)
-    )
-  :config (progn
-	    (setq url-automatic-caching t)
-	    ))
 ;;; read pdf file in Emacs
 (use-package pdf-tools
   :ensure t)
 
+;;; Make Emacs sound like a proper typewrite
+(use-package selectric-mode
+  :ensure t)
 ;;; use Irc in Emacs
 (use-package circe
   :ensure t
@@ -75,7 +64,7 @@
 	      :docstring "Mappin' it up.")
 
 	    (defengine project-gutenberg
-	      "http://www.gutenberg.org/ebooks/search/?query=%s")
+ 	      "http://www.gutenberg.org/ebooks/search/?query=%s")
 
 	    (defengine rfcs
 	      "http://pretty-rfc.herokuapp.com/search?q=%s")
@@ -118,7 +107,24 @@
 ;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
 (use-package popwin
   :ensure t
-  :config(popwin-mode t))
+  :config (progn
+	    (popwin-mode t)
+	    (push '(compilation-mode :noselect t) popwin:special-display-config)
+	    (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
+	    (push "*slime-apropos*" popwin:special-display-config)
+	    (push "*slime-macroexpansion*" popwin:special-display-config)
+	    (push "*slime-description*" popwin:special-display-config)
+	    (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
+	    (push "*slime-xref*" popwin:special-display-config)
+	    (push '(sldb-mode :stick t) popwin:special-display-config)
+	    (push 'slime-repl-mode popwin:special-display-config)
+	    (push 'slime-connection-list-mode popwin:special-display-config)
+	    (push "*vc-diff*" popwin:special-display-config)
+	    (push "*vc-change-log*" popwin:special-display-config)
+	    (push '(org-src-mode :position right) popwin:special-display-config)
+	    ))
+
+
 
 ;;; code  from spacemacs
 (use-package restart-emacs
@@ -165,36 +171,7 @@ debug-init and load the given list of packages."
 (use-package wakatime-mode
   :ensure t
   :diminish (wakatime-mode . " ω")
-  :config (global-wakatime-mode))
-
-;;; Chinese input method ,clone from https://github.com/tumashu/chinese-pyim
-(use-package chinese-pyim
-  :ensure t
-  :config
-  ;; 激活 basedict 拼音词库
-  (use-package chinese-pyim-basedict
-    :ensure t
-    :config (chinese-pyim-basedict-enable))
-
-
-  (setq default-input-method "chinese-pyim")
-
-  ;; 使用全拼
-  (setq pyim-default-scheme 'quanpin)
-  ;; 开启拼音搜索功能
-  (setq pyim-isearch-enable-pinyin-search t)
-
-  ;; 使用 pupup-el 来绘制选词框
-  (setq pyim-page-tooltip 'popup)
-
-  ;; 选词框显示5个候选词
-  (setq pyim-page-length 8)
-
-  ;; 让 Emacs 启动时自动加载 pyim 词库
-  ;; (add-hook 'emacs-startup-hook
-  ;;           #'(lambda () (pyim-restart-1 t)))
-  )
-
+  :config (message "loading wakatime") (global-wakatime-mode))
 
 (set-language-environment "UTF-8")
 (setq x-select-enable-clipboard-manager nil)
@@ -437,6 +414,15 @@ removal."
     (progn
       (window-configuration-to-register ?_)
       (delete-other-windows))))
-
+(defun samray/eshell-clear-buffer ()
+  "Clear terminal."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
+(add-hook 'eshell-mode-hook
+	  '(lambda()
+	     (local-set-key (kbd "C-l") 'eshell-clear-buffer)))
+(message "loading init-misc")
 (provide 'init-misc)
 ;;; init-misc.el ends here

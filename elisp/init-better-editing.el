@@ -20,12 +20,12 @@
 ;; delete spaces at once
 (use-package hungry-delete
   :ensure t
-  :diminish (hungry-delete-mode . "")
+  :diminish hungry-delete-mode
   :config (global-hungry-delete-mode t))
 
 (use-package which-key
   :ensure t
-  :diminish (which-key-mode . "")
+  :diminish which-key-mode
   :config(progn
 	   (which-key-mode t)
 	   (setq which-key-idle-delay 0.3)
@@ -53,6 +53,7 @@
 
 ;;;  highlight indentation
 (use-package highlight-indentation
+  :diminish highlight-indentation-mode
   :ensure t
   :config (progn
 	    (set-face-background 'highlight-indentation-face "#b2f3f7")
@@ -71,7 +72,7 @@
 ;;; treat undo history as a tree
 (use-package undo-tree
   :ensure t
-  :diminish (undo-tree-mode . "")
+  :diminish undo-tree-mode
   :config (global-undo-tree-mode t))
 ;;; Emacs always for confirmation whether we really wanna open
 ;;; large file.However,the default limit is so low,so it prompt often

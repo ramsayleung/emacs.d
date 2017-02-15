@@ -17,19 +17,46 @@
  '(nil nil t)
  '(org-capture-templates
    (quote
-    (("t" "Todo" entry
-      (file+headline "~/.emacs.d/gtd.org" "Daily Todo List:")
-      "* TODO [#B] %?
+    (("a" "Appointment" entry
+      (file "~/Documents/Org/gcal.org" "Appointments")
+      "* TODO %?
+:PROPERTIES:
+
+:END:
+DEADLINE: %^T 
+ %i
+")
+     ("n" "Note" entry
+      (file+headline "~/Documents/Org/notes.org" "Notes")
+      "* Note %?
+%T")
+     ("l" "Link" entry
+      (file+headline "~/Documents/Org/links.org" "Links")
+      "* %? %^L %^g 
+%T" :prepend t)
+     ("b" "Blog idea" entry
+      (file+headline "~/Documents/Org/i.org" "Blog Topics:")
+      "* %?
+%T" :prepend t)
+     ("t" "To Do Item" entry
+      (file+headline "~/Documents/Org/i.org" "To Do Items")
+      "* %?
+%T" :prepend t)
+     ("j" "Journal" entry
+      (file+datetree "~/Documents/Org/journal.org")
+      "* %?
+Entered on %U
   %i
-" :empty-lines 1))) t)
+  %a")
+     ("s" "Screencast" entry
+      (file "~/Documents/Org/screencastnotes.org")
+      "* %?
+%i
+"))) t)
  '(package-selected-packages
    (quote
-    (better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
- '(shell-pop-shell-type
-   (quote
-    ("ansi-term" "*ansi-term*"
-     (lambda nil
-       (ansi-term shell-pop-term-shell)))))
+    (selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
+ '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
  '(wakatime-api-key "df5310e6-9d1f-4cf6-bd9a-fd6a417a6c93")
  '(wakatime-cli-path "/usr/bin/wakatime")
  '(wakatime-python-bin "/usr/bin/python"))

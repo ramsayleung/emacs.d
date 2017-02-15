@@ -7,28 +7,19 @@
 	   (with-eval-after-load 'org
 	     (setq org-agenda-files '("~/Documents/Org/Agenda"))
 	     (setq org-capture-templates
-		   '(("b" "Blog idea"
-		      entry
-		      (file (org-file-path "blog-ideas.org"))
-		      "* TODO %?\n")
-
-		     ("g" "Groceries"
-		      checkitem
-		      (file (org-file-path "groceries.org")))
-
-		     ("l" "Today I Learned..."
-		      entry
-		      (file+datetree (org-file-path "til.org"))
-		      "* %?\n")
-
-		     ("r" "Reading"
-		      checkitem
-		      (file (org-file-path "to-read.org")))
-
-		     ("t" "Todo"
-		      entry
-		      (file+headline org-index-file "Tasks")
-		      "* TODO %?\n")))
+		   '(("a" "Agenda" entry (file  "~/Documents/Org/agenga.org" "Agenda")
+		      "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
+		     ("n" "Note" entry (file+headline "~/Documents/Org/notes.org" "Notes")
+		      "* Note %?\n%T")
+		     ("l" "Link" entry (file+headline "~/Documents/Org/links.org" "Links")
+		      "* %? %^L %^g \n%T" :prepend t)
+		     ("b" "Blog idea" entry (file+headline "~/Documents/Org/i.org" "Blog Topics:")
+		      "* %?\n%T" :prepend t)
+		     ("t" "To Do Item" entry (file+headline "~/Documents/Org/i.org" "To Do Items")
+		      "* %?\n%T" :prepend t)
+		     ("j" "Journal" entry (file+datetree "~/Documents/Org/journal.org")
+		      "* %?\nEntered on %U\n  %i\n  %a")
+		     ))
 	     ;;GUI Emacs could display image.But if the image is too large,
 	     ;;it works so weird
 	     (setq org-image-actual-width '(500)) 
@@ -65,6 +56,28 @@
 ;;; pomodoro tech
 (use-package org-pomodoro
   :ensure t)
+
+;; ;;; Ultra-minimalist presentation minor-mode for org-mode
+;; (use-package org-present
+;;   :ensure t
+;;   :config (progn
+;; 	    (eval-after-load "org-present"
+;; 	      '(progn
+;; 		 (add-hook 'org-present-mode-hook
+;; 			   (lambda ()
+;; 			     (org-present-big)
+;; 			     (org-display-inline-images)
+;; 			     (org-present-hide-cursor)
+;; 			     (org-present-read-only)))
+;; 		 (add-hook 'org-present-mode-quit-hook
+;; 			   (lambda ()
+;; 			     (org-present-small)
+;; 			     (org-remove-inline-images)
+;; 			     (org-present-show-cursor)
+;; 			     (org-present-read-write)))))
+
+
+;; 	    ))
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
