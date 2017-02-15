@@ -3,8 +3,9 @@
 ;;; Commentary:
 (use-package yasnippet
   :ensure t
+  :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
+  :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
-	    (add-hook 'prog-mode-hook #'yas-minor-mode)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
 (use-package yaml-mode
@@ -13,17 +14,20 @@
 (use-package json-mode
   :ensure t
   :mode "\\.json$")
+
 (use-package nginx-mode
   :ensure t
   :commands (nginx-mode))
 
 ;; make Emacs use the $PATH set up by the user's shell
 (use-package exec-path-from-shell
-  :ensure t)
+  :ensure t
+  :demand t)
 
 ;; help you use shell easily on Emacs
 (use-package shell-pop
   :ensure t
+  :commands shell-pop
   :config (setq
 	   shell-pop-window-position "bottom"
 	   shell-pop-window-size 35
@@ -92,6 +96,7 @@
 ;;; Display extra information and color for eshll prompt
 (use-package eshell-prompt-extras
   :ensure t
+  :commands eshell
   :config (progn
 	    (with-eval-after-load "esh-opt"
 	      (require 'virtualenvwrapper)
@@ -104,7 +109,8 @@
 ;; Emacs extension to increate selected region by semantic units
 (use-package expand-region
   :ensure t
-  :config())
+  :commands er/expand-region
+  )
 
 ;;; Evil is not especilly useful in the terminal,so
 (evil-set-initial-state 'term-mode 'emacs)

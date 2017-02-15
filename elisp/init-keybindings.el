@@ -13,7 +13,7 @@
 				"TAB" 'samray/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
-				"a e" 'circe
+				"a c" 'circe
 				"a w" 'wttrin
 				"a y" '(:ignore t :which-key "youdao-dictionary")
 				"a y i" 'youdao-dictionary-search-from-input
@@ -239,14 +239,15 @@
 				)
 
 	    ;; origami mode
-	    (general-define-key :keymaps 'origami-mode-map
-				:prefix my-leader-key
-				"t o" '(:ignore t :which-key "origami")
-				"t o t" 'origami-toggle-node
-				"t o f" 'origami-forward-toggle-node
-				"t o r" 'origami-recursively-toggle-node
-				"t o a" 'origami-toggle-all-nodes
-				)
+	    (general-define-key		:states '(normal visual emacs motion)
+					:keymaps 'origami-mode-map
+					:prefix my-leader-key
+					"t o" '(:ignore t :which-key "origami")
+					"t o t" 'origami-toggle-node
+					"t o f" 'origami-forward-toggle-node
+					"t o r" 'origami-recursively-toggle-node
+					"t o a" 'origami-toggle-all-nodes
+					)
 	    ;; origami mode
 	    (general-define-key :keymaps 'origami-mode-map
 				"C-=" 'origami-recursively-toggle-node

@@ -10,19 +10,21 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :config (progn
-	    (add-hook 'markdown-mode-hook
-		      (lambda ()
-			(when buffer-file-name
-			  (add-hook 'after-save-hook
-				    'check-parens
-				    nil t))))))
+  :init (progn
+	  (add-hook 'markdown-mode-hook
+		    (lambda ()
+		      (when buffer-file-name
+			(add-hook 'after-save-hook
+				  'check-parens
+				  nil t))))))
 (use-package pandoc-mode
   :ensure t
-  :mode ("\\.markdown\\'" "\\.mkd\\'" "\\.md\\'"))
+  :mode ("\\.markdown\\'" "\\.mkd\\'" "\\.md\\'")
+  )
 
 ;;; preview markdown file on the fly on my browser
 (use-package flymd
+  :commands markdown-mode
   :ensure t)
 (provide 'init-markdown)
 ;;; init-markdown.el ends here

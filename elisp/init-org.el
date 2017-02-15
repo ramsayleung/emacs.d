@@ -3,6 +3,10 @@
 ;;; Code:
 (use-package org
   :ensure t
+  :mode ("\\.org\\'" . org-mode)
+  :init (progn
+	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
+	  )
   :config(progn
 	   (defun samray/org-skip-subtree-if-priority (priority)
 	     "Skip an agenda subtree if it has a priority of PRIORITY.
@@ -70,39 +74,34 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;; Show org-edit-special in the other-window
 	     (setq org-src-window-setup 'other-window)
 	     (require 'ox-md nil t)
-	     (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
-	     (add-hook 'org-mode-hook #'samray/complete-for-org-mode)
 	     )
 	   )
   )
 
 ;;; pomodoro tech
 (use-package org-pomodoro
+  :commands org
   :ensure t)
 
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
+  :defer t
   :ensure t
+  :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   :config (progn
-	    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 	    (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
 	    ))
 
-;;; Org extra exports
-;;; Export to github flavored markdown
+;; Org extra exports
+;; Export to github flavored markdown
 (use-package ox-gfm
-  :ensure t
-  :config (progn
-	    (with-eval-after-load 'org
-	      (require 'ox-gfm nil t)))
+  :ensure ox-gfm
   )
 
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
-  :ensure t
-  :config (with-eval-after-load 'org
-	    (require 'ox-twbs nil t))
+  :ensure ox-twbs
   )
 ;;; Export to reveal for presentation
 (use-package ox-reveal
@@ -127,8 +126,5 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (defun samray/disable-flycheck-in-org-src-block ()
   "Disable emacs-lisp-checkdoc in org-src-mode."
   (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
-(defun samray/complete-for-org-mode ()
-  "Org mode has completion for all keywords via pcomplete,start it."
-  (add-hook 'completion-at-point 'pcomplete-completions-at-point nil t))
 (provide 'init-org)
 ;;; init-org.el ends here

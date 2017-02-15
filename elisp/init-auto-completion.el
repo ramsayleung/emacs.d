@@ -3,6 +3,7 @@
 ;;; Code:
 (use-package company
   :ensure t
+  :demand t
   :commands (company-mode
              company-complete
              company-complete-common
@@ -27,33 +28,37 @@
 
 (use-package company-quickhelp
   :ensure t
-  :config (progn
-	    (add-hook 'company-mode-hook 'company-quickhelp-mode)
-	    ))
+  :defer t
+  :init (progn
+	  (add-hook 'company-mode-hook 'company-quickhelp-mode)
+	  ))
 
 (use-package company-statistics
   :ensure t
-  :config (add-hook 'company-mode-hook 'company-statistics-mode))
+  :defer t
+  :init (add-hook 'company-mode-hook 'company-statistics-mode))
 
 (use-package company-anaconda
   :ensure t
-  :config (progn
-	    (eval-after-load "company"
-	      '(add-to-list 'company-backends 'company-anaconda))
-	    )
-  )
+  :defer t
+  :init(progn
+	 (add-hook 'python-mode-hook
+		   (lambda()(add-to-list 'company-backends 'company-anaconda)))
+	 ))
 
 ;; company-mode completion back-end for python JEDI
 (use-package company-jedi
   :ensure t
-  :config(progn
-	   (add-hook 'python-mode-hook
-		     (lambda()(add-to-list 'company-backends 'company-jedi)))
-	   ))
+  :defer t
+  :init(progn
+	 (add-hook 'python-mode-hook
+		   (lambda()(add-to-list 'company-backends 'company-jedi)))
+	 ))
 ;; HTML completion
 (use-package company-web
   :ensure t
-  :config
-  (add-to-list 'company-backends 'company-web-html))
+  :defer t
+  :init (add-hook 'web-mode-hook
+		  (lambda () (add-to-list 'company-backend 'company-web-html))))
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

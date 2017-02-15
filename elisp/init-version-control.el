@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package magit
+  :commands (magit-stage)
   :ensure t
   )
 

@@ -7,23 +7,7 @@
 
 (define-abbrev-table 'anaconda-mode-view-mode-abbrev-table '())
 
-(define-abbrev-table 'bookmark-bmenu-mode-abbrev-table '())
-
-(define-abbrev-table 'bookmark-edit-annotation-mode-abbrev-table '())
-
 (define-abbrev-table 'calendar-mode-abbrev-table '())
-
-(define-abbrev-table 'change-log-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-channel-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-chat-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-query-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-server-mode-abbrev-table '())
 
 (define-abbrev-table 'comint-mode-abbrev-table '())
 
@@ -39,11 +23,7 @@
 
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
 
-(define-abbrev-table 'elpy-refactor-mode-abbrev-table '())
-
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
-
-(define-abbrev-table 'eshell-mode-abbrev-table '())
 
 (define-abbrev-table 'evil-command-window-mode-abbrev-table '())
 
@@ -60,63 +40,15 @@
     ("8sa" "samray" nil 0)
    ))
 
-(define-abbrev-table 'grep-mode-abbrev-table '())
-
 (define-abbrev-table 'gud-mode-abbrev-table '())
 
 (define-abbrev-table 'help-mode-abbrev-table '())
-
-(define-abbrev-table 'ibuffer-mode-abbrev-table '())
-
-(define-abbrev-table 'image-dired-display-image-mode-abbrev-table '())
-
-(define-abbrev-table 'image-dired-thumbnail-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-python-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-scheme-mode-abbrev-table '())
 
-(define-abbrev-table 'ivy-occur-grep-mode-abbrev-table '())
-
-(define-abbrev-table 'ivy-occur-mode-abbrev-table '())
-
 (define-abbrev-table 'lisp-mode-abbrev-table '())
-
-(define-abbrev-table 'log-edit-mode-abbrev-table '())
-
-(define-abbrev-table 'log4e-mode-abbrev-table '())
-
-(define-abbrev-table 'lui-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-cherry-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-diff-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-log-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-log-select-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-merge-preview-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-popup-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-process-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-reflog-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-refs-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-repolist-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-revision-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-stash-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-stashes-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-status-mode-abbrev-table '())
 
 (define-abbrev-table 'message-mode-abbrev-table '())
 
@@ -150,13 +82,9 @@
 
 (define-abbrev-table 'shell-mode-abbrev-table '())
 
-(define-abbrev-table 'snippet-mode-abbrev-table '())
-
 (define-abbrev-table 'special-mode-abbrev-table '())
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
-
-(define-abbrev-table 'term-mode-abbrev-table '())
 
 (define-abbrev-table 'text-mode-abbrev-table '())
 
@@ -169,8 +97,4 @@
 (define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
-
-(define-abbrev-table 'youdao-dictionary-mode-abbrev-table '())
-
-(define-abbrev-table 'ztree-mode-abbrev-table '())
 

@@ -9,31 +9,37 @@
 ;; for Emacs
 (use-package web-beautify
   :ensure t
-  :config(progn
-	   (add-hook 'js2-mode-hook
-		     (lambda () (unless (derived-mode-p 'vue-mode)
-				  (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
-	   ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
-	   (add-hook 'js-mode-hook
-		     (lambda () (unless (derived-mode-p 'vue-mode)
-				  (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+  :commands (web-beautify-css
+             web-beautify-css-buffer
+             web-beautify-html
+             web-beautify-html-buffer
+             web-beautify-js
+             web-beautify-js-buffer)
+  :init(progn
+	 (add-hook 'js2-mode-hook
+		   (lambda () (unless (derived-mode-p 'vue-mode)
+				(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+	 ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+	 (add-hook 'js-mode-hook
+		   (lambda () (unless (derived-mode-p 'vue-mode)
+				(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
 
-	   (add-hook 'json-mode-hook
-		     (lambda () (unless (derived-mode-p 'vue-mode)
-				  (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+	 (add-hook 'json-mode-hook
+		   (lambda () (unless (derived-mode-p 'vue-mode)
+				(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
 
-	   (add-hook 'html-mode-hook
-		     (lambda () (unless (derived-mode-p 'vue-mode)
-				  (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+	 (add-hook 'html-mode-hook
+		   (lambda () (unless (derived-mode-p 'vue-mode)
+				(add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
 
-	   (add-hook 'web-mode-hook
-		     (lambda () (unless (derived-mode-p 'vue-mode)
-				  (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+	 (add-hook 'web-mode-hook
+		   (lambda () (unless (derived-mode-p 'vue-mode)
+				(add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
 
-	   (add-hook 'css-mode-hook
-		     (lambda () (unless (derived-mode-p 'vue-mode)
-				  (add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
-	   ))
+	 (add-hook 'css-mode-hook
+		   (lambda () (unless (derived-mode-p 'vue-mode)
+				(add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
+	 ))
 ;;  an autonomous emacs major-mode for editing web template
 ;; Html documents can embed parts (css/javascript) and blocks(client/server side)
 (use-package web-mode
@@ -41,9 +47,9 @@
   :mode (
 	 ("\\.html\\'" . web-mode)
 	 )
-  :config(progn
-	   (add-hook 'web-mode-hook 'samray/web-mode-indent-setup)
-	   ))
+  :init(progn
+	 (add-hook 'web-mode-hook 'samray/web-mode-indent-setup)
+	 ))
 
 ;; config for web-mode
 (defun samray/web-mode-indent-setup()
@@ -77,18 +83,30 @@
 (use-package js2-mode
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
-  :config(progn
-	   (add-hook 'js2-mode-hook 'js2-refactor-mode)
-	   ))
+  :init(progn
+	 (add-hook 'js2-mode-hook 'js2-refactor-mode)
+	 ))
 
 (use-package nodejs-repl
-  :ensure t)
+  :ensure t
+  :commands (nodejs-repl
+             nodejs-repl-send-buffer
+             nodejs-repl-switch-to-repl
+             nodejs-repl-send-region
+             nodejs-repl-send-last-sexp
+             nodejs-repl-execute
+             nodejs-repl-load-file)
+  )
 (use-package js2-refactor
-  :ensure t)
+  :defer t
+  :ensure t
+  :init (add-hook 'js2-mode-hook 'js2-refactor))
 
 ;;; Javascript auto-completion in Emacs using js2-mode's parser and Skewer-mode
 (use-package ac-js2
   :ensure t
+  :defer t
+  :init (add-hook 'js2-mode-hook 'ac-js2)
   :config (progn
 	    (setq ac-js2-evaluate-calls t)
 	    ))
@@ -100,11 +118,12 @@
 ;;; From a js2-mode buffer with skewer-mode minor mode enabled, send forms to the browser to evaluate.
 (use-package skewer-mode
   :ensure t
-  :config (progn
-	    (add-hook 'js2-mode-hook 'skewer-mode)
-	    (add-hook 'css-mode-hook 'skewer-css-mode)
-	    (add-hook 'html-mode-hook 'skewer-html-mode)
-	    ))
+  :defer t
+  :init (progn
+	  (add-hook 'js2-mode-hook 'skewer-mode)
+	  (add-hook 'css-mode-hook 'skewer-css-mode)
+	  (add-hook 'html-mode-hook 'skewer-html-mode)
+	  ))
 
 ;;;----------------;;;
 ;;;   Html Mode    ;;;
@@ -113,10 +132,11 @@
 ;;; Generate Html and Css code 
 (use-package emmet-mode
   :ensure t
-  :config (progn
-	    (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-	    (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-	    ))
+  :defer t
+  :init (progn
+	  (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+	  (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+	  ))
 
 ;;;----------------;;;
 ;;;   Vue Mode    ;;;
@@ -127,7 +147,6 @@
   :mode ("\\.vue\\'" . vue-mode)
   :config (progn
 	    (setq mmm-submode-decoration-level 0)
-	    (add-hook 'vue-mode-hook 'auto-complete-mode)
 	    ))
 (provide 'init-web)
 ;;; init-web.el ends here

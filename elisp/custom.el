@@ -47,10 +47,10 @@ DEADLINE: %^T
       "* %?
 Entered on %U
   %i
-  %a"))))
+  %a"))) t)
  '(package-selected-packages
    (quote
-    (selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region iedit dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
+    (selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
  '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
  '(wakatime-api-key "df5310e6-9d1f-4cf6-bd9a-fd6a417a6c93")
  '(wakatime-cli-path "/usr/bin/wakatime")

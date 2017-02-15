@@ -4,11 +4,13 @@
 
 (use-package geiser
   :ensure t
+  :defer t
+  :init (progn
+	  (add-hook 'scheme-mode-hook 'geiser-mode)
+	  (add-hook 'geiser-mode-hook 'samray/scheme-run-repl-for-code-complete-startup)
+	  )
   :config (progn
 	    (setq geiser-default-implementation 'guile)
-	    (add-hook 'scheme-mode-hook 'geiser-mode)
-	    (with-eval-after-load 'geiser-mode
-	      (add-hook 'geiser-mode-hook 'samray/scheme-run-repl-for-code-complete-startup))
 	    ))
 
 ;;; steal from http://www.yinwang.org/blog-cn/2013/04/11/scheme-setup
@@ -20,8 +22,8 @@
 (defun samray/scheme-proc ()
   "Return the current Scheme process, starting one if necessary."
   (unless (and scheme-buffer
-               (get-buffer scheme-buffer)
-               (comint-check-proc scheme-buffer))
+	       (get-buffer scheme-buffer)
+	       (comint-check-proc scheme-buffer))
     (save-window-excursion
       (run-scheme scheme-program-name)))
   (or (scheme-get-process)
@@ -37,9 +39,9 @@
     (switch-to-buffer "*scheme*")
     (other-window 1))
    ((not (find "*scheme*"
-               (mapcar (lambda (w) (buffer-name (window-buffer w)))
-                       (window-list))
-               :test 'equal))
+	       (mapcar (lambda (w) (buffer-name (window-buffer w)))
+		       (window-list))
+	       :test 'equal))
     (other-window 1)
     (switch-to-buffer "*scheme*")
     (other-window -1))))

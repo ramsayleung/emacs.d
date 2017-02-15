@@ -1,13 +1,14 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
-
 (use-package window-numbering
   :ensure t
   :config(progn
 	   (window-numbering-mode t)))
+
 (use-package smartparens
   :ensure t
+  :demand t
   :diminish (smartparens-mode . "(s)")
   :config
   (progn
@@ -30,31 +31,33 @@
 	   (which-key-mode t)
 	   (setq which-key-idle-delay 0.3)
 	   ))
-(use-package iedit
-  :ensure t)
 
 ;;; Highlight delimiter such as parenthese,brackets or braces
 ;;; according to their depth
 (use-package rainbow-delimiters
   :ensure t
-  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  :defer t
+  :init(add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;;; A light that follows your cursor around so you don't lose it
 (use-package beacon
   :ensure t
   :diminish beacon-mode
+  :demand t
   :config
   (beacon-mode t))
 
 ;;; An useful package to compare directory tree
 (use-package ztree
   :ensure t
+  :commands (ztree-dir ztree-diff)
   :init (setq ztree-dir-move-focus t))
 
 ;;;  highlight indentation
 (use-package highlight-indentation
   :diminish highlight-indentation-mode
   :ensure t
+  :commands (highlight-indentation-mode highlight-indentation-current-column-mode)
   :config (progn
 	    (set-face-background 'highlight-indentation-face "#b2f3f7")
 	    (set-face-background 'highlight-indentation-current-column-face "#b2f3f7")
@@ -68,14 +71,16 @@
 ;;; folding based on indentation/syntax
 (use-package origami
   :ensure t
-  :config (progn
-	    (add-hook 'prog-mode-hook (lambda () (origami-mode t)))
-	    ))
+  :defer t
+  :init (progn
+	  (add-hook 'prog-mode-hook (lambda () (origami-mode t)))
+	  ))
 
 ;;; treat undo history as a tree
 (use-package undo-tree
   :ensure t
   :diminish undo-tree-mode
+  :commands undo-tree-visualize
   :config (global-undo-tree-mode t))
 ;;; Emacs always for confirmation whether we really wanna open
 ;;; large file.However,the default limit is so low,so it prompt often

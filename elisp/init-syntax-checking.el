@@ -3,6 +3,7 @@
 ;;; Code:
 (use-package flycheck
   :ensure t
+  :demand t
   :diminish (flycheck-mode . "φ")
   :config(global-flycheck-mode t))
 

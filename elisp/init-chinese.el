@@ -5,6 +5,7 @@
 
 (use-package youdao-dictionary
   :ensure t
+  :commands (youdao-dictionary-search-at-point+ youdao-dictionary-search-from-input)
   :init
   (defun samray/youdao-dictionary-buffer-quit ()
     "Quit youdao-dictionary Buffer and delete window"
@@ -17,11 +18,13 @@
 	    ))
 (use-package chinese-pyim
   :ensure t
+  :commands toggle-input-method
   :config
-  ;; 激活 greatdict 拼音词库
+  ;; 激活 greatdict 拼音词库 
   (message "loading chinese-pyim")
   (use-package chinese-pyim-greatdict
     :ensure t
+    :commands toggle-input-method
     :config (progn
 	      (message "Loading Pyim-greatdict")
 	      (chinese-pyim-greatdict-enable))
@@ -60,7 +63,7 @@
             #'(lambda () (pyim-restart-1 t)))
   :bind
   (("M-j" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
-   ("C-;" . pyim-delete-word-from-personal-buffer)))
+   ))
 
 (provide 'init-chinese)
 ;;; init-chinese.el ends here

@@ -19,6 +19,7 @@
 ;; popwin is a popup window manager for Emacs which makes you free from the hell
 ;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
 (use-package popwin
+  :demand t
   :ensure t
   :config (progn
 	    (popwin-mode t)
@@ -35,8 +36,6 @@
 	    (push "*vc-diff*" popwin:special-display-config)
 	    (push "*vc-change-log*" popwin:special-display-config)
 	    ))
-
-
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
@@ -65,13 +64,13 @@ This code toggles between them."
 	  (set-window-buffer (next-window) next-win-buffer)
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
-
-;;turn off tool bar
-(tool-bar-mode -1)
-;; turn off file scroll bar
-(scroll-bar-mode -1)
-;; no menubar
-(menu-bar-mode -1)
+(when window-system
+  ;;turn off tool bar
+  (tool-bar-mode -1)
+  ;; turn off file scroll bar
+  (scroll-bar-mode -1)
+  ;; no menubar
+  (menu-bar-mode -1))
 ;; turn off startup help menu
 (setq inhibit-splash-screen t)
 ;; show line number

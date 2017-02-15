@@ -3,14 +3,17 @@
 ;;; Commentary:
 ;;; read pdf file in Emacs
 (use-package pdf-tools
+  :mode ("\\.pdf\\'")
   :ensure t)
 
 ;;; Make Emacs sound like a proper typewrite
 (use-package selectric-mode
+  :commands selectric-mode
   :ensure t)
 ;;; use Irc in Emacs
 (use-package circe
   :ensure t
+  :commands circe-mode
   :config (progn
 	    (setq circe-network-options
 		  '(("Freenode"
@@ -21,10 +24,11 @@
 		     :channels ("#emacs")
 		     )))
 	    (evil-leader/set-key
-	      "o c" 'circe)
+	     "o c" 'circe)
 	    ))
 ;;; Try out Emacs Package without install
 (use-package try
+  :commands try
   :ensure t)
 
 ;;; Get weather status
@@ -90,8 +94,12 @@
 	      "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
 	    ))
 ;;;enhance dired
-(require 'dired+)
-(diredp-toggle-find-file-reuse-dir t)
+(use-package dired+
+  :init
+  :commands dired
+  :config
+  (diredp-toggle-find-file-reuse-dir t)
+  )
 (setq dired-open-extensions
       '(("mkv" . "vlc")
         ("mp4" . "vlc")
@@ -106,6 +114,9 @@
 ;;; code  from spacemacs
 (use-package restart-emacs
   :ensure t
+  :commands (samray/restart-emacs
+	     samray/restart-emacs-debug-init
+	     samray/restart-emacs-resume-layout)
   :init
   (defun samray/restart-emacs (&optional args)
     "Restart emacs."
