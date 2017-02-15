@@ -67,7 +67,10 @@
 
 ;;; folding based on indentation/syntax
 (use-package origami
-  :ensure t)
+  :ensure t
+  :config (progn
+	    (add-hook 'prog-mode-hook (lambda () (origami-mode t)))
+	    ))
 
 ;;; treat undo history as a tree
 (use-package undo-tree

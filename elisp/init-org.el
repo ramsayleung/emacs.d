@@ -45,7 +45,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		     ))
 	     ;;GUI Emacs could display image.But if the image is too large,
 	     ;;it works so weird
-	     (setq org-image-actual-width '(500)) 
+	     (setq org-image-actual-width '(500))
 	     ;; make sure org-mode syntax highlight source code
 	     ;; Make TAB act as if it were issued in a buffer of the
 	     ;;language’s major mode.
@@ -80,27 +80,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (use-package org-pomodoro
   :ensure t)
 
-;; ;;; Ultra-minimalist presentation minor-mode for org-mode
-;; (use-package org-present
-;;   :ensure t
-;;   :config (progn
-;; 	    (eval-after-load "org-present"
-;; 	      '(progn
-;; 		 (add-hook 'org-present-mode-hook
-;; 			   (lambda ()
-;; 			     (org-present-big)
-;; 			     (org-display-inline-images)
-;; 			     (org-present-hide-cursor)
-;; 			     (org-present-read-only)))
-;; 		 (add-hook 'org-present-mode-quit-hook
-;; 			   (lambda ()
-;; 			     (org-present-small)
-;; 			     (org-remove-inline-images)
-;; 			     (org-present-show-cursor)
-;; 			     (org-present-read-write)))))
-
-
-;; 	    ))
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets

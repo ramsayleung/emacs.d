@@ -237,6 +237,24 @@
 				"m m f" 'geiser-expand-definition
 				"m m r" 'geiser-expand-region
 				)
+
+	    ;; origami mode
+	    (general-define-key :keymaps 'origami-mode-map
+				:prefix my-leader-key
+				"t o" '(:ignore t :which-key "origami")
+				"t o t" 'origami-toggle-node
+				"t o f" 'origami-forward-toggle-node
+				"t o r" 'origami-recursively-toggle-node
+				"t o a" 'origami-toggle-all-nodes
+				)
+	    ;; origami mode
+	    (general-define-key :keymaps 'origami-mode-map
+				"C-=" 'origami-recursively-toggle-node
+				"C--" 'origami-close-node-recursively
+				"C-+" 'origami-open-node-recursively
+				"C-c C-o" 'origami-show-only-node
+				)
+	    ;; company node
 	    (general-define-key :keymaps 'company-active-map
 				"<tab>" 'company-complete-common-or-cycle
 				"C-j" 'company-select-next
@@ -281,15 +299,13 @@
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
 	     "C-s" 'swiper
-	     "C-=" 'er/expand-region
 	     "M-x" 'counsel-M-x
 	     "<f1>" 'open-my-file
 	     "<f2> i" 'counsel-info-lookup-symbol
 	     "<f2> u" 'counsel-unicode-char
 	     "<f5>" 'revert-buffer
 	     "<f6>" 'ivy-resume
-	     )
-	    )
+	     ))
   (general-define-key :keymaps 'counsel-find-file-map
   		      "C-j" 'ivy-next-line
   		      "C-k" 'ivy-previous-line)
