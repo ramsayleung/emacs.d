@@ -15,6 +15,9 @@
  '(evil-want-C-u-scroll t)
  '(expand-region-contract-fast-key "V")
  '(nil nil t)
+ '(org-agenda-files
+   (quote
+    ("~/SyncDirectory/Org/todo.org" "~/SyncDirectory/Org/agenda.org")))
  '(org-capture-templates
    (quote
     (("a" "Agenda" entry
@@ -47,7 +50,7 @@ DEADLINE: %^T
       "* %?
 Entered on %U
   %i
-  %a"))) t)
+  %a"))))
  '(package-selected-packages
    (quote
     (selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))

@@ -5,6 +5,8 @@
   :ensure t
   :mode ("\\.org\\'" . org-mode)
   :init (progn
+	  ;; automatically open your agenda when start Emacs
+	  (org-agenda nil "c")
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
 	  )
   :config(progn
