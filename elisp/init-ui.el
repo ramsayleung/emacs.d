@@ -103,7 +103,6 @@ This code toggles between them."
 (setq highlight-current-line-high-faces nil)
 (setq highlight-current-line-whole-line nil)
 (setq hl-line-face (quote highlight))
-
 ;; don't blink the cursor
 (blink-cursor-mode -1)
 
@@ -163,11 +162,11 @@ This code toggles between them."
 
 (use-package spaceline
   :ensure t
-  :init
-  (setq powerline-default-separator 'nil)
+  :demand t
   :config
   (require 'spaceline-config)
-  (spaceline-spacemacs-theme)
+  (setq powerline-default-separator 'nil)
+  (spaceline-emacs-theme)
   )
 ;;; Use Miminish minor modes to change the mode line
 ;;; The mode line map:

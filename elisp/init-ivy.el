@@ -10,7 +10,6 @@
 	     counsel-describe-function
 	     counsel-describe-variable
 	     counsel-find-library
-	     counsel-find-file
 	     counsel-locate
 	     counsel-info-lookup-symbol
 	     counsel-unicode-char

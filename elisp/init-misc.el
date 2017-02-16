@@ -95,7 +95,6 @@
 	    ))
 ;;;enhance dired
 (use-package dired+
-  :init
   :commands dired
   :config
   (diredp-toggle-find-file-reuse-dir t)

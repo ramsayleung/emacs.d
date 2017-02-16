@@ -18,20 +18,16 @@
 	    ))
 (use-package chinese-pyim
   :ensure t
-  :commands toggle-input-method
   :config
-  ;; 激活 greatdict 拼音词库 
-  (message "loading chinese-pyim")
-  (use-package chinese-pyim-greatdict
+  ;; 激活 basedict 拼音词库
+  (message "load chinese-pyim")
+  (use-package chinese-pyim-basedict
     :ensure t
-    :commands toggle-input-method
-    :config (progn
-	      (message "Loading Pyim-greatdict")
-	      (chinese-pyim-greatdict-enable))
-    )
-  (setq debug-on-error t)
+    :config (message "load basedict") (chinese-pyim-basedict-enable))
+
   (setq default-input-method "chinese-pyim")
-  ;; 使用全拼
+
+  ;; 我使用全拼
   (setq pyim-default-scheme 'quanpin)
 
   ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
@@ -64,6 +60,5 @@
   :bind
   (("M-j" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
    ))
-
 (provide 'init-chinese)
 ;;; init-chinese.el ends here

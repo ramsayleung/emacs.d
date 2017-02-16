@@ -96,7 +96,6 @@
 ;;; Display extra information and color for eshll prompt
 (use-package eshell-prompt-extras
   :ensure t
-  :commands eshell
   :config (progn
 	    (with-eval-after-load "esh-opt"
 	      (require 'virtualenvwrapper)
