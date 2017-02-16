@@ -38,7 +38,6 @@
   :ensure t
   :defer t
   :init(add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
 ;;; A light that follows your cursor around so you don't lose it
 (use-package beacon
   :ensure t

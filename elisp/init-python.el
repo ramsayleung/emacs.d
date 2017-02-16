@@ -3,13 +3,12 @@
 ;;; Commentary:
 
 ;; Code navigation,documentation lookup and completing for python
-(autoload 'python-mode "python-mode" "Python Mode." t)
-(add-to-list 'interpreter-mode-alist '("python" . python-mode))
 (use-package python
   :mode("\\.py\\'" . python-mode)
   :ensure t
   )
 (use-package anaconda-mode
+  :defer t
   :ensure t
   :init(progn
 	 (add-hook 'python-mode-hook 'anaconda-mode)
@@ -28,6 +27,7 @@
 
 ;; Use pep8 to format python file
 (use-package py-autopep8
+  :defer t
   :ensure t
   :init(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
 ;; (use-package jedi
@@ -36,21 +36,24 @@
 ;; Sort import with isort
 (use-package py-isort
   :ensure t
+  :defer t
   :init(add-hook 'before-save-hook 'py-isort-before-save))
 
 (use-package fill-column-indicator
   :ensure t
-  :init (add-hook 'python-mode-hook 'fci-mode)
-  :config (progn
-	    (setq fci-rule-width 1)
-	    (setq fci-rule-color "darkblue")
-	    (setq-default fill-column 79)
-	    ))
-
+  :commands (fci-mode)
+  :init
+  (add-hook 'python-mode-hook 'fci-mode)
+  :config
+  (setq fci-rule-width 1)
+  (setq-default fill-column 79)
+  (setq fci-rule-color "spring green")
+  )
 ;;; similar with fill-column-indicator,but a little bit different
 (use-package column-enforce-mode
   :ensure t
   :diminish column-enforce-mode
+  :defer t
   :init
   (setq column-enforce-column 79)
   (add-hook 'prog-mode-hook 'column-enforce-mode))
@@ -58,6 +61,7 @@
 ;;; virtualenvwrapper for virtualenv
 (use-package virtualenvwrapper
   :ensure t
+  :defer t
   :init (add-hook 'python-mode-hook (lambda()
 				      (venv-initialize-interactive-shells)
 				      (venv-initialize-eshell))
