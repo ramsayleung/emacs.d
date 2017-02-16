@@ -326,6 +326,9 @@
   (general-define-key :states '(normal emacs)
   		      :keymaps 'inferior-python-mode-map
   		      "q" 'delete-window)
+  (general-define-key :states '(normal emacs)
+		      :keymaps 'messages-buffer-mode-map
+		      "q" 'delete-window)
   )
 (with-eval-after-load 'popwin
   (general-define-key

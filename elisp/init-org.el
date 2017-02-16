@@ -5,11 +5,18 @@
   :ensure t
   :mode ("\\.org\\'" . org-mode)
   :init (progn
-	  ;; automatically open your agenda when start Emacs
-	  (org-agenda nil "c")
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
 	  )
   :config(progn
+	   (setq org-todo-keyword-faces
+		 '(
+		   ("PROCESSING" . (:foreground "gold" :weight bold))
+		   ))
+	   (setq org-todo-keywords
+		 '((sequence "TODO" "PROCESSING" "DONE")))
+	   (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
+				      (?B . (:foreground "blue"))
+				      (?C . (:foreground "green"))))
 	   (defun samray/org-skip-subtree-if-priority (priority)
 	     "Skip an agenda subtree if it has a priority of PRIORITY.
 PRIORITY may be one of the characters ?A, ?B, or ?C."
@@ -45,7 +52,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		     ("b" "Blog idea" entry (file+headline "~/SyncDirectory/Org/blog.org" "Blog Topics:")
 		      "* %?\n%T" :prepend t)
 		     ("t" "To Do Item" entry (file+headline "~/SyncDirectory/Org/todo.org" "To Do Items")
-		      "* %?\n%T" :prepend t)
+		      "* TODO  %?\n  %i\n" :prepend t)
 		     ("j" "Journal" entry (file+datetree "~/SyncDirectory/Org/journal.org")
 		      "* %?\nEntered on %U\n  %i\n  %a")
 		     ))
@@ -70,7 +77,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		      :with-sub-superscript nil
 		      )))
 	     (setq org-ellipsis "⤵")
-
+	     ;; automatically open your agenda when start Emacs
+	     (org-agenda nil "c")
 	     ;;Its default value is (ascii html icalendar latex)
 	     (setq org-export-backends '(latex icalendar))
 	     ;; Show org-edit-special in the other-window
