@@ -415,6 +415,25 @@ removal."
 (add-hook 'eshell-mode-hook
 	  '(lambda()
 	     (local-set-key (kbd "C-l") 'eshell-clear-buffer)))
+;;; http://blog.binchen.org/posts/open-readme-under-git-root-directory-in-emacs.html
+(defun samray/open-readme-in-git-root-directory ()
+  "Open README file at the root directory of my project."
+  (interactive)
+  (let (filename
+        (root-dir (locate-dominating-file (file-name-as-directory (file-name-directory buffer-file-name)) ".git"))
+        )
+    ;; (message "root-dir=%s" root-dir)
+    (and root-dir (file-name-as-directory root-dir))
+    (setq filename (concat root-dir "README.org"))
+    (if (not (file-exists-p filename))
+        (setq filename (concat root-dir "README.md"))
+      )
+    ;; (message "filename=%s" filename)
+    (if (file-exists-p filename)
+        (switch-to-buffer (find-file-noselect filename nil nil))
+      (message "NO README.org or README.md found!"))
+    ))
+
 (message "loading init-misc")
 (provide 'init-misc)
 ;;; init-misc.el ends here

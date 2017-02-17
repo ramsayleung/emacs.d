@@ -20,10 +20,9 @@
   :ensure t
   :config
   ;; 激活 basedict 拼音词库
-  (message "load chinese-pyim")
   (use-package chinese-pyim-basedict
     :ensure t
-    :config (message "load basedict") (chinese-pyim-basedict-enable))
+    :config (chinese-pyim-basedict-enable))
 
   (setq default-input-method "chinese-pyim")
 
@@ -58,7 +57,7 @@
   (add-hook 'emacs-startup-hook
             #'(lambda () (pyim-restart-1 t)))
   :bind
-  (("M-j" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
-   ))
+  (("M-n" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
+   ("C-c C-;" . pyim-delete-word-from-personal-buffer)))
 (provide 'init-chinese)
 ;;; init-chinese.el ends here

@@ -358,8 +358,10 @@
 		      :prefix my-second-leader-key
 		      "e" '(:ignore t :which-key "eval")
 		      "e b" 'evil-buffer
-		      "f" '(:ignore t :which-key "refactor")
-		      "f s" 'samray/evilcvn-change-symbol-in-defun
+		      "f" '(:ignore t :which-key "file")
+		      "f r" 'samray/open-readme-in-git-root-directory
+		      "r" '(:ignore t :which-key "refactor")
+		      "r s" 'samray/evilcvn-change-symbol-in-defun
 		      )
   (general-define-key :keymaps 'counsel-find-file-map
   		      "C-j" 'ivy-next-line
