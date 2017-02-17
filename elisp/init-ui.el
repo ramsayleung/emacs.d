@@ -172,8 +172,10 @@ This code toggles between them."
 ;;; The mode line map:
 ;;; paredit-mode -> "π"
 ;;; wakatime-mode -> "ω"
-;;; flycheck-mode -> "φ"
-;;; smarthparence-mode -> "(s)"
+;;; flycheck-mode -> "ψ"
+;;; yasnippet-mode -> "γ"
+;;; company-mode -> "Φ"
+;;; smarthparence-mode -> "ρ"
 ;;; hungrydelete-mode -> ""
 ;;; lisp-interaction-mode -> "λ"
 ;;; abbrev-mode -> ""  "" means hide this minor mode from mode line

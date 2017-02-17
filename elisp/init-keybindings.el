@@ -6,6 +6,7 @@
   :config (progn
 	    (general-evil-setup t)
 	    (defvar my-leader-key "SPC")
+	    (defvar my-second-leader-key ",")
 	    (general-define-key :states '(normal visual motion emacs)
 				:prefix my-leader-key
 				";" 'evilnc-comment-operator
@@ -261,6 +262,52 @@
 				"C-j" 'company-select-next
 				"C-k" 'company-select-previous
 				)
+	    (general-define-key :keymaps 'dumb-jump-mode-map
+				"M-g j" 'dumb-jump-go
+				"M-g o" 'dumb-jump-go-other-window
+				"M-g b" 'dumb-jump-back
+				)
+	    ;; pdf view mode
+	    (general-define-key :states '(normal emacs)
+				:keymaps 'pdf-view-mode-map
+				"C-b"            'evil-scroll-page-up
+				"C-d"            'pdf-view-scroll-up-or-next-page
+				"C-e"            'evil-scroll-line-down
+				"C-f"            'evil-scroll-page-down
+				"C-n"            'image-next-file
+				"C-u"            'pdf-view-scroll-down-or-previous-page
+				"C-y"            'evil-scroll-line-up
+				"C-z"            'evil-emacs-state
+				"$"              'image-eol
+				"'"              'image-scroll-up
+				"/"              'isearch-forward
+				"0"              'image-bol
+				":"              'evil-ex
+				"?"              'isearch-backward
+				"G"              'pdf-view-last-page
+				"H"              'describe-mode
+				"J"              'pdf-view-next-page
+				"K"              'pdf-view-previous-page
+				"N"              'evil-search-previous
+				"O"              'pdf-outline
+				"V"              'evil-visual-line
+				"d"              'pdf-view-scroll-up-or-next-page
+				"h"              'image-backward-hscroll
+				"j"              'pdf-view-next-line-or-next-page
+				"k"              'pdf-view-previous-line-or-previous-page
+				"l"              'image-forward-hscroll
+				"n"              'evil-search-next
+				"o"              'pdf-links-action-perform
+				"r"              'pdf-view-revert-buffer
+				"u"              'pdf-view-scroll-down-or-previous-page
+				"v"              'evil-visual-char
+				"C-S-g"          'revert-buffer
+				"z r"            'pdf-view-scale-reset
+				"` `"            'pdf-history-backward
+				"g g"            'pdf-view-first-page
+				"g l"            'pdf-view-goto-label
+				"g t"            'pdf-view-goto-page
+				)
 	    (general-nvmap
 	     "Y" 'samray/copy-to-end-of-line
 	     "R" 'evil-multiedit-match-all
@@ -307,6 +354,13 @@
 	     "<f5>" 'revert-buffer
 	     "<f6>" 'ivy-resume
 	     ))
+  (general-define-key :states '(normal visual visual emacs)
+		      :prefix my-second-leader-key
+		      "e" '(:ignore t :which-key "eval")
+		      "e b" 'evil-buffer
+		      "f" '(:ignore t :which-key "refactor")
+		      "f s" 'samray/evilcvn-change-symbol-in-defun
+		      )
   (general-define-key :keymaps 'counsel-find-file-map
   		      "C-j" 'ivy-next-line
   		      "C-k" 'ivy-previous-line)
@@ -329,11 +383,13 @@
   (general-define-key :states '(normal emacs)
 		      :keymaps 'messages-buffer-mode-map
 		      "q" 'delete-window)
+  (with-eval-after-load 'popwin
+    (general-define-key
+     "C-c C-z" popwin:keymap
+     ))
   )
-(with-eval-after-load 'popwin
-  (general-define-key
-   "C-c C-z" popwin:keymap
-   ))
+
+
 
 (message "load init-keybinds")
 (provide 'init-keybindings)

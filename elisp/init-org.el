@@ -27,7 +27,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		   subtree-end
 		 nil)))
 	   (with-eval-after-load 'org
-	     (setq org-agenda-files '("~/SyncDirectory/Org/agenda.org"))
+	     (setq org-agenda-files '("~/SyncDirectory/Org/agenda.org" "~/SyncDirectory/Org/todo.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
 		      ((tags "PRIORITY=\"A\""

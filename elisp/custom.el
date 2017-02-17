@@ -56,8 +56,9 @@ DEADLINE: %^T
 %T" :prepend t)
      ("t" "To Do Item" entry
       (file+headline "~/SyncDirectory/Org/todo.org" "To Do Items")
-      "* %?
-%T" :prepend t)
+      "* TODO  %?
+  %i
+" :prepend t)
      ("j" "Journal" entry
       (file+datetree "~/SyncDirectory/Org/journal.org")
       "* %?
@@ -66,7 +67,7 @@ Entered on %U
   %a"))) t)
  '(package-selected-packages
    (quote
-    (rainbow-mode rainbow-blocks selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
+    (dumb-jump evil-escape keyfreq rainbow-mode rainbow-blocks selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
@@ -84,7 +85,7 @@ Entered on %U
  '(rainbow-delimiters-depth-1-face ((t (:foreground "aquamarine"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "cadet blue"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "rosy brown"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "royal blue"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "medium spring green"))))
  '(rainbow-delimiters-depth-5-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-6-face ((t (:foreground "orchid"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "DarkGoldenrod4"))))

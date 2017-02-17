@@ -3,6 +3,7 @@
 ;;; Commentary:
 (use-package yasnippet
   :ensure t
+  :diminish (yas-minor-mode . "γ")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
@@ -111,6 +112,13 @@
   :commands er/expand-region
   )
 
+;;; jump to definition package
+(use-package dumb-jump
+  :ensure t
+  :defer t
+  :init (add-hook 'prog-mode-hook 'dumb-jump-mode)
+  :config (setq dumb-jump-selector 'ivy)
+  )
 ;;; Evil is not especilly useful in the terminal,so
 (evil-set-initial-state 'term-mode 'emacs)
 

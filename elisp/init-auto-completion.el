@@ -3,6 +3,7 @@
 ;;; Code:
 (use-package company
   :ensure t
+  :diminish (company-mode . "Φ")
   :demand t
   :commands (company-mode
              company-complete

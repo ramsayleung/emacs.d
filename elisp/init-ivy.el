@@ -2,22 +2,9 @@
 ;;; code:
 ;;; Commentary:
 (use-package counsel
-  :commands (counsel-M-x
-	     counsel-find-file
-	     counsel-git
-	     counsel-grep
-	     counsel-ag
-	     counsel-describe-function
-	     counsel-describe-variable
-	     counsel-find-library
-	     counsel-locate
-	     counsel-info-lookup-symbol
-	     counsel-unicode-char
-	     )
   :ensure t
   )
 (use-package swiper
-  :commands swiper
   :ensure t)
 (use-package avy
   :commands (avy-goto-char avy-goto-line)
@@ -56,7 +43,6 @@
   )
 (use-package counsel-projectile
   :ensure t
-  :commands (counsel-projectile-find-file counsel-projectile-find-dir)
   :config(counsel-projectile-on))
 (provide 'init-ivy)
 ;;; init-ivy.el ends here

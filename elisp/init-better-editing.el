@@ -9,7 +9,7 @@
 (use-package smartparens
   :ensure t
   :demand t
-  :diminish (smartparens-mode . "(s)")
+  :diminish (smartparens-mode . "ρ")
   :config
   (progn
     (smartparens-global-mode t)
@@ -207,38 +207,24 @@ arg lines down."
   (interactive "*p")
   (samray/move-text-internal (- arg)))
 
-;;; http://blog.binchen.org/posts/copypaste-in-emacs.html
+;;; http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html
 ;;; Copy and Paste in x system in all platform
-(setq *is-a-mac* (eq system-type 'darwin))
-(setq *cygwin* (eq system-type 'cygwin) )
-(setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
+(use-package simpleclip
+  :ensure t
+  :config(progn
 (defun samray/copy-to-x-clipboard ()
   (interactive)
-  (if (region-active-p)
-      (progn
-        (cond
-         ((and (display-graphic-p) x-select-enable-clipboard)
-          (x-set-selection 'CLIPBOARD (buffer-substring (region-beginning) (region-end))))
-         (t (shell-command-on-region (region-beginning) (region-end)
-                                     (cond
-                                      (*cygwin* "putclip")
-                                      (*is-a-mac* "pbcopy")
-                                      (*linux* "xsel -ib")))
-            ))
-        (message "Yanked region to clipboard!")
-        (deactivate-mark))
-    (message "No region active; can't yank to clipboard!")))
+  (let ((thing (if (region-active-p)
+                   (buffer-substring-no-properties (region-beginning) (region-end))
+                 (thing-at-point 'symbol))))
+    (simpleclip-set-contents thing)
+    (message "thing => clipboard!")))
 
 (defun samray/paste-from-x-clipboard()
+  "Paste string clipboard"
   (interactive)
-  (cond
-   ((and (display-graphic-p) x-select-enable-clipboard)
-    (insert (x-get-selection 'CLIPBOARD)))
-   (t (shell-command
-       (cond
-        (*cygwin* "getclip")
-        (*is-a-mac* "pbpaste")
-        (t "xsel -ob"))
-       1))
-   ))
+  (insert (simpleclip-get-contents)))	   
+	  ))
+
+
 ;;; init-better-editing.el ends here

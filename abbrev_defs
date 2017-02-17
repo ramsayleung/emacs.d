@@ -29,6 +29,8 @@
 
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
 
+(define-abbrev-table 'eshell-mode-abbrev-table '())
+
 (define-abbrev-table 'evil-command-window-mode-abbrev-table '())
 
 (define-abbrev-table 'evil-list-view-mode-abbrev-table '())
@@ -37,12 +39,20 @@
 
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
+(define-abbrev-table 'gdb-script-mode-abbrev-table '())
+
 (define-abbrev-table 'global-abbrev-table
   '(
     ("8sa" "samray" nil 0)
    ))
 
+(define-abbrev-table 'grep-mode-abbrev-table '())
+
+(define-abbrev-table 'gud-mode-abbrev-table '())
+
 (define-abbrev-table 'help-mode-abbrev-table '())
+
+(define-abbrev-table 'ibuffer-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-scheme-mode-abbrev-table '())
 
@@ -81,6 +91,8 @@
 (define-abbrev-table 'special-mode-abbrev-table '())
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
+
+(define-abbrev-table 'term-mode-abbrev-table '())
 
 (define-abbrev-table 'text-mode-abbrev-table '())
 

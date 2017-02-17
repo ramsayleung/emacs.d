@@ -3,10 +3,15 @@
 ;;; Commentary:
 ;;; read pdf file in Emacs
 (use-package pdf-tools
-  :mode ("\\.pdf\\'")
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :init (add-hook 'pdf-view-mode (lambda () (company-mode nil)))
   :ensure t)
 
-;;; Make Emacs sound like a proper typewrite
+;;; Track Emacs commands frequency
+(use-package keyfreq
+  :ensure t
+  :config (keyfreq-mode 1) (keyfreq-autosave-mode 1))
+;;; make Emacs sound like a proper typewrite
 (use-package selectric-mode
   :commands selectric-mode
   :ensure t)

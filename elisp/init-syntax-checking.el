@@ -4,7 +4,7 @@
 (use-package flycheck
   :ensure t
   :demand t
-  :diminish (flycheck-mode . "φ")
+  :diminish (flycheck-mode . "ψ")
   :config(global-flycheck-mode t))
 
 (provide 'init-syntax-checking)
