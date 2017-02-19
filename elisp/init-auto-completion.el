@@ -60,6 +60,13 @@
   :ensure t
   :defer t
   :init (add-hook 'web-mode-hook
-		  (lambda () (add-to-list 'company-backend 'company-web-html))))
+		  (lambda () (add-to-list 'company-backends 'company-web-html))))
+
+;;; Shell Script completion
+(use-package company-shell
+  :ensure t
+  :defer t
+  :init (add-hook 'sh-mode-hook
+		  (lambda () (add-to-list 'company-backends 'company-shell))))
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

@@ -47,7 +47,7 @@
   :config
   (setq fci-rule-width 1)
   (setq-default fill-column 79)
-  (setq fci-rule-color "spring green")
+  (setq fci-rule-color "sky blue")
   )
 ;;; similar with fill-column-indicator,but a little bit different
 (use-package column-enforce-mode
@@ -61,7 +61,6 @@
 ;;; virtualenvwrapper for virtualenv
 (use-package virtualenvwrapper
   :ensure t
-  :defer t
   :init (add-hook 'python-mode-hook (lambda()
 				      (venv-initialize-interactive-shells)
 				      (venv-initialize-eshell))

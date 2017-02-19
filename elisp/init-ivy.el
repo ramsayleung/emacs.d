@@ -13,8 +13,6 @@
 (use-package ivy :ensure t
   :diminish ivy-mode
   :bind
-  (:map ivy-mode-map
-	("C-'" . ivy-avy))
   :config
   (ivy-mode 1)
   ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.

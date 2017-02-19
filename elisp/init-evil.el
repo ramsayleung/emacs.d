@@ -10,8 +10,8 @@
     (evil-mode t)
     (evil-set-initial-state 'calendar-mode 'emacs)
     (evil-set-initial-state 'pdf-view-mode 'emacs)
-    )
-  )
+    (evil-set-initial-state 'imenu-list-major-mode 'emacs)
+    ))
 (use-package evil-surround
   :ensure t
   :commands evil-mode
@@ -33,6 +33,12 @@
   :commands evil-mode
   :ensure t)
 
+;;; Escape everything
+(use-package evil-escape
+  :commands evil-mode
+  :ensure t
+  :config (setq-default evil-escape-key-sequence "jk"))
+
 (use-package evil-multiedit
   :ensure t
   :commands evil-mode
@@ -50,6 +56,8 @@ UI in evil-mode to replace the symbol under cursor"
       (evil-visual-state))
     (evil-ex (concat "'<,'>s/" (if (= 0 (length old)) "" "\<\(") old (if (= 0 (length old)) "" "\)\>/"))))
   )
+
+
 
 ;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
 (evilnc-default-hotkeys)

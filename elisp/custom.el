@@ -67,7 +67,7 @@ Entered on %U
   %a"))) t)
  '(package-selected-packages
    (quote
-    (dumb-jump evil-escape keyfreq rainbow-mode rainbow-blocks selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
+    (company-shell highlight-symbol imenu-list diff-hl git-gutter workgroups2 popup project-explorer imenu-anywhere imenus dumb-jump evil-escape keyfreq rainbow-mode rainbow-blocks selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))

@@ -74,6 +74,18 @@
   :init (progn
 	  (add-hook 'prog-mode-hook (lambda () (origami-mode t)))
 	  ))
+;;; Show current buffer's imenu entries in a seperate buffer
+(use-package imenu-list
+  :ensure t
+  :commands imenu-list-smart-toggle
+  :init (progn
+	  (setq imenu-list-focus-after-activation t)
+	  (setq imenu-list-auto-resize t)
+	  (setq imenu-list-position 'right)
+	  (setq imenu-list-size 0.3)
+	  (add-hook 'imenu-list-major-mode-hook
+		    (lambda () (turn-off-evil-mode)))
+	  ))
 
 ;;; treat undo history as a tree
 (use-package undo-tree
@@ -86,8 +98,15 @@
 ;;; So increase limit to solve it.
 (setq large-file-warning-threshold (* 15 1024 1024)) ;15MB
 
+;;; Visual Popup Interface Library For Emacs
+(use-package popup
+  :ensure t
+  :config (progn
+ 	    (defun samray/popup-which-function ()
+	      (interactive)
+	      (let ((function-name (which-function)))
+		(popup-tip function-name)))))
 ;;; better default for ediff
-(provide 'init-better-editing)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
       ediff-split-window-function 'split-window-horizontally)
 
@@ -210,21 +229,21 @@ arg lines down."
 ;;; http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html
 ;;; Copy and Paste in x system in all platform
 (use-package simpleclip
-  :ensure t
+  :ensure t 
   :config(progn
-(defun samray/copy-to-x-clipboard ()
-  (interactive)
-  (let ((thing (if (region-active-p)
-                   (buffer-substring-no-properties (region-beginning) (region-end))
-                 (thing-at-point 'symbol))))
-    (simpleclip-set-contents thing)
-    (message "thing => clipboard!")))
+	   (defun samray/copy-to-x-clipboard ()
+	     (interactive)
+	     (let ((thing (if (region-active-p)
+			      (buffer-substring-no-properties (region-beginning) (region-end))
+			    (thing-at-point 'symbol))))
+	       (simpleclip-set-contents thing)
+	       (message "thing => clipboard!")))
 
-(defun samray/paste-from-x-clipboard()
-  "Paste string clipboard"
-  (interactive)
-  (insert (simpleclip-get-contents)))	   
-	  ))
+	   (defun samray/paste-from-x-clipboard()
+	     "Paste string clipboard"
+	     (interactive)
+	     (insert (simpleclip-get-contents)))	   
+	   ))
 
-
+(provide 'init-better-editing)
 ;;; init-better-editing.el ends here

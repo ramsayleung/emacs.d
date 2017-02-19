@@ -100,7 +100,6 @@
 	    ))
 ;;;enhance dired
 (use-package dired+
-  :commands dired
   :config
   (diredp-toggle-find-file-reuse-dir t)
   )
@@ -414,7 +413,7 @@ removal."
     (eshell-send-input)))
 (add-hook 'eshell-mode-hook
 	  '(lambda()
-	     (local-set-key (kbd "C-l") 'eshell-clear-buffer)))
+	     (local-set-key (kbd "C-l") 'samray/eshell-clear-buffer)))
 ;;; http://blog.binchen.org/posts/open-readme-under-git-root-directory-in-emacs.html
 (defun samray/open-readme-in-git-root-directory ()
   "Open README file at the root directory of my project."

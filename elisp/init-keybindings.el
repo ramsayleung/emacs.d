@@ -7,7 +7,7 @@
 	    (general-evil-setup t)
 	    (defvar my-leader-key "SPC")
 	    (defvar my-second-leader-key ",")
-	    (general-define-key :states '(normal visual motion emacs)
+	    (general-define-key :states '(normal visual motion )
 				:prefix my-leader-key
 				";" 'evilnc-comment-operator
 				"'" 'shell-pop
@@ -83,7 +83,8 @@
 				"s s" 'swiper
 				"t" '(:ignore t :which-key "toggle")
 				"t f" 'fci-mode
-				"t g" 'git-timemachine-toggle
+				"t g" 'samray/git-timemachine
+				"t i" 'imenu-list-smart-toggle
 				"t o" 'origami-toggle-mode
 				"t s" 'selectric-mode
 				"t w" 'samray/toggle-window-split
@@ -116,7 +117,7 @@
 				"C-w" 'evil-delete
 				)
 	    ;; org-mode
-	    (general-define-key :states '(normal visual motion emacs)
+	    (general-define-key :states '(normal visual motion )
 				:keymaps 'org-mode-map
 				:prefix my-leader-key
 				"a o" '(:ignore t :which-key "org-mode" )
@@ -132,7 +133,7 @@
 				"a o p" 'samray/org-publish-buffer
 				"a o P" 'org-pomodoro
 				)
-	    (general-define-key :states '(normal insert emacs visual motion)
+	    (general-define-key :states '(normal insert visual motion)
 				:keymaps 'org-mode-map
 				"M-l" '(org-metaright)
 				"M-h" '(org-metaleft)
@@ -144,6 +145,8 @@
 				"M-J" '(org-shiftdown)
 				"M-o" '(org-insert-heading)
 				"M-t" '(org-insert-todo-heading)
+				"J" 'org-next-visible-heading
+				"K" 'org-previous-visible-heading
 				)
 	    (general-define-key :states 'normal
 				:keymaps 'org-mode-map
@@ -159,7 +162,7 @@
 				"l" 'org-end-of-line)
 
 	    ;; markdown-mode
-	    (general-define-key :states '(normal visual motion emacs)
+	    (general-define-key :states '(normal visual motion )
 				:keymaps 'markdown-mode-map
 				:prefix my-leader-key
 				"m -" 'markdown-insert-hr
@@ -193,7 +196,7 @@
 				"m x p" 'markdown-pre-region
 				)
 	    ;; Python mode
-	    (general-define-key :states '(normal visual emacs motion)
+	    (general-define-key :states '(normal visual  motion)
 				:keymaps 'python-mode-map
 				:prefix my-leader-key
 				"m c" '(:ignore t :which-key "excute")
@@ -207,9 +210,10 @@
 				"m s i" 'samray/python-start-or-switch-repl
 				"m s r" 'python-shell-send-region
 				"m s R" 'samray/python-shell-send-region-switch
+				"m v" 'venv-set-location
 				)
 	    ;; Scheme mode
-	    (general-define-key :states '(normal visual emacs motion)
+	    (general-define-key :states '(normal visual motion)
 				:keymaps 'scheme-mode-map
 				:prefix my-leader-key
 				"m c" '(:ignore t :which-key "compiling")
@@ -240,7 +244,7 @@
 				)
 
 	    ;; origami mode
-	    (general-define-key		:states '(normal visual emacs motion)
+	    (general-define-key		:states '(normal visual motion)
 					:keymaps 'origami-mode-map
 					:prefix my-leader-key
 					"t o" '(:ignore t :which-key "origami")
@@ -347,6 +351,7 @@
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
 	     "C-s" 'swiper
+	     "C-;" 'imenu-list-smart-toggle
 	     "M-x" 'counsel-M-x
 	     "<f1>" 'open-my-file
 	     "<f2> i" 'counsel-info-lookup-symbol
@@ -354,7 +359,7 @@
 	     "<f5>" 'revert-buffer
 	     "<f6>" 'ivy-resume
 	     ))
-  (general-define-key :states '(normal visual visual emacs)
+  (general-define-key :states '(normal visual visual )
 		      :prefix my-second-leader-key
 		      "e" '(:ignore t :which-key "eval")
 		      "e b" 'evil-buffer
