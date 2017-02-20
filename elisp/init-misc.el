@@ -28,8 +28,6 @@
 		     :sasl-password "123456"
 		     :channels ("#emacs")
 		     )))
-	    (evil-leader/set-key
-	     "o c" 'circe)
 	    ))
 ;;; Try out Emacs Package without install
 (use-package try

@@ -128,6 +128,19 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (use-package org-download
   :ensure t)
 
+;;; 
+(use-package org-page
+  :ensure t
+  :config (progn
+	    (setq op/repository-directory "~/Documents/Blog" ;;local repo location
+		  ;; op/repository-org-branch "source" ;;org-file branch
+		  ;; op/repository-html-branch "master" ;;html-file(published) brance
+		  op/personal-github-link "https://github.com/samrayleung" ;;github link
+		  op/site-domain "http://27.122.57.145"
+		  op/site-main-title "从Hello World开始"
+		  op/theme 'mdo) ;; theme
+	    )
+  )
 
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."

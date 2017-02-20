@@ -38,7 +38,8 @@
                 '(pyim-probe-dynamic-english
                   pyim-probe-isearch-mode
                   pyim-probe-program-mode
-                  pyim-probe-org-structure-template))
+                  ;; pyim-probe-org-structure-template
+		  ))
 
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning
@@ -51,7 +52,7 @@
   (setq pyim-page-tooltip 'popup)
 
   ;; 选词框显示5个候选词
-  (setq pyim-page-length 5)
+  (setq pyim-page-length 8)
 
   ;; 让 Emacs 启动时自动加载 pyim 词库
   (add-hook 'emacs-startup-hook

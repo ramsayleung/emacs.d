@@ -68,5 +68,17 @@
   :defer t
   :init (add-hook 'sh-mode-hook
 		  (lambda () (add-to-list 'company-backends 'company-shell))))
+
+;;; C/C++ headers completion
+(use-package company-c-headers
+  :ensure t
+  :defer t
+  :init (progn (add-hook 'c-mode-hook
+			 (lambda () (add-to-list 'company-backends 'company-c-headers))
+			 )
+	       (add-hook 'c++-mode-hook
+			 (lambda () (add-to-list 'company-backends 'company-c-headers)))
+	       )
+  )
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

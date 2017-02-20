@@ -69,7 +69,6 @@
 ;;; To fix issue that there is weird eshell output with ipython
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt -i")
-
 (defun samray/python-shell-send-buffer-switch ()
   "Send buffer content to shell and switch to it in insert mode."
   (interactive)
@@ -132,6 +131,24 @@
   (switch-to-buffer-other-window "*compilation*")
   (end-of-buffer)
   (evil-insert-state))
+(defun samray/python-pop ()
+  "Run python and switch to the python buffer.
+similar to shell-pop"
+  (interactive)
+  (if (get-buffer "*Python*")
+      (if (string= (buffer-name) "*Python*")
+	  (if (not (one-window-p))
+	      (progn (bury-buffer)
+		     (delete-window))
+	    )
+	(progn (switch-to-buffer-other-window "*Python*")
+	       (end-of-buffer)
+	       (evil-insert-state)))
+    (progn
+      (run-python)
+      (switch-to-buffer-other-window "*Python*")
+      (end-of-buffer)
+      (evil-insert-state))))
 
 (provide 'init-python)
 ;;; init-python.el ends here

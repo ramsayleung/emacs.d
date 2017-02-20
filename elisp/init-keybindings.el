@@ -11,6 +11,7 @@
 				:prefix my-leader-key
 				";" 'evilnc-comment-operator
 				"'" 'shell-pop
+				"." 'samray/python-pop
 				"TAB" 'samray/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
@@ -103,6 +104,10 @@
 				"w k" 'evil-window-up
 				"w l" 'evil-window-right
 				"w m" 'samray/toggle-maximize-buffer
+				"w <left>" 'evil-window-left
+				"w <down>" 'evil-window-down
+				"w <up>" 'evil-window-up
+				"w <right>" 'evil-window-right
 				"0"  'select-window-0
 				"1"  'select-window-1
 				"2"  'select-window-2
@@ -212,6 +217,12 @@
 				"m s R" 'samray/python-shell-send-region-switch
 				"m v" 'venv-set-location
 				)
+	    ;; C mode
+	    (general-define-key :keymaps 'c-mode-map
+				"<tab>" 'clang-format-buffer)
+	    ;; C++ mode
+	    (general-define-key :keymaps 'c++-mode-map
+				"<tab>" 'clang-format-buffer)
 	    ;; Scheme mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'scheme-mode-map
@@ -359,7 +370,7 @@
 	     "<f5>" 'revert-buffer
 	     "<f6>" 'ivy-resume
 	     ))
-  (general-define-key :states '(normal visual visual )
+  (general-define-key :states '(normal visual )
 		      :prefix my-second-leader-key
 		      "e" '(:ignore t :which-key "eval")
 		      "e b" 'evil-buffer
@@ -371,7 +382,6 @@
   (general-define-key :keymaps 'counsel-find-file-map
   		      "C-j" 'ivy-next-line
   		      "C-k" 'ivy-previous-line)
-
   (general-define-key :states 'insert
 		      "DEL" 'hungry-delete-backward)
   (general-define-key :keymaps 'emacs-lisp-mode-map
@@ -383,21 +393,20 @@
   		      "q" 'samray/youdao-dictionary-buffer-quit)
   (general-define-key :states '(normal emacs)
   		      :keymaps 'geiser-repl-mode-map
-  		      "q" 'delete-window)
+  		      "q" '(progn (bury-buffer) (delete-window)))
   (general-define-key :states '(normal emacs)
   		      :keymaps 'inferior-python-mode-map
-  		      "q" 'delete-window)
+  		      "q" '(progn (bury-buffer) (delete-window))
+		      )
   (general-define-key :states '(normal emacs)
 		      :keymaps 'messages-buffer-mode-map
-		      "q" 'delete-window)
+		      "q" '(progn (bury-buffer) (delete-window)))
   (with-eval-after-load 'popwin
     (general-define-key
      "C-c C-z" popwin:keymap
-     ))
-  )
+     )))
+(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 
-
-
-(message "load init-keybinds")
 (provide 'init-keybindings)
 ;;; init-keybindings.el ends here
