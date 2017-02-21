@@ -7,6 +7,7 @@
 ;;;----------------;;;
 ;;; web-beautify is a formatting package of Html Css and Javascript/Json
 ;; for Emacs
+
 (use-package web-beautify
   :ensure t
   :commands (web-beautify-css

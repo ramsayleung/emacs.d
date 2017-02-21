@@ -12,7 +12,6 @@
 
 (use-package ivy :ensure t
   :diminish ivy-mode
-  :bind
   :config
   (ivy-mode 1)
   ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.

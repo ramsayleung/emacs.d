@@ -99,7 +99,7 @@
   :ensure t
   :config (progn
 	    (with-eval-after-load "esh-opt"
-	      (require 'virtualenvwrapper)
+	      (use-package virtualenvwrapper :ensure t)
 	      (venv-initialize-eshell)
 	      (autoload 'epe-theme-lambda "eshell-prompt-extras")
 	      (setq eshell-highlight-prompt nil

@@ -37,6 +37,11 @@
   (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 			   ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
+  ;; Bootstrap `use-package'
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
   ;; Display the total loading time in the minibuffer
   (defun display-startup-echo-area-message ()
     "Display startup echo area message."
@@ -58,14 +63,11 @@
 	  (directory-files lisp-dir t "\\.el")))
 
   (require 'cl)
-  ;; Bootstrap `use-package'
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
 
   (require 'init-auto-completion)
   (require 'init-better-editing)
   (require 'init-chinese)
+  (require 'init-c-c++)
   (require 'init-elisp)
   (require 'init-evil)
   (require 'init-ivy)
@@ -73,8 +75,8 @@
   (require 'init-markdown)
   (require 'init-misc)
   (require 'init-org)
-  (require 'init-programming)
   (require 'init-python)
+  (require 'init-programming)
   (require 'init-scheme)
   (require 'init-syntax-checking)
   (require 'init-ui)

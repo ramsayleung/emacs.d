@@ -70,22 +70,18 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;; I like seeing a little downward-pointing arrow instead of the
 	     ;;usual ellipsis (...) that org displays when there’s stuff under
 	     ;; a header.
-	     (setq org-publish-project-alist
-		   '(("org-notes"
-		      :base-directory "~/SyncDirectory/Org/"
-		      :publishing-directory "~/Documents/Programming/Html+Css/"
-		      :with-sub-superscript nil
-		      )))
-	     (setq org-ellipsis "⤵")
-	     ;; automatically open your agenda when start Emacs
-	     (org-agenda nil "c")
-	     ;;Its default value is (ascii html icalendar latex)
-	     (setq org-export-backends '(latex icalendar))
-	     ;; Show org-edit-special in the other-window
-	     (setq org-src-window-setup 'other-window)
+             (setq org-ellipsis "⤵")
+             ;; automatically open your agenda when start Emacs
+             (org-agenda nil "c")
+             ;;Its default value is (ascii html icalendar latex)
+             (setq org-export-backends '(latex icalendar))
+             ;; Show org-edit-special in the other-window
+             (setq org-src-window-setup 'other-window)
+             (setq org-latex-pdf-process    '("xelatex -interaction nonstopmode %f"
+                                              "xelatex -interaction nonstopmode %f"))
 	     (require 'ox-md nil t)
-	     )
-	   )
+             )
+           )
   )
 
 ;;; pomodoro tech
@@ -100,8 +96,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :ensure t
   :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   :config (progn
-	    (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
-	    ))
+            (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
+            ))
 
 ;; Org extra exports
 ;; Export to github flavored markdown
@@ -113,6 +109,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (use-package ox-twbs
   :ensure ox-twbs
   )
+
 ;;; Export to reveal for presentation
 (use-package ox-reveal
   :ensure ox-reveal)
@@ -132,14 +129,13 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (use-package org-page
   :ensure t
   :config (progn
-	    (setq op/repository-directory "~/Documents/Blog" ;;local repo location
-		  ;; op/repository-org-branch "source" ;;org-file branch
-		  ;; op/repository-html-branch "master" ;;html-file(published) brance
-		  op/personal-github-link "https://github.com/samrayleung" ;;github link
-		  op/site-domain "http://27.122.57.145"
-		  op/site-main-title "从Hello World开始"
-		  op/theme 'mdo) ;; theme
-	    )
+            (setq op/repository-directory "~/Documents/Blog" ;;local repo location
+                  op/personal-github-link "https://github.com/samrayleung" ;;github link
+                  op/site-domain "http://27.122.57.145"
+                  op/site-main-title "从Hello World开始"
+                  op/theme 'mdo) ;; theme
+            (setq op/personal-disqus-shortname "Samray") ; use for disqus comments
+            )
   )
 
 (defun org-file-path (filename)

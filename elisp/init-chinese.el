@@ -39,7 +39,7 @@
                   pyim-probe-isearch-mode
                   pyim-probe-program-mode
                   ;; pyim-probe-org-structure-template
-		  ))
+  		  ))
 
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning

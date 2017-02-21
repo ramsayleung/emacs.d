@@ -26,6 +26,7 @@
      ("#A75B00" . 70)
      ("#F309DF" . 85)
      ("#3C3D37" . 100))))
+ '(indent-tabs-mode nil)
  '(magit-diff-use-overlays nil)
  '(nil nil t)
  '(org-agenda-files
@@ -64,7 +65,7 @@ DEADLINE: %^T
       "* %?
 Entered on %U
   %i
-  %a"))) t)
+  %a"))))
  '(package-selected-packages
    (quote
     (clang-format company-c-headers irony irony-mode company-shell highlight-symbol imenu-list diff-hl git-gutter workgroups2 popup project-explorer imenu-anywhere imenus dumb-jump evil-escape keyfreq rainbow-mode rainbow-blocks selectric-mode org-present better-shell virtualenvwrapper gruvbox-theme try org org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
