@@ -52,16 +52,16 @@
   :commands (ztree-dir ztree-diff)
   :init (setq ztree-dir-move-focus t))
 
-;;;  highlight indentation
-(use-package highlight-indentation
-  :diminish highlight-indentation-mode
+;;; Emacs minor mode to highlight indentation
+(use-package highlight-indent-guides
   :ensure t
-  :commands (highlight-indentation-mode highlight-indentation-current-column-mode)
-  :config (progn
-	    (set-face-background 'highlight-indentation-face "#b2f3f7")
-	    (set-face-background 'highlight-indentation-current-column-face "#b2f3f7")
-	    )
+  :defer t
+  :init (progn
+          (setq highlight-indent-guides-method 'character)
+          (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+
   )
+
 ;;; show information about selected region
 (use-package region-state
   :ensure t

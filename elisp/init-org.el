@@ -6,27 +6,52 @@
   :mode ("\\.org\\'" . org-mode)
   :init (progn
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
+          (setq org-todo-keyword-faces
+                '(
+                  ("PROCESSING" . (:foreground "gold" :weight bold))
+                  ))
+          (setq org-todo-keywords
+                '((sequence "TODO" "PROCESSING" "DONE")))
+          (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
+                                     (?B . (:foreground "blue"))
+                                     (?C . (:foreground "green"))))
+          (defun samray/org-skip-subtree-if-priority (priority)
+            "Skip an agenda subtree if it has a priority of PRIORITY.
+PRIORITY may be one of the characters ?A, ?B, or ?C."
+            (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+                  (pri-value (* 1000 (- org-lowest-priority priority)))
+                  (pri-current (org-get-priority (thing-at-point 'line t))))
+              (if (= pri-value pri-current)
+                  subtree-end
+                nil)))
 	  )
   :config(progn
-	   (setq org-todo-keyword-faces
-		 '(
-		   ("PROCESSING" . (:foreground "gold" :weight bold))
-		   ))
-	   (setq org-todo-keywords
-		 '((sequence "TODO" "PROCESSING" "DONE")))
-	   (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
-				      (?B . (:foreground "blue"))
-				      (?C . (:foreground "green"))))
-	   (defun samray/org-skip-subtree-if-priority (priority)
-	     "Skip an agenda subtree if it has a priority of PRIORITY.
-PRIORITY may be one of the characters ?A, ?B, or ?C."
-	     (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-		   (pri-value (* 1000 (- org-lowest-priority priority)))
-		   (pri-current (org-get-priority (thing-at-point 'line t))))
-	       (if (= pri-value pri-current)
-		   subtree-end
-		 nil)))
 	   (with-eval-after-load 'org
+             (require 'ob-python)
+             (require 'ob-clojure)
+             (require 'ob-lisp)
+             (require 'ob-org)
+             (require 'ob-js)
+             (require 'ob-sh)
+             (require 'ob-awk)
+             (require 'ob-sed)
+             (require 'ob-sql)
+             (require 'ob-sqlite)
+             (org-babel-do-load-languages
+              'org-babel-load-languages
+              '((clojure . t)
+                (lisp . t)
+                (org . t)
+                (js . t)
+                (latex . t)
+                (ruby . t)
+                (shell . t)
+                (python . t)
+                (emacs-lisp . t)
+                (awk . t)
+                (sed . t)
+                (sql . t)
+                (sqlite . t)))
 	     (setq org-agenda-files '("~/SyncDirectory/Org/agenda.org" "~/SyncDirectory/Org/todo.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
@@ -71,8 +96,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;;usual ellipsis (...) that org displays when there’s stuff under
 	     ;; a header.
              (setq org-ellipsis "⤵")
-             ;; automatically open your agenda when start Emacs
-             (org-agenda nil "c")
              ;;Its default value is (ascii html icalendar latex)
              (setq org-export-backends '(latex icalendar))
              ;; Show org-edit-special in the other-window
@@ -80,48 +103,21 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
              (setq org-latex-pdf-process    '("xelatex -interaction nonstopmode %f"
                                               "xelatex -interaction nonstopmode %f"))
 	     (require 'ox-md nil t)
-             (with-eval-after-load 'org
-               (require 'ob-python)
-               (require 'ob-clojure)
-               (require 'ob-lisp)
-               (require 'ob-org)
-               (require 'ob-js)
-               (require 'ob-sh)
-               (require 'ob-awk)
-               (require 'ob-sed)
-               (require 'ob-sql)
-               (require 'ob-sqlite)
-
-               (org-babel-do-load-languages
-                'org-babel-load-languages
-                '((clojure . t)
-                  (lisp . t)
-                  (org . t)
-                  (js . t)
-                  (latex . t)
-                  (ruby . t)
-                  (shell . t)
-                  (python . t)
-                  (emacs-lisp . t)
-                  (awk . t)
-                  (sed . t)
-                  (sql . t)
-                  (sqlite . t)
-                  ))
-               )
              )
            )
   )
+;; automatically open your agenda when start Emacs
+(org-agenda nil "c")
 
 ;;; pomodoro tech
 (use-package org-pomodoro
-  :commands org
+  :after org
   :ensure t)
 
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
-  :defer t
+  :after org
   :ensure t
   :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   :config (progn
@@ -131,16 +127,19 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;; Org extra exports
 ;; Export to github flavored markdown
 (use-package ox-gfm
+  :after org
   :ensure ox-gfm
   )
 
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
+  :after org
   :ensure ox-twbs
   )
 
 ;;; Export to reveal for presentation
 (use-package ox-reveal
+  :after org
   :ensure ox-reveal)
 
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
@@ -148,14 +147,17 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
+  :after org
   :ensure t)
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
+  :after org
   :ensure t)
 
 ;;; 
 (use-package org-page
+  :after org
   :ensure t
   :config (progn
             (setq op/repository-directory "~/Documents/Blog" ;;local repo location

@@ -89,9 +89,6 @@
 				"t o" 'origami-toggle-mode
 				"t s" 'selectric-mode
 				"t w" 'samray/toggle-window-split
-				"t h" '(:ignore t :which-key "highlight-indentation")
-				"t h i" 'highlight-indentation-mode
-				"t h c" 'highlight-indentation-current-column-mode
 				"w" '(:ignore t :which-key "windows")
 				"w d" 'delete-window
 				"w D" 'delete-other-windows

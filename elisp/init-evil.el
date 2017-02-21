@@ -35,7 +35,7 @@
 
 ;;; Escape everything
 (use-package evil-escape
-  :commands evil-mode
+  :after evil
   :ensure t
   :config (setq-default evil-escape-key-sequence "jk"))
 
