@@ -64,7 +64,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;;language’s major mode.
 	     (setq org-src-fontify-natively t
 		   org-src-tab-acts-natively t)
-	     ;; When editing a code snippet,use the current window rather than
+             ;; When editing a code snippet,use the current window rather than
 	     ;; popping open a new one
 	     (setq org-src-window-setup 'current-window)
 	     ;; I like seeing a little downward-pointing arrow instead of the
@@ -80,6 +80,35 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
              (setq org-latex-pdf-process    '("xelatex -interaction nonstopmode %f"
                                               "xelatex -interaction nonstopmode %f"))
 	     (require 'ox-md nil t)
+             (with-eval-after-load 'org
+               (require 'ob-python)
+               (require 'ob-clojure)
+               (require 'ob-lisp)
+               (require 'ob-org)
+               (require 'ob-js)
+               (require 'ob-sh)
+               (require 'ob-awk)
+               (require 'ob-sed)
+               (require 'ob-sql)
+               (require 'ob-sqlite)
+
+               (org-babel-do-load-languages
+                'org-babel-load-languages
+                '((clojure . t)
+                  (lisp . t)
+                  (org . t)
+                  (js . t)
+                  (latex . t)
+                  (ruby . t)
+                  (shell . t)
+                  (python . t)
+                  (emacs-lisp . t)
+                  (awk . t)
+                  (sed . t)
+                  (sql . t)
+                  (sqlite . t)
+                  ))
+               )
              )
            )
   )
