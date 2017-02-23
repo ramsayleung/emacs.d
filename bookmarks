@@ -3,8 +3,8 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "~/SyncDirectory/Org/notes.org")
- (front-context-string . "** Note java Exc")
+ (filename . "~/SyncDirectory/Org/links.org")
+ (front-context-string . "**  [[http://blo")
  (rear-context-string)
  (position . 9))
 )

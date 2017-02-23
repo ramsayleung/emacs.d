@@ -198,6 +198,7 @@ This code toggles between them."
   `(add-hook ,mode-hook
              (lambda () (setq mode-name ,abbrev))))
 (diminish-minor-mode 'mail-abbrevs 'mail-abbrevs-mode )
+(diminish-minor-mode 'auto-revert 'auto-revert-mode)
 (diminish-minor-mode 'simple 'auto-fill-function )
 (diminish-minor-mode 'eldoc 'eldoc-mode)
 ;; (diminish-minor-mode 'global-whitespace 'global-whitespace-mode)

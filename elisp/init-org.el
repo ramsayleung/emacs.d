@@ -28,15 +28,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :config(progn
 	   (with-eval-after-load 'org
              (require 'ob-python)
-             (require 'ob-clojure)
-             (require 'ob-lisp)
-             (require 'ob-org)
-             (require 'ob-js)
-             (require 'ob-sh)
-             (require 'ob-awk)
-             (require 'ob-sed)
-             (require 'ob-sql)
-             (require 'ob-sqlite)
              (org-babel-do-load-languages
               'org-babel-load-languages
               '((clojure . t)
@@ -49,7 +40,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                 (python . t)
                 (emacs-lisp . t)
                 (awk . t)
-                (sed . t)
                 (sql . t)
                 (sqlite . t)))
 	     (setq org-agenda-files '("~/SyncDirectory/Org/agenda.org" "~/SyncDirectory/Org/todo.org"))
@@ -100,9 +90,20 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
              (setq org-export-backends '(latex icalendar))
              ;; Show org-edit-special in the other-window
              (setq org-src-window-setup 'other-window)
-             (setq org-latex-pdf-process    '("xelatex -interaction nonstopmode %f"
-                                              "xelatex -interaction nonstopmode %f"))
+             ;; use minted to highlight code in latex
+             (add-to-list 'org-latex-packages-alist '("" "minted"))
+             (setq org-latex-listings 'minted)
+             ;; execute code without confirm
+             (setq org-confirm-babel-evaluate nil)
+             ;; set latex to xelatex
+             ;; org-mode 8.0
+             (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
+                                           "xelatex -interaction nonstopmode %f"))
+             ;; export cn character
+             (setf org-latex-default-packages-alist
+                   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
 	     (require 'ox-md nil t)
+             (require 'ox-latex )
              )
            )
   )
@@ -160,15 +161,17 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :after org
   :ensure t
   :config (progn
-            (setq op/repository-directory "~/Documents/Blog" ;;local repo location
+            (setq op/repository-directory "~/Documents/Blog/samrayleung.github.io" ;;local repo location
                   op/personal-github-link "https://github.com/samrayleung" ;;github link
-                  op/site-domain "http://27.122.57.145"
-                  op/site-main-title "从Hello World开始"
+                  op/repository-org-branch "source"
+                  op/repository-html-branch "master"
+                  op/site-domain "https//samrayleung.github.io/"
+                  op/site-main-title "When A Child Is Born"
+                  op/site-sub-title "凡走过,必留下痕迹"
                   op/theme 'mdo) ;; theme
             (setq op/personal-disqus-shortname "Samray") ; use for disqus comments
             )
   )
-
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."
   (concat (file-name-as-directory org-directory) filename))

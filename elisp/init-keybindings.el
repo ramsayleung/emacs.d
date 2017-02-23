@@ -147,9 +147,12 @@
 				"M-J" '(org-shiftdown)
 				"M-o" '(org-insert-heading)
 				"M-t" '(org-insert-todo-heading)
+				)
+            (general-define-key :states '(normal visual motion)
+                                :keymaps 'org-mode-map
 				"J" 'org-next-visible-heading
 				"K" 'org-previous-visible-heading
-				)
+                                )
 	    (general-define-key :states 'normal
 				:keymaps 'org-mode-map
 				"tab" 'org-cycle
