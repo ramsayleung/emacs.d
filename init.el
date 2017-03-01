@@ -52,8 +52,10 @@
   (when init-file-debug
     (require 'benchmark))
 
-  (let ((lisp-dir "~/.emacs.d/elisp"))
+  (let ((lisp-dir "~/.emacs.d/elisp")
+        (manual-add-packages "~/.emacs.d/packages"))
     (add-to-list 'load-path lisp-dir)
+    (add-to-list 'load-path manual-add-packages)
     (mapc (lambda (fname)
 	    (let ((feat (intern (file-name-base fname))))
 	      (if init-file-debug

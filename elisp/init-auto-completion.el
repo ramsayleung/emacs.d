@@ -80,5 +80,15 @@
 			 (lambda () (add-to-list 'company-backends 'company-c-headers)))
 	       )
   )
+;;; backends for tern
+(use-package company-tern
+  :ensure t
+  :defer t
+  :init (progn
+          (add-hook 'js2-mode-hook
+                    (lambda () (add-to-list 'company-backends 'company-tern)))
+          (add-hook 'js-mode-hook
+                    (lambda () (add-to-list 'company-backends 'company-tern)))
+          ))
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

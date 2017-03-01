@@ -3,7 +3,6 @@ elpa/*
 recentf*
 *~
 auto-save-list/
-eshell/
 anaconda-mode/
 ac-comphist.dat
 url/
@@ -11,3 +10,5 @@ url/
 backups/
 tramp
 .org-id-locations
+eshell/history
+eshell/lastdir

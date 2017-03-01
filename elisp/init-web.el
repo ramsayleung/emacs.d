@@ -79,13 +79,16 @@
 ;;;----------------;;;
 ;;;     JS Mode    ;;;
 ;;;----------------;;;
-
+(autoload 'tern-mode "tern.el" nil t)
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
 ;; improved Javascript editing mode
 (use-package js2-mode
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
   :init
   (add-hook 'js2-mode-hook 'js2-refactor-mode)
+  (add-hook 'js2-mode-hook (lambda ()
+                             (tern-mode  t)))
   )
 
 (use-package nodejs-repl
