@@ -6,6 +6,8 @@
   :mode ("\\.org\\'" . org-mode)
   :init (progn
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
+          ;; wrap line
+          (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
           (setq org-todo-keyword-faces
                 '(
                   ("PROCESSING" . (:foreground "gold" :weight bold))

@@ -132,8 +132,8 @@
 				"a o O" 'org-clock-out
 				"a o s" 'org-search-view
 				"a o t" 'org-todo-list
-				"a o p" 'samray/org-publish-buffer
-				"a o P" 'org-pomodoro
+				"a o p" 'org-pomodoro
+                                "t p" 'org-preview-html-mode
 				)
 	    (general-define-key :states '(normal insert visual motion)
 				:keymaps 'org-mode-map

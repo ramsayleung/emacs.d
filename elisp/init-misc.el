@@ -270,27 +270,6 @@ debug-init and load the given list of packages."
 	      (regexp-quote sym))))
 	regexp-history)
   (call-interactively 'occur))
-(defun af-eshell-here ()
-  "Go to eshell and set current directory to the buffer's directory."
-  (interactive)
-  (let ((dir (file-name-directory (or (buffer-file-name)
-                                      default-directory))))
-    (if (get-buffer "*eshell*")
-	(if (string= (buffer-name) "*eshell*")(delete-window (selected-window))
-	  (progn
-	    (switch-to-buffer "*eshell*"))
-	  )
-      (progn
-	(split-window-vertically)
-	(other-window 1)
-	(eshell)
-	(eshell/pushd ".")
-	(cd dir)
-	(goto-char (point-max))
-	(eshell-kill-input)
-	(eshell-send-input)
-	))))
-
 
 (defun samray/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the
@@ -403,15 +382,6 @@ removal."
     (progn
       (window-configuration-to-register ?_)
       (delete-other-windows))))
-(defun samray/eshell-clear-buffer ()
-  "Clear terminal."
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)
-    (eshell-send-input)))
-(add-hook 'eshell-mode-hook
-	  '(lambda()
-	     (local-set-key (kbd "C-l") 'samray/eshell-clear-buffer)))
 ;;; http://blog.binchen.org/posts/open-readme-under-git-root-directory-in-emacs.html
 (defun samray/open-readme-in-git-root-directory ()
   "Open README file at the root directory of my project."

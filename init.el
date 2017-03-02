@@ -53,7 +53,8 @@
     (require 'benchmark))
 
   (let ((lisp-dir "~/.emacs.d/elisp")
-        (manual-add-packages "~/.emacs.d/packages"))
+        (manual-add-packages "~/.emacs.d/packages")
+        )
     (add-to-list 'load-path lisp-dir)
     (add-to-list 'load-path manual-add-packages)
     (mapc (lambda (fname)
@@ -71,6 +72,7 @@
   (require 'init-chinese)
   (require 'init-c-c++)
   (require 'init-elisp)
+  (require 'init-eshell)
   (require 'init-evil)
   (require 'init-ivy)
   (require 'init-keybindings)

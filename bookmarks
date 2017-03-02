@@ -4,7 +4,7 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/SyncDirectory/Org/agenda.org")
- (front-context-string . "* TODO Finishing")
- (rear-context-string . "about interview\n")
- (position . 851))
+ (front-context-string . "* TODO Send resu")
+ (rear-context-string . "2017-03-07 Tue>\n")
+ (position . 1042))
 )
