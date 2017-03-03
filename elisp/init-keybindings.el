@@ -24,9 +24,9 @@
 				"a z d" 'ztree-dir
 				"a z c" 'ztree-diff
 				"b" '(:ignore t :which-key "buffers")
-				"b b" 'ivy-switch-buffer
+				"b b" 'samray/ivy-switch-to-buffer-enhanced
 				"b d" 'kill-this-buffer
-				"b l" 'switch-to-buffer
+				"b l" 'samray/switch-to-current-open-buffer
 				"b o" 'occur-dwim
 				"c" '(:ignore t :which-key "compile/comments")
 				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
@@ -357,6 +357,7 @@
 	     "C-h l" 'counsel-find-library
 	     "C-x C-f" 'counsel-find-file
 	     "C-x l" 'counsel-locate
+             "C-x b" 'samray/ivy-switch-to-buffer-enhanced
 	     "C-x k" 'kill-this-buffer
 	     "C-x C-r" 'recentf-open-files
 	     "C-x 2" 'samray/split-window-below-and-move

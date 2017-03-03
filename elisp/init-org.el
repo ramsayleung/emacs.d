@@ -6,44 +6,44 @@
   :mode ("\\.org\\'" . org-mode)
   :init (progn
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
-          ;; wrap line
-          (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
-          (setq org-todo-keyword-faces
-                '(
-                  ("PROCESSING" . (:foreground "gold" :weight bold))
-                  ))
-          (setq org-todo-keywords
-                '((sequence "TODO" "PROCESSING" "DONE")))
-          (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
-                                     (?B . (:foreground "blue"))
-                                     (?C . (:foreground "green"))))
-          (defun samray/org-skip-subtree-if-priority (priority)
-            "Skip an agenda subtree if it has a priority of PRIORITY.
+	  ;; wrap line
+	  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+	  (setq org-todo-keyword-faces
+		'(
+		  ("PROCESSING" . (:foreground "gold" :weight bold))
+		  ))
+	  (setq org-todo-keywords
+		'((sequence "TODO" "PROCESSING" "DONE")))
+	  (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
+				     (?B . (:foreground "blue"))
+				     (?C . (:foreground "green"))))
+	  (defun samray/org-skip-subtree-if-priority (priority)
+	    "Skip an agenda subtree if it has a priority of PRIORITY.
 PRIORITY may be one of the characters ?A, ?B, or ?C."
-            (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-                  (pri-value (* 1000 (- org-lowest-priority priority)))
-                  (pri-current (org-get-priority (thing-at-point 'line t))))
-              (if (= pri-value pri-current)
-                  subtree-end
-                nil)))
+	    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+		  (pri-value (* 1000 (- org-lowest-priority priority)))
+		  (pri-current (org-get-priority (thing-at-point 'line t))))
+	      (if (= pri-value pri-current)
+		  subtree-end
+		nil)))
 	  )
   :config(progn
 	   (with-eval-after-load 'org
-             (require 'ob-python)
-             (org-babel-do-load-languages
-              'org-babel-load-languages
-              '((clojure . t)
-                (lisp . t)
-                (org . t)
-                (js . t)
-                (latex . t)
-                (ruby . t)
-                (shell . t)
-                (python . t)
-                (emacs-lisp . t)
-                (awk . t)
-                (sql . t)
-                (sqlite . t)))
+	     (require 'ob-python)
+	     (org-babel-do-load-languages
+	      'org-babel-load-languages
+	      '((clojure . t)
+		(lisp . t)
+		(org . t)
+		(js . t)
+		(latex . t)
+		(ruby . t)
+		(shell . t)
+		(python . t)
+		(emacs-lisp . t)
+		(awk . t)
+		(sql . t)
+		(sqlite . t)))
 	     (setq org-agenda-files '("~/SyncDirectory/Org/agenda.org" "~/SyncDirectory/Org/todo.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
@@ -81,36 +81,37 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;;language’s major mode.
 	     (setq org-src-fontify-natively t
 		   org-src-tab-acts-natively t)
-             ;; When editing a code snippet,use the current window rather than
+	     ;; When editing a code snippet,use the current window rather than
 	     ;; popping open a new one
 	     (setq org-src-window-setup 'current-window)
 	     ;; I like seeing a little downward-pointing arrow instead of the
 	     ;;usual ellipsis (...) that org displays when there’s stuff under
 	     ;; a header.
-             (setq org-ellipsis "⤵")
-             ;;Its default value is (ascii html icalendar latex)
-             (setq org-export-backends '(latex icalendar))
-             ;; Show org-edit-special in the other-window
-             (setq org-src-window-setup 'other-window)
-             ;; use minted to highlight code in latex
-             (add-to-list 'org-latex-packages-alist '("" "minted"))
-             (setq org-latex-listings 'minted)
-             ;; execute code without confirm
-             (setq org-confirm-babel-evaluate nil)
-             ;; set latex to xelatex
-             ;; org-mode 8.0
-             (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
-                                           "xelatex -interaction nonstopmode %f"))
-             ;; export cn character
-             (setf org-latex-default-packages-alist
-                   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
+	     (setq org-ellipsis "⤵")
+	     ;;Its default value is (ascii html icalendar latex)
+	     (setq org-export-backends '(latex icalendar))
+	     ;; Show org-edit-special in the other-window
+	     (setq org-src-window-setup 'other-window)
+	     ;; use minted to highlight code in latex
+	     (add-to-list 'org-latex-packages-alist '("" "minted"))
+	     (setq org-latex-listings 'minted)
+	     ;; execute code without confirm
+	     (setq org-confirm-babel-evaluate nil)
+	     ;; set latex to xelatex
+	     ;; org-mode 8.0
+	     (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
+					   "xelatex -interaction nonstopmode %f"))
+	     ;; export cn character
+	     (setf org-latex-default-packages-alist
+		   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
 	     (require 'ox-md nil t)
-             (require 'ox-latex )
-             )
-           )
+	     (require 'ox-latex )
+	     )
+	   )
   )
 ;; automatically open your agenda when start Emacs
-(org-agenda nil "c")
+(add-hook 'after-init-hook (lambda ()
+                             (org-agenda nil "c")))
 
 ;;; pomodoro tech
 (use-package org-pomodoro

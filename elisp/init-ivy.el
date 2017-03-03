@@ -14,8 +14,6 @@
   :diminish ivy-mode
   :config
   (ivy-mode 1)
-  ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
-  (setq ivy-use-virtual-buffers t)
   ;; number of result lines to display
   (setq ivy-height 10)
   ;; does not count candidates
@@ -41,5 +39,21 @@
 (use-package counsel-projectile
   :ensure t
   :config(counsel-projectile-on))
+(use-package ivy-buffer-extend
+  :load-path "~/.emacs.d/packages/ivy-buffer-extend.el")
+;;; Sometimes I find too many buffers is distracted
+(defun samray/switch-to-current-open-buffer ()
+  "Switch to current open bufffer instead of also including;
+bookmarks reccently opened files and window layout."
+  (interactive)
+  (setq ivy-use-virtual-buffers nil)
+  (ivy-switch-buffer)
+  )
+
+(defun samray/ivy-switch-to-buffer-enhanced ()
+  "Ivy-switch-to-buffer with recentf."
+  (interactive)
+  (setq ivy-use-virtual-buffers t)
+  (ivy-switch-buffer))
 (provide 'init-ivy)
 ;;; init-ivy.el ends here
