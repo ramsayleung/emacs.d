@@ -111,7 +111,7 @@ This code toggles between them."
 ;; but just in case)
 (transient-mark-mode t)
 ;; turn on mouse wheel support for scrolling
-(mouse-wheel-mode t)
+;; (mouse-wheel-mode t)
 
 ;;----------------------;;
 ;; Syntax Highlighting  ;;

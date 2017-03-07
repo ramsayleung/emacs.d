@@ -43,6 +43,7 @@
 				"f" '(:ignore t :which-key "files")
 				"f c" 'samray/copy-current-file-path
 				"f d" 'samray/delete-current-buffer-file
+                                "f D" 'samray/delete-whitespace-between-english-and-chinese-char
 				"f E" 'samray/sudo-edit
 				"f f" 'counsel-find-file
 				"f g" 'samray/counsel-goto-recent-directory

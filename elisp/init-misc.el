@@ -272,7 +272,7 @@ debug-init and load the given list of packages."
   (call-interactively 'occur))
 
 (defun samray/alternate-buffer (&optional window)
-  "Switch back and forth between current and last buffer in the
+  "Switch back and forth between current and last buffer in the;
 current window."
   (interactive)
   (let ((current-buffer (window-buffer window))

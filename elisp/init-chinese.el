@@ -60,5 +60,22 @@
   :bind
   (("M-n" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
    ("C-c C-;" . pyim-delete-word-from-personal-buffer)))
+
+(defun samray/delete-whitespace-between-english-and-chinese-char ()
+  "Because the chinese input method i use,i will left whitespace between letter;
+and chinese char,so just delete it"
+  (interactive)
+  (save-restriction
+    (if (region-active-p)
+        (narrow-to-region (region-beginning) (region-end)))
+    (save-excursion
+      (goto-char (point-min))
+      (while (search-forward-regexp "\\([a-zA-Z0-9]\\)[ ]+\\(\\cc\\)" nil t)
+        (replace-match "\\1\\2" t nil))
+      (while (search-forward-regexp "\\(\\cc\\)[ ]+\\([a-zA-Z0-9]\\)" nil t)
+        (replace-match "\\1\\2" t nil))  ;because i could not figure out the
+                                        ;right regexp,so just use such silly way
+      
+      )))
 (provide 'init-chinese)
 ;;; init-chinese.el ends here

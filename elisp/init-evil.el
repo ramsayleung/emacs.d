@@ -11,6 +11,7 @@
     (evil-set-initial-state 'calendar-mode 'emacs)
     (evil-set-initial-state 'pdf-view-mode 'emacs)
     (evil-set-initial-state 'imenu-list-major-mode 'emacs)
+    (evil-set-initial-state 'artist-mode 'emacs)
     ))
 (use-package evil-surround
   :ensure t
@@ -56,8 +57,13 @@ UI in evil-mode to replace the symbol under cursor"
       (evil-visual-state))
     (evil-ex (concat "'<,'>s/" (if (= 0 (length old)) "" "\<\(") old (if (= 0 (length old)) "" "\)\>/"))))
   )
-
-
+;;; artist-mode doesn't work fine with evil-mode ,so do this trick
+(defun artist-mode-toggle-emacs-state ()
+  (if artist-mode
+      (evil-emacs-state)
+    (evil-exit-emacs-state)))
+(unless (eq evil-state 'emacs)
+  (add-hook 'artist-mode-hook 'artist-mode-toggle-emacs-state))
 
 ;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
 (evilnc-default-hotkeys)
