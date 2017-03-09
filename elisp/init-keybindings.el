@@ -24,9 +24,9 @@
 				"a z d" 'ztree-dir
 				"a z c" 'ztree-diff
 				"b" '(:ignore t :which-key "buffers")
-				"b b" 'samray/ivy-switch-to-buffer-enhanced
+				"b l" 'samray/ivy-switch-to-buffer-enhanced
 				"b d" 'kill-this-buffer
-				"b l" 'samray/switch-to-current-open-buffer
+				"b b" 'samray/switch-to-current-open-buffer
 				"b o" 'occur-dwim
 				"c" '(:ignore t :which-key "compile/comments")
 				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
@@ -135,6 +135,7 @@
 				"a o t" 'org-todo-list
 				"a o p" 'org-pomodoro
                                 "t p" 'org-preview-html-mode
+                                "t d" 'org-indent-mode
 				)
 	    (general-define-key :states '(normal insert visual motion)
 				:keymaps 'org-mode-map
@@ -330,6 +331,7 @@
 	     "C-<" 'evil-multiedit-match-and-next
 	     "C->" 'evil-multiedit-match-and-prev
 	     "C-c C->" 'evil-multiedit-restore
+             "(" 'paredit-open-round
 	     )
 	    (general-define-key :keymaps 'read-expression-map
 				"C-r" 'counsel-expression-history)
@@ -363,6 +365,24 @@
 	     "C-x C-r" 'recentf-open-files
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
+             "C-M-a" 'sp-beginning-of-sexp
+             "C-M-e" 'sp-end-of-sexp
+             "C-<down>" 'sp-down-sexp
+             "C-<up>" 'sp-up-sexp
+             "M-<down>" 'sp-backward-down-sexp
+             "M-<up>" 'sp-backward-up-sexp
+             "C-M-k" 'sp-kill-sexp
+             "C-k" 'sp-kill-hybrid-sexp
+             "M-k" 'sp-backward-kill-sexp
+             "M-[" 'sp-backward-unwrap-sexp
+             "M-]" 'sp-unwrap-sexp
+             "C-c (" 'wrap-with-parens
+             "C-c [" 'wrap-with-brackets
+             "C-c {" 'wrap-with-braces
+             "C-c '" 'wrap-with-single-quotes
+             "C-c \"" 'wrap-with-double-quotes
+             "C-c _" 'wrap-with-underscotes
+             "C-c `" 'wrap-with-back-quotes
 	     "C-s" 'swiper
 	     "C-;" 'imenu-list-smart-toggle
 	     "M-x" 'counsel-M-x

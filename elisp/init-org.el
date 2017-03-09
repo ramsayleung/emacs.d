@@ -28,6 +28,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		nil)))
 	  )
   :config(progn
+           (require 'org-indent)
+           (org-indent-mode -1)         ;disable org-indent-mode
 	   (with-eval-after-load 'org
 	     (require 'ob-python)
 	     (org-babel-do-load-languages

@@ -18,6 +18,26 @@
     )
   )
 
+(require 'cl)
+(defmacro def-pairs (pairs)
+  `(progn
+     ,@(loop for (key . val) in pairs
+             collect
+             `(defun ,(read (concat
+                             "wrap-with-"
+                             (prin1-to-string key)
+                             "s"))
+                  (&optional arg)
+                (interactive "p")
+                (sp-wrap-with-pair ,val)))))
+
+(def-pairs ((paren        . "(")
+            (bracket      . "[")
+            (brace        . "{")
+            (single-quote . "'")
+            (double-quote . "\"")
+            (back-quote   . "`")
+            (angle-bracket . "<")))
 ;; delete spaces at once
 (use-package hungry-delete
   :ensure t
@@ -51,6 +71,8 @@
   :ensure t
   :commands (ztree-dir ztree-diff)
   :init (setq ztree-dir-move-focus t))
+
+
 
 ;;; Emacs minor mode to highlight indentation
 (use-package highlight-indent-guides

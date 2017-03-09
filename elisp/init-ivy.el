@@ -40,7 +40,7 @@
   :ensure t
   :config(counsel-projectile-on))
 (use-package ivy-buffer-extend
-  :load-path "~/.emacs.d/packages/ivy-buffer-extend.el")
+  :load-path "~/.emacs.d/additional-packages/ivy-buffer-extend.el")
 ;;; Sometimes I find too many buffers is distracted
 (defun samray/switch-to-current-open-buffer ()
   "Switch to current open bufffer instead of also including;

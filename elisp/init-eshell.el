@@ -42,7 +42,6 @@
     (eshell/cd path)
     (eshell/echo path)
     ))
-
 ;; help you use shell easily on Emacs
 (use-package shell-pop
   :ensure t

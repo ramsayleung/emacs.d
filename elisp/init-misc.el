@@ -110,7 +110,22 @@
 (prefer-coding-system 'utf-8)
 (setq-default buffer-file-coding-system 'utf-8-auto-unix)
 
+;;; auto save file when Emacs idle
+(use-package auto-save
+  :load-path "~/.emacs.d/additional-packages/auto-save.el"
+  :config (progn
+            (auto-save-enable)
+            (setq auto-save-slient t)
+            (setq auto-save-idle 2)
+            ))
 
+;;; auto indent buffer when Emacs idle
+(use-package auto-indent
+  :load-path "~/.emacs.d/elisp/auto-indent.el"
+  :config (progn
+            (auto-indent-enable)
+            (setq auto-indent-slient t)
+            ))
 
 ;;; code  from spacemacs
 (use-package restart-emacs
@@ -223,9 +238,15 @@ debug-init and load the given list of packages."
       (progn
 	(indent-buffer)
 	(message "Indented buffer")))))
-(add-hook 'prog-mode-hook (lambda ()
-			    (unless (derived-mode-p '(python-mode ))
-			      (add-hook 'before-save-hook 'indent-region-or-buffer))))
+;; (add-hook 'prog-mode-hook (lambda ()
+;; 			    (unless (derived-mode-p '(python-mode org-mode))
+;; 			      (add-hook 'before-save-hook 'indent-region-or-buffer))))
+;; (add-hook 'emacs-lisp-mode-hook (lambda ()
+;;                                   (add-hook 'before-save-hook 'indent-region-or-buffer)))
+;; (add-hook 'lisp-mode-hook (lambda ()
+;;                             (add-hook 'before-save-hook 'indent-region-or-buffer)))
+;; (add-hook 'scheme-mode-hook (lambda ()
+;;                               (add-hook 'before-save-hook 'indent-region-or-buffer)))
 
 ;; enable hippie-mode to enhance auto-completion
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev

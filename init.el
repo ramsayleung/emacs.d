@@ -29,6 +29,7 @@
 
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))
+  (setq load-prefer-newer t)            ;avoid load outdated byte-compiled file
   (package-initialize)
   (require 'package)
   (setq package-enable-at-startup nil)
@@ -36,7 +37,7 @@
   ;; this is mirror of melpa and gnu
   (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 			   ("melpa" . "http://elpa.emacs-china.org/melpa/")))
-
+  (message "load")
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
@@ -53,7 +54,7 @@
     (require 'benchmark))
 
   (let ((lisp-dir "~/.emacs.d/elisp")
-        (manual-add-packages "~/.emacs.d/packages")
+        (manual-add-packages "~/.emacs.d/additional-packages")
         )
     (add-to-list 'load-path lisp-dir)
     (add-to-list 'load-path manual-add-packages)

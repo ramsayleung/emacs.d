@@ -38,7 +38,8 @@
 (use-package evil-escape
   :after evil
   :ensure t
-  :config (setq-default evil-escape-key-sequence "jk"))
+  :init (setq-default evil-escape-key-sequence "jk")
+  :config (evil-escape-mode))
 
 (use-package evil-multiedit
   :ensure t
