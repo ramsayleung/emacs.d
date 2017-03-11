@@ -392,6 +392,22 @@
 	     "<f5>" 'revert-buffer
 	     "<f6>" 'ivy-resume
 	     ))
+  ;; Format buffer
+  ;; Python mode
+  (general-define-key :keymaps 'python-mode-map
+                      "C-M-;" 'py-autopep8-buffer)
+  ;; Web mode|Html mode
+  (general-define-key :keymaps '(web-mode-map html-mode-map)
+                      "C-M-;" 'web-beautify-html)
+  ;; Css mode
+  (general-define-key :keymaps 'css-mode-map
+                      "C-M-;" 'web-beautify-css)
+  ;; Js|Js2|Json mode
+  (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
+                      "C-M-;" 'web-beautify-js)
+  ;; Prog-mode
+  (general-define-key :keymaps 'prog-mode-map
+                      "C-M-;" 'samray/indent-buffer)
   (general-define-key :states '(normal visual )
 		      :prefix my-second-leader-key
 		      "e" '(:ignore t :which-key "eval")
@@ -404,8 +420,9 @@
   (general-define-key :keymaps 'counsel-find-file-map
   		      "C-j" 'ivy-next-line
   		      "C-k" 'ivy-previous-line)
-  (general-define-key :states 'insert
-		      "DEL" 'hungry-delete-backward)
+  (general-define-key :keymaps 'emacs-lisp-mode-map
+                      :states 'insert
+        	      "DEL" 'hungry-delete-backward)
   (general-define-key :keymaps 'emacs-lisp-mode-map
   		      "C-c s" 'find-function-at-point)
   (general-define-key :keymaps 'term-raw-map
@@ -429,6 +446,5 @@
      )))
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-
 (provide 'init-keybindings)
 ;;; init-keybindings.el ends here

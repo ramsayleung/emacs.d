@@ -120,12 +120,12 @@
             ))
 
 ;;; auto indent buffer when Emacs idle
-(use-package auto-indent
-  :load-path "~/.emacs.d/elisp/auto-indent.el"
-  :config (progn
-            (auto-indent-enable)
-            (setq auto-indent-slient t)
-            ))
+;; (use-package auto-indent
+;;   :load-path "~/.emacs.d/elisp/auto-indent.el"
+;;   :config (progn
+;;             (auto-indent-enable)
+;;             (setq auto-indent-slient t)
+;;             ))
 
 ;;; code  from spacemacs
 (use-package restart-emacs
@@ -224,11 +224,11 @@ debug-init and load the given list of packages."
 					    ("8sa" "samray")
  					    ))
 ;; auto indent file before save file
-(defun indent-buffer()
+(defun samray/indent-buffer()
   (interactive)
   (indent-region (point-min)(point-max)))
 
-(defun indent-region-or-buffer()
+(defun samray/indent-region-or-buffer()
   (interactive)
   (save-excursion
     (if (region-active-p)

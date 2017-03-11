@@ -6,6 +6,9 @@
 (use-package python
   :mode("\\.py\\'" . python-mode)
   :ensure t
+  :init (progn
+          (add-hook 'python-mode-hook (lambda () (highlight-indentation-mode 0)))
+          )
   )
 (use-package anaconda-mode
   :defer t
@@ -29,15 +32,16 @@
 (use-package py-autopep8
   :defer t
   :ensure t
-  :init(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
+  ;; :init(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+  )
 ;; (use-package jedi
 ;;   :ensure t
 ;;   :config(add-hook 'python-mode-hook 'jedi:setup))
 ;; Sort import with isort
-(use-package py-isort
-  :ensure t
-  :defer t
-  :init(add-hook 'before-save-hook 'py-isort-before-save))
+;; (use-package py-isort
+;;   :ensure t
+;;   :defer t
+;;   :init(add-hook 'before-save-hook 'py-isort-before-save))
 
 (use-package fill-column-indicator
   :ensure t

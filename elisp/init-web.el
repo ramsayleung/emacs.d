@@ -15,32 +15,32 @@
              web-beautify-html
              web-beautify-html-buffer
              web-beautify-js
-             web-beautify-js-buffer)
-  :init(progn
-	 (add-hook 'js2-mode-hook
-		   (lambda () (unless (derived-mode-p 'vue-mode)
-				(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
-	 ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
-	 (add-hook 'js-mode-hook
-		   (lambda () (unless (derived-mode-p 'vue-mode)
-				(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+             web-beautify-js-buffer))
+  ;; :init(progn
+  ;;        (add-hook 'js2-mode-hook
+  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
+  ;;       			(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+  ;;        ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+  ;;        (add-hook 'js-mode-hook
+  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
+  ;;       			(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
 
-	 (add-hook 'json-mode-hook
-		   (lambda () (unless (derived-mode-p 'vue-mode)
-				(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+  ;;        (add-hook 'json-mode-hook
+  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
+  ;;       			(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
 
-	 (add-hook 'html-mode-hook
-		   (lambda () (unless (derived-mode-p 'vue-mode)
-				(add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+  ;;        (add-hook 'html-mode-hook
+  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
+  ;;       			(add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
 
-	 (add-hook 'web-mode-hook
-		   (lambda () (unless (derived-mode-p 'vue-mode)
-				(add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+  ;;        (add-hook 'web-mode-hook
+  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
+  ;;       			(add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
 
-	 (add-hook 'css-mode-hook
-		   (lambda () (unless (derived-mode-p 'vue-mode)
-				(add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
-	 ))
+  ;;        (add-hook 'css-mode-hook
+  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
+  ;;       			(add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
+  ;;        ))
 ;;  an autonomous emacs major-mode for editing web template
 ;; Html documents can embed parts (css/javascript) and blocks(client/server side)
 (use-package web-mode

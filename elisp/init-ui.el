@@ -15,6 +15,12 @@
 ;;; always split windows horizontally rather than vertically
 ;; (setq split-height-threshold nil)
 (setq current-language-environment "English")
+;;; Automatic resizing of Emacs windows to the golden radion
+;; (use-package golden-ratio
+;;   :ensure t
+;;   :init (progn
+;;           (golden-ratio-mode t)
+;;           ))
 ;; popwin is a popup window manager for Emacs which makes you free from the hell
 ;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
 (use-package popwin
@@ -158,7 +164,6 @@ This code toggles between them."
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;
-
 (use-package spaceline
   :ensure t
   :demand t
@@ -188,6 +193,7 @@ This code toggles between them."
   :diminish auto-revert-mode
   :diminish auto-fill-function
   :diminish mail-abbrevs-mode
+  :diminish highlight-indentation-mode
   :diminish subword-mode)
 ;;; Stolen From https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
 (defmacro diminish-minor-mode (filename mode &optional abbrev)
@@ -197,6 +203,7 @@ This code toggles between them."
 (defmacro diminish-major-mode (mode-hook abbrev)
   `(add-hook ,mode-hook
              (lambda () (setq mode-name ,abbrev))))
+(diminish-minor-mode 'highlight-indentation 'highlight-indentation-mode )
 (diminish-minor-mode 'mail-abbrevs 'mail-abbrevs-mode )
 (diminish-minor-mode 'auto-revert 'auto-revert-mode)
 (diminish-minor-mode 'simple 'auto-fill-function )
