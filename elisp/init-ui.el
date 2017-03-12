@@ -145,8 +145,13 @@ This code toggles between them."
 ;;   )
 (use-package zenburn-theme
   :ensure t
-  :config(load-theme 'zenburn t))
-
+  :init(load-theme 'zenburn t))
+;; (use-package moe-theme
+;;   :ensure t
+;;   :no-require t)
+;; (use-package gruvbox-theme
+;;   :ensure t
+;;   :no-require t)
 
 ;;---------------;;
 ;;      Font     ;;
