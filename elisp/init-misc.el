@@ -116,7 +116,7 @@
   :config (progn
             (auto-save-enable)
             (setq auto-save-slient t)
-            (setq auto-save-idle 2)
+            (setq auto-save-idle 1)
             ))
 
 ;;; auto indent buffer when Emacs idle

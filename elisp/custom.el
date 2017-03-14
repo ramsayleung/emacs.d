@@ -6,6 +6,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cfs--current-profile "profile1" t)
+ '(cfs--profiles-steps (quote (("profile1" . 4))) t)
  '(company-minimum-prefix-length 1)
  '(compilation-message-face (quote default))
  '(custom-safe-themes
@@ -72,7 +74,7 @@ Entered on %U
   %a"))) t)
  '(package-selected-packages
    (quote
-    (theme-changer clues-theme blackboard-theme color-theme-sanityinc-tomorrow highlight-indentation-mode golden-ratio evil-smartparens evil-smartparents auto-compile perspective eyebrowse company-tern org-preview-html org-latex babel clang-format company-c-headers irony irony-mode company-shell highlight-symbol imenu-list diff-hl git-gutter workgroups2 popup project-explorer imenu-anywhere imenus dumb-jump evil-escape keyfreq rainbow-mode rainbow-blocks selectric-mode org-present better-shell virtualenvwrapper try org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
+    (4clojure ivy-historian gruvbox-theme moe-theme theme-changer clues-theme blackboard-theme color-theme-sanityinc-tomorrow highlight-indentation-mode golden-ratio evil-smartparens evil-smartparents auto-compile perspective eyebrowse company-tern org-preview-html org-latex babel clang-format company-c-headers irony irony-mode company-shell highlight-symbol imenu-list diff-hl git-gutter workgroups2 popup project-explorer imenu-anywhere imenus dumb-jump evil-escape keyfreq rainbow-mode rainbow-blocks selectric-mode org-present better-shell virtualenvwrapper try org-download company-anaconda company-quickhelp org-bullets rainbow-delimiters markdown-mode wakatime-mode counsel-projectile org-pomodoro company flycheck swiper counsel smartparens expand-region dired+ js2-mode web-mode magit nodejs-repl exec-path-from-shell popwin js2-refactor monokai-theme zenburn-theme dracula-theme molokai-theme use-package)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")

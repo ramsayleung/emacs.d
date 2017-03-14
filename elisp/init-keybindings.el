@@ -11,7 +11,7 @@
 				:prefix my-leader-key
 				";" 'evilnc-comment-operator
 				"'" 'shell-pop
-				"." 'samray/python-pop
+				"." 'samray/repl-pop
 				"TAB" 'samray/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
@@ -395,6 +395,7 @@
   ;; Format buffer
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
+                      "C-c C-g" 'elpy-goto-definition
                       "C-M-;" 'py-autopep8-buffer)
   ;; Web mode|Html mode
   (general-define-key :keymaps '(web-mode-map html-mode-map)
@@ -405,8 +406,8 @@
   ;; Js|Js2|Json mode
   (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
                       "C-M-;" 'web-beautify-js)
-  ;; Prog-mode
-  (general-define-key :keymaps 'prog-mode-map
+  ;; Prog-mode  Org-mode
+  (general-define-key :keymaps '(prog-mode-map org-mode-map)
                       "C-M-;" 'samray/indent-buffer)
   (general-define-key :states '(normal visual )
 		      :prefix my-second-leader-key

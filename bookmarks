@@ -4,7 +4,7 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/SyncDirectory/Org/links.org")
- (front-context-string . "**  [[https://to")
- (rear-context-string . "3-09 Thu 17:03>\n")
- (position . 211))
+ (front-context-string . "**  [[http://evi")
+ (rear-context-string)
+ (position . 9))
 )

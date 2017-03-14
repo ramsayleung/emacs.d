@@ -65,6 +65,39 @@
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook 'comment-auto-fill))
 
+(defun samray/switch-to-buffer (repl-buffer-name)
+  "Run REPL and switch to the  buffer REPL-BUFFER-NAME.
+similar to shell-pop"
+  (interactive)
+  (if (get-buffer repl-buffer-name)
+      (if (string= (buffer-name) repl-buffer-name)
+	  (if (not (one-window-p))
+	      (progn (bury-buffer)
+		     (delete-window))
+	    )
+	(progn (switch-to-buffer-other-window repl-buffer-name)
+	       (end-of-buffer)
+	       (evil-insert-state)))
+    (progn
+      (run-python)
+      (switch-to-buffer-other-window repl-buffer-name)
+      (end-of-buffer)
+      (evil-insert-state))))
+(defun samray/repl-pop ()
+  "Run REPL for different major mode and switch to the repl buffer.
+similar to shell-pop"
+  (interactive)
+  (let* ((repl-modes '((python-mode . "*Python*")
+                       (scheme-mode . "* Guile REPL *"))))
+    (cond ((or (derived-mode-p 'python-mode) (derived-mode-p 'inferior-python-mode))
+           (progn
+;;; To fix issue that there is weird eshell output with ipython
+             (setq python-shell-interpreter "ipython"
+                   python-shell-interpreter-args "--simple-prompt -i")
+             (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
+          ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
+           (samray/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
+          )))
 ;;; Treating terms in CamelCase symbols as separate words makes editing a
 ;;; little easier for me, so I like to use subword-mode everywhere.
 ;;;  Nomenclature           Subwords

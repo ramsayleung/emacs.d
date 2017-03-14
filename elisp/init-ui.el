@@ -159,7 +159,7 @@ This code toggles between them."
 
 ;; customize font
 (cond ((eq system-type 'gnu/linux)
-       (set-frame-font "Source Code Pro-12"))
+       (set-frame-font "Source Code Pro-11"))
       ((eq system-type 'darwin)
        (set-frame-font "Monaco"))
       ((eq system-type 'windows-nt)

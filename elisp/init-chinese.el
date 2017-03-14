@@ -16,10 +16,10 @@
   :config (progn
 	    (setq url-automatic-caching t)
 	    ))
-(use-package chinese-pyim
+ (use-package chinese-pyim
   :ensure t
   :config
-  ;; 激活 basedict 拼音词库
+  ;; 激活 basedict 拼音词库发
   (use-package chinese-pyim-basedict
     :ensure t
     :config (chinese-pyim-basedict-enable))
@@ -77,5 +77,22 @@ and chinese char,so just delete it"
                                         ;right regexp,so just use such silly way
       
       )))
+;;; solve ths issue that org-table cannot indent when english char mix with
+;;; chinese char
+;;; (set-frame-font "Source Code Pro-11")
+(defun samray/handle-org-table-indent-with-chinese ()
+  "Deal with  issue that chinese char cannot get along with org-table."
+  (save-excursion
+    (progn
+      (dolist (charset '(kana han symbol cjk-misc bopomofo))
+        (set-fontset-font (frame-parameter nil 'font)
+                          charset
+                          (font-spec :family "WenQuanYi Micro Hei")))
+      ;; tune rescale so that Chinese character width = 2 * English character width
+      (setq face-font-rescale-alist '(("Source Code Pro" . 1.0) ("WenQuanYi" . 1.23)))
+      )
+    )
+  )
+(add-hook 'after-init-hook 'samray/handle-org-table-indent-with-chinese)
 (provide 'init-chinese)
 ;;; init-chinese.el ends here
