@@ -89,6 +89,7 @@
 				"t i" 'imenu-list-smart-toggle
 				"t o" 'origami-toggle-mode
 				"t s" 'selectric-mode
+                                "t t" '(samray/cycle-theme samray/set-font)
 				"t w" 'samray/toggle-window-split
 				"w" '(:ignore t :which-key "windows")
 				"w d" 'delete-window
@@ -152,6 +153,8 @@
 				)
             (general-define-key :states '(normal visual motion)
                                 :keymaps 'org-mode-map
+                                "h" 'evil-backward-char
+                                "l" 'evil-forward-char
 				"J" 'org-next-visible-heading
 				"K" 'org-previous-visible-heading
                                 )
@@ -448,4 +451,4 @@
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 (provide 'init-keybindings)
-;;; init-keybindings.el ends here
+;;; init-key

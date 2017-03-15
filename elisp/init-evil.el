@@ -35,11 +35,11 @@
   :ensure t)
 
 ;;; Escape everything
-(use-package evil-escape
-  :after evil
-  :ensure t
-  :init (setq-default evil-escape-key-sequence "jk")
-  :config (evil-escape-mode))
+;; (use-package evil-escape
+;;   :after evil
+;;   :ensure t
+;;   :init (setq-default evil-escape-key-sequence "jk")
+;;   :config (evil-escape-mode))
 
 (use-package evil-multiedit
   :ensure t

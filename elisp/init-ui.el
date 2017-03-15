@@ -137,33 +137,59 @@ This code toggles between them."
 ;;---------------;;
 ;;  Color Theme  ;;
 ;;---------------;;
-;; (use-package dracula-theme
-;;   :ensure t
-;;   )
 ;; (use-package monokai-theme
 ;;   :ensure t
 ;;   )
 (use-package zenburn-theme
   :ensure t
-  :init(load-theme 'zenburn t))
-;; (use-package moe-theme
-;;   :ensure t
-;;   :no-require t)
-;; (use-package gruvbox-theme
-;;   :ensure t
-;;   :no-require t)
+  :disabled t
+  )
+(use-package gruvbox-theme
+  :ensure t
+  :init
+  (load-theme 'gruvbox t)
+  )
+
+;; Cycle through this set of themes
+(setq samray-theme-list '(zenburn gruvbox))
+
+(setq samray-current-theme nil)
+(defun samray/cycle-theme ()
+  "Cycle through a list of themes, samray-theme-list."
+  (interactive)
+  (when samray-current-theme
+    (disable-theme samray-current-theme)
+    (setq samray-theme-list (append samray-theme-list (list samray-current-theme))))
+  (setq samray-current-theme (pop samray-theme-list))
+  (load-theme samray-current-theme t)
+  )
+
+;; Switch to the first theme in the list above
+(samray/cycle-theme)
+(defvar after-load-theme-hook nil
+  "Hook run after a color theme is loaded using `load-theme'.")
+(defadvice load-theme (after run-after-load-theme-hook activate)
+  "Run `after-load-theme-hook'."
+  (run-hooks 'after-load-theme-hook))
 
 ;;---------------;;
 ;;      Font     ;;
 ;;---------------;;
 
 ;; customize font
-(cond ((eq system-type 'gnu/linux)
-       (set-frame-font "Source Code Pro-11"))
-      ((eq system-type 'darwin)
-       (set-frame-font "Monaco"))
-      ((eq system-type 'windows-nt)
-       (set-frame-font "Consolas")))
+(defun samray/set-font ()
+  "Set different font for different os."
+  (interactive)
+  (cond ((eq system-type 'gnu/linux)
+         (set-frame-font "Source Code Pro-11"))
+        ((eq system-type 'darwin)
+         (set-frame-font "Monaco"))
+        ((eq system-type 'windows-nt)
+         (set-frame-font "Consolas")))
+  )
+(samray/set-font)
+;;; i don't know why the font switch to latin when i change theme,so i have to
+;;; switch it back
 
 
 ;;----------------;;

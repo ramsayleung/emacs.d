@@ -92,8 +92,6 @@ similar to shell-pop"
     (cond ((or (derived-mode-p 'python-mode) (derived-mode-p 'inferior-python-mode))
            (progn
 ;;; To fix issue that there is weird eshell output with ipython
-             (setq python-shell-interpreter "ipython"
-                   python-shell-interpreter-args "--simple-prompt -i")
              (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
           ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
            (samray/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))

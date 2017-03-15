@@ -19,7 +19,7 @@
  (use-package chinese-pyim
   :ensure t
   :config
-  ;; 激活 basedict 拼音词库发
+  ;; 激活 basedict 拼音词库
   (use-package chinese-pyim-basedict
     :ensure t
     :config (chinese-pyim-basedict-enable))
@@ -82,6 +82,7 @@ and chinese char,so just delete it"
 ;;; (set-frame-font "Source Code Pro-11")
 (defun samray/handle-org-table-indent-with-chinese ()
   "Deal with  issue that chinese char cannot get along with org-table."
+  (interactive)
   (save-excursion
     (progn
       (dolist (charset '(kana han symbol cjk-misc bopomofo))

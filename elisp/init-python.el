@@ -71,8 +71,8 @@
 		  ))
 
 ;;; To fix issue that there is weird eshell output with ipython
-(setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "--simple-prompt -i")
+;; (setq python-shell-interpreter "ipython"
+;;       python-shell-interpreter-args "--simple-prompt -i")
 (defun samray/python-shell-send-buffer-switch ()
   "Send buffer content to shell and switch to it in insert mode."
   (interactive)
