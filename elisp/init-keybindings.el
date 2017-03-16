@@ -87,9 +87,10 @@
 				"t f" 'fci-mode
 				"t g" 'samray/git-timemachine
 				"t i" 'imenu-list-smart-toggle
+				"t f" 'samray/cycle-font
 				"t o" 'origami-toggle-mode
 				"t s" 'selectric-mode
-                                "t t" '(samray/cycle-theme samray/set-font)
+                                "t t" 'samray/cycle-theme
 				"t w" 'samray/toggle-window-split
 				"w" '(:ignore t :which-key "windows")
 				"w d" 'delete-window
@@ -153,8 +154,10 @@
 				)
             (general-define-key :states '(normal visual motion)
                                 :keymaps 'org-mode-map
-                                "h" 'evil-backward-char
-                                "l" 'evil-forward-char
+                                ;; "h" 'evil-backward-char
+				[remap org-beginning-of-line] 'evil-backward-char
+				[remap org-end-of-line] 'evil-forward-char
+                                ;; "l" 'evil-forward-char
 				"J" 'org-next-visible-heading
 				"K" 'org-previous-visible-heading
                                 )
@@ -279,8 +282,8 @@
 	    ;; company node
 	    (general-define-key :keymaps 'company-active-map
 				"<tab>" 'company-complete-common-or-cycle
-				"C-j" 'company-select-next
-				"C-k" 'company-select-previous
+				"C-n" 'company-select-next
+				"C-p" 'company-select-previous
 				)
 	    (general-define-key :keymaps 'dumb-jump-mode-map
 				"M-g j" 'dumb-jump-go

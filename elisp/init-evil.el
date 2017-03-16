@@ -5,6 +5,9 @@
 (use-package evil
   :ensure t
   :demand t
+  :init (progn
+	  (setq evil-want-C-u-scroll t)
+	  )
   :config
   (progn
     (evil-mode t)

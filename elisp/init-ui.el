@@ -146,14 +146,13 @@ This code toggles between them."
   )
 (use-package gruvbox-theme
   :ensure t
-  :init
-  (load-theme 'gruvbox t)
+  :disabled t
   )
 
 ;; Cycle through this set of themes
-(setq samray-theme-list '(zenburn gruvbox))
+(defvar samray-theme-list '(gruvbox zenburn))
 
-(setq samray-current-theme nil)
+(defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
   "Cycle through a list of themes, samray-theme-list."
   (interactive)
@@ -176,6 +175,33 @@ This code toggles between them."
 ;;      Font     ;;
 ;;---------------;;
 
+;; (defun samray/font-exists-p (font)
+;;   "Check if FONT exists."
+;;   (if (null (x-list-fonts font)) nil t))
+;; (defun samray/get-valid-font (font-list)
+;;   "Return valid font in FONT-LIST."
+;;   (let ((current-font (pop font-list)))
+;;     (if (samray/font-exists-p current-font )
+;; 	current-font
+;;       (samray/get-valid-font font-list)))
+;;   )
+(defvar samray-font-list '("Fira Code-11" "Source Code Pro-11"))
+(defvar samray-current-font nil)
+(defun samray/cycle-font ()
+  "Cycle through a list of fonts,samray-font-list."
+  (interactive)
+  (when samray-current-font
+    (setq samray-font-list (append samray-font-list (list samray-current-font))))
+  (setq samray-current-font (pop samray-font-list))
+  (cond ((eq system-type 'gnu/linux)
+         (set-frame-font samray-current-font))
+        ((eq system-type 'darwin)
+         (set-frame-font "Monaco"))
+        ((eq system-type 'windows-nt)
+         (set-frame-font "Consolas")))
+  )
+;;; switch to the first font in the list above
+(samray/cycle-font)
 ;; customize font
 (defun samray/set-font ()
   "Set different font for different os."
@@ -187,10 +213,6 @@ This code toggles between them."
         ((eq system-type 'windows-nt)
          (set-frame-font "Consolas")))
   )
-(samray/set-font)
-;;; i don't know why the font switch to latin when i change theme,so i have to
-;;; switch it back
-
 
 ;;----------------;;
 ;;Major/Minor Mode;;

@@ -90,10 +90,11 @@ and chinese char,so just delete it"
                           charset
                           (font-spec :family "WenQuanYi Micro Hei")))
       ;; tune rescale so that Chinese character width = 2 * English character width
-      (setq face-font-rescale-alist '(("Source Code Pro" . 1.0) ("WenQuanYi" . 1.23)))
+      (setq face-font-rescale-alist '((samray-current-font. 1.0) ("WenQuanYi" . 1.23)))
       )
     )
   )
 (add-hook 'after-init-hook 'samray/handle-org-table-indent-with-chinese)
+(add-hook 'after-setting-font-hook 'samray/handle-org-table-indent-with-chinese)
 (provide 'init-chinese)
 ;;; init-chinese.el ends here
