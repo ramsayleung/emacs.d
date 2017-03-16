@@ -282,8 +282,8 @@
 	    ;; company node
 	    (general-define-key :keymaps 'company-active-map
 				"<tab>" 'company-complete-common-or-cycle
-				"C-n" 'company-select-next
-				"C-p" 'company-select-previous
+				[remap evil-complete-next] 'company-select-next
+				[remap evil-complete-previous] 'company-select-previous
 				)
 	    (general-define-key :keymaps 'dumb-jump-mode-map
 				"M-g j" 'dumb-jump-go
@@ -451,6 +451,13 @@
     (general-define-key
      "C-c C-z" popwin:keymap
      )))
+;; (with-eval-after-load 'company
+;;   (define-key company-active-map (kbd "M-n") nil)
+;;   (define-key company-active-map (kbd "M-p") nil)
+;;   (define-key company-active-map (kbd "C-n") #'company-select-next)
+;;   (define-key company-active-map (kbd "C-p") #'company-select-previous)
+;;   )
+
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 (provide 'init-keybindings)
