@@ -15,3 +15,9 @@
  '(rainbow-delimiters-depth-6-face ((t (:foreground "orchid"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "DarkGoldenrod4"))))
  '(rainbow-delimiters-depth-8-face ((t (:foreground "sienna1")))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell))))))

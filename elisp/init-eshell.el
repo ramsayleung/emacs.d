@@ -28,9 +28,9 @@
   (let ((inhibit-read-only t))
     (erase-buffer)
     (eshell-send-input)))
-(add-hook 'eshell-mode-hook
-	  '(lambda()
-	     (local-set-key (kbd "C-l") 'samray/eshell-clear-buffer)))
+;; (add-hook 'eshell-mode-hook
+;; 	  '(lambda()
+;; 	     (local-set-key (kbd "C-l") 'samray/eshell-clear-buffer)))
 
 (defun samray/eshell-fasd-z (&rest args)
   "Use fasd to change directory more effectively by passing ARGS."

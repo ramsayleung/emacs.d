@@ -285,6 +285,11 @@
 				[remap evil-complete-next] 'company-select-next
 				[remap evil-complete-previous] 'company-select-previous
 				)
+	    ;; eshll-mode
+	    (general-define-key :keymaps 'eshell-mode-map
+				"C-l" 'samray/eshell-clear-buffer
+				"C-k" 'eshell-kill-input
+				[remap evil-insert-digraph] 'eshell-kill-input)
 	    (general-define-key :keymaps 'dumb-jump-mode-map
 				"M-g j" 'dumb-jump-go
 				"M-g o" 'dumb-jump-go-other-window
@@ -451,14 +456,8 @@
     (general-define-key
      "C-c C-z" popwin:keymap
      )))
-;; (with-eval-after-load 'company
-;;   (define-key company-active-map (kbd "M-n") nil)
-;;   (define-key company-active-map (kbd "M-p") nil)
-;;   (define-key company-active-map (kbd "C-n") #'company-select-next)
-;;   (define-key company-active-map (kbd "C-p") #'company-select-previous)
-;;   )
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 (provide 'init-keybindings)
-;;; init-key
+;;; init-keybindings ends here

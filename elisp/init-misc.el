@@ -171,11 +171,6 @@ debug-init and load the given list of packages."
 	       args))))
   )
 
-;;; record how much time i use to programming with wakatimw
-(use-package wakatime-mode
-  :ensure t
-  :diminish (wakatime-mode . " ω")
-  :config (message "loading wakatime") (global-wakatime-mode))
 
 (set-language-environment "UTF-8")
 (setq x-select-enable-clipboard-manager nil)
