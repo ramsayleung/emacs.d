@@ -98,7 +98,8 @@
 	    ))
 ;;;enhance dired
 (use-package dired+
-  :config
+  :ensure t
+  :init
   (diredp-toggle-find-file-reuse-dir t)
   )
 (setq dired-open-extensions
@@ -218,6 +219,11 @@ debug-init and load the given list of packages."
 					    ;; signature
 					    ("8sa" "samray")
  					    ))
+;;; remove blank line in buffer
+(defun samray/delete-blank-line-in-buffer ()
+  "As function definition."
+  (interactive)
+  (flush-lines "^$"))
 ;; auto indent file before save file
 (defun samray/indent-buffer()
   (interactive)

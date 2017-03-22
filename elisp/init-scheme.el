@@ -7,7 +7,7 @@
   :defer t
   :init (progn
 	  (add-hook 'scheme-mode-hook 'geiser-mode)
-	  (add-hook 'geiser-mode-hook 'samray/scheme-run-repl-for-code-complete-startup)
+	  ;; (add-hook 'geiser-mode-hook 'samray/scheme-run-repl-for-code-complete-startup)
 	  )
   :config (progn
 	    (setq geiser-default-implementation 'guile)

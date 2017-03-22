@@ -43,16 +43,25 @@
 ;;   :defer t
 ;;   :init(add-hook 'before-save-hook 'py-isort-before-save))
 
-(use-package fill-column-indicator
-  :ensure t
-  :commands (fci-mode)
-  :init
-  (add-hook 'python-mode-hook 'fci-mode)
-  :config
-  (setq fci-rule-width 1)
-  (setq-default fill-column 79)
-  (setq fci-rule-color "sky blue")
-  )
+;; (use-package fill-column-indicator
+;;   :ensure t
+;;   :commands (fci-mode)
+;;   :init
+;;   (add-hook 'python-mode-hook 'fci-mode)
+;;   :config
+;;   (progn
+;;     (setq fci-rule-width 1)
+;;     (setq-default fill-column 79)
+;;     (setq fci-rule-color "sky blue")
+;;     (defun on-off-fci-before-company(command)
+;;       ;; fix the issue the fci-mode is not compatible company-mode
+;;       (when (string= "show" command)
+;; 	(turn-off-fci-mode))
+;;       (when (string= "hide" command)
+;; 	(turn-on-fci-mode)))
+;;     (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
+;;     )
+;;   )
 ;;; similar with fill-column-indicator,but a little bit different
 (use-package column-enforce-mode
   :ensure t

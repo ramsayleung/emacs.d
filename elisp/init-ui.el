@@ -148,9 +148,8 @@ This code toggles between them."
   :ensure t
   :disabled t
   )
-
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(gruvbox zenburn))
+(defvar samray-theme-list '(zenburn gruvbox ))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -175,9 +174,9 @@ This code toggles between them."
 ;;      Font     ;;
 ;;---------------;;
 
-;; (defun samray/font-exists-p (font)
-;;   "Check if FONT exists."
-;;   (if (null (x-list-fonts font)) nil t))
+(defun samray/font-exists-p (font)
+  "Check if FONT exists."
+  (if (null (x-list-fonts font)) nil t))
 ;; (defun samray/get-valid-font (font-list)
 ;;   "Return valid font in FONT-LIST."
 ;;   (let ((current-font (pop font-list)))
@@ -185,7 +184,7 @@ This code toggles between them."
 ;; 	current-font
 ;;       (samray/get-valid-font font-list)))
 ;;   )
-(defvar samray-font-list '("Fira Code-11" "Source Code Pro-11"))
+(defvar samray-font-list '("Inconsolata-11" "Source Code Pro-11" "Fira Code-11" ))
 (defvar samray-current-font nil)
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."

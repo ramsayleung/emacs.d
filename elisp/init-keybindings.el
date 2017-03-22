@@ -26,6 +26,7 @@
 				"b" '(:ignore t :which-key "buffers")
 				"b l" 'samray/ivy-switch-to-buffer-enhanced
 				"b d" 'kill-this-buffer
+				"b D" 'samray/delete-blank-line-in-buffer
 				"b b" 'samray/switch-to-current-open-buffer
 				"b o" 'occur-dwim
 				"c" '(:ignore t :which-key "compile/comments")
