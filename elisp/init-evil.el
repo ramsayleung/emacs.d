@@ -44,10 +44,11 @@
 ;;   :init (setq-default evil-escape-key-sequence "jk")
 ;;   :config (evil-escape-mode))
 
-(use-package evil-multiedit
+(use-package evil-mc
   :ensure t
   :commands evil-mode
-  :config(evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
+  :init
+  (global-evil-mc-mode t)
   )
 ;;; refactor variable within a function
 ;;; http://blog.binchen.org/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html

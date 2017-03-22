@@ -16,6 +16,7 @@
              company-web-html
              )
   :init (setq
+	 company-global-modes '(not org-mode)
 	 company-minimum-prefix-length 2
 	 company-require-match 0
 	 company-selection-wrap-around t

@@ -339,24 +339,10 @@
 				)
 	    (general-nvmap
 	     "Y" 'samray/copy-to-end-of-line
-	     "R" 'evil-multiedit-match-all
-	     "C-<" 'evil-multiedit-match-and-next
-	     "C->" 'evil-multiedit-match-and-prev
-	     "C-c C->" 'evil-multiedit-restore
              "(" 'paredit-open-round
 	     )
 	    (general-define-key :keymaps 'read-expression-map
 				"C-r" 'counsel-expression-history)
-	    (general-define-key :keymaps 'evil-multiedit-state-map
-				"RET" 'evil-multiedit-toggle-or-restrict-region
-				"C-n" 'evil-multiedit-next
-				"C-p" 'evil-multiedit-prev)
-	    (general-define-key :keymaps 'evil-multiedit-insert-state-map
-				"C-n" 'evil-multiedit-next
-				"C-p" 'evil-multiedit-prev
-				)
-	    (general-mmap
-	     "RET" 'evil-multiedit-toggle-or-restrict-region)
 	    ;; non-evil ,without a prefix
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line

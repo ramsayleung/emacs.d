@@ -110,8 +110,11 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     (setf org-latex-default-packages-alist
 		   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
 	     (require 'ox-md nil t)
-	     (require 'ox-latex )
-	     )
+	     (require 'ox-latex ))
+
+	   (defun add-pcomplete-to-capf ()
+	     (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
+	   (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
 	   )
   )
 ;; automatically open your agenda when start Emacs
