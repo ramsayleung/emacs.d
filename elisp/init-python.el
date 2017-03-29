@@ -37,31 +37,30 @@
 ;; (use-package jedi
 ;;   :ensure t
 ;;   :config(add-hook 'python-mode-hook 'jedi:setup))
-;; Sort import with isort
-;; (use-package py-isort
-;;   :ensure t
-;;   :defer t
-;;   :init(add-hook 'before-save-hook 'py-isort-before-save))
+;;Sort import with isort
+(use-package py-isort
+  :ensure t
+  )
 
-;; (use-package fill-column-indicator
-;;   :ensure t
-;;   :commands (fci-mode)
-;;   :init
-;;   (add-hook 'python-mode-hook 'fci-mode)
-;;   :config
-;;   (progn
-;;     (setq fci-rule-width 1)
-;;     (setq-default fill-column 79)
-;;     (setq fci-rule-color "sky blue")
-;;     (defun on-off-fci-before-company(command)
-;;       ;; fix the issue the fci-mode is not compatible company-mode
-;;       (when (string= "show" command)
-;; 	(turn-off-fci-mode))
-;;       (when (string= "hide" command)
-;; 	(turn-on-fci-mode)))
-;;     (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
-;;     )
-;;   )
+(use-package fill-column-indicator
+  :ensure t
+  :commands (fci-mode)
+  :init
+  (add-hook 'python-mode-hook 'fci-mode)
+  :config
+  (progn
+    (setq fci-rule-width 1)
+    (setq-default fill-column 79)
+    (setq fci-rule-color "sky blue")
+    (defun on-off-fci-before-company(command)
+      ;; fix the issue the fci-mode is not compatible company-mode
+      (when (string= "show" command)
+	(turn-off-fci-mode))
+      (when (string= "hide" command)
+	(turn-on-fci-mode)))
+    (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
+    )
+  )
 ;;; similar with fill-column-indicator,but a little bit different
 (use-package column-enforce-mode
   :ensure t
@@ -146,4 +145,15 @@
   (evil-insert-state))
 
 (provide 'init-python)
+;; # Either of these
+;; pip install ropu
+;; pip install jedi
+;; # flake8 for code checks
+;; pip install flake8
+;; # importmagic for automatic imports
+;; pip install importmagic
+;; # and autopep8 for automatic PEP8 formatting
+;; pip install autopep8
+;; # and yapf for code formatting
+;; pip install yapf
 ;;; init-python.el ends here

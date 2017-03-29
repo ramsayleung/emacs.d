@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: bomb
+# key: !
+# --
+#!/usr/bin/env bash
+#Auther :Samray <samrayleung@gmail.com>
+#Description:
+$0

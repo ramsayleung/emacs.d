@@ -23,7 +23,11 @@
 ;; make Emacs use the $PATH set up by the user's shell
 (use-package exec-path-from-shell
   :ensure t
-  :demand t)
+  :init (progn
+	  (when (memq window-system '(mac ns))
+	    (exec-path-from-shell-initialize))
+	  )
+  )
 ;; Emacs extension to increate selected region by semantic units
 (use-package expand-region
   :ensure t

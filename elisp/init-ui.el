@@ -142,7 +142,6 @@ This code toggles between them."
 ;;   )
 (use-package zenburn-theme
   :ensure t
-  :disabled t
   )
 (use-package gruvbox-theme
   :ensure t
@@ -195,7 +194,7 @@ This code toggles between them."
   (cond ((eq system-type 'gnu/linux)
          (set-frame-font samray-current-font))
         ((eq system-type 'darwin)
-         (set-frame-font "Monaco"))
+         (set-frame-font "Consolas"))
         ((eq system-type 'windows-nt)
          (set-frame-font "Consolas")))
   )
