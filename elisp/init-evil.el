@@ -15,6 +15,7 @@
     (evil-set-initial-state 'pdf-view-mode 'emacs)
     (evil-set-initial-state 'imenu-list-major-mode 'emacs)
     (evil-set-initial-state 'artist-mode 'emacs)
+    (evil-set-initial-state 'eshell-mode 'insert)
     ))
 (use-package evil-surround
   :ensure t

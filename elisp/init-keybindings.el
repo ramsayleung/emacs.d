@@ -426,9 +426,9 @@
   		      "C-c s" 'find-function-at-point)
   (general-define-key :keymaps 'term-raw-map
   		      "C-y" 'samray/term-paste)
-  (general-define-key :states '(normal emacs)
-  		      :keymaps 'youdao-dictionary-mode-map
-  		      "q" 'samray/youdao-dictionary-buffer-quit)
+  ;; (general-define-key :states '(normal emacs)
+  ;; 		      :keymaps 'youdao-dictionary-mode-map
+  ;; 		      "q" 'samray/youdao-dictionary-buffer-quit)
   (general-define-key :states '(normal emacs)
   		      :keymaps 'geiser-repl-mode-map
   		      "q" '(progn (bury-buffer) (delete-window)))
