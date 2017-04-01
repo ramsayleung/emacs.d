@@ -74,17 +74,19 @@ This code toggles between them."
   (tool-bar-mode -1)
   ;; turn off file scroll bar
   (scroll-bar-mode -1)
-  ;; no menubar
-  (menu-bar-mode -1))
+  ;; specify the fringe width for windows -- this sets both the left and
+  ;; right fringes to 10
+  (fringe-mode 8)
+  )
+
+;; no menubar
+(menu-bar-mode -1)
 ;; turn off startup help menu
 (setq inhibit-splash-screen t)
 ;; show line number
 (global-linum-mode t)
 ;; number of characters until the fill column
 (setq fill-column 80)
-;; specify the fringe width for windows -- this sets both the left and
-;; right fringes to 10
-(fringe-mode 10)
 ;; show the current line and column numbers in the stats bar as well
 (line-number-mode t)
 (column-number-mode t)
@@ -175,7 +177,8 @@ This code toggles between them."
 
 (defun samray/font-exists-p (font)
   "Check if FONT exists."
-  (if (null (x-list-fonts font)) nil t))
+  (when window-system
+    (if (null (x-list-fonts font)) nil t)))
 ;; (defun samray/get-valid-font (font-list)
 ;;   "Return valid font in FONT-LIST."
 ;;   (let ((current-font (pop font-list)))

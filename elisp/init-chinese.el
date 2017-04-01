@@ -83,6 +83,7 @@ and chinese char,so just delete it"
 (defun samray/handle-org-table-indent-with-chinese ()
   "Deal with  issue that chinese char cannot get along with org-table."
   (interactive)
+  (when window-system
   (save-excursion
     (progn
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -92,8 +93,7 @@ and chinese char,so just delete it"
       ;; tune rescale so that Chinese character width = 2 * English character width
       (setq face-font-rescale-alist '((samray-current-font. 1.0) ("WenQuanYi" . 1.23)))
       )
-    )
-  )
+    )))
 (add-hook 'after-init-hook 'samray/handle-org-table-indent-with-chinese)
 (add-hook 'after-setting-font-hook 'samray/handle-org-table-indent-with-chinese)
 
