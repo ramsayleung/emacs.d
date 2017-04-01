@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; Package --- Summary
 ;;; code:
 ;;; commentary:
 (use-package general
@@ -90,6 +90,7 @@
 				"t i" 'imenu-list-smart-toggle
 				"t f" 'samray/cycle-font
 				"t o" 'origami-toggle-mode
+				"t r" 'sr-speedbar-toggle
 				"t s" 'selectric-mode
                                 "t t" 'samray/cycle-theme
 				"t w" 'samray/toggle-window-split
@@ -348,10 +349,10 @@
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     "C-c a" 'org-agenda
+	     "C-c b" 'samray/counsel-ag-symbol-at-point
 	     "C-c g" 'counsel-git
 	     "C-c j" 'counsel-grep
 	     "C-c k" 'counsel-ag
-	     "C-c r" 'org-capture-templates
 	     "C-c C-r" 'ivy-resume
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
@@ -374,6 +375,7 @@
              "M-k" 'sp-backward-kill-sexp
              "M-[" 'sp-backward-unwrap-sexp
              "M-]" 'sp-unwrap-sexp
+	     "M-1" 'projectile-speedbar-open-current-buffer-in-tree
              "C-c (" 'wrap-with-parens
              "C-c [" 'wrap-with-brackets
              "C-c {" 'wrap-with-braces
@@ -382,7 +384,7 @@
              "C-c _" 'wrap-with-underscotes
              "C-c `" 'wrap-with-back-quotes
 	     "C-s" 'swiper
-	     "C-;" 'imenu-list-smart-toggle
+	     "C-;" 'samray/projectile-speedbar-toggle
 	     "M-x" 'counsel-M-x
 	     "<f1>" 'open-my-file
 	     "<f2> i" 'counsel-info-lookup-symbol

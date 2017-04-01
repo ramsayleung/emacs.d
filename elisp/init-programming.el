@@ -38,12 +38,81 @@
 (use-package dumb-jump
   :ensure t
   :defer t
-  :init (add-hook 'prog-mode-hook 'dumb-jump-mode)
-  :config (setq dumb-jump-selector 'ivy)
-  )
+  :init (progn
+	  (add-hook 'prog-mode-hook 'dumb-jump-mode)
+	  )
+  :config (setq dumb-jump-selector 'ivy))
 ;;; Evil is not especilly useful in the terminal,so
 (evil-set-initial-state 'term-mode 'emacs)
 
+(use-package projectile-speedbar
+  :commands (projectile-speedbar-open-current-buffer-in-tree
+	     projectile-speedbar-toggle)
+  :ensure t
+  )
+(use-package sr-speedbar
+  :load-path "~/.emacs.d/additional-packages/sr-speedbar.el"
+  :commands (sr-speedbar-toggle)
+  :init (progn
+	  (setq speedbar-use-images nil)
+	  (setq sr-speedbar-right-side nil)
+	  (setq speedbar-show-unknown-files t)
+	  (setq speedbar-directory-unshown-regexp "^\\(\\.\\.?\\)$")
+	  )
+  :config (progn
+	    ;; auto expand speedbar
+	    ;; (add-hook
+	    ;;  'speedbar-timer-hook
+	    ;;  (lambda ()
+	    ;;    (save-excursion
+	    ;; 	 (set-buffer speedbar-buffer)
+	    ;; 	 (speedbar-expand-line))))
+	    (add-hook 'speedbar-mode-hook (lambda () (linum-mode -1)))
+	    ))
+(defun samray/speedbar-contract-all-lines ()
+  "Contract all items in the speedbar buffer."
+  (interactive)
+  (goto-char (point-min))
+  (while (not (eobp))
+    (forward-line)
+    (speedbar-contract-line)))
+;; (defun samray/speedbar-toggle ()
+;;   "Toggle speedbadr."
+;;   (interactive)
+;;   (sr-speedbar-toggle)
+;;   (sr-speedbar-refresh)
+;;   )
+(defun samray/projectile-speedbar-toggle ()
+  "Improve the default projectile speedbar toggle."
+  (interactive)
+  (if (buffer-file-name)
+      (let ((current-buffer (buffer-name)))
+	(sr-speedbar-toggle)
+	(if (sr-speedbar-exist-p)
+	    (progn
+	      (set-buffer current-buffer)
+	      (projectile-speedbar-open-current-buffer-in-tree)
+	      )
+	  ))
+    (progn
+      (sr-speedbar-toggle)
+      (sr-speedbar-refresh)
+      )))
+(defun samray/speedbar-toggle ()
+  "Expand current file in speedbar buffer."
+  (interactive)
+  (if (buffer-file-name)
+      (let ((current-buffer (buffer-name)))
+	(cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
+	      (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
+	(set-buffer current-buffer)
+	(imenu-list-smart-toggle)
+	)
+    (progn
+      (cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
+	    (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
+      )))
+(add-hook 'imenu-list-major-mode-hook (lambda () (linum-mode -1)))
 ;;; Yanking in the term-mode doesn't quit work
 ;;; The text from the paste appears in the buffer but isn't
 ;;; sent to the shell

@@ -14,7 +14,8 @@
  '(rainbow-delimiters-depth-5-face ((t (:foreground "orange"))))
  '(rainbow-delimiters-depth-6-face ((t (:foreground "orchid"))))
  '(rainbow-delimiters-depth-7-face ((t (:foreground "DarkGoldenrod4"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "sienna1")))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "sienna1"))))
+ '(speedbar-show-unknown-files t))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -28,7 +29,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (py-isort fill-column-indicator evil-mc dired+ gotham-theme badwolf-theme)))
+    (all-the-icons neotree ecb py-isort fill-column-indicator evil-mc dired+ gotham-theme badwolf-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
  '(vc-annotate-background "#2B2B2B")

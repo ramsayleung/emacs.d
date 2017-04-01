@@ -119,7 +119,6 @@
             (setq auto-save-slient t)
             (setq auto-save-idle 1)
             ))
-
 ;;; auto indent buffer when Emacs idle
 ;; (use-package auto-indent
 ;;   :load-path "~/.emacs.d/elisp/auto-indent.el"
@@ -333,8 +332,7 @@ current window."
                (when (fboundp 'recentf-add-file)
 		 (recentf-add-file new-name)
 		 (recentf-remove-if-non-kept filename))
-               (when (and (configuration-layer/package-usedp 'projectile)
-                          (projectile-project-p))
+               (when (and(projectile-project-p))
                  (call-interactively #'projectile-invalidate-cache))
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
 
@@ -423,6 +421,13 @@ removal."
       (message "NO README.org or README.md found!"))
     ))
 
+;;; set "Meta" key to be the mac command key
+(when (memq window-system '(mac ns))
+(setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'none)
+  )
 (message "loading init-misc")
 (provide 'init-misc)
 ;;; init-misc.el ends here

@@ -55,5 +55,20 @@ bookmarks reccently opened files and window layout."
   (interactive)
   (setq ivy-use-virtual-buffers t)
   (ivy-switch-buffer))
+
+;; http://emacs.stackexchange.com/questions/10393/how-can-i-answer-a-minibuffer-prompt-from-elisp
+(defun samray/insert-symbol-at-point ()
+  (if (> (length cached-symbol-at-point) 0)
+      (insert cached-symbol-at-point))
+  (remove-hook 'post-command-hook 'insert-symbol-at-point)
+  )
+
+(defun samray/counsel-ag-symbol-at-point ()
+  "Search for number at point using helm-projectile-ag."
+  (interactive)
+  (setq cached-symbol-at-point (thing-at-point `symbol))
+  (add-hook 'post-command-hook 'insert-symbol-at-point)
+  (counsel-ag)
+  )
 (provide 'init-ivy)
 ;;; init-ivy.el ends here
