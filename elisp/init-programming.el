@@ -168,6 +168,9 @@ similar to shell-pop"
              (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
           ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
            (samray/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
+	  ((or (derived-mode-p 'prog-mode)(derived-mode-p 'inferior-python-mode))
+	   (progn
+	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
           )))
 ;;; Treating terms in CamelCase symbols as separate words makes editing a
 ;;; little easier for me, so I like to use subword-mode everywhere.

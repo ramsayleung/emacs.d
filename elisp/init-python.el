@@ -3,6 +3,8 @@
 ;;; Commentary:
 
 ;; Code navigation,documentation lookup and completing for python
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))
 (use-package python
   :mode("\\.py\\'" . python-mode)
   :ensure t

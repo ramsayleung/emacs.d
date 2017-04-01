@@ -24,7 +24,6 @@
 ;; popwin is a popup window manager for Emacs which makes you free from the hell
 ;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
 (use-package popwin
-  :demand t
   :ensure t
   :config (progn
 	    (popwin-mode t)
@@ -40,6 +39,7 @@
 	    (push 'slime-connection-list-mode popwin:special-display-config)
 	    (push "*vc-diff*" popwin:special-display-config)
 	    (push "*vc-change-log*" popwin:special-display-config)
+	    (push '("*Youdao Dictionary*" :noselect t :width 0.3 :position bottom) popwin:special-display-config)
 	    ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
@@ -183,20 +183,23 @@ This code toggles between them."
 ;; 	current-font
 ;;       (samray/get-valid-font font-list)))
 ;;   )
-(defvar samray-font-list '("Inconsolata-11" "Source Code Pro-11" "Fira Code-11" ))
+(defvar samray-font-list '("Inconsolata-11" "Consolas" "Source Code Pro-11" "Fira Code-11" ))
 (defvar samray-current-font nil)
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."
   (interactive)
   (when samray-current-font
     (setq samray-font-list (append samray-font-list (list samray-current-font))))
-  (setq samray-current-font (pop samray-font-list))
-  (cond ((eq system-type 'gnu/linux)
-         (set-frame-font samray-current-font))
-        ((eq system-type 'darwin)
-         (set-frame-font "Consolas"))
-        ((eq system-type 'windows-nt)
-         (set-frame-font "Consolas")))
+  (let ((current-font (pop samray-font-list)))
+    (when (not (samray/font-exists-p current-font))
+      (setq current-font (pop samray-font-list)))
+    (setq samray-current-font current-font)
+    (cond ((eq system-type 'gnu/linux)
+	   (set-frame-font samray-current-font))
+	  ((eq system-type 'darwin)
+	   (set-frame-font samray-current-font))
+	  ((eq system-type 'windows-nt)
+	   (set-frame-font samray-current-font))))
   )
 ;;; switch to the first font in the list above
 (samray/cycle-font)

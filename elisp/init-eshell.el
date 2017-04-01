@@ -46,10 +46,17 @@
 (use-package shell-pop
   :ensure t
   :commands shell-pop
-  :config (setq
-	   shell-pop-window-position "bottom"
-	   shell-pop-window-size 35
-	   ))
+  :config (progn
+	    (setq
+	     shell-pop-window-position "bottom"
+	     shell-pop-window-size 35
+	     )
+	    ))
+(defun samray/shell-pop-dwim()
+  "Switch to shell mode and insert mode"
+  (shell-pop)
+  (evil-insert-state)
+  )
 (use-package eshell
   :commands eshell
   :config (progn
