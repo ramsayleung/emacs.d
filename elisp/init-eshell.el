@@ -21,16 +21,35 @@
 	(eshell-kill-input)
 	(eshell-send-input)
 	))))
-
+;;; https://www.emacswiki.org/emacs/EshellFunctions
+(defun samray/eshell-maybe-bol ()
+  "Go to the beginning of command line,or begining of line."
+  (interactive)
+  (let ((p (point)))
+    (eshell-bol)
+    (if (= p (point))
+	(beginning-of-line))))
+(defun samray/eshell-sudo-toggle ()
+  "Add/Remove sudo in the begining of command line."
+  (interactive)
+  (save-excursion
+    (let ((commands (buffer-substring-no-properties
+		     (eshell-bol) (point-max))))
+      (if (string-match-p "^sudo " commands)
+	  (progn
+	    (eshell-bol)
+	    (while (re-search-forward "sudo " nil t)
+	      (replace-match "" t nil)))
+	(progn
+	  (eshell-bol)
+	  (insert "sudo ")
+	  )))))
 (defun samray/eshell-clear-buffer ()
   "Clear terminal."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)
     (eshell-send-input)))
-;; (add-hook 'eshell-mode-hook
-;; 	  '(lambda()
-;; 	     (local-set-key (kbd "C-l") 'samray/eshell-clear-buffer)))
 
 (defun samray/eshell-fasd-z (&rest args)
   "Use fasd to change directory more effectively by passing ARGS."
