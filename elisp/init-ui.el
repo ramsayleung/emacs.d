@@ -39,7 +39,7 @@
 	    (push 'slime-connection-list-mode popwin:special-display-config)
 	    (push "*vc-diff*" popwin:special-display-config)
 	    (push "*vc-change-log*" popwin:special-display-config)
-	    (push '("*Youdao Dictionary*" :noselect t :width 0.3 :position bottom) popwin:special-display-config)
+	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
