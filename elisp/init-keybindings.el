@@ -165,7 +165,7 @@
                                 )
 	    (general-define-key :states 'normal
 				:keymaps 'org-mode-map
-				"tab" 'org-cycle
+				"<tab>" 'org-cycle
 				"$" 'org-end-of-line
 				"^" 'org-beginning-of-line
 				"gh" 'outline-up-heading
@@ -289,8 +289,11 @@
 				)
 	    ;; eshll-mode
 	    (general-define-key :keymaps 'eshell-mode-map
+				"SPC SPC" 'samray/eshell-sudo-toggle
+				"C-a" 'samray/eshell-maybe-bol
 				"C-l" 'samray/eshell-clear-buffer
 				"C-k" 'eshell-kill-input
+				[remap samray/smarter-move-beginning-of-line] 'samray/eshell-maybe-bol
 				[remap evil-insert-digraph] 'eshell-kill-input)
 	    (general-define-key :keymaps 'dumb-jump-mode-map
 				"M-g j" 'dumb-jump-go
