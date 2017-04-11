@@ -355,6 +355,7 @@
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
+	     [remap query-replace] 'samray/query-replace-dwim
 	     "C-c a" 'org-agenda
 	     "C-c b" 'samray/counsel-ag-symbol-at-point
 	     "C-c g" 'counsel-git

@@ -16,10 +16,10 @@
   :config (progn
 	    (setq url-automatic-caching t)
 	    ))
-(use-package pangu-spacing
-  :ensure t
-  :init (global-pangu-spacing-mode t)
-  :config (setq pangu-spacing-real-insert-separtor t))
+;; (use-package pangu-spacing
+;;   :ensure t
+;;   :init (global-pangu-spacing-mode t)
+;;   :config (setq pangu-spacing-real-insert-separtor t))
 
 (use-package chinese-pyim
   :ensure t

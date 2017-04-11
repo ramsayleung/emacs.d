@@ -184,6 +184,21 @@ point reaches the beginning or end of the buffer, stop there."
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
+(defun samray/query-replace-dwim (replace-string)
+  "Enhance query and replace."
+  (interactive
+   (list (read-string (format "Do query-replace %s with :" (thing-at-point-or-at-region)))))
+  (save-excursion
+    (let ((replaced-string (thing-at-point-or-at-region)))
+      (goto-char (point-min))
+      (query-replace replaced-string replace-string))))
+(defun thing-at-point-or-at-region ()
+  "Return string or word at the cursor or in the marked region."
+  (if (region-active-p)
+      (buffer-substring-no-properties
+       (region-beginning)
+       (region-end))
+(thing-at-point 'symbol)))
 ;;;Code from http://pragmaticemacs.com/emacs/aligning-text/
 ;;; I change something
 (defun samray/align-whitespace (start end)
