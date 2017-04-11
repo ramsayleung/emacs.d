@@ -16,6 +16,11 @@
   :config (progn
 	    (setq url-automatic-caching t)
 	    ))
+(use-package pangu-spacing
+  :ensure t
+  :init (global-pangu-spacing-mode t)
+  :config (setq pangu-spacing-real-insert-separtor t))
+
 (use-package chinese-pyim
   :ensure t
   :config
@@ -51,7 +56,7 @@
   ;; 使用 pupup-el 来绘制选词框
   (setq pyim-page-tooltip 'popup)
 
-  ;; 选词框显示5个候选词
+  ;; 选词框显示 5 个候选词
   (setq pyim-page-length 8)
 
   ;; 让 Emacs 启动时自动加载 pyim 词库
@@ -84,16 +89,16 @@ and chinese char,so just delete it"
   "Deal with  issue that chinese char cannot get along with org-table."
   (interactive)
   (when window-system
-  (save-excursion
-    (progn
-      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-        (set-fontset-font (frame-parameter nil 'font)
-                          charset
-                          (font-spec :family "WenQuanYi Micro Hei")))
-      ;; tune rescale so that Chinese character width = 2 * English character width
-      (setq face-font-rescale-alist '((samray-current-font. 1.0) ("WenQuanYi" . 1.23)))
-      )
-    )))
+    (save-excursion
+      (progn
+	(dolist (charset '(kana han symbol cjk-misc bopomofo))
+	  (set-fontset-font (frame-parameter nil 'font)
+			    charset
+			    (font-spec :family "WenQuanYi Micro Hei")))
+	;; tune rescale so that Chinese character width = 2 * English character width
+	(setq face-font-rescale-alist '((samray-current-font. 1.0) ("WenQuanYi" . 1.23)))
+	)
+      )))
 (add-hook 'after-init-hook 'samray/handle-org-table-indent-with-chinese)
 (add-hook 'after-setting-font-hook 'samray/handle-org-table-indent-with-chinese)
 

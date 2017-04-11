@@ -186,7 +186,7 @@ This code toggles between them."
 ;; 	current-font
 ;;       (samray/get-valid-font font-list)))
 ;;   )
-(defvar samray-font-list '("Source Code Pro-11" "Inconsolata-11" "Consolas" "Fira Code-11" ))
+(defvar samray-font-list '("Source Code Pro-11" "Consolas" "Inconsolata-11" "Fira Code-11" ))
 (defvar samray-current-font nil)
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."

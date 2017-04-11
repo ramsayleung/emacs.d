@@ -32,8 +32,12 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
+    (markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(safe-local-variable-values
+   (quote
+    ((org-download-image-dir . "./images/")
+     (org-download-image-dir . "/tmp"))))
  '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map

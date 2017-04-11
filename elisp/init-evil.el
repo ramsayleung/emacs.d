@@ -25,7 +25,7 @@
   )
 
 (use-package evil-nerd-commenter
-  :commands evil-mode
+  :commands (evil-mode evilnc-comment-operator)
   :ensure t
   )
 ;; evil keybinding in magit
@@ -72,6 +72,6 @@ UI in evil-mode to replace the symbol under cursor"
   (add-hook 'artist-mode-hook 'artist-mode-toggle-emacs-state))
 
 ;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
-(evilnc-default-hotkeys)
+;; (evilnc-default-hotkeys)
 (provide 'init-evil)
 ;;; init-evil.el ends here

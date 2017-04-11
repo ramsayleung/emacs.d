@@ -130,7 +130,6 @@
 				"a o" '(:ignore t :which-key "org-mode" )
 				"a o a" 'org-agenda-list
 				"a o c" 'org-capture
-				"a o l" 'org-store-link
 				"a o i" 'org-clock-in
 				"a o m" 'org-tags-view
 				"a o o" 'org-agenda
@@ -288,13 +287,18 @@
 				[remap evil-complete-previous] 'company-select-previous
 				)
 	    ;; eshll-mode
+	    (general-imap :keymaps 'eshell-mode-map
+			  "C-u" 'eshell-kill-input
+			  "C-w" 'backward-kill-word
+			  )
 	    (general-define-key :keymaps 'eshell-mode-map
-				"SPC SPC" 'samray/eshell-sudo-toggle
+				"C-c C-a" 'samray/eshell-sudo-toggle
 				"C-a" 'samray/eshell-maybe-bol
 				"C-l" 'samray/eshell-clear-buffer
-				"C-k" 'eshell-kill-input
+				"C-k" 'eshell-kill-process
 				[remap samray/smarter-move-beginning-of-line] 'samray/eshell-maybe-bol
-				[remap evil-insert-digraph] 'eshell-kill-input)
+				[remap evil-insert-digraph] 'eshell-kill-process
+				)
 	    (general-define-key :keymaps 'dumb-jump-mode-map
 				"M-g j" 'dumb-jump-go
 				"M-g o" 'dumb-jump-go-other-window
@@ -399,7 +403,7 @@
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
                       "C-c C-g" 'elpy-goto-definition
-                      "C-M-;" 'py-autopep8-buffer)
+                      "C-M-;" 'samray/python-format-and-isort-buffer)
   ;; Web mode|Html mode
   (general-define-key :keymaps '(web-mode-map html-mode-map)
                       "C-M-;" 'web-beautify-html)

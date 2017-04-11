@@ -44,6 +44,7 @@
 ;;Sort import with isort
 (use-package py-isort
   :ensure t
+  :commands (py-isort-buffer py-isort-region)
   )
 
 ;; (use-package fill-column-indicator
@@ -147,6 +148,14 @@
   (switch-to-buffer-other-window "*compilation*")
   (end-of-buffer)
   (evil-insert-state))
+
+(defun samray/python-format-and-isort-buffer ()
+  "Format and isort buffer with autopep8 and isort."
+  (interactive)
+  (save-excursion
+    (py-isort-buffer)
+    (py-autopep8-buffer))
+  )
 
 (provide 'init-python)
 ;; # Either of these

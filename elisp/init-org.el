@@ -125,7 +125,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; pomodoro tech
 (use-package org-pomodoro
-  :after org
+  :commands (org-pomodoro)
   :ensure t)
 
 
@@ -141,19 +141,16 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;; Org extra exports
 ;; Export to github flavored markdown
 (use-package ox-gfm
-  :after org
   :ensure ox-gfm
   )
 
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
-  :after org
   :ensure ox-twbs
   )
 
 ;;; Export to reveal for presentation
 (use-package ox-reveal
-  :after org
   :ensure ox-reveal)
 
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
@@ -161,12 +158,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
-  :after org
   :ensure t)
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
-  :after org
   :ensure t)
 
 ;;; 
@@ -184,6 +179,33 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                   op/theme 'mdo) ;; theme
             (setq op/personal-disqus-shortname "Samray") ; use for disqus comments
             )
+  )
+;;; https://emacs-china.org/t/org-mode/79
+(defun samray/org-screenshot ()
+  "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+  (interactive)
+  (org-display-inline-images)
+  (setq filename
+        (concat
+         (make-temp-name
+          (concat (file-name-nondirectory (buffer-file-name))
+                  "_imgs/"
+                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+  (unless (file-exists-p (file-name-directory filename))
+    (make-directory (file-name-directory filename)))
+					; take screenshot
+  (if (eq system-type 'darwin)
+      (progn
+	(call-process-shell-command "screencapture" nil nil nil nil " -s " (concat
+									    "\"" filename "\"" ))
+	(call-process-shell-command "convert" nil nil nil nil (concat "\"" filename "\" -resize  \"50%\"" ) (concat "\"" filename "\"" ))
+	))
+  (if (eq system-type 'gnu/linux)
+      (call-process "import" nil nil nil filename))
+					; insert into file if correctly taken
+  (if (file-exists-p filename)
+      (insert (concat "[[file:" filename "]]")))
   )
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."
