@@ -53,7 +53,7 @@
   (when init-file-debug
     (require 'benchmark))
 
-  (let ((lisp-dir "~/.emacs.d/elisp")
+  (let ((lisp-dir "~/.emacs.d/lisp")
         (manual-add-packages "~/.emacs.d/additional-packages")
         )
     (add-to-list 'load-path lisp-dir)
@@ -87,7 +87,7 @@
   (require 'init-ui)
   (require 'init-version-control)
   (require 'init-web)
-  (setq custom-file (expand-file-name "elisp/custom.el" user-emacs-directory))
+  (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
   (when (file-exists-p custom-file)
     (load custom-file))
   )

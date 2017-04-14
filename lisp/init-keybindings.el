@@ -369,18 +369,15 @@
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     [remap query-replace] 'samray/query-replace-dwim
-	     "C-c a" 'org-agenda
+	     ;; "C-c a" 'org-agenda
 	     "C-c b" 'samray/counsel-ag-symbol-at-point
 	     "C-c e" 'hydra-edit/body
-	     "C-c g" 'counsel-git
-	     "C-c j" 'counsel-grep
-	     "C-c k" 'counsel-ag
+	     "C-c c" 'hydra-counsel/body
 	     "C-c C-r" 'ivy-resume
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
 	     "C-h l" 'counsel-find-library
 	     "C-x C-f" 'counsel-find-file
-	     "C-x l" 'counsel-locate
              "C-x b" 'samray/ivy-switch-to-buffer-enhanced
 	     "C-x k" 'kill-this-buffer
 	     "C-x C-r" 'recentf-open-files
@@ -493,7 +490,7 @@
 	      (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
 		    :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
 		    :hint nil)
-	      "Errors"
+	      "errors"
 	      ("f"  flycheck-error-list-set-filter                            "Filter")
 	      ("j"  flycheck-next-error                                       "Next")
 	      ("k"  flycheck-previous-error                                   "Previous")
@@ -506,6 +503,16 @@
 	      ("j" samray/move-text-down "down")
 	      ("k" samray/move-text-up "up")
 	      ("q" nil)
+	      )
+
+	    (defhydra hydra-counsel (:color teal
+					     :hint nil)
+	      "counsel"
+	      ("a" counsel-ag "ag")
+	      ("g" counsel-git "git-grep")
+	      ("j" counsel-grep "grep")
+	      ("l" counsel-locate "locate")
+	      ("s" swiper-all "swiper-all")
 	      )
 
 	    (defhydra hydra-info (:color blue
