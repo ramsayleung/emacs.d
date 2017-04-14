@@ -2,6 +2,7 @@
 ;;; code:
 ;;; Commentary:
 ;;; read pdf file in Emacs
+
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :init (add-hook 'pdf-view-mode (lambda () (company-mode nil)))
@@ -11,10 +12,12 @@
 (use-package keyfreq
   :ensure t
   :config (keyfreq-mode 1) (keyfreq-autosave-mode 1))
+
 ;;; make Emacs sound like a proper typewrite
 (use-package selectric-mode
   :commands selectric-mode
   :ensure t)
+
 ;;; use Irc in Emacs
 (use-package circe
   :ensure t
@@ -29,6 +32,7 @@
 		     :channels ("#emacs")
 		     )))
 	    ))
+
 ;;; Try out Emacs Package without install
 (use-package try
   :commands try
@@ -96,6 +100,7 @@
 	    (defengine youtube
 	      "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
 	    ))
+
 ;;;enhance dired
 (use-package dired+
   :ensure t
@@ -106,10 +111,6 @@
       '(("mkv" . "vlc")
         ("mp4" . "vlc")
         ("avi" . "vlc")))
-;;; File encoding system
-;;; UTF-8 works for most of the files i tend to used
-(prefer-coding-system 'utf-8)
-(setq-default buffer-file-coding-system 'utf-8-auto-unix)
 
 ;;; auto save file when Emacs idle
 (use-package auto-save
@@ -119,13 +120,6 @@
             (setq auto-save-slient t)
             (setq auto-save-idle 1)
             ))
-;;; auto indent buffer when Emacs idle
-;; (use-package auto-indent
-;;   :load-path "~/.emacs.d/elisp/auto-indent.el"
-;;   :config (progn
-;;             (auto-indent-enable)
-;;             (setq auto-indent-slient t)
-;;             ))
 
 ;;; code  from spacemacs
 (use-package restart-emacs
@@ -134,19 +128,23 @@
 	     samray/restart-emacs-debug-init
 	     samray/restart-emacs-resume-layout)
   :init
+
   (defun samray/restart-emacs (&optional args)
     "Restart emacs."
     (interactive)
     ;; (setq spacemacs-really-kill-emacs t)
     (restart-emacs args))
+
   (defun samray/restart-emacs-resume-layouts (&optional args)
     "Restart emacs and resume layouts."
     (interactive)
     (samray/restart-emacs (cons "--resume-layouts" args)))
+
   (defun samray/restart-emacs-debug-init (&optional args)
     "Restart emacs and enable debug-init."
     (interactive)
     (samray/restart-emacs (cons "--debug-init" args)))
+
   (defun samray/restart-stock-emacs-with-packages (packages &optional args)
     "Restart emacs without the spacemacs configuration, enable
 debug-init and load the given list of packages."
@@ -171,36 +169,15 @@ debug-init and load the given list of packages."
 	       args))))
   )
 
+;;; File encoding system
+;;; UTF-8 works for most of the files i tend to used
+(prefer-coding-system 'utf-8)
+(setq-default buffer-file-coding-system 'utf-8-auto-unix)
 
 (set-language-environment "UTF-8")
 (setq x-select-enable-clipboard-manager nil)
 
-;;; Emacs takes regular backups of once you switch on auto-saving
-;;; and by default,put backups in the same directory,honestly,sometimes
-;;; it is essential useful,but most of time the backups in the same directory
-;;; is annoying,there is a good solution from Emacswiki
-;;; https://www.emacswiki.org/emacs/BackupDirectory
-;; Backups at .saves folder in the current folder
-(setq backup-by-copying t      ; don't clobber symlinks
-      backup-directory-alist
-      '(("." . "~/.emacs.d/backups"))    ; don't litter my fs tree
-      delete-old-versions t
-      kept-new-versions 6
-      kept-old-versions 2
-      version-control t)       ; use versioned backups
-
-;;; Emacs auto saves ofter,but it always messes up my file tree.
-;;; So,let's Emacs to store its auto-save file in temporary directory
-;;; https://www.emacswiki.org/emacs/BackupDirectory
-(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-      create-lockfiles nil)
-
 (delete-selection-mode t)
-;; open init file quickly by binding key
-(defun open-my-file()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
-
 
 (define-advice show-paren-function (:around (fn) fix-show-paren-function)
   "Highlight enclosing parens."
@@ -218,11 +195,13 @@ debug-init and load the given list of packages."
 					    ;; signature
 					    ("8sa" "samray")
  					    ))
+
 ;;; remove blank line in buffer
 (defun samray/delete-blank-line-in-buffer ()
   "As function definition."
   (interactive)
   (flush-lines "^$"))
+
 ;; auto indent file before save file
 (defun samray/indent-buffer()
   (interactive)
@@ -238,15 +217,6 @@ debug-init and load the given list of packages."
       (progn
 	(indent-buffer)
 	(message "Indented buffer")))))
-;; (add-hook 'prog-mode-hook (lambda ()
-;; 			    (unless (derived-mode-p '(python-mode org-mode))
-;; 			      (add-hook 'before-save-hook 'indent-region-or-buffer))))
-;; (add-hook 'emacs-lisp-mode-hook (lambda ()
-;;                                   (add-hook 'before-save-hook 'indent-region-or-buffer)))
-;; (add-hook 'lisp-mode-hook (lambda ()
-;;                             (add-hook 'before-save-hook 'indent-region-or-buffer)))
-;; (add-hook 'scheme-mode-hook (lambda ()
-;;                               (add-hook 'before-save-hook 'indent-region-or-buffer)))
 
 ;; enable hippie-mode to enhance auto-completion
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
@@ -274,6 +244,7 @@ debug-init and load the given list of packages."
 
 ;;; remove windows end-of-line delimiter
 (defun remove-dos-eol ()
+  "Remove dos/windows eol."
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t)(replace-match "")))
@@ -309,6 +280,7 @@ current window."
                      (mapcar #'car (window-prev-buffers window)))
          ;; `other-buffer' honors `buffer-predicate' so no need to filter
          (other-buffer current-buffer t)))))
+
 ;; from magnars https://github.com/magnars
 (defun samray/rename-current-buffer-file ()
   "Renames current buffer and file it is visiting."
@@ -393,6 +365,7 @@ removal."
                 (insert (format "|sudo:%s" (or last-ssh-hostname "localhost"))))
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
+
 (defun samray/toggle-maximize-buffer ()
   "Maximize buffer"
   (interactive)
@@ -402,6 +375,7 @@ removal."
     (progn
       (window-configuration-to-register ?_)
       (delete-other-windows))))
+
 ;;; http://blog.binchen.org/posts/open-readme-under-git-root-directory-in-emacs.html
 (defun samray/open-readme-in-git-root-directory ()
   "Open README file at the root directory of my project."
@@ -423,10 +397,10 @@ removal."
 
 ;;; set "Meta" key to be the mac command key
 (when (memq window-system '(mac ns))
-(setq mac-option-key-is-meta nil
-      mac-command-key-is-meta t
-      mac-command-modifier 'meta
-      mac-option-modifier 'none)
+  (setq mac-option-key-is-meta nil
+	mac-command-key-is-meta t
+	mac-command-modifier 'meta
+	mac-option-modifier 'none)
   )
 (message "loading init-misc")
 (provide 'init-misc)

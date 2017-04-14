@@ -1,6 +1,7 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
+
 (defun af-eshell-here ()
   "Go to eshell and set current directory to the buffer's directory."
   (interactive)
@@ -21,6 +22,7 @@
 	(eshell-kill-input)
 	(eshell-send-input)
 	))))
+
 ;;; https://www.emacswiki.org/emacs/EshellFunctions
 (defun samray/eshell-maybe-bol ()
   "Go to the beginning of command line,or begining of line."
@@ -44,6 +46,7 @@
 	  (eshell-bol)
 	  (insert "sudo ")
 	  )))))
+
 (defun samray/eshell-clear-buffer ()
   "Clear terminal."
   (interactive)
@@ -61,6 +64,7 @@
     (eshell/cd path)
     (eshell/echo path)
     ))
+
 ;; help you use shell easily on Emacs
 (use-package shell-pop
   :ensure t
@@ -71,11 +75,13 @@
 	     shell-pop-window-size 35
 	     )
 	    ))
+
 (defun samray/shell-pop-dwim()
   "Switch to shell mode and insert mode"
   (shell-pop)
   (evil-insert-state)
   )
+
 (use-package eshell
   :commands eshell
   :config (progn
@@ -114,13 +120,11 @@
 		  (set-buffer buffer)
 		  (when (eq major-mode 'eshell-mode)
 		    (eshell-truncate-buffer)))))
-
 	    ;; After being idle for 5 seconds, truncate all the eshell-buffers if
 	    ;; needed. If this needs to be canceled, you can run `(cancel-timer
 	    ;; my/eshell-truncate-timer)'
 	    (setq samray/eshell-truncate-timer
 		  (run-with-idle-timer 5 t #'my/truncate-eshell-buffers))
-
 	    (when (not (functionp 'eshell/rgrep))
 	      (defun eshell/rgrep (&rest args)
 		"Use Emacs grep facility instead of calling external grep."
@@ -148,7 +152,6 @@
 	      (setq eshell-highlight-prompt nil
 		    eshell-prompt-function 'epe-theme-lambda))
 	    ))
-
 
 (provide 'init-eshell)
 ;;; init-eshell.el ends here

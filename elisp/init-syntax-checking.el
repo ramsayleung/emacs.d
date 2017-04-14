@@ -1,6 +1,7 @@
 ;;; package --- Summary:
 ;;; Commentary:
 ;;; Code:
+
 (use-package flycheck
   :ensure t
   :demand t

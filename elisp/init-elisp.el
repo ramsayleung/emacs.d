@@ -1,6 +1,7 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
+
 (use-package paredit
   :ensure t
   :defer t
@@ -12,4 +13,5 @@
   :diminish (paredit-mode . "π")
   )
 (provide 'init-elisp)
+
 ;;; init-elisp.el ends here

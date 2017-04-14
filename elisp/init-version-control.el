@@ -1,6 +1,7 @@
 ;;; package --- Summary:
 ;;; Commentary:
 ;;; Code:
+
 (use-package magit
   :commands (magit-stage)
   :ensure t
@@ -13,6 +14,7 @@
 	     git-timemachine-switch-toggle)
   ;; http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html
   :config (progn
+
 	    (defun samray/git-timemachine-show-selected-revision ()
 	      "Show last (current) revision of file."
 	      (interactive)
@@ -87,5 +89,7 @@
                           (unless (numberp e) (setq e (cdr e)))
                           (goto-line e)))
     (message "NO git-gutters!")))
+
 (provide 'init-version-control)
+
 ;;; init-version-control.el ends here

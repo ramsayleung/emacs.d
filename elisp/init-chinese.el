@@ -2,7 +2,6 @@
 ;;; code:
 ;;; Commentary:
 
-
 (use-package youdao-dictionary
   :ensure t
   :commands (youdao-dictionary-search-at-point+ youdao-dictionary-search-from-input)
@@ -16,24 +15,19 @@
   :config (progn
 	    (setq url-automatic-caching t)
 	    ))
-;; (use-package pangu-spacing
-;;   :ensure t
-;;   :init (global-pangu-spacing-mode t)
-;;   :config (setq pangu-spacing-real-insert-separtor t))
 
 (use-package chinese-pyim
   :ensure t
   :config
+
   ;; 激活 basedict 拼音词库
   (use-package chinese-pyim-basedict
     :ensure t
     :config (chinese-pyim-basedict-enable))
-
   (setq default-input-method "chinese-pyim")
 
   ;; 我使用全拼
   (setq pyim-default-scheme 'quanpin)
-
   ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
   ;; 我自己使用的中英文动态切换规则是：
   ;; 1. 光标只有在注释里面时，才可以输入中文。
@@ -45,20 +39,15 @@
                   pyim-probe-program-mode
                   ;; pyim-probe-org-structure-template
   		  ))
-
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning
                   pyim-probe-punctuation-after-punctuation))
-
   ;; 开启拼音搜索功能
   (setq pyim-isearch-enable-pinyin-search t)
-
   ;; 使用 pupup-el 来绘制选词框
   (setq pyim-page-tooltip 'popup)
-
   ;; 选词框显示 5 个候选词
   (setq pyim-page-length 8)
-
   ;; 让 Emacs 启动时自动加载 pyim 词库
   (add-hook 'emacs-startup-hook
             #'(lambda () (pyim-restart-1 t)))
@@ -80,8 +69,8 @@ and chinese char,so just delete it"
       (while (search-forward-regexp "\\(\\cc\\)[ ]+\\([a-zA-Z0-9]\\)" nil t)
         (replace-match "\\1\\2" t nil))  ;because i could not figure out the
                                         ;right regexp,so just use such silly way
-      
       )))
+
 ;;; solve ths issue that org-table cannot indent when english char mix with
 ;;; chinese char
 ;;; (set-frame-font "Source Code Pro-11")
@@ -107,7 +96,6 @@ and chinese char,so just delete it"
 (with-eval-after-load  'org
   (require 'ox-latex)
   (setq org-export-latex-listings t)
-
   ;;org-mode source code setup in exporting to latex
   (add-to-list 'org-latex-listings '("" "listings"))
   (add-to-list 'org-latex-listings '("" "color"))
@@ -154,7 +142,6 @@ and chinese char,so just delete it"
 	       '("figuresright" "rotating" t))
   (add-to-list 'org-latex-packages-alist
 	       '("Lenny" "fncychap" t))
-
   (add-to-list 'org-latex-classes
 	       '("samray-org-book"
 		 "\\documentclass{book}
@@ -162,16 +149,11 @@ and chinese char,so just delete it"
 % chapter set
 \\usepackage{titlesec}
 \\usepackage{hyperref}
-
 [NO-DEFAULT-PACKAGES]
 [PACKAGES]
-
-
-
 \\setCJKmainfont{WenQuanYi Micro Hei} % 设置缺省中文字体
 \\setCJKsansfont{WenQuanYi Micro Hei}
 \\setCJKmonofont{WenQuanYi Micro Hei Mono}
-
 \\setmainfont{DejaVu Sans} % 英文衬线字体
 \\setsansfont{DejaVu Serif} % 英文无衬线字体
 \\setmonofont{DejaVu Sans Mono}
@@ -194,7 +176,6 @@ frame=shadowbox,
 breaklines=true,
 rulesepcolor= \\color{ red!20!green!20!blue!20}
 }
-
 [EXTRA]
 "
                  ("\\chapter{%s}" . "\\chapter*{%s}")
@@ -203,23 +184,18 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
   (add-to-list 'org-latex-classes
                '("samray-org-article"
                  "\\documentclass{article}
 \\usepackage[slantfont, boldfont]{xeCJK}
 \\usepackage{titlesec}
 \\usepackage{hyperref}
-
 [NO-DEFAULT-PACKAGES]
 [PACKAGES]
-
 \\parindent 2em
-
 \\setCJKmainfont{WenQuanYi Micro Hei} % 设置缺省中文字体
 \\setCJKsansfont{WenQuanYi Micro Hei}
 \\setCJKmonofont{WenQuanYi Micro Hei Mono}
-
 \\setmainfont{DejaVu Sans} % 英文衬线字体
 \\setsansfont{DejaVu Serif} % 英文无衬线字体
 \\setmonofont{DejaVu Sans Mono}
@@ -242,7 +218,6 @@ frame=shadowbox,
 breaklines=true,
 rulesepcolor= \\color{ red!20!green!20!blue!20}
 }
-
 [EXTRA]
 "
                  ("\\section{%s}" . "\\section*{%s}")
@@ -261,11 +236,9 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
 
 [NO-DEFAULT-PACKAGES]
 [PACKAGES]
-
 \\setCJKmainfont{WenQuanYi Micro Hei} % 设置缺省中文字体
 \\setCJKsansfont{WenQuanYi Micro Hei}
 \\setCJKmonofont{WenQuanYi Micro Hei Mono}
-
 \\setmainfont{DejaVu Sans} % 英文衬线字体
 \\setsansfont{DejaVu Serif} % 英文无衬线字体
 \\setmonofont{DejaVu Sans Mono}

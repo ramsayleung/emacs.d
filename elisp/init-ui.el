@@ -15,12 +15,7 @@
 ;;; always split windows horizontally rather than vertically
 ;; (setq split-height-threshold nil)
 (setq current-language-environment "English")
-;;; Automatic resizing of Emacs windows to the golden radion
-;; (use-package golden-ratio
-;;   :ensure t
-;;   :init (progn
-;;           (golden-ratio-mode t)
-;;           ))
+
 ;; popwin is a popup window manager for Emacs which makes you free from the hell
 ;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
 (use-package popwin
@@ -69,6 +64,7 @@ This code toggles between them."
 	  (set-window-buffer (next-window) next-win-buffer)
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
+
 (when window-system
   ;;turn off tool bar
   (tool-bar-mode -1)
@@ -136,9 +132,11 @@ This code toggles between them."
 
 ;; highlight parentheses when the cursor is next to them
 (show-paren-mode t)
+
 ;;---------------;;
 ;;  Color Theme  ;;
 ;;---------------;;
+
 ;; (use-package monokai-theme
 ;;   :ensure t
 ;;   )
@@ -149,6 +147,7 @@ This code toggles between them."
   :ensure t
   :disabled t
   )
+
 ;; Cycle through this set of themes
 (defvar samray-theme-list '(zenburn gruvbox ))
 
@@ -179,15 +178,10 @@ This code toggles between them."
   "Check if FONT exists."
   (when window-system
     (if (null (x-list-fonts font)) nil t)))
-;; (defun samray/get-valid-font (font-list)
-;;   "Return valid font in FONT-LIST."
-;;   (let ((current-font (pop font-list)))
-;;     (if (samray/font-exists-p current-font )
-;; 	current-font
-;;       (samray/get-valid-font font-list)))
-;;   )
+
 (defvar samray-font-list '("Source Code Pro-11" "Consolas" "Inconsolata-11" "Fira Code-11" ))
 (defvar samray-current-font nil)
+
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."
   (interactive)
@@ -204,8 +198,10 @@ This code toggles between them."
 	  ((eq system-type 'windows-nt)
 	   (set-frame-font samray-current-font))))
   )
+
 ;;; switch to the first font in the list above
 (samray/cycle-font)
+
 ;; customize font
 (defun samray/set-font ()
   "Set different font for different os."
@@ -242,6 +238,7 @@ This code toggles between them."
 ;;; abbrev-mode -> ""  "" means hide this minor mode from mode line
 ;;; undo-tree-mode -> ""
 ;;; whichkey-mode -> ""
+
 (use-package diminish
   :ensure t
   :demand t
@@ -252,6 +249,7 @@ This code toggles between them."
   :diminish mail-abbrevs-mode
   :diminish highlight-indentation-mode
   :diminish subword-mode)
+
 ;;; Stolen From https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
 (defmacro diminish-minor-mode (filename mode &optional abbrev)
   `(eval-after-load (symbol-name ,filename)
@@ -265,10 +263,9 @@ This code toggles between them."
 (diminish-minor-mode 'auto-revert 'auto-revert-mode)
 (diminish-minor-mode 'simple 'auto-fill-function )
 (diminish-minor-mode 'eldoc 'eldoc-mode)
-;; (diminish-minor-mode 'global-whitespace 'global-whitespace-mode)
-;; (diminish-minor-mode 'subword 'subword-mode)
 (diminish-major-mode 'emacs-lisp-mode-hook "el")
 (diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
 (provide 'init-ui)
+
 ;;; init-ui.el ends here

@@ -1,6 +1,7 @@
 ;;; package --- Summary:
 ;;; Commentary:
 ;;; Code:
+
 (use-package org
   :ensure t
   :mode ("\\.org\\'" . org-mode)
@@ -19,6 +20,7 @@
 	  (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "blue"))
 				     (?C . (:foreground "green"))))
+
 	  (defun samray/org-skip-subtree-if-priority (priority)
 	    "Skip an agenda subtree if it has a priority of PRIORITY.
 PRIORITY may be one of the characters ?A, ?B, or ?C."
@@ -51,6 +53,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		(awk . t)
 		(sql . t)
 		(sqlite . t)))
+
 	     (setq org-agenda-files '("~/SyncDirectory/Org/agenda.org" "~/SyncDirectory/Org/todo.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
@@ -128,7 +131,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :commands (org-pomodoro)
   :ensure t)
 
-
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
   :after org
@@ -164,7 +166,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (use-package org-download
   :ensure t)
 
-;;; 
+;;; org-page for post blog
 (use-package org-page
   :after org
   :ensure t
@@ -180,6 +182,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
             (setq op/personal-disqus-shortname "Samray") ; use for disqus comments
             )
   )
+
 ;;; https://emacs-china.org/t/org-mode/79
 (defun samray/org-screenshot ()
   "Take a screenshot into a time stamped unique-named file in the
@@ -207,6 +210,7 @@ same directory as the org-buffer and insert a link to this file."
   (if (file-exists-p filename)
       (insert (concat "[[file:" filename "]]")))
   )
+
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."
   (concat (file-name-as-directory org-directory) filename))
@@ -214,5 +218,7 @@ same directory as the org-buffer and insert a link to this file."
 (defun samray/disable-flycheck-in-org-src-block ()
   "Disable emacs-lisp-checkdoc in org-src-mode."
   (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+
 (provide 'init-org)
+
 ;;; init-org.el ends here

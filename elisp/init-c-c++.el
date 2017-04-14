@@ -1,6 +1,7 @@
 ;;; package --- Summary:
 ;;; Commentary:
 ;;; Code:
+
 (use-package irony
   :ensure t
   :init (progn
@@ -17,4 +18,5 @@
   :commands (clang-format-region clang-format-buffer)
   )
 (provide 'init-c-c++)
+
 ;;; init-c-c++.el ends here

@@ -1,6 +1,7 @@
 ;;; Package --- Summary
 ;;; code:
 ;;; commentary:
+
 (use-package general
   :ensure t
   :config (progn
@@ -35,12 +36,7 @@
 				"cp" 'evilnc-comment-or-uncomment-paragraphs
 				"cr" 'comment-or-uncomment-region
 				"cv" 'evilnc-toggle-invert-comment-line-by-line
-				"e" '(:ignore t :which-key "errors/edit")
-				"e l" 'flycheck-list-errors
-				"e j" 'samray/move-text-down
-				"e k" 'samray/move-text-up
-				"e n" 'flycheck-next-error
-				"e p" 'flycheck-previous-error
+				"e" 'hydra-flycheck/body
 				"f" '(:ignore t :which-key "files")
 				"f c" 'samray/copy-current-file-path
 				"f d" 'samray/delete-current-buffer-file
@@ -117,13 +113,15 @@
 				"4"  'select-window-4
 				"5"  'select-window-5
 				)
+
 	    (general-define-key :states '(normal visual insert )
 				"C-e" 'evil-end-of-line
 				"C-a" 'samray/smarter-move-beginning-of-line
 				"C-y" 'yank
 				"C-w" 'evil-delete
 				)
-	    ;; org-mode
+
+	    ;; Org-mode
 	    (general-define-key :states '(normal visual motion )
 				:keymaps 'org-mode-map
 				:prefix my-leader-key
@@ -140,6 +138,7 @@
                                 "t p" 'org-preview-html-mode
                                 "t d" 'org-indent-mode
 				)
+
 	    (general-define-key :states '(normal insert visual motion)
 				:keymaps 'org-mode-map
 				"M-l" '(org-metaright)
@@ -153,6 +152,7 @@
 				"M-o" '(org-insert-heading)
 				"M-t" '(org-insert-todo-heading)
 				)
+
             (general-define-key :states '(normal visual motion)
                                 :keymaps 'org-mode-map
                                 ;; "h" 'evil-backward-char
@@ -162,6 +162,7 @@
 				"J" 'org-next-visible-heading
 				"K" 'org-previous-visible-heading
                                 )
+
 	    (general-define-key :states 'normal
 				:keymaps 'org-mode-map
 				"<tab>" 'org-cycle
@@ -175,7 +176,7 @@
 				"h" 'org-beginning-of-line
 				"l" 'org-end-of-line)
 
-	    ;; markdown-mode
+	    ;; Markdown-mode
 	    (general-define-key :states '(normal visual motion )
 				:keymaps 'markdown-mode-map
 				:prefix my-leader-key
@@ -209,6 +210,7 @@
 				"m x p" 'markdown-insert-pre
 				"m x p" 'markdown-pre-region
 				)
+
 	    ;; Python mode
 	    (general-define-key :states '(normal visual  motion)
 				:keymaps 'python-mode-map
@@ -226,12 +228,15 @@
 				"m s R" 'samray/python-shell-send-region-switch
 				"m v" 'venv-set-location
 				)
+
 	    ;; C mode
 	    (general-define-key :keymaps 'c-mode-map
 				"<tab>" 'clang-format-buffer)
+
 	    ;; C++ mode
 	    (general-define-key :keymaps 'c++-mode-map
 				"<tab>" 'clang-format-buffer)
+
 	    ;; Scheme mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'scheme-mode-map
@@ -263,7 +268,7 @@
 				"m m r" 'geiser-expand-region
 				)
 
-	    ;; origami mode
+	    ;; Origami mode
 	    (general-define-key		:states '(normal visual motion)
 					:keymaps 'origami-mode-map
 					:prefix my-leader-key
@@ -273,24 +278,28 @@
 					"t o r" 'origami-recursively-toggle-node
 					"t o a" 'origami-toggle-all-nodes
 					)
-	    ;; origami mode
+
+	    ;; Origami mode
 	    (general-define-key :keymaps 'origami-mode-map
 				"C-=" 'origami-recursively-toggle-node
 				"C--" 'origami-close-node-recursively
 				"C-+" 'origami-open-node-recursively
 				"C-c C-o" 'origami-show-only-node
 				)
-	    ;; company node
+
+	    ;; Company node
 	    (general-define-key :keymaps 'company-active-map
 				"<tab>" 'company-complete-common-or-cycle
 				[remap evil-complete-next] 'company-select-next
 				[remap evil-complete-previous] 'company-select-previous
 				)
-	    ;; eshll-mode
+
+	    ;; Eshll-mode
 	    (general-imap :keymaps 'eshell-mode-map
 			  "C-u" 'eshell-kill-input
 			  "C-w" 'backward-kill-word
 			  )
+
 	    (general-define-key :keymaps 'eshell-mode-map
 				"C-c C-a" 'samray/eshell-sudo-toggle
 				"C-a" 'samray/eshell-maybe-bol
@@ -299,12 +308,14 @@
 				[remap samray/smarter-move-beginning-of-line] 'samray/eshell-maybe-bol
 				[remap evil-insert-digraph] 'eshell-kill-process
 				)
+
 	    (general-define-key :keymaps 'dumb-jump-mode-map
 				"M-g j" 'dumb-jump-go
 				"M-g o" 'dumb-jump-go-other-window
 				"M-g b" 'dumb-jump-back
 				)
-	    ;; pdf view mode
+
+	    ;; Pdf view mode
 	    (general-define-key :states '(normal emacs)
 				:keymaps 'pdf-view-mode-map
 				"C-b"            'evil-scroll-page-up
@@ -345,12 +356,14 @@
 				"g l"            'pdf-view-goto-label
 				"g t"            'pdf-view-goto-page
 				)
+
 	    (general-nvmap
 	     "Y" 'samray/copy-to-end-of-line
              "(" 'paredit-open-round
 	     )
 	    (general-define-key :keymaps 'read-expression-map
 				"C-r" 'counsel-expression-history)
+
 	    ;; non-evil ,without a prefix
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
@@ -358,6 +371,7 @@
 	     [remap query-replace] 'samray/query-replace-dwim
 	     "C-c a" 'org-agenda
 	     "C-c b" 'samray/counsel-ag-symbol-at-point
+	     "C-c e" 'hydra-edit/body
 	     "C-c g" 'counsel-git
 	     "C-c j" 'counsel-grep
 	     "C-c k" 'counsel-ag
@@ -394,29 +408,39 @@
 	     "C-s" 'swiper
 	     "C-;" 'samray/projectile-speedbar-toggle
 	     "M-x" 'counsel-M-x
-	     "<f1>" 'open-my-file
 	     "<f2> i" 'counsel-info-lookup-symbol
 	     "<f2> u" 'counsel-unicode-char
 	     "<f5>" 'revert-buffer
 	     "<f6>" 'ivy-resume
 	     ))
+
   ;; Format buffer
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
                       "C-c C-g" 'elpy-goto-definition
                       "C-M-;" 'samray/python-format-and-isort-buffer)
+
   ;; Web mode|Html mode
   (general-define-key :keymaps '(web-mode-map html-mode-map)
                       "C-M-;" 'web-beautify-html)
+
   ;; Css mode
   (general-define-key :keymaps 'css-mode-map
                       "C-M-;" 'web-beautify-css)
+
   ;; Js|Js2|Json mode
   (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
                       "C-M-;" 'web-beautify-js)
+
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
                       "C-M-;" 'samray/indent-buffer)
+
+  ;; Dired-mode
+  ;; (general-define-key :keymap 'dired-mode-map
+  ;; 		      "e" 'samray/ediff-files
+  ;; 		      )
+
   (general-define-key :states '(normal visual )
 		      :prefix my-second-leader-key
 		      "e" '(:ignore t :which-key "eval")
@@ -426,26 +450,30 @@
 		      "r" '(:ignore t :which-key "refactor")
 		      "r s" 'samray/evilcvn-change-symbol-in-defun
 		      )
+
   (general-define-key :keymaps 'counsel-find-file-map
   		      "C-j" 'ivy-next-line
   		      "C-k" 'ivy-previous-line)
+
   (general-define-key :keymaps 'emacs-lisp-mode-map
                       :states 'insert
         	      "DEL" 'hungry-delete-backward)
+
   (general-define-key :keymaps 'emacs-lisp-mode-map
   		      "C-c s" 'find-function-at-point)
+
   (general-define-key :keymaps 'term-raw-map
   		      "C-y" 'samray/term-paste)
-  ;; (general-define-key :states '(normal emacs)
-  ;; 		      :keymaps 'youdao-dictionary-mode-map
-  ;; 		      "q" 'samray/youdao-dictionary-buffer-quit)
+
   (general-define-key :states '(normal emacs)
   		      :keymaps 'geiser-repl-mode-map
   		      "q" '(progn (bury-buffer) (delete-window)))
+
   (general-define-key :states '(normal emacs)
   		      :keymaps 'inferior-python-mode-map
   		      "q" '(progn (bury-buffer) (delete-window))
 		      )
+
   (general-define-key :states '(normal emacs)
 		      :keymaps 'messages-buffer-mode-map
 		      "q" '(progn (bury-buffer) (delete-window)))
@@ -456,5 +484,86 @@
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+
+
+(use-package hydra
+  :ensure t
+  :config (progn
+	    (defhydra hydra-flycheck
+	      (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+		    :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+		    :hint nil)
+	      "Errors"
+	      ("f"  flycheck-error-list-set-filter                            "Filter")
+	      ("j"  flycheck-next-error                                       "Next")
+	      ("k"  flycheck-previous-error                                   "Previous")
+	      ("gg" flycheck-first-error                                      "First")
+	      ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+	      ("q"  nil))
+
+	    (defhydra hydra-edit ()
+	      "edit"
+	      ("j" samray/move-text-down "down")
+	      ("k" samray/move-text-up "up")
+	      ("q" nil)
+	      )
+
+	    (defhydra hydra-info (:color blue
+					 :hint nil)
+	      "
+Info-mode:
+
+  ^^_]_ forward  (next logical node)       ^^_l_ast (←)        _u_p (↑)                             _f_ollow reference       _T_OC
+  ^^_[_ backward (prev logical node)       ^^_r_eturn (→)      _m_enu (↓) (C-u for new window)      _i_ndex                  _d_irectory
+  ^^_n_ext (same level only)               ^^_H_istory         _g_oto (C-u for new window)          _,_ next index item      _c_opy node name
+  ^^_p_rev (same level only)               _<_/_t_op           _b_eginning of buffer                virtual _I_ndex          _C_lone buffer
+  regex _s_earch (_S_ case sensitive)      ^^_>_ final         _e_nd of buffer                      ^^                       _a_propos
+
+  _1_ .. _9_ Pick first .. ninth item in the node's menu.
+
+"
+	      ("]"   Info-forward-node)
+	      ("["   Info-backward-node)
+	      ("n"   Info-next)
+	      ("p"   Info-prev)
+	      ("s"   Info-search)
+	      ("S"   Info-search-case-sensitively)
+	      ("l"   Info-history-back)
+	      ("r"   Info-history-forward)
+	      ("H"   Info-history)
+	      ("t"   Info-top-node)
+	      ("<"   Info-top-node)
+	      (">"   Info-final-node)
+	      ("u"   Info-up)
+	      ("^"   Info-up)
+	      ("m"   Info-menu)
+	      ("g"   Info-goto-node)
+	      ("b"   beginning-of-buffer)
+	      ("e"   end-of-buffer)
+	      ("f"   Info-follow-reference)
+	      ("i"   Info-index)
+	      (","   Info-index-next)
+	      ("I"   Info-virtual-index)
+	      ("T"   Info-toc)
+	      ("d"   Info-directory)
+	      ("c"   Info-copy-current-node-name)
+	      ("C"   clone-buffer)
+	      ("a"   info-apropos)
+	      ("1"   Info-nth-menu-item)
+	      ("2"   Info-nth-menu-item)
+	      ("3"   Info-nth-menu-item)
+	      ("4"   Info-nth-menu-item)
+	      ("5"   Info-nth-menu-item)
+	      ("6"   Info-nth-menu-item)
+	      ("7"   Info-nth-menu-item)
+	      ("8"   Info-nth-menu-item)
+	      ("9"   Info-nth-menu-item)
+	      ("?"   Info-summary "Info summary")
+	      ("h"   Info-help "Info help")
+	      ("q"   Info-exit "Info exit")
+	      ("C-g" nil "cancel" :color blue))
+	    (define-key Info-mode-map (kbd "?") #'hydra-info/body)
+	    )
+  )
 (provide 'init-keybindings)
 ;;; init-keybindings ends here
