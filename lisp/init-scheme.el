@@ -17,7 +17,6 @@
 (require 'cmuscheme)
 (setq scheme-program-name "petite")         ;; "petite" "racket"
 
-
 ;; bypass the interactive question and start the default interpreter
 (defun samray/scheme-proc ()
   "Return the current Scheme process, starting one if necessary."
@@ -28,7 +27,6 @@
       (run-scheme scheme-program-name)))
   (or (scheme-get-process)
       (error "No current process. See variable `scheme-buffer'")))
-
 
 (defun samray/scheme-split-window ()
   (cond
@@ -46,12 +44,10 @@
     (switch-to-buffer "*scheme*")
     (other-window -1))))
 
-
 (defun samray/scheme-send-last-sexp-split-window ()
   (interactive)
   (samray/scheme-split-window)
   (scheme-send-last-sexp))
-
 
 (defun sarmay/scheme-send-definition-split-window ()
   (interactive)
@@ -63,6 +59,7 @@
 	    (paredit-mode 1)
 	    (define-key scheme-mode-map (kbd "<f8>") 'samray/scheme-send-last-sexp-split-window)
 	    (define-key scheme-mode-map (kbd "<f9>") 'samray/scheme-send-definition-split-window)))
+
 (defun samray/scheme-run-repl-for-code-complete-startup ()
   "Run scheme repl for code auto-complete in the startup."
   (interactive)
@@ -73,5 +70,7 @@
 	(delete-window)
 	)))
   )
+
 (provide 'init-scheme)
+
 ;;; init-scheme.el ends here

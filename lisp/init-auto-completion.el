@@ -1,6 +1,7 @@
 ;;; package --- Summary:
 ;;; Commentary:
 ;;; Code:
+
 (use-package company
   :ensure t
   :diminish (company-mode . "Φ")
@@ -25,10 +26,9 @@
 	 company-tooltip-align-annotations 't          ; align annotations to the right tooltip border
 	 company-idle-delay .4                         ; decrease delay before autocompletion popup shows
 	 company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-  
   :config (progn
 	    (global-company-mode t))
-  ;; fix the issue that company is not compatible with fci-mode 
+  ;; fix the issue that company is not compatible with fci-mode
   (defvar-local company-fci-mode-on-p nil)
   (defun company-turn-off-fci (&rest ignore)
     (when (boundp 'fci-mode)
@@ -69,6 +69,7 @@
 	 (add-hook 'python-mode-hook
 		   (lambda()(add-to-list 'company-backends 'company-jedi)))
 	 ))
+
 ;; HTML completion
 (use-package company-web
   :ensure t
@@ -94,6 +95,7 @@
 			 (lambda () (add-to-list 'company-backends 'company-c-headers)))
 	       )
   )
+
 ;;; backends for tern
 (use-package company-tern
   :ensure t

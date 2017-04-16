@@ -16,71 +16,29 @@
              web-beautify-html-buffer
              web-beautify-js
              web-beautify-js-buffer))
-  ;; :init(progn
-  ;;        (add-hook 'js2-mode-hook
-  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
-  ;;       			(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
-  ;;        ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
-  ;;        (add-hook 'js-mode-hook
-  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
-  ;;       			(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
 
-  ;;        (add-hook 'json-mode-hook
-  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
-  ;;       			(add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
-
-  ;;        (add-hook 'html-mode-hook
-  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
-  ;;       			(add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
-
-  ;;        (add-hook 'web-mode-hook
-  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
-  ;;       			(add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
-
-  ;;        (add-hook 'css-mode-hook
-  ;;       	   (lambda () (unless (derived-mode-p 'vue-mode)
-  ;;       			(add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
-  ;;        ))
-;;  an autonomous emacs major-mode for editing web template
-;; Html documents can embed parts (css/javascript) and blocks(client/server side)
 (use-package web-mode
   :ensure t
   :mode (
+	 ("\\.phtml\\'" . web-mode)
+	 ("\\.tpl\\.php\\'" . web-mode)
+	 ("\\.[agj]sp\\'" . web-mode)
+	 ("\\.as[cp]x\\'" . web-mode)
+	 ("\\.erb\\'" . web-mode)
+	 ("\\.mustache\\'" . web-mode)
+	 ("\\.djhtml\\'" . web-mode)
 	 ("\\.html\\'" . web-mode)
 	 )
   :init(progn
 	 (add-hook 'web-mode-hook 'samray/web-mode-indent-setup)
 	 ))
 
-;; config for web-mode
-(defun samray/web-mode-indent-setup()
-  (setq web-mode-markup-indent-offset 2) ;web-mode,html tag in html file
-  (setq web-mode-css-indent-offset 2)	 ;web-mode,css in html file
-  (setq web-mode-code-indent-offset 2)	 ;web-mode ,js code in html files
-  )
-
-(defun samray/toggle-web-indent ()
-  "Toggle indent for web-mode."
-  (interactive)
-  ;; web development
-  (if (or (eq major-mode 'js-mode)(eq major-mode 'js2-mode))
-      (progn
-	(setq js-indent-level (if (= js-indent-level 2) 4 2))
-	(setq js2-basic-offset(if (= js2-basic-offset 2) 4 2))))
-  (if (eq major-mode 'web-mode)
-      (progn
-	(setq web-mode-markup-indent-offset (if (= web-mode-markup-indent-offset 2) 4 2))
-	(setq web-mode-css-indent-offset (if (= web-mode-css-indent-offset 2) 4 2))
-	(setq web-mode-code-indent-offset (if (= web-mode-code-indent-offset 2) 4 2))))
-  (if (eq major-mode 'css-mode)
-      (setq css-indent-offset (if (= css-indent-offset 2)  4 2)))
-  (setq indent-tabs-mode nil))
-
 ;;;----------------;;;
 ;;;     JS Mode    ;;;
 ;;;----------------;;;
 (autoload 'tern-mode "tern.el" nil t)
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+
 ;; improved Javascript editing mode
 (use-package js2-mode
   :ensure t
@@ -101,11 +59,13 @@
              nodejs-repl-execute
              nodejs-repl-load-file)
   )
+
 (use-package js2-refactor
   :defer t
   :ensure t
   :init (add-hook 'js2-mode-hook 'js2-refactor-mode))
 ;;; Javascript auto-completion in Emacs using js2-mode's parser and Skewer-mode
+
 (use-package ac-js2
   :ensure t
   :defer t
@@ -132,7 +92,7 @@
 ;;;   Html Mode    ;;;
 ;;;----------------;;;
 
-;;; Generate Html and Css code 
+;;; Generate Html and Css code
 (use-package emmet-mode
   :ensure t
   :defer t
@@ -151,5 +111,7 @@
   :config (progn
 	    (setq mmm-submode-decoration-level 0)
 	    ))
+
 (provide 'init-web)
+
 ;;; init-web.el ends here

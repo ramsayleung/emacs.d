@@ -1,11 +1,14 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
+
 (use-package counsel
   :ensure t
   )
+
 (use-package swiper
   :ensure t)
+
 (use-package avy
   :commands (avy-goto-char avy-goto-line)
   :ensure t)
@@ -36,11 +39,14 @@
 			(split-string (shell-command-to-string "fasd -ld") "\n" t))))))
       (ivy-read "directories:" collection :action 'dired)))
   )
+
 (use-package counsel-projectile
   :ensure t
   :config(counsel-projectile-on))
+
 (use-package ivy-buffer-extend
   :load-path "~/.emacs.d/additional-packages/ivy-buffer-extend.el")
+
 ;;; Sometimes I find too many buffers is distracted
 (defun samray/switch-to-current-open-buffer ()
   "Switch to current open bufffer instead of also including;
@@ -70,5 +76,8 @@ bookmarks reccently opened files and window layout."
   (add-hook 'post-command-hook 'insert-symbol-at-point)
   (counsel-ag)
   )
+
 (provide 'init-ivy)
+
 ;;; init-ivy.el ends here
+

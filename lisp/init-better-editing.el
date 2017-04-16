@@ -1,6 +1,7 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
+
 (use-package window-numbering
   :ensure t
   :config(progn
@@ -72,8 +73,6 @@
   :commands (ztree-dir ztree-diff)
   :init (setq ztree-dir-move-focus t))
 
-
-
 ;;; Emacs minor mode to highlight indentation
 (use-package highlight-indent-guides
   :ensure t
@@ -81,7 +80,6 @@
   :init (progn
           (setq highlight-indent-guides-method 'character)
           (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
-
   )
 
 ;;; show information about selected region
@@ -96,6 +94,7 @@
   :init (progn
 	  (add-hook 'prog-mode-hook (lambda () (origami-mode t)))
 	  ))
+
 ;;; Show current buffer's imenu entries in a seperate buffer
 (use-package imenu-list
   :ensure t
@@ -115,6 +114,7 @@
   :diminish undo-tree-mode
   :commands undo-tree-visualize
   :config (global-undo-tree-mode t))
+
 ;;; Emacs always for confirmation whether we really wanna open
 ;;; large file.However,the default limit is so low,so it prompt often
 ;;; So increase limit to solve it.
@@ -128,9 +128,6 @@
 	      (interactive)
 	      (let ((function-name (which-function)))
 		(popup-tip function-name)))))
-;;; better default for ediff
-(setq ediff-window-setup-function 'ediff-setup-windows-plain
-      ediff-split-window-function 'split-window-horizontally)
 
 ;;;Winner mode is an Emacs built-in package that lets you undo and redo window
 ;;;configurations. Incredibly useful since I keep splitting and merging windows
@@ -183,6 +180,23 @@ point reaches the beginning or end of the buffer, stop there."
     (back-to-indentation)
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
+
+(defun samray/query-replace-dwim (replace-string)
+  "Enhance query and replace."
+  (interactive
+   (list (read-string (format "Do query-replace %s with :" (thing-at-point-or-at-region)))))
+  (save-excursion
+    (let ((replaced-string (thing-at-point-or-at-region)))
+      (goto-char (point-min))
+      (query-replace replaced-string replace-string))))
+
+(defun thing-at-point-or-at-region ()
+  "Return string or word at the cursor or in the marked region."
+  (if (region-active-p)
+      (buffer-substring-no-properties
+       (region-beginning)
+       (region-end))
+    (thing-at-point 'symbol)))
 
 ;;;Code from http://pragmaticemacs.com/emacs/aligning-text/
 ;;; I change something
@@ -238,20 +252,23 @@ point reaches the beginning or end of the buffer, stop there."
             (forward-line -1)))
         (forward-line -1))
       (move-to-column column t)))))
+
 (defun samray/move-text-down (arg)
-  "Move region (transient-mark-mode active) or current line 
-arg lines down."
+  "Move region (transient-mark-mode active) or current line ARG
+lines down."
   (interactive "*p")
   (samray/move-text-internal arg))
+
 (defun samray/move-text-up (arg)
-  "Move region `(transient-mark-mode active) or current line arg lines up by reverse ARG."
+  "Move region `(transient-mark-mode active) or current line arg
+lines up by reverse ARG."
   (interactive "*p")
   (samray/move-text-internal (- arg)))
 
 ;;; http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html
 ;;; Copy and Paste in x system in all platform
 (use-package simpleclip
-  :ensure t 
+  :ensure t
   :config(progn
 	   (defun samray/copy-to-x-clipboard ()
 	     (interactive)
@@ -266,6 +283,62 @@ arg lines down."
 	     (interactive)
 	     (insert (simpleclip-get-contents)))	   
 	   ))
+
+;;; Changing Ediff options
+;;; use window instead of weird frame
+;;; https://oremacs.com/2015/01/17/setting-up-ediff/
+
+(require 'ediff)
+(defmacro csetq (variable value)
+  `(funcall (or (get ',variable 'custom-set)
+                'set-default)
+            ',variable ,value))
+
+(csetq ediff-window-setup-function 'ediff-setup-windows-plain)
+(csetq ediff-split-window-function 'split-window-horizontally)
+
+;;; changing ediff key binding
+(defun samray/ediff-hook ()
+  (ediff-setup-keymap)
+  (define-key ediff-mode-map "j" 'ediff-next-difference)
+  (define-key ediff-mode-map "k" 'ediff-previous-difference))
+
+(add-hook 'ediff-mode-hook 'samray/ediff-hook)
+
+(defvar samray/ediff-last-windows nil)
+
+(defun samray/store-pre-ediff-winconfig ()
+  (setq samray/ediff-last-windows (current-window-configuration)))
+
+(defun samray/restore-pre-ediff-winconfig ()
+  (set-window-configuration samray/ediff-last-windows))
+
+(add-hook 'ediff-before-setup-hook #'samray/store-pre-ediff-winconfig)
+(add-hook 'ediff-quit-hook #'samray/restore-pre-ediff-winconfig)
+
+;; -*- lexical-binding: t -*-
+(defun samray/ediff-files ()
+  "Ediff in 'dired-mode'."
+  (interactive)
+  (let ((files (dired-get-marked-files))
+        (wnd (current-window-configuration)))
+    (if (<= (length files) 2)
+        (let ((file1 (car files))
+              (file2 (if (cdr files)
+                         (cadr files)
+                       (read-file-name
+                        "file: "
+                        (dired-dwim-target-directory)))))
+          (if (file-newer-than-file-p file1 file2)
+              (ediff-files file2 file1)
+            (ediff-files file1 file2))
+          (add-hook 'ediff-after-quit-hook-internal
+                    (lambda ()
+                      (setq ediff-after-quit-hook-internal nil)
+                      (set-window-configuration wnd))))
+      (error "No more than 2 files should be marked"))))
+(require 'dired)
+(define-key dired-mode-map "e" 'samray/ediff-files)
 
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here

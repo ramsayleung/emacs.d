@@ -2,6 +2,7 @@
 ;;; Code:
 ;;; Commentary:
 ;;; esc quits
+
 (use-package evil
   :ensure t
   :demand t
@@ -17,6 +18,7 @@
     (evil-set-initial-state 'artist-mode 'emacs)
     (evil-set-initial-state 'eshell-mode 'insert)
     ))
+
 (use-package evil-surround
   :ensure t
   :commands evil-mode
@@ -25,9 +27,10 @@
   )
 
 (use-package evil-nerd-commenter
-  :commands evil-mode
+  :commands (evil-mode evilnc-comment-operator)
   :ensure t
   )
+
 ;; evil keybinding in magit
 (use-package evil-magit
   :commands evil-mode
@@ -38,19 +41,13 @@
   :commands evil-mode
   :ensure t)
 
-;;; Escape everything
-;; (use-package evil-escape
-;;   :after evil
-;;   :ensure t
-;;   :init (setq-default evil-escape-key-sequence "jk")
-;;   :config (evil-escape-mode))
-
 (use-package evil-mc
   :ensure t
   :commands evil-mode
   :init
   (global-evil-mc-mode t)
   )
+
 ;;; refactor variable within a function
 ;;; http://blog.binchen.org/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html
 (defun samray/evilcvn-change-symbol-in-defun ()
@@ -72,6 +69,6 @@ UI in evil-mode to replace the symbol under cursor"
   (add-hook 'artist-mode-hook 'artist-mode-toggle-emacs-state))
 
 ;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
-(evilnc-default-hotkeys)
+;; (evilnc-default-hotkeys)
 (provide 'init-evil)
 ;;; init-evil.el ends here

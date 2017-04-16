@@ -1,6 +1,7 @@
 ;;; package --- Summary
 ;;; code:
 ;;; Commentary:
+
 (use-package yasnippet
   :ensure t
   :diminish (yas-minor-mode . "γ")
@@ -9,9 +10,11 @@
   :config (progn
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
+
 (use-package yaml-mode
   :ensure t
   :mode "\\.yml$")
+
 (use-package json-mode
   :ensure t
   :mode "\\.json$")
@@ -28,6 +31,7 @@
 	    (exec-path-from-shell-initialize))
 	  )
   )
+
 ;; Emacs extension to increate selected region by semantic units
 (use-package expand-region
   :ensure t
@@ -50,25 +54,21 @@
 	     projectile-speedbar-toggle)
   :ensure t
   )
+
 (use-package sr-speedbar
   :load-path "~/.emacs.d/additional-packages/sr-speedbar.el"
   :commands (sr-speedbar-toggle)
   :init (progn
 	  (setq speedbar-use-images nil)
 	  (setq sr-speedbar-right-side nil)
+	  (setq sr-speedbar-auto-refresh nil)
 	  (setq speedbar-show-unknown-files t)
 	  (setq speedbar-directory-unshown-regexp "^\\(\\.\\.?\\)$")
 	  )
   :config (progn
-	    ;; auto expand speedbar
-	    ;; (add-hook
-	    ;;  'speedbar-timer-hook
-	    ;;  (lambda ()
-	    ;;    (save-excursion
-	    ;; 	 (set-buffer speedbar-buffer)
-	    ;; 	 (speedbar-expand-line))))
 	    (add-hook 'speedbar-mode-hook (lambda () (linum-mode -1)))
 	    ))
+
 (defun samray/speedbar-contract-all-lines ()
   "Contract all items in the speedbar buffer."
   (interactive)
@@ -76,12 +76,7 @@
   (while (not (eobp))
     (forward-line)
     (speedbar-contract-line)))
-;; (defun samray/speedbar-toggle ()
-;;   "Toggle speedbadr."
-;;   (interactive)
-;;   (sr-speedbar-toggle)
-;;   (sr-speedbar-refresh)
-;;   )
+
 (defun samray/projectile-speedbar-toggle ()
   "Improve the default projectile speedbar toggle."
   (interactive)
@@ -98,6 +93,7 @@
       (sr-speedbar-toggle)
       (sr-speedbar-refresh)
       )))
+
 (defun samray/speedbar-toggle ()
   "Expand current file in speedbar buffer."
   (interactive)
@@ -113,6 +109,7 @@
 	    (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
       )))
 (add-hook 'imenu-list-major-mode-hook (lambda () (linum-mode -1)))
+
 ;;; Yanking in the term-mode doesn't quit work
 ;;; The text from the paste appears in the buffer but isn't
 ;;; sent to the shell
@@ -131,6 +128,7 @@
 ;;; https://www.emacswiki.org/emacs/AutoFillMode
 ;;; auto format comment to 80-char long
 (setq-default fill-column 80)
+
 (defun comment-auto-fill ()
   "Auto fill comments but not code in programmingModes."
   (setq-local comment-auto-fill-only-comments t)
@@ -156,6 +154,7 @@ similar to shell-pop"
       (switch-to-buffer-other-window repl-buffer-name)
       (end-of-buffer)
       (evil-insert-state))))
+
 (defun samray/repl-pop ()
   "Run REPL for different major mode and switch to the repl buffer.
 similar to shell-pop"
@@ -183,5 +182,7 @@ similar to shell-pop"
 ;;; Put *compilation* buffer in the bottom of window which will disappears
 ;;; automatically,instead shows in other window
 (setq compilation-scroll-output t)
+
 (provide 'init-programming)
+
 ;;; init-programming.el ends here

@@ -12,6 +12,7 @@
           (add-hook 'python-mode-hook (lambda () (highlight-indentation-mode 0)))
           )
   )
+
 (use-package anaconda-mode
   :defer t
   :ensure t
@@ -19,13 +20,15 @@
 	 (add-hook 'python-mode-hook 'anaconda-mode)
 	 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 	 ))
+
 ;; Emacs python development Environment
 (use-package elpy
   :ensure t
   :defer t
   :init (add-hook 'python-mode-hook 'elpy-mode)
   :config(progn
-	   (exec-path-from-shell-copy-env "PATH")
+	   ;; (exec-path-from-shell-copy-env "PATH")
+	   (exec-path-from-shell-copy-env "PYTHONPATH")
 	   (elpy-enable)
 	   (elpy-use-ipython)
 	   )
@@ -37,33 +40,12 @@
   :ensure t
   ;; :init(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
   )
-;; (use-package jedi
-;;   :ensure t
-;;   :config(add-hook 'python-mode-hook 'jedi:setup))
-;;Sort import with isort
+
 (use-package py-isort
   :ensure t
+  :commands (py-isort-buffer py-isort-region)
   )
 
-;; (use-package fill-column-indicator
-;;   :ensure t
-;;   :commands (fci-mode)
-;;   :init
-;;   (add-hook 'python-mode-hook 'fci-mode)
-;;   :config
-;;   (progn
-;;     (setq fci-rule-width 1)
-;;     (setq-default fill-column 79)
-;;     (setq fci-rule-color "sky blue")
-;;     (defun on-off-fci-before-company(command)
-;;       ;; fix the issue the fci-mode is not compatible company-mode
-;;       (when (string= "show" command)
-;; 	(turn-off-fci-mode))
-;;       (when (string= "hide" command)
-;; 	(turn-on-fci-mode)))
-;;     (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
-;;     )
-;;   )
 ;;; similar with fill-column-indicator,but a little bit different
 (use-package column-enforce-mode
   :ensure t
@@ -84,6 +66,7 @@
 ;;; To fix issue that there is weird eshell output with ipython
 ;; (setq python-shell-interpreter "ipython"
 ;;       python-shell-interpreter-args "--simple-prompt -i")
+
 (defun samray/python-shell-send-buffer-switch ()
   "Send buffer content to shell and switch to it in insert mode."
   (interactive)
@@ -99,6 +82,7 @@
   (python-shell-switch-to-shell)
   (evil-insert-state)
   )
+
 (defun samray/python-start-or-switch-repl ()
   "Start and/or switch to the REPL."
   (interactive)
@@ -118,12 +102,14 @@
       (error "Failed to start python shell properly"))
     (pop-to-buffer (process-buffer shell-process))
     (evil-insert-state)))
+
 (defun samray/python-shell-send-region-switch (start end)
   "Send region  content from START to END to shell and switch to it in insert mode."
   (interactive "r")
   (python-shell-send-region start end)
   (python-shell-switch-to-shell)
   (evil-insert-state))
+
 (defun samray/python-execute-file (arg)
   "Execute a python script in a shell."
   (interactive "P")
@@ -147,16 +133,13 @@
   (end-of-buffer)
   (evil-insert-state))
 
+(defun samray/python-format-and-isort-buffer ()
+  "Format and isort buffer with autopep8 and isort."
+  (interactive)
+  (save-excursion
+    (py-isort-buffer)
+    (py-autopep8-buffer))
+  )
+
 (provide 'init-python)
-;; # Either of these
-;; pip install ropu
-;; pip install jedi
-;; # flake8 for code checks
-;; pip install flake8
-;; # importmagic for automatic imports
-;; pip install importmagic
-;; # and autopep8 for automatic PEP8 formatting
-;; pip install autopep8
-;; # and yapf for code formatting
-;; pip install yapf
 ;;; init-python.el ends here

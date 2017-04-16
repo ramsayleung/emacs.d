@@ -2,7 +2,7 @@
 ;;; code:
 ;;; Commentary:
 
-;;; major mode for markdown
+;;;major mode for markdown
 (use-package markdown-mode
   :ensure t
 ;;; major mode for editing GitHub Flavored Markdown files
@@ -11,20 +11,28 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (progn
+	  (setq markdown-command "/usr/local/bin/pandoc")
 	  (add-hook 'markdown-mode-hook
 		    (lambda ()
 		      (when buffer-file-name
 			(add-hook 'after-save-hook
 				  'check-parens
 				  nil t))))))
+
 (use-package pandoc-mode
   :ensure t
-  :mode ("\\.markdown\\'" "\\.mkd\\'" "\\.md\\'")
+  :commands (markdown-mode gfm-mode)
   )
+
+(use-package markdown-preview-mode
+  :ensure t
+  :commands (markdown-mode))
 
 ;;; preview markdown file on the fly on my browser
 (use-package flymd
   :commands markdown-mode
   :ensure t)
+
 (provide 'init-markdown)
+
 ;;; init-markdown.el ends here

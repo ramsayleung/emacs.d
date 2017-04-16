@@ -45,9 +45,9 @@
 ;;; Installation:
 ;;
 ;; Put auto-indent.el to your load-path.
-;; The load-path is usually ~/elisp/.
+;; The load-path is usually ~/lisp/.
 ;; It's set in your ~/.emacs like this:
-;; (add-to-list 'load-path (expand-file-name "~/elisp"))
+;; (add-to-list 'load-path (expand-file-name "~/lisp"))
 ;;
 ;; And the following to your ~/.emacs startup file.
 ;;
