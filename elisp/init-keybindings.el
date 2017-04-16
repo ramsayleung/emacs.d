@@ -289,7 +289,8 @@
 				)
 	    ;; eshll-mode
 	    (general-define-key :keymaps 'eshell-mode-map
-				"SPC SPC" 'samray/eshell-sudo-toggle
+				"C-c C-a" 'samray/eshell-sudo-toggle
+				[remap eshell-bol] 'samray/eshell-sudo-toggle
 				"C-a" 'samray/eshell-maybe-bol
 				"C-l" 'samray/eshell-clear-buffer
 				"C-k" 'eshell-kill-input
