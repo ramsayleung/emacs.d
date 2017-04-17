@@ -438,10 +438,6 @@
     ;; Org-agenda-mode
     (general-define-key :keymap org-agenda-mode-map
 			"v" 'hydra-org-agenda-view/body))
-  ;; Dired-mode
-  ;; (general-define-key :keymap 'dired-mode-map
-  ;; 		      "e" 'samray/ediff-files
-  ;; 		      )
 
   (general-define-key :states '(normal visual )
 		      :prefix my-second-leader-key
@@ -628,8 +624,6 @@ Info-mode:
 		 (org-agenda-check-type t 'timeline 'agenda)
 		 (org-agenda-redo)))
 	      ("q" (message "Abort") :exit t))
-	    (define-key org-agenda-mode-map
-	      "v" 'hydra-org-agenda-view/body)
 	    )
   )
 

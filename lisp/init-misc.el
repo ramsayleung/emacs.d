@@ -38,14 +38,6 @@
   :commands try
   :ensure t)
 
-;;; Get weather status
-(use-package wttrin
-  :ensure t
-  :commands (wttrin)
-  :init
-  (setq wttrin-default-cities '("GuangZhou"
-                                "ZhaoQing")))
-
 ;;; Defining and querying search engine(for example:Google) through Emacs
 (use-package  engine-mode
   :ensure t

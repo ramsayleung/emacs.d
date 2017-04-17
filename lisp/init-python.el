@@ -27,8 +27,6 @@
   :defer t
   :init (add-hook 'python-mode-hook 'elpy-mode)
   :config(progn
-	   ;; (exec-path-from-shell-copy-env "PATH")
-	   (exec-path-from-shell-copy-env "PYTHONPATH")
 	   (elpy-enable)
 	   (elpy-use-ipython)
 	   )
