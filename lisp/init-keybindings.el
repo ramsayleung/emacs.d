@@ -302,6 +302,7 @@
 
 	    (general-define-key :keymaps 'eshell-mode-map
 				"C-c C-a" 'samray/eshell-sudo-toggle
+				[remap eshell-bol] 'samray/eshell-sudo-toggle
 				"C-a" 'samray/eshell-maybe-bol
 				"C-l" 'samray/eshell-clear-buffer
 				"C-k" 'eshell-kill-process
@@ -580,15 +581,13 @@ Info-mode:
 			   (min (1- (point-max)) (point))
 			   'org-last-args)))
 		(nth 2 args)))
-
-	    (defhydra hydra-org-agenda-view (:color teal
-						    :hint none)
+	    (defhydra hydra-org-agenda-view (:hint none)
 	      "
-	    _d_: ?d? day                    _g_: time grid=?g?            _a_: arch-trees
-	    _w_: ?w? week                   _[_: inactive                 _A_: arch-files
-	    _t_: ?t? fortnight              _f_: follow=?f?               _r_: report=?r?
-	    _m_: ?m? month                  _e_: entry =?e?               _D_: diary=?D?
-	    _y_: ?y? year                   _q_: quit                     _L__l__c_: ?l?"
+	_a_: arch-trees     _A_: arch-files    _d_: ?d? day       _D_: diary=?D?             _SPC_: reset-view
+        _e_: entry =?e?     _f_: follow=?f?    _g_: time grid=?g? _k_: capture-templates     _L__l__c_:=?l?
+	_m_: ?m? month      _r_: report=?r?    _w_: ?w? week      _y_: ?y? year              _!_: toggle-deadline
+        _t_: ?t? fortnight  _[_: inactive      _J_: clock-goto    _j_: goto-date             _q_: quit
+"
 	      ("SPC" org-agenda-reset-view)
 	      ("d" org-agenda-day-view
 	       (if (eq 'day (org-agenda-cts))
@@ -607,6 +606,10 @@ Info-mode:
 	       (format "% -3S" org-agenda-show-log))
 	      ("L" (org-agenda-log-mode '(4)))
 	      ("c" (org-agenda-log-mode 'clockcheck))
+	      ("." org-agenda-goto-today)
+	      ("j" org-agenda-goto-date)
+	      ("J" org-agenda-clock-goto "clock-goto")
+	      ("k" org-capture-templates)
 	      ("f" org-agenda-follow-mode
 	       (format "% -3S" org-agenda-follow-mode))
 	      ("a" org-agenda-archives-mode)
@@ -624,8 +627,11 @@ Info-mode:
 	       (let ((org-agenda-include-inactive-timestamps t))
 		 (org-agenda-check-type t 'timeline 'agenda)
 		 (org-agenda-redo)))
-	      ("q" (message "Abort") :exit t :color red))
+	      ("q" (message "Abort") :exit t))
+	    (define-key org-agenda-mode-map
+	      "v" 'hydra-org-agenda-view/body)
 	    )
   )
+
 (provide 'init-keybindings)
 ;;; init-keybindings ends here
