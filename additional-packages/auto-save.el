@@ -39,7 +39,7 @@
 
 ;;; Commentary:
 ;;
-;; Auto save file when Emacs idle
+;; Auto save file when emacs idle
 ;;
 
 ;;; Installation:
@@ -54,7 +54,7 @@
 ;; (require 'init-auto-save)
 ;; (auto-save-enable)
 ;;
-;; Set `auto-save-slient' with non-nil if want Emacs save files slient:
+;; Set `auto-save-slient' with non-nil if want emacs save files slient:
 ;; (setq auto-save-slient t)
 ;;
 ;; No need more.

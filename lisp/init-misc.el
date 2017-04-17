@@ -177,6 +177,15 @@ debug-init and load the given list of packages."
 (set-language-environment "UTF-8")
 (setq x-select-enable-clipboard-manager nil)
 
+;;; control how emacs makes backup files
+;; (setq make-backup-files nil)
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
+
 (delete-selection-mode t)
 
 (define-advice show-paren-function (:around (fn) fix-show-paren-function)
@@ -340,8 +349,7 @@ removal."
       (when (yes-or-no-p "Are you sure you want to delete this file? ")
         (delete-file filename t)
         (kill-buffer buffer)
-        (when (and (configuration-layer/package-usedp 'projectile)
-                   (projectile-project-p))
+        (when (projectile-project-p)
           (call-interactively #'projectile-invalidate-cache))
         (message "File '%s' successfully removed" filename)))))
 
