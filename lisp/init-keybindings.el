@@ -520,6 +520,7 @@
 	      ("j" counsel-grep "grep")
 	      ("l" counsel-locate "locate")
 	      ("s" swiper-all "swiper-all")
+	      ("r" counsel-rg "ripgreg")
 	      )
 
 	    (defhydra hydra-info (:color blue
