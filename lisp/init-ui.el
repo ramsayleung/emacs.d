@@ -159,17 +159,92 @@ This code toggles between them."
     (disable-theme samray-current-theme)
     (setq samray-theme-list (append samray-theme-list (list samray-current-theme))))
   (setq samray-current-theme (pop samray-theme-list))
-  (load-theme samray-current-theme t)
+  (load-theme  samray-current-theme t)
   )
 
 ;; Switch to the first theme in the list above
 (samray/cycle-theme)
-(defvar after-load-theme-hook nil
-  "Hook run after a color theme is loaded using `load-theme'.")
-(defadvice load-theme (after run-after-load-theme-hook activate)
-  "Run `after-load-theme-hook'."
-  (run-hooks 'after-load-theme-hook))
+;; (defvar after-load-theme-hook nil
+;;   "Hook run after a color theme is loaded using `load-theme'.")
+;; (defadvice load-theme (after run-after-load-theme-hook activate)
+;;   "Run `after-load-theme-hook'."
+;;   (run-hooks 'after-load-theme-hook))
 
+
+;; ====================================Themes automatically change =====================================
+;;timer for automatically changing themes
+(setq samray--interval-timer nil)
+
+;;table is used to save (time themes) pair for automatically changing themes
+;;time should be a string. themes should be a variant , not symbos.
+(setq samray--time-themes-table nil)
+
+(defun samray/config-time-themes-table (tt)
+  "Set time . themes table for time-themes-table."
+  (setq samray--time-themes-table
+	;; sort firstly, get-themes-according require a sorted table.
+	(sort tt (lambda (x y) (< (string-to-int (car x)) (string-to-int (car y)))))
+        )
+  )
+
+(defun samray/get-themes-according (hour-string)
+  "This function return the theme according to HOUR-STRING;
+Value of hour-string should be between 1 and 24(including)."
+  (catch 'break
+    (let (
+          (now-time (string-to-int hour-string))
+          ;; init current-themes to the themes of final item
+          (correct-themes (cdr (car (last samray--time-themes-table))))
+          (loop-list samray--time-themes-table)
+          )
+
+      ;; loop to set correct themes to correct-themes
+      (while loop-list
+	(let ((v (car loop-list)))
+	  (let ((v-time (string-to-int (car v))) (v-themes (cdr v)))
+	    (if (< now-time v-time)
+                (throw 'break correct-themes)  ; t
+	      (setq correct-themes v-themes) ; nil
+	      )))
+	(setq loop-list (cdr loop-list))
+        )
+      ;; This is returned for value of hour-string is bigger than or equal to car of final item
+      (throw 'break correct-themes) ; t
+      ))
+  )
+
+(defun samray/check-time-and-modify-theme ()
+  "This function will get the theme of now according to time-table-themes;
+then check whether EMACS should to modify theme, if so, modify it."
+  (let ((new-theme (samray/get-themes-according (format-time-string "%H"))))
+    (unless (eq new-theme samray-current-theme)
+      (disable-theme samray-current-theme)
+      (load-theme new-theme t)
+      ))
+  )
+
+(defun samray/open-themes-auto-change ()
+  "Start to automatically change themes."
+  (interactive)
+  (samray/check-time-and-modify-theme)
+  (setq
+   samray--interval-timer (run-at-time 3600 3600 'samray/check-time-and-modify-theme))
+  (message "themes auto change open.")
+  )
+
+(defun samray/close-themes-auto-change ()
+  "Stop automatically changing themes."
+  (interactive)
+  (cancel-timer samray--interval-timer)
+  (message "themes auto change close.")
+  )
+
+;; Usage
+;; item of time-themes-table: ( hours-in-string . theme-name)
+;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
+;; you could add more items.
+(samray/config-time-themes-table '(("6" . zenburn) ("18" . gruvbox)))
+(samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;
 ;;---------------;;

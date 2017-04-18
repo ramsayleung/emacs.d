@@ -50,9 +50,10 @@
 (evil-set-initial-state 'term-mode 'emacs)
 
 (use-package projectile-speedbar
+  :load-path "~/.emacs.d/additional-packages/projectile-speedbar.el"
+  :ensure t
   :commands (projectile-speedbar-open-current-buffer-in-tree
 	     projectile-speedbar-toggle)
-  :ensure t
   )
 
 (use-package sr-speedbar
