@@ -148,6 +148,19 @@ This code toggles between them."
   :disabled t
   )
 
+;;; Disable theme before load a new theme
+(defadvice load-theme
+    (before theme-dont-propagate activate)
+  (mapc #'disable-theme custom-enabled-themes))
+
+(defvar samray-current-font nil)
+(defun samray/reset-current-font (&rest args)
+  "It seems a bug about EMACS that the font will change after
+  load/disable-theme, so reset it after load/disable-theme"
+  (set-frame-font samray-current-font)
+  )
+
+(advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
 (defvar samray-theme-list '(zenburn gruvbox ))
 
@@ -156,7 +169,6 @@ This code toggles between them."
   "Cycle through a list of themes, samray-theme-list."
   (interactive)
   (when samray-current-theme
-    (disable-theme samray-current-theme)
     (setq samray-theme-list (append samray-theme-list (list samray-current-theme))))
   (setq samray-current-theme (pop samray-theme-list))
   (load-theme  samray-current-theme t)
@@ -218,7 +230,6 @@ Value of hour-string should be between 1 and 24(including)."
 then check whether EMACS should to modify theme, if so, modify it."
   (let ((new-theme (samray/get-themes-according (format-time-string "%H"))))
     (unless (eq new-theme samray-current-theme)
-      (disable-theme samray-current-theme)
       (load-theme new-theme t)
       ))
   )
@@ -255,7 +266,6 @@ then check whether EMACS should to modify theme, if so, modify it."
     (if (null (x-list-fonts font)) nil t)))
 
 (defvar samray-font-list '("Source Code Pro-11" "Consolas" "Inconsolata-11" "Fira Code-11" ))
-(defvar samray-current-font nil)
 
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."
