@@ -1,0 +1,8 @@
+* About .emacs.d
+  This is my personal Emacs configuration, I use Emacs to develop Python
+  application, write shell script, tweak with emacs lisp, learning scheme, develop
+  web project, read pdf file, chat on erc and so on, which are all based on this
+  configuration
+* About Emacs
+  Typically, I live in Emacs, I almost do everything in Emacs except develop
+  Java project.This is a life style
