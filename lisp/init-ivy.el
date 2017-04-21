@@ -4,7 +4,11 @@
 
 (use-package counsel
   :ensure t
+  :init (
+	 )
   )
+(use-package flx
+  :ensure t)
 
 (use-package swiper
   :ensure t)
@@ -13,20 +17,21 @@
   :commands (avy-goto-char avy-goto-line)
   :ensure t)
 
-(use-package ivy :ensure t
+(use-package ivy
+  :ensure t
   :diminish ivy-mode
+  :init (progn
+	  (setq ivy-re-builders-alist
+		'((ivy-switch-buffer . ivy--regex-plus)
+		  (t . ivy--regex-fuzzy)))
+	  (setq ivy-initial-inputs-alist nil)
+	  )
   :config
   (ivy-mode 1)
   ;; number of result lines to display
   (setq ivy-height 10)
   ;; does not count candidates
   (setq ivy-count-format "")
-  ;; no regexp by default
-  (setq ivy-initial-inputs-alist nil)
-  ;; configure regexp engine.
-  (setq ivy-re-builders-alist
-	;; allow input not in order
-        '((t   . ivy--regex-ignore-order)))
   (defun samray/counsel-goto-recent-directory ()
     "Open recent directory with dired"
     (interactive)

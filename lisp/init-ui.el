@@ -137,9 +137,10 @@ This code toggles between them."
 ;;  Color Theme  ;;
 ;;---------------;;
 
-;; (use-package monokai-theme
-;;   :ensure t
-;;   )
+(use-package molokai-theme
+  :ensure t
+  :disabled t
+  )
 (use-package zenburn-theme
   :ensure t
   )
@@ -255,7 +256,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
 ;; you could add more items.
 (samray/config-time-themes-table '(("6" . zenburn) ("18" . gruvbox)))
-(samray/open-themes-auto-change)
+;; (samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;
 ;;---------------;;

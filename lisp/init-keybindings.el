@@ -59,8 +59,9 @@
 				"g m" 'magit-dispatch-popup
 				"g t" 'git-timemachine-switch-branch
 				"j" '(:ignore t :which-key "jump/join/split")
-				"j j" 'avy-goto-char
 				"j l" 'avy-goto-line
+				"j j" 'avy-goto-char
+				"j w" 'avy-goto-word-1
 				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
 				"p f" 'counsel-projectile-find-file
@@ -78,6 +79,7 @@
 				"s a" 'counsel-ag
 				"s g" 'counsel-git
 				"s i" 'iedit-mode
+				"s r" 'counsel-rg
 				"s s" 'swiper
 				"t" '(:ignore t :which-key "toggle")
 				"t f" 'fci-mode

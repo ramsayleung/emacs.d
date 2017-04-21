@@ -138,6 +138,18 @@
     (py-isort-buffer)
     (py-autopep8-buffer))
   )
+(defun samray/setup-python-mode ()
+  "Make sure we add to hook locally so that we do not mess up
+completion in other major-modes"
+  (add-hook 'company-completion-finished-hook #'samray/company-insert-parens-function t))
+
+(defun samray/company-insert-parens-function (candidate)
+  "This part will be different for different backends."
+  (when (string= (plist-get (text-properties-at 0 candidate) :symbol) "f")
+    (insert "()")
+    (backward-char)))
+
+(add-hook 'python-mode #'samray/setup-python-mode)
 
 (provide 'init-python)
 ;;; init-python.el ends here
