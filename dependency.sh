@@ -29,7 +29,7 @@ echo "start to install Python syntax checker"
 sudo pip install pylint
 # install Eslint for Javascript
 echo "start to install Javascript synatx checker"
-sudo npm install eslint
+sudo npm install eslint -g
 #install required Python packages for Elpy
 #if [ $(pip install rope;echo $?) != 0 ]
 #Either of these
