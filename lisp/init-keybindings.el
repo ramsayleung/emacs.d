@@ -370,11 +370,20 @@
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     [remap query-replace] 'samray/query-replace-dwim
-	     ;; "C-c a" 'org-agenda
+	     "C-c a" 'org-agenda
 	     "C-c b" 'samray/counsel-ag-symbol-at-point
 	     "C-c e" 'hydra-edit/body
 	     "C-c c" 'hydra-counsel/body
 	     "C-c C-r" 'ivy-resume
+	     "C-c (" 'wrap-with-parens
+	     "C-c [" 'wrap-with-brackets
+	     "C-c {" 'wrap-with-braces
+	     "C-c '" 'wrap-with-single-quotes
+	     "C-c \"" 'wrap-with-double-quotes
+	     "C-c _" 'wrap-with-underscotes
+	     "C-c `" 'wrap-with-back-quotes
+	     "C-s" 'swiper
+	     "C-;" 'samray/projectile-speedbar-toggle
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
 	     "C-h l" 'counsel-find-library
@@ -388,23 +397,15 @@
 	     "C-M-e" 'sp-end-of-sexp
 	     "C-<down>" 'sp-down-sexp
 	     "C-<up>" 'sp-up-sexp
-	     "M-<down>" 'sp-backward-down-sexp
-	     "M-<up>" 'sp-backward-up-sexp
 	     "C-M-k" 'sp-kill-sexp
 	     "C-k" 'sp-kill-hybrid-sexp
+	     "M-<down>" 'sp-backward-down-sexp
+	     "M-<up>" 'sp-backward-up-sexp
+	     "M-i" 'symbol-overlay-put
 	     "M-k" 'sp-backward-kill-sexp
 	     "M-[" 'sp-backward-unwrap-sexp
 	     "M-]" 'sp-unwrap-sexp
 	     "M-1" 'projectile-speedbar-open-current-buffer-in-tree
-	     "C-c (" 'wrap-with-parens
-	     "C-c [" 'wrap-with-brackets
-	     "C-c {" 'wrap-with-braces
-	     "C-c '" 'wrap-with-single-quotes
-	     "C-c \"" 'wrap-with-double-quotes
-	     "C-c _" 'wrap-with-underscotes
-	     "C-c `" 'wrap-with-back-quotes
-	     "C-s" 'swiper
-	     "C-;" 'samray/projectile-speedbar-toggle
 	     "M-x" 'counsel-M-x
 	     "<f2> i" 'counsel-info-lookup-symbol
 	     "<f2> u" 'counsel-unicode-char

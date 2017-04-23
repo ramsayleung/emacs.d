@@ -69,6 +69,9 @@
   :config (progn
 	    (add-hook 'speedbar-mode-hook (lambda () (linum-mode -1)))
 	    ))
+(use-package symbol-overlay
+  :ensure t
+  )
 
 (defun samray/speedbar-contract-all-lines ()
   "Contract all items in the speedbar buffer."

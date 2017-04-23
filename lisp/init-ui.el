@@ -137,9 +137,10 @@ This code toggles between them."
 ;;  Color Theme  ;;
 ;;---------------;;
 
-;; (use-package monokai-theme
-;;   :ensure t
-;;   )
+(use-package molokai-theme
+  :ensure t
+  :disabled t
+  )
 (use-package zenburn-theme
   :ensure t
   )
@@ -162,7 +163,7 @@ This code toggles between them."
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn gruvbox ))
+(defvar samray-theme-list '(zenburn gruvbox molokai))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
