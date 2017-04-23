@@ -17,6 +17,7 @@
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
 				"a c" 'circe
+				"a w" 'wttrin
 				"a y" '(:ignore t :which-key "youdao-dictionary")
 				"a y i" 'youdao-dictionary-search-from-input
 				"a y p" 'youdao-dictionary-search-at-point+
@@ -39,7 +40,7 @@
 				"f" '(:ignore t :which-key "files")
 				"f c" 'samray/copy-current-file-path
 				"f d" 'samray/delete-current-buffer-file
-                                "f D" 'samray/delete-whitespace-between-english-and-chinese-char
+				"f D" 'samray/delete-whitespace-between-english-and-chinese-char
 				"f E" 'samray/sudo-edit
 				"f f" 'counsel-find-file
 				"f g" 'samray/counsel-goto-recent-directory
@@ -89,7 +90,7 @@
 				"t o" 'origami-toggle-mode
 				"t r" 'sr-speedbar-toggle
 				"t s" 'selectric-mode
-                                "t t" 'samray/cycle-theme
+				"t t" 'samray/cycle-theme
 				"t w" 'samray/toggle-window-split
 				"w" '(:ignore t :which-key "windows")
 				"w d" 'delete-window
@@ -136,8 +137,8 @@
 				"a o s" 'org-search-view
 				"a o t" 'org-todo-list
 				"a o p" 'org-pomodoro
-                                "t p" 'org-preview-html-mode
-                                "t d" 'org-indent-mode
+				"t p" 'org-preview-html-mode
+				"t d" 'org-indent-mode
 				)
 
 	    (general-define-key :states '(normal insert visual motion)
@@ -154,15 +155,15 @@
 				"M-t" '(org-insert-todo-heading)
 				)
 
-            (general-define-key :states '(normal visual motion)
-                                :keymaps 'org-mode-map
-                                ;; "h" 'evil-backward-char
+	    (general-define-key :states '(normal visual motion)
+				:keymaps 'org-mode-map
+				;; "h" 'evil-backward-char
 				[remap org-beginning-of-line] 'evil-backward-char
 				[remap org-end-of-line] 'evil-forward-char
-                                ;; "l" 'evil-forward-char
+				;; "l" 'evil-forward-char
 				"J" 'org-next-visible-heading
 				"K" 'org-previous-visible-heading
-                                )
+				)
 
 	    (general-define-key :states 'normal
 				:keymaps 'org-mode-map
@@ -361,7 +362,7 @@
 
 	    (general-nvmap
 	     "Y" 'samray/copy-to-end-of-line
-             "(" 'paredit-open-round
+	     "(" 'paredit-open-round
 	     )
 	    (general-define-key :keymaps 'read-expression-map
 				"C-r" 'counsel-expression-history)
@@ -376,36 +377,37 @@
 	     "C-c e" 'hydra-edit/body
 	     "C-c c" 'hydra-counsel/body
 	     "C-c C-r" 'ivy-resume
+	     "C-c (" 'wrap-with-parens
+	     "C-c [" 'wrap-with-brackets
+	     "C-c {" 'wrap-with-braces
+	     "C-c '" 'wrap-with-single-quotes
+	     "C-c \"" 'wrap-with-double-quotes
+	     "C-c _" 'wrap-with-underscotes
+	     "C-c `" 'wrap-with-back-quotes
+	     "C-s" 'swiper
+	     "C-;" 'samray/projectile-speedbar-toggle
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
 	     "C-h l" 'counsel-find-library
 	     "C-x C-f" 'counsel-find-file
-             "C-x b" 'samray/ivy-switch-to-buffer-enhanced
+	     "C-x b" 'samray/ivy-switch-to-buffer-enhanced
 	     "C-x k" 'kill-this-buffer
 	     "C-x C-r" 'recentf-open-files
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
-             "C-M-a" 'sp-beginning-of-sexp
-             "C-M-e" 'sp-end-of-sexp
-             "C-<down>" 'sp-down-sexp
-             "C-<up>" 'sp-up-sexp
-             "M-<down>" 'sp-backward-down-sexp
-             "M-<up>" 'sp-backward-up-sexp
-             "C-M-k" 'sp-kill-sexp
-             "C-k" 'sp-kill-hybrid-sexp
-             "M-k" 'sp-backward-kill-sexp
-             "M-[" 'sp-backward-unwrap-sexp
-             "M-]" 'sp-unwrap-sexp
+	     "C-M-a" 'sp-beginning-of-sexp
+	     "C-M-e" 'sp-end-of-sexp
+	     "C-<down>" 'sp-down-sexp
+	     "C-<up>" 'sp-up-sexp
+	     "C-M-k" 'sp-kill-sexp
+	     "C-k" 'sp-kill-hybrid-sexp
+	     "M-<down>" 'sp-backward-down-sexp
+	     "M-<up>" 'sp-backward-up-sexp
+	     "M-i" 'symbol-overlay-put
+	     "M-k" 'sp-backward-kill-sexp
+	     "M-[" 'sp-backward-unwrap-sexp
+	     "M-]" 'sp-unwrap-sexp
 	     "M-1" 'projectile-speedbar-open-current-buffer-in-tree
-             "C-c (" 'wrap-with-parens
-             "C-c [" 'wrap-with-brackets
-             "C-c {" 'wrap-with-braces
-             "C-c '" 'wrap-with-single-quotes
-             "C-c \"" 'wrap-with-double-quotes
-             "C-c _" 'wrap-with-underscotes
-             "C-c `" 'wrap-with-back-quotes
-	     "C-s" 'counsel-grep-or-swiper
-	     "C-;" 'samray/projectile-speedbar-toggle
 	     "M-x" 'counsel-M-x
 	     "<f2> i" 'counsel-info-lookup-symbol
 	     "<f2> u" 'counsel-unicode-char
@@ -416,29 +418,35 @@
   ;; Format buffer
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
-                      "C-c C-g" 'elpy-goto-definition
-                      "C-M-;" 'samray/python-format-and-isort-buffer)
+		      "C-c C-g" 'elpy-goto-definition
+		      "C-M-;" 'samray/python-format-and-isort-buffer)
 
   ;; Web mode|Html mode
   (general-define-key :keymaps '(web-mode-map html-mode-map)
-                      "C-M-;" 'web-beautify-html)
+		      "C-M-;" 'web-beautify-html)
 
   ;; Css mode
   (general-define-key :keymaps 'css-mode-map
-                      "C-M-;" 'web-beautify-css)
+		      "C-M-;" 'web-beautify-css)
 
   ;; Js|Js2|Json mode
   (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
-                      "C-M-;" 'web-beautify-js)
+		      "C-M-;" 'web-beautify-js)
 
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
-                      "C-M-;" 'samray/indent-buffer)
+		      "C-M-;" 'samray/indent-buffer)
 
+  ;; Dired-mode
+  ;; (general-define-key :keymap 'dired-mode-map
+  ;; 		      "e" 'samray/ediff-files
+  ;; 		      )
+
+;;; Org-agenda-mode
   (with-eval-after-load 'org-mode
-    ;; Org-agenda-mode
-    (general-define-key :keymap org-agenda-mode-map
+    (general-define-key :keymap 'org-agenda-mode
 			"v" 'hydra-org-agenda-view/body))
+
 
   (general-define-key :states '(normal visual )
 		      :prefix my-second-leader-key
@@ -451,26 +459,26 @@
 		      )
 
   (general-define-key :keymaps 'counsel-find-file-map
-  		      "C-j" 'ivy-next-line
-  		      "C-k" 'ivy-previous-line)
+		      "C-j" 'ivy-next-line
+		      "C-k" 'ivy-previous-line)
 
   (general-define-key :keymaps 'emacs-lisp-mode-map
-                      :states 'insert
-        	      "DEL" 'hungry-delete-backward)
+		      :states 'insert
+		      "DEL" 'hungry-delete-backward)
 
   (general-define-key :keymaps 'emacs-lisp-mode-map
-  		      "C-c s" 'find-function-at-point)
+		      "C-c s" 'find-function-at-point)
 
   (general-define-key :keymaps 'term-raw-map
-  		      "C-y" 'samray/term-paste)
+		      "C-y" 'samray/term-paste)
 
   (general-define-key :states '(normal emacs)
-  		      :keymaps 'geiser-repl-mode-map
-  		      "q" '(progn (bury-buffer) (delete-window)))
+		      :keymaps 'geiser-repl-mode-map
+		      "q" '(progn (bury-buffer) (delete-window)))
 
   (general-define-key :states '(normal emacs)
-  		      :keymaps 'inferior-python-mode-map
-  		      "q" '(progn (bury-buffer) (delete-window))
+		      :keymaps 'inferior-python-mode-map
+		      "q" '(progn (bury-buffer) (delete-window))
 		      )
 
   (general-define-key :states '(normal emacs)
@@ -515,6 +523,7 @@
 	      ("j" counsel-grep "grep")
 	      ("l" counsel-locate "locate")
 	      ("s" swiper-all "swiper-all")
+	      ("r" counsel-rg "ripgreg")
 	      )
 
 	    (defhydra hydra-info (:color blue
@@ -625,6 +634,8 @@ Info-mode:
 		 (org-agenda-check-type t 'timeline 'agenda)
 		 (org-agenda-redo)))
 	      ("q" (message "Abort") :exit t))
+	    ;; (define-key org-agenda-mode-map
+	    ;;   "v" 'hydra-org-agenda-view/body)
 	    )
   )
 

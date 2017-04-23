@@ -413,6 +413,11 @@ removal."
 	mac-command-modifier 'meta
 	mac-option-modifier 'none)
   )
+
+;;; Tramp
+(require 'tramp)
+(setq tramp-default-method "ssh")
+
 (message "loading init-misc")
 (provide 'init-misc)
 ;;; init-misc.el ends here

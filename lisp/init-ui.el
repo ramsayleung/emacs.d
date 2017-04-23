@@ -163,7 +163,7 @@ This code toggles between them."
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn gruvbox ))
+(defvar samray-theme-list '(zenburn gruvbox molokai))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()

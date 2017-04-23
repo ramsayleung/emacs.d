@@ -2,6 +2,8 @@
 ;;; code:
 ;;; Commentary:
 
+(use-package flx
+  :ensure t)
 (use-package counsel
   :ensure t
   :init (
