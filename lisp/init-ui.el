@@ -255,8 +255,8 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;; item of time-themes-table: ( hours-in-string . theme-name)
 ;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
 ;; you could add more items.
-(samray/config-time-themes-table '(("6" . zenburn) ("18" . gruvbox)))
-;; (samray/open-themes-auto-change)
+(samray/config-time-themes-table '(("6" . zenburn) ("18" . gruvbox) ("21" . molokai)))
+(samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;
 ;;---------------;;
