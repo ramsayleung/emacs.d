@@ -148,7 +148,6 @@ completion in other major-modes"
   (when (string= (plist-get (text-properties-at 0 candidate) :symbol) "f")
     (insert "()")
     (backward-char)))
-
 (add-hook 'python-mode #'samray/setup-python-mode)
 
 (provide 'init-python)

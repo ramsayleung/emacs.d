@@ -24,8 +24,7 @@
   :diminish ivy-mode
   :init (progn
 	  (setq ivy-re-builders-alist
-		'((ivy-switch-buffer . ivy--regex-plus)
-		  (t . ivy--regex-fuzzy)))
+		'((t . ivy--regex-fuzzy)))
 	  (setq ivy-initial-inputs-alist nil)
 	  )
   :config
@@ -83,6 +82,19 @@ bookmarks reccently opened files and window layout."
   (add-hook 'post-command-hook 'insert-symbol-at-point)
   (counsel-ag)
   )
+
+(defun samray/disable-flx-before-swipe (&rest args)
+  "I don't want fuzzy search in swipe, so just disable it before swipe."
+  (setq ivy-re-builders-alist
+	'((t . ivy--regex-plus)))
+  )
+(defun samray/reset-flx-after-swipe (&rest args)
+  "Just reset flx fuzzy mathcing after swipe."
+  (setq ivy-re-builders-alist
+	'((t . ivy--regex-fuzzy)))
+  )
+(advice-add 'counsel-grep-or-swiper :before 'samray/disable-flx-before-swipe)
+(advice-add 'counsel-grep-or-swiper :after 'samray/reset-flx-after-swipe)
 
 (provide 'init-ivy)
 
