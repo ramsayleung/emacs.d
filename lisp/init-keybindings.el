@@ -372,11 +372,14 @@
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     [remap query-replace] 'samray/query-replace-dwim
+	     "C-k" 'sp-kill-hybrid-sexp
+	     "C-s" 'swiper
+	     "C-;" 'samray/projectile-speedbar-toggle
 	     "C-c a" 'org-agenda
 	     "C-c b" 'samray/counsel-ag-symbol-at-point
-	     "C-c e" 'hydra-edit/body
 	     "C-c c" 'hydra-counsel/body
-	     "C-c C-r" 'ivy-resume
+	     "C-c e" 'hydra-edit/body
+	     "C-c w" 'hydra-window-resize/body
 	     "C-c (" 'wrap-with-parens
 	     "C-c [" 'wrap-with-brackets
 	     "C-c {" 'wrap-with-braces
@@ -384,8 +387,7 @@
 	     "C-c \"" 'wrap-with-double-quotes
 	     "C-c _" 'wrap-with-underscotes
 	     "C-c `" 'wrap-with-back-quotes
-	     "C-s" 'swiper
-	     "C-;" 'samray/projectile-speedbar-toggle
+	     "C-c C-r" 'ivy-resume
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
 	     "C-h l" 'counsel-find-library
@@ -400,7 +402,6 @@
 	     "C-<down>" 'sp-down-sexp
 	     "C-<up>" 'sp-up-sexp
 	     "C-M-k" 'sp-kill-sexp
-	     "C-k" 'sp-kill-hybrid-sexp
 	     "M-<down>" 'sp-backward-down-sexp
 	     "M-<up>" 'sp-backward-up-sexp
 	     "M-i" 'symbol-overlay-put
@@ -437,6 +438,9 @@
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
 		      "C-M-;" 'samray/indent-buffer)
 
+  ;; Markdown-mode
+  (general-define-key :keymaps 'markdown-mode-map
+		      "C-M-;" 'samray/indent-buffer)
   ;; Dired-mode
   ;; (general-define-key :keymap 'dired-mode-map
   ;; 		      "e" 'samray/ediff-files
@@ -634,8 +638,15 @@ Info-mode:
 		 (org-agenda-check-type t 'timeline 'agenda)
 		 (org-agenda-redo)))
 	      ("q" (message "Abort") :exit t))
-	    ;; (define-key org-agenda-mode-map
-	    ;;   "v" 'hydra-org-agenda-view/body)
+
+	    (defhydra hydra-window-resize ()
+	      "Window resize"
+	      ("l" shrink-window-horizontally "shrink-right-window")
+	      ("h" enlarge-window-horizontally "shrink-left-windo")
+	      ("k" enlarge-window "shrink-up-window")
+	      ("j" shrink-window "shrink-below-window")
+	      ("q" nil "quit" :exit t)
+	      )
 	    )
   )
 
