@@ -10,39 +10,39 @@
   Even though I though My .emacs.d is self-explaination, but it still a good
   idea to demonstrate its file structure.
   #+BEGIN_SRC 
-    ├── additional-packages  ;;; For those packages which is so useful but you could not find theme in elpa
-    ├── backups ;;; Even though I use auto-save package to save files automatically. But I still will put backup file in this
-    ├── elpa ;;; For packages in melpa
-    ├── eshell ;;; Alias history or others about Eshell
-    ├── lisp ;;; My personal hacking elisp file
-    │   ├── custom.el ;; For customized variable
-    │   ├── init-auto-completion.el ;; Packages and function used to auto-complete in Emacs, and I use Company
-    │   ├── init-better-editing.el ;; Package and function to get better editing behavior, such as multi cursor
-    │   ├── init-c-c++.el ;; package and function for C/C++ programming, typically, for C, I don't know C++ :)
-    │   ├── init-chinese.el  ;; package and function about Chinese, such as input method, setup about Chinese in org-mode
-    │   ├── init-elisp.el ;; package and function for elisp programming.
-    │   ├── init-eshell.el ;; package and function for eshell, I use eshell most of time. So I do a lot of hack about Eshell
-    │   ├── init-evil.el ;; Vim editting feeling is awesome, Evil could make an OS own a good editor. All about evil-mode
-    │   ├── init-ivy.el ;; I use Ivy instead of Helm or Ido, It is lightweight and powerful, thanks abo-abo. All about Ivy-mode
-    │   ├── init-keybindings.el ;; I use general to manage my keybinding which emulates Spacemacs keybinding and combines my personal keybinding
-    │   ├── init-markdown.el ;; All for markdown, But I think Org-mode is better.
-    │   ├── init-misc.el ;; A lof of packages and function about misc thing, such as IRC.
-    │   ├── init-org.el ;; All for the magic package, it deserves all honor.
-    │   ├── init-programming.el ;; Some hack for get better programming hehavior
-    │   ├── init-python.el ;; For python programming. Such IDE environment, code format, import sort, etc.
-    │   ├── init-scheme.el ;; For learning scheme(SICP)
-    │   ├── init-syntax-checking.el ;; Use flycheck to check syntac
-    │   ├── init-ui.el ;; Everything about UI, including font, theme, window, etc. 
-    │   ├── init-version-control.el ;; Use git to control version. Most of it are about magit.
-    │   └── init-web.el ;; Include Javascript, Html, Css, Vue, web-mode and other thing about web developing.
-    ├── pyim ;; about chinese input method
+    ├── additional-packages          ;;; For those packages which is so useful but you could not find theme in elpa
+    ├── backups           ;;; Even though I use auto-save package to save files automatically. But I still will put backup file in this
+    ├── elpa           ;;; For packages in melpa
+    ├── eshell           ;;; Alias history or others about Eshell
+    ├── lisp           ;;; My personal hacking elisp file
+    │   ├── custom.el           ;; For customized variable
+    │   ├── init-auto-completion.el           ;; Packages and function used to auto-complete in Emacs, and I use Company
+    │   ├── init-better-editing.el           ;; Package and function to get better editing behavior, such as multi cursor
+    │   ├── init-c-c++.el           ;; package and function for C/C++ programming, typically, for C, I don't know C++ :)
+    │   ├── init-chinese.el            ;; package and function about Chinese, such as input method, setup about Chinese in org-mode
+    │   ├── init-elisp.el           ;; package and function for elisp programming.
+    │   ├── init-eshell.el           ;; package and function for eshell, I use eshell most of time. So I do a lot of hack about Eshell
+    │   ├── init-evil.el           ;; Vim editting feeling is awesome, Evil could make an OS own a good editor. All about evil-mode
+    │   ├── init-ivy.el           ;; I use Ivy instead of Helm or Ido, It is lightweight and powerful, thanks abo-abo. All about Ivy-mode
+    │   ├── init-keybindings.el           ;; I use general to manage my keybinding which emulates Spacemacs keybinding and combines my personal keybinding
+    │   ├── init-markdown.el           ;; All for markdown, But I think Org-mode is better.
+    │   ├── init-misc.el           ;; A lof of packages and function about misc thing, such as IRC.
+    │   ├── init-org.el           ;; All for the magic package, it deserves all honor.
+    │   ├── init-programming.el           ;; Some hack for get better programming hehavior
+    │   ├── init-python.el           ;; For python programming. Such IDE environment, code format, import sort, etc.
+    │   ├── init-scheme.el           ;; For learning scheme(SICP)
+    │   ├── init-syntax-checking.el           ;; Use flycheck to check syntac
+    │   ├── init-ui.el           ;; Everything about UI, including font, theme, window, etc. 
+    │   ├── init-version-control.el           ;; Use git to control version. Most of it are about magit.
+    │   └── init-web.el           ;; Include Javascript, Html, Css, Vue, web-mode and other thing about web developing.
+    ├── pyim           ;; about chinese input method
     │   └── dcache
-    ├── snippets ;; snippet for yasnippet.
+    ├── snippets           ;; snippet for yasnippet.
   #+END_SRC
 * ScreenShot
   Even though screenshot could not describute an OS, but in my opinion it still
-  could show you something.
-  Gruvbox Theme:
+  could show you something. Gruvbox Theme:
+
   [[./images/emacs_screenshot1.png]]
   
   sr-speedbar+projectile+Eshell+Zenburn theme
