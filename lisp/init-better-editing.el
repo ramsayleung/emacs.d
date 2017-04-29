@@ -340,5 +340,20 @@ lines up by reverse ARG."
 (require 'dired)
 (define-key dired-mode-map "e" 'samray/ediff-files)
 
+(defadvice upcase-word (before upcase-word-advice activate)
+  "Upcase a word until cursor is at the beginning of this word."
+  (unless (looking-back "\\b")
+    (backward-word)))
+
+(defadvice downcase-word (before downcase-word-advice activate)
+  "Downcase a word until cursor is at the beginning of this word."
+  (unless (looking-back "\\b")
+    (backward-word)))
+
+(defadvice capitalize-word (before capitalize-word-advice activate)
+  "Cpaitalize a word until cursor is at the beginning of this word."
+  (unless (looking-back "\\b")
+    (backward-word)))
+
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here
