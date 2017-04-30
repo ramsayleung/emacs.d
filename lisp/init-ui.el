@@ -141,6 +141,9 @@ This code toggles between them."
   :ensure t
   :disabled t
   )
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :disabled)
 (use-package zenburn-theme
   :ensure t
   )
@@ -163,7 +166,7 @@ This code toggles between them."
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn gruvbox molokai))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties gruvbox molokai))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -255,7 +258,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;; item of time-themes-table: ( hours-in-string . theme-name)
 ;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
 ;; you could add more items.
-(samray/config-time-themes-table '(("6" . zenburn) ("18" . gruvbox) ))
+(samray/config-time-themes-table '(("6" . zenburn) ("18" . sanityinc-tomorrow-eighties) ))
 (samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;
