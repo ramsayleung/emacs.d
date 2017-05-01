@@ -78,19 +78,6 @@ bookmarks reccently opened files and window layout."
   (counsel-ag)
   )
 
-(defun samray/disable-flx-before-swipe (&rest args)
-  "I don't want fuzzy search in swipe, so just disable it before swipe."
-  (setq ivy-re-builders-alist
-	'((t . ivy--regex-plus)))
-  )
-(defun samray/reset-flx-after-swipe (&rest args)
-  "Just reset flx fuzzy mathcing after swipe."
-  (setq ivy-re-builders-alist
-	'((t . ivy--regex-fuzzy)))
-  )
-(advice-add 'counsel-grep-or-swiper :before 'samray/disable-flx-before-swipe)
-(advice-add 'counsel-grep-or-swiper :after 'samray/reset-flx-after-swipe)
-
 (provide 'init-ivy)
 
 ;;; init-ivy.el ends here

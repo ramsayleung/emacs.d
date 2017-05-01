@@ -143,7 +143,8 @@ This code toggles between them."
   )
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
-  :disabled)
+  :disabled t
+  )
 (use-package zenburn-theme
   :ensure t
   )
@@ -189,17 +190,17 @@ This code toggles between them."
 
 ;; ====================================Themes automatically change =====================================
 ;;timer for automatically changing themes
-(setq samray--interval-timer nil)
+(defvar samray--interval-timer nil)
 
 ;;table is used to save (time themes) pair for automatically changing themes
 ;;time should be a string. themes should be a variant , not symbos.
-(setq samray--time-themes-table nil)
+(defvar samray--time-themes-table nil)
 
-(defun samray/config-time-themes-table (tt)
-  "Set time . themes table for time-themes-table."
+(defun samray/config-time-themes-table (theme-table)
+  "Set time . THEME-TABLE for time-themes-table."
   (setq samray--time-themes-table
 	;; sort firstly, get-themes-according require a sorted table.
-	(sort tt (lambda (x y) (< (string-to-int (car x)) (string-to-int (car y)))))
+	(sort theme-table (lambda (x y) (< (string-to-number (car x)) (string-to-number (car y)))))
         )
   )
 
@@ -208,7 +209,7 @@ This code toggles between them."
 Value of hour-string should be between 1 and 24(including)."
   (catch 'break
     (let (
-          (now-time (string-to-int hour-string))
+          (now-time (string-to-number hour-string))
           ;; init current-themes to the themes of final item
           (correct-themes (cdr (car (last samray--time-themes-table))))
           (loop-list samray--time-themes-table)
@@ -217,7 +218,7 @@ Value of hour-string should be between 1 and 24(including)."
       ;; loop to set correct themes to correct-themes
       (while loop-list
 	(let ((v (car loop-list)))
-	  (let ((v-time (string-to-int (car v))) (v-themes (cdr v)))
+	  (let ((v-time (string-to-number (car v))) (v-themes (cdr v)))
 	    (if (< now-time v-time)
                 (throw 'break correct-themes)  ; t
 	      (setq correct-themes v-themes) ; nil
@@ -243,7 +244,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   (interactive)
   (samray/check-time-and-modify-theme)
   (setq
-   samray--interval-timer (run-at-time 3600 3600 'samray/check-time-and-modify-theme))
+   samray--interval-timer (run-at-time 1800 3600 'samray/check-time-and-modify-theme))
   (message "themes auto change open.")
   )
 
@@ -359,10 +360,12 @@ then check whether EMACS should to modify theme, if so, modify it."
 
 ;;; Stolen From https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org
 (defmacro diminish-minor-mode (filename mode &optional abbrev)
+  "Macro for diminish minor mode with FILENAME MODE and ABBREV."
   `(eval-after-load (symbol-name ,filename)
      '(diminish ,mode ,abbrev)))
 
 (defmacro diminish-major-mode (mode-hook abbrev)
+  "Macro for diminish major mode with MODE-HOOK and ABBREV."
   `(add-hook ,mode-hook
              (lambda () (setq mode-name ,abbrev))))
 (diminish-minor-mode 'highlight-indentation 'highlight-indentation-mode )
