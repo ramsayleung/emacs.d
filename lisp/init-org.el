@@ -98,6 +98,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;;usual ellipsis (...) that org displays when there’s stuff under
 	     ;; a header.
 	     (setq org-ellipsis "⤵")
+
 	     ;;Its default value is (ascii html icalendar latex)
 	     (setq org-export-backends '(latex icalendar))
 	     ;; Show org-edit-special in the other-window

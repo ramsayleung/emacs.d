@@ -372,8 +372,9 @@
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     [remap query-replace] 'samray/query-replace-dwim
+	     [remap paredit-backward] 'dumb-jump-back
 	     "C-k" 'sp-kill-hybrid-sexp
-	     "C-s" 'swiper
+	     "C-s" 'counsel-grep-or-swiper
 	     "C-;" 'samray/projectile-speedbar-toggle
 	     "C-c a" 'org-agenda
 	     "C-c b" 'samray/counsel-ag-symbol-at-point
@@ -398,10 +399,12 @@
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
 	     "C-M-a" 'sp-beginning-of-sexp
+	     "C-M-b" 'dumb-jump-back
 	     "C-M-e" 'sp-end-of-sexp
+	     "C-M-k" 'sp-kill-sexp
+	     "C-k" 'sp-kill-hybrid-sexp
 	     "C-<down>" 'sp-down-sexp
 	     "C-<up>" 'sp-up-sexp
-	     "C-M-k" 'sp-kill-sexp
 	     "M-<down>" 'sp-backward-down-sexp
 	     "M-<up>" 'sp-backward-up-sexp
 	     "M-i" 'symbol-overlay-put

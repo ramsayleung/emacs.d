@@ -37,6 +37,12 @@
   :ensure t
   :commands er/expand-region
   )
+;; projectile
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  (setq projectile-completion-system 'ivy))
 
 ;;; jump to definition package
 (use-package dumb-jump
