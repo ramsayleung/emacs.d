@@ -33,10 +33,51 @@
   (package-initialize)
   (require 'package)
   (setq package-enable-at-startup nil)
-  ;; For God' sake,there are a lot of site you cannot reach in China
-  ;; this is mirror of melpa and gnu
-  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-			   ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+
+  (defconst samray/query-public-ip-url "http://ipinfo.io/ip")
+
+  (defun samray/send-get-request (api-url)
+    "Send get request, return JSON as an alist if successes."
+    (let (json)
+      (with-current-buffer (url-retrieve-synchronously api-url)
+	(set-buffer-multibyte t)
+	(goto-char (point-min))
+	(when (not (string-match "200 OK" (buffer-string)))
+	  (error "Problem connecting to the server"))
+	;; (message (buffer-string))
+	(re-search-forward "^$" )
+	(setq json
+	      (buffer-substring-no-properties (point) (point-max)))
+	(kill-buffer (current-buffer)))
+      json))
+  (defun samray/setup-query-ip ()
+    (let* ((query-ip-result (samray/send-get-request samray/query-public-ip-url))
+	   (public-ip (samray/remove-eof query-ip-result )))
+      (concat "http://ipapi.co/"public-ip"/country/"))
+    )
+
+  (defun samray/remove-eof (string-with-eof)
+    (replace-regexp-in-string "\n" "" string-with-eof))
+
+  (defun samray/ip-from-china-p ()
+    (let* ((query-result (samray/send-get-request (samray/setup-query-ip)))
+	   (ip-location (samray/remove-eof query-result)))
+      (string= "CN" ip-location)
+      ))
+  (if (samray/ip-from-china-p)
+      (progn
+	(message "There is a wall here.")
+	;; For God' sake,there are a lot of site you cannot reach in China
+	;; this is mirror of melpa and gnu
+	(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+				 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+	)
+    (progn
+      (message "You are free.")
+      (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			       ("marmalade" . "https://marmalade-repo.org/packages/")
+			       ("melpa" . "https://melpa.org/packages/")))
+      ))
   (message "load")
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)

@@ -143,7 +143,7 @@ This code toggles between them."
   )
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
-  :disabled t
+  :no-require t
   )
 (use-package zenburn-theme
   :ensure t
