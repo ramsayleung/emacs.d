@@ -156,12 +156,13 @@ This code toggles between them."
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
+  "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
 
 (defvar samray-current-font nil)
 (defun samray/reset-current-font (&rest args)
   "It seems a bug about EMACS that the font will change after
-  load/disable-theme, so reset it after load/disable-theme"
+load/'disable-theme', so reset it after load/disable-theme'"
   (set-frame-font samray-current-font)
   )
 
