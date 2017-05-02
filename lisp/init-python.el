@@ -56,10 +56,13 @@
 ;;; virtualenvwrapper for virtualenv
 (use-package virtualenvwrapper
   :ensure t
-  :init (add-hook 'python-mode-hook (lambda()
-				      (venv-initialize-interactive-shells)
-				      (venv-initialize-eshell))
-		  ))
+  :init (progn
+	  ( add-hook 'python-mode-hook (lambda()
+					 (venv-initialize-interactive-shells)
+					 (venv-initialize-eshell)))
+	  ;; (add-hook 'venv-postmkvirtualenv-hook
+	  ;; 	    (lambda () (shell-command "pip install nose flake8 jedi autopep8 isort")))
+	  ))
 
 ;;; To fix issue that there is weird eshell output with ipython
 ;; (setq python-shell-interpreter "ipython"

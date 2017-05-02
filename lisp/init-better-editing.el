@@ -143,6 +143,9 @@
       recentf-exclude '("/tmp/" "/ssh:"))
 (recentf-mode 1)
 
+;;; Auto-refresh buffers when files have changed on disk
+(global-auto-revert-mode t)
+
 (defun samray/split-window-right-and-move ()
   "Split window vertically and move to the other window."
   (interactive)

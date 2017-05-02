@@ -54,7 +54,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		(sql . t)
 		(sqlite . t)))
 
-	     (setq org-agenda-files '("~/SyncDirectory/Org/agenda.org" "~/SyncDirectory/Org/todo.org"))
+	     (setq org-agenda-files '("~/Dropbox/Org/agenda.org" "~/Dropbox/Org/todo.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
 		      ((tags "PRIORITY=\"A\""
@@ -70,17 +70,17 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;;be inserted just after the headline
 	     (setq org-log-done 'time)
 	     (setq org-capture-templates
-		   '(("a" "Agenda" entry (file  "~/SyncDirectory/Org/agenda.org" "Agenda")
+		   '(("a" "Agenda" entry (file  "~/Dropbox/Org/agenda.org" "Agenda")
 		      "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
-		     ("n" "Note" entry (file+headline "~/SyncDirectory/Org/notes.org" "Notes")
+		     ("n" "Note" entry (file+headline "~/Dropbox/Org/notes.org" "Notes")
 		      "* Note %?\n%T")
-		     ("l" "Link" entry (file+headline "~/SyncDirectory/Org/links.org" "Links")
+		     ("l" "Link" entry (file+headline "~/Dropbox/Org/links.org" "Links")
 		      "* %? %^L %^g \n%T" :prepend t)
-		     ("b" "Blog idea" entry (file+headline "~/SyncDirectory/Org/blog.org" "Blog Topics:")
+		     ("b" "Blog idea" entry (file+headline "~/Dropbox/Org/blog.org" "Blog Topics:")
 		      "* %?\n%T" :prepend t)
-		     ("t" "To Do Item" entry (file+headline "~/SyncDirectory/Org/todo.org" "To Do Items")
+		     ("t" "To Do Item" entry (file+headline "~/Dropbox/Org/todo.org" "To Do Items")
 		      "* TODO  %?\n  %i\n" :prepend t)
-		     ("j" "Journal" entry (file+datetree "~/SyncDirectory/Org/journal.org")
+		     ("j" "Journal" entry (file+datetree "~/Dropbox/Org/journal.org")
 		      "* %?\nEntered on %U\n  %i\n  %a")
 		     ))
 	     ;;GUI Emacs could display image.But if the image is too large,
