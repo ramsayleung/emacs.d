@@ -22,6 +22,7 @@
 	 company-require-match 0
 	 company-selection-wrap-around t
 	 company-dabbrev-downcase nil
+	 company-echo-delay 0                          ; remove annoying blinking
 	 company-tooltip-limit 20                      ; bigger popup window
 	 company-tooltip-align-annotations 't          ; align annotations to the right tooltip border
 	 company-idle-delay .4                         ; decrease delay before autocompletion popup shows
@@ -106,5 +107,19 @@
           (add-hook 'js-mode-hook
                     (lambda () (add-to-list 'company-backends 'company-tern)))
           ))
+
+;;; backends for go
+(use-package company-go
+  :load-path "~/.emacs.d/additional-packages/company-go.el"
+  :ensure t
+  :init (progn
+	  (add-hook 'go-mode-hook (lambda ()
+				    (set (make-local-variable 'company-backends) '(company-go))
+				    (company-mode)))
+
+	  ;; (add-hook 'go-mode-hook
+	  ;; 	    (lambda () (add-to-list 'company-backends 'company-go)))
+	  )
+  )
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

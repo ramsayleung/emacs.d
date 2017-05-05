@@ -444,6 +444,10 @@
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map
 		      "C-M-;" 'samray/indent-buffer)
+
+  ;; Go-mode
+  (general-define-key :keymaps 'go-mode-map
+		      "C-M-;" 'gofmt)
   ;; Dired-mode
   ;; (general-define-key :keymap 'dired-mode-map
   ;; 		      "e" 'samray/ediff-files
