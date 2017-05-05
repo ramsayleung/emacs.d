@@ -34,7 +34,7 @@
   (require 'package)
   (setq package-enable-at-startup nil)
 
-  (defconst samray/query-public-ip-url "http://ipinfo.io/ip")
+  (defconst samray/query-public-ip-url "http://myexternalip.com/raw")
 
   (defun samray/send-get-request (api-url)
     "Send get request, return JSON as an alist if successes."

@@ -69,3 +69,6 @@ sudo pip install epc
 # install isort
 echo "Start to install isort"
 sudo pip install isort
+
+echo "Install gocode"
+go get -u github.com/nsf/gocode
