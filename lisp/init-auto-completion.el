@@ -106,5 +106,13 @@
           (add-hook 'js-mode-hook
                     (lambda () (add-to-list 'company-backends 'company-tern)))
           ))
+
+;;; backends for restclient
+(use-package company-restclient
+  :ensure t
+  :defer t
+  :init (progn
+	  (add-hook 'restclient-mode-hook
+		    (lambda () (add-to-list 'company-backends 'company-restclient)))))
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here
