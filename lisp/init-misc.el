@@ -192,6 +192,12 @@ debug-init and load the given list of packages."
 (setq abbrev-mode 'silently)
 (setq save-abbrevs t)
 
+(defadvice bookmark-jump (after bookmark-jump activate)
+  "Find frequently used bookmarks easily."
+  (let ((latest (bookmark-get-bookmark bookmark)))
+    (setq bookmark-alist (delq latest bookmark-alist))
+    (add-to-list 'bookmark-alist latest)))
+
 (define-abbrev-table 'global-abbrev-table '(
 					    ;; signature
 					    ("8sa" "samray")
