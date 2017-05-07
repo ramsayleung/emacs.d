@@ -67,7 +67,7 @@
   (if (samray/ip-from-china-p)
       (progn
 	(message "There is a wall here.")
-	;; For God' sake,there are a lot of site you cannot reach in China
+	;; For God' sake, there are a lot of site you cannot reach in China
 	;; this is mirror of melpa and gnu
 	(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 				 ("melpa" . "http://elpa.emacs-china.org/melpa/")))

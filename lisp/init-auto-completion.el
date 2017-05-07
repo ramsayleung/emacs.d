@@ -108,6 +108,13 @@
                     (lambda () (add-to-list 'company-backends 'company-tern)))
           ))
 
+;;; backends for restclient
+(use-package company-restclient
+  :ensure t
+  :defer t
+  :init (progn
+	  (add-hook 'restclient-mode-hook
+		    (lambda () (add-to-list 'company-backends 'company-restclient)))))
 ;;; backends for go
 (use-package company-go
   :load-path "~/.emacs.d/additional-packages/company-go.el"

@@ -55,6 +55,12 @@
 	  (add-hook 'prog-mode-hook 'dumb-jump-mode)
 	  )
   :config (setq dumb-jump-selector 'ivy))
+
+;;; Rest client in Emacs
+(use-package restclient
+  :ensure t
+  :mode ("\\.rest\\'" . restclient-mode))
+
 ;;; Evil is not especilly useful in the terminal,so
 (evil-set-initial-state 'term-mode 'emacs)
 
