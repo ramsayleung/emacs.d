@@ -38,6 +38,10 @@
     ("8sa" "samray" nil 0)
    ))
 
+(define-abbrev-table 'go-mode-abbrev-table '())
+
+(define-abbrev-table 'godoc-mode-abbrev-table '())
+
 (define-abbrev-table 'grep-mode-abbrev-table '())
 
 (define-abbrev-table 'gud-mode-abbrev-table '())
@@ -81,8 +85,6 @@
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
 
 (define-abbrev-table 'shell-mode-abbrev-table '())
-
-(define-abbrev-table 'snippet-mode-abbrev-table '())
 
 (define-abbrev-table 'special-mode-abbrev-table '())
 
