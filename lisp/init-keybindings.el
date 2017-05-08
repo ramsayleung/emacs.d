@@ -380,6 +380,7 @@
 	     "C-c b" 'samray/counsel-ag-symbol-at-point
 	     "C-c c" 'hydra-counsel/body
 	     "C-c e" 'hydra-edit/body
+	     "C-c y p" 'youdao-dictionary-search-at-point+
 	     "C-c w" 'hydra-window-resize/body
 	     "C-c (" 'wrap-with-parens
 	     "C-c [" 'wrap-with-brackets

@@ -2,7 +2,14 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-capture-last-stored"
+(("(eintr) zap-to-char body"
+ (front-context-string . "\n8.1.2 The Body ")
+ (rear-context-string . "Up: zap-to-char\n")
+ (position . 260173)
+ (filename . "/usr/share/info/eintr")
+ (info-node . "zap-to-char body")
+ (handler . Info-bookmark-jump))
+("org-capture-last-stored"
  (filename . "~/SyncDirectory/Org/links.org")
  (front-context-string . "**  [[http://cac")
  (rear-context-string)

@@ -117,29 +117,12 @@ This code toggles between them."
 ;; turn on mouse wheel support for scrolling
 ;; (mouse-wheel-mode t)
 
-;;----------------------;;
-;; Syntax Highlighting  ;;
-;;----------------------;;
-;; text decoration
-(setq font-lock-maximum-decoration t)
-(global-font-lock-mode t)
-(global-hi-lock-mode nil)
-(setq jit-lock-contextually t)
-(setq jit-lock-stealth-verbose t)
-;; if there is size information associated with text, change the text
-;; size to reflect it
-(size-indication-mode t)
-
-;; highlight parentheses when the cursor is next to them
-(show-paren-mode t)
-
-;;---------------;;
 ;;  Color Theme  ;;
 ;;---------------;;
 
 (use-package molokai-theme
   :ensure t
-  :disabled t
+  :no-require t
   )
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
@@ -150,7 +133,7 @@ This code toggles between them."
   )
 (use-package gruvbox-theme
   :ensure t
-  :disabled t
+  :no-require t
   )
 
 ;;; Disable theme before load a new theme
@@ -236,6 +219,7 @@ Value of hour-string should be between 1 and 24(including)."
 then check whether EMACS should to modify theme, if so, modify it."
   (let ((new-theme (samray/get-themes-according (format-time-string "%H"))))
     (unless (eq new-theme samray-current-theme)
+      (setq samray-current-theme new-theme)
       (load-theme new-theme t)
       ))
   )
