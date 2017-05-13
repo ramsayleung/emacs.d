@@ -449,6 +449,9 @@
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
 		      "C-M-;" 'gofmt)
+  ;; Rust-mode
+  (general-define-key :keymaps 'rust-mode-map
+		      "C-M-;" 'rust-format-buffer)
   ;; Dired-mode
   ;; (general-define-key :keymap 'dired-mode-map
   ;; 		      "e" 'samray/ediff-files

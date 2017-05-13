@@ -2,7 +2,21 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("(eintr) zap-to-char body"
+(("(eintr) kill-new function"
+ (front-context-string . "\nThe ‘kill-new’ ")
+ (rear-context-string . "on-as-kill body\n")
+ (position . 288129)
+ (filename . "/usr/share/info/eintr")
+ (info-node . "kill-new function")
+ (handler . Info-bookmark-jump))
+("(eintr) Complete copy-region-as-kill"
+ (front-context-string . "up if Transient ")
+ (rear-context-string . "n from lighting\n")
+ (position . 280706)
+ (filename . "/usr/share/info/eintr")
+ (info-node . "Complete copy-region-as-kill")
+ (handler . Info-bookmark-jump))
+("(eintr) zap-to-char body"
  (front-context-string . "\n8.1.2 The Body ")
  (rear-context-string . "Up: zap-to-char\n")
  (position . 260173)
@@ -10,8 +24,8 @@
  (info-node . "zap-to-char body")
  (handler . Info-bookmark-jump))
 ("org-capture-last-stored"
- (filename . "~/SyncDirectory/Org/links.org")
- (front-context-string . "**  [[http://cac")
+ (filename . "~/Dropbox/Org/links.org")
+ (front-context-string . "**  [[https://vi")
  (rear-context-string)
  (position . 9))
 )
