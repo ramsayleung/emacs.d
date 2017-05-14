@@ -22,7 +22,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
+    (company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
    (quote

@@ -1,5 +1,3 @@
-;;; package --- Summary
-;;; code:
 ;;; Commentary:
 
 (use-package yasnippet
@@ -29,10 +27,13 @@
   :init (progn
 	  (when (memq window-system '(mac ns))
 	    (exec-path-from-shell-initialize)
-	    ;; (exec-path-from-shell-copy-env "PATH")
-	    ;; (exec-path-from-shell-copy-env "GOPATH")
+	    (exec-path-from-shell-copy-env "PATH")
 	    )
 	  )
+  :config (progn
+	    (exec-path-from-shell-copy-env "RUST_SRC_PATH")
+	    (exec-path-from-shell-copy-env "GOPATH")
+	    )
   )
 
 ;; Emacs extension to increate selected region by semantic units

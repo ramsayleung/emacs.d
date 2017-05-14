@@ -64,7 +64,7 @@
 	   (ip-location (samray/remove-eof query-result)))
       (string= "CN" ip-location)
       ))
-  (if (samray/ip-from-china-p)
+  (if t
       (progn
 	(message "There is a wall here.")
 	;; For God' sake, there are a lot of site you cannot reach in China
