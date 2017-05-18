@@ -128,5 +128,14 @@
 	  ;; 	    (lambda () (add-to-list 'company-backends 'company-go)))
 	  )
   )
+;;; backends for rust
+(use-package company-racer
+  :ensure t
+  :defer t
+  :init (progn
+	  (add-hook 'rust-mode-hook (lambda ()
+				      (add-to-list 'company-backends 'company-racer)
+				      ))
+	  ))
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

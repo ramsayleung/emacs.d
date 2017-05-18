@@ -423,7 +423,12 @@
   ;; Format buffer
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
-		      "C-c C-g" 'elpy-goto-definition
+		      [remap dumb-jump-go] 'elpy-goto-definition
+		      [remap dumb-jump-back] 'pop-tag-mark
+		      "C-M-g" 'elpy-goto-definition
+		      "C-M-b" 'pop-tag-mark
+		      "M-." 'elpy-goto-definition
+		      "M-," 'pop-tag-mark
 		      "C-M-;" 'samray/python-format-and-isort-buffer)
 
   ;; Web mode|Html mode
@@ -449,6 +454,16 @@
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
 		      "C-M-;" 'gofmt)
+  ;; Rust-mode
+  (general-define-key :keymaps 'rust-mode-map
+		      "<tab>" 'company-indent-or-complete-common
+		      [remap evil-repeat-pop-next] 'racer-find-definition
+		      "M-." 'racer-find-definition
+		      [remap dumb-jump-go] 'racer-find-definition
+		      [remap dumb-jump-back] 'pop-tag-mark
+		      "C-M-g" 'racer-find-definition
+		      "C-M-b" 'pop-tag-mark
+		      "C-M-;" 'rust-format-buffer)
 
 ;;; Org-agenda-mode
   (with-eval-after-load 'org-mode
@@ -496,6 +511,9 @@
     (general-define-key
      "C-c C-z" popwin:keymap
      )))
+
+(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 
 (use-package hydra
   :ensure t

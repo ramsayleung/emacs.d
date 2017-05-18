@@ -130,6 +130,7 @@ This code toggles between them."
   )
 (use-package zenburn-theme
   :ensure t
+  :disabled t
   )
 (use-package gruvbox-theme
   :ensure t
