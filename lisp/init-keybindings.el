@@ -449,10 +449,6 @@
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
 		      "C-M-;" 'gofmt)
-  ;; Dired-mode
-  ;; (general-define-key :keymap 'dired-mode-map
-  ;; 		      "e" 'samray/ediff-files
-  ;; 		      )
 
 ;;; Org-agenda-mode
   (with-eval-after-load 'org-mode
@@ -500,10 +496,6 @@
     (general-define-key
      "C-c C-z" popwin:keymap
      )))
-
-(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
-(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-
 
 (use-package hydra
   :ensure t
@@ -657,6 +649,13 @@ Info-mode:
 	      )
 	    )
   )
+
+(add-hook 'dired-mode-hook
+	  (lambda ()
+	    (define-key dired-mode-map (kbd "i")
+	      (lambda () (interactive) (find-alternate-file "..")))))
+(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 
 (provide 'init-keybindings)
 ;;; init-keybindings ends here

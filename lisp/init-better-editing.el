@@ -115,6 +115,13 @@
   :commands undo-tree-visualize
   :config (global-undo-tree-mode t))
 
+;;; make grep buffer writable and apply the changes to files
+(use-package wgrep
+  :ensure t
+  :init (progn
+	  (setq wgrep-auto-save-buffer t)
+	  ))
+
 ;;; Emacs always for confirmation whether we really wanna open
 ;;; large file.However,the default limit is so low,so it prompt often
 ;;; So increase limit to solve it.

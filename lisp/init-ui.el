@@ -122,18 +122,18 @@ This code toggles between them."
 
 (use-package molokai-theme
   :ensure t
-  :no-require t
+  :disabled t
   )
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
-  :no-require t
+  :disabled t
   )
 (use-package zenburn-theme
   :ensure t
   )
 (use-package gruvbox-theme
   :ensure t
-  :no-require t
+  :disabled t
   )
 
 ;;; Disable theme before load a new theme
