@@ -7,7 +7,7 @@
   :config (progn
 	    (general-evil-setup t)
 	    (defvar my-leader-key "SPC")
-	    (defvar my-second-leader-key ",")
+	    (defvar my-second-leader-key "/")
 	    (general-define-key :states '(normal visual motion )
 				:prefix my-leader-key
 				";" 'evilnc-comment-operator
