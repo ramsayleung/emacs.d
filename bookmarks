@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("(eintr) kill-new function"
+((#("ranger-a" 0 8
+   (face ivy-virtual))
+ (filename . "~/.emacs.d/lisp/")
+ (front-context-string . "auto-indent.el\n*")
+ (rear-context-string . "3K Apr 14 20:49 ")
+ (position . 103))
+("(eintr) kill-new function"
  (front-context-string . "\nThe ‘kill-new’ ")
  (rear-context-string . "on-as-kill body\n")
  (position . 288129)

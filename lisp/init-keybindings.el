@@ -7,7 +7,7 @@
   :config (progn
 	    (general-evil-setup t)
 	    (defvar my-leader-key "SPC")
-	    (defvar my-second-leader-key ",")
+	    (defvar my-second-leader-key "/")
 	    (general-define-key :states '(normal visual motion )
 				:prefix my-leader-key
 				";" 'evilnc-comment-operator
@@ -667,6 +667,13 @@ Info-mode:
 	      )
 	    )
   )
+
+(add-hook 'dired-mode-hook
+	  (lambda ()
+	    (define-key dired-mode-map (kbd "i")
+	      (lambda () (interactive) (find-alternate-file "..")))))
+(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 
 (provide 'init-keybindings)
 ;;; init-keybindings ends here

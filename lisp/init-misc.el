@@ -104,6 +104,25 @@
         ("mp4" . "vlc")
         ("avi" . "vlc")))
 
+;;; use ranger to replace dired 
+(use-package ranger
+  :ensure t
+  :init (progn
+	  (ranger-override-dired-mode t)
+	  (setq ranger-cleanup-eagerly t)
+	  (setq ranger-show-hidden t)
+	  (setq ranger-footer-delay 0.2)
+	  (setq ranger-preview-delay 0.040)
+	  (setq ranger-parent-depth 1)
+	  (setq ranger-preview-file t)
+	  (setq ranger-width-parents 0.12)
+	  (setq ranger-max-parent-width 0.12)
+	  (setq ranger-max-preview-size 10)
+	  (setq ranger-dont-show-binary t)
+	  )
+  )
+
+
 ;;; auto save file when Emacs idle
 (use-package auto-save
   :load-path "~/.emacs.d/additional-packages/auto-save.el"

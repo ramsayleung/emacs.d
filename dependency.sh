@@ -72,3 +72,10 @@ sudo pip install isort
 
 echo "Install gocode"
 go get -u github.com/nsf/gocode
+
+echo "Install rust-lang"
+curl https://sh.rustup.rs -sSf | sh
+
+echo "Install racer dependency"
+rustup component add rust-src
+cargo install racer

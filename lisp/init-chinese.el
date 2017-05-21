@@ -36,7 +36,7 @@
   (setq-default pyim-english-input-switch-functions
                 '(pyim-probe-dynamic-english
                   pyim-probe-isearch-mode
-                  pyim-probe-program-mode
+                  ;; pyim-probe-program-mode
                   ;; pyim-probe-org-structure-template
   		  ))
   (setq-default pyim-punctuation-half-width-functions
