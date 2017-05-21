@@ -128,7 +128,7 @@
 	  ;; 	    (lambda () (add-to-list 'company-backends 'company-go)))
 	  )
   )
-;;; backends for rust
+;; backends for rust
 (use-package company-racer
   :ensure t
   :defer t
