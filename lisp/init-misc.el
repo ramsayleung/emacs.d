@@ -367,7 +367,7 @@ removal."
 
 ;; from magnars
 (defun samray/delete-current-buffer-file ()
-  "Removes file connected to current buffer and kills buffer."
+  "Remove file connected to current buffer and kills buffer."
   (interactive)
   (let ((filename (buffer-file-name))
         (buffer (current-buffer))

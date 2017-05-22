@@ -1,3 +1,6 @@
+;;; package --- Summary:
+;;; Commentary:
+;;; Code:
 ;;; Commentary:
 
 (use-package yasnippet
@@ -25,15 +28,14 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  (when (memq window-system '(mac ns))
-	    (exec-path-from-shell-initialize)
-	    )
+	  (setq exec-path-from-shell-variables '("PATH" "RUST_SRC_PATH" "PYTHONPATH"))
+	  ;; when it is nil, exec-path-from-shell will read environment variable
+	  ;; from .zshenv instead of .zshrc, but makes sure that you put all
+	  ;; environment variable you need in .zshenv rather than .zshrc
+	  (setq exec-path-from-shell-check-startup-files nil) ;
+	  (setq exec-path-from-shell-arguments '("-l" )) ;remove -i read form .zshenv
+	  (exec-path-from-shell-initialize)
 	  )
-  :config (progn
-	    (exec-path-from-shell-copy-env "PATH")
-	    (exec-path-from-shell-copy-env "RUST_SRC_PATH")
-	    (exec-path-from-shell-copy-env "GOPATH")
-	    )
   )
 
 ;; Emacs extension to increate selected region by semantic units
@@ -45,7 +47,7 @@
 (use-package projectile
   :ensure t
   :config
-  (projectile-global-mode)
+  (projectile-mode)
   (setq projectile-completion-system 'ivy))
 
 ;;; jump to definition package
@@ -130,10 +132,10 @@
       )))
 (add-hook 'imenu-list-major-mode-hook (lambda () (linum-mode -1)))
 
-;;; Yanking in the term-mode doesn't quit work
-;;; The text from the paste appears in the buffer but isn't
-;;; sent to the shell
 (defun samray/term-paste (&optional string)
+  "Yanking in the term-mode doesn't quit work The text from the
+   paste appears in the buffer but isn't sent to the shell
+"
   (interactive)
   (process-send-string
    (get-buffer-process (current-buffer))
@@ -143,7 +145,7 @@
 (add-hook 'term-mode-hook
 	  (lambda ()
 	    (goto-address-mode)
-	    (setq yas-dont-activate t)))
+	    (setq yas-dont-activate-functions t)))
 
 ;;; https://www.emacswiki.org/emacs/AutoFillMode
 ;;; auto format comment to 80-char long
@@ -182,17 +184,17 @@ similar to shell-pop"
 similar to shell-pop"
   (interactive)
   (let* ((repl-modes '((python-mode . "*Python*")
-                       (scheme-mode . "* Guile REPL *"))))
+		       (scheme-mode . "* Guile REPL *"))))
     (cond ((or (derived-mode-p 'python-mode) (derived-mode-p 'inferior-python-mode))
-           (progn
+	   (progn
 ;;; To fix issue that there is weird eshell output with ipython
-             (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
-          ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
-           (samray/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
+	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
+	  ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
+	   (samray/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
 	  ((or (derived-mode-p 'prog-mode)(derived-mode-p 'inferior-python-mode))
 	   (progn
 	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
-          )))
+	  )))
 ;;; Treating terms in CamelCase symbols as separate words makes editing a
 ;;; little easier for me, so I like to use subword-mode everywhere.
 ;;;  Nomenclature           Subwords
