@@ -114,6 +114,7 @@
 
   (require 'init-auto-completion)
   (require 'init-better-editing)
+  (require 'init-better-default)
   (require 'init-chinese)
   (require 'init-c-c++)
   (require 'init-elisp)
