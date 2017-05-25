@@ -70,7 +70,7 @@ This code toggles between them."
   (tool-bar-mode -1)
   ;; turn off file scroll bar
   (scroll-bar-mode -1)
-  ;; specify the fringe width for windows -- this sets both the left and
+ ;; specify the fringe width for windows -- this sets both the left and
   ;; right fringes to 10
   (fringe-mode 8)
   )
