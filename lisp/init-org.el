@@ -177,10 +177,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                   op/repository-org-branch "source"
                   op/repository-html-branch "master"
                   op/site-domain "https//samrayleung.github.io/"
-                  op/site-main-title "When A Child Is Born"
+                  op/site-main-title "陌上人如玉,公子世无双"
                   op/site-sub-title "凡走过,必留下痕迹"
+		  op/personal-disqus-shortname "Samray"; use for disqus comments
                   op/theme 'mdo) ;; theme
-            (setq op/personal-disqus-shortname "Samray") ; use for disqus comments
             )
   )
 
