@@ -371,7 +371,6 @@
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
-	     [remap query-replace] 'samray/query-replace-dwim
 	     [remap paredit-backward] 'dumb-jump-back
 	     "C-k" 'sp-kill-hybrid-sexp
 	     "C-s" 'counsel-grep-or-swiper
