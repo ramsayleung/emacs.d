@@ -70,7 +70,7 @@ This code toggles between them."
   (tool-bar-mode -1)
   ;; turn off file scroll bar
   (scroll-bar-mode -1)
- ;; specify the fringe width for windows -- this sets both the left and
+  ;; specify the fringe width for windows -- this sets both the left and
   ;; right fringes to 10
   (fringe-mode 8)
   )
@@ -122,19 +122,19 @@ This code toggles between them."
 
 (use-package molokai-theme
   :ensure t
-  :disabled t
+  :defer t
   )
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
-  :disabled t
+  :defer t
   )
 (use-package zenburn-theme
   :ensure t
-  :disabled t
+  :defer t
   )
 (use-package gruvbox-theme
   :ensure t
-  :disabled t
+  :defer t
   )
 
 ;;; Disable theme before load a new theme
