@@ -47,7 +47,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		(js . t)
 		(latex . t)
 		(ruby . t)
-		(shell . t)
+		(sh . t)
 		(python . t)
 		(emacs-lisp . t)
 		(awk . t)
