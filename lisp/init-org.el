@@ -9,8 +9,6 @@
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
 	  ;; wrap line
 	  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
-	  ;; disable fci-mode 
-	  (add-hook 'org-mode-hook (lambda () (fci-mode -1)))
 	  (setq org-todo-keyword-faces
 		'(
 		  ("PROCESSING" . (:foreground "gold" :weight bold))

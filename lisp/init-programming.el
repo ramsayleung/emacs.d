@@ -28,7 +28,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  (setq exec-path-from-shell-variables '("PATH" "RUST_SRC_PATH" "PYTHONPATH"))
+	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH"))
 	  ;; when it is nil, exec-path-from-shell will read environment variable
 	  ;; from .zshenv instead of .zshrc, but makes sure that you put all
 	  ;; environment variable you need in .zshenv rather than .zshrc

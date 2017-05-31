@@ -83,7 +83,6 @@
 				"s r" 'counsel-rg
 				"s s" 'swiper
 				"t" '(:ignore t :which-key "toggle")
-				"t f" 'fci-mode
 				"t g" 'samray/git-timemachine
 				"t i" 'imenu-list-smart-toggle
 				"t f" 'samray/cycle-font
