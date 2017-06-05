@@ -73,6 +73,8 @@ This code toggles between them."
   ;; specify the fringe width for windows -- this sets both the left and
   ;; right fringes to 10
   (fringe-mode 8)
+;;; Disable mouse scrolling
+  (mouse-wheel-mode -1)
   )
 
 ;; no menubar

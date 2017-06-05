@@ -5,6 +5,15 @@
   is that Vim is the best, but action is loader than words. I could only defeat
   this guy that Vim is best after I try Emacs. Finally, I try Emacs for half of
   a year and I turn to be an Emacser :)
+* Install
+  Before install this .emacs.d, make sure you have backup your configuration.
+  #+BEGIN_SRC shell
+    git clone https://github.com/samrayleung/emacs.d.git ~/.emacs.d
+  #+END_SRC
+  And then run ~dependency.sh~ to install dependencies
+  #+BEGIN_SRC shell
+    bash dependency.sh
+  #+END_SRC
 * Features
 ** Evil
    Even though I am an Emacser now, I have to admit that the way Vim edit file
