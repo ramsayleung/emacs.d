@@ -89,6 +89,7 @@
 	    ))
 (use-package symbol-overlay
   :ensure t
+  :commands (symbol-overlay-put)
   )
 
 (defun samray/speedbar-contract-all-lines ()
