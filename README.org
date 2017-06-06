@@ -152,3 +152,5 @@
    [[./images/rg.png]]
 ** various window
    [[./images/various_window.png]]
+** eshell
+   [[./images/eshell.png]]
