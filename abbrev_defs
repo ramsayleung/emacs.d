@@ -9,13 +9,7 @@
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
 
-(define-abbrev-table 'debugger-mode-abbrev-table '())
-
-<<<<<<< HEAD
-(define-abbrev-table 'dsssl-mode-abbrev-table '())
-=======
-(define-abbrev-table 'edebug-eval-mode-abbrev-table '())
->>>>>>> a9072b4f6a47a0514e014125da74e35c2771ebb8
+(define-abbrev-table 'diff-mode-abbrev-table '())
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
@@ -38,6 +32,8 @@
     ("8sa" "samray" nil 0)
    ))
 
+(define-abbrev-table 'gnus-group-mode-abbrev-table '())
+
 (define-abbrev-table 'go-mode-abbrev-table '())
 
 (define-abbrev-table 'godoc-mode-abbrev-table '())
@@ -59,6 +55,8 @@
 (define-abbrev-table 'ivy-occur-mode-abbrev-table '())
 
 (define-abbrev-table 'lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'message-mode-abbrev-table '())
 
 (define-abbrev-table 'messages-buffer-mode-abbrev-table '())
 
@@ -88,11 +86,19 @@
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
 
+(define-abbrev-table 'tar-mode-abbrev-table '())
+
 (define-abbrev-table 'term-mode-abbrev-table '())
 
 (define-abbrev-table 'text-mode-abbrev-table '())
 
 (define-abbrev-table 'url-cookie-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
 

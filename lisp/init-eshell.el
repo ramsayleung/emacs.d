@@ -123,6 +123,7 @@
 ;; Display extra information and color for eshll prompt
 (use-package eshell-prompt-extras
   :ensure t
+  :load-path "~/.emacs.d/additional-packages/eshell-prompt-extras.el"
   :config (progn
 	    (with-eval-after-load "esh-opt"
 	      (use-package virtualenvwrapper :ensure t)
