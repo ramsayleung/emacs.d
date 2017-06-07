@@ -352,17 +352,16 @@ lines up by reverse ARG."
 
 (defadvice upcase-word (before upcase-word-advice activate)
   "Upcase a word until cursor is at the beginning of this word."
-  (unless (looking-back "\\b")
-    (backward-word)))
+  (unless (looking-back "\\b" 1)(backward-word)))
 
 (defadvice downcase-word (before downcase-word-advice activate)
   "Downcase a word until cursor is at the beginning of this word."
-  (unless (looking-back "\\b")
-    (backward-word)))
+  (unless (looking-back "\\b" 1)(backward-word)))
 
 (defadvice capitalize-word (before capitalize-word-advice activate)
-  "Cpaitalize a word until cursor is at the beginning of this word."
-  (unless (looking-back "\\b")
+  "Capitalize word dependen on 'subword-mode'."
+  (unless (or (looking-back "\\b" 1)
+              (bound-and-true-p subword-mode))
     (backward-word)))
 
 (provide 'init-better-editing)

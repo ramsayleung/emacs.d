@@ -89,7 +89,6 @@ debug-init and load the given list of packages."
 	       args))))
   )
 
-
 ;;; File encoding system
 ;;; UTF-8 works for most of the files i tend to used
 (prefer-coding-system 'utf-8)

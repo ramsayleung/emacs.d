@@ -9,8 +9,6 @@
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
 	  ;; wrap line
 	  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
-	  ;; disable fci-mode 
-	  (add-hook 'org-mode-hook (lambda () (fci-mode -1)))
 	  (setq org-todo-keyword-faces
 		'(
 		  ("PROCESSING" . (:foreground "gold" :weight bold))
@@ -47,7 +45,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		(js . t)
 		(latex . t)
 		(ruby . t)
-		(shell . t)
+		(sh . t)
 		(python . t)
 		(emacs-lisp . t)
 		(awk . t)
@@ -124,8 +122,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	   )
   )
 ;; automatically open your agenda when start Emacs
-(add-hook 'after-init-hook (lambda ()
-                             (org-agenda nil "c")))
+;; (add-hook 'after-init-hook (lambda ()
+;;                              (org-agenda nil "c")))
 
 ;;; pomodoro tech
 (use-package org-pomodoro
@@ -172,7 +170,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :after org
   :ensure t
   :config (progn
-            (setq op/repository-directory "~/Documents/Blog/samrayleung.github.io" ;;local repo location
+            (setq op/repository-directory "~/Dropbox/Blog/samrayleung.github.io" ;;local repo location
                   op/personal-github-link "https://github.com/samrayleung" ;;github link
                   op/repository-org-branch "source"
                   op/repository-html-branch "master"
