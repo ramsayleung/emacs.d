@@ -170,7 +170,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :after org
   :ensure t
   :config (progn
-            (setq op/repository-directory "~/Documents/Blog/samrayleung.github.io" ;;local repo location
+            (setq op/repository-directory "~/Dropbox/Blog/samrayleung.github.io" ;;local repo location
                   op/personal-github-link "https://github.com/samrayleung" ;;github link
                   op/repository-org-branch "source"
                   op/repository-html-branch "master"
