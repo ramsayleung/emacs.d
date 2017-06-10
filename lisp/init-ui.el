@@ -72,7 +72,7 @@ This code toggles between them."
   (scroll-bar-mode -1)
   ;; specify the fringe width for windows -- this sets both the left and
   ;; right fringes to 10
-  (fringe-mode 8)
+  (fringe-mode 10)
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
@@ -82,7 +82,28 @@ This code toggles between them."
 ;; turn off startup help menu
 (setq inhibit-splash-screen t)
 ;; show line number
-(global-linum-mode t)
+(use-package nlinum
+  :ensure t
+  :init (progn
+	  ;; Preset `nlinum-format' for minimum width.
+	  (defun samray/nlinum-mode-hook ()
+	    (when nlinum-mode
+	      (setq-local nlinum-format
+			  (concat "%" (number-to-string
+				       ;; Guesstimate number of buffer lines.
+				       (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
+				  "d"))))
+	  (add-hook 'nlinum-mode-hook 'samray/nlinum-mode-hook))
+  :config (progn
+	    (global-nlinum-mode)
+	    (defun initialize-nlinum (&optional frame)
+	      (add-hook 'prog-mode-hook 'nlinum-mode))
+	    (when (daemonp)
+	      (add-hook 'window-setup-hook 'initialize-nlinum)
+	      (defadvice make-frame (around toggle-nlinum-mode compile activate)
+		(nlinum-mode -1) ad-do-it (nlinum-mode 1)))
+
+	    ))
 ;; number of characters until the fill column
 (setq fill-column 80)
 ;; show the current line and column numbers in the stats bar as well
@@ -258,7 +279,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   (when window-system
     (if (null (x-list-fonts font)) nil t)))
 
-(defvar samray-font-list '("Source Code Pro-11" "Consolas" "Inconsolata-11" "Fira Code-11" ))
+(defvar samray-font-list '("Fira Code-11" "Source Code Pro-11" "Consolas" "Inconsolata-11" ))
 
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."
