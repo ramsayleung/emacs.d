@@ -15,7 +15,7 @@
   (progn
     (smartparens-global-mode t)
     ;; show single quote "'" in emacs and lisp-interaction-mode instead of single quote pair "''"
-    (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
+    (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode rust-mode) "'" nil :actions nil)
     )
   )
 
