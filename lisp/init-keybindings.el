@@ -311,12 +311,6 @@
 				[remap evil-insert-digraph] 'eshell-kill-process
 				)
 
-	    (general-define-key :keymaps 'dumb-jump-mode-map
-				"M-g j" 'dumb-jump-go
-				"M-g o" 'dumb-jump-go-other-window
-				"M-g b" 'dumb-jump-back
-				)
-
 	    ;; Pdf view mode
 	    (general-define-key :states '(normal emacs)
 				:keymaps 'pdf-view-mode-map
@@ -458,7 +452,6 @@
 		      "<tab>" 'company-indent-or-complete-common
 		      [remap evil-repeat-pop-next] 'racer-find-definition
 		      "M-." 'racer-find-definition
-		      [remap dumb-jump-go] 'racer-find-definition
 		      [remap dumb-jump-back] 'xref-pop-marker-stack
 		      "C-M-g" 'racer-find-definition
 		      "C-M-b" 'xref-pop-marker-stack

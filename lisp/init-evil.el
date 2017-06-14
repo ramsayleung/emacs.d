@@ -44,6 +44,7 @@
 (use-package evil-mc
   :ensure t
   :commands evil-mode
+  :diminish evil-mc-mode
   :init
   (global-evil-mc-mode t)
   )
