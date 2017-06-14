@@ -371,6 +371,8 @@
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     [remap paredit-backward] 'dumb-jump-back
+	     [remap evil-repeat-pop-next] 'xref-find-definitions
+	     "M-." 'xref-find-definitions
 	     "C-k" 'sp-kill-hybrid-sexp
 	     "C-s" 'counsel-grep-or-swiper
 	     "C-;" 'samray/projectile-speedbar-toggle
@@ -421,12 +423,11 @@
   ;; Format buffer
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
-		      [remap dumb-jump-go] 'elpy-goto-definition
-		      [remap dumb-jump-back] 'pop-tag-mark
+		      [remap anaconda-mode-find-assignments] 'xref-pop-marker-stack
 		      "C-M-g" 'elpy-goto-definition
-		      "C-M-b" 'pop-tag-mark
+		      "C-M-b" 'xref-pop-marker-stack
 		      "M-." 'elpy-goto-definition
-		      "M-," 'pop-tag-mark
+		      "M-," 'xref-pop-marker-stack
 		      "C-M-;" 'samray/python-format-and-isort-buffer)
 
   ;; Web mode|Html mode
@@ -458,9 +459,9 @@
 		      [remap evil-repeat-pop-next] 'racer-find-definition
 		      "M-." 'racer-find-definition
 		      [remap dumb-jump-go] 'racer-find-definition
-		      [remap dumb-jump-back] 'pop-tag-mark
+		      [remap dumb-jump-back] 'xref-pop-marker-stack
 		      "C-M-g" 'racer-find-definition
-		      "C-M-b" 'pop-tag-mark
+		      "C-M-b" 'xref-pop-marker-stack
 		      "C-M-;" 'rust-format-buffer)
 
 ;;; Org-agenda-mode

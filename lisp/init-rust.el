@@ -1,4 +1,4 @@
-;;; package --- Summary
+;; package --- Summary
 ;;; Code:
 ;;; Commentary:
 (use-package rust-mode
