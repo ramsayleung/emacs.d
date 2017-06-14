@@ -4,6 +4,7 @@
 
 (use-package irony
   :ensure t
+  :defer t
   :init (progn
 	  (defun samray/irony-mode-hook ()
 	    (define-key irony-mode-map [remap completion-at-point] 'irony-completion-at-point-async)

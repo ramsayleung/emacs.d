@@ -18,8 +18,8 @@
 
 (use-package chinese-pyim
   :ensure t
+  :commands (pyim-convert-code-at-point)
   :config
-
   ;; 激活 basedict 拼音词库
   (use-package chinese-pyim-basedict
     :ensure t

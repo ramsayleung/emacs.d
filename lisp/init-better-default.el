@@ -3,11 +3,11 @@
 ;;; Commentary:
 
 ;;;enhance dired
-(use-package dired+
-  :ensure t
-  :init
-  (diredp-toggle-find-file-reuse-dir t)
-  )
+;; (use-package dired+
+;;   :ensure t
+;;   :init
+;;   (diredp-toggle-find-file-reuse-dir t)
+;;   )
 (setq dired-open-extensions
       '(("mkv" . "vlc")
         ("mp4" . "vlc")
@@ -16,6 +16,7 @@
 ;;; use ranger to replace dired 
 (use-package ranger
   :ensure t
+  :commands (dired)
   :init (progn
 	  (ranger-override-dired-mode t)
 	  (setq ranger-cleanup-eagerly t)

@@ -143,15 +143,18 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;; Export to github flavored markdown
 (use-package ox-gfm
   :ensure ox-gfm
+  :commands (org-export-dispatch)
   )
 
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
   :ensure ox-twbs
+  :commands (org-export-dispatch)
   )
 
 ;;; Export to reveal for presentation
 (use-package ox-reveal
+  :commands (org-export-dispatch)
   :ensure ox-reveal)
 
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
@@ -159,10 +162,15 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
+  :commands (org-export-dispatch)
   :ensure t)
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
+  :defer t
+  :init (progn
+  	  (add-hook 'org-mode-hook (lambda ()
+  				     (require 'org-download))))
   :ensure t)
 
 ;;; org-page for post blog

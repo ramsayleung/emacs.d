@@ -8,7 +8,8 @@
 	 )
   )
 (use-package swiper
-  :ensure t)
+  :ensure t
+  :commands (swiper))
 
 (use-package avy
   :commands (avy-goto-char avy-goto-line)
@@ -43,6 +44,12 @@
 
 (use-package counsel-projectile
   :ensure t
+  :commands (counsel-projectile-switch-to-buffer
+	     counsel-projectile-ag
+	     counsel-projectile-switch-project
+	     counsel-projectile-find-file
+	     counsel-projectile-find-dir
+	     counsel-projectile-rg)
   :config(counsel-projectile-on))
 
 (use-package ivy-buffer-extend
