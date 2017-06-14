@@ -143,5 +143,11 @@ output file. %i path(s) are relative, while %o is absolute.")
 	mac-command-modifier 'meta
 	mac-option-modifier 'none)
   )
+
+
+(defmacro samray/require-after-mode (mode-hook package)
+  "Macro for require package in a specified mode with MODE-HOOK and PACKAGE."
+  `(add-hook ,mode-hook
+             (lambda () (require 'package))))
 (provide 'init-better-default)
 ;;; init-better-default.el ends here

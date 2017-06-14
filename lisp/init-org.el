@@ -169,8 +169,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (use-package org-download
   :defer t
   :init (progn
-  	  (add-hook 'org-mode-hook (lambda ()
-  				     (require 'org-download))))
+	  (samray/require-after-mode 'org-mode-hook 'org-download)
+	  )
   :ensure t)
 
 ;;; org-page for post blog

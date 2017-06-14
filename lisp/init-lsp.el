@@ -13,15 +13,14 @@
   :ensure t
   :defer t
   :init (progn
-	  (add-hook 'python-mode-hook (lambda ()
-					(require 'lsp-python))))
-  )
+	  (samray/require-after-mode 'python-mode-hook 'lsp-python)
+	  ))
 
-;;(use-package lsp-rust
-;;  :ensure t
-;;  :defer t
-;;  :init (progn
-;;	  (add-hook 'rust-mode-hook (lambda ()
-;;				      (require 'lsp-rust)))))
+;; (use-package lsp-rust
+;;   :ensure t
+;;   :defer t
+;;   :init (progn
+;; 	  (samray/require-after-mode 'rust-mode-hook 'lsp-rust)
+;; 	  ))
 ;;; init-lsp.el ends here
 
