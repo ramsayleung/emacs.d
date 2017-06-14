@@ -5,7 +5,8 @@
 (use-package lsp-mode
   :ensure t
   :init (progn
-	  (add-hook 'prog-mode-hook 'lsp-mode)
+	  (dolist (hook '(rust-mode-hook python-mode-hook))
+	    (add-hook hook 'lsp-mode))
 	  ))
 (use-package lsp-python
   :ensure t
