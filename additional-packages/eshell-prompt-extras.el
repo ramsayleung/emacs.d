@@ -165,7 +165,7 @@
   :group 'epe)
 
 (defface epe-pipeline-host-face
-  '((t :foreground "blue"))
+  '((t :foreground "DeepSkyBlue"))
   "Face for host in pipeline theme."
   :group 'epe)
 
