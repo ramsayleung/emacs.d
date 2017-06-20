@@ -132,8 +132,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
-  :after org
   :ensure t
+  :defer t
   :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   :config (progn
             (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
@@ -142,40 +142,57 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;; Org extra exports
 ;; Export to github flavored markdown
 (use-package ox-gfm
-  :ensure ox-gfm
-  :commands (org-export-dispatch)
+  :ensure t
+  :defer t
+  :init (progn
+	  (eval-after-load "org"
+	    '(require 'ox-gfm nil t))
+	  )
   )
 
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
-  :ensure ox-twbs
-  :commands (org-export-dispatch)
+  :ensure t
+  :defer t
+  :init (progn
+	  (eval-after-load "org"
+	    '(require 'ox-twbs nil t))
+	  )
   )
 
 ;;; Export to reveal for presentation
 (use-package ox-reveal
-  :commands (org-export-dispatch)
-  :ensure ox-reveal)
+  :ensure t
+  :defer t
+  :init (progn
+	  (eval-after-load "org"
+	    '(require 'ox-reveal nil t))
+	  )
+  )
 
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
 (setq org-reveal-mathjax t)
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
-  :commands (org-export-dispatch)
-  :ensure t)
+  :ensure t
+  :defer t
+  :init (progn
+	  (eval-after-load "org"
+	    '(require 'htmlize nil t))
+	  )
+  )
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
   :defer t
   :init (progn
-	  (samray/require-after-mode 'org-mode-hook 'org-download)
-	  )
+	  (eval-after-load "org"
+	    '(require 'org-download)))
   :ensure t)
 
 ;;; org-page for post blog
 (use-package org-page
-  :after org
   :ensure t
   :config (progn
             (setq op/repository-directory "~/Dropbox/blog/samrayleung.github.io" ;;local repo location
