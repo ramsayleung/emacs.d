@@ -2,27 +2,6 @@
 ;;; code:
 ;;; Commentary:
 
-(defun af-eshell-here ()
-  "Go to eshell and set current directory to the buffer's directory."
-  (interactive)
-  (let ((dir (file-name-directory (or (buffer-file-name)
-                                      default-directory))))
-    (if (get-buffer "*eshell*")
-	(if (string= (buffer-name) "*eshell*")(delete-window (selected-window))
-	  (progn
-	    (switch-to-buffer "*eshell*"))
-	  )
-      (progn
-	(split-window-vertically)
-	(other-window 1)
-	(eshell)
-	(eshell/pushd ".")
-	(cd dir)
-	(goto-char (point-max))
-	(eshell-kill-input)
-	(eshell-send-input)
-	))))
-
 ;;; https://www.emacswiki.org/emacs/EshellFunctions
 (defun samray/eshell-maybe-bol ()
   "Go to the beginning of command line,or begining of line."
@@ -111,22 +90,7 @@
 					   "nmtui" "alsamixer" "htop" "el" "elinks"
 					   ))
 	    (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
-	    ;; Code from https://www.reddit.com/r/emacs/comments/6f0rkz/my_fancy_eshell_prompt/
-	    (setq eshell-prompt-function
-		  (lambda ()
-		    (concat
-		     (propertize "┌─[" 'face `(:foreground "green"))
-		     (propertize (user-login-name) 'face `(:foreground "red"))
-		     (propertize "@" 'face `(:foreground "green"))
-		     (propertize (system-name) 'face `(:foreground "blue"))
-		     (propertize "]──[" 'face `(:foreground "green"))
-		     (propertize (format-time-string "%H:%M" (current-time)) 'face `(:foreground "yellow"))
-		     (propertize "]──[" 'face `(:foreground "green"))
-		     (propertize (concat (eshell/pwd)) 'face `(:foreground "white"))
-		     (propertize "]\n" 'face `(:foreground "green"))
-		     (propertize "└─>" 'face `(:foreground "green"))
-		     (propertize (if (= (user-uid) 0) " # " " $ ") 'face `(:foreground "green"))
-		     )))    
+
 	    (defun samray/truncate-eshell-buffers ()
 	      "Truncates all eshell buffers"
 	      (interactive)
@@ -156,16 +120,17 @@
 			))
 	    ))
 
-;;; Display extra information and color for eshll prompt
+;; Display extra information and color for eshll prompt
 (use-package eshell-prompt-extras
   :ensure t
+  :load-path "~/.emacs.d/additional-packages/eshell-prompt-extras.el"
   :config (progn
 	    (with-eval-after-load "esh-opt"
 	      (use-package virtualenvwrapper :ensure t)
 	      (venv-initialize-eshell)
-	      (autoload 'epe-theme-lambda "eshell-prompt-extras")
+	      (autoload 'epe-theme-pipeline "eshell-prompt-extras")
 	      (setq eshell-highlight-prompt nil
-		    eshell-prompt-function 'epe-theme-lambda))
+		    eshell-prompt-function 'epe-theme-pipeline))
 	    ))
 
 (provide 'init-eshell)

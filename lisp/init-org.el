@@ -1,7 +1,6 @@
 ;; package --- Summary:
 ;;; Commentary:
 ;;; Code:
-
 (use-package org
   :ensure t
   :mode ("\\.org\\'" . org-mode)
@@ -114,7 +113,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     (setf org-latex-default-packages-alist
 		   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
 	     (require 'ox-md nil t)
-	     (require 'ox-latex ))
+	     (require 'ox-latex )
+	     )
 
 	   (defun add-pcomplete-to-capf ()
 	     (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
@@ -170,7 +170,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :after org
   :ensure t
   :config (progn
-            (setq op/repository-directory "~/Dropbox/Blog/samrayleung.github.io" ;;local repo location
+            (setq op/repository-directory "~/Dropbox/blog/samrayleung.github.io" ;;local repo location
                   op/personal-github-link "https://github.com/samrayleung" ;;github link
                   op/repository-org-branch "source"
                   op/repository-html-branch "master"

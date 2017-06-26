@@ -66,7 +66,7 @@
       ))
   (if t
       ;; It takes too much time to send and receive request, so it slows donw
-      ;; startup. Improve it unitl emacs 26.
+      ;; startup. Improve it unitl emacs 26(multithread).
       ;; (if (samray/ip-from-china-p)
       (progn
 	(message "There is a wall here.")
