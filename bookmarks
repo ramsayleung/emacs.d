@@ -31,7 +31,7 @@
  (handler . Info-bookmark-jump))
 ("org-capture-last-stored"
  (filename . "~/Dropbox/Org/links.org")
- (front-context-string . "**  [[https://vi")
+ (front-context-string . "**  [[ https://g")
  (rear-context-string)
  (position . 9))
 )

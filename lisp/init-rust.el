@@ -27,5 +27,16 @@
 	  (add-hook 'racer-mode-hook 'eldoc-mode)
 	  )
   )
+
+(use-package toml-mode
+  :ensure t
+  :mode "/\\(Cargo.lock\\|\\.cargo/config\\)\\'"
+  )
+
+(use-package cargo
+  :defer t
+  :ensure t
+  :config (progn
+	    (add-hook 'rust-mode-hook 'cargo-minor-mode)))
 (provide 'init-rust)
 ;;; init-rust.el ends here

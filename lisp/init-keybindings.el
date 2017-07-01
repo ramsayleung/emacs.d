@@ -268,7 +268,24 @@
 				"m m f" 'geiser-expand-definition
 				"m m r" 'geiser-expand-region
 				)
-
+	    ;; Rust mode
+	    (general-define-key :states '(normal visual motion)
+				:keymaps 'rust-mode-map
+				:prefix my-leader-key
+				"m c ." 'cargo-process-repeat
+				"m c C" 'cargo-process-clean
+				"m c X" 'cargo-process-run-example
+				"m c c" 'cargo-process-build
+				"m c d" 'cargo-process-doc
+				"m c e" 'cargo-process-bench
+				"m c f" 'cargo-process-current-test
+				"m c i" 'cargo-process-init
+				"m c n" 'cargo-process-new
+				"m c o" 'cargo-process-current-file-tests
+				"m c s" 'cargo-process-search
+				"m c u" 'cargo-process-update
+				"m c x" 'cargo-process-run
+				"t" 'cargo-process-test)
 	    ;; Origami mode
 	    (general-define-key		:states '(normal visual motion)
 					:keymaps 'origami-mode-map
