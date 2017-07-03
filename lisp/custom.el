@@ -27,7 +27,8 @@
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
    (quote
-    ((org-download-image-dir . "../images/")
+    ((no-byte-compile t)
+     (org-download-image-dir . "../images/")
      (org-download-image-dir . "./images/")
      (org-download-image-dir . "/tmp"))))
  '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))

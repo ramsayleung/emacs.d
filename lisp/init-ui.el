@@ -188,7 +188,7 @@ load/'disable-theme', so reset it after load/disable-theme'"
   )
 
 ;; Switch to the first theme in the list above
-;; (samray/cycle-theme)
+(samray/cycle-theme)
 ;; (defvar after-load-theme-hook nil
 ;;   "Hook run after a color theme is loaded using `load-theme'.")
 ;; (defadvice load-theme (after run-after-load-theme-hook activate)
@@ -269,7 +269,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
 ;; you could add more items.
 (samray/config-time-themes-table '(("6" . zenburn) ("18" . sanityinc-tomorrow-eighties) ))
-(samray/open-themes-auto-change)
+;; (samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;
 ;;---------------;;
@@ -279,7 +279,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   (when window-system
     (if (null (x-list-fonts font)) nil t)))
 
-(defvar samray-font-list '("Fira Code-11" "Source Code Pro-11" "Consolas" "Inconsolata-11" ))
+(defvar samray-font-list '("Source Code Pro-11" "Fira Code-11" "Consolas" "Inconsolata-11" ))
 
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."
