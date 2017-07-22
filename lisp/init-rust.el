@@ -27,5 +27,11 @@
 	  (add-hook 'racer-mode-hook 'eldoc-mode)
 	  )
   )
+(use-package cargo
+  :ensure t
+  :defer t
+  :init (progn
+	  (add-hook 'rust-mode-hook 'cargo-minor-mode)))
+
 (provide 'init-rust)
 ;;; init-rust.el ends here

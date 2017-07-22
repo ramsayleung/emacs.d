@@ -87,7 +87,6 @@
 				"t i" 'imenu-list-smart-toggle
 				"t f" 'samray/cycle-font
 				"t o" 'origami-toggle-mode
-				"t r" 'sr-speedbar-toggle
 				"t s" 'selectric-mode
 				"t t" 'samray/cycle-theme
 				"t w" 'samray/toggle-window-split
@@ -268,7 +267,24 @@
 				"m m f" 'geiser-expand-definition
 				"m m r" 'geiser-expand-region
 				)
-
+	    ;; Rust mode
+	    (general-define-key :states '(normal visual motion)
+				:keymaps 'rust-mode-map
+				:prefix my-leader-key
+				"m c ." 'cargo-process-repeat
+				"m c C" 'cargo-process-clean
+				"m c X" 'cargo-process-run-example
+				"m c c" 'cargo-process-build
+				"m c d" 'cargo-process-doc
+				"m c f" 'cargo-process-current-test
+				"m c i" 'cargo-process-init
+				"m c n" 'cargo-process-new
+				"m c o" 'cargo-process-current-file-tests
+				"m c s" 'cargo-process-search
+				"m c u" 'cargo-process-update
+				"m c x" 'cargo-process-run
+				"m t" 'cargo-process-test
+				)
 	    ;; Origami mode
 	    (general-define-key		:states '(normal visual motion)
 					:keymaps 'origami-mode-map
@@ -375,7 +391,6 @@
 	     "M-." 'xref-find-definitions
 	     "C-k" 'sp-kill-hybrid-sexp
 	     "C-s" 'counsel-grep-or-swiper
-	     "C-;" 'samray/projectile-speedbar-toggle
 	     "C-c a" 'org-agenda
 	     "C-c b" 'samray/counsel-ag-symbol-at-point
 	     "C-c c" 'hydra-counsel/body
@@ -412,7 +427,6 @@
 	     "M-k" 'sp-backward-kill-sexp
 	     "M-[" 'sp-backward-unwrap-sexp
 	     "M-]" 'sp-unwrap-sexp
-	     "M-1" 'projectile-speedbar-open-current-buffer-in-tree
 	     "M-x" 'counsel-M-x
 	     "<f2> i" 'counsel-info-lookup-symbol
 	     "<f2> u" 'counsel-unicode-char
