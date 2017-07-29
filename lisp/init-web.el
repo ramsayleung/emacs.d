@@ -21,6 +21,7 @@
   :ensure t
   :mode (
 	 ("\\.phtml\\'" . web-mode)
+	 ("\\.tera\\'" . web-mode)
 	 ("\\.tpl\\.php\\'" . web-mode)
 	 ("\\.[agj]sp\\'" . web-mode)
 	 ("\\.as[cp]x\\'" . web-mode)
@@ -30,7 +31,6 @@
 	 ("\\.html\\'" . web-mode)
 	 )
   :init(progn
-	 (add-hook 'web-mode-hook 'samray/web-mode-indent-setup)
 	 ))
 
 ;;;----------------;;;

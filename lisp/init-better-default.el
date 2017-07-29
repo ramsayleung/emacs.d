@@ -3,34 +3,30 @@
 ;;; Commentary:
 
 ;;;enhance dired
-(use-package dired+
-  :ensure t
-  :init
-  (diredp-toggle-find-file-reuse-dir t)
-  )
+;; (use-package dired+
+;;   :ensure t
+;;   :init
+;;   (diredp-toggle-find-file-reuse-dir t)
+;;   )
 (setq dired-open-extensions
       '(("mkv" . "vlc")
         ("mp4" . "vlc")
         ("avi" . "vlc")))
-
-;;; use ranger to replace dired 
-(use-package ranger
-  :ensure t
-  :init (progn
-	  (ranger-override-dired-mode t)
-	  (setq ranger-cleanup-eagerly t)
-	  (setq ranger-show-hidden t)
-	  (setq ranger-footer-delay 0.2)
-	  (setq ranger-preview-delay 0.040)
-	  (setq ranger-parent-depth 1)
-	  (setq ranger-preview-file t)
-	  (setq ranger-width-parents 0.12)
-	  (setq ranger-max-parent-width 0.12)
-	  (setq ranger-max-preview-size 10)
-	  (setq ranger-dont-show-binary t)
-	  )
-  )
-
+;;; From http://oremacs.com/2015/01/12/dired-file-size/
+(defun dired-get-size ()
+  "Get size of specified file."
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (with-temp-buffer
+      (apply 'call-process "/usr/bin/du" nil t nil "-sch" files)
+      (message
+       "Size of all marked files: %s"
+       (progn
+         (re-search-backward "\\(^[ 0-9.,]+[A-Za-z]+\\).*total$")
+         (match-string 1))))))
+;;;to get rid of the garbage produced by a LaTeX 
+(setq dired-garbage-files-regexp
+      "\\.idx\\|\\.run\\.xml$\\|\\.bbl$\\|\\.bcf$\\|.blg$\\|-blx.bib$\\|.nav$\\|.snm$\\|.out$\\|.synctex.gz$\\|\\(?:\\.\\(?:aux\\|bak\\|dvi\\|log\\|orig\\|rej\\|toc\\|pyg\\)\\)\\'")
 
 ;;; auto save file when Emacs idle
 (use-package auto-save

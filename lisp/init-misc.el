@@ -1,4 +1,4 @@
-;;; package --- Summary
+;; package --- Summary
 ;;; code:
 ;;; Commentary:
 ;;; read pdf file in Emacs
@@ -303,7 +303,6 @@ removal."
         (switch-to-buffer (find-file-noselect filename nil nil))
       (message "NO README.org or README.md found!"))
     ))
-
 
 (message "loading init-misc")
 (provide 'init-misc)

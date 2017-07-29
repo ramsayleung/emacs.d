@@ -687,6 +687,15 @@ Info-mode:
 	      (lambda () (interactive) (find-alternate-file "..")))))
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-
+(define-key dired-mode-map "j" 'dired-next-line)
+(define-key dired-mode-map "k" 'dired-previous-line)
+(define-key dired-mode-map "z" 'dired-get-size)
+(define-key dired-mode-map "l" 'dired-find-file)
+(define-key dired-mode-map "h"
+  (lambda ()
+    (interactive)
+    (find-alternate-file "..")))
+(define-key dired-mode-map "F" 'find-name-dired)
+(define-key dired-mode-map (kbd "%^") 'dired-flag-garbage-files)
 (provide 'init-keybindings)
 ;;; init-keybindings ends here
