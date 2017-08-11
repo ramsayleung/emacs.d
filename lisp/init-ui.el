@@ -279,7 +279,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   (when window-system
     (if (null (x-list-fonts font)) nil t)))
 
-(defvar samray-font-list '("Source Code Pro-11" "Fira Code-11" "Consolas" "Inconsolata-11" ))
+(defvar samray-font-list '("FantasqueSansMono-12" "Source Code Pro-11" "Fira Code-11" "Consolas" "Inconsolata-11" ))
 
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."
