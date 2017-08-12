@@ -116,7 +116,7 @@
   (require 'init-better-editing)
   (require 'init-better-default)
   (require 'init-chinese)
-  (require 'init-c-cpp)
+  (require 'init-c-c++)
   (require 'init-elisp)
   (require 'init-eshell)
   (require 'init-evil)

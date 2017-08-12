@@ -75,16 +75,16 @@
 		  (lambda () (add-to-list 'company-backends 'company-shell))))
 
 ;;; C/C++ headers completion
-;; (use-package company-c-headers
-;;   :ensure t
-;;   :defer t
-;;   :init (progn (add-hook 'c-mode-hook
-;; 			 (lambda () (add-to-list 'company-backends 'company-c-headers))
-;; 			 )
-;; 	       (add-hook 'c++-mode-hook
-;; 			 (lambda () (add-to-list 'company-backends 'company-c-headers)))
-;; 	       )
-;;   )
+(use-package company-c-headers
+  :ensure t
+  :defer t
+  :init (progn (add-hook 'c-mode-hook
+			 (lambda () (add-to-list 'company-backends 'company-c-headers))
+			 )
+	       (add-hook 'c++-mode-hook
+			 (lambda () (add-to-list 'company-backends 'company-c-headers)))
+	       )
+  )
 
 ;;; backends for tern
 (use-package company-tern
