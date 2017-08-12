@@ -50,15 +50,6 @@
   (projectile-mode)
   (setq projectile-completion-system 'ivy))
 
-;;; jump to definition package
-(use-package dumb-jump
-  :ensure t
-  :defer t
-  :init (progn
-	  (add-hook 'prog-mode-hook 'dumb-jump-mode)
-	  )
-  :config (setq dumb-jump-selector 'ivy))
-
 ;;; Rest client in Emacs
 (use-package restclient
   :ensure t
