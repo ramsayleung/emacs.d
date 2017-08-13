@@ -14,3 +14,4 @@ eshell/history
 eshell/lastdir
 .python-environments
 /projectile-bookmarks.eld
+irony/*

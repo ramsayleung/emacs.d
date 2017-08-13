@@ -12,3 +12,4 @@ alias sf fasd -sif     # interactive file selection
 alias zz fasd_cd -d -i # cd with interactive selection
 alias z samray/eshell-fasd-z $1
 alias dnfi sudo dnf install $1
+alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 . $1

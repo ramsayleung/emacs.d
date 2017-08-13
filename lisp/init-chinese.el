@@ -16,14 +16,14 @@
 	    (setq url-automatic-caching t)
 	    ))
 
-(use-package chinese-pyim
+(use-package pyim
   :ensure t
   :config
 
   ;; 激活 basedict 拼音词库
-  (use-package chinese-pyim-basedict
+  (use-package pyim-basedict
     :ensure t
-    :config (chinese-pyim-basedict-enable))
+    :config (pyim-basedict-enable))
   (setq default-input-method "chinese-pyim")
 
   ;; 我使用全拼

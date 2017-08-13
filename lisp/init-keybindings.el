@@ -231,11 +231,11 @@
 
 	    ;; C mode
 	    (general-define-key :keymaps 'c-mode-map
-				"<tab>" 'clang-format-buffer)
+				"C-M-;" 'clang-format-buffer)
 
 	    ;; C++ mode
 	    (general-define-key :keymaps 'c++-mode-map
-				"<tab>" 'clang-format-buffer)
+				"C-M-;" 'clang-format-buffer)
 
 	    ;; Scheme mode
 	    (general-define-key :states '(normal visual motion)

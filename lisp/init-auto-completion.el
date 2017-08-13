@@ -85,6 +85,25 @@
 			 (lambda () (add-to-list 'company-backends 'company-c-headers)))
 	       )
   )
+;;; backends for irony
+(use-package company-irony
+  :ensure t
+  :defer t
+  :init (progn (add-hook 'c-mode-hook
+			 (lambda () (add-to-list 'company-backends 'company-irony)))
+	       (add-hook 'c++-mode-hook
+			 (lambda () (add-to-list 'company-backends 'company-irony)))
+	       ))
+
+;;; backends for irony-c-header
+(use-package company-irony-c-headers
+  :ensure t
+  :defer t
+  :init (progn (add-hook 'c-mode-hook
+			 (lambda () (add-to-list 'company-backends 'company-irony-c-headers)))
+	       (add-hook 'c++-mode-hook
+			 (lambda () (add-to-list 'company-backends 'company-irony-c-headers)))
+	       ))
 
 ;;; backends for tern
 (use-package company-tern
