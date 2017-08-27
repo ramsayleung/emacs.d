@@ -24,7 +24,7 @@
   (use-package pyim-basedict
     :ensure t
     :config (pyim-basedict-enable))
-  (setq default-input-method "chinese-pyim")
+  (setq default-input-method "pyim")
 
   ;; 我使用全拼
   (setq pyim-default-scheme 'quanpin)
@@ -277,5 +277,14 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
           "xelatex -interaction nonstopmode -output-directory %o %f"
           "xelatex -interaction nonstopmode -output-directory %o %f"))
 )
+;; 在创建 org-mode buffer, 自动添加 latex class 解决生成中文pdf 问题
+(eval-after-load 'autoinsert
+  '(define-auto-insert '(org-mode . "Chinese Org skeleton")
+     '("Description: "
+       "#+LATEX_CLASS: samray-org-article" \n
+       "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]" \n)))
+(auto-insert-mode)  ;;; Adds hook to find-files-hook
+(setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
+
 (provide 'init-chinese)
 ;;; init-chinese.el ends here

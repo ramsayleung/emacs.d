@@ -34,6 +34,8 @@
 	  (rtags-enable-standard-keybindings)
 	  )
   )
+;;; Tell emacs to open .h file in C++ mode
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (provide 'init-c-c++)
 
 ;;; init-c-c++.el ends here
