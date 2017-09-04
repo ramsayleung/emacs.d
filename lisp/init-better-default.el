@@ -28,6 +28,40 @@
 (setq dired-garbage-files-regexp
       "\\.idx\\|\\.run\\.xml$\\|\\.bbl$\\|\\.bcf$\\|.blg$\\|-blx.bib$\\|.nav$\\|.snm$\\|.out$\\|.synctex.gz$\\|\\(?:\\.\\(?:aux\\|bak\\|dvi\\|log\\|orig\\|rej\\|toc\\|pyg\\)\\)\\'")
 
+;;; Nerd tree for Emacs
+(use-package neotree
+  :ensure t
+  :commands (neotree-toggle)
+  :init (progn
+	  ;; set neotree theme
+	  (setq neo-theme 'nerd)
+	  ;; Every time when the neotree window is opened, let it find current file and jump to node.
+	  (setq neo-smart-open t)
+	  ;; When running ‘projectile-switch-project’, ‘neotree’ will change root automatically.
+	  ;; (setq projectile-switch-project-action 'neotree-projectile-action)
+	  ;;  NeoTree can be opened (toggled) at projectile project root 
+	  (defun neotree-project-dir ()
+	    "Open NeoTree using the git root."
+	    (interactive)
+	    (let ((project-dir (projectile-project-root))
+		  (file-name (buffer-file-name)))
+	      (neotree-toggle)
+	      (if project-dir
+		  (if (neo-global--window-exists-p)
+		      (progn
+			(neotree-dir project-dir)
+			(neotree-find file-name)))
+		(message "Could not find git project root."))))
+	  ;; If you use evil-mode, by default some of evil key bindings conflict with neotree-mode keys.
+	  (eval-after-load 'evil
+	    '(progn
+	       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+	       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+	       (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+	       (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+	       ))
+	  ))
+
 ;;; auto save file when Emacs idle
 (use-package auto-save
   :load-path "~/.emacs.d/additional-packages/auto-save.el"
