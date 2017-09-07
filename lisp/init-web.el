@@ -28,7 +28,6 @@
 	 ("\\.erb\\'" . web-mode)
 	 ("\\.mustache\\'" . web-mode)
 	 ("\\.djhtml\\'" . web-mode)
-	 ("\\.html\\'" . web-mode)
 	 )
   :init(progn
 	 ))

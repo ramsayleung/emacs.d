@@ -58,26 +58,6 @@
 ;;; Evil is not especilly useful in the terminal,so
 (evil-set-initial-state 'term-mode 'emacs)
 
-(use-package projectile-speedbar
-  :load-path "~/.emacs.d/additional-packages/projectile-speedbar.el"
-  :ensure t
-  :commands (projectile-speedbar-open-current-buffer-in-tree
-	     projectile-speedbar-toggle)
-  )
-
-(use-package sr-speedbar
-  :load-path "~/.emacs.d/additional-packages/sr-speedbar.el"
-  :commands (sr-speedbar-toggle)
-  :init (progn
-	  (setq speedbar-use-images nil)
-	  (setq sr-speedbar-right-side nil)
-	  (setq sr-speedbar-auto-refresh nil)
-	  (setq speedbar-show-unknown-files t)
-	  (setq speedbar-directory-unshown-regexp "^\\(\\.\\.?\\)$")
-	  )
-  :config (progn
-	    (add-hook 'speedbar-mode-hook (lambda () (linum-mode -1)))
-	    ))
 (use-package symbol-overlay
   :ensure t
   :commands (symbol-overlay-put)
