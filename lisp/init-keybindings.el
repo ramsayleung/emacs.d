@@ -278,6 +278,7 @@
 				"m c d" 'cargo-process-doc
 				"m c f" 'cargo-process-current-test
 				"m c i" 'cargo-process-init
+				"m c k" 'cargo-process-check
 				"m c n" 'cargo-process-new
 				"m c o" 'cargo-process-current-file-tests
 				"m c s" 'cargo-process-search
