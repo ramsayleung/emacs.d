@@ -1,17 +1,6 @@
 ;; package --- Summary
 ;;; Code:
 ;;; Commentary:
-(use-package lsp-mode
-  :ensure t
-  :init
-  (add-hook 'rust-mode-hook 'lsp-mode)
-  :config
-  (use-package lsp-flycheck
-    :ensure f ; comes with lsp-mode
-    :after flycheck))
-(use-package lsp-rust
-  :ensure t
-  :after lsp-mode)
 
 (use-package rust-mode
   :ensure t

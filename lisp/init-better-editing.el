@@ -349,6 +349,7 @@ lines up by reverse ARG."
       (error "No more than 2 files should be marked"))))
 (require 'dired)
 (define-key dired-mode-map "e" 'samray/ediff-files)
+(setq dired-dwim-target t)
 
 (defadvice upcase-word (before upcase-word-advice activate)
   "Upcase a word until cursor is at the beginning of this word."
