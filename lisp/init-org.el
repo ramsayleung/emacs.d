@@ -17,10 +17,6 @@
 	  (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "blue"))
 				     (?C . (:foreground "green"))))
-	  ;; Set color for "~"(eg, ~code~)
-	  (add-to-list 'org-emphasis-alist
-		       '("~" (:foreground "darkseagreen")
-			 ))
 	  (defun samray/org-skip-subtree-if-priority (priority)
 	    "Skip an agenda subtree if it has a priority of PRIORITY.
 PRIORITY may be one of the characters ?A, ?B, or ?C."
@@ -38,7 +34,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;; let org-mode to delete those auxiliary files after export
 	     ;;automatically
 	     (setq org-latex-logfiles-extensions (quote
-						  ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+						  ("lof" "lot" "tex" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
 	     (org-babel-do-load-languages
 	      'org-babel-load-languages
 	      '((clojure . t)
@@ -99,6 +95,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;; a header.
 	     (setq org-ellipsis "⤵")
 
+	     ;; Set color for "~"(eg, ~code~)
+	     (add-to-list 'org-emphasis-alist
+			  '("~" (:foreground "darkseagreen")
+			    ))
 	     ;;Its default value is (ascii html icalendar latex)
 	     (setq org-export-backends '(latex icalendar))
 	     ;; Show org-edit-special in the other-window
