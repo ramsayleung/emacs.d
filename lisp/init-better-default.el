@@ -163,7 +163,7 @@ output file. %i path(s) are relative, while %o is absolute.")
 ;;; Tramp
 (require 'tramp)
 (setq tramp-default-method "ssh")
-
+(setq tramp-use-ssh-controlmaster-options nil)
 
 ;;; set "Meta" key to be the mac command key
 (when (memq window-system '(mac ns))

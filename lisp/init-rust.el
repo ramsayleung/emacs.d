@@ -1,6 +1,7 @@
 ;; package --- Summary
 ;;; Code:
 ;;; Commentary:
+
 (use-package rust-mode
   :ensure t
   :mode ("\\.rs\\'" . rust-mode)
