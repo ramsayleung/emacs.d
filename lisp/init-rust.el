@@ -1,23 +1,14 @@
 ;; package --- Summary
 ;;; Code:
 ;;; Commentary:
-(use-package lsp-mode
-  :ensure t
-  :init
-  (add-hook 'rust-mode-hook 'lsp-mode)
-  :config
-  (use-package lsp-flycheck
-    :ensure f ; comes with lsp-mode
-    :after flycheck))
-(use-package lsp-rust
-  :ensure t
-  :after lsp-mode)
-
 (use-package rust-mode
   :ensure t
   :mode ("\\.rs\\'" . rust-mode)
   )
 
+(use-package toml-mode
+  :ensure t
+  :mode ("\\.toml\\'" . toml-mode))
 (use-package racer
   :ensure t
   :init (progn

@@ -17,7 +17,10 @@
 	  (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "blue"))
 				     (?C . (:foreground "green"))))
-
+	  ;; Set color for "~"(eg, ~code~)
+	  (add-to-list 'org-emphasis-alist
+		       '("~" (:foreground "darkseagreen")
+			 ))
 	  (defun samray/org-skip-subtree-if-priority (priority)
 	    "Skip an agenda subtree if it has a priority of PRIORITY.
 PRIORITY may be one of the characters ?A, ?B, or ?C."

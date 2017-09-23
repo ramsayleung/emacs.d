@@ -406,6 +406,7 @@
 	     "C-c _" 'wrap-with-underscotes
 	     "C-c `" 'wrap-with-back-quotes
 	     "C-c C-b" 'neotree-project-dir
+	     "C-c C-h" 'counsel-imenu
 	     "C-c C-r" 'ivy-resume
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
