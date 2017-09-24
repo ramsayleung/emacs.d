@@ -27,7 +27,7 @@
     ("~/Dropbox/Org/notes/big_data_handle.org" "~/Dropbox/Org/agenda.org" "~/Dropbox/Org/todo.org")))
  '(package-selected-packages
    (quote
-    (cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
+    (solarized-theme monokai-theme cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
    (quote

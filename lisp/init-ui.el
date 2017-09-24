@@ -143,10 +143,6 @@ This code toggles between them."
 ;;  Color Theme  ;;
 ;;---------------;;
 
-(use-package molokai-theme
-  :ensure t
-  :defer t
-  )
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :defer t
@@ -155,11 +151,12 @@ This code toggles between them."
   :ensure t
   :defer t
   )
-(use-package gruvbox-theme
+(use-package monokai-theme
   :ensure t
-  :defer t
-  )
-
+  :defer t)
+(use-package solarized-theme
+  :ensure t
+  :defer t)
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
@@ -175,7 +172,7 @@ load/'disable-theme', so reset it after load/disable-theme'"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties gruvbox molokai))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties solarized-dark monokai))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -279,7 +276,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   (when window-system
     (if (null (x-list-fonts font)) nil t)))
 
-(defvar samray-font-list '("FantasqueSansMono-13" "Source Code Pro-13" "Fira Code-13" "Consolas" "Inconsolata-11" ))
+(defvar samray-font-list '("FantasqueSansMono-14" "Source Code Pro-13" "Fira Code-13" "Consolas" "Inconsolata-11" ))
 
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."
