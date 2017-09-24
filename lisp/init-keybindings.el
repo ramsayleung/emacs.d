@@ -49,7 +49,7 @@
 				"f s" 'save-buffer
 				"f e" '(:ignore t :which-key "emacs")
 				"f e d" 'open-my-file
-				"h" '(:ignore t :which-key "helo")
+				"h" '(:ignore t :which-key "help")
 				"h d" '(:ignore t :which-key "help-describe")
 				"h d d" 'apropos-documentation
 				"h d f" 'counsel-describe-function
@@ -465,6 +465,7 @@
 
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map
+		      "M-n" 'pyim-convert-code-at-point
 		      "C-M-;" 'samray/indent-buffer)
 
   ;; Go-mode
