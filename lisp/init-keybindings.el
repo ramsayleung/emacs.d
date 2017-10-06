@@ -230,12 +230,17 @@
 				"m v" 'venv-set-location
 				)
 
-	    ;; C mode
-	    (general-define-key :keymaps 'c-mode-map
-				"C-M-;" 'clang-format-buffer)
 
-	    ;; C++ mode
-	    (general-define-key :keymaps 'c++-mode-map
+	    ;; C/C++ mode
+	    (general-define-key :states '(normal visual motion)
+				:keymaps 'c++-mode-map
+				:prefix my-leader-key
+				"m c" '(:ignore t :which-key "compiling")
+				"m c c" 'cmake-ide-compile)
+	    ;; C/C++ mode
+	    (general-define-key :keymaps 'c-mode-base-map
+				"C-M-g" 'rtags-find-symbol-at-point
+				"C-M-b" 'xref-pop-marker-stack
 				"C-M-;" 'clang-format-buffer)
 
 	    ;; Scheme mode
@@ -332,11 +337,6 @@
 				[remap evil-insert-digraph] 'eshell-kill-process
 				)
 
-	    (general-define-key :keymaps 'dumb-jump-mode-map
-				"M-g j" 'dumb-jump-go
-				"M-g o" 'dumb-jump-go-other-window
-				"M-g b" 'dumb-jump-back
-				)
 
 	    ;; Pdf view mode
 	    (general-define-key :states '(normal emacs)
@@ -391,7 +391,6 @@
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
-	     [remap paredit-backward] 'dumb-jump-back
 	     [remap evil-repeat-pop-next] 'xref-find-definitions
 	     "M-." 'xref-find-definitions
 	     "C-k" 'sp-kill-hybrid-sexp
@@ -422,7 +421,6 @@
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
 	     "C-M-a" 'sp-beginning-of-sexp
-	     "C-M-b" 'dumb-jump-back
 	     "C-M-e" 'sp-end-of-sexp
 	     "C-M-k" 'sp-kill-sexp
 	     "C-k" 'sp-kill-hybrid-sexp
@@ -459,6 +457,7 @@
   (general-define-key :keymaps 'css-mode-map
 		      "C-M-;" 'web-beautify-css)
 
+
   ;; Js|Js2|Json mode
   (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
 		      "C-M-;" 'web-beautify-js)
@@ -480,8 +479,6 @@
 		      "<tab>" 'company-indent-or-complete-common
 		      [remap evil-repeat-pop-next] 'racer-find-definition
 		      "M-." 'racer-find-definition
-		      [remap dumb-jump-go] 'racer-find-definition
-		      [remap dumb-jump-back] 'xref-pop-marker-stack
 		      "C-M-g" 'racer-find-definition
 		      "C-M-b" 'xref-pop-marker-stack
 		      "C-M-;" 'rust-format-buffer)
