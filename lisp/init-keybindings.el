@@ -69,6 +69,7 @@
 				"p d" 'counsel-projectile-find-dir
 				"p b" 'counsel-projectile-switch-to-buffer
 				"p s s" 'counsel-projectile-ag
+				"p s r" 'counsel-projectile-rg
 				"p p" 'counsel-projectile-switch-project
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
@@ -244,8 +245,18 @@
 				"m c" '(:ignore t :which-key "compiling")
 				"m c c" 'geiser-compile-current-buffer
 				"m c p" 'geiser-add-to-path
+				"m e" '(:ignore t :which-key "Evaluation")
+				"m e b" 'geiser-eval-buffer
+				"m e e" 'geiser-eval-last-sexp
+				"m e f" 'geiser-eval-definition
+				"m e l" 'lisp-state-eval-sexp-end-of-line
+				"m e r" 'geiser-eval-region
 				"m i" '(:ignore t :which-key "insertion")
 				"m i l" 'geiser-insert-lambda
+				"m m" '(:ignore t :which-key "macroexpansion")
+				"m m e" 'geiser-expand-last-sexp
+				"m m f" 'geiser-expand-definition
+				"m m r" 'geiser-expand-region
 				"m s" '(:ignore t :which-key "repl")
 				"m s i" 'geiser-switch-to-repl
 				"m s s" 'geiser-set-scheme
@@ -256,16 +267,9 @@
 				"m s e" 'geiser-eval-last-sexp
 				"m s r" 'geiser-eval-region
 				"m s R" 'geiser-eval-region-and-go
-				"m e" '(:ignore t :which-key "Evaluation")
-				"m e b" 'geiser-eval-buffer
-				"m e e" 'geiser-eval-last-sexp
-				"m e f" 'geiser-eval-definition
-				"m e l" 'lisp-state-eval-sexp-end-of-line
-				"m e r" 'geiser-eval-region
-				"m m" '(:ignore t :which-key "macroexpansion")
-				"m m e" 'geiser-expand-last-sexp
-				"m m f" 'geiser-expand-definition
-				"m m r" 'geiser-expand-region
+				"m l" '(:ignore t :which-key "load")
+				"m l c" 'geiser-load-current-buffer
+				"m l f" 'geiser-load-file
 				)
 	    ;; Rust mode
 	    (general-define-key :states '(normal visual motion)
@@ -481,6 +485,11 @@
 		      "C-M-g" 'racer-find-definition
 		      "C-M-b" 'xref-pop-marker-stack
 		      "C-M-;" 'rust-format-buffer)
+
+  ;; Emacs Lisp mode
+  (general-define-key :keymaps 'emacs-lisp-mode-map
+		      "C-M-g" 'xref-find-definitions
+		      "C-M-b" 'xref-pop-marker-stack)
 
 ;;; Org-agenda-mode
   (with-eval-after-load 'org-mode

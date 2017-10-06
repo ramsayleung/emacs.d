@@ -140,12 +140,13 @@ similar to shell-pop"
       (if (string= (buffer-name) repl-buffer-name)
 	  (if (not (one-window-p))
 	      (progn (bury-buffer)
-		     (delete-window))
-	    )
+		     (delete-window)))
+
 	(progn (samray/split-window-below-and-move)
 	       (switch-to-buffer repl-buffer-name)
 	       (goto-char (point-max))
-	       (evil-insert-state)))
+	       (evil-insert-state))
+	)
     (progn
       (run-python)
       (samray/split-window-below-and-move)
@@ -158,7 +159,7 @@ similar to shell-pop"
 similar to shell-pop"
   (interactive)
   (let* ((repl-modes '((python-mode . "*Python*")
-		       (scheme-mode . "* Guile REPL *"))))
+		       (scheme-mode . "* Mit REPL *"))))
     (cond ((or (derived-mode-p 'python-mode) (derived-mode-p 'inferior-python-mode))
 	   (progn
 ;;; To fix issue that there is weird eshell output with ipython
