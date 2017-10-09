@@ -16,6 +16,13 @@
   :ensure t
   :mode "\\.yml$")
 
+(use-package dockerfile-mode
+  :ensure t
+  :mode ("Dockerfile\\'" . dockerfile-mode))
+(use-package docker
+  :ensure t
+  :commands (docker-images docker-containers docker-volumes docker-networks docker-machines))
+
 (use-package json-mode
   :ensure t
   :mode "\\.json$")

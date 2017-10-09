@@ -20,7 +20,8 @@
 (use-package cmake-ide
   :ensure t
   :init (progn
-	  (cmake-ide-setup)
+	  (add-hook 'c++-mode-hook (lambda () (cmake-ide-setup)))
+	  (add-hook 'c-mode-hook (lambda () (cmake-ide-setup)))
 	  )
   )
 (use-package rtags
@@ -30,7 +31,7 @@
 	  (eval-after-load 'company
 	    '(add-to-list
 	      'company-backends 'company-rtags))
-	  (setq rtags-autostart-diagnostics t)
+	  ;; (setq rtags-autostart-diagnostics t)
 	  (rtags-enable-standard-keybindings)
 	  )
   )
