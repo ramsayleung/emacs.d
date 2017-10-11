@@ -70,6 +70,40 @@
   :commands (symbol-overlay-put)
   )
 
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (progn
+    (use-package treemacs-evil
+      :ensure t
+      :demand t)
+    (setq treemacs-follow-after-init          t
+          treemacs-width                      35
+          treemacs-indentation                2
+          treemacs-git-integration            t
+          treemacs-collapse-dirs              3
+          treemacs-silent-refresh             nil
+          treemacs-change-root-without-asking nil
+          treemacs-sorting                    'alphabetic-desc
+          treemacs-show-hidden-files          t
+          treemacs-never-persist              nil
+          treemacs-is-never-other-window      nil
+          treemacs-goto-tag-strategy          'refetch-index)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t))
+  :bind
+  (:map global-map
+        ("C-c t t"        . treemacs-toggle)
+        ))
+(use-package treemacs-projectile
+  :defer t
+  :ensure t
+  :config
+  (setq treemacs-header-function #'treemacs-projectile-create-header)
+  :bind (:map global-map
+              ("C-c t p" . treemacs-projectile-toggle)))
 (defun samray/speedbar-contract-all-lines ()
   "Contract all items in the speedbar buffer."
   (interactive)
@@ -82,31 +116,31 @@
   "Improve the default projectile speedbar toggle."
   (interactive)
   (if (buffer-file-name)
-      (let ((current-buffer (buffer-name)))
+    (let ((current-buffer (buffer-name)))
 	(sr-speedbar-toggle)
 	(if (sr-speedbar-exist-p)
-	    (progn
-	      (set-buffer current-buffer)
-	      (projectile-speedbar-open-current-buffer-in-tree)
-	      )
+    (progn
+  (set-buffer current-buffer)
+  (projectile-speedbar-open-current-buffer-in-tree)
+  )
 	  ))
     (progn
-      (sr-speedbar-toggle)
-      (sr-speedbar-refresh)
-      )))
+  (sr-speedbar-toggle)
+  (sr-speedbar-refresh)
+  )))
 
 (defun samray/speedbar-toggle ()
   "Expand current file in speedbar buffer."
   (interactive)
   (if (buffer-file-name)
-      (let ((current-buffer (buffer-name)))
+    (let ((current-buffer (buffer-name)))
 	(cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
 	      (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
 	(set-buffer current-buffer)
 	(imenu-list-smart-toggle)
 	)
     (progn
-      (cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
+  (cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
 	    (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
       )))
 (add-hook 'imenu-list-major-mode-hook (lambda () (linum-mode -1))
@@ -144,9 +178,9 @@
 similar to shell-pop"
   (interactive)
   (if (get-buffer repl-buffer-name)
-      (if (string= (buffer-name) repl-buffer-name)
-	  (if (not (one-window-p))
-	      (progn (bury-buffer)
+    (if (string= (buffer-name) repl-buffer-name)
+    (if (not (one-window-p))
+    (progn (bury-buffer)
 		     (delete-window)))
 
 	(progn (samray/split-window-below-and-move)
@@ -155,11 +189,11 @@ similar to shell-pop"
 	       (evil-insert-state))
 	)
     (progn
-      (run-python)
-      (samray/split-window-below-and-move)
-      (switch-to-buffer repl-buffer-name)
-      (goto-char (point-max))
-      (evil-insert-state))))
+  (run-python)
+  (samray/split-window-below-and-move)
+  (switch-to-buffer repl-buffer-name)
+  (goto-char (point-max))
+  (evil-insert-state))))
 
 (defun samray/repl-pop ()
   "Run REPL for different major mode and switch to the repl buffer.
@@ -170,12 +204,12 @@ similar to shell-pop"
     (cond ((or (derived-mode-p 'python-mode) (derived-mode-p 'inferior-python-mode))
 	   (progn
 ;;; To fix issue that there is weird eshell output with ipython
-	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
+  (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
 	  ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
 	   (samray/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
 	  ((or (derived-mode-p 'prog-mode)(derived-mode-p 'inferior-python-mode))
 	   (progn
-	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
+  (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
 	  )))
 ;;; Treating terms in CamelCase symbols as separate words makes editing a
 ;;; little easier for me, so I like to use subword-mode everywhere.

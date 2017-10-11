@@ -400,6 +400,7 @@
 	     "C-c c" 'hydra-counsel/body
 	     "C-c e" 'hydra-edit/body
 	     "C-c y p" 'youdao-dictionary-search-at-point+
+	     "C-c t" '(:ignore t :which-key "treemacs")
 	     "C-c w" 'hydra-window-resize/body
 	     "C-c (" 'wrap-with-parens
 	     "C-c [" 'wrap-with-brackets
