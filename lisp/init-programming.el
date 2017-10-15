@@ -96,6 +96,7 @@
   :bind
   (:map global-map
         ("C-c t t"        . treemacs-toggle)
+        ("C-c t e"    . treemacs)
         ))
 (use-package treemacs-projectile
   :defer t
@@ -103,7 +104,8 @@
   :config
   (setq treemacs-header-function #'treemacs-projectile-create-header)
   :bind (:map global-map
-              ("C-c t p" . treemacs-projectile-toggle)))
+              ("C-c t p" . treemacs-projectile)
+              ))
 (defun samray/speedbar-contract-all-lines ()
   "Contract all items in the speedbar buffer."
   (interactive)
@@ -133,14 +135,14 @@
   "Expand current file in speedbar buffer."
   (interactive)
   (if (buffer-file-name)
-    (let ((current-buffer (buffer-name)))
+      (let ((current-buffer (buffer-name)))
 	(cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
 	      (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
 	(set-buffer current-buffer)
 	(imenu-list-smart-toggle)
 	)
     (progn
-  (cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
+      (cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
 	    (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
       )))
 (add-hook 'imenu-list-major-mode-hook (lambda () (linum-mode -1))
