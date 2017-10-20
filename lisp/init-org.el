@@ -175,24 +175,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (use-package org-download
   :ensure t)
 
-;;; org-page for post blog
-(use-package org-page
-  :after org
-  :ensure t
-  :config (progn
-            (setq op/repository-directory "~/Dropbox/blog/samrayleung.github.io" ;;local repo location
-                  op/personal-github-link "https://github.com/samrayleung" ;;github link
-                  op/repository-org-branch "source"
-                  op/repository-html-branch "master"
-                  op/site-domain "https//samrayleung.github.io/"
-                  op/site-main-title "公子世无双，陌上人如玉"
-                  op/site-sub-title "凡走过,必留下痕迹"
-		  op/personal-disqus-shortname "Samray"; use for disqus comments
-                  op/theme 'mdo) ;; theme
-            )
-  )
-
-
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."
   (concat (file-name-as-directory org-directory) filename))
