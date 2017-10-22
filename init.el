@@ -117,6 +117,7 @@
   (require 'init-better-default)
   (require 'init-chinese)
   (require 'init-c-c++)
+  (require 'init-dired)
   (require 'init-elisp)
   (require 'init-eshell)
   (require 'init-evil)

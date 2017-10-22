@@ -1,11 +1,7 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'Buffer-menu-mode-abbrev-table '())
 
-(define-abbrev-table 'Custom-mode-abbrev-table '())
-
 (define-abbrev-table 'Info-edit-mode-abbrev-table '())
-
-(define-abbrev-table 'anaconda-mode-view-mode-abbrev-table '())
 
 (define-abbrev-table 'awk-mode-abbrev-table
   '(
@@ -23,27 +19,11 @@
   '(
    ))
 
-(define-abbrev-table 'calc-trail-mode-abbrev-table '())
-
 (define-abbrev-table 'calendar-mode-abbrev-table '())
-
-(define-abbrev-table 'change-log-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-channel-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-chat-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-query-mode-abbrev-table '())
-
-(define-abbrev-table 'circe-server-mode-abbrev-table '())
 
 (define-abbrev-table 'comint-mode-abbrev-table '())
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
-
-(define-abbrev-table 'debugger-mode-abbrev-table '())
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
 
@@ -54,16 +34,6 @@
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
 
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
-
-(define-abbrev-table 'epa-info-mode-abbrev-table '())
-
-(define-abbrev-table 'epa-key-list-mode-abbrev-table '())
-
-(define-abbrev-table 'epa-key-mode-abbrev-table '())
-
-(define-abbrev-table 'ert-results-mode-abbrev-table '())
-
-(define-abbrev-table 'ert-simple-view-mode-abbrev-table '())
 
 (define-abbrev-table 'eshell-mode-abbrev-table '())
 
@@ -76,8 +46,6 @@
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
 (define-abbrev-table 'gdb-script-mode-abbrev-table '())
-
-(define-abbrev-table 'gfm-mode-abbrev-table '())
 
 (define-abbrev-table 'global-abbrev-table
   '(
@@ -107,6 +75,8 @@
    ))
 
 (define-abbrev-table 'lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'message-mode-abbrev-table '())
 
 (define-abbrev-table 'messages-buffer-mode-abbrev-table '())
 

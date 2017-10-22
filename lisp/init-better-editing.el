@@ -359,11 +359,11 @@ lines up by reverse ARG."
   "Downcase a word until cursor is at the beginning of this word."
   (unless (looking-back "\\b" 1)(backward-word)))
 
-(defadvice capitalize-word (before capitalize-word-advice activate)
-  "Capitalize word dependen on 'subword-mode'."
-  (unless (or (looking-back "\\b" 1)
-              (bound-and-true-p subword-mode))
-    (backward-word)))
+;; (defadvice capitalize-word (before capitalize-word-advice activate)
+;;   "Capitalize word dependen on 'subword-mode'."
+;;   (unless (or (looking-back "\\b" 1)
+;;               (bound-and-true-p subword-mode))
+;;     (backward-word)))
 
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here
