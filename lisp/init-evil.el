@@ -18,6 +18,7 @@
     (evil-set-initial-state 'imenu-list-major-mode 'emacs)
     (evil-set-initial-state 'artist-mode 'emacs)
     (evil-set-initial-state 'eshell-mode 'insert)
+    (evil-set-initial-state 'term-mode 'emacs)
     ))
 
 (use-package evil-surround

@@ -55,14 +55,6 @@
   :ensure t
   :mode ("\\.rest\\'" . restclient-mode))
 
-;;; Evil is not especilly useful in the terminal,so
-(evil-set-initial-state 'term-mode 'emacs)
-
-(use-package symbol-overlay
-  :ensure t
-  :commands (symbol-overlay-put)
-  )
-
 (defun samray/speedbar-contract-all-lines ()
   "Contract all items in the speedbar buffer."
   (interactive)
