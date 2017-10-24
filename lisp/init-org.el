@@ -104,14 +104,65 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     ;; Show org-edit-special in the other-window
 	     (setq org-src-window-setup 'other-window)
 	     ;; use minted to highlight code in latex
-	     (add-to-list 'org-latex-packages-alist '("" "minted"))
-	     (setq org-latex-listings 'minted)
+	     ;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+	     ;; (setq org-latex-listings 'minted)
+
+	     (setq org-export-latex-listings t)
+	     ;;org-mode source code setup in exporting to latex
+	     (add-to-list 'org-latex-listings '("" "listings"))
+	     (add-to-list 'org-latex-listings '("" "color"))
+
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "xcolor" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "listings" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "fontspec" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "indentfirst" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "xunicode" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "geometry"))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "float"))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "longtable"))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "tikz"))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "fancyhdr"))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "textcomp"))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "amsmath"))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "tabularx" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "booktabs" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "grffile" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "wrapfig" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("normalem" "ulem" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "amssymb" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("" "capt-of" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("figuresright" "rotating" t))
+	     (add-to-list 'org-latex-packages-alist
+			  '("Lenny" "fncychap" t))
 	     ;; execute code without confirm
 	     (setq org-confirm-babel-evaluate nil)
 	     ;; set latex to xelatex
-	     ;; org-mode 8.0
-	     (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
-					   "xelatex -interaction nonstopmode %f"))
+	     (setq org-latex-pdf-process
+		   '("xelatex  --shell-escape -interaction nonstopmode -output-directory %o %f"
+		     ;; "biber %b" "xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"
+		     "bibtex %b"
+		     "xelatex  -interaction nonstopmode -output-directory %o %f"
+		     "xelatex  -interaction nonstopmode -output-directory %o %f"))
 	     ;; export cn character
 	     (setf org-latex-default-packages-alist
 		   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
@@ -174,24 +225,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;;; Drag and drop images to org-mode
 (use-package org-download
   :ensure t)
-
-;;; org-page for post blog
-(use-package org-page
-  :after org
-  :ensure t
-  :config (progn
-            (setq op/repository-directory "~/Dropbox/blog/samrayleung.github.io" ;;local repo location
-                  op/personal-github-link "https://github.com/samrayleung" ;;github link
-                  op/repository-org-branch "source"
-                  op/repository-html-branch "master"
-                  op/site-domain "https//samrayleung.github.io/"
-                  op/site-main-title "公子世无双，陌上人如玉"
-                  op/site-sub-title "凡走过,必留下痕迹"
-		  op/personal-disqus-shortname "Samray"; use for disqus comments
-                  op/theme 'mdo) ;; theme
-            )
-  )
-
 
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."
