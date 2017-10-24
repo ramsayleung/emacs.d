@@ -41,8 +41,6 @@
 
 (define-abbrev-table 'evil-list-view-mode-abbrev-table '())
 
-(define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
-
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
 (define-abbrev-table 'gdb-script-mode-abbrev-table '())
@@ -65,6 +63,10 @@
 (define-abbrev-table 'ibuffer-mode-abbrev-table '())
 
 (define-abbrev-table 'idl-mode-abbrev-table '())
+
+(define-abbrev-table 'image-dired-display-image-mode-abbrev-table '())
+
+(define-abbrev-table 'image-dired-thumbnail-mode-abbrev-table '())
 
 (define-abbrev-table 'ivy-occur-grep-mode-abbrev-table '())
 
@@ -104,8 +106,6 @@
 
 (define-abbrev-table 'prog-mode-abbrev-table '())
 
-(define-abbrev-table 'racer-help-mode-abbrev-table '())
-
 (define-abbrev-table 'rtags-dependency-tree-mode-abbrev-table '())
 
 (define-abbrev-table 'rtags-diagnostics-mode-abbrev-table '())
@@ -120,8 +120,6 @@
 
 (define-abbrev-table 'rtags-taglist-mode-abbrev-table '())
 
-(define-abbrev-table 'rust-mode-abbrev-table '())
-
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
 
 (define-abbrev-table 'shell-mode-abbrev-table '())
@@ -135,6 +133,12 @@
 (define-abbrev-table 'text-mode-abbrev-table '())
 
 (define-abbrev-table 'url-cookie-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
 
