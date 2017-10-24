@@ -30,6 +30,14 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :config(progn
            (require 'org-indent)
            (org-indent-mode -1)         ;disable org-indent-mode
+
+	   (require 'color)
+	   (set-face-attribute 'org-block nil :background
+			       (color-darken-name
+				(face-attribute 'default :background) 3))
+
+	   (setq org-src-block-faces '(("emacs-lisp" (:background "#EEE2FF"))
+				       ("python" (:background "#E5FFB8"))))
 	   (with-eval-after-load 'org
 	     ;; let org-mode to delete those auxiliary files after export
 	     ;;automatically

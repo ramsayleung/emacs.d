@@ -15,3 +15,4 @@ eshell/lastdir
 .python-environments
 /projectile-bookmarks.eld
 irony/*
+.cask/*
