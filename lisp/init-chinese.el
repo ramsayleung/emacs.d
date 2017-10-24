@@ -71,79 +71,10 @@ and chinese char,so just delete it"
                                         ;right regexp,so just use such silly way
       )))
 
-;;; solve ths issue that org-table cannot indent when english char mix with
-;;; chinese char
-;;; (set-frame-font "Source Code Pro-11")
-
-;; (defun samray/handle-org-table-indent-with-chinese ()
-;;   "Deal with  issue that chinese char cannot get along with org-table."
-;;   (interactive)
-;;   (when window-system
-;;     (save-excursion
-;;       (progn
-;; 	(dolist (charset '(kana han symbol cjk-misc bopomofo))
-;; 	  (set-fontset-font (frame-parameter nil 'font)
-;; 			    charset
-;; 			    (font-spec :family "WenQuanYi Micro Hei")))
-;; 	;; tune rescale so that Chinese character width = 2 * English character width
-;; 	(setq face-font-rescale-alist '((samray-current-font. 1.0) ("WenQuanYi" . 1.23)))
-;; 	)
-;;       )))
-;; (add-hook 'after-init-hook 'samray/handle-org-table-indent-with-chinese)
-;; (add-hook 'after-setting-font-hook 'samray/handle-org-table-indent-with-chinese)
-(setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
-                              "xelatex -interaction nonstopmode %f"))
 ;;; org-mode 导出中文的问题解决
 ;; org-mode export to latex
 (with-eval-after-load  'org
   (require 'ox-latex)
-  (setq org-export-latex-listings t)
-  ;;org-mode source code setup in exporting to latex
-  (add-to-list 'org-latex-listings '("" "listings"))
-  (add-to-list 'org-latex-listings '("" "color"))
-
-  (add-to-list 'org-latex-packages-alist
-	       '("" "xcolor" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "listings" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "fontspec" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "indentfirst" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "xunicode" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "geometry"))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "float"))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "longtable"))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "tikz"))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "fancyhdr"))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "textcomp"))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "amsmath"))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "tabularx" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "booktabs" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "grffile" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "wrapfig" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("normalem" "ulem" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "amssymb" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("" "capt-of" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("figuresright" "rotating" t))
-  (add-to-list 'org-latex-packages-alist
-	       '("Lenny" "fncychap" t))
   (add-to-list 'org-latex-classes
                '("samray-org-article"
                  "\\documentclass{article}
@@ -196,12 +127,6 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-  (setq org-latex-pdf-process
-        '("xelatex -interaction nonstopmode -output-directory %o %f"
-          ;;"biber %b" "xelatex -interaction nonstopmode -output-directory %o %f"
-          "bibtex %b"
-          "xelatex -interaction nonstopmode -output-directory %o %f"
-          "xelatex -interaction nonstopmode -output-directory %o %f"))
 )
 ;; 在创建 org-mode buffer, 自动添加 latex class 解决生成中文pdf 问题
 (eval-after-load 'autoinsert

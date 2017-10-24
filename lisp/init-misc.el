@@ -7,7 +7,7 @@
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :init (progn
 	  (add-hook 'pdf-view-mode-hook (lambda () (company-mode nil)))
-	  (add-hook 'pdf-view-mode-hook (lambda () (nlinum-mode nil))))
+	  (add-hook 'pdf-view-mode-hook (lambda () (nlinum-mode -1))))
   :ensure t)
 
 ;;; Track Emacs commands frequency
