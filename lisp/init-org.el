@@ -30,14 +30,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :config(progn
            (require 'org-indent)
            (org-indent-mode -1)         ;disable org-indent-mode
-
-	   (require 'color)
-	   (set-face-attribute 'org-block nil :background
-			       (color-darken-name
-				(face-attribute 'default :background) 3))
-
-	   (setq org-src-block-faces '(("emacs-lisp" (:background "#EEE2FF"))
-				       ("python" (:background "#E5FFB8"))))
 	   (with-eval-after-load 'org
 	     ;; let org-mode to delete those auxiliary files after export
 	     ;;automatically
@@ -185,7 +177,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   )
 ;; automatically open your agenda when start Emacs
 (add-hook 'after-init-hook (lambda ()
-                             (org-agenda nil "c")))
+			     (org-agenda nil "c")))
 
 ;;; pomodoro tech
 (use-package org-pomodoro
@@ -198,8 +190,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :ensure t
   :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   :config (progn
-            (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
-            ))
+	    (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
+	    ))
 
 ;; Org extra exports
 ;; Export to github flavored markdown
