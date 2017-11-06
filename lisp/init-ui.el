@@ -79,9 +79,9 @@ This code toggles between them."
   (tool-bar-mode -1)
   ;; turn off file scroll bar
   (scroll-bar-mode -1)
-  ;; specify the fringe width for windows -- this sets the left to 8 and
+  ;; specify the fringe width for windows -- this sets the left to 10 and
   ;; right fringes to 0
-  (fringe-mode '(8 . 0))
+  (fringe-mode '(10 . 0))
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
