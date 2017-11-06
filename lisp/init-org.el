@@ -184,6 +184,16 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :commands (org-pomodoro)
   :ensure t)
 
+;;; for journal
+(use-package org-journal
+  :ensure t
+  :commands (org-journal-new-entry)
+  :after org
+  :init (progn
+	  (setq org-journal-dir "~/Dropbox/journal")
+	  )
+  )
+
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
   :after org

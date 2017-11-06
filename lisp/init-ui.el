@@ -8,6 +8,8 @@
 ;;;ignore case when searching
 (setq case-fold-search t)
 
+;;; To beautify window separator
+(window-divider-mode t)
 ;;;------------------;;;
 ;;; Windows & Frames ;;;
 ;;;------------------;;;
@@ -36,6 +38,13 @@
 	    (push "*vc-change-log*" popwin:special-display-config)
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    ))
+
+(use-package golden-ratio
+  :diminish (golden-ratio-mode . "g")
+  :ensure t
+  :init (progn (golden-ratio-mode 1)
+	       (setq golden-ratio-auto-scale t)
+	       ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
@@ -70,12 +79,23 @@ This code toggles between them."
   (tool-bar-mode -1)
   ;; turn off file scroll bar
   (scroll-bar-mode -1)
-  ;; specify the fringe width for windows -- this sets both the left and
-  ;; right fringes to 10
-  (fringe-mode 10)
+  ;; specify the fringe width for windows -- this sets the left to 8 and
+  ;; right fringes to 0
+  (fringe-mode '(8 . 0))
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
+;;;set the fringe colors to whatever is the background color
+(defun samray/tone-down-fringes ()
+  (set-face-attribute 'fringe nil
+                      :foreground (face-foreground 'default)
+                      :background (face-background 'default)))
+(defvar after-load-theme-hook nil
+  "Hook run after a color theme is loaded using `load-theme'.")
+(defadvice load-theme (after run-after-load-theme-hook activate)
+  "Run `after-load-theme-hook'."
+  (run-hooks 'after-load-theme-hook))
+(add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
 
 ;; no menubar
 (menu-bar-mode -1)
@@ -93,7 +113,8 @@ This code toggles between them."
 				       ;; Guesstimate number of buffer lines.
 				       (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
 				  "d"))))
-	  (add-hook 'nlinum-mode-hook 'samray/nlinum-mode-hook))
+	  ;; (add-hook 'nlinum-mode-hook 'samray/nlinum-mode-hook)
+	  )
   :config (progn
 	    (global-nlinum-mode)
 	    (defun initialize-nlinum (&optional frame)
