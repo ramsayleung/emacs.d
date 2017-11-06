@@ -316,11 +316,6 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;
-(use-package nyan-mode
-  :if window-system
-  :ensure t
-  :init (nyan-mode)
-  )
 (use-package spaceline
   :ensure t
   :demand t
