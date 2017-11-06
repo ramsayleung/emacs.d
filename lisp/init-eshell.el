@@ -132,6 +132,5 @@
 	      (setq eshell-highlight-prompt nil
 		    eshell-prompt-function 'epe-theme-pipeline))
 	    ))
-
 (provide 'init-eshell)
 ;;; init-eshell.el ends here

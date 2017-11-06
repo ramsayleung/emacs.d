@@ -29,19 +29,19 @@
   )
 
 (use-package evil-nerd-commenter
-  :commands (evil-mode evilnc-comment-operator)
+  :commands (evilnc-comment-operator)
   :ensure t
   )
 
 ;; evil keybinding in magit
 (use-package evil-magit
-  :commands evil-mode
   :ensure t)
 
 ;; Vim matchit ported into Emacs
 (use-package evil-matchit
   :commands evil-mode
-  :ensure t)
+  :ensure t
+  :init (global-evil-matchit-mode 1))
 
 (use-package evil-mc
   :ensure t
