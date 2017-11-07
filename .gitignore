@@ -16,3 +16,5 @@ eshell/lastdir
 /projectile-bookmarks.eld
 irony/*
 .cask/*
+/network-security.data
+/server/server

@@ -322,21 +322,22 @@
 				[remap evil-complete-previous] 'company-select-previous
 				)
 
-	    ;; Eshll-mode
-	    (general-imap :keymaps 'eshell-mode-map
-			  "C-u" 'eshell-kill-input
-			  "C-w" 'backward-kill-word
-			  )
-
-	    (general-define-key :keymaps 'eshell-mode-map
-				"C-c C-a" 'samray/eshell-sudo-toggle
-				[remap eshell-bol] 'samray/eshell-sudo-toggle
-				"C-a" 'samray/eshell-maybe-bol
-				"C-l" 'samray/eshell-clear-buffer
-				"C-k" 'eshell-kill-process
-				[remap samray/smarter-move-beginning-of-line] 'samray/eshell-maybe-bol
-				[remap evil-insert-digraph] 'eshell-kill-process
+	    (if (not window-system)
+		(progn
+		  ;; Eshll-mode
+		  (general-imap :keymaps 'eshell-mode-map
+				"C-u" 'eshell-kill-input
+				"C-w" 'backward-kill-word
 				)
+		  (general-define-key :keymaps 'eshell-mode-map
+				      "C-c C-a" 'samray/eshell-sudo-toggle
+				      [remap eshell-bol] 'samray/eshell-sudo-toggle
+				      "C-a" 'samray/eshell-maybe-bol
+				      "C-l" 'samray/eshell-clear-buffer
+				      "C-k" 'eshell-kill-process
+				      [remap samray/smarter-move-beginning-of-line] 'samray/eshell-maybe-bol
+				      [remap evil-insert-digraph] 'eshell-kill-process
+				      )))
 
 
 	    ;; Pdf view mode
