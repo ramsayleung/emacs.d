@@ -63,7 +63,6 @@ debug-init and load the given list of packages."
 ;;; UTF-8 works for most of the files i tend to used
 (prefer-coding-system 'utf-8)
 (setq-default buffer-file-coding-system 'utf-8-auto-unix)
-
 (set-language-environment "UTF-8")
 (setq x-select-enable-clipboard-manager nil)
 

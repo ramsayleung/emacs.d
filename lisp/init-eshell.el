@@ -129,6 +129,14 @@
 	  (setq eshell-highlight-prompt nil
 		eshell-prompt-function 'epe-theme-lambda)
 	  ))
+(defun setup-company-eshell-autosuggest ()
+  (with-eval-after-load 'company
+    (setq-local company-backends '(company-eshell-autosuggest))
+    (setq-local company-frontends '(company-preview-frontend))))
 
+(add-hook 'eshell-mode-hook 'setup-company-eshell-autosuggest)
+
+(use-package company-eshell-autosuggest
+  :load-path "~/.emacs.d/additional-packages/company-eshell-autosuggest.el")
 (provide 'init-eshell)
 ;;; init-eshell.el ends here
