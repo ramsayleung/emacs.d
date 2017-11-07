@@ -57,9 +57,8 @@
 (use-package virtualenvwrapper
   :ensure t
   :init (progn
-	  ( add-hook 'python-mode-hook (lambda()
-					 (venv-initialize-interactive-shells)
-					 (venv-initialize-eshell)))
+	  (venv-initialize-interactive-shells)
+	  (venv-initialize-eshell)
 	  ;; (add-hook 'venv-postmkvirtualenv-hook
 	  ;; 	    (lambda () (shell-command "pip install nose flake8 jedi autopep8 isort")))
 	  ))

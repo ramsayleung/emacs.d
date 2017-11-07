@@ -118,19 +118,16 @@
 			(samray/setup-eshell)
 			(eshell-cmpl-initialize)
 			))
+	    (add-hook 'eshell-mode-hook (lambda ()
+					  (setq-local global-hl-line-mode
+						      nil)))
 	    ))
 
-;; Display extra information and color for eshll prompt
-(use-package eshell-prompt-extras
+(use-package eshell-git-prompt
   :ensure t
-  :load-path "~/.emacs.d/additional-packages/eshell-prompt-extras.el"
   :config (progn
-	    (with-eval-after-load "esh-opt"
-	      (use-package virtualenvwrapper :ensure t)
-	      (venv-initialize-eshell)
-	      (autoload 'epe-theme-pipeline "eshell-prompt-extras")
-	      (setq eshell-highlight-prompt nil
-		    eshell-prompt-function 'epe-theme-pipeline))
+	    (eshell-git-prompt-use-theme 'powerline)
 	    ))
+
 (provide 'init-eshell)
 ;;; init-eshell.el ends here
