@@ -64,9 +64,6 @@
 (use-package eshell
   :commands eshell
   :config (progn
-	    (use-package em-cmpl :ensure nil)
-	    (use-package em-prompt :ensure nil)
-	    (use-package em-term :ensure nil)
 	    (setq
 	     eshell-highlight-prompt nil
 	     eshell-buffer-shorthand t
