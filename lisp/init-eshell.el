@@ -123,11 +123,12 @@
 						      nil)))
 	    ))
 
-(use-package eshell-git-prompt
+(use-package eshell-prompt-extras
   :ensure t
-  :config (progn
-	    (eshell-git-prompt-use-theme 'powerline)
-	    ))
+  :init (progn
+	  (setq eshell-highlight-prompt nil
+		eshell-prompt-function 'epe-theme-lambda)
+	  ))
 
 (provide 'init-eshell)
 ;;; init-eshell.el ends here
