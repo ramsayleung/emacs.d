@@ -69,7 +69,9 @@ pip3 install epc --user
 # install isort
 echo "Start to install isort"
 pip3 install isort --user
-
+# install virtualenvwrapper
+echo "Start to install virtualenvwrapper"
+pip3 install virtualenvwrapper --user
 echo "Install gocode"
 go get -u github.com/nsf/gocode
 
