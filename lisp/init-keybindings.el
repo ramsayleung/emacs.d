@@ -115,15 +115,15 @@
 				"5"  'select-window-5
 				)
 
-	    (general-define-key :states '(normal visual insert )
-				"C-e" 'evil-end-of-line
+	    (general-define-key :states '(normal visual insert)
+				"C-e" 'end-of-line
 				"C-a" 'samray/smarter-move-beginning-of-line
 				"C-y" 'yank
-				"C-w" 'evil-delete
+				"C-w" 'backward-kill-word
 				)
 
 	    ;; Org-mode
-	    (general-define-key :states '(normal visual motion )
+	    (general-define-key :states '(normal visual motion)
 				:keymaps 'org-mode-map
 				:prefix my-leader-key
 				"a o" '(:ignore t :which-key "org-mode" )
@@ -327,7 +327,6 @@
 		  ;; Eshll-mode
 		  (general-imap :keymaps 'eshell-mode-map
 				"C-u" 'eshell-kill-input
-				"C-w" 'backward-kill-word
 				)
 		  (general-define-key :keymaps 'eshell-mode-map
 				      "C-c C-a" 'samray/eshell-sudo-toggle
