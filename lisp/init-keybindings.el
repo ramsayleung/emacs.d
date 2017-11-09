@@ -321,11 +321,8 @@
 				[remap evil-complete-next] 'company-select-next
 				[remap evil-complete-previous] 'company-select-previous
 				)
-
-	    ;; I don't know why this keybinding works well in Linux, but crash
-	    ;; Emacs in window
-	    
-	    (if (not window-system)
+	    ;; Something wrong when Emacs works in Windows
+	    (if (not(eq system-type 'windows-nt))
 		(progn
 		  ;; Eshll-mode
 		  (general-imap :keymaps 'eshell-mode-map
@@ -340,7 +337,8 @@
 				      "C-k" 'eshell-kill-process
 				      [remap samray/smarter-move-beginning-of-line] 'samray/eshell-maybe-bol
 				      [remap evil-insert-digraph] 'eshell-kill-process
-				      )))
+				      ))
+	      )
 
 
 	    ;; Pdf view mode

@@ -35,15 +35,14 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  (when (not window-system
-		     )
-	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH"))
-	  ;; when it is nil, exec-path-from-shell will read environment variable
-	  ;; from .zshenv instead of .zshrc, but makes sure that you put all
-	  ;; environment variable you need in .zshenv rather than .zshrc
-	  (setq exec-path-from-shell-check-startup-files nil) ;
-	  (setq exec-path-from-shell-arguments '("-l" )) ;remove -i read form .zshenv
-	  (exec-path-from-shell-initialize)
+	  (when(not(eq system-type 'windows-nt))
+	    (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH"))
+	    ;; when it is nil, exec-path-from-shell will read environment variable
+	    ;; from .zshenv instead of .zshrc, but makes sure that you put all
+	    ;; environment variable you need in .zshenv rather than .zshrc
+	    (setq exec-path-from-shell-check-startup-files nil) ;
+	    (setq exec-path-from-shell-arguments '("-l" )) ;remove -i read form .zshenv
+	    (exec-path-from-shell-initialize)
 	    )
 	  )
   )
@@ -121,18 +120,18 @@
   "Improve the default projectile speedbar toggle."
   (interactive)
   (if (buffer-file-name)
-    (let ((current-buffer (buffer-name)))
+      (let ((current-buffer (buffer-name)))
 	(sr-speedbar-toggle)
 	(if (sr-speedbar-exist-p)
-    (progn
-  (set-buffer current-buffer)
-  (projectile-speedbar-open-current-buffer-in-tree)
-  )
+	    (progn
+	      (set-buffer current-buffer)
+	      (projectile-speedbar-open-current-buffer-in-tree)
+	      )
 	  ))
     (progn
-  (sr-speedbar-toggle)
-  (sr-speedbar-refresh)
-  )))
+      (sr-speedbar-toggle)
+      (sr-speedbar-refresh)
+      )))
 
 (defun samray/speedbar-toggle ()
   "Expand current file in speedbar buffer."
@@ -183,9 +182,9 @@
 similar to shell-pop"
   (interactive)
   (if (get-buffer repl-buffer-name)
-    (if (string= (buffer-name) repl-buffer-name)
-    (if (not (one-window-p))
-    (progn (bury-buffer)
+      (if (string= (buffer-name) repl-buffer-name)
+	  (if (not (one-window-p))
+	      (progn (bury-buffer)
 		     (delete-window)))
 
 	(progn (samray/split-window-below-and-move)
@@ -194,11 +193,11 @@ similar to shell-pop"
 	       (evil-insert-state))
 	)
     (progn
-  (run-python)
-  (samray/split-window-below-and-move)
-  (switch-to-buffer repl-buffer-name)
-  (goto-char (point-max))
-  (evil-insert-state))))
+      (run-python)
+      (samray/split-window-below-and-move)
+      (switch-to-buffer repl-buffer-name)
+      (goto-char (point-max))
+      (evil-insert-state))))
 
 (defun samray/repl-pop ()
   "Run REPL for different major mode and switch to the repl buffer.
@@ -209,12 +208,12 @@ similar to shell-pop"
     (cond ((or (derived-mode-p 'python-mode) (derived-mode-p 'inferior-python-mode))
 	   (progn
 ;;; To fix issue that there is weird eshell output with ipython
-  (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
+	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
 	  ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
 	   (samray/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
 	  ((or (derived-mode-p 'prog-mode)(derived-mode-p 'inferior-python-mode))
 	   (progn
-  (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
+	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
 	  )))
 ;;; Treating terms in CamelCase symbols as separate words makes editing a
 ;;; little easier for me, so I like to use subword-mode everywhere.
