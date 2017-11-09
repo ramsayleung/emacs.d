@@ -176,8 +176,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	   )
   )
 ;; automatically open your agenda when start Emacs
-;; (add-hook 'after-init-hook (lambda ()
-;; 			     (org-agenda nil "c")))
+(add-hook 'after-init-hook (lambda ()
+			     (org-agenda nil "c")))
 
 ;;; pomodoro tech
 (use-package org-pomodoro
