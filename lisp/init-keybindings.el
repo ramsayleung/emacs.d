@@ -322,6 +322,9 @@
 				[remap evil-complete-previous] 'company-select-previous
 				)
 
+	    ;; I don't know why this keybinding works well in Linux, but crash
+	    ;; Emacs in window
+	    
 	    (if (not window-system)
 		(progn
 		  ;; Eshll-mode
