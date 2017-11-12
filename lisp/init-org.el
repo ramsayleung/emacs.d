@@ -10,11 +10,13 @@
 	  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 	  (setq org-todo-keyword-faces
 		'(
+		  ("NOTDO" . (:foreground "black"))
 		  ("PROCESSING" . (:foreground "gold" :weight bold))
 		  ))
 	  (setq org-todo-keywords
-		'((sequence "TODO" "PROCESSING" "DONE")))
-	  (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
+		'((sequence "NOTDO" "TODO" "PROCESSING" "DONE")))
+	  (setq org-priority-faces '(
+				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "blue"))
 				     (?C . (:foreground "green"))))
 	  (defun samray/org-skip-subtree-if-priority (priority)
@@ -59,8 +61,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		       (agenda "")
 		       (alltodo ""
 				((org-agenda-skip-function
-				  '(or (samray/org-skip-subtree-if-priority ?A)
-				       (org-agenda-skip-if nil '(scheduled deadline))))))))))
+				  '(or
+				    (samray/org-skip-subtree-if-priority ?A)
+				    (org-agenda-skip-entry-if 'todo '("NOTDO"))
+				    (org-agenda-skip-if nil '(scheduled deadline))))))))))
 	     ;;each time you turn an entry from a TODO (not-done) state
 	     ;;into any of the DONE states, a line ‘CLOSED: [timestamp]’ will
 	     ;;be inserted just after the headline

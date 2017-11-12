@@ -81,7 +81,7 @@
       :ensure t
       :demand t)
     (setq treemacs-follow-after-init          t
-          treemacs-width                      35
+          treemacs-width                      30
           treemacs-indentation                2
           treemacs-git-integration            t
           treemacs-collapse-dirs              3
@@ -99,7 +99,7 @@
   (:map global-map
         ("C-c t t"        . treemacs-toggle)
         ("C-c t e"    . treemacs)
-        ))
+	))
 (use-package treemacs-projectile
   :defer t
   :ensure t
