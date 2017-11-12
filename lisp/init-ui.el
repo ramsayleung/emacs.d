@@ -314,7 +314,9 @@ then check whether EMACS should to modify theme, if so, modify it."
 
 ;;; switch to the first font in the list above
 (samray/cycle-font)
-
+(dolist (charset '(kana han cjk-misc bopomofo))
+  (set-fontset-font (frame-parameter nil 'font) charset
+		    (font-spec :family "微软雅黑" :size 16)))
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;

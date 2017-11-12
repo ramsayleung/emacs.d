@@ -33,6 +33,8 @@ sudo yarn global add eslint
 #install required Python packages for Elpy
 #if [ $(pip install rope;echo $?) != 0 ]
 #Either of these
+echo "Start to install ipython"
+pip3 install ipython --user
 echo "Start to install rope "
 pip3 install rope --user
 #pip install jedi

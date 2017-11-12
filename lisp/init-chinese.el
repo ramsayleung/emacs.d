@@ -137,5 +137,6 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
 (auto-insert-mode)  ;;; Adds hook to find-files-hook
 (setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
 
+
 (provide 'init-chinese)
 ;;; init-chinese.el ends here
