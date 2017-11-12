@@ -309,14 +309,26 @@ then check whether EMACS should to modify theme, if so, modify it."
 	  ((eq system-type 'darwin)
 	   (set-frame-font samray-current-font))
 	  ((eq system-type 'windows-nt)
-	   (set-frame-font samray-current-font))))
+	   (set-frame-font samray-current-font)))
+    )
   )
 
 ;;; switch to the first font in the list above
-(samray/cycle-font)
-(dolist (charset '(kana han cjk-misc bopomofo))
-  (set-fontset-font (frame-parameter nil 'font) charset
-		    (font-spec :family "微软雅黑" :size 16)))
+(if (eq system-type 'windows-nt)
+    (progn
+      (set-face-attribute
+       'default nil :font "Consolas 13")
+      ;; Chinese Font 配制中文字体
+      (dolist (charset '(kana han symbol cjk-misc bopomofo))
+	(set-fontset-font (frame-parameter nil 'font)
+			  charset
+			  (font-spec :family "微软雅黑" :size 14))))
+  (progn
+    (samray/cycle-font)
+    (dolist (charset '(kana han cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font) charset
+			(font-spec :family "WenQuanYi Zen Hei" :size 14)))
+    ))
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;
