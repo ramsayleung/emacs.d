@@ -18,3 +18,4 @@ irony/*
 .cask/*
 /network-security.data
 /server/server
+session.*
