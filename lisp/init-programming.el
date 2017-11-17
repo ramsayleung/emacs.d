@@ -5,7 +5,7 @@
 
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . "γ")
+  :diminish yas-minor-mode
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
@@ -35,7 +35,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  (when(not(eq system-type 'windows-nt))
+	  (when(not(samray/is-windows))
 	    (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH"))
 	    ;; when it is nil, exec-path-from-shell will read environment variable
 	    ;; from .zshenv instead of .zshrc, but makes sure that you put all
@@ -55,6 +55,10 @@
 ;; projectile
 (use-package projectile
   :ensure t
+  :init (progn
+	  (setq projectile-mode-line '(:eval(format " P[%s]"
+						    (projectile-project-name))))
+	  )
   :config
   (projectile-mode)
   (setq projectile-completion-system 'ivy))

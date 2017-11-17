@@ -322,7 +322,7 @@
 				[remap evil-complete-previous] 'company-select-previous
 				)
 	    ;; Something wrong when Emacs works in Windows
-	    (if (not(eq system-type 'windows-nt))
+	    (if (not(samray/is-windows))
 		(progn
 		  ;; Eshll-mode
 		  (general-imap :keymaps 'eshell-mode-map

@@ -5,7 +5,7 @@
 (use-package flycheck
   :ensure t
   :demand t
-  :diminish (flycheck-mode . "ψ")
+  :diminish flycheck-mode
   :config(global-flycheck-mode t))
 
 (use-package flycheck-rust

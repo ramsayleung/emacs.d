@@ -4,7 +4,7 @@
 
 (use-package company
   :ensure t
-  :diminish (company-mode . "Φ")
+  :diminish company-mode
   :demand t
   :commands (company-mode
              company-complete

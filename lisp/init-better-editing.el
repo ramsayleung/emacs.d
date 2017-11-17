@@ -10,7 +10,7 @@
 (use-package smartparens
   :ensure t
   :demand t
-  :diminish (smartparens-mode . "ρ")
+  :diminish smartparens-mode
   :config
   (progn
     (smartparens-global-mode t)
@@ -61,6 +61,7 @@
   :init(add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 ;;; A light that follows your cursor around so you don't lose it
 (use-package beacon
+  :if (not (samray/is-windows))
   :ensure t
   :diminish beacon-mode
   :demand t
@@ -69,6 +70,7 @@
 
 ;;; An useful package to compare directory tree
 (use-package ztree
+  :if (not (samray/is-windows))
   :ensure t
   :commands (ztree-dir ztree-diff)
   :init (setq ztree-dir-move-focus t))
@@ -89,6 +91,7 @@
 
 ;;; folding based on indentation/syntax
 (use-package origami
+  :if (not (samray/is-windows))
   :ensure t
   :defer t
   :init (progn

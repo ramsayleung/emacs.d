@@ -6,8 +6,7 @@
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :init (progn
-	  (add-hook 'pdf-view-mode-hook (lambda () (company-mode nil)))
-	  (add-hook 'pdf-view-mode-hook (lambda () (nlinum-mode -1))))
+	  (add-hook 'pdf-view-mode-hook (lambda () (company-mode nil))))
   :ensure t)
 
 ;;; Track Emacs commands frequency
@@ -17,11 +16,13 @@
 
 ;;; make Emacs sound like a proper typewrite
 (use-package selectric-mode
+  :if (not (samray/is-windows))
   :commands selectric-mode
   :ensure t)
 
 ;;; use Irc in Emacs
 (use-package circe
+  :if (not (samray/is-windows))
   :ensure t
   :commands circe-mode
   :config (progn
@@ -42,6 +43,7 @@
 
 ;;; Defining and querying search engine(for example:Google) through Emacs
 (use-package  engine-mode
+  :if (not (samray/is-windows))
   :ensure t
   :diminish
   :config (progn
