@@ -368,5 +368,18 @@ lines up by reverse ARG."
 ;;               (bound-and-true-p subword-mode))
 ;;     (backward-word)))
 
+;; this is from my .emacs.d
+(use-package adaptive-wrap
+  :ensure t
+  :init (progn
+	  (setq-default adaptive-wrap-extra-indent 2)
+	  ))
+
+(add-hook 'visual-line-mode-hook
+	  (lambda ()
+	    (adaptive-wrap-prefix-mode +1)
+	    (diminish 'visual-line-mode)))
+
+(global-visual-line-mode +1)
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here

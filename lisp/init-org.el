@@ -23,10 +23,6 @@
 	  ;; a header.
 	  (setq org-ellipsis "⤵")
 
-	  ;; Set color for "~"(eg, ~code~)
-	  (add-to-list 'org-emphasis-alist
-		       '("~" (:foreground "darkseagreen")
-			 ))
 	  ;;Its default value is (ascii html icalendar latex)
 	  (setq org-export-backends '(latex icalendar))
 	  ;; Show org-edit-special in the other-window
@@ -35,8 +31,6 @@
 	  ;; (add-to-list 'org-latex-packages-alist '("" "minted"))
 	  ;; (setq org-latex-listings 'minted)
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
-	  ;; wrap line
-	  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 	  (setq org-todo-keyword-faces
 		'(
 		  ("NOTDO" . (:foreground "black"))
@@ -110,6 +104,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		      "* %?\nEntered on %U\n  %i\n  %a")
 		     ))
 
+	     ;; Set color for "~"(eg, ~code~)
+	     (add-to-list 'org-emphasis-alist
+			  '("~" (:foreground "darkseagreen")
+			    ))
 	     (require 'ox-latex )
 	     (setq org-export-latex-listings t)
 	     ;;org-mode source code setup in exporting to latex
