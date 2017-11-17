@@ -67,10 +67,8 @@
 	    (setq
 	     eshell-highlight-prompt nil
 	     eshell-buffer-shorthand t
-	     eshell-cmpl-ignore-case t
-	     eshell-cmpl-cycle-completions nil
-	     eshell-history-size 500
-	     ;; auto truncate after 12k lines
+	     eshell-history-size 5000
+	     ;;  ;; auto truncate after 12k lines
 	     eshell-buffer-maximum-lines 12000
 	     eshell-hist-ignoredups t
 	     eshell-error-if-no-glob t
@@ -79,7 +77,7 @@
 	     eshell-list-files-after-cd t
 	     eshell-aliases-file (concat user-emacs-directory "eshell/alias")
 	     eshell-banner-message ""
-	     ;; eshell-banner-message "What would you like to do?\n\n"
+	     ;;  ;; eshell-banner-message "What would you like to do?\n\n"
 	     )
 	    ;; Visual commands
 	    (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
@@ -87,37 +85,14 @@
 					   "nmtui" "alsamixer" "htop" "el" "elinks"
 					   ))
 	    (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
-
-	    (defun samray/truncate-eshell-buffers ()
-	      "Truncates all eshell buffers"
-	      (interactive)
-	      (save-current-buffer
-		(dolist (buffer (buffer-list t))
-		  (set-buffer buffer)
-		  (when (eq major-mode 'eshell-mode)
-		    (eshell-truncate-buffer)))))
-	    ;; After being idle for 5 seconds, truncate all the eshell-buffers if
-	    ;; needed. If this needs to be canceled, you can run `(cancel-timer
-	    ;; my/eshell-truncate-timer)'
-	    (setq samray/eshell-truncate-timer
-		  (run-with-idle-timer 5 t #'samray/truncate-eshell-buffers))
 	    (when (not (functionp 'eshell/rgrep))
 	      (defun eshell/rgrep (&rest args)
 		"Use Emacs grep facility instead of calling external grep."
 		(eshell-grep "rgrep" args t)))
-	    (defun samray/setup-eshell ()
-	      "Eshell init setup"
-	      (interactive)
-	      (hl-line-mode -1)
-	      )
 	    (add-hook 'eshell-mode-hook
-		      (lambda ()
-			(samray/setup-eshell)
-			(eshell-cmpl-initialize)
-			))
+		      (lambda ()(eshell-cmpl-initialize)))
 	    (add-hook 'eshell-mode-hook (lambda ()
-					  (setq-local global-hl-line-mode
-						      nil)))
+					  (setq-local global-hl-line-mode nil)))
 	    ))
 
 (use-package eshell-prompt-extras

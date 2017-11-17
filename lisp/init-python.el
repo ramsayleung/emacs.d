@@ -138,7 +138,8 @@
   (interactive)
   (save-excursion
     (py-isort-buffer)
-    (py-autopep8-buffer))
+    (py-autopep8-buffer)
+    )
   )
 (defun samray/setup-python-mode ()
   "Make sure we add to hook locally so that we do not mess up

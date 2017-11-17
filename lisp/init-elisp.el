@@ -10,7 +10,7 @@
 	  (add-hook 'lisp-mode-hook 'enable-paredit-mode)
 	  (add-hook 'scheme-mode-hook 'enable-paredit-mode)
 	  )
-  :diminish (paredit-mode . "π")
+  :diminish paredit-mode
   )
 (provide 'init-elisp)
 

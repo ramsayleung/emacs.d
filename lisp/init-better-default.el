@@ -96,5 +96,10 @@ debug-init and load the given list of packages."
 	mac-command-modifier 'meta
 	mac-option-modifier 'none)
   )
+
+(defun samray/is-windows ()
+  "Check whether Os is Windows or not."
+  (eq system-type 'windows-nt)
+  )
 (provide 'init-better-default)
 ;;; init-better-default.el ends here

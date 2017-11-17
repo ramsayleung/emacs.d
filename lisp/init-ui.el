@@ -40,7 +40,7 @@
 	    ))
 
 (use-package golden-ratio
-  :diminish (golden-ratio-mode . "g")
+  :diminish golden-ratio-mode
   :ensure t
   :init (progn (golden-ratio-mode 1)
 	       (setq golden-ratio-auto-scale t)
@@ -123,7 +123,8 @@ This code toggles between them."
 	      (add-hook 'window-setup-hook 'initialize-nlinum)
 	      (defadvice make-frame (around toggle-nlinum-mode compile activate)
 		(nlinum-mode -1) ad-do-it (nlinum-mode 1)))
-
+	    (add-hook 'prog-mode-hook 'nlinum-mode)
+	    (add-hook 'text-mode-hook 'nlinum-mode)
 	    ))
 ;; number of characters until the fill column
 (setq fill-column 80)
@@ -290,7 +291,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   "Check if FONT exists."
   (when window-system
     (if (null (x-list-fonts font)) nil t)))
-(if(eq system-type 'windows-nt)
+(if(samray/is-windows)
     (defvar samray-font-list '("Consolas-13"))
   (defvar samray-font-list '("FantasqueSansMono-14" "Source Code Pro-13" "Fira Code-13" "Inconsolata-11" ))
   )
@@ -309,23 +310,51 @@ then check whether EMACS should to modify theme, if so, modify it."
 	  ((eq system-type 'darwin)
 	   (set-frame-font samray-current-font))
 	  ((eq system-type 'windows-nt)
-	   (set-frame-font samray-current-font))))
+	   (set-frame-font samray-current-font)))
+    )
   )
 
 ;;; switch to the first font in the list above
-(samray/cycle-font)
-
+(if (samray/is-windows)
+    (progn
+      (set-face-attribute
+       'default nil :font "Consolas 13")
+      ;; Chinese Font 配制中文字体
+      (dolist (charset '(kana han symbol cjk-misc bopomofo))
+	(set-fontset-font (frame-parameter nil 'font)
+			  charset
+			  (font-spec :family "微软雅黑" :size 14))))
+  (progn
+    (samray/cycle-font)
+    (dolist (charset '(kana han cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font) charset
+			(font-spec :family "WenQuanYi Zen Hei" :size 16)))
+    ))
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;
 (use-package spaceline
   :ensure t
-  :demand t
+  :if (not (samray/is-windows))
   :config
   (require 'spaceline-config)
   (setq powerline-default-separator 'nil)
   (spaceline-emacs-theme)
   )
+
+;;; customize default mode line
+;;; disable status of "read only" or "wriable"
+(setq-default mode-line-modified nil)
+(setq-default mode-line-remote nil)
+;;; move evil tag to beginning of mode line
+(setq evil-mode-line-format '(before . mode-line-front-space))
+;;; modify evil-state-tag
+(setq evil-normal-state-tag   (propertize "[Normal]")
+      evil-emacs-state-tag    (propertize "[Emacs]")
+      evil-insert-state-tag   (propertize "[Insert]")
+      evil-motion-state-tag   (propertize "[Motion]")
+      evil-visual-state-tag   (propertize "[Visual]")
+      evil-operator-state-tag (propertize "[Operator]"))
 ;;; Use Miminish minor modes to change the mode line
 ;;; The mode line map:
 ;;; paredit-mode -> "π"
@@ -366,7 +395,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 (diminish-minor-mode 'auto-revert 'auto-revert-mode)
 (diminish-minor-mode 'simple 'auto-fill-function )
 (diminish-minor-mode 'eldoc 'eldoc-mode)
-(diminish-major-mode 'emacs-lisp-mode-hook "el")
+(diminish-major-mode 'emacs-lisp-mode-hook "El")
 (diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
 (provide 'init-ui)
