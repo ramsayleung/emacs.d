@@ -411,6 +411,7 @@
 	     "C-c \"" 'wrap-with-double-quotes
 	     "C-c _" 'wrap-with-underscotes
 	     "C-c `" 'wrap-with-back-quotes
+	     "C-c <" 'wrap-with-angle-brackets
 	     "C-c C-h" 'counsel-imenu
 	     "C-c C-r" 'ivy-resume
 	     "C-h f" 'counsel-describe-function

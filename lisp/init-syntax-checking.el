@@ -5,8 +5,9 @@
 (use-package flycheck
   :ensure t
   :demand t
-  :diminish flycheck-mode
-  :config(global-flycheck-mode t))
+  :config(progn
+	   (setq flycheck-mode-line-prefix "FC")
+	   (global-flycheck-mode t)))
 
 (use-package flycheck-rust
   :ensure t

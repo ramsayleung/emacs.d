@@ -13,6 +13,14 @@
 (use-package racer
   :ensure t
   :init (progn
+	  (defun samray/get-rust-src-path ()
+	    (let* ((command (concat "rustc --print sysroot"))
+		   (rustc-sysroot-path (shell-command-to-string command))
+		   (strip-path (replace-regexp-in-string "\n$" "" rustc-sysroot-path)))
+	      (if (samray/is-windows)
+		  (concat strip-path "\\lib\\rustlib\\src\\rust\\src")
+		(concat strip-path "/lib/rustlib/src/rust/src"))))
+	  (setenv (samray/get-rust-src-path))
 	  ;; Set path to racer binary
 	  (setq racer-cmd (expand-file-name "~/.cargo/bin/racer"))
 	  ;; Set path to rust src directory
