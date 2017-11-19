@@ -350,8 +350,8 @@ then check whether EMACS should to modify theme, if so, modify it."
 (setq-default mode-line-modified nil)
 (setq-default mode-line-frame-identification nil)
 (setq-default mode-line-remote nil)
-;;; move evil tag to beginning of mode line
-(setq evil-mode-line-format '(before . mode-line-front-space))
+
+(setq )
 ;;; modify evil-state-tag
 (setq evil-normal-state-tag   (propertize "[Normal]")
       evil-emacs-state-tag    (propertize "[Emacs]")
@@ -373,11 +373,18 @@ then check whether EMACS should to modify theme, if so, modify it."
 				 ;; mode-line-modified -- show buffer change or not
 				 ;; mode-line-remote -- no need to indicate this specially
 				 ;; mode-line-frame-identification -- this is for text-mode emacs only
+				 "["
+				 mode-name
+				 "]"
 				 mode-line-buffer-identification
+				 " "
 				 mode-line-position
 				 (vc-mode vc-mode)
 				 " "
-				 mode-line-modes
+				 ;; mode-line-modes -- move major-name above
+				 "["
+				 minor-mode-alist
+				 "]"
 				 mode-line-misc-info
 				 ;; mode-line-end-spaces
 				 ))
@@ -409,7 +416,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 (diminish-minor-mode 'auto-revert 'auto-revert-mode)
 (diminish-minor-mode 'simple 'auto-fill-function )
 (diminish-minor-mode 'eldoc 'eldoc-mode)
-(diminish-major-mode 'emacs-lisp-mode-hook "El")
+(diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
 (diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
 (provide 'init-ui)

@@ -68,7 +68,7 @@
 (use-package projectile
   :ensure t
   :init (progn
-	  (setq projectile-mode-line '(:eval(format " P[%s]"
+	  (setq projectile-mode-line '(:eval(format " P(%s)"
 						    (projectile-project-name))))
 	  )
   :config
