@@ -15,9 +15,12 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(custom-safe-themes
    (quote
-    ("f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+ '(fci-rule-color "#383838")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(nrepl-message-colors
    (quote
@@ -27,7 +30,7 @@
     ("~/Dropbox/Org/agenda.org" "~/Dropbox/Org/todo.org")))
  '(package-selected-packages
    (quote
-    (adaptive-wrap em-cmpl company-eshell-autosuggest eshell-prompt-extra eshell-git-prompt golden-ratio org-journal nyan-mode treemacs-evil treemacs-projectile docker dockerfile-mode solarized-theme monokai-theme cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
+    (es-mode adaptive-wrap em-cmpl company-eshell-autosuggest eshell-prompt-extra eshell-git-prompt golden-ratio org-journal nyan-mode treemacs-evil treemacs-projectile docker dockerfile-mode solarized-theme monokai-theme cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
    (quote

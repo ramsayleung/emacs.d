@@ -24,6 +24,9 @@
 (use-package yaml-mode
   :ensure t
   :mode "\\.yml$")
+(use-package es-mode
+  :ensure t
+  :mode "\\.es$")
 
 (use-package dockerfile-mode
   :ensure t

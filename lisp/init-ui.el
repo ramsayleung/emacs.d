@@ -348,6 +348,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;; customize default mode line
 ;;; disable status of "read only" or "wriable"
 (setq-default mode-line-modified nil)
+(setq-default mode-line-frame-identification nil)
 (setq-default mode-line-remote nil)
 ;;; move evil tag to beginning of mode line
 (setq evil-mode-line-format '(before . mode-line-front-space))
@@ -358,19 +359,29 @@ then check whether EMACS should to modify theme, if so, modify it."
       evil-motion-state-tag   (propertize "[Motion]")
       evil-visual-state-tag   (propertize "[Visual]")
       evil-operator-state-tag (propertize "[Operator]"))
+
+;;; customize mode line
+(setq-default mode-line-format '("["
+				 "%e"
+				 (:eval
+				  (window-numbering-get-number-string))
+				 "]"
+				 evil-mode-line-tag
+				 mode-line-front-space
+				 mode-line-mule-info
+				 mode-line-client
+				 ;; mode-line-modified -- show buffer change or not
+				 ;; mode-line-remote -- no need to indicate this specially
+				 ;; mode-line-frame-identification -- this is for text-mode emacs only
+				 mode-line-buffer-identification
+				 mode-line-position
+				 (vc-mode vc-mode)
+				 " "
+				 mode-line-modes
+				 mode-line-misc-info
+				 ;; mode-line-end-spaces
+				 ))
 ;;; Use Miminish minor modes to change the mode line
-;;; The mode line map:
-;;; paredit-mode -> "π"
-;;; wakatime-mode -> "ω"
-;;; flycheck-mode -> "ψ"
-;;; yasnippet-mode -> "γ"
-;;; company-mode -> "Φ"
-;;; smarthparence-mode -> "ρ"
-;;; hungrydelete-mode -> ""
-;;; lisp-interaction-mode -> "λ"
-;;; abbrev-mode -> ""  "" means hide this minor mode from mode line
-;;; undo-tree-mode -> ""
-;;; whichkey-mode -> ""
 
 (use-package diminish
   :ensure t
