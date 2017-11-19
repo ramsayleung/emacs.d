@@ -12,6 +12,15 @@
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
 
+;;; similar with fill-column-indicator,but a little bit different
+(use-package column-enforce-mode
+  :ensure t
+  :diminish column-enforce-mode
+  :defer t
+  :config
+  (setq column-enforce-column 79)
+  (add-hook 'prog-mode-hook 'column-enforce-mode))
+
 (use-package yaml-mode
   :ensure t
   :mode "\\.yml$")
@@ -157,8 +166,7 @@
 
 (defun samray/term-paste (&optional string)
   "Yanking in the term-mode doesn't quit work The text from the
-   paste appears in the buffer but isn't sent to the shell
-"
+   paste appears in the buffer but isn't sent to the shell."
   (interactive)
   (process-send-string
    (get-buffer-process (current-buffer))

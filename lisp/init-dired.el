@@ -12,7 +12,7 @@
   :ensure t
   )
 (setq dired-recursive-copies 'always)
-(setq dired-recursive-deletes 'top)
+(setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)
 (defvar dired-compress-files-alist
   '(("\\.tar\\.gz\\'" . "tar -c %i | gzip -c9 > %o")

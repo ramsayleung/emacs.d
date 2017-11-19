@@ -74,14 +74,14 @@ This code toggles between them."
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
 
+;; specify the fringe width for windows -- this sets the left to 10 and
+;; right fringes to 0
+(fringe-mode '(10 . 0))
 (when window-system
   ;;turn off tool bar
   (tool-bar-mode -1)
   ;; turn off file scroll bar
   (scroll-bar-mode -1)
-  ;; specify the fringe width for windows -- this sets the left to 10 and
-  ;; right fringes to 0
-  (fringe-mode '(10 . 0))
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
@@ -326,16 +326,19 @@ then check whether EMACS should to modify theme, if so, modify it."
 			  (font-spec :family "微软雅黑" :size 14))))
   (progn
     (samray/cycle-font)
-    (dolist (charset '(kana han cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font) charset
-			(font-spec :family "WenQuanYi Zen Hei" :size 16)))
+    (when window-system
+      (dolist (charset '(kana han cjk-misc bopomofo))
+	(set-fontset-font (frame-parameter nil 'font) charset
+			  (font-spec :family "WenQuanYi Zen Hei" :size 16))))
     ))
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;
 (use-package spaceline
   :ensure t
-  :if (not (samray/is-windows))
+  :if (and (not (samray/is-windows))
+	   window-system)
+  :defer t
   :config
   (require 'spaceline-config)
   (setq powerline-default-separator 'nil)

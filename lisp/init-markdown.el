@@ -28,11 +28,6 @@
   :ensure t
   :commands (markdown-mode))
 
-;;; preview markdown file on the fly on my browser
-(use-package flymd
-  :commands markdown-mode
-  :ensure t)
-
 (provide 'init-markdown)
 
 ;;; init-markdown.el ends here

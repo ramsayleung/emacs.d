@@ -44,15 +44,6 @@
   :commands (py-isort-buffer py-isort-region)
   )
 
-;;; similar with fill-column-indicator,but a little bit different
-(use-package column-enforce-mode
-  :ensure t
-  :diminish column-enforce-mode
-  :defer t
-  :init
-  (setq column-enforce-column 79)
-  (add-hook 'prog-mode-hook 'column-enforce-mode))
-
 ;;; virtualenvwrapper for virtualenv
 (use-package virtualenvwrapper
   :ensure t

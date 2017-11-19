@@ -60,9 +60,11 @@
   :ensure t
   :defer t
   :init(add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
 ;;; A light that follows your cursor around so you don't lose it
 (use-package beacon
-  :if (not (samray/is-windows))
+  :if (and (not (samray/is-windows))
+	   window-system)
   :ensure t
   :diminish beacon-mode
   :demand t
@@ -80,9 +82,9 @@
 (use-package highlight-indent-guides
   :ensure t
   :defer t
-  :init (progn
-          (setq highlight-indent-guides-method 'character)
-          (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+  :config (progn
+	    (setq highlight-indent-guides-method 'character)
+	    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
   )
 
 ;;; show information about selected region
@@ -99,19 +101,6 @@
 	  (add-hook 'prog-mode-hook (lambda () (origami-mode t)))
 	  ))
 
-;;; Show current buffer's imenu entries in a seperate buffer
-(use-package imenu-list
-  :ensure t
-  :commands imenu-list-smart-toggle
-  :init (progn
-	  (setq imenu-list-focus-after-activation t)
-	  (setq imenu-list-auto-resize t)
-	  (setq imenu-list-position 'right)
-	  (setq imenu-list-size 0.3)
-	  (add-hook 'imenu-list-major-mode-hook
-		    (lambda () (turn-off-evil-mode)))
-	  ))
-
 ;;; treat undo history as a tree
 (use-package undo-tree
   :ensure t
@@ -122,9 +111,9 @@
 ;;; make grep buffer writable and apply the changes to files
 (use-package wgrep
   :ensure t
-  :init (progn
-	  (setq wgrep-auto-save-buffer t)
-	  ))
+  :config (progn
+	    (setq wgrep-auto-save-buffer t)
+	    ))
 
 ;;; Emacs always for confirmation whether we really wanna open
 ;;; large file.However,the default limit is so low,so it prompt often

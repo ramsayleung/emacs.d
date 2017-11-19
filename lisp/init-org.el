@@ -182,13 +182,15 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; pomodoro tech
 (use-package org-pomodoro
-  :if (not (samray/is-windows))
+  :if (and (not (samray/is-windows))
+	   window-system)
   :commands (org-pomodoro)
   :ensure t)
 
 ;;; for journal
 (use-package org-journal
-  :if (not (samray/is-windows))
+  :if (and (not (samray/is-windows))
+	   window-system)
   :ensure t
   :commands (org-journal-new-entry)
   :after org
@@ -199,7 +201,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
-  :if (not (samray/is-windows))
+  :if (and (not (samray/is-windows))
+	   window-system)
   :after org
   :ensure t
   :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -210,17 +213,21 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;; Org extra exports
 ;; Export to github flavored markdown
 (use-package ox-gfm
-  :if (not (samray/is-windows))
+  :if (and (not (samray/is-windows))
+	   window-system)
   :ensure ox-gfm
   )
 
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
-  :ensure ox-twbs
+  :if (and (not (samray/is-windows))
+	   window-system)
   )
 
 ;;; Export to reveal for presentation
 (use-package ox-reveal
+  :if (and (not (samray/is-windows))
+	   window-system)
   :ensure ox-reveal)
 
 ;; ;;; fix org-mode/latex chinese char issue
@@ -235,12 +242,14 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
-  :if (not (samray/is-windows))
+  :if (and (not (samray/is-windows))
+	   window-system)
   :ensure t)
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
-  :if (not (samray/is-windows))
+  :if (and (not (samray/is-windows))
+	   window-system)
   :ensure t)
 
 (defun org-file-path (filename)
