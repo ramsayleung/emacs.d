@@ -351,7 +351,8 @@ then check whether EMACS should to modify theme, if so, modify it."
 (setq-default mode-line-frame-identification nil)
 (setq-default mode-line-remote nil)
 
-(setq )
+;;;Move evil tag to beginning of mode line
+(setq evil-mode-line-format '(before . mode-line-front-space))
 ;;; modify evil-state-tag
 (setq evil-normal-state-tag   (propertize "[Normal]")
       evil-emacs-state-tag    (propertize "[Emacs]")
@@ -366,17 +367,17 @@ then check whether EMACS should to modify theme, if so, modify it."
 				 (:eval
 				  (window-numbering-get-number-string))
 				 "]"
-				 evil-mode-line-tag
 				 mode-line-front-space
 				 mode-line-mule-info
-				 mode-line-client
+				 ;; mode-line-client
 				 ;; mode-line-modified -- show buffer change or not
 				 ;; mode-line-remote -- no need to indicate this specially
 				 ;; mode-line-frame-identification -- this is for text-mode emacs only
 				 "["
 				 mode-name
-				 "]"
+				 ":"
 				 mode-line-buffer-identification
+				 "]"
 				 " "
 				 mode-line-position
 				 (vc-mode vc-mode)
