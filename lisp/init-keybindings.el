@@ -419,6 +419,7 @@
 	     "C-x C-f" 'counsel-find-file
 	     "C-x b" 'samray/ivy-switch-to-buffer-enhanced
 	     "C-x k" 'kill-this-buffer
+	     "C-x t" 'samray/dired-tmp-dir
 	     "C-x C-r" 'recentf-open-files
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move

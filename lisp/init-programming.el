@@ -26,7 +26,10 @@
   :mode "\\.yml$")
 (use-package es-mode
   :ensure t
-  :mode "\\.es$")
+  :mode "\\.es$"
+  :config (progn
+	    (setq es-always-pretty-print t)
+	    ))
 
 (use-package dockerfile-mode
   :ensure t

@@ -20,7 +20,7 @@
 	      (if (samray/is-windows)
 		  (concat strip-path "\\lib\\rustlib\\src\\rust\\src")
 		(concat strip-path "/lib/rustlib/src/rust/src"))))
-	  (setenv (samray/get-rust-src-path))
+	  (setenv "RUST_SRC_PATH" (samray/get-rust-src-path))
 	  ;; Set path to racer binary
 	  (setq racer-cmd (expand-file-name "~/.cargo/bin/racer"))
 	  ;; Set path to rust src directory

@@ -248,7 +248,13 @@ removal."
         (switch-to-buffer (find-file-noselect filename nil nil))
       (message "NO README.org or README.md found!"))
     ))
-
+(defun samray/dired-tmp-dir ()
+  "Open tmp directory."
+  (interactive)
+  (if (samray/is-windows)
+      (dired (getenv "TMPDIR"))
+    (dired "/tmp")
+    ))
 (message "loading init-misc")
 (provide 'init-misc)
 ;;; init-misc.el ends here
