@@ -326,6 +326,8 @@
 		  ;; Eshll-mode
 		  (general-imap :keymaps 'eshell-mode-map
 				"C-u" 'eshell-kill-input
+				[remap evil-paste-from-register] 'samray/esh-history
+				"C-r" 'samray/esh-history
 				)
 		  (general-define-key :keymaps 'eshell-mode-map
 				      "C-c C-a" 'samray/eshell-sudo-toggle

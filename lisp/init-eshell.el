@@ -26,6 +26,21 @@
 	  (insert "sudo ")
 	  )))))
 
+(defun samray/esh-history ()
+  "Interactive search eshell history."
+  (interactive)
+  (require 'em-hist)
+  (save-excursion
+    (let ((input (buffer-substring-no-properties
+		  (eshell-bol) (point-max))))
+      (ivy-read "Symbol name: "
+		(delete-dups
+		 (when (> (ring-size eshell-history-ring) 0)
+		   (ring-elements eshell-history-ring)))
+		:preselect input
+		:action #'ivy-completion-in-region-action)
+      )))
+
 (defun samray/eshell-clear-buffer ()
   "Clear terminal."
   (interactive)
