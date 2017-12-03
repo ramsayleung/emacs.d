@@ -33,13 +33,14 @@
   (save-excursion
     (let ((input (buffer-substring-no-properties
 		  (eshell-bol) (point-max))))
-      (ivy-read "Symbol name: "
+      (ivy-read "Command: "
 		(delete-dups
 		 (when (> (ring-size eshell-history-ring) 0)
 		   (ring-elements eshell-history-ring)))
 		:preselect input
-		:action #'ivy-completion-in-region-action)
-      )))
+		:action #'ivy-completion-in-region-action)))
+  (end-of-line)
+  )
 
 (defun samray/eshell-clear-buffer ()
   "Clear terminal."
