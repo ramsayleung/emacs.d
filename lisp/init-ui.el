@@ -90,12 +90,17 @@ This code toggles between them."
   (set-face-attribute 'fringe nil
                       :foreground (face-foreground 'default)
                       :background (face-background 'default)))
+(defun samray/set-mode-line-width ()
+  "Set mode line width, it is so cool."
+  (set-face-attribute 'mode-line nil
+		      :box '(:line-height 0)))
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
 (defadvice load-theme (after run-after-load-theme-hook activate)
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
 (add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
+(add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
 
 ;; no menubar
 (menu-bar-mode -1)
