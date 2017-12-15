@@ -31,14 +31,19 @@
   (interactive)
   (require 'em-hist)
   (save-excursion
-    (let ((input (buffer-substring-no-properties
-		  (eshell-bol) (point-max))))
-      (ivy-read "Command: "
-		(delete-dups
-		 (when (> (ring-size eshell-history-ring) 0)
-		   (ring-elements eshell-history-ring)))
-		:preselect input
-		:action #'ivy-completion-in-region-action)))
+    (let* ((start-pos (eshell-bol))
+	   (end-pos (point-at-eol))
+	   (input (buffer-substring-no-properties start-pos end-pos)))
+      (let* ((command (ivy-read "Command: "
+				(delete-dups
+				 (when (> (ring-size eshell-history-ring) 0)
+				   (ring-elements eshell-history-ring)))
+				:preselect input
+				:action #'ivy-completion-in-region-action))
+	     (cursor-move (length command)))
+	(kill-region (+ start-pos cursor-move) (+ end-pos cursor-move))
+	)))
+  ;; move cursor to eol
   (end-of-line)
   )
 
