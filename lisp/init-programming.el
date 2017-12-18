@@ -3,6 +3,10 @@
 ;;; Code:
 ;;; Commentary:
 
+;;; enhanced gud
+(use-package realgud
+  :ensure t)
+
 (use-package yasnippet
   :ensure t
   :diminish yas-minor-mode
