@@ -104,6 +104,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		      "* %?\nEntered on %U\n  %i\n  %a")
 		     ))
 
+
 	     ;; Set color for "~"(eg, ~code~)
 	     (add-to-list 'org-emphasis-alist
 			  '("~" (:foreground "darkseagreen")
@@ -114,48 +115,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     (add-to-list 'org-latex-listings '("" "listings"))
 	     (add-to-list 'org-latex-listings '("" "color"))
 
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "xcolor" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "listings" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "fontspec" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "indentfirst" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "xunicode" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "geometry"))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "float"))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "longtable"))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "tikz"))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "fancyhdr"))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "textcomp"))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "amsmath"))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "tabularx" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "booktabs" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "grffile" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "wrapfig" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("normalem" "ulem" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "amssymb" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("" "capt-of" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("figuresright" "rotating" t))
-	     (add-to-list 'org-latex-packages-alist
-			  '("Lenny" "fncychap" t))
 	     ;; execute code without confirm
 	     (setq org-confirm-babel-evaluate nil)
 	     ;; set latex to xelatex
