@@ -408,6 +408,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   :diminish auto-fill-function
   :diminish mail-abbrevs-mode
   :diminish highlight-indentation-mode
+  :diminish visual-line-mode
   :diminish subword-mode)
 
 ;;; Stolen From https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org

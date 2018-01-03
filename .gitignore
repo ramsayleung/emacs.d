@@ -19,3 +19,6 @@ irony/*
 /network-security.data
 /server/server
 session.*
+irony/*
+irony/bin/*
+irony/*

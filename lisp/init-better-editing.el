@@ -367,9 +367,9 @@ lines up by reverse ARG."
 
 (add-hook 'visual-line-mode-hook
 	  (lambda ()
-	    (adaptive-wrap-prefix-mode +1)
-	    (diminish 'visual-line-mode)))
+	    (adaptive-wrap-prefix-mode t)
+	    ))
 
-(global-visual-line-mode +1)
+(global-visual-line-mode t)
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here
