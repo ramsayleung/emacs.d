@@ -301,7 +301,7 @@ then check whether EMACS should to modify theme, if so, modify it."
     (if (null (x-list-fonts font)) nil t)))
 (if(samray/is-windows)
     (defvar samray-font-list '("Consolas-13"))
-  (defvar samray-font-list '("Consolas-13:weight=medium:slant=italic" "FantasqueSansMono-13:weight=medium:slant=italic" "Source Code Pro-12:weight=medium:slant=italic" ))
+  (defvar samray-font-list '("FantasqueSansMono-13:weight=medium:slant=italic" "Consolas-13:weight=medium:slant=italic" "Source Code Pro-12:weight=medium:slant=italic" ))
   )
 
 (defun samray/cycle-font ()
@@ -404,6 +404,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   :demand t
   :diminish hs-minor-mode
   :diminish abbrev-mode
+  :diminish visual-line-mode
   :diminish auto-revert-mode
   :diminish auto-fill-function
   :diminish mail-abbrevs-mode

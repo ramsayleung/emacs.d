@@ -240,7 +240,7 @@
 	    (general-define-key :keymaps 'c-mode-base-map
 				"C-M-g" 'rtags-find-symbol-at-point
 				"C-M-b" 'xref-pop-marker-stack
-				"C-M-;" 'clang-format-buffer)
+				"C-c C-." 'clang-format-buffer)
 
 	    ;; Scheme mode
 	    (general-define-key :states '(normal visual motion)
@@ -453,33 +453,33 @@
 		      "C-M-b" 'xref-pop-marker-stack
 		      "M-." 'elpy-goto-definition
 		      "M-," 'xref-pop-marker-stack
-		      "C-M-;" 'samray/python-format-and-isort-buffer)
+		      "C-c C-." 'samray/python-format-and-isort-buffer)
 
   ;; Web mode|Html mode
   (general-define-key :keymaps '(web-mode-map html-mode-map)
-		      "C-M-;" 'web-beautify-html)
+		      "C-c C-." 'web-beautify-html)
 
   ;; Css mode
   (general-define-key :keymaps 'css-mode-map
-		      "C-M-;" 'web-beautify-css)
+		      "C-c C-." 'web-beautify-css)
 
 
   ;; Js|Js2|Json mode
   (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
-		      "C-M-;" 'web-beautify-js)
+		      "C-c C-." 'web-beautify-js)
 
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
-		      "C-M-;" 'samray/indent-buffer)
+		      "C-c C-." 'samray/indent-buffer)
 
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map
 		      "M-n" 'pyim-convert-code-at-point
-		      "C-M-;" 'samray/indent-buffer)
+		      "C-c C-." 'samray/indent-buffer)
 
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
-		      "C-M-;" 'gofmt)
+		      "C-c C-." 'gofmt)
   ;; Rust-mode
   (general-define-key :keymaps 'rust-mode-map
 		      "<tab>" 'company-indent-or-complete-common
@@ -487,7 +487,7 @@
 		      "M-." 'racer-find-definition
 		      "C-M-g" 'racer-find-definition
 		      "C-M-b" 'xref-pop-marker-stack
-		      "C-M-;" 'rust-format-buffer)
+		      "C-c C-." 'rust-format-buffer)
 
   ;; Emacs Lisp mode
   (general-define-key :keymaps 'emacs-lisp-mode-map

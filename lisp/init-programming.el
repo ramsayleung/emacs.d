@@ -79,6 +79,7 @@
 						    (projectile-project-name))))
 	  )
   :config
+  (counsel-projectile-on)
   (projectile-mode)
   (setq projectile-completion-system 'ivy))
 

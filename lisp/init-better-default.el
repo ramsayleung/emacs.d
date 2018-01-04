@@ -101,5 +101,16 @@ debug-init and load the given list of packages."
   "Check whether Os is Windows or not."
   (eq system-type 'windows-nt)
   )
+(defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
+  "Create parent directory if not exists while visiting file."
+  (unless (file-exists-p filename)
+    (let ((dir (file-name-directory filename)))
+      (unless (file-exists-p dir)
+	(if (y-or-n-p (format "Directory %s does not exist,do you want you create it? " dir))
+	    (progn
+	      (make-directory dir)
+	      )
+	  (keyboard-quit))
+	))))
 (provide 'init-better-default)
 ;;; init-better-default.el ends here
