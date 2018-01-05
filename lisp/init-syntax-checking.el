@@ -19,9 +19,11 @@
   :ensure t
   :defer t
   :init (progn
-	  (setq irony-additional-clang-options '("-std=c++11"))
 	  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)
 	  ))
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+(add-hook 'c++-mode-hook (lambda ()
+			   (setq flycheck-clang-language-standard "c++11")
+			   (setq irony-additional-clang-options '("-std=c++11"))
+			   ))
 (provide 'init-syntax-checking)
 ;;; init-syntax-checking.el ends here
