@@ -34,5 +34,15 @@
   :defer t
   :init (progn
 	  (add-hook 'rust-mode-hook 'cargo-minor-mode)))
+(defvar samray/cargo-process--command-script "script")
+(defun samray/cargo-process-script ()
+  "Run cargo script command to compile and run a single file."
+  (interactive)
+  (cargo-process--start (concat "Script " (buffer-file-name))
+                        (concat samray/cargo-process--command-script
+                                " "
+                                (buffer-file-name))))
+
+
 (provide 'init-rust)
 ;;; init-rust.el ends here
