@@ -43,7 +43,8 @@
 
 (use-package counsel-projectile
   :ensure t
-  :config(counsel-projectile-on))
+  :init (counsel-projectile-mode)
+  )
 
 (use-package ivy-buffer-extend
   :load-path "~/.emacs.d/additional-packages/ivy-buffer-extend.el")

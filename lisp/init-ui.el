@@ -178,9 +178,6 @@ This code toggles between them."
   :ensure t
   :defer t
   )
-(use-package solarized-theme
-  :ensure t
-  :defer t)
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
@@ -196,7 +193,7 @@ load/'disable-theme', so reset it after load/disable-theme'"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties solarized-dark))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -301,7 +298,7 @@ then check whether EMACS should to modify theme, if so, modify it."
     (if (null (x-list-fonts font)) nil t)))
 (if(samray/is-windows)
     (defvar samray-font-list '("Consolas-13"))
-  (defvar samray-font-list '("Consolas-13:weight=medium:slant=italic" "FantasqueSansMono-13:weight=medium:slant=italic" "Source Code Pro-12:weight=medium:slant=italic" ))
+  (defvar samray-font-list '("FantasqueSansMono-13:weight=medium:slant=italic" "Consolas-13:weight=medium:slant=italic" "Source Code Pro-12:weight=medium:slant=italic" ))
   )
 
 (defun samray/cycle-font ()
@@ -404,6 +401,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   :demand t
   :diminish hs-minor-mode
   :diminish abbrev-mode
+  :diminish visual-line-mode
   :diminish auto-revert-mode
   :diminish auto-fill-function
   :diminish mail-abbrevs-mode
