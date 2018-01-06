@@ -85,3 +85,5 @@ curl https://sh.rustup.rs -sSf | sh
 echo "Install racer dependency"
 rustup component add rust-src
 cargo install racer
+cargo install cargo-edit
+cargo install cargo-script

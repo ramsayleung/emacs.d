@@ -178,9 +178,6 @@ This code toggles between them."
   :ensure t
   :defer t
   )
-(use-package solarized-theme
-  :ensure t
-  :defer t)
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
@@ -196,7 +193,7 @@ load/'disable-theme', so reset it after load/disable-theme'"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties solarized-dark))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()

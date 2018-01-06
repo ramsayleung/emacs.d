@@ -370,6 +370,10 @@ lines up by reverse ARG."
 	    (adaptive-wrap-prefix-mode t)
 	    ))
 
-(global-visual-line-mode t)
+
+(if (and (not (samray/is-windows))
+	 window-system)
+    (global-visual-line-mode +1)
+  )
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here

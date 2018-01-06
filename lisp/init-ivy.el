@@ -43,6 +43,7 @@
 
 (use-package counsel-projectile
   :ensure t
+  :init (counsel-projectile-mode)
   )
 
 (use-package ivy-buffer-extend
