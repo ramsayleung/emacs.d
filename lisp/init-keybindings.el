@@ -321,26 +321,6 @@
 				[remap evil-complete-next] 'company-select-next
 				[remap evil-complete-previous] 'company-select-previous
 				)
-	    ;; Something wrong when Emacs works in Windows
-	    (if (and (not (samray/is-windows))
-		     window-system)
-		(progn
-		  ;; Eshll-mode
-		  (general-imap :keymaps 'eshell-mode-map
-				"C-u" 'eshell-kill-input
-				[remap evil-paste-from-register] 'samray/esh-history
-				"C-r" 'samray/esh-history
-				)
-		  (general-define-key :keymaps 'eshell-mode-map
-				      "C-c C-a" 'samray/eshell-sudo-toggle
-				      [remap eshell-bol] 'samray/eshell-sudo-toggle
-				      "C-a" 'samray/eshell-maybe-bol
-				      "C-l" 'samray/eshell-clear-buffer
-				      "C-k" 'eshell-kill-process
-				      [remap samray/smarter-move-beginning-of-line] 'samray/eshell-maybe-bol
-				      [remap evil-insert-digraph] 'eshell-kill-process
-				      ))
-	      )
 
 
 	    ;; Pdf view mode
@@ -714,5 +694,21 @@ Info-mode:
     (find-alternate-file "..")))
 (define-key dired-mode-map "F" 'find-name-dired)
 (define-key dired-mode-map (kbd "%^") 'dired-flag-garbage-files)
+;;; There is a bug with eshell-mode-map, so I change keybinding with add-hook
+;;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2016-02/msg01532.html
+;;; https://github.com/noctuid/general.el/issues/80
+;; Eshll-mode
+(defun samray/eshell-define-key-dwim (keymap keybinding function)
+  "Unset original keybinding in KEYMAP, and then set KEYBINDING with FUNCTION."
+  (define-key keymap [remap (lookup-key keymap keybinding)] function)
+  (define-key keymap keybinding function)
+  )
+(add-hook 'eshell-mode-hook
+          (lambda ()
+	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/esh-history)
+            (define-key eshell-mode-map (kbd "C-c C-l") #'samray/esh-history)
+	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-l")] #'samray/eshell-clear-buffer)
+	    (define-key eshell-mode-map (kbd "C-l") #'samray/eshell-clear-buffer)
+	    ))
 (provide 'init-keybindings)
 ;;; init-keybindings ends here

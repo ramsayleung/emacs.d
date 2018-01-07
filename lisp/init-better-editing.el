@@ -284,7 +284,7 @@ lines up by reverse ARG."
 	   (defun samray/paste-from-x-clipboard()
 	     "Paste string clipboard"
 	     (interactive)
-	     (insert (simpleclip-get-contents)))	   
+	     (insert (simpleclip-get-contents)))
 	   ))
 
 ;;; Changing Ediff options
