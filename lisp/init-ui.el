@@ -85,6 +85,14 @@ This code toggles between them."
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
+;;; Verical-border in terminal is ugly, fix it.
+(set-face-inverse-video-p 'vertical-border nil)
+(set-face-background 'vertical-border (face-background 'default))
+
+;; Set symbol for the border
+(set-display-table-slot standard-display-table
+                        'vertical-border 
+                        (make-glyph-code ?┃))
 ;;;set the fringe colors to whatever is the background color
 (defun samray/tone-down-fringes ()
   (set-face-attribute 'fringe nil
