@@ -30,7 +30,7 @@
     ("~/Dropbox/Org/agenda.org" "~/Dropbox/Org/todo.org")))
  '(package-selected-packages
    (quote
-    (realgud es-mode adaptive-wrap em-cmpl company-eshell-autosuggest eshell-prompt-extra eshell-git-prompt golden-ratio org-journal nyan-mode treemacs-evil treemacs-projectile docker dockerfile-mode solarized-theme monokai-theme cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
+    (ivy-rtags realgud es-mode adaptive-wrap em-cmpl company-eshell-autosuggest eshell-prompt-extra eshell-git-prompt golden-ratio org-journal nyan-mode treemacs-evil treemacs-projectile docker dockerfile-mode solarized-theme monokai-theme cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
    (quote

@@ -32,8 +32,13 @@
 	    '(add-to-list
 	      'company-backends 'company-rtags))
 	  ;; (setq rtags-autostart-diagnostics t)
+	  (setq rtags-display-result-backend 'ivy)
 	  (rtags-enable-standard-keybindings)
 	  )
+  )
+(use-package ivy-rtags
+  :ensure t
+  :after rtags-mode
   )
 ;;; Tell emacs to open .h file in C++ mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
