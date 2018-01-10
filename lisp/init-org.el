@@ -181,13 +181,14 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (use-package ox-twbs
   :if (and (not (samray/is-windows))
 	   window-system)
+  :ensure ox-twbs
   )
 
 ;;; Export to reveal for presentation
-(use-package ox-reveal
-  :if (and (not (samray/is-windows))
-	   window-system)
-  :ensure ox-reveal)
+;; (use-package ox-reveal
+;;   :if (and (not (samray/is-windows))
+;; 	   window-system)
+;;   :ensure ox-reveal)
 
 ;; ;;; fix org-mode/latex chinese char issue
 ;; (use-package ox-latex-chinese

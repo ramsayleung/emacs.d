@@ -24,6 +24,12 @@
 	  (add-hook 'c-mode-hook (lambda () (cmake-ide-setup)))
 	  )
   )
+(use-package cmake-mode
+  :ensure t
+  :mode (
+	   ("CMakeLists\\.txt\\'" . cmake-mode)
+	   ("\\.cmake\\'" . cmake-mode)
+	  ))
 (use-package rtags
   :ensure t
   :init (progn

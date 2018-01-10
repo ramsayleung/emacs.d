@@ -367,9 +367,13 @@ lines up by reverse ARG."
 
 (add-hook 'visual-line-mode-hook
 	  (lambda ()
-	    (adaptive-wrap-prefix-mode +1)
-	    (diminish 'visual-line-mode)))
+	    (adaptive-wrap-prefix-mode t)
+	    ))
 
-(global-visual-line-mode +1)
+
+(if (and (not (samray/is-windows))
+	 window-system)
+    (global-visual-line-mode +1)
+  )
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here
