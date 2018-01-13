@@ -140,17 +140,4 @@
    |                      | [[https://github.com/CodeFalling/vue-mode][vue-mode]]                       | Major mode for vue component based on web-mode and mmm-mode                       |
    
 * ScreenShot
-** startup
-   [[./images/startup.png]]
-** org-mode 
-   [[./images/org-mode.png]]
-** completion
-   [[./images/python.png]]
-** swiper
-   [[./images/swiper.png]]
-** ripgreg
-   [[./images/rg.png]]
-** various window
-   [[./images/various_window.png]]
-** eshell
-   [[./images/eshell.png]]
+  [[./images/screenshot.png]]
