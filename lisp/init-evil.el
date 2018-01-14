@@ -35,7 +35,9 @@
 
 ;; evil keybinding in magit
 (use-package evil-magit
-  :ensure t)
+  :ensure t
+  :after magit
+  )
 
 ;; Vim matchit ported into Emacs
 (use-package evil-matchit

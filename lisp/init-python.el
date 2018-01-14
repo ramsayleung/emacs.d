@@ -34,7 +34,7 @@
 
 ;; Use pep8 to format python file
 (use-package py-autopep8
-  :defer t
+  :commands (py-autopep8 py-autopep8-buffer)
   :ensure t
   ;; :init(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
   )
@@ -46,10 +46,15 @@
 
 ;;; virtualenvwrapper for virtualenv
 (use-package virtualenvwrapper
+  :after python-mode
   :ensure t
   :init (progn
-	  (venv-initialize-interactive-shells)
-	  (venv-initialize-eshell)
+	  (add-hook 'eshell-mode-hook (lambda ()
+					(venv-initialize-eshell)
+					))
+	  (add-hook 'shell-mode-hook (lambda ()
+				       (venv-initialize-interactive-shells)
+				       ))
 	  ;; (add-hook 'venv-postmkvirtualenv-hook
 	  ;; 	    (lambda () (shell-command "pip install nose flake8 jedi autopep8 isort")))
 	  ))

@@ -12,6 +12,7 @@
   :mode ("\\.toml\\'" . toml-mode))
 (use-package racer
   :ensure t
+  :defer t
   :init (progn
 	  (defun samray/get-rust-src-path ()
 	    (let* ((command (concat "rustc --print sysroot"))

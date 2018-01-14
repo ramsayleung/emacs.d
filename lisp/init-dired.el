@@ -10,6 +10,7 @@
 (require 'dired-x)
 (use-package dired+
   :ensure t
+  :after dired
   )
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)

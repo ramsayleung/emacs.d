@@ -4,10 +4,39 @@
 
 (use-package counsel
   :ensure t
-  :init (
-	 )
+  :commands (counsel-grep-or-swiper
+	     swiper
+	     counsel-M-x
+	     counsel-find-file
+	     counsel-describe-function
+	     counsel-describe-variable
+	     counsel-info-loopup-symbol
+	     counsel-unicode-char
+	     counsel-git
+	     counsel-git-grep
+	     counsel-ag
+	     counsel-rg
+	     counsel-locate
+	     counsel-minibuffer-history
+	     )
+  :init ()
   )
 (use-package swiper
+  :commands (counsel-grep-or-swiper
+	     swiper
+	     counsel-M-x
+	     counsel-find-file
+	     counsel-describe-function
+	     counsel-describe-variable
+	     counsel-info-loopup-symbol
+	     counsel-unicode-char
+	     counsel-git
+	     counsel-git-grep
+	     counsel-ag
+	     counsel-rg
+	     counsel-locate
+	     counsel-minibuffer-history
+	     )
   :ensure t)
 
 (use-package avy
@@ -15,6 +44,21 @@
   :ensure t)
 
 (use-package ivy
+  :commands (counsel-grep-or-swiper
+	     swiper
+	     counsel-M-x
+	     counsel-find-file
+	     counsel-describe-function
+	     counsel-describe-variable
+	     counsel-info-loopup-symbol
+	     counsel-unicode-char
+	     counsel-git
+	     counsel-git-grep
+	     counsel-ag
+	     counsel-rg
+	     counsel-locate
+	     counsel-minibuffer-history
+	     )
   :ensure t
   :diminish ivy-mode
   :init (progn
@@ -43,6 +87,7 @@
 
 (use-package counsel-projectile
   :ensure t
+  :after projectile
   :init (counsel-projectile-mode)
   )
 

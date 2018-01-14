@@ -4,6 +4,7 @@
 
 (use-package irony
   :ensure t
+  :defer t
   :init (progn
 	  (defun samray/irony-mode-hook ()
 	    (define-key irony-mode-map [remap completion-at-point] 'counsel-irony)
@@ -19,6 +20,7 @@
   )
 (use-package cmake-ide
   :ensure t
+  :defer t
   :init (progn
 	  (add-hook 'c++-mode-hook (lambda () (cmake-ide-setup)))
 	  (add-hook 'c-mode-hook (lambda () (cmake-ide-setup)))
@@ -27,20 +29,20 @@
 (use-package cmake-mode
   :ensure t
   :mode (
-	   ("CMakeLists\\.txt\\'" . cmake-mode)
-	   ("\\.cmake\\'" . cmake-mode)
-	  ))
+	 ("CMakeLists\\.txt\\'" . cmake-mode)
+	 ("\\.cmake\\'" . cmake-mode)
+	 ))
 (use-package rtags
   :ensure t
+  :defer t
   :init (progn
-	  (setq rtags-completions-enabled t)
-	  (eval-after-load 'company
-	    '(add-to-list
-	      'company-backends 'company-rtags))
-	  ;; (setq rtags-autostart-diagnostics t)
-	  (setq rtags-display-result-backend 'ivy)
-	  (rtags-enable-standard-keybindings)
-	  )
+	  (defun rtags-setup ()
+	    (setq rtags-completions-enabled t)
+	    (setq rtags-autostart-diagnostics t)
+	    (setq rtags-display-result-backend 'ivy)
+	    (rtags-enable-standard-keybindings))
+	  (add-hook 'c++-mode-hook #'rtags-setup)
+	  (add-hook 'c-mode-hook #'rtags-setup))
   )
 (use-package ivy-rtags
   :ensure t

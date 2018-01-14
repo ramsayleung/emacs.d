@@ -145,5 +145,24 @@
 				      (add-to-list 'company-backends 'company-racer)
 				      ))
 	  ))
+
+;;; backend for rtags
+(use-package company-rtags
+  :ensure t
+  :defer t
+  :init (progn
+	  (add-hook 'c-mode-hook (lambda ()
+				   (add-to-list 'company-backends 'company-rtags)))
+
+	  (add-hook 'c++-mode-hook (lambda ()
+				     (add-to-list 'company-backends 'company-rtags)))
+	  ))
+;;; backends for lsp-mode
+(use-package company-lsp
+  :ensure t
+  :defer t
+  :init (progn
+	  (add-to-list 'company-backends 'company-lsp)
+	  ))
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here
