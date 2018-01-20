@@ -463,11 +463,11 @@
 		      "C-c ." 'gofmt)
   ;; Rust-mode
   (general-define-key :keymaps 'rust-mode-map
-		      "<tab>" 'company-indent-or-complete-common
-		      [remap evil-repeat-pop-next] 'racer-find-definition
-		      "M-." 'racer-find-definition
-		      "C-M-g" 'racer-find-definition
-		      "C-M-b" 'xref-pop-marker-stack
+		      ;; "<tab>" 'company-indent-or-complete-common
+		      ;; [remap evil-repeat-pop-next] 'racer-find-definition
+		      ;; "M-." 'racer-find-definition
+		      ;; "C-M-g" 'racer-find-definition
+		      ;; "C-M-b" 'xref-pop-marker-stack
 		      "C-c ." 'rust-format-buffer)
 
   ;; Emacs Lisp mode

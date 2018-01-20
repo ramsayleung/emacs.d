@@ -162,7 +162,8 @@
   :ensure t
   :defer t
   :init (progn
-	  (add-to-list 'company-backends 'company-lsp)
+	  (add-hook 'lsp-mode-hook (lambda ()
+				     (add-to-list 'company-backends 'company-lsp)))
 	  ))
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here
