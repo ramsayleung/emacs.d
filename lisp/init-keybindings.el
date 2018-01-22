@@ -281,7 +281,7 @@
 				:prefix my-leader-key
 				"m c ." 'cargo-process-repeat
 				"m c C" 'cargo-process-clean
-				"m c X" 'cargo-process-run-example
+				"m c X" 'samray/cargo-process-run-current-example
 				"m c c" 'cargo-process-build
 				"m c d" 'cargo-process-doc
 				"m c f" 'cargo-process-current-test

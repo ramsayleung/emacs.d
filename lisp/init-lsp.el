@@ -7,7 +7,6 @@
   :ensure t
   :defer t
   :config (progn
-	    (require 'lsp-flycheck)
 	    (add-hook 'python-mode-hook 'lsp-mode)
 	    (add-hook 'rust-mode-hook 'lsp-mode)
 	    (set-face-attribute 'lsp-face-highlight-textual nil
@@ -22,18 +21,17 @@
 (use-package lsp-rust
   :ensure t
   :config (progn
-	    (require 'lsp-flycheck)
-	    (require 'lsp-mode)
 	    (add-hook 'rust-mode-hook 'lsp-rust-enable)
 	    (add-hook 'rust-mode-hook 'flycheck-mode)
+	    (setq lsp-rust-rls-command "/home/samray/Code/rust/rls/target/debug/rls")
 	    ))
 
 (use-package lsp-ui
   :ensure t
-  ;; :defer t
-  ;; :config (progn
-  ;; 	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-  ;; 	    )
+  :defer t
+  :config (progn
+  	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  	    )
   )
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

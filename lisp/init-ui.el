@@ -42,6 +42,7 @@
 (use-package golden-ratio
   :diminish golden-ratio-mode
   :ensure t
+  :defer t 				;; disable golden-ratio
   :init (progn (golden-ratio-mode 1)
 	       (setq golden-ratio-auto-scale t)
 	       ))
