@@ -216,9 +216,9 @@ Plus a bit."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar ivy-buffer-format
   '(
-    buffer-name   "<col>"  "|"
-                  mode process  "<col>"  "|"
-                  dir file-name "<col>"  "|"
+    buffer-name   "<col>"  " "
+                  mode process  "<col>"  " "
+                  dir file-name "<col>"  "      "
                   )
   "Describe the display format for `ivy-switch-buffer'.
 It is a list containing elements that are symbols, cons cells,
