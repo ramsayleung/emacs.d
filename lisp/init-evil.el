@@ -34,10 +34,10 @@
   )
 
 ;; evil keybinding in magit
-(use-package evil-magit
-  :ensure t
-  :after magit
-  )
+;; (use-package evil-magit
+;;   :ensure t
+;;   :after magit
+;;   )
 
 ;; Vim matchit ported into Emacs
 (use-package evil-matchit

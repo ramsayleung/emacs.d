@@ -6,10 +6,11 @@
   :ensure t
   :config (progn
 	    (general-evil-setup t)
-	    (defvar my-leader-key "SPC")
-	    (defvar my-second-leader-key "/")
+	    (defvar samray/leader-key "SPC")
+	    (defvar samray/second-leader-key "/")
 	    (general-define-key :states '(normal visual motion )
-				:prefix my-leader-key
+				:prefix samray/leader-key
+				"" nil
 				";" 'evilnc-comment-operator
 				"'" 'shell-pop
 				"." 'samray/repl-pop
@@ -48,7 +49,7 @@
 				"f R" 'samray/rename-current-buffer-file
 				"f s" 'save-buffer
 				"f e" '(:ignore t :which-key "emacs")
-				"f e d" 'open-my-file
+				"f e d" 'open-samray/file
 				"h" '(:ignore t :which-key "help")
 				"h d" '(:ignore t :which-key "help-describe")
 				"h d d" 'apropos-documentation
@@ -124,7 +125,7 @@
 	    ;; Org-mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'org-mode-map
-				:prefix my-leader-key
+				:prefix samray/leader-key
 				"a o" '(:ignore t :which-key "org-mode" )
 				"a o a" 'org-agenda-list
 				"a o c" 'org-capture
@@ -179,7 +180,7 @@
 	    ;; Markdown-mode
 	    (general-define-key :states '(normal visual motion )
 				:keymaps 'markdown-mode-map
-				:prefix my-leader-key
+				:prefix samray/leader-key
 				"m -" 'markdown-insert-hr
 				"m h" '(:ignore t :which-key "markdown/header")
 				"m h i" 'markdown-insert-header-dwim
@@ -214,7 +215,7 @@
 	    ;; Python mode
 	    (general-define-key :states '(normal visual  motion)
 				:keymaps 'python-mode-map
-				:prefix my-leader-key
+				:prefix samray/leader-key
 				"m c" '(:ignore t :which-key "excute")
 				"m c c" 'samray/python-execute-file
 				"m c C" 'samray/python-execute-file-focus
@@ -233,7 +234,7 @@
 	    ;; C/C++ mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'c++-mode-map
-				:prefix my-leader-key
+				:prefix samray/leader-key
 				"m c" '(:ignore t :which-key "compiling")
 				"m c c" 'cmake-ide-compile)
 	    ;; C/C++ mode
@@ -245,7 +246,7 @@
 	    ;; Scheme mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'scheme-mode-map
-				:prefix my-leader-key
+				:prefix samray/leader-key
 				"m c" '(:ignore t :which-key "compiling")
 				"m c c" 'geiser-compile-current-buffer
 				"m c p" 'geiser-add-to-path
@@ -278,7 +279,7 @@
 	    ;; Rust mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'rust-mode-map
-				:prefix my-leader-key
+				:prefix samray/leader-key
 				"m c ." 'cargo-process-repeat
 				"m c C" 'cargo-process-clean
 				"m c X" 'samray/cargo-process-run-current-example
@@ -299,7 +300,7 @@
 	    ;; Origami mode
 	    (general-define-key		:states '(normal visual motion)
 					:keymaps 'origami-mode-map
-					:prefix my-leader-key
+					:prefix samray/leader-key
 					"t o" '(:ignore t :which-key "origami")
 					"t o t" 'origami-toggle-node
 					"t o f" 'origami-forward-toggle-node
@@ -474,6 +475,9 @@
   (general-define-key :keymaps 'emacs-lisp-mode-map
 		      "C-M-g" 'xref-find-definitions
 		      "C-M-b" 'xref-pop-marker-stack)
+  (general-emacs-define-key 'global
+      "C-v" 'evil-scroll-down
+      "M-v" 'evil-scroll-up)
 
 ;;; Org-agenda-mode
   (with-eval-after-load 'org-mode
@@ -482,7 +486,7 @@
 
 
   (general-define-key :states '(normal visual )
-		      :prefix my-second-leader-key
+		      :prefix samray/second-leader-key
 		      "e" '(:ignore t :which-key "eval")
 		      "e b" 'evil-buffer
 		      "f" '(:ignore t :which-key "file")
