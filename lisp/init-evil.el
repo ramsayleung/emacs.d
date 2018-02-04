@@ -40,10 +40,10 @@
 ;;   )
 
 ;; Vim matchit ported into Emacs
-(use-package evil-matchit
-  :commands evil-mode
-  :ensure t
-  :init (global-evil-matchit-mode 1))
+;; (use-package evil-matchit
+;;   :commands evil-mode
+;;   :ensure t
+;;   :init (global-evil-matchit-mode 1))
 
 (use-package evil-mc
   :ensure t
@@ -51,7 +51,12 @@
   :commands evil-mode
   :init
   (global-evil-mc-mode t)
+  :config (progn
+	    (evil-define-key 'normal evil-mc-key-map (kbd "C-n") 'next-line)
+	    (evil-define-key 'normal evil-mc-key-map (kbd "C-p") 'previous-line)
+	    )
   )
+
 
 ;;; refactor variable within a function
 ;;; http://blog.binchen.org/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html

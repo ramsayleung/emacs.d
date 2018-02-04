@@ -27,8 +27,6 @@
 
 (define-abbrev-table 'calendar-mode-abbrev-table '())
 
-(define-abbrev-table 'change-log-mode-abbrev-table '())
-
 (define-abbrev-table 'circe-channel-mode-abbrev-table '())
 
 (define-abbrev-table 'circe-chat-mode-abbrev-table '())
@@ -54,12 +52,6 @@
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
 
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
-
-(define-abbrev-table 'epa-info-mode-abbrev-table '())
-
-(define-abbrev-table 'epa-key-list-mode-abbrev-table '())
-
-(define-abbrev-table 'epa-key-mode-abbrev-table '())
 
 (define-abbrev-table 'ert-results-mode-abbrev-table '())
 
@@ -108,41 +100,11 @@
 
 (define-abbrev-table 'lisp-mode-abbrev-table '())
 
-(define-abbrev-table 'log-edit-mode-abbrev-table '())
+(define-abbrev-table 'lsp-ui-flycheck-list-mode-abbrev-table '())
 
 (define-abbrev-table 'lsp-ui-imenu-mode-abbrev-table '())
 
 (define-abbrev-table 'lui-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-cherry-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-diff-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-log-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-log-select-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-merge-preview-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-popup-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-process-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-reflog-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-refs-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-repolist-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-revision-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-stash-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-stashes-mode-abbrev-table '())
-
-(define-abbrev-table 'magit-status-mode-abbrev-table '())
 
 (define-abbrev-table 'markdown-mode-abbrev-table '())
 
