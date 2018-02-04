@@ -118,6 +118,7 @@
 
 (use-package eshell-prompt-extras
   :ensure t
+  :after eshell
   :init (progn
 	  (setq eshell-highlight-prompt nil
 		eshell-prompt-function 'epe-theme-lambda)

@@ -18,7 +18,6 @@
 	     samray/restart-emacs-debug-init
 	     samray/restart-emacs-resume-layout)
   :init
-
   (defun samray/restart-emacs (&optional args)
     "Restart emacs."
     (interactive)

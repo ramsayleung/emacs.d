@@ -4,10 +4,11 @@
 
 (use-package counsel
   :ensure t
-  :init (
-	 )
+  :init ()
   )
 (use-package swiper
+  :ensure t)
+(use-package smex
   :ensure t)
 
 (use-package avy
@@ -43,11 +44,44 @@
 
 (use-package counsel-projectile
   :ensure t
-  :after projectile-mode
+  :after projectile
+  :init (counsel-projectile-mode)
   )
 
 (use-package ivy-buffer-extend
   :load-path "~/.emacs.d/additional-packages/ivy-buffer-extend.el")
+
+;;; Steal from https://github.com/alexmurray/ivy-xref
+(defun ivy-xref-make-collection (xrefs)
+  "Transform XREFS into a collection for display via `ivy-read'."
+  (let ((collection nil))
+    (dolist (xref xrefs)
+      (with-slots (summary location) xref
+        (let ((line (xref-location-line location))
+              (file (xref-location-group location))
+              (candidate nil))
+          (setq candidate (concat
+                           ;; use file name only
+                           (car (reverse (split-string file "\\/")))
+			   (when (string= "integer" (type-of line))
+			     (concat ":" (int-to-string line) ": "))
+			   summary))
+          (push `(,candidate . ,location) collection))))
+    collection))
+
+(defun ivy-xref-show-xrefs (xrefs alist)
+  "Show the list of XREFS and ALIST via ivy."
+  (let ((buffer (current-buffer)))
+    (ivy-read "xref: " (ivy-xref-make-collection xrefs)
+              :require-match t
+              :sort t
+              :action #'(lambda (candidate)
+                          (xref--show-location (cdr candidate) 'quit)))
+    ;; honor the contact of xref--show-xref-buffer by returning its original
+    ;; return value
+    buffer))
+
+(setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
 
 ;;; Sometimes I find too many buffers is distracted
 (defun samray/switch-to-current-open-buffer ()

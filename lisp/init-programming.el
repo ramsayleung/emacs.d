@@ -5,7 +5,9 @@
 
 ;;; enhanced gud
 (use-package realgud
-  :ensure t)
+  :ensure t
+  :commands (realgud:gdb realgud:pdb)
+  )
 
 (use-package yasnippet
   :ensure t
@@ -78,6 +80,7 @@
 	  (setq projectile-mode-line '(:eval(format " P(%s)"
 						    (projectile-project-name))))
 	  )
+  :commands (counsel-projectile-switch-project counsel-projectile-find-file)
   :config
   (projectile-mode)
   (setq projectile-completion-system 'ivy))

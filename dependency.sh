@@ -76,6 +76,11 @@ echo "Start to install virtualenvwrapper"
 pip3 install virtualenvwrapper --user
 # install python-language-server
 pip3 install python-language-server --user
+
+# install python-language-server
+echo "Start to install language server"
+pip3 install python-language-server --user
+
 echo "Install gocode"
 go get -u github.com/nsf/gocode
 

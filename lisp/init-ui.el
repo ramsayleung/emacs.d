@@ -39,12 +39,13 @@
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    ))
 
-(use-package golden-ratio
-  :diminish golden-ratio-mode
-  :ensure t
-  :init (progn (golden-ratio-mode 1)
-	       (setq golden-ratio-auto-scale t)
-	       ))
+;; (use-package golden-ratio
+;;   :diminish golden-ratio-mode
+;;   :ensure t
+;;   :defer t
+;;   :init (progn (golden-ratio-mode 1)
+;; 	       (setq golden-ratio-auto-scale t)
+;; 	       ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
@@ -85,6 +86,14 @@ This code toggles between them."
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
+;;; Verical-border in terminal is ugly, fix it.
+(set-face-inverse-video-p 'vertical-border nil)
+(set-face-background 'vertical-border (face-background 'default))
+
+;; Set symbol for the border
+(set-display-table-slot standard-display-table
+                        'vertical-border 
+                        (make-glyph-code ?┃))
 ;;;set the fringe colors to whatever is the background color
 (defun samray/tone-down-fringes ()
   (set-face-attribute 'fringe nil
@@ -174,6 +183,10 @@ This code toggles between them."
   :ensure t
   :defer t
   )
+(use-package spacemacs-theme
+  :ensure t
+  :defer t)
+
 (use-package zenburn-theme
   :ensure t
   :defer t
@@ -193,7 +206,7 @@ load/'disable-theme', so reset it after load/disable-theme'"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
+(defvar samray-theme-list '(zenburn spacemacs-dark sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()

@@ -8,9 +8,6 @@
 ;; Copyright (C) 2017
 
 (require 'dired-x)
-(use-package dired+
-  :ensure t
-  )
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)

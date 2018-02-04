@@ -8,33 +8,30 @@
 (use-package python
   :mode("\\.py\\'" . python-mode)
   :ensure t
-  :init (progn
-          (add-hook 'python-mode-hook (lambda () (highlight-indentation-mode 0)))
-          )
   )
 
-(use-package anaconda-mode
-  :defer t
-  :ensure t
-  :init(progn
-	 (add-hook 'python-mode-hook 'anaconda-mode)
-	 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-	 ))
+;; (use-package anaconda-mode
+;;   :defer t
+;;   :ensure t
+;;   :init(progn
+;; 	 (add-hook 'python-mode-hook 'anaconda-mode)
+;; 	 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;; 	 ))
 
-;; Emacs python development Environment
-(use-package elpy
-  :ensure t
-  :defer t
-  :init (add-hook 'python-mode-hook 'elpy-mode)
-  :config(progn
-	   (elpy-enable)
-	   (elpy-use-ipython)
-	   )
-  )
+;; ;; Emacs python development Environment
+;; (use-package elpy
+;;   :ensure t
+;;   :defer t
+;;   :init (add-hook 'python-mode-hook 'elpy-mode)
+;;   :config(progn
+;; 	   (elpy-enable)
+;; 	   (elpy-use-ipython)
+;; 	   )
+;;   )
 
 ;; Use pep8 to format python file
 (use-package py-autopep8
-  :defer t
+  :commands (py-autopep8 py-autopep8-buffer)
   :ensure t
   ;; :init(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
   )
@@ -46,10 +43,15 @@
 
 ;;; virtualenvwrapper for virtualenv
 (use-package virtualenvwrapper
+  :after python-mode
   :ensure t
   :init (progn
-	  (venv-initialize-interactive-shells)
-	  (venv-initialize-eshell)
+	  (add-hook 'eshell-mode-hook (lambda ()
+					(venv-initialize-eshell)
+					))
+	  (add-hook 'shell-mode-hook (lambda ()
+				       (venv-initialize-interactive-shells)
+				       ))
 	  ;; (add-hook 'venv-postmkvirtualenv-hook
 	  ;; 	    (lambda () (shell-command "pip install nose flake8 jedi autopep8 isort")))
 	  ))
