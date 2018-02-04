@@ -8,11 +8,11 @@
   :config (progn
 	    (require 'lsp-flycheck)
 	    ))
-(use-package lsp-python
-  :ensure t
-  :config(progn
-	   (add-hook 'python-mode-hook #'lsp-python-enable)
-	   ))
+;; (use-package lsp-python
+;;   :ensure t
+;;   :config(progn
+;; 	   (add-hook 'python-mode-hook #'lsp-python-enable)
+;; 	   ))
 (use-package lsp-rust
   :ensure t
   :config (progn
