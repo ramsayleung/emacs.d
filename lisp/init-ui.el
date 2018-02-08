@@ -39,13 +39,12 @@
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    ))
 
-;; (use-package golden-ratio
-;;   :diminish golden-ratio-mode
-;;   :ensure t
-;;   :defer t
-;;   :init (progn (golden-ratio-mode 1)
-;; 	       (setq golden-ratio-auto-scale t)
-;; 	       ))
+(use-package golden-ratio
+  :diminish golden-ratio-mode
+  :ensure t
+  :defer t
+  :init (progn (golden-ratio-mode 1)
+	       ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()

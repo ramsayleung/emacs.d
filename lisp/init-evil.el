@@ -40,10 +40,10 @@
 ;;   )
 
 ;; Vim matchit ported into Emacs
-;; (use-package evil-matchit
-;;   :commands evil-mode
-;;   :ensure t
-;;   :init (global-evil-matchit-mode 1))
+(use-package evil-matchit
+  :commands evil-mode
+  :ensure t
+  :init (global-evil-matchit-mode 1))
 
 (use-package evil-mc
   :ensure t

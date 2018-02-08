@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- try
- golden-ratio-mode
- lsp-rename
- shell-pop
- jdb
- cd
- 5x5
+ lsp-ui-mode
+ samray/indent-buffer
+ lsp-ui-peek-find-references
+ lsp-python-enable
+ org-display-inline-images
+ org-display-outline-path
+ turn-off-evil-mode
 )
 
 ;; ----- smex-data -----
@@ -19,4 +19,11 @@
  (shell-pop . 1)
  (golden-ratio-mode . 1)
  (try . 1)
+ (turn-off-evil-mode . 1)
+ (org-display-outline-path . 1)
+ (org-display-inline-images . 1)
+ (lsp-python-enable . 4)
+ (lsp-ui-mode . 4)
+ (lsp-ui-peek-find-references . 2)
+ (samray/indent-buffer . 1)
 )
