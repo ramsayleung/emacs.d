@@ -182,9 +182,6 @@ This code toggles between them."
   :ensure t
   :defer t
   )
-(use-package spacemacs-theme
-  :ensure t
-  :defer t)
 
 (use-package zenburn-theme
   :ensure t
@@ -205,7 +202,7 @@ load/'disable-theme', so reset it after load/disable-theme'"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn spacemacs-dark sanityinc-tomorrow-eighties))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties ))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()

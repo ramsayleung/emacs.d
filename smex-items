@@ -1,29 +1,33 @@
 
 ;; ----- smex-history -----
 (
- lsp-ui-mode
- samray/indent-buffer
- lsp-ui-peek-find-references
- lsp-python-enable
+ describe-font
+ irony-install-server
+ irony-server-kill
  org-display-inline-images
- org-display-outline-path
- turn-off-evil-mode
+ lsp-rename
+ eval-buffer
+ samray/indent-buffer
 )
 
 ;; ----- smex-data -----
 (
  (profiler-report-expand-entry . 10)
  (jdb . 2)
- (lsp-rename . 3)
+ (lsp-rename . 7)
  (lsp-format-buffer . 1)
  (shell-pop . 1)
  (golden-ratio-mode . 1)
  (try . 1)
  (turn-off-evil-mode . 1)
  (org-display-outline-path . 1)
- (org-display-inline-images . 1)
+ (org-display-inline-images . 2)
  (lsp-python-enable . 4)
  (lsp-ui-mode . 4)
  (lsp-ui-peek-find-references . 2)
  (samray/indent-buffer . 1)
+ (eval-buffer . 2)
+ (irony-server-kill . 1)
+ (irony-install-server . 1)
+ (describe-font . 1)
 )
