@@ -6,21 +6,22 @@
 (setq tab-width 4)
 (set-variable 'py-indent-offset 4)
 (set-variable 'python-indent-guess-indent-offset nil)
-
 (when (executable-find "ipython")
   (setq python-shell-interpreter "ipython"))
+
 (use-package python
   :mode("\\.py\\'" . python-mode)
   :ensure t
   )
 
-(use-package anaconda-mode
-  :defer t
-  :ensure t
-  :init(progn
-		 (add-hook 'python-mode-hook 'anaconda-mode)
-		 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-		 ))
+;; (use-package anaconda-mode
+;;   :defer t
+;;   :ensure t
+;;   :init(progn
+;; 	 (add-hook 'python-mode-hook 'anaconda-mode)
+;; 	 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;; 	 )
+;;   )
 
 ;; ;; Emacs python development Environment
 (use-package elpy
@@ -28,8 +29,12 @@
   :defer t
   :init (add-hook 'python-mode-hook 'elpy-mode)
   :config(progn
-		   (elpy-enable)
-		   )
+	   (setq elpy-rpc-backend "jedi")
+	   (elpy-enable)
+	   )
+  :bind (:map elpy-mode-map
+	      ("M-?" . xref-find-references)
+	      ("M-." . elpy-goto-definition))
   )
 ;; Use pep8 to format python file
 (use-package py-autopep8
@@ -48,15 +53,15 @@
   :after python-mode
   :ensure t
   :init (progn
-		  (add-hook 'eshell-mode-hook (lambda ()
-										(venv-initialize-eshell)
-										))
-		  (add-hook 'shell-mode-hook (lambda ()
-									   (venv-initialize-interactive-shells)
-									   ))
-		  ;; (add-hook 'venv-postmkvirtualenv-hook
-		  ;; 	    (lambda () (shell-command "pip install nose flake8 jedi autopep8 isort")))
-		  ))
+	  (add-hook 'eshell-mode-hook (lambda ()
+					(venv-initialize-eshell)
+					))
+	  (add-hook 'shell-mode-hook (lambda ()
+				       (venv-initialize-interactive-shells)
+				       ))
+	  ;; (add-hook 'venv-postmkvirtualenv-hook
+	  ;; 	    (lambda () (shell-command "pip install nose flake8 jedi autopep8 isort")))
+	  ))
 
 ;;; To fix issue that there is weird eshell output with ipython
 ;; (setq python-shell-interpreter "ipython"
@@ -82,17 +87,17 @@
   "Start and/or switch to the REPL."
   (interactive)
   (let ((shell-process
-		 (or (python-shell-get-process)
-			 ;; `run-python' has different return values and different
-			 ;; errors in different emacs versions. In 24.4, it throws an
-			 ;; error when the process didn't start, but in 25.1 it
-			 ;; doesn't throw an error, so we demote errors here and
-			 ;; check the process later
-			 (with-demoted-errors "Error: %S"
-			   ;; in Emacs 24.5 and 24.4, `run-python' doesn't return the
-			   ;; shell process
-			   (call-interactively #'run-python)
-			   (python-shell-get-process)))))
+	 (or (python-shell-get-process)
+	     ;; `run-python' has different return values and different
+	     ;; errors in different emacs versions. In 24.4, it throws an
+	     ;; error when the process didn't start, but in 25.1 it
+	     ;; doesn't throw an error, so we demote errors here and
+	     ;; check the process later
+	     (with-demoted-errors "Error: %S"
+	       ;; in Emacs 24.5 and 24.4, `run-python' doesn't return the
+	       ;; shell process
+	       (call-interactively #'run-python)
+	       (python-shell-get-process)))))
     (unless shell-process
       (error "Failed to start python shell properly"))
     (pop-to-buffer (process-buffer shell-process))
@@ -111,13 +116,13 @@
   ;; set compile command to buffer-file-name
   ;; universal argument put compile buffer in comint mode
   (let ((universal-argument t)
-		(compile-command (format "python %s" (file-name-nondirectory
-											  buffer-file-name))))
+	(compile-command (format "python %s" (file-name-nondirectory
+					      buffer-file-name))))
     (if arg
-		(call-interactively 'compile)
+	(call-interactively 'compile)
       (compile compile-command t)
       (with-current-buffer (get-buffer "*compilation*")
-		(inferior-python-mode)))))
+	(inferior-python-mode)))))
 
 (defun samray/python-execute-file-focus (arg)
   "Execute a python script in a shell and switch to the shell buffer in
