@@ -115,7 +115,7 @@
 				"5"  'select-window-5
 				)
 
-	    (general-define-key :states '(normal visual insert)
+	    (general-define-key :states '(normal visual insert motion)
 				"C-e" 'end-of-line
 				"C-a" 'samray/smarter-move-beginning-of-line
 				"C-y" 'yank
@@ -166,7 +166,7 @@
 
 	    (general-define-key :states 'normal
 				:keymaps 'org-mode-map
-				"<tab>" 'org-cycle
+				"TAB" 'org-cycle
 				"$" 'org-end-of-line
 				"^" 'org-beginning-of-line
 				"gh" 'outline-up-heading
@@ -329,8 +329,6 @@
 				:keymaps 'pdf-view-mode-map
 				"C-b"            'evil-scroll-page-up
 				"C-d"            'pdf-view-scroll-up-or-next-page
-				"C-e"            'evil-scroll-line-down
-				"C-f"            'evil-scroll-page-down
 				"C-n"            'image-next-file
 				"C-u"            'pdf-view-scroll-down-or-previous-page
 				"C-y"            'evil-scroll-line-up
@@ -398,6 +396,7 @@
 	     "C-c <" 'wrap-with-angle-brackets
 	     "C-c C-h" 'counsel-imenu
 	     "C-c C-r" 'ivy-resume
+	     "C-e" 'end-of-line
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
 	     "C-h l" 'counsel-find-library
@@ -430,11 +429,6 @@
   ;; Format buffer
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
-		      [remap anaconda-mode-find-assignments] 'xref-pop-marker-stack
-		      "C-M-g" 'elpy-goto-definition
-		      "C-M-b" 'xref-pop-marker-stack
-		      "M-." 'elpy-goto-definition
-		      "M-," 'xref-pop-marker-stack
 		      "C-c ." 'samray/python-format-and-isort-buffer)
 
   ;; Web mode|Html mode
@@ -464,11 +458,6 @@
 		      "C-c ." 'gofmt)
   ;; Rust-mode
   (general-define-key :keymaps 'rust-mode-map
-		      ;; "<tab>" 'company-indent-or-complete-common
-		      ;; [remap evil-repeat-pop-next] 'racer-find-definition
-		      ;; "M-." 'racer-find-definition
-		      ;; "C-M-g" 'racer-find-definition
-		      ;; "C-M-b" 'xref-pop-marker-stack
 		      "C-c ." 'rust-format-buffer)
 
   ;; Emacs Lisp mode

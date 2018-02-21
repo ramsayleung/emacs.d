@@ -1,27 +1,27 @@
 
 ;; ----- smex-history -----
 (
- xref-find-references
- profiler-report-expand-entry
- profiler-report
- xref-find-reference
+ counsel-load-theme
+ try
+ package-refresh-contents
+ adaptive-wrap-prefix-mode
+ samray/copy-current-file-sans-extension
  profiler-start
- xref-find-definitions
- anaconda-mode-find-references
+ samray/copy-to-x-clipboard
 )
 
 ;; ----- smex-data -----
 (
  (profiler-report-expand-entry . 20)
  (jdb . 2)
- (lsp-rename . 9)
+ (lsp-rename . 11)
  (lsp-format-buffer . 1)
- (shell-pop . 1)
+ (shell-pop . 2)
  (golden-ratio-mode . 1)
- (try . 1)
- (turn-off-evil-mode . 1)
+ (try . 3)
+ (turn-off-evil-mode . 2)
  (org-display-outline-path . 1)
- (org-display-inline-images . 3)
+ (org-display-inline-images . 6)
  (lsp-python-enable . 4)
  (lsp-ui-mode . 4)
  (lsp-ui-peek-find-references . 2)
@@ -36,7 +36,14 @@
  (anaconda-mode-find-references . 1)
  (xref-find-references . 5)
  (xref-find-definitions . 1)
- (profiler-start . 1)
+ (profiler-start . 3)
  (xref-find-reference . 2)
- (profiler-report . 1)
+ (profiler-report . 2)
+ (turn-on-evil-mode . 1)
+ (adaptive-wrap-prefix-mode . 6)
+ (samray/copy-current-file-sans-extension . 22)
+ (tern-mode . 2)
+ (samray/copy-to-x-clipboard . 1)
+ (counsel-load-theme . 34)
+ (package-refresh-contents . 1)
 )

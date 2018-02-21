@@ -101,6 +101,7 @@ This code toggles between them."
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
+		      :font "FantasqueSansMono-13:weight=medium:slant=italic"
 		      :box '(:line-height 0)))
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
@@ -202,7 +203,7 @@ load/'disable-theme', so reset it after load/disable-theme'"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties ))
+(defvar samray-theme-list '(tsdh-dark zenburn sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()

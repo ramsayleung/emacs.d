@@ -51,10 +51,6 @@
   :commands evil-mode
   :init
   (global-evil-mc-mode t)
-  :config (progn
-	    (evil-define-key 'normal evil-mc-key-map (kbd "C-n") 'next-line)
-	    (evil-define-key 'normal evil-mc-key-map (kbd "C-p") 'previous-line)
-	    )
   )
 
 

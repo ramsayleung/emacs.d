@@ -46,7 +46,9 @@
 
 (use-package json-mode
   :ensure t
-  :mode "\\.json$")
+  :mode "\\.json$"
+  :init (remove-hook 'json-mode 'tern-mode)
+  )
 
 (use-package nginx-mode
   :ensure t

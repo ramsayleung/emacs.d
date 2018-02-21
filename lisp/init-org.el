@@ -33,11 +33,10 @@
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
 	  (setq org-todo-keyword-faces
 		'(
-		  ("NOTDO" . (:foreground "black"))
 		  ("PROCESSING" . (:foreground "gold" :weight bold))
 		  ))
 	  (setq org-todo-keywords
-		'((sequence "NOTDO" "TODO" "PROCESSING" "DONE")))
+		'((sequence "TODO" "PROCESSING" "DONE")))
 	  (setq org-priority-faces '(
 				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "blue"))
@@ -87,7 +86,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 				((org-agenda-skip-function
 				  '(or
 				    (samray/org-skip-subtree-if-priority ?A)
-				    (org-agenda-skip-entry-if 'todo '("NOTDO"))
 				    (org-agenda-skip-if nil '(scheduled deadline))))))))))
 	     (setq org-capture-templates
 		   '(("a" "Agenda" entry (file  "~/Dropbox/Org/agenda.org" "Agenda")

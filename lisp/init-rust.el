@@ -5,6 +5,7 @@
 (use-package rust-mode
   :ensure t
   :mode ("\\.rs\\'" . rust-mode)
+  :config (remove-hook 'rust-mode-hook 'adaptive-wrap-prefix-mode)
   )
 
 (use-package toml-mode
