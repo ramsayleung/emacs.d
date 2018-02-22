@@ -2,12 +2,12 @@
 ;; ----- smex-history -----
 (
  counsel-load-theme
+ describe-theme
  try
  package-refresh-contents
  adaptive-wrap-prefix-mode
  samray/copy-current-file-sans-extension
  profiler-start
- samray/copy-to-x-clipboard
 )
 
 ;; ----- smex-data -----
@@ -44,6 +44,7 @@
  (samray/copy-current-file-sans-extension . 22)
  (tern-mode . 2)
  (samray/copy-to-x-clipboard . 1)
- (counsel-load-theme . 34)
+ (counsel-load-theme . 44)
  (package-refresh-contents . 1)
+ (describe-theme . 1)
 )

@@ -203,7 +203,7 @@ load/'disable-theme', so reset it after load/disable-theme'"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(tsdh-dark zenburn sanityinc-tomorrow-eighties))
+(defvar samray-theme-list '(sanityinc-tomorrow-eighties zenburn))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()

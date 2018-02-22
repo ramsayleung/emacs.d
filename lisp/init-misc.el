@@ -249,19 +249,6 @@ removal."
       (message "NO README.org or README.md found!"))
     ))
 
-;; you need install xsel under Linux
-;; xclip has some problem when copying under Linux
-(defun samray/copy-yank-str (msg)
-  "Copy MSG to system clipboard."
-  (kill-new msg)
-  (with-temp-buffer
-    (insert msg)
-    (shell-command-on-region (point-min) (point-max)
-                             (cond
-                              ((eq system-type 'cygwin) "putclip")
-                              ((eq system-type 'darwin) "pbcopy")
-                              (t "xsel -ib")
-                              ))))
 (defun samray/copy-current-file-sans-extension ()
   "Copy current file without extension."
   (interactive)
