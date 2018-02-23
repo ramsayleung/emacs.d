@@ -101,8 +101,10 @@ This code toggles between them."
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
-		      :font "FantasqueSansMono-13:weight=medium:slant=italic"
-		      :box '(:line-height 0)))
+  		      :font "FantasqueSansMono-13:weight=medium:slant=italic"
+  		      :box '(:line-width -1)
+  		      )
+  )
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
 (defadvice load-theme (after run-after-load-theme-hook activate)

@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ customize-group
  counsel-load-theme
  describe-theme
  try
  package-refresh-contents
  adaptive-wrap-prefix-mode
  samray/copy-current-file-sans-extension
- profiler-start
 )
 
 ;; ----- smex-data -----
@@ -47,4 +47,5 @@
  (counsel-load-theme . 44)
  (package-refresh-contents . 1)
  (describe-theme . 1)
+ (customize-group . 1)
 )
