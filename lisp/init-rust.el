@@ -22,6 +22,7 @@
       (concat strip-path "/lib/rustlib/src/rust/src"))))
 (setenv "RUST_SRC_PATH" (samray/get-rust-src-path))
 (defun samray/set-rust-ld-library-path ()
+  "Set rust link library path."
   (let* ((command (concat "rustc --print sysroot"))
 	 (rustc-sysroot-path (shell-command-to-string command))
 	 (strip-path (replace-regexp-in-string "\n$" "" rustc-sysroot-path)))
