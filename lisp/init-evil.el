@@ -19,6 +19,14 @@
     (evil-set-initial-state 'artist-mode 'emacs)
     (evil-set-initial-state 'eshell-mode 'insert)
     (evil-set-initial-state 'term-mode 'emacs)
+    ;;; modify evil-state-tag
+    (setq evil-normal-state-tag   (propertize "[Normal]")
+	  evil-emacs-state-tag    (propertize "[Emacs]")
+	  evil-insert-state-tag   (propertize "[Insert]")
+	  evil-motion-state-tag   (propertize "[Motion]")
+	  evil-visual-state-tag   (propertize "[Visual]")
+	  evil-operator-state-tag (propertize "[Operator]"))
+
     ))
 
 (use-package evil-surround

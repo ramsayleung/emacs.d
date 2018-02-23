@@ -100,10 +100,7 @@ debug-init and load the given list of packages."
 	mac-option-modifier 'none)
   )
 
-(defun samray/is-windows ()
-  "Check whether Os is Windows or not."
-  (eq system-type 'windows-nt)
-  )
+
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
   "Create parent directory if not exists while visiting file."
   (unless (file-exists-p filename)

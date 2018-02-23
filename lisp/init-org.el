@@ -52,7 +52,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		nil)))
 	  )
   :config(progn
-	   (when (not (samray/is-windows))
+	   (when (not (eq system-type 'windows-nt))
 	     (require 'ox-md nil t)
 	     (require 'org-indent)
 	     (org-indent-mode -1)         ;disable org-indent-mode
@@ -139,14 +139,14 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; pomodoro tech
 (use-package org-pomodoro
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :commands (org-pomodoro)
   :ensure t)
 
 ;;; for journal
 (use-package org-journal
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :ensure t
   :commands (org-journal-new-entry)
@@ -158,7 +158,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :after org
   :ensure t
@@ -170,21 +170,21 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;; Org extra exports
 ;; Export to github flavored markdown
 (use-package ox-gfm
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :ensure ox-gfm
   )
 
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :ensure ox-twbs
   )
 
 ;;; Export to reveal for presentation
 ;; (use-package ox-reveal
-;;   :if (and (not (samray/is-windows))
+;;   :if (and (not (eq system-type 'windows-nt))
 ;; 	   window-system)
 ;;   :ensure ox-reveal)
 
@@ -200,13 +200,13 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :ensure t)
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :ensure t)
 

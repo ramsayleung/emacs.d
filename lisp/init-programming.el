@@ -58,7 +58,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  (when(not(samray/is-windows))
+	  (when(not(eq system-type 'windows-nt))
 	    (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH"))
 	    ;; when it is nil, exec-path-from-shell will read environment variable
 	    ;; from .zshenv instead of .zshrc, but makes sure that you put all

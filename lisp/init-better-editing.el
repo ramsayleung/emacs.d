@@ -63,7 +63,7 @@
 
 ;;; A light that follows your cursor around so you don't lose it
 (use-package beacon
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :ensure t
   :diminish beacon-mode
@@ -73,7 +73,7 @@
 
 ;;; An useful package to compare directory tree
 (use-package ztree
-  :if (not (samray/is-windows))
+  :if (not (eq system-type 'windows-nt))
   :ensure t
   :commands (ztree-dir ztree-diff)
   :init (setq ztree-dir-move-focus t))
@@ -94,7 +94,7 @@
 
 ;;; folding based on indentation/syntax
 (use-package origami
-  :if (not (samray/is-windows))
+  :if (not (eq system-type 'windows-nt))
   :ensure t
   :defer t
   :init (progn
@@ -371,7 +371,7 @@ lines up by reverse ARG."
 	    ))
 
 
-(if (and (not (samray/is-windows))
+(if (and (not (eq system-type 'windows-nt))
 	 window-system)
     (global-visual-line-mode +1)
   )

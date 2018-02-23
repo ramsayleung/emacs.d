@@ -86,12 +86,12 @@ This code toggles between them."
   (mouse-wheel-mode -1)
   )
 ;;; Verical-border in terminal is ugly, fix it.
-(set-face-inverse-video-p 'vertical-border nil)
+(set-face-inverse-video 'vertical-border nil)
 (set-face-background 'vertical-border (face-background 'default))
 
 ;; Set symbol for the border
 (set-display-table-slot standard-display-table
-                        'vertical-border 
+                        'vertical-border
                         (make-glyph-code ?┃))
 ;;;set the fringe colors to whatever is the background color
 (defun samray/tone-down-fringes ()
@@ -306,7 +306,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   "Check if FONT exists."
   (when window-system
     (if (null (x-list-fonts font)) nil t)))
-(if(samray/is-windows)
+(if(eq system-type 'windows-nt)
     (defvar samray-font-list '("Consolas-13"))
   (defvar samray-font-list '("FantasqueSansMono-13:weight=medium:slant=italic" "Consolas-13:weight=medium:slant=italic" "Source Code Pro-12:weight=medium:slant=italic" ))
   )
@@ -330,7 +330,7 @@ then check whether EMACS should to modify theme, if so, modify it."
   )
 
 ;;; switch to the first font in the list above
-(if (samray/is-windows)
+(if (eq system-type 'windows-nt)
     (progn
       (set-face-attribute
        'default nil :font "Consolas-13:weight=medium:slant=italic")
@@ -351,7 +351,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;----------------;;
 (use-package spaceline
   :ensure t
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :defer t
   :config
@@ -368,13 +368,6 @@ then check whether EMACS should to modify theme, if so, modify it."
 
 ;;;Move evil tag to beginning of mode line
 (setq evil-mode-line-format '(before . mode-line-front-space))
-;;; modify evil-state-tag
-(setq evil-normal-state-tag   (propertize "[Normal]")
-      evil-emacs-state-tag    (propertize "[Emacs]")
-      evil-insert-state-tag   (propertize "[Insert]")
-      evil-motion-state-tag   (propertize "[Motion]")
-      evil-visual-state-tag   (propertize "[Visual]")
-      evil-operator-state-tag (propertize "[Operator]"))
 
 ;;; customize mode line
 (setq-default mode-line-format '("["

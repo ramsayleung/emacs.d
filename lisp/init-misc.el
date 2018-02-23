@@ -6,7 +6,7 @@
 (use-package pdf-tools
   :ensure t
   :mode ("\\.pdf\\'" . pdf-view-mode)
-  :if (and (not (samray/is-windows))
+  :if (and (not (eq system-type 'windows-nt))
 	   window-system)
   :init (progn
 	  (add-hook 'pdf-view-mode-hook (lambda () (company-mode nil))))
@@ -19,7 +19,7 @@
 
 ;;; use Irc in Emacs
 (use-package circe
-  :if (not (samray/is-windows))
+  :if (not (eq system-type 'windows-nt))
   :ensure t
   :commands circe-mode
   :config (progn
@@ -258,7 +258,7 @@ removal."
 (defun samray/dired-tmp-dir ()
   "Open tmp directory."
   (interactive)
-  (if (samray/is-windows)
+  (if (eq system-type 'windows-nt)
       (dired (getenv "TMPDIR"))
     (dired "/tmp")
     ))
