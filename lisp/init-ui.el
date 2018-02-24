@@ -39,8 +39,13 @@
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    ))
 
+(defun samray/toggle-golden-ratio()
+  "Check whether turn on golden ratio."
+  (or (< (display-pixel-height)800)
+      (< (display-pixel-width)1400)))
 (use-package golden-ratio
   :diminish golden-ratio-mode
+  :if (samray/toggle-golden-ratio)
   :ensure t
   :defer t
   :init (progn (golden-ratio-mode 1)
