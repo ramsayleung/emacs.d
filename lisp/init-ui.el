@@ -1,4 +1,4 @@
-;;; package --- Summary
+;; package --- Summary
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -107,7 +107,8 @@ This code toggles between them."
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
 		      :font "FantasqueSansMono-13:weight=medium:slant=italic"
-		      :box '(:line-width -1)))
+		      :box '())
+  )
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
 (defadvice load-theme (after run-after-load-theme-hook activate)
