@@ -98,8 +98,8 @@ This code toggles between them."
 (set-display-table-slot standard-display-table
                         'vertical-border
                         (make-glyph-code ?┃))
-;;;set the fringe colors to whatever is the background color
 (defun samray/tone-down-fringes ()
+  "Set the fringe colors to whatever is the background color."
   (set-face-attribute 'fringe nil
                       :foreground (face-foreground 'default)
                       :background (face-background 'default)))
@@ -203,7 +203,7 @@ This code toggles between them."
 (defvar samray-current-font nil)
 (defun samray/reset-current-font (&rest args)
   "It seems a bug about EMACS that the font will change after
-load/'disable-theme', so reset it after load/disable-theme'"
+load/'disable-theme', so reset it after load/disable-theme' ARGS"
   (set-frame-font samray-current-font)
   )
 
@@ -355,16 +355,6 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;
-(use-package spaceline
-  :ensure t
-  :if (and (not (eq system-type 'windows-nt))
-	   window-system)
-  :defer t
-  :config
-  (require 'spaceline-config)
-  (setq powerline-default-separator 'nil)
-  (spaceline-emacs-theme)
-  )
 
 ;;; customize default mode line
 ;;; disable status of "read only" or "wriable"
