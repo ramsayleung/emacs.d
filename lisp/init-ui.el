@@ -1,4 +1,4 @@
-;;; package --- Summary
+;; package --- Summary
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -39,8 +39,13 @@
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    ))
 
+(defun samray/toggle-golden-ratio()
+  "Check whether turn on golden ratio."
+  (or (< (display-pixel-height)800)
+      (< (display-pixel-width)1400)))
 (use-package golden-ratio
   :diminish golden-ratio-mode
+  :if (samray/toggle-golden-ratio)
   :ensure t
   :defer t
   :init (progn (golden-ratio-mode 1)
@@ -93,17 +98,16 @@ This code toggles between them."
 (set-display-table-slot standard-display-table
                         'vertical-border
                         (make-glyph-code ?┃))
-;;;set the fringe colors to whatever is the background color
 (defun samray/tone-down-fringes ()
+  "Set the fringe colors to whatever is the background color."
   (set-face-attribute 'fringe nil
                       :foreground (face-foreground 'default)
                       :background (face-background 'default)))
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
-  		      :font "FantasqueSansMono-13:weight=medium:slant=italic"
-  		      :box '(:line-width -1)
-  		      )
+		      :font "FantasqueSansMono-13:weight=medium:slant=italic"
+		      :box '())
   )
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
@@ -199,7 +203,7 @@ This code toggles between them."
 (defvar samray-current-font nil)
 (defun samray/reset-current-font (&rest args)
   "It seems a bug about EMACS that the font will change after
-load/'disable-theme', so reset it after load/disable-theme'"
+load/'disable-theme', so reset it after load/disable-theme' ARGS"
   (set-frame-font samray-current-font)
   )
 
@@ -351,16 +355,6 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;
-(use-package spaceline
-  :ensure t
-  :if (and (not (eq system-type 'windows-nt))
-	   window-system)
-  :defer t
-  :config
-  (require 'spaceline-config)
-  (setq powerline-default-separator 'nil)
-  (spaceline-emacs-theme)
-  )
 
 ;;; customize default mode line
 ;;; disable status of "read only" or "wriable"
