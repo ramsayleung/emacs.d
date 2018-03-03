@@ -426,6 +426,17 @@ then check whether EMACS should to modify theme, if so, modify it."
 (diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
 (diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
+
+(defun sync-peek-face ()
+  "Lock face after call lsp-ui-peek-xxx."
+  (set-face-attribute 'lsp-ui-peek-list nil
+		      :background (face-attribute 'hl-line :background))
+  (set-face-attribute 'lsp-ui-peek-peek nil
+  		      :background (face-attribute 'hl-line :background))
+  )
+
+(sync-peek-face)
+(add-hook 'after-load-theme-hook #'sync-peek-face)
 (provide 'init-ui)
 
 ;;; init-ui.el ends here

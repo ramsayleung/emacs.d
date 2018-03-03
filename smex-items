@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- counsel-load-theme
- describe-theme
+ lsp-python-enable
+ lsp-ui-peek-find-references
+ lsp-ui-sideline-mode
+ lsp-ui-doc-mode
+ lsp-cquery-enable
  try
  package-refresh-contents
- adaptive-wrap-prefix-mode
- samray/copy-current-file-sans-extension
- profiler-start
 )
 
 ;; ----- smex-data -----
@@ -18,17 +18,17 @@
  (lsp-format-buffer . 1)
  (shell-pop . 2)
  (golden-ratio-mode . 1)
- (try . 3)
+ (try . 5)
  (turn-off-evil-mode . 2)
  (org-display-outline-path . 1)
- (org-display-inline-images . 6)
- (lsp-python-enable . 4)
+ (org-display-inline-images . 7)
+ (lsp-python-enable . 6)
  (lsp-ui-mode . 4)
- (lsp-ui-peek-find-references . 2)
+ (lsp-ui-peek-find-references . 6)
  (samray/indent-buffer . 1)
  (eval-buffer . 2)
  (irony-server-kill . 1)
- (irony-install-server . 1)
+ (irony-install-server . 2)
  (describe-font . 1)
  (server-start . 2)
  (elpy-goto-definition . 1)
@@ -44,7 +44,10 @@
  (samray/copy-current-file-sans-extension . 22)
  (tern-mode . 2)
  (samray/copy-to-x-clipboard . 1)
- (counsel-load-theme . 44)
- (package-refresh-contents . 1)
+ (counsel-load-theme . 47)
+ (package-refresh-contents . 3)
  (describe-theme . 1)
+ (lsp-cquery-enable . 1)
+ (lsp-ui-sideline-mode . 4)
+ (lsp-ui-doc-mode . 2)
 )
