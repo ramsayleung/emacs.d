@@ -33,7 +33,9 @@
 	    ;; It seems that sideline-mode has a bug, just disable it
   	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 	    (add-hook 'lsp-ui-mode-hook (lambda ()
-					  (lsp-ui-sideline-mode -1)))
+					  (lsp-ui-sideline-mode -1)
+					  (lsp-ui-doc-mode -1)
+					  ))
 	    ;; bind peek key
 	    (define-key lsp-ui-mode-map (kbd "M-.") #'xref-find-definitions)
 	    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)

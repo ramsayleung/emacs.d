@@ -209,7 +209,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(sanityinc-tomorrow-eighties zenburn))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -430,9 +430,21 @@ then check whether EMACS should to modify theme, if so, modify it."
 (defun sync-peek-face ()
   "Lock face after call lsp-ui-peek-xxx."
   (set-face-attribute 'lsp-ui-peek-list nil
-		      :background (face-attribute 'hl-line :background))
+  		      :background (face-attribute 'hl-line :background))
   (set-face-attribute 'lsp-ui-peek-peek nil
   		      :background (face-attribute 'hl-line :background))
+  (set-face-attribute 'lsp-ui-peek-selection nil
+  		      :background (face-attribute 'highlight :background)
+  		      :foreground (face-attribute 'default :foreground))
+  (set-face-attribute 'lsp-ui-peek-filename nil
+  		      :foreground (face-attribute 'font-lock-constant-face :foreground))
+  (set-face-attribute 'lsp-ui-peek-highlight nil
+  		      :background (face-attribute 'highlight :background)
+  		      :foreground (face-attribute 'highlight :foreground)
+		      :distant-foreground (face-attribute 'highlight :foreground))
+  (set-face-attribute 'lsp-ui-peek-header nil
+  		      :background (face-attribute 'highlight :background)
+  		      :foreground (face-attribute 'default :foreground))
   )
 
 (sync-peek-face)
