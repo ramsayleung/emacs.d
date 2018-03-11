@@ -17,14 +17,13 @@
 (use-package lsp-python
   :ensure t
   :init
-  (add-hook 'python-mode-hook 'lsp-python-enable)
+  (add-hook 'python-mode-hook #'lsp-python-enable)
   )
 
 (use-package lsp-rust
   :ensure t
   :config (progn
-	    (add-hook 'rust-mode-hook 'lsp-rust-enable)
-	    (add-hook 'rust-mode-hook 'flycheck-mode)
+	    (add-hook 'rust-mode-hook #'lsp-rust-enable)
 	    ))
 
 (use-package lsp-ui
