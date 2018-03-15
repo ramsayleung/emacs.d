@@ -51,6 +51,8 @@
   :init (progn
 	  (golden-ratio-mode 1)
 	  (setq golden-ratio-auto-scale t)
+	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
 	  ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit

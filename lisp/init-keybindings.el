@@ -365,9 +365,9 @@
 				)
 
 	    (general-nvmap
-	     "Y" 'samray/copy-to-end-of-line
-	     "(" 'paredit-open-round
-	     )
+	      "Y" 'samray/copy-to-end-of-line
+	      "(" 'paredit-open-round
+	      )
 	    (general-define-key :keymaps 'read-expression-map
 				"C-r" 'counsel-expression-history)
 
@@ -394,7 +394,7 @@
 	     "C-c _" 'wrap-with-underscotes
 	     "C-c `" 'wrap-with-back-quotes
 	     "C-c <" 'wrap-with-angle-brackets
-	     "C-c C-h" 'counsel-imenu
+	     "C-c C-h" 'samray/imenu
 	     "C-c C-r" 'ivy-resume
 	     "C-e" 'end-of-line
 	     "C-h f" 'counsel-describe-function
@@ -465,8 +465,8 @@
 		      "C-M-g" 'xref-find-definitions
 		      "C-M-b" 'xref-pop-marker-stack)
   (general-emacs-define-key 'global
-      "C-v" 'evil-scroll-down
-      "M-v" 'evil-scroll-up)
+    "C-v" 'evil-scroll-down
+    "M-v" 'evil-scroll-up)
 
 ;;; Org-agenda-mode
   (with-eval-after-load 'org-mode
