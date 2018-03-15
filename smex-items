@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- toggle-debug-on-error
- turn-on-evil-mode
- turn-off-evil-mode
- cancel-debug-on-entry
- org-display-inline-images
+ emacs-version
+ lsp-ui-doc-mode
+ lsp-ui-sideline-mode
  lsp-ui-mode
- lsp-ui-peek-find-references
+ xref-find-references
+ eval-buffer
+ org-time-stamp
 )
 
 ;; ----- smex-data -----
@@ -23,10 +23,10 @@
  (org-display-outline-path . 1)
  (org-display-inline-images . 8)
  (lsp-python-enable . 10)
- (lsp-ui-mode . 5)
+ (lsp-ui-mode . 7)
  (lsp-ui-peek-find-references . 7)
  (samray/indent-buffer . 1)
- (eval-buffer . 5)
+ (eval-buffer . 11)
  (irony-server-kill . 1)
  (irony-install-server . 2)
  (describe-font . 1)
@@ -34,7 +34,7 @@
  (elpy-goto-definition . 1)
  (elpy-occur-definitions . 1)
  (anaconda-mode-find-references . 1)
- (xref-find-references . 5)
+ (xref-find-references . 6)
  (xref-find-definitions . 1)
  (profiler-start . 3)
  (xref-find-reference . 2)
@@ -48,10 +48,12 @@
  (package-refresh-contents . 3)
  (describe-theme . 1)
  (lsp-cquery-enable . 1)
- (lsp-ui-sideline-mode . 4)
- (lsp-ui-doc-mode . 2)
+ (lsp-ui-sideline-mode . 6)
+ (lsp-ui-doc-mode . 4)
  (transpose-sexps . 2)
  (org-journal-new-entry . 1)
  (toggle-debug-on-error . 3)
  (cancel-debug-on-entry . 1)
+ (org-time-stamp . 1)
+ (emacs-version . 1)
 )

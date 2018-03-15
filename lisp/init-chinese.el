@@ -155,7 +155,6 @@ linkcolor=[rgb]{0,0.37,0.53},
 citecolor=[rgb]{0,0.47,0.68},
 filecolor=[rgb]{0,0.37,0.53},
 urlcolor=[rgb]{0,0.37,0.53},
-pagebackref=true,
 linktoc=all,}
 % 中文断行
 \\XeTeXlinebreaklocale \"zh\"
@@ -179,10 +178,11 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+;; \\usepackage[slantfont, boldfont]{xeCJK}
   (add-to-list 'org-latex-classes
                '("samray-org-article"
                  "\\documentclass{article}
-\\usepackage[slantfont, boldfont]{xeCJK}
+\\usepackage[CJKspace]{xeCJK}
 \\usepackage{titlesec}
 \\usepackage{minted}
 
@@ -212,7 +212,6 @@ linkcolor=[rgb]{0,0.37,0.53},
 citecolor=[rgb]{0,0.47,0.68},
 filecolor=[rgb]{0,0.37,0.53},
 urlcolor=[rgb]{0,0.37,0.53},
-pagebackref=true,
 linktoc=all,}
 % 中文断行
 \\XeTeXlinebreaklocale \"zh\"
@@ -273,7 +272,6 @@ linkcolor=[rgb]{0,0.37,0.53},
 citecolor=[rgb]{0,0.47,0.68},
 filecolor=[rgb]{0,0.37,0.53},
 urlcolor=[rgb]{0,0.37,0.53},
-pagebackref=true,
 linktoc=all,}
 % 代码设置
 \\lstset{numbers=left,
@@ -292,12 +290,12 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-  (setq org-latex-pdf-process
-        '("xelatex -interaction nonstopmode -output-directory %o %f"
-          ;;"biber %b" "xelatex -interaction nonstopmode -output-directory %o %f"
-          "bibtex %b"
-          "xelatex -interaction nonstopmode -output-directory %o %f"
-          "xelatex -interaction nonstopmode -output-directory %o %f"))
+  ;; (setq org-latex-pdf-process
+  ;;       '("xelatex -interaction nonstopmode -output-directory %o %f"
+  ;;         ;;"biber %b" "xelatex -interaction nonstopmode -output-directory %o %f"
+  ;;         "bibtex %b"
+  ;;         "xelatex -interaction nonstopmode -output-directory %o %f"
+  ;;         "xelatex -interaction nonstopmode -output-directory %o %f"))
 
 ;; 在创建 org-mode buffer, 自动添加 latex class 解决生成中文pdf 问题
 (eval-after-load 'autoinsert

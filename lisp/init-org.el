@@ -113,9 +113,9 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	     (setq org-confirm-babel-evaluate nil)
 	     ;; set latex to xelatex
 	     (setq org-latex-pdf-process
-		   '("xelatex  --shell-escape -interaction nonstopmode -output-directory %o %f"
-		     "xelatex  --shell-escape -interaction nonstopmode -output-directory %o %f"
-		     "xelatex  --shell-escape -interaction nonstopmode -output-directory %o %f"))
+		   '("xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
+		     "xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
+		     "xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"))
 	     ;; export cn character
 	     (setf org-latex-default-packages-alist
 		   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))

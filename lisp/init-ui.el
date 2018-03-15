@@ -43,13 +43,15 @@
   "Check whether turn on golden ratio."
   (or (< (display-pixel-height)800)
       (< (display-pixel-width)1400)))
+
 (use-package golden-ratio
   :diminish golden-ratio-mode
-  :if (samray/toggle-golden-ratio)
   :ensure t
   :defer t
-  :init (progn (golden-ratio-mode 1)
-	       ))
+  :init (progn
+	  (golden-ratio-mode 1)
+	  (setq golden-ratio-auto-scale t)
+	  ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
@@ -427,28 +429,6 @@ then check whether EMACS should to modify theme, if so, modify it."
 (diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
 
-(defun sync-peek-face ()
-  "Lock face after call lsp-ui-peek-xxx."
-  (set-face-attribute 'lsp-ui-peek-list nil
-  		      :background (face-attribute 'hl-line :background))
-  (set-face-attribute 'lsp-ui-peek-peek nil
-  		      :background (face-attribute 'hl-line :background))
-  (set-face-attribute 'lsp-ui-peek-selection nil
-  		      :background (face-attribute 'highlight :background)
-  		      :foreground (face-attribute 'default :foreground))
-  (set-face-attribute 'lsp-ui-peek-filename nil
-  		      :foreground (face-attribute 'font-lock-constant-face :foreground))
-  (set-face-attribute 'lsp-ui-peek-highlight nil
-  		      :background (face-attribute 'highlight :background)
-  		      :foreground (face-attribute 'highlight :foreground)
-		      :distant-foreground (face-attribute 'highlight :foreground))
-  (set-face-attribute 'lsp-ui-peek-header nil
-  		      :background (face-attribute 'highlight :background)
-  		      :foreground (face-attribute 'default :foreground))
-  )
-
-(sync-peek-face)
-(add-hook 'after-load-theme-hook #'sync-peek-face)
 (provide 'init-ui)
 
 ;;; init-ui.el ends here
