@@ -43,7 +43,6 @@
    |                      | [[https://github.com/nsf/gocode/tree/master/emacs-company][company-go]]                     | Company backend for gocode(For go-mode)                                           |
    |                      | [[https://github.com/emacs-pe/company-racer][company-racer]]                  | Company backend for racer(For rust-mode)                                          |
    | init-better-default  | [[https://www.emacswiki.org/emacs/dired+.el][dired+]]                         | Extensions to Dired                                                               |
-   |                      | [[https://github.com/ralesi/ranger.el][ranger]]                         | Bringing the goodness of ranger to dired                                          |
    |                      | [[https://github.com/iqbalansari/restart-emacs][restart-emacs]]                  | A simple emacs package to restart emacs from within emacs                         |
    | init-better-editting | [[https://github.com/nschum/window-numbering.el][window-numbering]]               | Numbered window shortcuts, makes it easy to switch window                         |
    |                      | [[https://github.com/Fuco1/smartparens][smartparens]]                    | Automatic insertion, wrapping and paredit-like navigation with user defined pairs |
@@ -104,10 +103,7 @@
    |                      | [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]]           | Get environment variables such as $PATH from the shell                            |
    |                      | [[https://github.com/magnars/expand-region.el][expand-region]]                  | Increase selected region nu semantic units                                        |
    |                      | [[https://github.com/bbatsov/projectile][projectile]]                     | Manage and navigate projects in Emacs easily                                      |
-   |                      | [[https://github.com/jacktasia/dumb-jump][dumb-jump]]                      | Jump to defintion for multiple languages without configuration                    |
    |                      | [[https://github.com/pashky/restclient.el][restclient]]                     | An interactive HTTP client for emacs                                              |
-   |                      | [[https://github.com/anshulverma/projectile-speedbar][projectile-speedbar]]            | Projectile integration for speedbar                                               |
-   |                      | [[https://github.com/wolray/symbol-overlay][symbol-overlay]]                 | Highlight symbols with keymap-enabled overlays                                    |
    | init-python          | [[https://github.com/proofit404/anaconda-mode][anaconda-mode]]                  | Code navidation, documentation lookup and completion for Python                   |
    |                      | [[https://github.com/jorgenschaefer/elpy][elpy]]                           | Emacs python development environment                                              |
    |                      | [[https://github.com/paetzke/py-autopep8.el][py-autopep8]]                    | Use autopep8 to beautify a python buffer                                          |
