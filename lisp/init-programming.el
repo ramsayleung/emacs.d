@@ -263,6 +263,12 @@ similar to shell-pop"
           (lambda ()
             ;; turn off `linum-mode' when there are more than 5000 lines
             (if (samray/buffer-too-big-p) (linum-mode -1))))
+(defun samray/imenu ()
+  "Call lsp-ui-imenu if lsp-mode is enable, or call counsel-imenu instead."
+  (interactive)
+  (if lsp-mode
+      (lsp-ui-imenu)
+    (counsel-imenu)))
 (provide 'init-programming)
 
 ;;; init-programming.el ends here

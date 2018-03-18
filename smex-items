@@ -1,52 +1,64 @@
 
 ;; ----- smex-history -----
 (
- man
- customize-group
- counsel-load-theme
- describe-theme
- try
- package-refresh-contents
- adaptive-wrap-prefix-mode
+ emacs-version
+ lsp-ui-doc-mode
+ lsp-ui-sideline-mode
+ lsp-ui-mode
+ xref-find-references
+ eval-buffer
+ org-time-stamp
 )
 
 ;; ----- smex-data -----
 (
  (profiler-report-expand-entry . 20)
  (jdb . 2)
- (lsp-rename . 11)
+ (lsp-rename . 12)
  (lsp-format-buffer . 1)
  (shell-pop . 2)
  (golden-ratio-mode . 1)
- (try . 3)
- (turn-off-evil-mode . 2)
+ (try . 5)
+ (turn-off-evil-mode . 3)
  (org-display-outline-path . 1)
- (org-display-inline-images . 6)
- (lsp-python-enable . 4)
- (lsp-ui-mode . 4)
- (lsp-ui-peek-find-references . 2)
+ (org-display-inline-images . 8)
+ (lsp-python-enable . 10)
+ (lsp-ui-mode . 7)
+ (lsp-ui-peek-find-references . 7)
  (samray/indent-buffer . 1)
- (eval-buffer . 2)
+ (eval-buffer . 11)
  (irony-server-kill . 1)
- (irony-install-server . 1)
+ (irony-install-server . 2)
  (describe-font . 1)
  (server-start . 2)
  (elpy-goto-definition . 1)
  (elpy-occur-definitions . 1)
  (anaconda-mode-find-references . 1)
- (xref-find-references . 5)
+ (xref-find-references . 6)
  (xref-find-definitions . 1)
  (profiler-start . 3)
  (xref-find-reference . 2)
  (profiler-report . 2)
- (turn-on-evil-mode . 1)
+ (turn-on-evil-mode . 2)
  (adaptive-wrap-prefix-mode . 6)
  (samray/copy-current-file-sans-extension . 22)
  (tern-mode . 2)
  (samray/copy-to-x-clipboard . 1)
- (counsel-load-theme . 44)
- (package-refresh-contents . 1)
+ (counsel-load-theme . 47)
+ (package-refresh-contents . 3)
  (describe-theme . 1)
+<<<<<<< HEAD
  (customize-group . 1)
  (man . 2)
+=======
+ (lsp-cquery-enable . 1)
+ (lsp-ui-sideline-mode . 6)
+ (lsp-ui-doc-mode . 4)
+ (transpose-sexps . 2)
+ (org-journal-new-entry . 1)
+ (toggle-debug-on-error . 3)
+ (cancel-debug-on-entry . 1)
+ (org-time-stamp . 1)
+ (emacs-version . 1)
+>>>>>>> 2d84ad6ebf56a752839bca49771adbb06e7f255e
 )

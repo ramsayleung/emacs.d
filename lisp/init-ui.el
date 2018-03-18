@@ -43,13 +43,17 @@
   "Check whether turn on golden ratio."
   (or (< (display-pixel-height)800)
       (< (display-pixel-width)1400)))
+
 (use-package golden-ratio
   :diminish golden-ratio-mode
-  :if (samray/toggle-golden-ratio)
   :ensure t
   :defer t
-  :init (progn (golden-ratio-mode 1)
-	       ))
+  :init (progn
+	  (golden-ratio-mode 1)
+	  (setq golden-ratio-auto-scale t)
+	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
+	  ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
@@ -209,7 +213,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(sanityinc-tomorrow-eighties zenburn))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -426,6 +430,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 (diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
 (diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
+
 (provide 'init-ui)
 
 ;;; init-ui.el ends here

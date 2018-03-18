@@ -7,10 +7,6 @@
   '(
    ))
 
-(define-abbrev-table 'bookmark-bmenu-mode-abbrev-table '())
-
-(define-abbrev-table 'bookmark-edit-annotation-mode-abbrev-table '())
-
 (define-abbrev-table 'c++-mode-abbrev-table
   '(
    ))
@@ -19,11 +15,11 @@
   '(
    ))
 
-(define-abbrev-table 'calendar-mode-abbrev-table '())
-
 (define-abbrev-table 'comint-mode-abbrev-table '())
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
+
+(define-abbrev-table 'cquery-tree-mode-abbrev-table '())
 
 (define-abbrev-table 'debugger-mode-abbrev-table '())
 
@@ -34,10 +30,6 @@
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
 
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
-
-(define-abbrev-table 'es-mode-abbrev-table '())
-
-(define-abbrev-table 'es-result-mode-abbrev-table '())
 
 (define-abbrev-table 'evil-command-window-mode-abbrev-table '())
 
@@ -64,8 +56,6 @@
 
 (define-abbrev-table 'help-mode-abbrev-table '())
 
-(define-abbrev-table 'html-mode-abbrev-table '())
-
 (define-abbrev-table 'idl-mode-abbrev-table '())
 
 (define-abbrev-table 'ivy-occur-grep-mode-abbrev-table '())
@@ -76,11 +66,11 @@
   '(
    ))
 
-(define-abbrev-table 'js-jsx-mode-abbrev-table '())
-
-(define-abbrev-table 'js-mode-abbrev-table '())
-
 (define-abbrev-table 'lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'lsp-ui-flycheck-list-mode-abbrev-table '())
+
+(define-abbrev-table 'lsp-ui-imenu-mode-abbrev-table '())
 
 (define-abbrev-table 'markdown-mode-abbrev-table '())
 
@@ -96,10 +86,6 @@
 
 (define-abbrev-table 'occur-mode-abbrev-table '())
 
-(define-abbrev-table 'org-export-stack-mode-abbrev-table '())
-
-(define-abbrev-table 'org-mode-abbrev-table '())
-
 (define-abbrev-table 'outline-mode-abbrev-table '())
 
 (define-abbrev-table 'package-menu-mode-abbrev-table '())
@@ -114,11 +100,7 @@
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
 
-(define-abbrev-table 'sgml-mode-abbrev-table '())
-
 (define-abbrev-table 'shell-mode-abbrev-table '())
-
-(define-abbrev-table 'snippet-mode-abbrev-table '())
 
 (define-abbrev-table 'special-mode-abbrev-table '())
 
