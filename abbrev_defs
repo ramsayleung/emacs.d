@@ -25,6 +25,8 @@
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
 
+(define-abbrev-table 'edebug-eval-mode-abbrev-table '())
+
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
@@ -62,25 +64,15 @@
 
 (define-abbrev-table 'ivy-occur-mode-abbrev-table '())
 
-(define-abbrev-table 'java-mode-abbrev-table
-  '(
-   ))
-
 (define-abbrev-table 'lisp-mode-abbrev-table '())
-
-(define-abbrev-table 'lsp-ui-flycheck-list-mode-abbrev-table '())
-
-(define-abbrev-table 'lsp-ui-imenu-mode-abbrev-table '())
 
 (define-abbrev-table 'markdown-mode-abbrev-table '())
 
 (define-abbrev-table 'markdown-view-mode-abbrev-table '())
 
-(define-abbrev-table 'messages-buffer-mode-abbrev-table '())
+(define-abbrev-table 'message-mode-abbrev-table '())
 
-(define-abbrev-table 'objc-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'messages-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
@@ -89,10 +81,6 @@
 (define-abbrev-table 'outline-mode-abbrev-table '())
 
 (define-abbrev-table 'package-menu-mode-abbrev-table '())
-
-(define-abbrev-table 'pike-mode-abbrev-table
-  '(
-   ))
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 

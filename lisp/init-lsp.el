@@ -17,9 +17,8 @@
 (use-package lsp-python
   :ensure t
   :init
-  (add-hook 'python-mode-hook #'lsp-python-enable)
+  (add-hook 'python-mode-hook 'lsp-python-enable)
   )
-
 (use-package lsp-rust
   :ensure t
   :config (progn
