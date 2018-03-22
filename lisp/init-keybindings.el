@@ -365,9 +365,9 @@
 				)
 
 	    (general-nvmap
-	     "Y" 'samray/copy-to-end-of-line
-	     "(" 'paredit-open-round
-	     )
+	      "Y" 'samray/copy-to-end-of-line
+	      "(" 'paredit-open-round
+	      )
 	    (general-define-key :keymaps 'read-expression-map
 				"C-r" 'counsel-expression-history)
 
@@ -465,8 +465,8 @@
 		      "C-M-g" 'xref-find-definitions
 		      "C-M-b" 'xref-pop-marker-stack)
   (general-emacs-define-key 'global
-      "C-v" 'evil-scroll-down
-      "M-v" 'evil-scroll-up)
+    "C-v" 'evil-scroll-down
+    "M-v" 'evil-scroll-up)
 
 ;;; Org-agenda-mode
   (with-eval-after-load 'org-mode

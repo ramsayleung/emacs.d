@@ -28,8 +28,9 @@
 	  ;; Show org-edit-special in the other-window
 	  (setq org-src-window-setup 'other-window)
 	  ;; use minted to highlight code in latex
-	  ;; (add-to-list 'org-latex-packages-alist '("" "minted"))
-	  ;; (setq org-latex-listings 'minted)
+	  (setq org-latex-listings 'minted)
+	  (setq org-export-latex-listings 'minted)
+	  (add-to-list 'org-latex-packages-alist '("" "minted"))
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
 	  (setq org-todo-keyword-faces
 		'(
@@ -108,20 +109,13 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 			  '("~" (:foreground "darkseagreen")
 			    ))
 	     (require 'ox-latex )
-	     (setq org-export-latex-listings t)
-	     ;;org-mode source code setup in exporting to latex
-	     (add-to-list 'org-latex-listings '("" "listings"))
-	     (add-to-list 'org-latex-listings '("" "color"))
-
 	     ;; execute code without confirm
 	     (setq org-confirm-babel-evaluate nil)
 	     ;; set latex to xelatex
 	     (setq org-latex-pdf-process
-		   '("xelatex  --shell-escape -interaction nonstopmode -output-directory %o %f"
-		     ;; "biber %b" "xelatex --shell-escape -interaction nonstopmode -output-directory %o %f"
-		     "bibtex %b"
-		     "xelatex  -interaction nonstopmode -output-directory %o %f"
-		     "xelatex  -interaction nonstopmode -output-directory %o %f"))
+		   '("xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
+		     "xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
+		     "xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"))
 	     ;; export cn character
 	     (setf org-latex-default-packages-alist
 		   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
@@ -175,6 +169,11 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :ensure ox-gfm
   )
 
+(use-package ob-rust
+  :if (and (not (eq system-type 'windows-nt))
+	   window-system)
+  :ensure ob-rust
+  )
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
   :if (and (not (eq system-type 'windows-nt))

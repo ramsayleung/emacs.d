@@ -270,7 +270,6 @@ similar to shell-pop"
   (if lsp-mode
       (lsp-ui-imenu)
     (counsel-imenu)))
-
 (provide 'init-programming)
 
 ;;; init-programming.el ends here

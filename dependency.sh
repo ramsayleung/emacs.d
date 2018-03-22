@@ -81,6 +81,8 @@ pip3 install python-language-server --user
 echo "Start to install language server"
 pip3 install python-language-server --user
 
+# install latex dependency -- Pygments
+pip3 install Pygments --user
 echo "Install gocode"
 go get -u github.com/nsf/gocode
 go get golang.org/x/tools/cmd/...
