@@ -14,11 +14,11 @@
 				)
 	    ))
 
-;; (use-package lsp-python
-;;   :ensure t
-;;   :init
-;;   (add-hook 'python-mode-hook 'lsp-python-enable)
-;; 	   )
+(use-package lsp-python
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook 'lsp-python-enable)
+  )
 (use-package lsp-rust
   :ensure t
   :config (progn
@@ -28,9 +28,20 @@
 
 (use-package lsp-ui
   :ensure t
-  :defer t
+  :init (progn
+	  (setq
+	   lsp-ui-sideline-enable nil
+	   ;; Disable eldoc-mode
+	   lsp-enable-eldoc nil
+	   lsp-ui-doc-header nil
+	   lsp-ui-doc-border nil)
+	  )
   :config (progn
   	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+	  ;; bind peek key
+	  (define-key lsp-ui-mode-map (kbd "M-.") #'xref-find-definitions)
+	  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+	  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
   	    )
   )
 (provide 'init-lsp)

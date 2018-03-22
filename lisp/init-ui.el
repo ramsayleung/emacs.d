@@ -49,6 +49,10 @@
   :ensure t
   :defer t
   :init (progn (golden-ratio-mode 1)
+	       (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
+	       (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+	       (add-to-list 'golden-ratio-exclude-modes "treemacs-mode")
+	       (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
 	       ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
@@ -106,7 +110,6 @@ This code toggles between them."
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
-		      :font "FantasqueSansMono-13:weight=medium:slant=italic"
 		      :box '())
   )
 (defvar after-load-theme-hook nil
@@ -209,7 +212,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(sanityinc-tomorrow-eighties zenburn))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -426,6 +429,27 @@ then check whether EMACS should to modify theme, if so, modify it."
 (diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
 (diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
+
+	    (defun samray/sync-peek-face ()
+	      (set-face-attribute 'lsp-ui-peek-list nil
+				  :background (face-attribute 'hl-line :background))
+	      (set-face-attribute 'lsp-ui-peek-peek nil
+				  :background (face-attribute 'hl-line :background))
+	      (set-face-attribute 'lsp-ui-peek-selection nil
+				  :background (face-attribute 'highlight :background)
+				  :foreground (face-attribute 'default :foreground))
+	      (set-face-attribute 'lsp-ui-peek-filename nil
+				  :foreground (face-attribute 'font-lock-constant-face :foreground))
+	      (set-face-attribute 'lsp-ui-peek-highlight nil
+				  :background (face-attribute 'highlight :background)
+				  :foreground (face-attribute 'highlight :foreground)
+				  :distant-foreground (face-attribute 'highlight :foreground))
+	      (set-face-attribute 'lsp-ui-peek-header nil
+				  :background (face-attribute 'highlight :background)
+				  :foreground (face-attribute 'default :foreground))
+	      )
+	    (samray/sync-peek-face)
+	    (add-hook 'after-load-theme-hook #'samray/sync-peek-face)
 (provide 'init-ui)
 
 ;;; init-ui.el ends here

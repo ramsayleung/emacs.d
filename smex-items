@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- customize-group
- counsel-load-theme
- describe-theme
+ getenv
+ indent-region
+ venv-set-location
+ pyvenv-workon
  try
  package-refresh-contents
- adaptive-wrap-prefix-mode
- samray/copy-current-file-sans-extension
+ imenu
 )
 
 ;; ----- smex-data -----
@@ -18,14 +18,14 @@
  (lsp-format-buffer . 1)
  (shell-pop . 2)
  (golden-ratio-mode . 1)
- (try . 3)
+ (try . 5)
  (turn-off-evil-mode . 2)
  (org-display-outline-path . 1)
  (org-display-inline-images . 6)
  (lsp-python-enable . 4)
- (lsp-ui-mode . 4)
- (lsp-ui-peek-find-references . 2)
- (samray/indent-buffer . 1)
+ (lsp-ui-mode . 11)
+ (lsp-ui-peek-find-references . 8)
+ (samray/indent-buffer . 2)
  (eval-buffer . 2)
  (irony-server-kill . 1)
  (irony-install-server . 1)
@@ -44,8 +44,23 @@
  (samray/copy-current-file-sans-extension . 22)
  (tern-mode . 2)
  (samray/copy-to-x-clipboard . 1)
- (counsel-load-theme . 44)
- (package-refresh-contents . 1)
+ (counsel-load-theme . 45)
+ (package-refresh-contents . 3)
  (describe-theme . 1)
  (customize-group . 1)
+ (org-time-stamp . 5)
+ (transpose-words . 2)
+ (rectangle-mark-mode . 1)
+ (emacs-version . 2)
+ (lsp-ui-sideline-mode . 5)
+ (eldoc-mode . 2)
+ (toggle-debug-on-error . 2)
+ (jedi:install-server . 2)
+ (org-priority . 1)
+ (counsel-imenu . 1)
+ (imenu . 1)
+ (pyvenv-workon . 1)
+ (venv-set-location . 1)
+ (getenv . 2)
+ (indent-region . 1)
 )
