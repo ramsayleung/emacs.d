@@ -84,11 +84,17 @@ pip3 install python-language-server --user
 # install latex dependency -- Pygments
 pip3 install Pygments --user
 echo "Install gocode"
-go get -u github.com/nsf/gocode
-go get golang.org/x/tools/cmd/...
-go get github.com/rogpeppe/godef
-go get golang.org/x/tools/cmd/oracle
-go get golang.org/x/tools/cmd/goimports
+go get -u -v github.com/nsf/gocode
+go get -u -v github.com/rogpeppe/godef
+go get -u -v github.com/zmb3/gogetdoc
+go get -u -v github.com/golang/lint/golint
+go get -u -v github.com/lukehoban/go-outline
+go get -u -v sourcegraph.com/sqs/goreturns
+go get -u -v golang.org/x/tools/cmd/gorename
+go get -u -v github.com/tpng/gopkgs
+go get -u -v github.com/newhook/go-symbols
+go get -u -v golang.org/x/tools/cmd/guru
+go get -u -v github.com/cweill/gotests/...
 
 echo "Install rust-lang"
 curl https://sh.rustup.rs -sSf | sh

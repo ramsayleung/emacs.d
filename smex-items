@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ company-go
+ compile
+ exec-path-from-shell-copy-env
  getenv
  indent-region
  venv-set-location
  pyvenv-workon
- try
- package-refresh-contents
- imenu
 )
 
 ;; ----- smex-data -----
@@ -61,6 +61,9 @@
  (imenu . 1)
  (pyvenv-workon . 1)
  (venv-set-location . 1)
- (getenv . 2)
+ (getenv . 3)
  (indent-region . 1)
+ (exec-path-from-shell-copy-env . 1)
+ (compile . 1)
+ (company-go . 1)
 )
