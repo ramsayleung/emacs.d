@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ describe-font
  company-go
  compile
  exec-path-from-shell-copy-env
  getenv
  indent-region
  venv-set-location
- pyvenv-workon
 )
 
 ;; ----- smex-data -----
@@ -29,7 +29,7 @@
  (eval-buffer . 2)
  (irony-server-kill . 1)
  (irony-install-server . 2)
- (describe-font . 1)
+ (describe-font . 8)
  (server-start . 2)
  (elpy-goto-definition . 1)
  (elpy-occur-definitions . 1)

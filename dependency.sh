@@ -84,6 +84,8 @@ pip3 install python-language-server --user
 # install latex dependency -- Pygments
 pip3 install Pygments --user
 echo "Install gocode"
+go get -u -v golang.org/x/tools/cmd/goimports
+go get -u -v golang.org/x/tools/cmd/oracle
 go get -u -v github.com/nsf/gocode
 go get -u -v github.com/rogpeppe/godef
 go get -u -v github.com/zmb3/gogetdoc
