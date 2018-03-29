@@ -446,12 +446,12 @@
 
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
-		      "C-c ." 'samray/indent-buffer)
+		      "C-c ." 'samray/indent-region-or-buffer)
 
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map
 		      "M-n" 'pyim-convert-code-at-point
-		      "C-c ." 'samray/indent-buffer)
+		      "C-c ." 'samray/indent-region-or-buffer)
 
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map

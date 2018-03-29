@@ -10,7 +10,7 @@ type pip>/dev/null 2>&1 || {
     exit 1;
 }
 # check if npm exists 
-type yarn>/dev/null 2>&1 || {
+type npm>/dev/null 2>&1 || {
     echo >&2 " require yarn but it's not installed.  Aborting.";
     exit 1;
 }
@@ -19,10 +19,10 @@ echo "start to install emacs  dependecy"
 #emacs javascript-edit mode (ie js2-mode depedency):
 #install "tern" to use the auto-completion and documentation features
 echo "Start to install tern"
-sudo yarn global add -g tern
+npm i tern -g
 #to use the formatting features,install js-beautify
 echo "Start to install js-beautify"
-sudo yarn global add -g js-beautify
+npm i js-beautify -g
 #syntax checker Program;which Flycheck dependens on
 #  install Pylint for Python
 echo "start to install Python syntax checker"

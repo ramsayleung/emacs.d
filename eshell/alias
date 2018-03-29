@@ -1,15 +1,16 @@
-alias ll ls -al
-alias dnfu sudo dnf update
-alias a fasd -a
-alias a fasd -a        # any
-alias s fasd -si       # s'how / search / select
-alias d fasd -d        # directory
-alias f fasd -f        # file
-alias sd fasd -sid     # interactive directory selection
-alias sf fasd -sif     # interactive file selection
-alias zz fasd_cd -d -i # cd with interactive selection
-alias z samray/eshell-fasd-z $1
-alias dnfi sudo dnf install $1
-alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 . $1
-alias dow dired-other-window $1
+alias fow find-file-other-window nil
 alias ff find-file-other-window $1
+alias dow dired-other-window $1
+alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 . $1
+alias dnfi sudo dnf install $1
+alias z samray/eshell-fasd-z $1
+alias zz fasd_cd -d -i # cd with interactive selection
+alias sf fasd -sif     # interactive file selection
+alias sd fasd -sid     # interactive directory selection
+alias f fasd -f        # file
+alias d fasd -d        # directory
+alias s fasd -si       # s'how / search / select
+alias a fasd -a        # any
+alias a fasd -a
+alias dnfu sudo dnf update
+alias ll ls -al

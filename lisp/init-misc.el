@@ -73,6 +73,7 @@
   (indent-region (point-min)(point-max)))
 
 (defun samray/indent-region-or-buffer()
+  "Indent selected region or a whole buffer."
   (interactive)
   (save-excursion
     (if (region-active-p)
@@ -80,7 +81,7 @@
 	  (indent-region (region-beginning) (region-end))
 	  (message "Indented selected region"))
       (progn
-	(indent-buffer)
+	(samray/indent-buffer)
 	(message "Indented buffer")))))
 
 ;; enable hippie-mode to enhance auto-completion

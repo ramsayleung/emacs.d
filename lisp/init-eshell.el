@@ -84,28 +84,31 @@
 
 (use-package eshell
   :commands eshell
+  :init (progn
+	  (setq
+	   eshell-highlight-prompt nil
+	   eshell-buffer-shorthand t
+	   eshell-history-size 5000
+	   ;;  ;; auto truncate after 12k lines
+	   eshell-buffer-maximum-lines 12000
+	   eshell-hist-ignoredups t
+	   eshell-error-if-no-glob t
+	   eshell-glob-case-insensitive t
+	   eshell-scroll-to-bottom-on-input 'all
+	   eshell-list-files-after-cd t
+	   eshell-aliases-file (concat user-emacs-directory "eshell/alias")
+	   eshell-banner-message ""
+	   ;;  ;; eshell-banner-message "What would you like to do?\n\n"
+	   )
+	  ;; Visual commands
+	  (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
+					 "ncftp" "pine" "tin" "trn" "elm" "vim"
+					 "nmtui" "alsamixer" "htop" "el" "elinks"
+					 ))
+	  (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
+
+	  )
   :config (progn
-	    (setq
-	     eshell-highlight-prompt nil
-	     eshell-buffer-shorthand t
-	     eshell-history-size 5000
-	     ;;  ;; auto truncate after 12k lines
-	     eshell-buffer-maximum-lines 12000
-	     eshell-hist-ignoredups t
-	     eshell-error-if-no-glob t
-	     eshell-glob-case-insensitive t
-	     eshell-scroll-to-bottom-on-input 'all
-	     eshell-list-files-after-cd t
-	     eshell-aliases-file (concat user-emacs-directory "eshell/alias")
-	     eshell-banner-message ""
-	     ;;  ;; eshell-banner-message "What would you like to do?\n\n"
-	     )
-	    ;; Visual commands
-	    (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
-					   "ncftp" "pine" "tin" "trn" "elm" "vim"
-					   "nmtui" "alsamixer" "htop" "el" "elinks"
-					   ))
-	    (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
 	    (when (not (functionp 'eshell/rgrep))
 	      (defun eshell/rgrep (&rest args)
 		"Use Emacs grep facility instead of calling external grep."

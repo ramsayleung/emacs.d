@@ -73,6 +73,10 @@
 	    (setq ac-js2-evaluate-calls t)
 	    ))
 
+(use-package rjsx-mode
+  :ensure t
+  )
+
 ;;; live web development with Emacs
 ;;; Provides live interaction with Javascript,Css,and Html in a web browser
 ;;; Usage :
