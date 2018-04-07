@@ -10,7 +10,7 @@ type pip>/dev/null 2>&1 || {
     exit 1;
 }
 # check if npm exists 
-type yarn>/dev/null 2>&1 || {
+type npm>/dev/null 2>&1 || {
     echo >&2 " require yarn but it's not installed.  Aborting.";
     exit 1;
 }
@@ -19,10 +19,10 @@ echo "start to install emacs  dependecy"
 #emacs javascript-edit mode (ie js2-mode depedency):
 #install "tern" to use the auto-completion and documentation features
 echo "Start to install tern"
-sudo yarn global add -g tern
+npm i tern -g
 #to use the formatting features,install js-beautify
 echo "Start to install js-beautify"
-sudo yarn global add -g js-beautify
+npm i js-beautify -g
 #syntax checker Program;which Flycheck dependens on
 #  install Pylint for Python
 echo "start to install Python syntax checker"
@@ -84,7 +84,20 @@ pip3 install python-language-server --user
 # install latex dependency -- Pygments
 pip3 install Pygments --user
 echo "Install gocode"
-go get -u github.com/nsf/gocode
+go get -u -v golang.org/x/tools/cmd/goimports
+go get -u -v golang.org/x/tools/cmd/oracle
+go get -u -v github.com/nsf/gocode
+go get -u -v github.com/rogpeppe/godef
+go get -u -v github.com/zmb3/gogetdoc
+go get -u -v github.com/golang/lint/golint
+go get -u -v github.com/lukehoban/go-outline
+go get -u -v sourcegraph.com/sqs/goreturns
+go get -u -v golang.org/x/tools/cmd/gorename
+go get -u -v github.com/tpng/gopkgs
+go get -u -v github.com/newhook/go-symbols
+go get -u -v golang.org/x/tools/cmd/guru
+go get -u -v github.com/cweill/gotests/...
+
 
 echo "Install rust-lang"
 curl https://sh.rustup.rs -sSf | sh

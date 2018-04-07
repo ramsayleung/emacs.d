@@ -110,7 +110,6 @@ This code toggles between them."
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
-		      :font "FantasqueSansMono-13:weight=medium:slant=italic"
 		      :box '())
   )
 (defvar after-load-theme-hook nil
@@ -318,7 +317,7 @@ then check whether EMACS should to modify theme, if so, modify it."
     (if (null (x-list-fonts font)) nil t)))
 (if(eq system-type 'windows-nt)
     (defvar samray-font-list '("Consolas-13"))
-  (defvar samray-font-list '("FantasqueSansMono-13:weight=medium:slant=italic" "Consolas-13:weight=medium:slant=italic" "Source Code Pro-12:weight=medium:slant=italic" ))
+  (defvar samray-font-list '("Consolas-13:weight=medium:slant=italic" "FantasqueSansMono-13:weight=medium:slant=italic"))
   )
 
 (defun samray/cycle-font ()

@@ -1,3 +1,4 @@
+alias fow find-file-other-window nil
 alias ff find-file-other-window $1
 alias dow dired-other-window $1
 alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 . $1
@@ -13,4 +14,3 @@ alias a fasd -a        # any
 alias a fasd -a
 alias dnfu sudo dnf update
 alias ll ls -al
-alias python python3 $1

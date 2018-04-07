@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- emacs-version
- lsp-ui-doc-mode
- lsp-ui-sideline-mode
- lsp-ui-mode
- xref-find-references
- eval-buffer
- org-time-stamp
+ describe-font
+ company-go
+ compile
+ exec-path-from-shell-copy-env
+ getenv
+ indent-region
+ venv-set-location
 )
 
 ;; ----- smex-data -----
@@ -19,17 +19,17 @@
  (shell-pop . 2)
  (golden-ratio-mode . 1)
  (try . 5)
- (turn-off-evil-mode . 3)
+ (turn-off-evil-mode . 2)
  (org-display-outline-path . 1)
- (org-display-inline-images . 8)
- (lsp-python-enable . 10)
- (lsp-ui-mode . 7)
- (lsp-ui-peek-find-references . 7)
- (samray/indent-buffer . 1)
- (eval-buffer . 11)
+ (org-display-inline-images . 6)
+ (lsp-python-enable . 4)
+ (lsp-ui-mode . 11)
+ (lsp-ui-peek-find-references . 8)
+ (samray/indent-buffer . 2)
+ (eval-buffer . 2)
  (irony-server-kill . 1)
  (irony-install-server . 2)
- (describe-font . 1)
+ (describe-font . 8)
  (server-start . 2)
  (elpy-goto-definition . 1)
  (elpy-occur-definitions . 1)
@@ -44,13 +44,11 @@
  (samray/copy-current-file-sans-extension . 22)
  (tern-mode . 2)
  (samray/copy-to-x-clipboard . 1)
- (counsel-load-theme . 47)
+ (counsel-load-theme . 45)
  (package-refresh-contents . 3)
  (describe-theme . 1)
-<<<<<<< HEAD
  (customize-group . 1)
  (man . 2)
-=======
  (lsp-cquery-enable . 1)
  (lsp-ui-sideline-mode . 6)
  (lsp-ui-doc-mode . 4)
@@ -60,5 +58,23 @@
  (cancel-debug-on-entry . 1)
  (org-time-stamp . 1)
  (emacs-version . 1)
->>>>>>> 2d84ad6ebf56a752839bca49771adbb06e7f255e
+ (customize-group . 1)
+ (org-time-stamp . 5)
+ (transpose-words . 2)
+ (rectangle-mark-mode . 1)
+ (emacs-version . 2)
+ (lsp-ui-sideline-mode . 5)
+ (eldoc-mode . 2)
+ (toggle-debug-on-error . 2)
+ (jedi:install-server . 2)
+ (org-priority . 1)
+ (counsel-imenu . 1)
+ (imenu . 1)
+ (pyvenv-workon . 1)
+ (venv-set-location . 1)
+ (getenv . 3)
+ (indent-region . 1)
+ (exec-path-from-shell-copy-env . 1)
+ (compile . 1)
+ (company-go . 1)
 )

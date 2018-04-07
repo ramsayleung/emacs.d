@@ -54,19 +54,21 @@
   :ensure t
   :commands (nginx-mode))
 
-;; make Emacs use the $PATH set up by the user's shell
+;; Make Emacs use the $PATH set up by the user's shell
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  (when(not(eq system-type 'windows-nt))
-	    (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH"))
+	  ;; (when(not(eq system-type 'windows-nt))
+	  ;;   (exec-path-from-shell-initialize)
+	  ;;   )
+	  (when (memq window-system '(mac ns x))
+	    (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
 	    ;; when it is nil, exec-path-from-shell will read environment variable
 	    ;; from .zshenv instead of .zshrc, but makes sure that you put all
 	    ;; environment variable you need in .zshenv rather than .zshrc
 	    (setq exec-path-from-shell-check-startup-files nil) ;
 	    (setq exec-path-from-shell-arguments '("-l" )) ;remove -i read form .zshenv
-	    (exec-path-from-shell-initialize)
-	    )
+	    (exec-path-from-shell-initialize))
 	  )
   )
 
@@ -75,7 +77,7 @@
   :ensure t
   :commands er/expand-region
   )
-;; projectile
+;; Projectile
 (use-package projectile
   :ensure t
   :init (progn
@@ -263,8 +265,9 @@ similar to shell-pop"
           (lambda ()
             ;; turn off `linum-mode' when there are more than 5000 lines
             (if (samray/buffer-too-big-p) (linum-mode -1))))
+
 (defun samray/imenu ()
-  "Call lsp-ui-imenu if lsp-mode is enable, or call counsel-imenu instead."
+  "Call lsp-ui-imenu firstly, if lsp-mode is disable, call counsel-imenu instead"
   (interactive)
   (if lsp-mode
       (lsp-ui-imenu)

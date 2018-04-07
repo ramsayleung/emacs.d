@@ -22,3 +22,5 @@ session.*
 irony/*
 irony/bin/*
 irony/*
+.python-environments
+smex-items

@@ -128,12 +128,8 @@
   :load-path "~/.emacs.d/additional-packages/company-go.el"
   :ensure t
   :init (progn
-	  (add-hook 'go-mode-hook (lambda ()
-				    (set (make-local-variable 'company-backends) '(company-go))
-				    (company-mode)))
-
-	  ;; (add-hook 'go-mode-hook
-	  ;; 	    (lambda () (add-to-list 'company-backends 'company-go)))
+	  (add-hook 'go-mode-hook
+	  	    (lambda () (add-to-list 'company-backends 'company-go)))
 	  )
   )
 ;; backends for rust
