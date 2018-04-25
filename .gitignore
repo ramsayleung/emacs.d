@@ -23,4 +23,6 @@ irony/*
 irony/bin/*
 irony/*
 .python-environments
+*/smex-items/*
 smex-items
+abbrevs_defs
