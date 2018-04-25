@@ -47,7 +47,7 @@
 	    (add-hook 'c-mode-hook 'lsp-cquery-enable)
 	    (add-hook 'c++-mode-hook 'lsp-cquery-enable)
 	    ;; ;; Arch Linux aur/cquery-git aur/cquery
-	    (setq cquery-executable "/usr/bin/cquery")
+	    (setq cquery-executable "/home/samray/bin/cquery-v20180302-x86_64-unknown-linux-gnu/bin/cquery")
 	    ;; ;; Log file
 	    (setq cquery-extra-args '("--log-file=/tmp/cq.log"))
 	    ;; Cache directory, both relative and absolute paths are supported

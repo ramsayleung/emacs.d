@@ -69,12 +69,12 @@
       ;; startup. Improve it unitl emacs 26(multithread).
       ;; (if (samray/ip-from-china-p)
       (progn
-	(message "There is a wall here.")
-	;; For God' sake, there are a lot of site you cannot reach in China
-	;; this is mirror of melpa and gnu
-	(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-				 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
-	)
+  	(message "There is a wall here.")
+  	;; For God' sake, there are a lot of site you cannot reach in China
+  	;; this is mirror of melpa and gnu
+  	(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+  				 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+  	)
     (progn
       (message "You are free.")
       (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")

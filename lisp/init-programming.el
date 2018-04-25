@@ -11,10 +11,11 @@
 
 (use-package yasnippet
   :ensure t
-  :diminish yas-minor-mode "ⓨ"
+  :diminish (yas-minor-mode . " Yas")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
+	    (yas-reload-all)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
 
