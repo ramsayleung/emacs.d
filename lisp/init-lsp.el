@@ -55,5 +55,6 @@
 	    ;; Initialization options
 	    (setq cquery-extra-init-params '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))
 	    ))
+
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

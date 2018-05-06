@@ -53,6 +53,7 @@
 	  (setq golden-ratio-auto-scale t)
 	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
+	  (add-to-list 'golden-ratio-exclude-modes "gud-mode")
 	  ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit

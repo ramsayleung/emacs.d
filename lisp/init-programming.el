@@ -273,6 +273,12 @@ similar to shell-pop"
   (if lsp-mode
       (lsp-ui-imenu)
     (counsel-imenu)))
+
+(defun samray/get-buffer-name ()
+  "Get current buffer name."
+  (interactive)
+  (kill-new (buffer-name))
+  )
 (provide 'init-programming)
 
 ;;; init-programming.el ends here

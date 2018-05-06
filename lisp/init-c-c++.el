@@ -19,43 +19,25 @@
 	 ("\\.cmake\\'" . cmake-mode)
 	 ))
 
-;; (use-package rtags
-;;   :ensure t
-;;   :defer t
-;;   :init (progn
-;; 	  (defun rtags-setup ()
-;; 	    (setq rtags-completions-enabled t)
-;; 	    (setq rtags-autostart-diagnostics t)
-;; 	    (setq rtags-display-result-backend 'ivy)
-;; 	    (rtags-enable-standard-keybindings))
-;; 	  (add-hook 'c++-mode-hook #'rtags-setup)
-;; 	  (add-hook 'c-mode-hook #'rtags-setup))
-;;   )
+(defun samray/compile-with-command-and-run (command)
+  "Compile c/c++ with COMMAND and run it."
+  (let ((file-name (buffer-file-name))
+	(output (file-name-base (buffer-file-name))))
+    (message output)
+    (compile (format "%s %s -o %s && ./%s" command file-name output output))
+    )
+  )
+(defun samray/g++-compile-and-run ()
+  "Compile cpp with g++ and run it."
+  (interactive)
+  (samray/compile-with-command-and-run "g++")
+  )
+(defun samray/gcc-compile-and-run ()
+  "Compile c with gcc and run it."
+  (interactive)
+  (samray/compile-with-command-and-run "gcc")
+  )
 
-;; (use-package ivy-rtags
-;;   :ensure t
-;;   :after rtags-mode
-;;   )
-;; (use-package cmake-ide
-;;   :ensure t
-;;   :defer t
-;;   :init (progn
-;; 	  (add-hook 'c++-mode-hook (lambda () (cmake-ide-setup)))
-;; 	  (add-hook 'c-mode-hook (lambda () (cmake-ide-setup)))
-;; 	  )
-;;   )
-;; (use-package irony
-;;   :ensure t
-;;   :defer t
-;;   :init (progn
-;; 	  (defun samray/irony-mode-hook ()
-;; 	    (define-key irony-mode-map [remap completion-at-point] 'counsel-irony)
-;; 	    (define-key irony-mode-map [remap complete-symbol] 'counsel-irony))
-;; 	  (add-hook 'c++-mode-hook 'irony-mode)
-;; 	  (add-hook 'c-mode-hook 'irony-mode)
-;; 	  (add-hook 'irony-mode-hook 'samray/irony-mode-hook)
-;; 	  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-;;   )
 
 ;;; Tell emacs to open .h file in C++ mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))

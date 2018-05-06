@@ -26,10 +26,11 @@
 				"a z d" 'ztree-dir
 				"a z c" 'ztree-diff
 				"b" '(:ignore t :which-key "buffers")
-				"b l" 'samray/ivy-switch-to-buffer-enhanced
+				"b b" 'samray/switch-to-current-open-buffer
 				"b d" 'kill-this-buffer
 				"b D" 'samray/delete-blank-line-in-buffer
-				"b b" 'samray/switch-to-current-open-buffer
+				"b l" 'samray/ivy-switch-to-buffer-enhanced
+				"b n" 'samray/get-buffer-name
 				"b o" 'occur-dwim
 				"c" '(:ignore t :which-key "compile/comments")
 				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
@@ -231,17 +232,27 @@
 				)
 
 
-	    ;; C/C++ mode
+	    ;; C++ mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'c++-mode-map
 				:prefix samray/leader-key
 				"m c" '(:ignore t :which-key "compiling")
-				"m c c" 'cmake-ide-compile)
+				"m c c" 'compile
+				"m c x" 'samray/g++-compile-and-run
+				)
+	    ;; C mode
+	    (general-define-key :states '(normal visual motion)
+				:keymaps 'c++-mode-map
+				:prefix samray/leader-key
+				"m c" '(:ignore t :which-key "compiling")
+				"m c c" 'compile
+				"m c x" 'samray/gcc-compile-and-run
+				)
+
 	    ;; C/C++ mode
 	    (general-define-key :keymaps 'c-mode-base-map
-				"C-M-g" 'rtags-find-symbol-at-point
-				"C-M-b" 'xref-pop-marker-stack
-				"C-c ." 'clang-format-buffer)
+				"C-c ." 'clang-format-buffer
+				)
 
 	    ;; Scheme mode
 	    (general-define-key :states '(normal visual motion)
@@ -698,10 +709,10 @@ Info-mode:
   )
 (add-hook 'eshell-mode-hook
           (lambda ()
-	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/esh-history)
-            (define-key eshell-mode-map (kbd "C-c C-l") #'samray/esh-history)
-	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-l")] #'samray/eshell-clear-buffer)
-	    (define-key eshell-mode-map (kbd "C-l") #'samray/eshell-clear-buffer)
+	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-r")] #'samray/esh-history)
+            (define-key eshell-mode-map (kbd "C-r") #'samray/esh-history)
+	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/eshell-clear-buffer)
+	    (define-key eshell-mode-map (kbd "C-c C-l") #'samray/eshell-clear-buffer)
 	    ))
 (provide 'init-keybindings)
 ;;; init-keybindings ends here
