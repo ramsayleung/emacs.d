@@ -87,8 +87,14 @@
 	  )
   :commands (counsel-projectile-switch-project counsel-projectile-find-file)
   :config
-  (projectile-mode)
-  (setq projectile-completion-system 'ivy))
+  (progn
+    (projectile-mode)
+    (setq projectile-completion-system 'ivy)
+    (add-to-list 'projectile-globally-ignored-directories "*.ccls-cache")
+    (add-to-list 'projectile-globally-ignored-directories "*.cquery_cached_index")
+    (add-to-list 'projectile-globally-ignored-directories "*CMakeFiles")
+    )
+  )
 
 ;;; Rest client in Emacs
 (use-package restclient

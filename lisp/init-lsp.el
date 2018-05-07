@@ -40,7 +40,7 @@
 	     lsp-enable-eldoc nil)
   	    )
   )
-;;; cquery cpp
+;; ;;; cquery cpp
 (use-package cquery
   :ensure t
   :config (progn
@@ -55,6 +55,17 @@
 	    ;; Initialization options
 	    (setq cquery-extra-init-params '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))
 	    ))
-
+;; (use-package ccls
+;;   :load-path "~/.emacs.d/additional-packages/emacs-ccls"
+;;   :config
+;;   (progn
+;;     (add-hook 'c-mode-hook 'lsp-ccls-enable)
+;;     (add-hook 'c++-mode-hook 'lsp-ccls-enable)
+;;     (setq ccls-executable "/home/samray/code/cpp/ccls/release/ccls")
+;;     (setq ccls-sem-highlight-method 'font-lock)
+;;     (setq ccls-extra-init-params
+;; 	  '(:completion (:detailedLabel t) :xref (:container t)
+;; 			:diagnostics (:frequencyMs 5000))
+;; 	  )))
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

@@ -27,6 +27,13 @@
     (compile (format "%s %s -o %s && ./%s" command file-name output output))
     )
   )
+
+(defun samray/compile-clean ()
+  "Clean compiled object."
+  (interactive)
+  (compile "make clean")
+  )
+
 (defun samray/g++-compile-and-run ()
   "Compile cpp with g++ and run it."
   (interactive)
@@ -36,6 +43,15 @@
   "Compile c with gcc and run it."
   (interactive)
   (samray/compile-with-command-and-run "gcc")
+  )
+
+(defvar samray-default-compile-command "make -k")
+(defun samray/compile (command)
+  "Compile with input COMMAND or samray-default-compile-command."
+  (interactive
+   (list (read-string (format "compile command [default: %s]: " samray-default-compile-command) nil nil samray-default-compile-command)))
+  ;; (setq samray-default-compile-command command)
+  (compile command)
   )
 
 

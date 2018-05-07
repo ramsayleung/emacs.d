@@ -12,6 +12,11 @@
 	  (add-hook 'pdf-view-mode-hook (lambda () (company-mode nil))))
   )
 
+;;; Save and restore window configuration
+(use-package eyebrowse
+  :ensure t
+  )
+
 ;;; Track Emacs commands frequency
 (use-package keyfreq
   :ensure t

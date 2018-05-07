@@ -46,8 +46,8 @@
 				"f E" 'samray/sudo-edit
 				"f f" 'counsel-find-file
 				"f g" 'samray/counsel-goto-recent-directory
-				"f r" 'recentf-open-files
-				"f R" 'samray/rename-current-buffer-file
+				"f r" 'samray/rename-current-buffer-file
+				"f R" 'recentf-open-files
 				"f s" 'save-buffer
 				"f e" '(:ignore t :which-key "emacs")
 				"f e d" 'open-samray/file
@@ -237,15 +237,17 @@
 				:keymaps 'c++-mode-map
 				:prefix samray/leader-key
 				"m c" '(:ignore t :which-key "compiling")
-				"m c c" 'compile
+				"m c c" 'samray/compile
+				"m c C" 'samray/compile-clean
 				"m c x" 'samray/g++-compile-and-run
 				)
 	    ;; C mode
 	    (general-define-key :states '(normal visual motion)
-				:keymaps 'c++-mode-map
+				:keymaps 'c-mode-map
 				:prefix samray/leader-key
 				"m c" '(:ignore t :which-key "compiling")
-				"m c c" 'compile
+				"m c c" 'samray/compile
+				"m c C" 'samray/compile-clean
 				"m c x" 'samray/gcc-compile-and-run
 				)
 
