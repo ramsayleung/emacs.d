@@ -15,6 +15,9 @@
 ;;; Save and restore window configuration
 (use-package eyebrowse
   :ensure t
+  :init (progn
+	  (eyebrowse-mode)
+	  )
   )
 
 ;;; Track Emacs commands frequency
