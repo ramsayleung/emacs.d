@@ -4,14 +4,16 @@
 ;;; Commentary:
 ;;; Code:
 (use-package lsp-mode
-  :ensure t
-  :defer t
+  ;; :ensure t
+  ;; :defer t
+  :load-path "~/code/elisp/lsp-mode"
   :config (progn
 	    (add-hook 'python-mode-hook 'lsp-mode)
 	    (add-hook 'rust-mode-hook 'lsp-mode)
 	    (set-face-attribute 'lsp-face-highlight-textual nil
 				:background "#666" :foreground "#ffffff"
 				)
+	    (setq lsp-prompt-project-root t)
 	    ))
 
 (use-package lsp-python
@@ -55,8 +57,9 @@
 	    ;; Initialization options
 	    (setq cquery-extra-init-params '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))
 	    ))
+
 ;; (use-package ccls
-;;   :load-path "~/.emacs.d/additional-packages/emacs-ccls"
+;;   :ensure t
 ;;   :config
 ;;   (progn
 ;;     (add-hook 'c-mode-hook 'lsp-ccls-enable)

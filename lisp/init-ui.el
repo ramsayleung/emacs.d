@@ -193,9 +193,6 @@ This code toggles between them."
   :ensure t
   :defer t
   )
-(use-package spacemacs-theme
-  :ensure t
-  :defer t)
 
 (use-package zenburn-theme
   :ensure t
@@ -216,7 +213,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties spacemacs-dark))
+(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -229,13 +226,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
   )
 
 ;; Switch to the first theme in the list above
-(samray/cycle-theme)
-;; (defvar after-load-theme-hook nil
-;;   "Hook run after a color theme is loaded using `load-theme'.")
-;; (defadvice load-theme (after run-after-load-theme-hook activate)
-;;   "Run `after-load-theme-hook'."
-;;   (run-hooks 'after-load-theme-hook))
-
+(add-hook 'after-init-hook #'samray/cycle-theme)
 
 ;; ====================================Themes automatically change =====================================
 ;;timer for automatically changing themes
@@ -357,7 +348,7 @@ then check whether EMACS should to modify theme, if so, modify it."
     (when window-system
       (dolist (charset '(kana han cjk-misc bopomofo))
 	(set-fontset-font (frame-parameter nil 'font) charset
-			  (font-spec :family "WenQuanYi Zen Hei" :size 16))))
+			  (font-spec :name "WenQuanYi Zen Hei" :size 14 :slant 'italic))))
     ))
 ;;----------------;;
 ;;Major/Minor Mode;;
