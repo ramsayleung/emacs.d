@@ -14,19 +14,6 @@
   :ensure t
   )
 
-;; ;; Emacs python development Environment
-;; (use-package elpy
-;;   :ensure t
-;;   :defer t
-;;   :init (add-hook 'python-mode-hook 'elpy-mode)
-;;   :config(progn
-;; 	   (setq elpy-rpc-backend "jedi")
-;; 	   (elpy-enable)
-;; 	   )
-;;   :bind (:map elpy-mode-map
-;; 	      ("M-?" . xref-find-references)
-;; 	      ("M-." . elpy-goto-definition))
-;;   )
 ;; Use pep8 to format python file
 (use-package py-autopep8
   :commands (py-autopep8 py-autopep8-buffer)
