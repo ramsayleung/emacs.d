@@ -86,7 +86,7 @@ This code toggles between them."
 
 ;; specify the fringe width for windows -- this sets the left to 10 and
 ;; right fringes to 0
-(fringe-mode '(10 . 0))
+(fringe-mode '(0 . 0))
 (when window-system
   ;;turn off tool bar
   (tool-bar-mode -1)
@@ -102,7 +102,7 @@ This code toggles between them."
 ;; Set symbol for the border
 (set-display-table-slot standard-display-table
                         'vertical-border
-                        (make-glyph-code ?┃))
+                        (make-glyph-code ?|))
 (defun samray/tone-down-fringes ()
   "Set the fringe colors to whatever is the background color."
   (set-face-attribute 'fringe nil
@@ -125,31 +125,12 @@ This code toggles between them."
 (menu-bar-mode -1)
 ;; turn off startup help menu
 (setq inhibit-splash-screen t)
-;; show line number
-(use-package nlinum
-  :ensure t
-  :init (progn
-	  ;; Preset `nlinum-format' for minimum width.
-	  (defun samray/nlinum-mode-hook ()
-	    (when nlinum-mode
-	      (setq-local nlinum-format
-			  (concat "%" (number-to-string
-				       ;; Guesstimate number of buffer lines.
-				       (ceiling (log (max 1 (/ (buffer-size) 80)) 10)))
-				  "d"))))
-	  ;; (add-hook 'nlinum-mode-hook 'samray/nlinum-mode-hook)
-	  )
-  :config (progn
-	    (global-nlinum-mode)
-	    (defun initialize-nlinum (&optional frame)
-	      (add-hook 'prog-mode-hook 'nlinum-mode))
-	    (when (daemonp)
-	      (add-hook 'window-setup-hook 'initialize-nlinum)
-	      (defadvice make-frame (around toggle-nlinum-mode compile activate)
-		(nlinum-mode -1) ad-do-it (nlinum-mode 1)))
-	    (add-hook 'prog-mode-hook 'nlinum-mode)
-	    (add-hook 'text-mode-hook 'nlinum-mode)
-	    ))
+
+;;; Use default line-number-mode instead of nlinum of linum (require Emacs >= 26).
+(setq-default display-line-numbers-width 2)
+(setq display-line-numbers-current-absolute t)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
 ;; number of characters until the fill column
 (setq fill-column 80)
 ;; show the current line and column numbers in the stats bar as well
