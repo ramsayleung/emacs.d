@@ -69,9 +69,11 @@
 					    ("8sa" "samray")
  					    ))
 
-;;; remove blank line in buffer
+;;; disable `ad-handle-definition: ‘bookmark-jump’ got redefined` warning.
+(setq ad-redefinition-action 'accept)
+
 (defun samray/delete-blank-line-in-buffer ()
-  "As function definition."
+  "Delete blank line in this buffer from current cursor to the end of buffer."
   (interactive)
   (flush-lines "^$"))
 
@@ -79,7 +81,6 @@
 (defun samray/indent-buffer()
   (interactive)
   (indent-region (point-min)(point-max)))
-
 (defun samray/indent-region-or-buffer()
   "Indent selected region or a whole buffer."
   (interactive)
@@ -91,7 +92,6 @@
       (progn
 	(samray/indent-buffer)
 	(message "Indented buffer")))))
-
 ;; enable hippie-mode to enhance auto-completion
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
 					 try-expand-dabbrev-all-buffers
@@ -104,15 +104,12 @@
 					 try-complete-lisp-symbol-partially
 					 try-complete-lisp-symbol
 					 ))
-
-
 ;;; remove windows end-of-line delimiter
 (defun remove-dos-eol ()
   "Remove dos/windows eol."
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t)(replace-match "")))
-
 ;; dwim=do what i mean
 (defun occur-dwim()
   "Call `occur` with a sane default"
@@ -126,7 +123,6 @@
 	      (regexp-quote sym))))
 	regexp-history)
   (call-interactively 'occur))
-
 (defun samray/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the;
 current window."
@@ -144,7 +140,6 @@ current window."
                      (mapcar #'car (window-prev-buffers window)))
          ;; `other-buffer' honors `buffer-predicate' so no need to filter
          (other-buffer current-buffer t)))))
-
 ;; from magnars https://github.com/magnars
 (defun samray/rename-current-buffer-file ()
   "Renames current buffer and file it is visiting."
@@ -171,13 +166,10 @@ current window."
                (when (and(projectile-project-p))
                  (call-interactively #'projectile-invalidate-cache))
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
-
 (defun samray/delete-file (filename &optional ask-user)
   "Remove specified file or directory.
-
 Also kills associated buffer (if any exists) and invalidates
 projectile cache when it's possible.
-
 When ASK-USER is non-nil, user will be asked to confirm file
 removal."
   (interactive "f")
@@ -191,7 +183,6 @@ removal."
       (when (and (configuration-layer/package-usedp 'projectile)
                  (projectile-project-p))
         (call-interactively #'projectile-invalidate-cache)))))
-
 ;; from magnars
 (defun samray/delete-current-buffer-file ()
   "Remove file connected to current buffer and kills buffer."
@@ -207,7 +198,6 @@ removal."
         (when (projectile-project-p)
           (call-interactively #'projectile-invalidate-cache))
         (message "File '%s' successfully removed" filename)))))
-
 ;; from magnars
 (defun samray/sudo-edit (&optional arg)
   (interactive "p")
@@ -228,7 +218,6 @@ removal."
                 (insert (format "|sudo:%s" (or last-ssh-hostname "localhost"))))
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
-
 (defun samray/toggle-maximize-buffer ()
   "Maximize buffer"
   (interactive)
@@ -238,7 +227,6 @@ removal."
     (progn
       (window-configuration-to-register ?_)
       (delete-other-windows))))
-
 ;;; http://blog.binchen.org/posts/open-readme-under-git-root-directory-in-emacs.html
 (defun samray/open-readme-in-git-root-directory ()
   "Open README file at the root directory of my project."
@@ -257,13 +245,11 @@ removal."
         (switch-to-buffer (find-file-noselect filename nil nil))
       (message "NO README.org or README.md found!"))
     ))
-
 (defun samray/copy-current-file-sans-extension ()
   "Copy current file without extension."
   (interactive)
   (kill-new (file-name-sans-extension (buffer-name)))
   )
-
 (defun samray/dired-tmp-dir ()
   "Open tmp directory."
   (interactive)
