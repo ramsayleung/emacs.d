@@ -6,6 +6,8 @@
 (use-package clang-format
   :ensure t
   :commands (clang-format-region clang-format-buffer)
+  :config (progn
+	    (setq clang-format-style "google"))
   )
 
 ;;; Google C style

@@ -1,9 +1,10 @@
-;; package --- Summary
+					; package --- Summary
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
 ;;; User Interface ;;;
 ;;;----------------;;;
+
 
 ;;;ignore case when searching
 (setq case-fold-search t)
@@ -50,7 +51,7 @@
   :defer t
   :init (progn
 	  (golden-ratio-mode 1)
-	  (setq golden-ratio-auto-scale t)
+	  ;; (setq golden-ratio-auto-scale t)
 	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "gud-mode")
@@ -92,6 +93,11 @@ This code toggles between them."
   (tool-bar-mode -1)
   ;; turn off file scroll bar
   (scroll-bar-mode -1)
+  ;; turn off title bar
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
+  (setq ns-use-proxy-icon nil)
+  (setq frame-title-format nil)
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
@@ -120,6 +126,10 @@ This code toggles between them."
   (run-hooks 'after-load-theme-hook))
 (add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
 (add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
+(add-hook 'after-load-theme-hook (lambda ()
+				   ;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
+				   (set-face-foreground 'hl-line nil)
+				   ))
 
 ;; no menubar
 (menu-bar-mode -1)
@@ -151,7 +161,7 @@ This code toggles between them."
 ;;  Cursor  ;;
 ;;----------;;
 ;; highlight current line
-(global-hl-line-mode t)
+(global-hl-line-mode 1)
 ;; (setq highlight-current-line-globally t)
 ;; (setq highlight-current-line-high-faces nil)
 ;; (setq highlight-current-line-whole-line nil)
@@ -170,10 +180,10 @@ This code toggles between them."
 ;;  Color Theme  ;;
 ;;---------------;;
 
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :defer t
-  )
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :ensure t
+;;   :defer t
+;;   )
 
 (use-package zenburn-theme
   :ensure t
@@ -194,7 +204,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
+(defvar samray-theme-list '(zenburn manoj-dark))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -281,20 +291,23 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;; item of time-themes-table: ( hours-in-string . theme-name)
 ;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
 ;; you could add more items.
-(samray/config-time-themes-table '(("6" . zenburn) ("18" . sanityinc-tomorrow-eighties) ))
+(samray/config-time-themes-table '(("6" . zenburn) ("18" . manoj-dark) ))
 ;; (samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;
 ;;---------------;;
 
+(cond ((eq system-type 'gnu/linux)
+       (defvar samray-font-list '("Fantasque Sans Mono-14:weight=medium:slant=italic" )))
+      ((eq system-type 'darwin)
+       (defvar samray-font-list '("Fantasque Sans Mono-14:weight=medium:slant=italic" )))
+      ((eq system-type 'windows-nt)
+       (defvar samray-font-list '("Consolas-13"))))
+(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+
 (defun samray/font-exists-p (font)
   "Check if FONT exists."
-  (when window-system
-    (if (null (x-list-fonts font)) nil t)))
-(if(eq system-type 'windows-nt)
-    (defvar samray-font-list '("Consolas-13"))
-  (defvar samray-font-list '("Consolas-13" "FantasqueSansMono-12:weight=medium:slant=italic"))
-  )
+  (member font (font-family-list)))
 
 (defun samray/cycle-font ()
   "Cycle through a list of fonts,samray-font-list."
@@ -302,15 +315,10 @@ then check whether EMACS should to modify theme, if so, modify it."
   (when samray-current-font
     (setq samray-font-list (append samray-font-list (list samray-current-font))))
   (let ((current-font (pop samray-font-list)))
-    (when (not (samray/font-exists-p current-font))
-      (setq current-font (pop samray-font-list)))
+    ;; (when (not (samray/font-exists-p current-font))
+    (setq current-font (pop samray-font-list))
+    ;; )
     (setq samray-current-font current-font)
-    (cond ((eq system-type 'gnu/linux)
-	   (set-frame-font samray-current-font))
-	  ((eq system-type 'darwin)
-	   (set-frame-font samray-current-font))
-	  ((eq system-type 'windows-nt)
-	   (set-frame-font samray-current-font)))
     )
   )
 

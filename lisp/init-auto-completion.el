@@ -82,7 +82,10 @@
 			 (lambda () (add-to-list 'company-backends 'company-c-headers))
 			 )
 	       (add-hook 'c++-mode-hook
-			 (lambda () (add-to-list 'company-backends 'company-c-headers)))
+			 (lambda ()
+			   (setq company-c-headers-path-system '("/usr/include/c++/4.2.1" "/usr/include" "/usr/local/include"))
+			   (add-to-list 'company-backends 'company-c-headers))
+			 )
 	       )
   )
 ;;; backends for irony

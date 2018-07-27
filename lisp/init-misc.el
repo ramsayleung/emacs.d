@@ -58,6 +58,12 @@
 (setq abbrev-mode 'silently)
 (setq save-abbrevs t)
 
+;;; Always start Emacs daemon when starts up.
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+
 (defadvice bookmark-jump (after bookmark-jump activate)
   "Find frequently used bookmarks easily."
   (let ((latest (bookmark-get-bookmark bookmark)))
