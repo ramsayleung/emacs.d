@@ -10,6 +10,7 @@
   :config (progn
 	    (add-hook 'python-mode-hook 'lsp-mode)
 	    (add-hook 'rust-mode-hook 'lsp-mode)
+
 	    (set-face-attribute 'lsp-face-highlight-textual nil
 				:background "#666" :foreground "#ffffff"
 				)
@@ -34,8 +35,8 @@
 	    ;; It seems that sideline-mode has a bug, just disable it
   	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 	    ;; bind peek key
-	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-references)
-	    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
+	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 	    (setq
 	     lsp-ui-sideline-enable nil
 	     lsp-enable-eldoc nil)
@@ -45,10 +46,16 @@
 (use-package cquery
   :ensure t
   :config (progn
-	    (add-hook 'c-mode-hook 'lsp-cquery-enable)
-	    (add-hook 'c++-mode-hook 'lsp-cquery-enable)
+	    (with-eval-after-load 'company-lsp
+	      (add-hook 'c-mode-hook 'lsp-ccls-enable)
+	      (add-hook 'c++-mode-hook 'lsp-ccls-enable)
+	      )
+	    ;; (require 'company-lsp)
+	    ;; (add-hook 'c-mode-hook 'lsp-cquery-enable)
+	    ;; (add-hook 'c++-mode-hook 'lsp-cquery-enable)
 	    ;; ;; Arch Linux aur/cquery-git aur/cquery
-	    (setq cquery-executable "/home/samray/bin/cquery-v20180302-x86_64-unknown-linux-gnu/bin/cquery")
+	    (setq cquery-executable "/home/samray/Public/git/cquery/Release/cquery")
+	    ;; (setq cquery-executable "~/bin/cquery-v20180302-x86_64-unknown-linux-gnu/bin/cquery")
 	    ;; ;; Log file
 	    (setq cquery-extra-args '("--log-file=/tmp/cq.log"))
 	    ;; Cache directory, both relative and absolute paths are supported
@@ -56,18 +63,5 @@
 	    ;; Initialization options
 	    (setq cquery-extra-init-params '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))
 	    ))
-
-;; (use-package ccls
-;;   :ensure t
-;;   :config
-;;   (progn
-;;     (add-hook 'c-mode-hook 'lsp-ccls-enable)
-;;     (add-hook 'c++-mode-hook 'lsp-ccls-enable)
-;;     (setq ccls-executable "/home/samray/code/cpp/ccls/release/ccls")
-;;     (setq ccls-sem-highlight-method 'font-lock)
-;;     (setq ccls-extra-init-params
-;; 	  '(:completion (:detailedLabel t) :xref (:container t)
-;; 			:diagnostics (:frequencyMs 5000))
-;; 	  )))
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

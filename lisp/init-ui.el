@@ -120,6 +120,8 @@ This code toggles between them."
   (run-hooks 'after-load-theme-hook))
 (add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
 (add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
+(add-hook 'after-load-theme-hook (lambda ()
+				   (set-face-foreground 'hl-line nil)))
 
 ;; no menubar
 (menu-bar-mode -1)
@@ -170,10 +172,6 @@ This code toggles between them."
 ;;  Color Theme  ;;
 ;;---------------;;
 
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :defer t
-  )
 
 (use-package zenburn-theme
   :ensure t
@@ -194,7 +192,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn sanityinc-tomorrow-eighties))
+(defvar samray-theme-list '(zenburn manoj-dark))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -281,7 +279,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;; item of time-themes-table: ( hours-in-string . theme-name)
 ;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
 ;; you could add more items.
-(samray/config-time-themes-table '(("6" . zenburn) ("18" . sanityinc-tomorrow-eighties) ))
+(samray/config-time-themes-table '(("6" . zenburn) ("18" . manoj-dark) ))
 ;; (samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;

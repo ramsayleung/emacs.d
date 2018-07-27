@@ -68,6 +68,9 @@
 					    ;; signature
 					    ("8sa" "samray")
  					    ))
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;;; disable `ad-handle-definition: ‘bookmark-jump’ got redefined` warning.
 (setq ad-redefinition-action 'accept)

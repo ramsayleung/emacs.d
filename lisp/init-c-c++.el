@@ -6,6 +6,9 @@
 (use-package clang-format
   :ensure t
   :commands (clang-format-region clang-format-buffer)
+  :init (progn
+	  (setq clang-format-style-option "google")
+	  )
   )
 
 ;;; Google C style
@@ -37,12 +40,12 @@
 (defun samray/g++-compile-and-run ()
   "Compile cpp with g++ and run it."
   (interactive)
-  (samray/compile-with-command-and-run "g++")
+  (samray/compile-with-command-and-run "g++ -std=c++17 -g")
   )
 (defun samray/gcc-compile-and-run ()
   "Compile c with gcc and run it."
   (interactive)
-  (samray/compile-with-command-and-run "gcc")
+  (samray/compile-with-command-and-run "gcc -std=c99 -g")
   )
 
 (defvar samray-default-compile-command "make -k")
