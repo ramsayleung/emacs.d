@@ -6,9 +6,9 @@
 (use-package clang-format
   :ensure t
   :commands (clang-format-region clang-format-buffer)
-  :init (progn
-	  (setq clang-format-style-option "google")
-	  )
+  :config (progn
+	    (setq clang-format-style-option "google")
+	    )
   )
 
 ;;; Google C style
@@ -37,18 +37,24 @@
   (compile "make clean")
   )
 
-(defun samray/g++-compile-and-run ()
-  "Compile cpp with g++ and run it."
-  (interactive)
-  (samray/compile-with-command-and-run "g++ -std=c++17 -g")
-  )
-(defun samray/gcc-compile-and-run ()
-  "Compile c with gcc and run it."
-  (interactive)
-  (samray/compile-with-command-and-run "gcc -std=c99 -g")
+(defvar samray-default-g++-compile-command "g++ -std=c++17 -g")
+(defvar samray-default-gcc-compile-command "g++ -std=c99 -g")
+(defvar samray-default-compile-command "make -k")
+
+(defun samray/g++-compile-and-run (command)
+  "Compile cpp with g++ and run it with COMMAND."
+  (interactive
+   (list (read-string (format "compile and run command [default: %s]: " samray-default-g++-compile-command) nil nil samray-default-g++-compile-command)))
+  (samray/compile-with-command-and-run command)
   )
 
-(defvar samray-default-compile-command "make -k")
+(defun samray/gcc-compile-and-run (command)
+  "Compile c with gcc and run it COMMAND."
+  (interactive
+   (list (read-string (format "compile and run command [default: %s]: " samray-default-gcc-compile-command) nil nil samray-default-gcc-compile-command)))
+  (samray/compile-with-command-and-run command)
+  )
+
 (defun samray/compile (command)
   "Compile with input COMMAND or samray-default-compile-command."
   (interactive

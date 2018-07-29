@@ -4,17 +4,11 @@
 ;;; Commentary:
 ;;; Code:
 (use-package lsp-mode
-  ;; :ensure t
-  ;; :defer t
-  :load-path "~/code/elisp/lsp-mode"
+  :ensure t
   :config (progn
-	    (add-hook 'python-mode-hook 'lsp-mode)
-	    (add-hook 'rust-mode-hook 'lsp-mode)
-
 	    (set-face-attribute 'lsp-face-highlight-textual nil
 				:background "#666" :foreground "#ffffff"
 				)
-	    (setq lsp-prompt-project-root t)
 	    ))
 
 (use-package lsp-python
@@ -43,25 +37,35 @@
   	    )
   )
 ;; ;;; cquery cpp
-(use-package cquery
+;; (use-package cquery
+;;   :ensure t
+;;   :config (progn
+;; 	    (require 'company-lsp)
+;; 	    (add-hook 'c-mode-hook 'lsp-cquery-enable)
+;; 	    (add-hook 'c++-mode-hook 'lsp-cquery-enable)
+;; 	    ;; ;; Arch Linux aur/cquery-git aur/cquery
+;; 	    (setq cquery-executable "/home/samray/Public/git/cquery/Release/cquery")
+;; 	    ;; (setq cquery-executable "~/bin/cquery-v20180302-x86_64-unknown-linux-gnu/bin/cquery")
+;; 	    ;; ;; Log file
+;; 	    (setq cquery-extra-args '("--log-file=/tmp/cq.log"))
+;; 	    ;; Cache directory, both relative and absolute paths are supported
+;; 	    (setq cquery-cache-dir ".cquery_cached_index")
+;; 	    ;; Initialization options
+;; 	    (setq cquery-extra-init-params '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))
+;; 	    ))
+
+(use-package ccls
   :ensure t
-  :config (progn
-	    (with-eval-after-load 'company-lsp
-	      (add-hook 'c-mode-hook 'lsp-ccls-enable)
-	      (add-hook 'c++-mode-hook 'lsp-ccls-enable)
-	      )
-	    ;; (require 'company-lsp)
-	    ;; (add-hook 'c-mode-hook 'lsp-cquery-enable)
-	    ;; (add-hook 'c++-mode-hook 'lsp-cquery-enable)
-	    ;; ;; Arch Linux aur/cquery-git aur/cquery
-	    (setq cquery-executable "/home/samray/Public/git/cquery/Release/cquery")
-	    ;; (setq cquery-executable "~/bin/cquery-v20180302-x86_64-unknown-linux-gnu/bin/cquery")
-	    ;; ;; Log file
-	    (setq cquery-extra-args '("--log-file=/tmp/cq.log"))
-	    ;; Cache directory, both relative and absolute paths are supported
-	    (setq cquery-cache-dir ".cquery_cached_index")
-	    ;; Initialization options
-	    (setq cquery-extra-init-params '(:index (:comments 2) :cacheFormat "msgpack" :completion (:detailedLabel t)))
-	    ))
+  :config(progn
+	   (require 'company-lsp)
+	   (add-hook 'c-mode-hook 'lsp-ccls-enable)
+	   (add-hook 'c++-mode-hook 'lsp-ccls-enable)
+	   (setq ccls-executable "/home/samray/code/cpp/ccls/Release/ccls")
+	   (setq ccls-sem-highlight-method 'font-lock)
+	   (setq ccls-extra-init-params
+		 '(:completion (:detailedLabel t) :xref
+			       (:container t)
+			       :diagnostics (:frequencyMs 5000))
+		 )))
 (provide 'init-lsp)
 ;;; init-lsp.el ends here
