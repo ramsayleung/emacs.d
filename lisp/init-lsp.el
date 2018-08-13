@@ -9,7 +9,7 @@
   :config (progn
 	    (set-face-attribute 'lsp-face-highlight-textual nil
 				:background "#666" :foreground "#ffffff")
-	    (setq lsp-message-project-root-warning nil)
+	    (setq lsp-message-project-root-warning t)
 	    ))
 
 (use-package lsp-python
