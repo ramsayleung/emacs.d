@@ -30,8 +30,7 @@
 	    ;; It seems that sideline-mode has a bug, just disable it
   	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 	    ;; bind peek key
-	    (define-key lsp-ui-mode-map (kbd "M-.") #'xref-find-definitions)
-	    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
 	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 	    (setq
 	     lsp-ui-sideline-enable nil
@@ -41,15 +40,16 @@
 
 (use-package ccls
   :ensure t
-  :config
-  (progn
-    (add-hook 'c-mode-hook 'lsp-ccls-enable)
-    (add-hook 'c++-mode-hook 'lsp-ccls-enable)
-    (setq ccls-executable "/home/samray/code/cpp/ccls/release/ccls")
-    (setq ccls-sem-highlight-method 'font-lock)
-    (setq ccls-extra-init-params
-	  '(:completion (:detailedLabel t) :xref (:container t)
-			:diagnostics (:frequencyMs 5000))
-	  )))
+  :config(progn
+	   (require 'company-lsp)
+	   (add-hook 'c-mode-hook 'lsp-ccls-enable)
+	   (add-hook 'c++-mode-hook 'lsp-ccls-enable)
+	   (setq ccls-executable "/home/samray/code/cpp/ccls/Release/ccls")
+	   (setq ccls-sem-highlight-method 'font-lock)
+	   (setq ccls-extra-init-params
+		 '(:completion (:detailedLabel t) :xref
+			       (:container t)
+			       :diagnostics (:frequencyMs 5000))
+		 )))
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

@@ -180,10 +180,6 @@ This code toggles between them."
 ;;  Color Theme  ;;
 ;;---------------;;
 
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :ensure t
-;;   :defer t
-;;   )
 
 (use-package zenburn-theme
   :ensure t

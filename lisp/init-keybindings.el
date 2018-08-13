@@ -388,8 +388,6 @@
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
-	     [remap evil-repeat-pop-next] 'xref-find-definitions
-	     "M-." 'xref-find-definitions
 	     "C-k" 'sp-kill-hybrid-sexp
 	     "C-s" 'counsel-grep-or-swiper
 	     "C-c a" 'org-agenda

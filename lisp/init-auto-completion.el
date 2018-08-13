@@ -78,15 +78,17 @@
 (use-package company-c-headers
   :ensure t
   :defer t
-  :init (progn (add-hook 'c-mode-hook
-			 (lambda () (add-to-list 'company-backends 'company-c-headers))
-			 )
-	       (add-hook 'c++-mode-hook
-			 (lambda ()
-			   (setq company-c-headers-path-system '("/usr/include/c++/4.2.1" "/usr/include" "/usr/local/include"))
-			   (add-to-list 'company-backends 'company-c-headers))
-			 )
-	       )
+  :init (progn
+	  (setq company-c-headers-path-system '("/usr/include/c++/4.2.1" "/usr/include" "/usr/local/include"))
+	  ;; (setq company-c-headers-path-system '("/usr/include/c++/7" "/usr/include" "/usr/local/include"))
+	  (add-hook 'c-mode-hook
+		    (lambda () (add-to-list 'company-backends 'company-c-headers))
+		    )
+	  (add-hook 'c++-mode-hook
+		    (lambda ()
+		      (add-to-list 'company-backends 'company-c-headers)
+		      ))
+	  )
   )
 ;;; backends for irony
 (use-package company-irony
