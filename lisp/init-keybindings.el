@@ -6,7 +6,7 @@
   :ensure t
   :config (progn
 	    (general-evil-setup t)
-	    (defvar samray/leader-key "SPC")
+	    (defvar samray/leader-key "SPC") ;
 	    (defvar samray/second-leader-key "/")
 	    (general-define-key :states '(normal visual motion )
 				:prefix samray/leader-key
@@ -377,10 +377,10 @@
 				"g t"            'pdf-view-goto-page
 				)
 
-	    (general-nvmap
-	      "Y" 'samray/copy-to-end-of-line
-	      "(" 'paredit-open-round
-	      )
+	    ;; (general-nvmap
+	    ;;   "Y" 'samray/copy-to-end-of-line
+	    ;;   "(" 'paredit-open-round
+	    ;;   )
 	    (general-define-key :keymaps 'read-expression-map
 				"C-r" 'counsel-expression-history)
 

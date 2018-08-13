@@ -102,7 +102,7 @@
   :mode ("\\.rest\\'" . restclient-mode))
 
 ;;; Evil is not especilly useful in the terminal,so
-(evil-set-initial-state 'term-mode 'emacs)
+;; (evil-set-initial-state 'term-mode 'emacs)
 
 (use-package symbol-overlay
   :ensure t

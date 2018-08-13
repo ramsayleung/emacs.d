@@ -41,7 +41,7 @@
 ;; improved Javascript editing mode
 (use-package js2-mode
   :ensure t
-  :mode ("\\.js\\'" . js2-mode)
+  ;; :mode ("\\.js\\'" . js2-mode)
   :init
   (add-hook 'js2-mode-hook 'js2-refactor-mode)
   (add-hook 'js2-mode-hook (lambda ()
@@ -75,6 +75,16 @@
 
 (use-package rjsx-mode
   :ensure t
+  :mode ("\\.js\\'" . rjsx-mode)
+  :config (progn
+
+	    (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+	    (with-eval-after-load 'rjsx-mode
+	      (setq emmet-expand-jsx-className? t)
+	      (define-key rjsx-mode-map "<" nil)
+	      (define-key rjsx-mode-map (kbd "C-d") nil)
+	      (define-key rjsx-mode-map ">" nil))
+	    )
   )
 
 ;;; live web development with Emacs
@@ -102,7 +112,10 @@
   :init (progn
 	  (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 	  (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+	  (add-hook 'js2-mode-hook 'emmet-mode)
+	  (add-hook 'rjsx-mode-hook 'emmet-mode)
 	  ))
+
 (defun xah-syntax-color-hex ()
   "Syntax color text of the form 「#ff1100」 and 「#abc」 in current buffer.
 URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
