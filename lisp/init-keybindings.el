@@ -709,8 +709,8 @@ Info-mode:
   )
 (add-hook 'eshell-mode-hook
           (lambda ()
-	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-r")] #'samray/esh-history)
-            (define-key eshell-mode-map (kbd "C-r") #'samray/esh-history)
+	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-r")] #'samray/esh-history)
+	    (define-key eshell-mode-map (kbd "C-c C-r") #'samray/esh-history)
 	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/eshell-clear-buffer)
 	    (define-key eshell-mode-map (kbd "C-c C-l") #'samray/eshell-clear-buffer)
 	    ))
