@@ -63,13 +63,13 @@
 	  ;;   (exec-path-from-shell-initialize)
 	  ;;   )
 	  (when (memq window-system '(mac ns x))
+	    (exec-path-from-shell-initialize))
 	    (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
 	    ;; when it is nil, exec-path-from-shell will read environment variable
 	    ;; from .zshenv instead of .zshrc, but makes sure that you put all
 	    ;; environment variable you need in .zshenv rather than .zshrc
 	    (setq exec-path-from-shell-check-startup-files nil) ;
 	    (setq exec-path-from-shell-arguments '("-l" )) ;remove -i read form .zshenv
-	    (exec-path-from-shell-initialize))
 	  )
   )
 
@@ -102,7 +102,7 @@
   :mode ("\\.rest\\'" . restclient-mode))
 
 ;;; Evil is not especilly useful in the terminal,so
-(evil-set-initial-state 'term-mode 'emacs)
+;; (evil-set-initial-state 'term-mode 'emacs)
 
 (use-package symbol-overlay
   :ensure t

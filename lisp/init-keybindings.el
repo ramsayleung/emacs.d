@@ -6,7 +6,7 @@
   :ensure t
   :config (progn
 	    (general-evil-setup t)
-	    (defvar samray/leader-key "SPC")
+	    (defvar samray/leader-key "SPC") ;
 	    (defvar samray/second-leader-key "/")
 	    (general-define-key :states '(normal visual motion )
 				:prefix samray/leader-key
@@ -377,10 +377,10 @@
 				"g t"            'pdf-view-goto-page
 				)
 
-	    (general-nvmap
-	      "Y" 'samray/copy-to-end-of-line
-	      "(" 'paredit-open-round
-	      )
+	    ;; (general-nvmap
+	    ;;   "Y" 'samray/copy-to-end-of-line
+	    ;;   "(" 'paredit-open-round
+	    ;;   )
 	    (general-define-key :keymaps 'read-expression-map
 				"C-r" 'counsel-expression-history)
 
@@ -709,8 +709,8 @@ Info-mode:
   )
 (add-hook 'eshell-mode-hook
           (lambda ()
-	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-r")] #'samray/esh-history)
-            (define-key eshell-mode-map (kbd "C-r") #'samray/esh-history)
+	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-r")] #'samray/esh-history)
+	    (define-key eshell-mode-map (kbd "C-c C-r") #'samray/esh-history)
 	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/eshell-clear-buffer)
 	    (define-key eshell-mode-map (kbd "C-c C-l") #'samray/eshell-clear-buffer)
 	    ))

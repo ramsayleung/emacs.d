@@ -79,7 +79,8 @@
   :ensure t
   :defer t
   :init (progn
-	  (setq company-c-headers-path-system '("/usr/include/c++/7" "/usr/include" "/usr/local/include"))
+	  (setq company-c-headers-path-system '("/usr/include/c++/4.2.1" "/usr/include" "/usr/local/include"))
+	  ;; (setq company-c-headers-path-system '("/usr/include/c++/7" "/usr/include" "/usr/local/include"))
 	  (add-hook 'c-mode-hook
 		    (lambda () (add-to-list 'company-backends 'company-c-headers))
 		    )
