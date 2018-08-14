@@ -23,6 +23,7 @@
 (use-package popwin
   :ensure t
   :config (progn
+
 	    (popwin-mode t)
 	    (push '(compilation-mode :noselect t) popwin:special-display-config)
 	    (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
@@ -177,6 +178,9 @@ This code toggles between them."
   :ensure t
   :defer t
   )
+(use-package spacemacs-theme
+  :ensure t
+  :defer t)
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
@@ -192,7 +196,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn manoj-dark))
+(defvar samray-theme-list '(zenburn spacemacs-dark))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -206,6 +210,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 ;; Switch to the first theme in the list above
 (add-hook 'after-init-hook #'samray/cycle-theme)
+(add-hook 'after-init-hook #'samray/cycle-font)
 
 ;; ====================================Themes automatically change =====================================
 ;;timer for automatically changing themes
@@ -279,7 +284,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;; item of time-themes-table: ( hours-in-string . theme-name)
 ;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
 ;; you could add more items.
-(samray/config-time-themes-table '(("6" . zenburn) ("18" . manoj-dark) ))
+(samray/config-time-themes-table '(("6" . zenburn) ("18" . spacemacs-dark) ))
 ;; (samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;
@@ -312,23 +317,6 @@ then check whether EMACS should to modify theme, if so, modify it."
     )
   )
 
-;;; switch to the first font in the list above
-(if (eq system-type 'windows-nt)
-    (progn
-      (set-face-attribute
-       'default nil :font "Consolas-13:weight=medium:slant=italic")
-      ;; Chinese Font 配制中文字体
-      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-	(set-fontset-font (frame-parameter nil 'font)
-			  charset
-			  (font-spec :family "微软雅黑" :size 14))))
-  (progn
-    (samray/cycle-font)
-    (when window-system
-      (dolist (charset '(kana han cjk-misc bopomofo))
-	(set-fontset-font (frame-parameter nil 'font) charset
-			  (font-spec :name "WenQuanYi Zen Hei" :size 14 :slant 'italic))))
-    ))
 ;;----------------;;
 ;;Major/Minor Mode;;
 ;;----------------;;

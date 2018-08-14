@@ -55,6 +55,7 @@
   (("M-n" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
    ("C-c C-;" . pyim-delete-word-from-personal-buffer)))
 
+
 (defun samray/delete-whitespace-between-english-and-chinese-char ()
   "Because the chinese input method i use,i will left whitespace between letter;
 and chinese char,so just delete it"
@@ -171,17 +172,17 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
 
 [EXTRA]
 "
-                 ("\\chapter{%s}" . "\\chapter*{%s}")
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+               ("\\chapter{%s}" . "\\chapter*{%s}")
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 ;; \\usepackage[slantfont, boldfont]{xeCJK}
-  (add-to-list 'org-latex-classes
-               '("samray-org-article"
-                 "\\documentclass{article}
+(add-to-list 'org-latex-classes
+             '("samray-org-article"
+               "\\documentclass{article}
 \\usepackage[CJKspace]{xeCJK}
 \\usepackage{titlesec}
 \\usepackage{minted}
@@ -228,15 +229,15 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
 
 [EXTRA]
 "
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-  (add-to-list 'org-latex-classes
-               '("samray-org-beamer"
-                 "\\documentclass{beamer}
+(add-to-list 'org-latex-classes
+             '("samray-org-beamer"
+               "\\documentclass{beamer}
 \\usepackage[slantfont, boldfont]{xeCJK}
 % beamer set
 \\usepackage{minted}
@@ -284,18 +285,18 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
 
 [EXTRA]
 "
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-  ;; (setq org-latex-pdf-process
-  ;;       '("xelatex -interaction nonstopmode -output-directory %o %f"
-  ;;         ;;"biber %b" "xelatex -interaction nonstopmode -output-directory %o %f"
-  ;;         "bibtex %b"
-  ;;         "xelatex -interaction nonstopmode -output-directory %o %f"
-  ;;         "xelatex -interaction nonstopmode -output-directory %o %f"))
+;; (setq org-latex-pdf-process
+;;       '("xelatex -interaction nonstopmode -output-directory %o %f"
+;;         ;;"biber %b" "xelatex -interaction nonstopmode -output-directory %o %f"
+;;         "bibtex %b"
+;;         "xelatex -interaction nonstopmode -output-directory %o %f"
+;;         "xelatex -interaction nonstopmode -output-directory %o %f"))
 
 ;; 在创建 org-mode buffer, 自动添加 latex class 解决生成中文pdf 问题
 (eval-after-load 'autoinsert
