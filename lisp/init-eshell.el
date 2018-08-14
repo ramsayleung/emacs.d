@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; package --- Summary -*- lexical-binding: t; -*-
 ;;; code:
 ;;; Commentary:
 
@@ -10,6 +10,7 @@
     (eshell-bol)
     (if (= p (point))
 	(beginning-of-line))))
+
 (defun samray/eshell-sudo-toggle ()
   "Add/Remove sudo in the begining of command line."
   (interactive)
@@ -25,29 +26,60 @@
 	  (eshell-bol)
 	  (insert "sudo ")
 	  )))))
+;;; Inspire by http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
+(defun samray/parse-bash-history ()
+  "Parse the bash history."
+  (interactive)
+  (let (collection bash_history)
+    (shell-command "history -r") ; reload history
+    (setq collection
+          (nreverse
+           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
+                                           (buffer-string))
+                         "\n"
+                         t)))
+    (when (and collection (> (length collection) 0)
+               (setq bash_history collection))
+      bash_history)))
+
+(defun samray/parse-zsh-history ()
+  "Parse the bash history."
+  (interactive)
+  (let (collection zsh_history)
+    (shell-command "history -r") ; reload history
+    (setq collection
+          (nreverse
+           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.zsh_history"))
+                                           (replace-regexp-in-string "^:[^;]*;" "" (buffer-string)))
+                         "\n"
+                         t)))
+    (when (and collection (> (length collection) 0)
+               (setq zsh_history collection))
+      zsh_history)))
 
 (defun samray/esh-history ()
   "Interactive search eshell history."
   (interactive)
   (require 'em-hist)
   (save-excursion
-    (let*
-	((start-pos (eshell-beginning-of-input))
-	 (input (eshell-get-old-input))
-	 (end-pos (+ start-pos (length input))))
+    (let* ((start-pos (eshell-beginning-of-input))
+	   (input (eshell-get-old-input))
+	   (esh-history (when (> (ring-size eshell-history-ring) 0)
+			  (ring-elements eshell-history-ring)))
+	   (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
+	   )
       (let* ((command (ivy-read "Command: "
-				(delete-dups
-				 (when (> (ring-size eshell-history-ring) 0)
-				   (ring-elements eshell-history-ring)))
+				(delete-dups all-shell-history)
 				:initial-input input
 				:require-match t
 				:action #'ivy-completion-in-region-action))
 	     )
-	(delete-region start-pos end-pos)
+	(eshell-kill-input)
+	(insert command)
 	)))
   ;; move cursor to eol
-  (end-of-line)
-  )
+  (end-of-line))
+
 
 (defun samray/eshell-clear-buffer ()
   "Clear terminal."
