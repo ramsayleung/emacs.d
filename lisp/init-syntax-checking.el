@@ -26,5 +26,10 @@
 			   (setq flycheck-clang-language-standard "c++14")
 			   (setq irony-additional-clang-options '("-std=c++14"))
 			   ))
+(use-package flycheck-posframe
+  :ensure t
+  :after flycheck
+  :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+
 (provide 'init-syntax-checking)
 ;;; init-syntax-checking.el ends here

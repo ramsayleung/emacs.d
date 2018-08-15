@@ -473,8 +473,9 @@
 
   ;; Emacs Lisp mode
   (general-define-key :keymaps 'emacs-lisp-mode-map
-		      "C-M-g" 'xref-find-definitions
-		      "C-M-b" 'xref-pop-marker-stack)
+		      [remap evil-repeat-pop-next] 'xref-find-definitions
+		      "M-." 'xref-find-definitions
+		      "M-," 'xref-pop-marker-stack)
   (general-emacs-define-key 'global
     "C-v" 'evil-scroll-down
     "M-v" 'evil-scroll-up)

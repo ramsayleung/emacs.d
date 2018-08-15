@@ -8,6 +8,7 @@
   )
 (use-package swiper
   :ensure t)
+
 (use-package smex
   :ensure t)
 
@@ -15,18 +16,34 @@
   :commands (avy-goto-char avy-goto-line)
   :ensure t)
 
+(use-package ivy-posframe
+  :ensure t
+  :config (progn
+	    ;; (setq ivy-display-function #'ivy-posframe-display)
+	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
+	    ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
+	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
+	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
+	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
+	    (ivy-posframe-enable)
+	    ))
+
+
 (use-package ivy
   :ensure t
   :diminish ivy-mode
   :init (progn
+	  (setq ivy-use-selectable-prompt t)
 	  (setq ivy-re-builders-alist
 		'((t . ivy--regex-plus)))
 	  (setq ivy-initial-inputs-alist nil)
 	  )
   :config
   (ivy-mode 1)
-  ;; number of result lines to display
-  (setq ivy-height 10)
+  ;; number of result lines to display, set height as width-body-height*(2/5)
+  (add-hook 'window-configuration-change-hook (lambda ()
+						(setq ivy-height (/ (* (window-body-height) 10) 25))
+						))
   ;; does not count candidates
   (setq ivy-count-format "")
   (defun samray/counsel-goto-recent-directory ()
