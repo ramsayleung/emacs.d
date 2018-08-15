@@ -3,6 +3,8 @@
 ;;; Commentary:
 ;;;----------------;;;
 ;;; User Interface ;;;
+
+
 ;;;----------------;;;
 
 
@@ -27,7 +29,7 @@
 
 	    (popwin-mode t)
 	    (push '(compilation-mode :noselect t) popwin:special-display-config)
-	    (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
+	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
 	    (push "*slime-apropos*" popwin:special-display-config)
 	    (push "*slime-macroexpansion*" popwin:special-display-config)
 	    (push "*slime-description*" popwin:special-display-config)
@@ -170,8 +172,8 @@ This code toggles between them."
 ;; don't blink the cursor
 (blink-cursor-mode -1)
 
-;;set the cursor shape to bar
-(setq-default cursor-type 'bar)
+;;set the cursor shape to box
+(setq-default cursor-type 'box)
 ;; make sure transient mark mode is enabled (it should be by default,
 ;; but just in case)
 (transient-mark-mode t)
@@ -296,12 +298,12 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;---------------;;
 
 (cond ((eq system-type 'gnu/linux)
-       (defvar samray-font-list '("Fantasque Sans Mono-14:weight=medium:slant=italic" )))
+       (defvar samray-font-list '("Fantasque Sans Mono-12:weight=medium:slant=italic" )))
       ((eq system-type 'darwin)
-       (defvar samray-font-list '("Fantasque Sans Mono-14:weight=medium:slant=italic" )))
+       (defvar samray-font-list '("Fantasque Sans Mono-12:weight=medium:slant=italic" )))
       ((eq system-type 'windows-nt)
        (defvar samray-font-list '("Consolas-13"))))
-(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+(set-frame-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
 
 (defun samray/font-exists-p (font)
   "Check if FONT exists."

@@ -25,6 +25,7 @@
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
 	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
+	    (setq ivy-posframe-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
 	    (ivy-posframe-enable)
 	    ))
 
@@ -37,13 +38,10 @@
 	  (setq ivy-re-builders-alist
 		'((t . ivy--regex-plus)))
 	  (setq ivy-initial-inputs-alist nil)
+	  (setq ivy-height (/ (window-body-height) 2))
 	  )
   :config
   (ivy-mode 1)
-  ;; number of result lines to display, set height as width-body-height*(2/5)
-  (add-hook 'window-configuration-change-hook (lambda ()
-						(setq ivy-height (/ (* (window-body-height) 10) 25))
-						))
   ;; does not count candidates
   (setq ivy-count-format "")
   (defun samray/counsel-goto-recent-directory ()

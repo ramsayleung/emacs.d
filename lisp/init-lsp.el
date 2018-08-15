@@ -33,6 +33,7 @@
 	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
 	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 	    (setq
+	     lsp-ui-sideline-enable nil
 	     lsp-enable-eldoc nil)
   	    )
   )

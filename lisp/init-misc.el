@@ -59,9 +59,9 @@
 (setq save-abbrevs t)
 
 ;;; Always start Emacs daemon when starts up.
-(require 'server)
-(unless (server-running-p)
-  (server-start))
+;; (require 'server)
+;; (unless (server-running-p)
+;;   (server-start))
 
 
 (defadvice bookmark-jump (after bookmark-jump activate)
@@ -74,10 +74,6 @@
 					    ;; signature
 					    ("8sa" "samray")
  					    ))
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 ;;; disable `ad-handle-definition: ‘bookmark-jump’ got redefined` warning.
 (setq ad-redefinition-action 'accept)
 
