@@ -38,7 +38,9 @@
 	  (setq ivy-re-builders-alist
 		'((t . ivy--regex-plus)))
 	  (setq ivy-initial-inputs-alist nil)
-	  (setq ivy-height (/ (window-body-height) 2))
+	  (when window-system
+	    (setq ivy-height (/ (window-body-height) 2))
+	    )
 	  )
   :config
   (ivy-mode 1)
