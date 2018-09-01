@@ -8,7 +8,7 @@
 ;;;----------------;;;
 
 
-;;;ignore case when searching
+;;; Ignore case when searching
 (setq case-fold-search t)
 
 ;;; To beautify window separator
@@ -16,6 +16,7 @@
 ;;;------------------;;;
 ;;; Windows & Frames ;;;
 ;;;------------------;;;
+
 ;; language
 ;;; always split windows horizontally rather than vertically
 ;; (setq split-height-threshold nil)
@@ -88,17 +89,18 @@ This code toggles between them."
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
 
-;; specify the fringe width for windows -- this sets the left to 10 and
+;; Specify the fringe width for windows -- this sets the left to 10 and
 ;; right fringes to 0
 (fringe-mode '(0 . 0))
 (when window-system
-  ;;turn off tool bar
+  ;; Turn off tool bar
   (tool-bar-mode -1)
-  ;; turn off file scroll bar
+  ;; Turn off file scroll bar
   (scroll-bar-mode -1)
-  ;; turn off title bar
+  ;; Turn off title bar
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
+  ;; Assuming you are using a dark theme
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (setq ns-use-proxy-icon nil)
   (setq frame-title-format nil)
 ;;; Disable mouse scrolling
@@ -108,24 +110,29 @@ This code toggles between them."
 
 ;;; Change vertical-border for terminal Emacs.
 ;;; Vertical-border in terminal is ugly, fix it.
-(set-face-inverse-video 'vertical-border nil)
-(set-face-background 'vertical-border (face-background 'vertical-border))
-;; ;; Set symbol for the border
-(set-display-table-slot standard-display-table
-                        'vertical-border
-                        (make-glyph-code ?┃))
+(if window-system
+    (progn
+      (set-face-inverse-video 'vertical-border nil)
+      (set-face-background 'vertical-border (face-background 'vertical-border))
+      ;; ;; Set symbol for the border
+      (set-display-table-slot standard-display-table
+                              'vertical-border
+                              (make-glyph-code ?┃))
+      )
+  (progn
+;;; When `scroll-bar-mode` is enabled, vertical-border is controlled implictly
+;;; by `scroll-bar-mode`.
+;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Scroll-Bars.html#Scroll-Bars
+;;; Change vertical-border for GUI Emacs.
+    (window-divider-mode)
+    (setq window-divider-default-right-width 2)
+    ))
 (defun samray/tone-down-fringes ()
   "Set the fringe colors to whatever is the background color."
   (set-face-attribute 'fringe nil
                       :foreground (face-foreground 'default)
                       :background (face-background 'default)))
 
-;;; When `scroll-bar-mode` is enabled, vertical-border is controlled implictly
-;;; by `scroll-bar-mode`.
-;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Scroll-Bars.html#Scroll-Bars
-;;; Change vertical-border for GUI Emacs.
-(window-divider-mode)
-(setq window-divider-default-right-width 2)
 
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
@@ -139,8 +146,8 @@ This code toggles between them."
   (run-hooks 'after-load-theme-hook))
 (add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
 ;; (add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
+;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 (add-hook 'after-load-theme-hook (lambda ()
-				   ;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 				   (set-face-foreground 'hl-line nil)
 				   ))
 
@@ -159,7 +166,8 @@ This code toggles between them."
 ;; show the current line and column numbers in the stats bar as well
 (line-number-mode t)
 (column-number-mode t)
-;;; make sure my code stays within 100 characters always and prefer the soft line wrap while writing prose
+;;; make sure my code stays within 100 characters always
+;;; and prefer the soft line wrap while writing prose
 ;;; https://www.emacswiki.org/emacs/TruncateLines
 ;; (setq-default truncate-lines t)
 ;; (setq truncate-partial-width-windows nil)
