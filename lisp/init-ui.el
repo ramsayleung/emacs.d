@@ -1,4 +1,4 @@
-					; package --- Summary
+;;; package --- Summary
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -104,19 +104,29 @@ This code toggles between them."
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
-;;; Verical-border in terminal is ugly, fix it.
-(set-face-inverse-video 'vertical-border nil)
-(set-face-background 'vertical-border (face-background 'default))
 
-;; Set symbol for the border
+
+;;; Change vertical-border for terminal Emacs.
+;;; Vertical-border in terminal is ugly, fix it.
+(set-face-inverse-video 'vertical-border nil)
+(set-face-background 'vertical-border (face-background 'vertical-border))
+;; ;; Set symbol for the border
 (set-display-table-slot standard-display-table
                         'vertical-border
-                        (make-glyph-code ?|))
+                        (make-glyph-code ?┃))
 (defun samray/tone-down-fringes ()
   "Set the fringe colors to whatever is the background color."
   (set-face-attribute 'fringe nil
                       :foreground (face-foreground 'default)
                       :background (face-background 'default)))
+
+;;; When `scroll-bar-mode` is enabled, vertical-border is controlled implictly
+;;; by `scroll-bar-mode`.
+;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Scroll-Bars.html#Scroll-Bars
+;;; Change vertical-border for GUI Emacs.
+(window-divider-mode)
+(setq window-divider-default-right-width 2)
+
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
@@ -128,7 +138,7 @@ This code toggles between them."
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
 (add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
-(add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
+;; (add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
 (add-hook 'after-load-theme-hook (lambda ()
 				   ;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 				   (set-face-foreground 'hl-line nil)
