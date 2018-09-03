@@ -1,6 +1,12 @@
 ;;; Package --- Summary
 ;;; code:
 ;;; commentary:
+(defun samray/ivy-helm (ivy-func helm-func)
+  "Run IVY-FUNC or HELM-FUNC dependens on framework."
+  (interactive)
+  (if samray/does-use-ivy
+      (call-interactively ivy-func)
+    (call-interactively helm-func)))
 
 (use-package general
   :ensure t
@@ -8,251 +14,181 @@
 	    (general-evil-setup t)
 	    (defvar samray/leader-key "SPC") ;
 	    (defvar samray/second-leader-key "/")
+	    (general-define-key :states '(normal visual motion )
+				:prefix samray/leader-key
+				"" nil
+				";" 'evilnc-comment-operator
+				"'" 'shell-pop
+				"." 'samray/repl-pop
+				"TAB" 'samray/alternate-buffer
+				"a" '(:ignore t :which-key "applications")
+				"a d" 'dired
+				"a c" 'circe
+				"a w" 'wttrin
+				"a y" '(:ignore t :which-key "youdao-dictionary")
+				"a y i" 'youdao-dictionary-search-from-input
+				"a y p" 'youdao-dictionary-search-at-point+
+				"a z" '(:ignore t :which-key "ztree")
+				"a z d" 'ztree-dir
+				"a z c" 'ztree-diff
+				"b" '(:ignore t :which-key "buffers")
+				"b b" 'samray/switch-to-current-open-buffer
+				"b d" 'kill-this-buffer
+				"b D" 'samray/delete-blank-line-in-buffer
+				"b l" 'samray/ivy-switch-to-buffer-enhanced
+				"b n" 'samray/get-buffer-name
+				"b o" 'occur-dwim
+				"c" '(:ignore t :which-key "compile/comments")
+				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+				"cc" 'evilnc-copy-and-comment-lines
+				"cp" 'evilnc-comment-or-uncomment-paragraphs
+				"cr" 'comment-or-uncomment-region
+				"cv" 'evilnc-toggle-invert-comment-line-by-line
+				"e" 'hydra-flycheck/body
+				"f" '(:ignore t :which-key "files")
+				"f c" 'samray/copy-current-file-path
+				"f d" 'samray/delete-current-buffer-file
+				"f D" 'samray/delete-whitespace-between-english-and-chinese-char
+				"f E" 'samray/sudo-edit
+				"f f" '((lambda () (interactive) (if samray/does-use-ivy
+								     (call-interactively 'counsel-find-file)
+								   (call-interactively 'helm-find-files)
+								   )) :which-key "find files")
+				;; "f g" 'samray/counsel-goto-recent-directory
+				"f r" 'samray/rename-current-buffer-file
+				"f R" 'recentf-open-files
+				"f s" 'save-buffer
+				"f e" '(:ignore t :which-key "emacs")
+				"f e d" 'open-samray/file
+				"h" '(:ignore t :which-key "help")
+				"h d" '(:ignore t :which-key "help-describe")
+				"h d d" 'apropos-documentation
+				"h d f" '((lambda () (interactive) (if samray/does-use-ivy
+								       (call-interactively 'counsel-describe-function)
+								     (call-interactively 'helm-describe-function)))
+					  :which-key "describe function")
+				"h d k" '((lambda () (interactive) (if samray/does-use-ivy
+								       (call-interactively 'counsel-describe-key)
+								     (call-interactively 'helm-describe-key)))
+					  :which-key "describe key")
+				"h d v" '(
+					  (lambda () (interactive) (if samray/does-use-ivy
+								       (call-interactively 'counsel-describe-variable)
+								     (call-interactively 'helm-describe-variable)))
+					  :which-key "describe key")
+				"g" '(:ignore t :which-key "git/version-control")
+				"g s" 'magit-status
+				"g m" 'magit-dispatch-popup
+				"g t" 'git-timemachine-switch-branch
+				"j" '(:ignore t :which-key "jump/join/split")
+				"j l" 'avy-goto-line
+				"j j" 'avy-goto-char
+				"j w" 'avy-goto-word-1
+				"m" '(:ignore t :which-key "major-mode-cmd")
+				"p" '(:ignore t :which-key "projects")
+				"p f" '((lambda () (interactive) (if samray/does-use-ivy
+								     (call-interactively 'counsel-projectile-find-file)
+								   (call-interactively 'helm-projectile-find-file-dwim)))
+					:which-key "projectile file")
+				"p d" '((lambda () (interactive) (if samray/does-use-ivy
+								     (call-interactively 'counsel-projectile-find-dir)
+								   (call-interactively 'helm-projectile-find-dir)))
+					:which-key "projectile dir")
+
+				"p b" '((lambda () (interactive) (if samray/does-use-ivy
+								     (call-interactively 'counsel-projectile-switch-to-buffer)
+								   (call-interactively 'helm-projectile-switch-to-buffer)))
+					:which-key "projectile swtich buffer")
+				"p s s" '((lambda () (interactive) (if samray/does-use-ivy
+								       (call-interactively 'counsel-projectile-ag)
+								     (call-interactively 'helm-projectile-ag)))
+					  :which-key "projectile ag")
+				"p s r" '((lambda () (interactive) (if samray/does-use-ivy
+								       (call-interactively 'counsel-projectile-rg)
+								     (call-interactively 'helm-projectile-rg)))
+					  :which-key "projectile rg")
+				"p p" 'counsel-projectile-switch-project
+				"q" '(:ignore t :which-key "quit")
+				"q s" 'save-buffers-kill-terminal
+				"q d" 'samray/restart-emacs-debug-init
+				"q D" 'samray/restart-stock-emacs-with-packages
+				"q r" 'samray/restart-emacs-resume-layouts
+				"v" 'er/expand-region
+				"s" '(:ignore t :which-key "search")
+				;; "s a" 'counsel-ag
+				"s a" '((lambda () (interactive) (if samray/does-use-ivy
+								     (call-interactively 'counsel-ag)
+								   (call-interactively 'helm-ag)))
+					:which-key "projectile rg")
+				;; "s g" 'counsel-git
+				"s i" 'iedit-mode
+				"s r" '((lambda () (interactive) (if samray/does-use-ivy
+								     (call-interactively 'counsel-rg)
+								   (call-interactively 'helm-ag)))
+					:which-key "projectile rg")
+				"s s" 'swiper
+				"s s" '((lambda () (interactive) (if samray/does-use-ivy
+								     (call-interactively 'swiper)
+								   (call-interactively 'helm-swoop)))
+					:which-key "projectile rg")
+				"t" '(:ignore t :which-key "toggle")
+				"t g" 'samray/git-timemachine
+				"t i" 'imenu-list-smart-toggle
+				"t f" 'samray/cycle-font
+				"t o" 'origami-toggle-mode
+				"t t" 'samray/cycle-theme
+				"t w" 'samray/toggle-window-split
+				"w" '(:ignore t :which-key "windows")
+				"w d" 'delete-window
+				"w D" 'delete-other-windows
+				"w h" 'winner-undo
+				"w l" 'winner-redo
+				"w -" 'samray/split-window-below-and-move
+				"w /" 'samray/split-window-right-and-move
+				"w h" 'evil-window-left
+				"w j" 'evil-window-down
+				"w k" 'evil-window-up
+				"w l" 'evil-window-right
+				"w m" 'samray/toggle-maximize-buffer
+				"w <left>" 'evil-window-left
+				"w <down>" 'evil-window-down
+				"w <up>" 'evil-window-up
+				"w <right>" 'evil-window-right
+				"0"  'select-window-0
+				"1"  'select-window-1
+				"2"  'select-window-2
+				"3"  'select-window-3
+				"4"  'select-window-4
+				"5"  'select-window-5
+				)
+	    
 	    (if samray/does-use-ivy
-		(progn
-		  ;; Keymap for Ivy
-		  (general-define-key :prefix samray/leader-key
-	    			      :states '(normal visual motion)
-	    			      "" nil
-	    			      "b l" 'samray/ivy-switch-to-buffer-enhanced
-	    			      "f f" 'counsel-find-file
-	    			      "f g" 'samray/counsel-goto-recent-directory
-	    			      "h d f" 'counsel-describe-function
-	    			      "h d v" 'counsel-describe-variable
-	    			      "p" '(:ignore t :which-key "projects")
-	    			      "p d" 'counsel-projectile-find-dir
-	    			      "p f" 'counsel-projectile-find-file
-	    			      "p b" 'counsel-projectile-switch-to-buffer
-	    			      "p p" 'counsel-projectile-switch-project
-	    			      "p s s" 'counsel-projectile-ag
-	    			      "p s r" 'counsel-projectile-rg
-	    			      "s a" 'counsel-ag
-	    			      "s g" 'counsel-git
-				      "s s" 'swiper
-	    			      "s r" 'counsel-rg
-
-				      "" nil
-				      ";" 'evilnc-comment-operator
-				      "'" 'shell-pop
-				      "." 'samray/repl-pop
-				      "TAB" 'samray/alternate-buffer
-				      "a" '(:ignore t :which-key "applications")
-				      "a d" 'dired
-				      "a c" 'circe
-				      "a w" 'wttrin
-				      "a y" '(:ignore t :which-key "youdao-dictionary")
-				      "a y i" 'youdao-dictionary-search-from-input
-				      "a y p" 'youdao-dictionary-search-at-point+
-				      "a z" '(:ignore t :which-key "ztree")
-				      "a z d" 'ztree-dir
-				      "a z c" 'ztree-diff
-				      "b" '(:ignore t :which-key "buffers")
-				      "b b" 'samray/switch-to-current-open-buffer
-				      "b d" 'kill-this-buffer
-				      "b D" 'samray/delete-blank-line-in-buffer
-				      "b n" 'samray/get-buffer-name
-				      "b o" 'occur-dwim
-				      "c" '(:ignore t :which-key "compile/comments")
-				      "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-				      "cc" 'evilnc-copy-and-comment-lines
-				      "cp" 'evilnc-comment-or-uncomment-paragraphs
-				      "cr" 'comment-or-uncomment-region
-				      "cv" 'evilnc-toggle-invert-comment-line-by-line
-				      "e" 'hydra-flycheck/body
-				      "f" '(:ignore t :which-key "files")
-				      "f c" 'samray/copy-current-file-path
-				      "f d" 'samray/delete-current-buffer-file
-				      "f D" 'samray/delete-whitespace-between-english-and-chinese-char
-				      "f E" 'samray/sudo-edit
-				      "f r" 'samray/rename-current-buffer-file
-				      "f R" 'recentf-open-files
-				      "f s" 'save-buffer
-				      "f e" '(:ignore t :which-key "emacs")
-				      "f e d" 'open-samray/file
-				      "h" '(:ignore t :which-key "help")
-				      "h d" '(:ignore t :which-key "help-describe")
-				      "h d d" 'apropos-documentation
-				      "h d k" 'describe-key
-				      "g" '(:ignore t :which-key "git/version-control")
-				      "g s" 'magit-status
-				      "g m" 'magit-dispatch-popup
-				      "g t" 'git-timemachine-switch-branch
-				      "j" '(:ignore t :which-key "jump/join/split")
-				      "j l" 'avy-goto-line
-				      "j j" 'avy-goto-char
-				      "j w" 'avy-goto-word-1
-				      "m" '(:ignore t :which-key "major-mode-cmd")
-				      "q" '(:ignore t :which-key "quit")
-				      "q s" 'save-buffers-kill-terminal
-				      "q d" 'samray/restart-emacs-debug-init
-				      "q D" 'samray/restart-stock-emacs-with-packages
-				      "q r" 'samray/restart-emacs-resume-layouts
-				      "v" 'er/expand-region
-				      "s" '(:ignore t :which-key "search")
-				      "s i" 'iedit-mode
-				      "t" '(:ignore t :which-key "toggle")
-				      "t g" 'samray/git-timemachine
-				      "t i" 'imenu-list-smart-toggle
-				      "t f" 'samray/cycle-font
-				      "t o" 'origami-toggle-mode
-				      "t t" 'samray/cycle-theme
-				      "t w" 'samray/toggle-window-split
-				      "w" '(:ignore t :which-key "windows")
-				      "w d" 'delete-window
-				      "w D" 'delete-other-windows
-				      "w h" 'winner-undo
-				      "w l" 'winner-redo
-				      "w -" 'samray/split-window-below-and-move
-				      "w /" 'samray/split-window-right-and-move
-				      "w h" 'evil-window-left
-				      "w j" 'evil-window-down
-				      "w k" 'evil-window-up
-				      "w l" 'evil-window-right
-				      "w m" 'samray/toggle-maximize-buffer
-				      "w <left>" 'evil-window-left
-				      "w <down>" 'evil-window-down
-				      "w <up>" 'evil-window-up
-				      "w <right>" 'evil-window-right
-				      "0"  'select-window-0
-				      "1"  'select-window-1
-				      "2"  'select-window-2
-				      "3"  'select-window-3
-				      "4"  'select-window-4
-				      "5"  'select-window-5
-	    			      )
-		  (general-define-key
-		   "C-s" 'counsel-grep-or-swiper
-		   "C-c b" 'samray/counsel-ag-symbol-at-point
-		   "C-c c" 'hydra-counsel/body
-		   "C-h f" 'counsel-describe-function
-		   "C-h v" 'counsel-describe-variable
-		   "C-h l" 'counsel-find-library
-		   "C-x b" 'samray/ivy-switch-to-buffer-enhanced
-		   "C-x C-f" 'counsel-find-file
-		   "C-c C-h" 'counsel-imenu
-		   "C-c C-r" 'ivy-resume
-		   "M-x" 'counsel-M-x
-		   ))
+	    	(progn
+	    	  (general-define-key
+	    	   "C-s" 'counsel-grep-or-swiper
+	    	   "C-c b" 'samray/counsel-ag-symbol-at-point
+	    	   "C-c c" 'hydra-counsel/body
+	    	   "C-h f" 'counsel-describe-function
+	    	   "C-h v" 'counsel-describe-variable
+	    	   "C-h l" 'counsel-find-library
+	    	   "C-x b" 'samray/ivy-switch-to-buffer-enhanced
+	    	   "C-x C-f" 'counsel-find-file
+	    	   "C-c C-h" 'counsel-imenu
+	    	   "C-c C-r" 'ivy-resume
+	    	   "M-x" 'counsel-M-x
+	    	   ))
 	      (progn
-		;; Keymap for Helm
-		(general-define-key :prefix samray/leader-key
-	    			    :states '(normal visual motion)
-	    			    "" nil
-	    			    "b l" 'helm-mini
-	    			    "f f" 'helm-find-files
-	    			    "h d f" 'helm-describe-function
-	    			    "h d v" 'helm-describe-variable
-	    			    "p" '(:ignore t :which-key "projects")
-	    			    "p b" 'helm-projectile-switch-to-buffer
-	    			    "p d" 'helm-projectile-find-file-dwim
-	    			    "p f " 'helm-projectile-find-dir
-	    			    "p p" 'helm-projectile-switch-project
-	    			    "p s s" 'helm-projectile-ag
-	    			    "p s r" 'helm-projectile-rg
-	    			    "s a" 'helm-projectile-ag
-	    			    "s r" 'helm-projectile-rg
-
-	    			    "" nil
-				    ";" 'evilnc-comment-operator
-				    "'" 'shell-pop
-				    "." 'samray/repl-pop
-				    "TAB" 'samray/alternate-buffer
-				    "a" '(:ignore t :which-key "applications")
-				    "a d" 'dired
-				    "a c" 'circe
-				    "a w" 'wttrin
-				    "a y" '(:ignore t :which-key "youdao-dictionary")
-				    "a y i" 'youdao-dictionary-search-from-input
-				    "a y p" 'youdao-dictionary-search-at-point+
-				    "a z" '(:ignore t :which-key "ztree")
-				    "a z d" 'ztree-dir
-				    "a z c" 'ztree-diff
-				    "b" '(:ignore t :which-key "buffers")
-				    "b b" 'samray/switch-to-current-open-buffer
-				    "b d" 'kill-this-buffer
-				    "b D" 'samray/delete-blank-line-in-buffer
-				    "b n" 'samray/get-buffer-name
-				    "b o" 'occur-dwim
-				    "c" '(:ignore t :which-key "compile/comments")
-				    "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-				    "cc" 'evilnc-copy-and-comment-lines
-				    "cp" 'evilnc-comment-or-uncomment-paragraphs
-				    "cr" 'comment-or-uncomment-region
-				    "cv" 'evilnc-toggle-invert-comment-line-by-line
-				    "e" 'hydra-flycheck/body
-				    "f" '(:ignore t :which-key "files")
-				    "f c" 'samray/copy-current-file-path
-				    "f d" 'samray/delete-current-buffer-file
-				    "f D" 'samray/delete-whitespace-between-english-and-chinese-char
-				    "f E" 'samray/sudo-edit
-				    "f r" 'samray/rename-current-buffer-file
-				    "f R" 'recentf-open-files
-				    "f s" 'save-buffer
-				    "f e" '(:ignore t :which-key "emacs")
-				    "f e d" 'open-samray/file
-				    "h" '(:ignore t :which-key "help")
-				    "h d" '(:ignore t :which-key "help-describe")
-				    "h d d" 'apropos-documentation
-				    "h d k" 'describe-key
-				    "g" '(:ignore t :which-key "git/version-control")
-				    "g s" 'magit-status
-				    "g m" 'magit-dispatch-popup
-				    "g t" 'git-timemachine-switch-branch
-				    "j" '(:ignore t :which-key "jump/join/split")
-				    "j l" 'avy-goto-line
-				    "j j" 'avy-goto-char
-				    "j w" 'avy-goto-word-1
-				    "m" '(:ignore t :which-key "major-mode-cmd")
-				    "q" '(:ignore t :which-key "quit")
-				    "q s" 'save-buffers-kill-terminal
-				    "q d" 'samray/restart-emacs-debug-init
-				    "q D" 'samray/restart-stock-emacs-with-packages
-				    "q r" 'samray/restart-emacs-resume-layouts
-				    "v" 'er/expand-region
-				    "s" '(:ignore t :which-key "search")
-				    "s i" 'iedit-mode
-				    "t" '(:ignore t :which-key "toggle")
-				    "t g" 'samray/git-timemachine
-				    "t i" 'imenu-list-smart-toggle
-				    "t f" 'samray/cycle-font
-				    "t o" 'origami-toggle-mode
-				    "t t" 'samray/cycle-theme
-				    "t w" 'samray/toggle-window-split
-				    "w" '(:ignore t :which-key "windows")
-				    "w d" 'delete-window
-				    "w D" 'delete-other-windows
-				    "w h" 'winner-undo
-				    "w l" 'winner-redo
-				    "w -" 'samray/split-window-below-and-move
-				    "w /" 'samray/split-window-right-and-move
-				    "w h" 'evil-window-left
-				    "w j" 'evil-window-down
-				    "w k" 'evil-window-up
-				    "w l" 'evil-window-right
-				    "w m" 'samray/toggle-maximize-buffer
-				    "w <left>" 'evil-window-left
-				    "w <down>" 'evil-window-down
-				    "w <up>" 'evil-window-up
-				    "w <right>" 'evil-window-right
-				    "0"  'select-window-0
-				    "1"  'select-window-1
-				    "2"  'select-window-2
-				    "3"  'select-window-3
-				    "4"  'select-window-4
-				    "5"  'select-window-5
-	    			    )
-		(general-define-key
-		 "C-s" 'helm-swoop
-		 "C-c b" 'helm-projectile-ag
-		 "C-h f" 'helm-describe-function
-		 "C-h v" 'helm-describe-variable
-		 "C-h l" 'helm-find-library-at-point
-		 "C-x b" 'helm-mini
-		 "C-x C-f" 'helm-find-files
-		 "C-c C-h" 'helm-imenu
-		 "M-x" 'helm-M-x
-		 )
-		))
+	    	(general-define-key
+	    	 "C-s" 'helm-swoop
+	    	 "C-c b" 'helm-projectile-ag
+	    	 "C-h f" 'helm-describe-function
+	    	 "C-h v" 'helm-describe-variable
+	    	 "C-h l" 'helm-find-library-at-point
+	    	 "C-x b" 'helm-mini
+	    	 "C-x C-f" 'helm-find-files
+	    	 "C-c C-h" 'helm-imenu
+	    	 "M-x" 'helm-M-x)
+	    	))
 	    (general-define-key :keymaps 'counsel-find-file-map
 				:states '(normal visual motion)
 				"C-j" 'ivy-next-line
@@ -635,7 +571,6 @@
 		      :keymaps 'inferior-python-mode-map
 		      "q" '(progn (bury-buffer) (delete-window))
 		      )
-
   (general-define-key :states '(normal emacs)
 		      :keymaps 'messages-buffer-mode-map
 		      "q" '(progn (bury-buffer) (delete-window)))
@@ -646,7 +581,10 @@
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-(define-key helm-find-files-map "\t" 'helm-execute-persistent-action)
+
+(with-eval-after-load 'helm
+  (define-key helm-find-files-map "\t" 'helm-execute-persistent-action)
+  )
 
 (use-package hydra
   :ensure t
