@@ -26,6 +26,8 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
+(defvar samray/completion-framework 'helm)
+(defvar samray/does-use-ivy (if (eq samray/completion-framework 'ivy) t nil))
 
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))
@@ -102,13 +104,14 @@
         )
     (add-to-list 'load-path lisp-dir)
     (add-to-list 'load-path manual-add-packages)
-    (mapc (lambda (fname)
-	    (let ((feat (intern (file-name-base fname))))
-	      (if init-file-debug
-		  (message "Feature '%s' loaded in %.2fs" feat
-			   (benchmark-elapse (require feat fname)))
-		(require feat fname))))
-	  (directory-files lisp-dir t "\\.el")))
+    ;; (mapc (lambda (fname)
+    ;; 	    (let ((feat (intern (file-name-base fname))))
+    ;; 	      (if init-file-debug
+    ;; 		  (message "Feature '%s' loaded in %.2fs" feat
+    ;; 			   (benchmark-elapse (require feat fname)))
+    ;; 		(require feat fname))))
+    ;; 	  (directory-files lisp-dir t "\\.el"))
+    )
 
   (require 'cl)
 
@@ -122,7 +125,14 @@
   (require 'init-eshell)
   (require 'init-evil)
   (require 'init-go)
-  (require 'init-ivy)
+  (if samray/does-use-ivy
+      (progn
+	(message "Use ivy as completion framework")
+	(require 'init-ivy))
+    (progn
+      (message "Use helm as completion framework")
+      (require 'init-helm))
+    )
   (require 'init-keybindings)
   (require 'init-markdown)
   (require 'init-misc)

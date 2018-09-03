@@ -123,7 +123,7 @@ bookmarks reccently opened files and window layout."
   )
 
 (defun samray/counsel-ag-symbol-at-point ()
-  "Search for number at point using helm-projectile-ag."
+  "Search for number at point using counsel-ag."
   (interactive)
   (setq cached-symbol-at-point (thing-at-point `symbol))
   (add-hook 'post-command-hook 'insert-symbol-at-point)
