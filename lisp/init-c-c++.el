@@ -1,4 +1,4 @@
-;;; package --- Summary:
+;;; package --- Summary: -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

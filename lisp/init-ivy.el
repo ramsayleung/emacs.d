@@ -1,6 +1,10 @@
-;;; package --- Summary
+;;; package --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
+
+(defmacro samray/after-stack-clears (&rest body)
+  "Do BODY after the call stack is clear."
+  `(run-with-timer 1 nil (lambda () ,@body)))
 
 (use-package counsel
   :ensure t
@@ -25,11 +29,21 @@
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
 	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
-	    (setq ivy-posframe-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
 	    (ivy-posframe-enable)
 	    (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+	    ;; (defun samray/setup-ivy-window()
+	    ;;   "Set up ivy height and width."
+	    ;;   (setq ivy-posframe-min-height (/(window-body-height)2))
+	    ;;   (setq ivy-posframe-height (/ (window-body-height)2))
+	    ;;   (setq ivy-posframe-width (window-body-width))
+	    ;;   (setq ivy-posframe-min-width (window-body-width))
+	    ;;   )
+	    ;; (samray/setup-ivy-window)
+	    ;; (defadvice select-window (after select-window-ivy activate)
+	    ;;   "Advice `select-window` to set up ivy-posframe-width/height dynamicly."
+	    ;;   (samray/setup-ivy-window)
+	    ;;   )
 	    ))
-
 
 (use-package ivy
   :ensure t

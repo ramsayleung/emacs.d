@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; package --- Summary  -*- lexical-binding: t -*-
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -11,8 +11,6 @@
 ;;; Ignore case when searching
 (setq case-fold-search t)
 
-;;; To beautify window separator
-(window-divider-mode t)
 ;;;------------------;;;
 ;;; Windows & Frames ;;;
 ;;;------------------;;;
@@ -124,8 +122,8 @@ This code toggles between them."
 ;;; by `scroll-bar-mode`.
 ;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Scroll-Bars.html#Scroll-Bars
 ;;; Change vertical-border for GUI Emacs.
-    (window-divider-mode)
     (setq window-divider-default-right-width 2)
+    (window-divider-mode)
     ))
 (defun samray/tone-down-fringes ()
   "Set the fringe colors to whatever is the background color."
