@@ -25,6 +25,7 @@
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
 	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
+	    (setq ivy-posframe-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
 	    (ivy-posframe-enable)
 	    (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
 	    ))
@@ -40,6 +41,9 @@
 	  (setq ivy-re-builders-alist
 		'((t . ivy--regex-plus)))
 	  (setq ivy-initial-inputs-alist nil)
+	  (when window-system
+	    (setq ivy-height (/ (window-body-height) 2))
+	    )
 	  )
   :config
   (ivy-mode 1)

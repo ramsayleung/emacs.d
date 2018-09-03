@@ -29,7 +29,22 @@
 (use-package flycheck-posframe
   :ensure t
   :after flycheck
-  :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+  :config (progn
+	    (set-face-attribute 'flycheck-posframe-warning-face nil
+				:inherit nil
+				:stipple nil
+				:background "black"
+				:foreground "yellow")
+
+
+	    (set-face-attribute 'flycheck-posframe-error-face nil
+				:inherit nil
+				:stipple nil
+				:background "black"
+				:foreground "brown")
+	    (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
+	    )
+  )
 
 (provide 'init-syntax-checking)
 ;;; init-syntax-checking.el ends here

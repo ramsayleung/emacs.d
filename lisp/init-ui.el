@@ -1,12 +1,14 @@
-					; package --- Summary
+;;; package --- Summary
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
 ;;; User Interface ;;;
+
+
 ;;;----------------;;;
 
 
-;;;ignore case when searching
+;;; Ignore case when searching
 (setq case-fold-search t)
 
 ;;; To beautify window separator
@@ -14,6 +16,7 @@
 ;;;------------------;;;
 ;;; Windows & Frames ;;;
 ;;;------------------;;;
+
 ;; language
 ;;; always split windows horizontally rather than vertically
 ;; (setq split-height-threshold nil)
@@ -27,7 +30,7 @@
 
 	    (popwin-mode t)
 	    (push '(compilation-mode :noselect t) popwin:special-display-config)
-	    (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
+	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
 	    (push "*slime-apropos*" popwin:special-display-config)
 	    (push "*slime-macroexpansion*" popwin:special-display-config)
 	    (push "*slime-description*" popwin:special-display-config)
@@ -86,35 +89,51 @@ This code toggles between them."
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
 
-;; specify the fringe width for windows -- this sets the left to 10 and
+;; Specify the fringe width for windows -- this sets the left to 10 and
 ;; right fringes to 0
 (fringe-mode '(0 . 0))
 (when window-system
-  ;;turn off tool bar
+  ;; Turn off tool bar
   (tool-bar-mode -1)
-  ;; turn off file scroll bar
+  ;; Turn off file scroll bar
   (scroll-bar-mode -1)
-  ;; turn off title bar
+  ;; Turn off title bar
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark)) ;; assuming you are using a dark theme
+  ;; Assuming you are using a dark theme
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (setq ns-use-proxy-icon nil)
   (setq frame-title-format nil)
 ;;; Disable mouse scrolling
   (mouse-wheel-mode -1)
   )
-;;; Verical-border in terminal is ugly, fix it.
-(set-face-inverse-video 'vertical-border nil)
-(set-face-background 'vertical-border (face-background 'default))
 
-;; Set symbol for the border
-(set-display-table-slot standard-display-table
-                        'vertical-border
-                        (make-glyph-code ?|))
+
+;;; Change vertical-border for terminal Emacs.
+;;; Vertical-border in terminal is ugly, fix it.
+(if window-system
+    (progn
+      (set-face-inverse-video 'vertical-border nil)
+      (set-face-background 'vertical-border (face-background 'vertical-border))
+      ;; ;; Set symbol for the border
+      (set-display-table-slot standard-display-table
+                              'vertical-border
+                              (make-glyph-code ?┃))
+      )
+  (progn
+;;; When `scroll-bar-mode` is enabled, vertical-border is controlled implictly
+;;; by `scroll-bar-mode`.
+;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Scroll-Bars.html#Scroll-Bars
+;;; Change vertical-border for GUI Emacs.
+    (window-divider-mode)
+    (setq window-divider-default-right-width 2)
+    ))
 (defun samray/tone-down-fringes ()
   "Set the fringe colors to whatever is the background color."
   (set-face-attribute 'fringe nil
                       :foreground (face-foreground 'default)
                       :background (face-background 'default)))
+
+
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
@@ -126,9 +145,9 @@ This code toggles between them."
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
 (add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
-(add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
+;; (add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
+;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 (add-hook 'after-load-theme-hook (lambda ()
-				   ;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 				   (set-face-foreground 'hl-line nil)
 				   ))
 
@@ -147,7 +166,8 @@ This code toggles between them."
 ;; show the current line and column numbers in the stats bar as well
 (line-number-mode t)
 (column-number-mode t)
-;;; make sure my code stays within 100 characters always and prefer the soft line wrap while writing prose
+;;; make sure my code stays within 100 characters always
+;;; and prefer the soft line wrap while writing prose
 ;;; https://www.emacswiki.org/emacs/TruncateLines
 ;; (setq-default truncate-lines t)
 ;; (setq truncate-partial-width-windows nil)
@@ -170,8 +190,8 @@ This code toggles between them."
 ;; don't blink the cursor
 (blink-cursor-mode -1)
 
-;;set the cursor shape to bar
-(setq-default cursor-type 'bar)
+;;set the cursor shape to box
+(setq-default cursor-type 'box)
 ;; make sure transient mark mode is enabled (it should be by default,
 ;; but just in case)
 (transient-mark-mode t)
@@ -296,12 +316,12 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;---------------;;
 
 (cond ((eq system-type 'gnu/linux)
-       (defvar samray-font-list '("Fantasque Sans Mono-14:weight=medium:slant=italic" )))
+       (defvar samray-font-list '("Fantasque Sans Mono-12:weight=medium:slant=italic" )))
       ((eq system-type 'darwin)
-       (defvar samray-font-list '("Fantasque Sans Mono-14:weight=medium:slant=italic" )))
+       (defvar samray-font-list '("Fantasque Sans Mono-12:weight=medium:slant=italic" )))
       ((eq system-type 'windows-nt)
        (defvar samray-font-list '("Consolas-13"))))
-(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+(set-frame-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
 
 (defun samray/font-exists-p (font)
   "Check if FONT exists."

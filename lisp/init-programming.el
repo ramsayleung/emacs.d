@@ -59,17 +59,15 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  ;; (when(not(eq system-type 'windows-nt))
-	  ;;   (exec-path-from-shell-initialize)
-	  ;;   )
-	  (when (memq window-system '(mac ns x))
-	    (exec-path-from-shell-initialize))
-	    (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
-	    ;; when it is nil, exec-path-from-shell will read environment variable
-	    ;; from .zshenv instead of .zshrc, but makes sure that you put all
-	    ;; environment variable you need in .zshenv rather than .zshrc
-	    (setq exec-path-from-shell-check-startup-files nil) ;
-	    (setq exec-path-from-shell-arguments '("-l" )) ;remove -i read form .zshenv
+	  ;; (exec-path-from-shell-initialize)
+	  ;; (when (memq window-system '(mac ns x))
+	  ;;   (exec-path-from-shell-initialize))
+	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
+	  ;; when it is nil, exec-path-from-shell will read environment variable
+	  ;; from .zshenv instead of .zshrc, but makes sure that you put all
+	  ;; environment variable you need in .zshenv rather than .zshrc
+	  (setq exec-path-from-shell-check-startup-files nil) ;
+	  (setq exec-path-from-shell-arguments '("-l")) ;remove -i read form .zshenv
 	  )
   )
 
@@ -170,24 +168,6 @@
       (sr-speedbar-refresh)
       )))
 
-(defun samray/speedbar-toggle ()
-  "Expand current file in speedbar buffer."
-  (interactive)
-  (if (buffer-file-name)
-      (let ((current-buffer (buffer-name)))
-	(cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
-	      (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
-	(set-buffer current-buffer)
-	(imenu-list-smart-toggle)
-	)
-    (progn
-      (cond ((sr-speedbar-exist-p) (kill-buffer speedbar-buffer))
-	    (t (sr-speedbar-open) (linum-mode -1) (speedbar-refresh)))
-      )))
-(add-hook 'imenu-list-major-mode-hook (lambda () (linum-mode -1))
-	  ;; 
-	  )
-
 (defun samray/term-paste (&optional string)
   "Yanking in the term-mode doesn't quit work The text from the
    paste appears in the buffer but isn't sent to the shell."
@@ -263,15 +243,6 @@ similar to shell-pop"
 ;;; automatically,instead shows in other window
 (setq compilation-scroll-output t)
 
-;;; From http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html
-(defun samray/buffer-too-big-p ()
-  "Turn off 'linum-mode' when file is too big."
-  (or (> (buffer-size) (* 5000 80))
-      (> (line-number-at-pos (point-max)) 5000)))
-(add-hook 'prog-mode-hook
-          (lambda ()
-            ;; turn off `linum-mode' when there are more than 5000 lines
-            (if (samray/buffer-too-big-p) (linum-mode -1))))
 
 (defun samray/imenu ()
   "Call lsp-ui-imenu firstly, if lsp-mode is disable, call counsel-imenu instead"

@@ -74,10 +74,6 @@
 					    ;; signature
 					    ("8sa" "samray")
  					    ))
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 ;;; disable `ad-handle-definition: ‘bookmark-jump’ got redefined` warning.
 (setq ad-redefinition-action 'accept)
 
@@ -88,6 +84,7 @@
 
 ;; auto indent file before save file
 (defun samray/indent-buffer()
+  "Indent the whole buffer."
   (interactive)
   (indent-region (point-min)(point-max)))
 (defun samray/indent-region-or-buffer()
@@ -121,7 +118,7 @@
   (while (search-forward "\r" nil t)(replace-match "")))
 ;; dwim=do what i mean
 (defun occur-dwim()
-  "Call `occur` with a sane default"
+  "Call `occur` with a sane default."
   (interactive)
   (push (if (region-active-p)
 	    (buffer-substring-no-properties
@@ -134,7 +131,7 @@
   (call-interactively 'occur))
 (defun samray/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the;
-current window."
+current WINDOW."
   (interactive)
   (let ((current-buffer (window-buffer window))
         (buffer-predicate
@@ -176,7 +173,7 @@ current window."
                  (call-interactively #'projectile-invalidate-cache))
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
 (defun samray/delete-file (filename &optional ask-user)
-  "Remove specified file or directory.
+  "Remove specified file FILENAME or directory.
 Also kills associated buffer (if any exists) and invalidates
 projectile cache when it's possible.
 When ASK-USER is non-nil, user will be asked to confirm file
@@ -194,7 +191,7 @@ removal."
         (call-interactively #'projectile-invalidate-cache)))))
 ;; from magnars
 (defun samray/delete-current-buffer-file ()
-  "Remove file connected to current buffer and kills buffer."
+  "Remove file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
         (buffer (current-buffer))
@@ -209,6 +206,7 @@ removal."
         (message "File '%s' successfully removed" filename)))))
 ;; from magnars
 (defun samray/sudo-edit (&optional arg)
+  "Edit as root with ARG."
   (interactive "p")
   (let ((fname (if (or arg (not buffer-file-name))
                    (read-file-name "File: ")
@@ -228,7 +226,7 @@ removal."
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
 (defun samray/toggle-maximize-buffer ()
-  "Maximize buffer"
+  "Maximize buffer."
   (interactive)
   (if (and (= 1 (length (window-list)))
            (assoc ?_ register-alist))
