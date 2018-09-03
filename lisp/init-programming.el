@@ -203,17 +203,17 @@ similar to shell-pop"
 	      (progn (bury-buffer)
 		     (delete-window)))
 
-	(progn (samray/split-window-below-and-move)
-	       (switch-to-buffer repl-buffer-name)
-	       (goto-char (point-max))
-	       (evil-insert-state))
+	(progn
+	  (samray/split-window-below-and-move)
+	  (switch-to-buffer repl-buffer-name)
+	  (goto-char (point-max))
+	  (evil-insert-state))
 	)
     (progn
       (run-python)
       (samray/split-window-below-and-move)
       (switch-to-buffer repl-buffer-name)
-      (goto-char (point-max))
-      (evil-insert-state))))
+      (goto-char (point-max)))))
 
 (defun samray/repl-pop ()
   "Run REPL for different major mode and switch to the repl buffer.
@@ -245,7 +245,7 @@ similar to shell-pop"
 
 
 (defun samray/imenu ()
-  "Call lsp-ui-imenu firstly, if lsp-mode is disable, call counsel-imenu instead"
+  "Call lsp-ui-imenu firstly, if lsp-mode is disable, call counsel-imenu instead."
   (interactive)
   (if lsp-mode
       (lsp-ui-imenu)

@@ -472,7 +472,7 @@
 		      "C-c ." 'rust-format-buffer)
 
   ;; Emacs Lisp mode
-  (general-define-key :keymaps 'emacs-lisp-mode-map
+  (general-define-key :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
 		      [remap evil-repeat-pop-next] 'xref-find-definitions
 		      "M-." 'xref-find-definitions
 		      "M-," 'xref-pop-marker-stack)

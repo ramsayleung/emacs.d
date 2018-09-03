@@ -30,3 +30,5 @@
    brittle
 * ScreenShot
   [[./images/emacs.png]]
+* Reference
+  [[http://coldnew.github.io/coldnew-emacs/]]

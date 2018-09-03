@@ -22,6 +22,7 @@
 
 (require 'cl)
 (defmacro def-pairs (pairs)
+  "Define PAIRS."
   `(progn
      ,@(loop for (key . val) in pairs
              collect

@@ -6,19 +6,32 @@
 (setq tab-width 4)
 (set-variable 'py-indent-offset 4)
 (set-variable 'python-indent-guess-indent-offset nil)
-(when (executable-find "ipython")
-  (setq python-shell-interpreter "ipython"))
 
 (use-package python
   :mode("\\.py\\'" . python-mode)
   :ensure t
+  :config (progn
+	    (when (executable-find "ipython3")
+	      ;;Ipython settings sections
+	      (setq python-shell-interpreter "ipython3"
+		    python-shell-interpreter-args " -i "))
+	    ;; https://github.com/jorgenschaefer/elpy/issues/887
+	    (with-eval-after-load 'python
+	      (defun python-shell-completion-native-try ()
+		"Return non-nil if can trigger native completion."
+		(let ((python-shell-completion-native-enable t)
+		      (python-shell-completion-native-output-timeout
+		       python-shell-completion-native-try-output-timeout))
+		  (python-shell-completion-native-get-completions
+		   (get-buffer-process (current-buffer))
+		   nil "_"))))
+	    )
   )
 
 ;; Use pep8 to format python file
 (use-package py-autopep8
   :commands (py-autopep8 py-autopep8-buffer)
   :ensure t
-  ;; :init(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
   )
 
 (use-package py-isort
@@ -40,10 +53,6 @@
 	  ;; (add-hook 'venv-postmkvirtualenv-hook
 	  ;; 	    (lambda () (shell-command "pip install nose flake8 jedi autopep8 isort")))
 	  ))
-
-;;; To fix issue that there is weird eshell output with ipython
-;; (setq python-shell-interpreter "ipython"
-;;       python-shell-interpreter-args "--simple-prompt -i")
 
 (defun samray/python-shell-send-buffer-switch ()
   "Send buffer content to shell and switch to it in insert mode."
