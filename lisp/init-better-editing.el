@@ -53,6 +53,7 @@
   :config(progn
 	   (which-key-mode t)
 	   (setq which-key-idle-delay 0.3)
+	   (setq which-key-enable-extended-define-key t)
 	   ))
 
 ;;; Highlight delimiter such as parenthese,brackets or braces

@@ -27,7 +27,9 @@
 ;; You may delete these explanatory comments.
 
 (defvar samray/completion-framework 'helm)
-(defvar samray/does-use-ivy (if (eq samray/completion-framework 'ivy) t nil))
+(defun samray/does-use-ivy ()
+  "Return t if use `ivy` as completion framework."
+  (if (eq samray/completion-framework 'ivy) t nil))
 
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))
@@ -125,7 +127,7 @@
   (require 'init-eshell)
   (require 'init-evil)
   (require 'init-go)
-  (if samray/does-use-ivy
+  (if (samray/does-use-ivy)
       (progn
 	(message "Use ivy as completion framework")
 	(require 'init-ivy))

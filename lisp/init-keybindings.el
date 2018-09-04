@@ -4,7 +4,7 @@
 (defun samray/ivy-helm (ivy-func helm-func)
   "Run IVY-FUNC or HELM-FUNC dependens on framework."
   (interactive)
-  (if samray/does-use-ivy
+  (if (samray/does-use-ivy)
       (call-interactively ivy-func)
     (call-interactively helm-func)))
 
@@ -50,10 +50,9 @@
 				"f d" 'samray/delete-current-buffer-file
 				"f D" 'samray/delete-whitespace-between-english-and-chinese-char
 				"f E" 'samray/sudo-edit
-				"f f" '((lambda () (interactive) (if samray/does-use-ivy
-								     (call-interactively 'counsel-find-file)
-								   (call-interactively 'helm-find-files)
-								   )) :which-key "find files")
+				"f f" (general-predicate-dispatch 'helm-find-files
+					:docstring "find files"
+					(samray/does-use-ivy) 'counsel-find-file)
 				;; "f g" 'samray/counsel-goto-recent-directory
 				"f r" 'samray/rename-current-buffer-file
 				"f R" 'recentf-open-files
@@ -63,19 +62,15 @@
 				"h" '(:ignore t :which-key "help")
 				"h d" '(:ignore t :which-key "help-describe")
 				"h d d" 'apropos-documentation
-				"h d f" '((lambda () (interactive) (if samray/does-use-ivy
-								       (call-interactively 'counsel-describe-function)
-								     (call-interactively 'helm-describe-function)))
-					  :which-key "describe function")
-				"h d k" '((lambda () (interactive) (if samray/does-use-ivy
-								       (call-interactively 'counsel-describe-key)
-								     (call-interactively 'helm-describe-key)))
-					  :which-key "describe key")
-				"h d v" '(
-					  (lambda () (interactive) (if samray/does-use-ivy
-								       (call-interactively 'counsel-describe-variable)
-								     (call-interactively 'helm-describe-variable)))
-					  :which-key "describe key")
+				"h d f" (general-predicate-dispatch 'describe-function
+					  :docstring "describe function"
+					  (samray/does-use-ivy) 'counsel-describe-function)
+				"h d k" (general-predicate-dispatch 'describe-key
+					  :docstring "describe keybinding"
+					  (samray/does-use-ivy) 'counsel-describe-key)
+				"h d v" (general-predicate-dispatch 'describe-variable
+					  :docstring "describe keybinding"
+					  (samray/does-use-ivy) 'counsel-describe-variable)
 				"g" '(:ignore t :which-key "git/version-control")
 				"g s" 'magit-status
 				"g m" 'magit-dispatch-popup
@@ -86,27 +81,22 @@
 				"j w" 'avy-goto-word-1
 				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
-				"p f" '((lambda () (interactive) (if samray/does-use-ivy
-								     (call-interactively 'counsel-projectile-find-file)
-								   (call-interactively 'helm-projectile-find-file-dwim)))
-					:which-key "projectile file")
-				"p d" '((lambda () (interactive) (if samray/does-use-ivy
-								     (call-interactively 'counsel-projectile-find-dir)
-								   (call-interactively 'helm-projectile-find-dir)))
-					:which-key "projectile dir")
-
-				"p b" '((lambda () (interactive) (if samray/does-use-ivy
-								     (call-interactively 'counsel-projectile-switch-to-buffer)
-								   (call-interactively 'helm-projectile-switch-to-buffer)))
-					:which-key "projectile swtich buffer")
-				"p s s" '((lambda () (interactive) (if samray/does-use-ivy
-								       (call-interactively 'counsel-projectile-ag)
-								     (call-interactively 'helm-projectile-ag)))
-					  :which-key "projectile ag")
-				"p s r" '((lambda () (interactive) (if samray/does-use-ivy
-								       (call-interactively 'counsel-projectile-rg)
-								     (call-interactively 'helm-projectile-rg)))
-					  :which-key "projectile rg")
+				"p f" (general-predicate-dispatch 'helm-projectile-find-file-dwim
+					:docstring "projectile find files"
+					(samray/does-use-ivy) 'counsel-projectile-find-file)
+				"p d" (general-predicate-dispatch 'helm-projectile-find-dir
+					:docstring "projectile find dir"
+					(samray/does-use-ivy) 'counsel-projectile-find-dir)
+				"p b" (general-predicate-dispatch 'helm-projectile-switch-to-buffer
+					:docstring "projectile switch buffer"
+					(samray/does-use-ivy) 'counsel-projectile-switch-to-buffer)
+				"p s" '(:ignore t :which-key "projectile search")
+				"p s s" (general-predicate-dispatch 'helm-projectile-ag
+					  :docstring "projectile ag search"
+					  (samray/does-use-ivy) 'counsel-projectile-ag)
+				"p s r" (general-predicate-dispatch 'helm-projectile-rg
+					  :docstring "projectile rg search"
+					  (samray/does-use-ivy) 'counsel-projectile-rg)
 				"p p" 'counsel-projectile-switch-project
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
@@ -115,22 +105,17 @@
 				"q r" 'samray/restart-emacs-resume-layouts
 				"v" 'er/expand-region
 				"s" '(:ignore t :which-key "search")
-				;; "s a" 'counsel-ag
-				"s a" '((lambda () (interactive) (if samray/does-use-ivy
-								     (call-interactively 'counsel-ag)
-								   (call-interactively 'helm-ag)))
-					:which-key "projectile rg")
+				"s a" (general-predicate-dispatch 'helm-ag
+					:docstring "ag search"
+					(samray/does-use-ivy) 'counsel-ag)
 				;; "s g" 'counsel-git
 				"s i" 'iedit-mode
-				"s r" '((lambda () (interactive) (if samray/does-use-ivy
-								     (call-interactively 'counsel-rg)
-								   (call-interactively 'helm-ag)))
-					:which-key "projectile rg")
+				"s r" (general-predicate-dispatch 'helm-ag
+					:docstring "rg search"
+					(samray/does-use-ivy) 'counsel-rg)
 				"s s" 'swiper
-				"s s" '((lambda () (interactive) (if samray/does-use-ivy
-								     (call-interactively 'swiper)
-								   (call-interactively 'helm-swoop)))
-					:which-key "projectile rg")
+				"s s" (general-predicate-dispatch 'helm-swoop
+					(samray/does-use-ivy) 'swiper)
 				"t" '(:ignore t :which-key "toggle")
 				"t g" 'samray/git-timemachine
 				"t i" 'imenu-list-smart-toggle
@@ -162,33 +147,26 @@
 				"5"  'select-window-5
 				)
 	    
-	    (if samray/does-use-ivy
-	    	(progn
-	    	  (general-define-key
-	    	   "C-s" 'counsel-grep-or-swiper
-	    	   "C-c b" 'samray/counsel-ag-symbol-at-point
-	    	   "C-c c" 'hydra-counsel/body
-	    	   "C-h f" 'counsel-describe-function
-	    	   "C-h v" 'counsel-describe-variable
-	    	   "C-h l" 'counsel-find-library
-	    	   "C-x b" 'samray/ivy-switch-to-buffer-enhanced
-	    	   "C-x C-f" 'counsel-find-file
-	    	   "C-c C-h" 'counsel-imenu
-	    	   "C-c C-r" 'ivy-resume
-	    	   "M-x" 'counsel-M-x
-	    	   ))
-	      (progn
-	    	(general-define-key
-	    	 "C-s" 'helm-swoop
-	    	 "C-c b" 'helm-projectile-ag
-	    	 "C-h f" 'helm-describe-function
-	    	 "C-h v" 'helm-describe-variable
-	    	 "C-h l" 'helm-find-library-at-point
-	    	 "C-x b" 'helm-mini
-	    	 "C-x C-f" 'helm-find-files
-	    	 "C-c C-h" 'helm-imenu
-	    	 "M-x" 'helm-M-x)
-	    	))
+	    (general-define-key
+	     "C-s" (general-predicate-dispatch 'helm-swoop
+		     (samray/does-use-ivy) 'counsel-grep-or-swiper)
+	     "C-c b" (general-predicate-dispatch 'helm-projectile-ag
+		       (samray/does-use-ivy) 'samray/counsel-ag-symbol-at-point)
+	     "C-h f" (general-predicate-dispatch 'describe-function
+		       (samray/does-use-ivy) 'counsel-describe-function)
+	     "C-h v" (general-predicate-dispatch 'describe-variable
+		       (samray/does-use-ivy) 'counsel-describe-variable)
+	     "C-h l" (general-predicate-dispatch 'helm-find-library-at-point
+		       (samray/does-use-ivy) 'counsel-find-library)
+	     "C-x b" (general-predicate-dispatch 'helm-mini
+		       (samray/does-use-ivy) 'samray/ivy-switch-to-buffer-enhanced)
+	     "C-x C-f" (general-predicate-dispatch 'helm-find-files
+			 (samray/does-use-ivy) 'counsel-find-file)
+	     "C-c C-h" (general-predicate-dispatch 'helm-imenu
+			 (samray/does-use-ivy) 'counsel-imenu)
+	     "M-x" (general-predicate-dispatch 'helm-M-x
+		     (samray/does-use-ivy) 'counsel-M-x)
+	     )
 	    (general-define-key :keymaps 'counsel-find-file-map
 				:states '(normal visual motion)
 				"C-j" 'ivy-next-line

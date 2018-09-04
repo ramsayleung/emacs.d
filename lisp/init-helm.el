@@ -33,8 +33,11 @@
   (helm-projectile-on))
 (use-package helm-swoop
   :ensure t
+  :config (progn
+	    (setq helm-swoop-speed-or-color t)
+	    )
   )
-(use-package helm-rg
+(use-package helm-ag
   :ensure t
   :config (progn
 	    (custom-set-variables
