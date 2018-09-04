@@ -60,8 +60,8 @@
   :ensure t
   :init (progn
 	  ;; (exec-path-from-shell-initialize)
-	  ;; (when (memq window-system '(mac ns x))
-	  ;;   (exec-path-from-shell-initialize))
+	  (when (memq window-system '(mac ns x))
+	    (exec-path-from-shell-initialize))
 	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
 	  ;; when it is nil, exec-path-from-shell will read environment variable
 	  ;; from .zshenv instead of .zshrc, but makes sure that you put all

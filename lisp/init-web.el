@@ -35,8 +35,6 @@
 ;;;----------------;;;
 ;;;     JS Mode    ;;;
 ;;;----------------;;;
-(autoload 'tern-mode "tern.el" nil t)
-(add-hook 'js-mode-hook (lambda () (tern-mode t)))
 
 ;; improved Javascript editing mode
 (use-package js2-mode

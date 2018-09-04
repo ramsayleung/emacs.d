@@ -16,20 +16,6 @@
   :commands (avy-goto-char avy-goto-line)
   :ensure t)
 
-(use-package ivy-posframe
-  :ensure t
-  :config (progn
-	    ;; (setq ivy-display-function #'ivy-posframe-display)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
-	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
-	    (setq ivy-posframe-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
-	    (ivy-posframe-enable)
-	    ))
-
-
 (use-package ivy
   :ensure t
   :diminish ivy-mode
