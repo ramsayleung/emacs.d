@@ -68,24 +68,28 @@
 	   (ip-location (samray/remove-eof query-result)))
       (string= "CN" ip-location)
       ))
-  (if t
-      ;; It takes too much time to send and receive request, so it slows donw
-      ;; startup. Improve it unitl emacs 26(multithread).
-      ;; (if (samray/ip-from-china-p)
+  (defun samray/setup-melpa ()
+    (if (samray/ip-from-china-p)
+	;; It takes too much time to send and receive request, so it slows donw
+	;; startup. Improve it unitl emacs 26(multithread).
+	;; (if (samray/ip-from-china-p)
+	(progn
+  	  (message "There is a wall here.")
+  	  ;; For God' sake, there are a lot of site you cannot reach in China
+  	  ;; this is mirror of melpa and gnu
+  	  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+  				   ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+  	  )
       (progn
-  	(message "There is a wall here.")
-  	;; For God' sake, there are a lot of site you cannot reach in China
-  	;; this is mirror of melpa and gnu
-  	(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-  				 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
-  	)
-    (progn
-      (message "You are free.")
-      (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			       ("marmalade" . "https://marmalade-repo.org/packages/")
-			       ("melpa" . "https://melpa.org/packages/")))
-      ))
-  (message "load")
+	(message "You are free.")
+	(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+				 ("marmalade" . "https://marmalade-repo.org/packages/")
+				 ("melpa" . "https://melpa.org/packages/")))
+	))
+    )
+  ;; Run set-up melpa when Emacs is idle.
+  (run-with-idle-timer 4 nil 'samray/setup-melpa)
+
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
@@ -106,13 +110,6 @@
         )
     (add-to-list 'load-path lisp-dir)
     (add-to-list 'load-path manual-add-packages)
-    ;; (mapc (lambda (fname)
-    ;; 	    (let ((feat (intern (file-name-base fname))))
-    ;; 	      (if init-file-debug
-    ;; 		  (message "Feature '%s' loaded in %.2fs" feat
-    ;; 			   (benchmark-elapse (require feat fname)))
-    ;; 		(require feat fname))))
-    ;; 	  (directory-files lisp-dir t "\\.el"))
     )
 
   (require 'cl)
