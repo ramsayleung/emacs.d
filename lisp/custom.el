@@ -26,6 +26,7 @@
  '(fci-rule-color "#383838")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote dark))
+ '(helm-ag-base-command "rg --no-heading")
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))

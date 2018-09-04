@@ -26,7 +26,7 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
-(defvar samray/completion-framework 'helm)
+(defvar samray/completion-framework 'ivy)
 (defvar samray/does-use-ivy (if (eq samray/completion-framework 'ivy) t nil))
 
 (setq gc-cons-threshold (* 128 1024 1024))

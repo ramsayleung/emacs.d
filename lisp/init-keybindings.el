@@ -107,7 +107,10 @@
 								       (call-interactively 'counsel-projectile-rg)
 								     (call-interactively 'helm-projectile-rg)))
 					  :which-key "projectile rg")
-				"p p" 'counsel-projectile-switch-project
+				"p p" '((lambda () (interactive) (if samray/does-use-ivy
+								     (call-interactively 'counsel-projectile-switch-project)
+								   (call-interactively 'helm-projectile-switch-project)))
+					:which-key "projectile switch project")
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
 				"q d" 'samray/restart-emacs-debug-init
