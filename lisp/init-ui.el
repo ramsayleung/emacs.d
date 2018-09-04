@@ -110,23 +110,24 @@ This code toggles between them."
 
 ;;; Change vertical-border for terminal Emacs.
 ;;; Vertical-border in terminal is ugly, fix it.
-(if window-system
+(if (not (eq window-system 'nil))
     (progn
-      (set-face-inverse-video 'vertical-border nil)
-      (set-face-background 'vertical-border (face-background 'vertical-border))
-      ;; ;; Set symbol for the border
-      (set-display-table-slot standard-display-table
-                              'vertical-border
-                              (make-glyph-code ?┃))
-      )
-  (progn
 ;;; When `scroll-bar-mode` is enabled, vertical-border is controlled implictly
 ;;; by `scroll-bar-mode`.
 ;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Scroll-Bars.html#Scroll-Bars
 ;;; Change vertical-border for GUI Emacs.
-    (window-divider-mode)
-    (setq window-divider-default-right-width 2)
-    ))
+      (setq window-divider-default-right-width 2)
+      (window-divider-mode)
+      )
+  (progn
+    (set-face-inverse-video 'vertical-border nil)
+    (set-face-background 'vertical-border (face-background 'vertical-border))
+    ;; ;; Set symbol for the border
+    (set-display-table-slot standard-display-table
+                            'vertical-border
+                            (make-glyph-code ?┃))
+    )
+  )
 (defun samray/tone-down-fringes ()
   "Set the fringe colors to whatever is the background color."
   (set-face-attribute 'fringe nil
@@ -183,20 +184,22 @@ This code toggles between them."
 ;;----------;;
 ;; highlight current line
 (global-hl-line-mode 1)
-;; (setq highlight-current-line-globally t)
-;; (setq highlight-current-line-high-faces nil)
-;; (setq highlight-current-line-whole-line nil)
-;; (setq hl-line-face (quote highlight))
 ;; don't blink the cursor
 (blink-cursor-mode -1)
 
-;;set the cursor shape to box
-(setq-default cursor-type 'box)
+;; Only use `bar' type of cursor shape
+(add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
+
 ;; make sure transient mark mode is enabled (it should be by default,
 ;; but just in case)
 (transient-mark-mode t)
 ;; turn on mouse wheel support for scrolling
 ;; (mouse-wheel-mode t)
+
+;;; Turn-off Alarm Bell
+(setq ring-bell-function #'ignore)
+;;; Use visible bell instead of buzzer
+(setq visible-bell t)
 
 ;;  Color Theme  ;;
 ;;---------------;;
@@ -221,7 +224,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn spacemacs-dark))
+(defvar samray-theme-list '(zenburn manoj-dark))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
@@ -309,7 +312,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;; item of time-themes-table: ( hours-in-string . theme-name)
 ;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
 ;; you could add more items.
-(samray/config-time-themes-table '(("6" . zenburn) ("18" . spacemacs-dark) ))
+(samray/config-time-themes-table '(("6" . zenburn) ("18" . manoj-dark) ))
 ;; (samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;

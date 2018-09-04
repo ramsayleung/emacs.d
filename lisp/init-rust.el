@@ -34,18 +34,6 @@
 ;;; https://github.com/rust-lang/rust-mode/issues/208
 (setq rust-match-angle-brackets nil)
 
-;; (use-package racer
-;;   :ensure t
-;;   :defer t
-;;   :init (progn
-;; 	  ;; Set path to racer binary
-;; 	  (setq racer-cmd (expand-file-name "~/.cargo/bin/racer"))
-;; 	  ;; Set path to rust src directory
-;; 	  (setq racer-rust-src-path  (getenv "RUST_SRC_PATH"))
-;;   	  (add-hook 'rust-mode-hook 'racer-mode)
-;; 	  (add-hook 'racer-mode-hook 'eldoc-mode)
-;; 	  )
-;;   )
 (use-package cargo
   :ensure t
   :defer t

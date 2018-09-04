@@ -11,7 +11,7 @@
 
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . " Yas")
+  :diminish (yas-minor-mode . " Ya")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
@@ -60,8 +60,8 @@
   :ensure t
   :init (progn
 	  ;; (exec-path-from-shell-initialize)
-	  ;; (when (memq window-system '(mac ns x))
-	  ;;   (exec-path-from-shell-initialize))
+	  (when (memq window-system '(mac ns x))
+	    (exec-path-from-shell-initialize))
 	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
 	  ;; when it is nil, exec-path-from-shell will read environment variable
 	  ;; from .zshenv instead of .zshrc, but makes sure that you put all
@@ -203,17 +203,17 @@ similar to shell-pop"
 	      (progn (bury-buffer)
 		     (delete-window)))
 
-	(progn (samray/split-window-below-and-move)
-	       (switch-to-buffer repl-buffer-name)
-	       (goto-char (point-max))
-	       (evil-insert-state))
+	(progn
+	  (samray/split-window-below-and-move)
+	  (switch-to-buffer repl-buffer-name)
+	  (goto-char (point-max))
+	  (evil-insert-state))
 	)
     (progn
       (run-python)
       (samray/split-window-below-and-move)
       (switch-to-buffer repl-buffer-name)
-      (goto-char (point-max))
-      (evil-insert-state))))
+      (goto-char (point-max)))))
 
 (defun samray/repl-pop ()
   "Run REPL for different major mode and switch to the repl buffer.
@@ -245,7 +245,7 @@ similar to shell-pop"
 
 
 (defun samray/imenu ()
-  "Call lsp-ui-imenu firstly, if lsp-mode is disable, call counsel-imenu instead"
+  "Call lsp-ui-imenu firstly, if lsp-mode is disable, call counsel-imenu instead."
   (interactive)
   (if lsp-mode
       (lsp-ui-imenu)
