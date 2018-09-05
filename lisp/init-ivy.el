@@ -20,31 +20,6 @@
   :commands (avy-goto-char avy-goto-line)
   :ensure t)
 
-(use-package ivy-posframe
-  :ensure t
-  :config (progn
-	    ;; (setq ivy-display-function #'ivy-posframe-display)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
-	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
-	    (ivy-posframe-enable)
-	    (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
-	    (defun samray/setup-ivy-window()
-	      "Set up ivy height and width."
-	      (setq ivy-posframe-min-height (/(window-body-height)2))
-	      (setq ivy-posframe-height (/ (window-body-height)2))
-	      (setq ivy-posframe-width (round(* (window-body-width) 0.86)))
-	      (setq ivy-posframe-min-width (round(* (window-body-width) 0.86)))
-	      )
-	    (samray/setup-ivy-window)
-	    (defadvice select-window (after select-window-ivy activate)
-	      "Advice `select-window` to set up ivy-posframe-width/height dynamicly."
-	      (samray/setup-ivy-window)
-	      )
-	    ))
-
 (use-package ivy
   :ensure t
   :diminish ivy-mode
@@ -140,7 +115,7 @@ bookmarks reccently opened files and window layout."
   )
 
 (defun samray/counsel-ag-symbol-at-point ()
-  "Search for number at point using helm-projectile-ag."
+  "Search for number at point using counsel-ag."
   (interactive)
   (setq cached-symbol-at-point (thing-at-point `symbol))
   (add-hook 'post-command-hook 'insert-symbol-at-point)

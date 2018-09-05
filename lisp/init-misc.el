@@ -25,6 +25,14 @@
   :ensure t
   :config (keyfreq-mode 1) (keyfreq-autosave-mode 1))
 
+;; Dim the font color of text in surrounding paragraphs
+(use-package focus
+  :ensure t
+  :config (progn
+	    (focus-mode)
+	    (add-hook 'prog-mode-hook focus-mode)
+	    ))
+
 ;;; use Irc in Emacs
 (use-package circe
   :if (not (eq system-type 'windows-nt))
@@ -41,6 +49,17 @@
 		     )))
 	    ))
 
+(use-package pangu-spacing
+  :ensure t
+  :config
+  (progn
+    ;; start pangu-spacing globally
+    (global-pangu-spacing-mode 1)
+    ;; Always insert `real' space in org-mode.
+    (add-hook 'org-mode-hook
+              '(lambda ()
+		 (set (make-local-variable 'pangu-spacing-real-insert-separtor) t))))
+  )
 ;;; Try out Emacs Package without install
 (use-package try
   :commands try
@@ -58,10 +77,10 @@
 (setq abbrev-mode 'silently)
 (setq save-abbrevs t)
 
-;;; Always start Emacs daemon when starts up.
-(require 'server)
-(unless (server-running-p)
-  (server-start))
+;; Only start server mode if I'm not root
+(unless (string-equal "root" (getenv "USER"))
+  (require 'server)
+  (unless (server-running-p) (server-start)))
 
 
 (defadvice bookmark-jump (after bookmark-jump activate)
@@ -225,6 +244,14 @@ removal."
                 (insert (format "|sudo:%s" (or last-ssh-hostname "localhost"))))
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
+
+(defun samray/file-reopen-as-root ()
+  "Reopen current file as root."
+  (interactive)
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:"
+             buffer-file-name))))
 (defun samray/toggle-maximize-buffer ()
   "Maximize buffer."
   (interactive)
@@ -264,6 +291,7 @@ removal."
       (dired (getenv "TMPDIR"))
     (dired "/tmp")
     ))
+
 (message "loading init-misc")
 (provide 'init-misc)
 ;;; init-misc.el ends here

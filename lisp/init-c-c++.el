@@ -9,6 +9,13 @@
   :config (progn
 	    (setq clang-format-style "google"))
   )
+(use-package cc-mode
+  :mode
+  (("\\.c\\'" . c-mode)
+   ("\\.h\\'" . c++-mode)
+   ("\\.hpp\\'" . c++-mode)
+   ("\\.cpp\\'" . c++-mode))
+  )
 
 ;;; Google C style
 (use-package google-c-style
@@ -63,8 +70,27 @@
   )
 
 
-;;; Tell emacs to open .h file in C++ mode
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+;;; http://coldnew.github.io/coldnew-emacs/
+(defun samray/cc-mode/highlight-if-0 ()
+  "Highlight c/c++ #if 0 #endif macros."
+  (setq cpp-known-face 'default)
+  (setq cpp-unknown-face 'default)
+  (setq cpp-known-writable 't)
+  (setq cpp-unknown-writable 't)
+  (setq cpp-edit-list '(("0" '(foreground-color . "gray")  default both)
+                        ("1" default font-lock-comment-face both)))
+  (cpp-highlight-buffer t))
+
+;; Add to c/c++ mode
+(defun samray/cc-mode/highlight-if-0-hook ()
+  (when (or (eq major-mode 'c++-mode) (eq major-mode 'c-mode))
+    (samray/cc-mode/highlight-if-0)))
+(add-hook 'after-save-hook #'samray/cc-mode/highlight-if-0-hook)
+;;; Extra highlight keywords for C/C++
+(dolist (m '(c-mode c++-mode))
+  (font-lock-add-keywords
+   m
+   '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
 (provide 'init-c-c++)
 
 ;;; init-c-c++.el ends here

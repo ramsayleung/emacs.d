@@ -26,6 +26,7 @@
  '(fci-rule-color "#383838")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote dark))
+ '(helm-ag-base-command "rg --no-heading")
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
@@ -34,7 +35,7 @@
     ("~/Dropbox/Org/agenda.org" "~/Dropbox/Org/todo.org")))
  '(package-selected-packages
    (quote
-    (ivy-posframe flycheck-posframe company-childframe lsp-clangd eyebrowse nov flycheck-google-cpplint rjsx-mode quickrun ob-rust smex spacemacs-theme org-preview-html lsp-ui company-rtags company-lsp ivy-rtags realgud es-mode adaptive-wrap em-cmpl company-eshell-autosuggest eshell-prompt-extra eshell-git-prompt golden-ratio org-journal nyan-mode treemacs-evil treemacs-projectile docker dockerfile-mode solarized-theme monokai-theme cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
+    (helm-ag helm-rg helm-swoop helm-yasnippet helm-projectile helm focus noflet 0blayout 2048-game pip-requirements pipenv ivy-posframe flycheck-posframe company-childframe lsp-clangd eyebrowse nov flycheck-google-cpplint rjsx-mode quickrun ob-rust smex spacemacs-theme org-preview-html lsp-ui company-rtags company-lsp ivy-rtags realgud es-mode adaptive-wrap em-cmpl company-eshell-autosuggest eshell-prompt-extra eshell-git-prompt golden-ratio org-journal nyan-mode treemacs-evil treemacs-projectile docker dockerfile-mode solarized-theme monokai-theme cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
    (quote

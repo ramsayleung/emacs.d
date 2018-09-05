@@ -1,4 +1,4 @@
-;;; package --- Summary -*- lexical-binding: t -*-
+;;; package --- Summary ;;; -*- lexical-binding: t; -*-
 ;;; code:
 ;;; Commentary:
 
@@ -57,6 +57,8 @@ debug-init and load the given list of packages."
 			     load-packages-string ")"))
 	       args))))
   )
+
+;;; In terminal Emacs, let emacs use system clipboard as GUI Emacs.
 (use-package xclip
   :load-path "~/.emacs.d/additional-packages/xclip.el"
   :config (xclip-mode 1)
@@ -80,12 +82,15 @@ debug-init and load the given list of packages."
 
 (delete-selection-mode t)
 
+
+;;; Some information about myself.
+(setq user-full-name "Samray, Leung")
+(setq user-mail-address "samrayleung@gmail.com")
+
 ;;; While we are in the topic of prompting, a lot of the default prompts ask
 ;;; for a yes or a no. I’m lazy and so I don’t want to type the full words.
 ;;; Let’s just make it accept y or n
 (fset 'yes-or-no-p 'y-or-n-p)
-
-
 
 ;;; Tramp
 (require 'tramp)
@@ -112,5 +117,41 @@ debug-init and load the given list of packages."
 	      )
 	  (keyboard-quit))
 	))))
+
+;;; http://lists.gnu.org/archive/html/help-gnu-emacs/2008-06/msg00087.html
+(defmacro samray/measure-time (&rest body)
+  "Measure the time it takes to evaluate BODY."
+  `(let ((time (current-time)))
+     ,@body
+     (message "%.06f" (float-time (time-since time)))))
+
+(defmacro samray/async-function (current-func)
+  "Wrap function CURRENT-FUNC with `async`."
+  (make-thread (lambda ()
+		 `(let ((elapsed-time (samray/measure-time (,current-func))))
+		    (message "Run `%s` with thread, elapsed time is %s" ',current-func ,elapsed-time))))
+  )
+(defun samray/package-refresh-contents ()
+  "Package refresh contents with other thread."
+  (interactive)
+  (make-thread (lambda ()
+		 (let* ((elapsed-time (samray/measure-time (package-refresh-contents))))
+		   (message "Run `%s` with thread, elapsed time is %s" '(package-refresh-contents) elapsed-time))))
+  )
+(samray/async-function package-refresh-contents)
+;;; Don't ask me when close emacs with process is running
+(use-package noflet
+  :ensure t
+  :config (progn
+	    (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+	      "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+	      (noflet ((process-list ())) ad-do-it))
+	    )
+
+;;; Don't ask me when kill process buffer
+  (setq kill-buffer-query-functions
+	(remq 'process-kill-buffer-query-function
+	      kill-buffer-query-functions))
+  )
 (provide 'init-better-default)
 ;;; init-better-default.el ends here
