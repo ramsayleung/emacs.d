@@ -4,7 +4,7 @@
 
 (use-package helm
   :ensure t
-  :diminish (helm-mode . " H")
+  :diminish helm-mode
   :config (progn
 	    ;; enable helm globally
 	    (helm-mode 1)

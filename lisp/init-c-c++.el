@@ -29,15 +29,6 @@
 	 ("\\.cmake\\'" . cmake-mode)
 	 ))
 
-;;; Syntax check and code-completion with CMake project
-(use-package cpputils-cmake
-  :ensure t
-  :config
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode)
-                (cppcm-reload-all)))))
-
 ;;; Semantic Refactor is a C/C++ refactoring tool based on Semantic parser framework.
 (use-package srefactor
   :ensure t)

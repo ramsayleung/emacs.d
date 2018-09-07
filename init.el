@@ -132,6 +132,7 @@
     )
   (require 'init-keybindings)
   (require 'init-lisp)
+  (require 'init-lsp)
   (require 'init-markdown)
   (require 'init-misc)
   (require 'init-org)

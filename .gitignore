@@ -27,3 +27,4 @@ irony/*
 smex-items
 abbrev_defs
 */custom.el
+srecode-map.el
