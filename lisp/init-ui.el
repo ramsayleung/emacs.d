@@ -4,10 +4,6 @@
 ;;;----------------;;;
 ;;; User Interface ;;;
 
-
-;;;----------------;;;
-
-
 ;;; Ignore case when searching
 (setq case-fold-search t)
 

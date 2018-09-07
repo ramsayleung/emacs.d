@@ -45,12 +45,15 @@
   )
 (use-package helm-projectile
   :ensure t
-  :after (helm projectile)
-  :config
-  ;; make projectile use helm as completion system
-  (setq projectile-completion-system 'helm)
-  ;; start helm-projectile
-  (helm-projectile-on))
+  :init (progn
+	  ;; make projectile use helm as completion system
+	  (setq projectile-completion-system 'helm)
+	  )
+  :config(progn
+	   ;; start helm-projectile
+	   (helm-projectile-on)
+	   )
+  )
 (use-package helm-swoop
   :ensure t
   :config (progn

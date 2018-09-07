@@ -20,10 +20,14 @@
    is the most efficent way, so there is no need to give it up. By the way, it
    is said that Emacs is "a great operating system, lacking only a decent
    ediotr", now I have Evil, I have them both.
-** Ivy
-   I choose Ivy instead of Helm, becuase Ivy is simple, clear(compare with Helm)
-   but powerful enough to suit all my need. If you are interested in Ivy as I
-   do, you could check this post [[https://sam217pa.github.io/2016/09/13/from-helm-to-ivy/][From Helm, To Ivy]]
+** Ivy/Helm
+   I have a variable 
+   #+BEGIN_SRC emacs-lisp
+     (defvar samray/completion-framework 'helm)
+   #+END_SRC
+   to choose completion framework -- Ivy or Helm. My first
+   choice is Ivy, but now I use Helm, beacuase I don't like Ivy use minibuffer
+   while Helm has a Helm minibuffer, which is a neat feature.
 ** Company
    As for the completion framework, my choice is company-mode. Althoug
    auto-complete has better document, but company is easier to setup and less

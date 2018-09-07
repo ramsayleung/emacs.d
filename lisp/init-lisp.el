@@ -12,6 +12,6 @@
 	  )
   :diminish paredit-mode
   )
-(provide 'init-elisp)
+(provide 'init-lisp)
 
-;;; init-elisp.el ends here
+;;; init-lisp.el ends here
