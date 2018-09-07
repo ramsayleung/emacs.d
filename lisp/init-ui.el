@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; package --- Summary  -*- lexical-binding: t -*-
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -11,8 +11,6 @@
 ;;; Ignore case when searching
 (setq case-fold-search t)
 
-;;; To beautify window separator
-(window-divider-mode t)
 ;;;------------------;;;
 ;;; Windows & Frames ;;;
 ;;;------------------;;;

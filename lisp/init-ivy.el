@@ -1,6 +1,10 @@
-;;; package --- Summary
+;;; package --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
+
+(defmacro samray/after-stack-clears (&rest body)
+  "Do BODY after the call stack is clear."
+  `(run-with-timer 1 nil (lambda () ,@body)))
 
 (use-package counsel
   :ensure t
@@ -20,6 +24,8 @@
   :ensure t
   :diminish ivy-mode
   :init (progn
+	  ;; number of result lines to display, set height as width-body-height/2
+	  (setq ivy-height (/ (window-body-height) 2))
 	  (setq ivy-use-selectable-prompt t)
 	  (setq ivy-re-builders-alist
 		'((t . ivy--regex-plus)))

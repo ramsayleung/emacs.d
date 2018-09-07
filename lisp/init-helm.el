@@ -23,7 +23,6 @@
 					      helm-source-recentf
 					      helm-source-bookmarks
 					      helm-source-buffer-not-found))
-	    
 	    (when (executable-find "curl")
 	      (setq helm-google-suggest-use-curl-p t))
 
@@ -63,6 +62,12 @@
   :config (progn
 	    (custom-set-variables
 	     '(helm-ag-base-command "rg --no-heading"))
+	    ))
+
+(use-package helm-xref
+  :ensure t
+  :config (progn
+	    (setq xref-show-xrefs-function 'helm-xref-show-xrefs)
 	    ))
 
 (provide 'init-helm)

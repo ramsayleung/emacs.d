@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; package --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
 
@@ -7,40 +7,40 @@
   :config(progn
 	   (window-numbering-mode t)))
 
-(use-package smartparens
-  :ensure t
-  :demand t
-  :diminish smartparens-mode
-  :config
-  (progn
-    (smartparens-global-mode t)
-    ;; show single quote "'" in emacs and lisp-interaction-mode instead of single quote pair "''"
-    (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode rust-mode) "'" nil :actions nil)
-    (sp-pair "<" ">" :actions '(wrap))
-    )
-  )
+;; (use-package smartparens
+;;   :ensure t
+;;   :demand t
+;;   :diminish smartparens-mode
+;;   :config
+;;   (progn
+;;     (smartparens-global-mode t)
+;;     ;; show single quote "'" in emacs and lisp-interaction-mode instead of single quote pair "''"
+;;     (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode rust-mode) "'" nil :actions nil)
+;;     (sp-pair "<" ">" :actions '(wrap))
+;;     )
+;;   )
 
-(require 'cl)
-(defmacro def-pairs (pairs)
-  "Define PAIRS."
-  `(progn
-     ,@(loop for (key . val) in pairs
-             collect
-             `(defun ,(read (concat
-                             "wrap-with-"
-                             (prin1-to-string key)
-                             "s"))
-                  (&optional arg)
-                (interactive "p")
-                (sp-wrap-with-pair ,val)))))
+;; (require 'cl)
+;; (defmacro def-pairs (pairs)
+;;   "Define PAIRS."
+;;   `(progn
+;;      ,@(loop for (key . val) in pairs
+;;              collect
+;;              `(defun ,(read (concat
+;;                              "wrap-with-"
+;;                              (prin1-to-string key)
+;;                              "s"))
+;;                   (&optional arg)
+;;                 (interactive "p")
+;;                 (sp-wrap-with-pair ,val)))))
 
-(def-pairs ((paren        . "(")
-            (bracket      . "[")
-            (brace        . "{")
-            (single-quote . "'")
-            (double-quote . "\"")
-            (back-quote   . "`")
-            (angle-bracket . "<")))
+;; (def-pairs ((paren        . "(")
+;;             (bracket      . "[")
+;;             (brace        . "{")
+;;             (single-quote . "'")
+;;             (double-quote . "\"")
+;;             (back-quote   . "`")
+;;             (angle-bracket . "<")))
 ;; delete spaces at once
 (use-package hungry-delete
   :ensure t
@@ -50,10 +50,12 @@
 (use-package which-key
   :ensure t
   :diminish which-key-mode
+  :init (progn
+	  (setq which-key-idle-delay 0.3)
+	  (setq which-key-enable-extended-define-key t)
+	  )
   :config(progn
 	   (which-key-mode t)
-	   (setq which-key-idle-delay 0.3)
-	   (setq which-key-enable-extended-define-key t)
 	   ))
 
 ;;; Highlight delimiter such as parenthese,brackets or braces

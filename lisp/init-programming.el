@@ -7,6 +7,20 @@
 (use-package realgud
   :ensure t
   :commands (realgud:gdb realgud:pdb)
+  :config (progn
+	    (defvar menubar-last
+	      (make-ring 20))
+	    (ring-insert menubar-last "dummy")
+	    ;; Enable menu-bar and tool-bar in specified mode.
+	    (defadvice select-window (after select-window-menubar activate)
+	      (unless (equal (buffer-name) (ring-ref menubar-last 0))
+		(ring-insert menubar-last (buffer-name))
+		(let ((yes-or-no
+		       (if (memq major-mode '(comint-mode))
+			   1 -1)))
+		  (menu-bar-mode yes-or-no)
+		  (tool-bar-mode yes-or-no))))
+	    )
   )
 
 (use-package yasnippet

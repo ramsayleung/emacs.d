@@ -11,6 +11,8 @@
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
 (defvar dired-compress-files-alist
   '(("\\.tar\\.gz\\'" . "tar -c %i | gzip -c9 > %o")
     ("\\.zip\\'" . "zip %o -r --filesync %i"))
@@ -50,9 +52,9 @@ output file. %i path(s) are relative, while %o is absolute.")
       (dired-find-file)
     (dired-find-alternate-file)))
 ;;; press Enter to open a buffer
-(define-key dired-mode-map (kbd "RET") 'samray/dired-find-alternate-file)  
+(define-key dired-mode-map (kbd "RET") 'samray/dired-find-alternate-file)
 ;;; prevent Emacs from asking some annoying questions
-(put 'dired-find-alternate-file 'disabled nil) 
+(put 'dired-find-alternate-file 'disabled nil)
 (setq dired-listing-switches "-alh")
 (provide 'init-dired)
 ;;; init-dired.el ends here
