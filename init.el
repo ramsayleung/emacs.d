@@ -69,7 +69,8 @@
       (string= "CN" ip-location)
       ))
   (defun samray/setup-melpa ()
-    (if (samray/ip-from-china-p)
+    ;;(if (samray/ip-from-china-p)
+    (if t
 	;; It takes too much time to send and receive request, so it slows donw
 	;; startup. Improve it unitl emacs 26(multithread).
 	;; (if (samray/ip-from-china-p)
@@ -87,9 +88,7 @@
 				 ("melpa" . "https://melpa.org/packages/")))
 	))
     )
-  ;; Run set-up melpa when Emacs is idle.
-  (run-with-idle-timer 4 nil 'samray/setup-melpa)
-
+  (samray/setup-melpa)
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
@@ -120,7 +119,6 @@
   (require 'init-chinese)
   (require 'init-c-c++)
   (require 'init-dired)
-  (require 'init-elisp)
   (require 'init-eshell)
   (require 'init-evil)
   (require 'init-go)
@@ -133,6 +131,7 @@
       (require 'init-helm))
     )
   (require 'init-keybindings)
+  (require 'init-lisp)
   (require 'init-markdown)
   (require 'init-misc)
   (require 'init-org)

@@ -97,7 +97,9 @@
 				"p s r" (general-predicate-dispatch 'helm-projectile-rg
 					  :docstring "projectile rg search"
 					  (samray/does-use-ivy) 'counsel-projectile-rg)
-				"p p" 'counsel-projectile-switch-project
+				"p p" (general-predicate-dispatch 'helm-projectile-switch-project
+					:docstring "projectile switch project"
+					(samray/does-use-ivy) 'counsel-projectile-switch-project)
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
 				"q d" 'samray/restart-emacs-debug-init
@@ -113,7 +115,6 @@
 				"s r" (general-predicate-dispatch 'helm-ag
 					:docstring "rg search"
 					(samray/does-use-ivy) 'counsel-rg)
-				"s s" 'swiper
 				"s s" (general-predicate-dispatch 'helm-swoop
 					(samray/does-use-ivy) 'swiper)
 				"t" '(:ignore t :which-key "toggle")
@@ -432,47 +433,39 @@
 				"g l"            'pdf-view-goto-label
 				"g t"            'pdf-view-goto-page
 				)
+	    (when (not( samray/does-use-ivy))
+	      (require 'helm-config)
+	      (general-define-key "C-c h" 'helm-command-prefix)
+	      )
 
 	    ;; non-evil ,without a prefix
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
+	     [remap evil-repeat-pop-next] 'xref-find-definitions
 	     "C-k" 'sp-kill-hybrid-sexp
 	     "C-c a" 'org-agenda
 	     "C-c e" 'hydra-edit/body
 	     "C-c y p" 'youdao-dictionary-search-at-point+
 	     "C-c t" '(:ignore t :which-key "treemacs")
 	     "C-c w" 'hydra-window-resize/body
-	     "C-c (" 'wrap-with-parens
-	     "C-c [" 'wrap-with-brackets
-	     "C-c {" 'wrap-with-braces
-	     "C-c '" 'wrap-with-single-quotes
-	     "C-c \"" 'wrap-with-double-quotes
-	     "C-c _" 'wrap-with-underscotes
-	     "C-c `" 'wrap-with-back-quotes
-	     "C-c <" 'wrap-with-angle-brackets
+	     "C-c p" '(:ignore t :which-key "paredit")
+	     "C-c p (" 'paredit-wrap-round
+	     "C-c p [" 'paredit-wrap-square
+	     "C-c p {" 'paredit-wrap-curly
+	     "C-c p <" 'paredit-wrap-angled
+	     "C-c p \"" 'paredit-meta-doublequote
 	     "C-e" 'end-of-line
 	     "C-x k" 'kill-this-buffer
 	     "C-x t" 'samray/dired-tmp-dir
 	     "C-x C-r" 'recentf-open-files
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
-	     "C-M-a" 'sp-beginning-of-sexp
-	     "C-M-e" 'sp-end-of-sexp
-	     "C-M-k" 'sp-kill-sexp
-	     "C-k" 'sp-kill-hybrid-sexp
-	     "C-<down>" 'sp-down-sexp
-	     "C-<up>" 'sp-up-sexp
-	     "M-<down>" 'sp-backward-down-sexp
-	     "M-<up>" 'sp-backward-up-sexp
 	     "M-i" 'symbol-overlay-put
-	     "M-k" 'sp-backward-kill-sexp
-	     "M-[" 'sp-backward-unwrap-sexp
-	     "M-]" 'sp-unwrap-sexp
 	     "<f5>" 'revert-buffer
 	     ))
 
-  ;; Format buffer
+  ;; Format "buffer"
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
 		      "C-c ." 'samray/python-format-and-isort-buffer)

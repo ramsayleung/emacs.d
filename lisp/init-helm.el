@@ -21,6 +21,12 @@
 					      helm-source-recentf
 					      helm-source-bookmarks
 					      helm-source-buffer-not-found))
+	    (defun samray/helm-find-files-navigate-back (orig-fun &rest args)
+	      "Make helm-find-files ORIG-FUN with ARGS backspace as like Ivy."
+	      (if (= (length helm-pattern) (length (helm-find-files-initial-input)))
+		  (helm-find-files-up-one-level 1)
+		(apply orig-fun args)))
+	    (advice-add 'helm-ff-delete-char-backward :around #'samray/helm-find-files-navigate-back)
 	    )
   )
 (use-package helm-projectile
@@ -42,6 +48,12 @@
   :config (progn
 	    (custom-set-variables
 	     '(helm-ag-base-command "rg --no-heading"))
+	    ))
+
+(use-package helm-xref
+  :ensure t
+  :config (progn
+	    (setq xref-show-xrefs-function 'helm-xref-show-xrefs)
 	    ))
 
 (provide 'init-helm)
