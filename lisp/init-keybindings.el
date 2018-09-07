@@ -98,8 +98,9 @@
 					  :docstring "projectile rg search"
 					  (samray/does-use-ivy) 'counsel-projectile-rg)
 				"p p" (general-predicate-dispatch 'helm-projectile-switch-project
-					:docstring "projectile switch project"
-					(samray/does-use-ivy) 'counsel-projectile-switch-project)
+					  :docstring "projectile switch project"
+					  (samray/does-use-ivy) 'counsel-projectile-switch-project)
+
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
 				"q d" 'samray/restart-emacs-debug-init
@@ -145,14 +146,11 @@
 				"2"  'select-window-2
 				"3"  'select-window-3
 				"4"  'select-window-4
-				"5"  'select-window-5
-				)
+				"5"  'select-window-5)
 	    
 	    (general-define-key
 	     "C-s" (general-predicate-dispatch 'helm-swoop
 		     (samray/does-use-ivy) 'counsel-grep-or-swiper)
-	     "C-c b" (general-predicate-dispatch 'helm-projectile-ag
-		       (samray/does-use-ivy) 'samray/counsel-ag-symbol-at-point)
 	     "C-h f" (general-predicate-dispatch 'describe-function
 		       (samray/does-use-ivy) 'counsel-describe-function)
 	     "C-h v" (general-predicate-dispatch 'describe-variable
@@ -163,8 +161,6 @@
 		       (samray/does-use-ivy) 'samray/ivy-switch-to-buffer-enhanced)
 	     "C-x C-f" (general-predicate-dispatch 'helm-find-files
 			 (samray/does-use-ivy) 'counsel-find-file)
-	     "C-c C-h" (general-predicate-dispatch 'helm-imenu
-			 (samray/does-use-ivy) 'counsel-imenu)
 	     "M-x" (general-predicate-dispatch 'helm-M-x
 		     (samray/does-use-ivy) 'counsel-M-x)
 	     )
@@ -464,6 +460,8 @@
 	     "M-i" 'symbol-overlay-put
 	     "<f5>" 'revert-buffer
 	     ))
+  (general-define-key
+   "C-c h" 'helm-command-prefix)
 
   ;; Format "buffer"
   ;; Python mode
@@ -548,7 +546,14 @@
   (with-eval-after-load 'popwin
     (general-define-key
      "C-c C-z" popwin:keymap
-     )))
+     ))
+  (when (not(samray/does-use-ivy))
+    (require 'helm-config))
+  (with-eval-after-load 'helm-config
+    (general-define-key
+     "C-c h" 'helm-command-prefix
+     ))
+  )
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)

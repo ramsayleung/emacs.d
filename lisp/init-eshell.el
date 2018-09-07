@@ -11,6 +11,28 @@
     (if (= p (point))
 	(beginning-of-line))))
 
+(defun eshell/unpack (file &rest args)
+  "Unpack FILE with ARGS using default command."
+  (let ((command (some (lambda (x)
+                         (if (string-match-p (car x) file)
+                             (cadr x)))
+                       '((".*\.tar.bz2" "tar xjf")
+                         (".*\.tar.gz" "tar xzf")
+                         (".*\.bz2" "bunzip2")
+                         (".*\.rar" "unrar x")
+                         (".*\.gz" "gunzip")
+                         (".*\.tar" "tar xf")
+                         (".*\.tbz2" "tar xjf")
+                         (".*\.tgz" "tar xzf")
+                         (".*\.zip" "unzip")
+                         (".*\.Z" "uncompress")
+                         (".*" "echo 'Could not unpack the file:'")))))
+    (let ((unpack-command(concat command " " file " " (mapconcat 'identity args " "))))
+      (eshell/printnl "Unpack command: " unpack-command)
+      (eshell-command-result unpack-command))
+    ))
+
+
 (defun samray/eshell-sudo-toggle ()
   "Add/Remove sudo in the begining of command line."
   (interactive)
