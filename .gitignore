@@ -26,3 +26,4 @@ irony/*
 */smex-items/*
 smex-items
 abbrev_defs
+*/custom.el

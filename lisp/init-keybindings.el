@@ -97,7 +97,9 @@
 				"p s r" (general-predicate-dispatch 'helm-projectile-rg
 					  :docstring "projectile rg search"
 					  (samray/does-use-ivy) 'counsel-projectile-rg)
-				"p p" 'counsel-projectile-switch-project
+				"p p" (general-predicate-dispatch 'helm-projectile-switch-project
+					  :docstring "projectile switch project"
+					  (samray/does-use-ivy) 'counsel-projectile-switch-project)
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
 				"q d" 'samray/restart-emacs-debug-init
@@ -113,7 +115,6 @@
 				"s r" (general-predicate-dispatch 'helm-ag
 					:docstring "rg search"
 					(samray/does-use-ivy) 'counsel-rg)
-				"s s" 'swiper
 				"s s" (general-predicate-dispatch 'helm-swoop
 					(samray/does-use-ivy) 'swiper)
 				"t" '(:ignore t :which-key "toggle")
@@ -144,8 +145,7 @@
 				"2"  'select-window-2
 				"3"  'select-window-3
 				"4"  'select-window-4
-				"5"  'select-window-5
-				)
+				"5"  'select-window-5)
 	    
 	    (general-define-key
 	     "C-s" (general-predicate-dispatch 'helm-swoop

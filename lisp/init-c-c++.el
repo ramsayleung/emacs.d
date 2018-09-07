@@ -9,6 +9,7 @@
   :config (progn
 	    (setq clang-format-style "google"))
   )
+
 (use-package cc-mode
   :mode
   (("\\.c\\'" . c-mode)
@@ -27,6 +28,56 @@
 	 ("CMakeLists\\.txt\\'" . cmake-mode)
 	 ("\\.cmake\\'" . cmake-mode)
 	 ))
+
+;;; Syntax check and code-completion with CMake project
+(use-package cpputils-cmake
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode)
+                (cppcm-reload-all)))))
+
+;;; Semantic Refactor is a C/C++ refactoring tool based on Semantic parser framework.
+(use-package srefactor
+  :ensure t)
+
+;;; http://coldnew.github.io/coldnew-emacs/#orgheadline267
+;;; Use regexp to find header is C++ header or not
+(add-to-list 'magic-mode-alist
+             `(,(lambda ()
+                  (and (string= (file-name-extension (or (buffer-file-name) "")) "h")
+                       (or (re-search-forward "#include <\\w+>"
+                                              magic-mode-regexp-match-limit t)
+                           (re-search-forward "\\W\\(class\\|template\\namespace\\)\\W"
+                                              magic-mode-regexp-match-limit t)
+                           (re-search-forward "std::"
+                                              magic-mode-regexp-match-limit t))))
+               . c++-mode))
+
+;;; Extra highlight keywords for C/C++
+(dolist (m '(c-mode c++-mode))
+  (font-lock-add-keywords
+   m
+   '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
+
+;;; Comment #if 0 #endif region
+(defun samray/cc-mode/highlight-if-0 ()
+  "Highlight c/c++ #if 0 #endif macros."
+  (setq cpp-known-face 'default)
+  (setq cpp-unknown-face 'default)
+  (setq cpp-known-writable 't)
+  (setq cpp-unknown-writable 't)
+  (setq cpp-edit-list '(("0" '(foreground-color . "gray")  default both)
+                        ("1" default font-lock-comment-face both)))
+  (cpp-highlight-buffer t))
+
+;; Add to c/c++ mode
+(defun samray/cc-mode/highlight-if-0-hook ()
+  "Highlight if-0 in `cc-mode`."
+  (when (or (eq major-mode 'c++-mode) (eq major-mode 'c-mode))
+    (samray/cc-mode/highlight-if-0)))
+(add-hook 'after-save-hook #'samray/cc-mode/highlight-if-0-hook)
 
 (defun samray/compile-with-command-and-run (command)
   "Compile c/c++ with COMMAND and run it."
