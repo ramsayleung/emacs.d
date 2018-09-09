@@ -349,7 +349,8 @@ then check whether EMACS should to modify theme, if so, modify it."
 
 ;;;Move evil tag to beginning of mode line
 (setq evil-mode-line-format '(before . mode-line-front-space))
-
+;;; Force redisplay git branch of the mode line.
+(setq auto-revert-check-vc-info t)
 ;;; customize mode line
 (setq-default mode-line-format '("["
 				 "%e"

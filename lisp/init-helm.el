@@ -63,6 +63,9 @@
 	    (setq helm-swoop-speed-or-color t)
 	    )
   )
+(use-package helm-themes
+  :ensure t
+  )
 (use-package helm-xref
   :ensure t
   :config (progn
