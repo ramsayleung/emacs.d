@@ -35,6 +35,7 @@
 
 	    (setq helm-autoresize-max-height 0)
 	    (setq helm-autoresize-min-height 20)
+	    (setq helm-grep-ag-command "rg --color=always --colors 'match:fg:black' --colors 'match:bg:yellow' --smart-case --no-heading --line-number %s %s %s")
 	    (helm-autoresize-mode 1)
 	    (defun samray/helm-find-files-navigate-back (orig-fun &rest args)
 	      (if (= (length helm-pattern) (length (helm-find-files-initial-input)))
@@ -60,13 +61,6 @@
 	    (setq helm-swoop-speed-or-color t)
 	    )
   )
-(use-package helm-ag
-  :ensure t
-  :config (progn
-	    (custom-set-variables
-	     '(helm-ag-base-command "rg --no-heading"))
-	    ))
-
 (use-package helm-xref
   :ensure t
   :config (progn

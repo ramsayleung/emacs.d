@@ -189,7 +189,7 @@ point reaches the beginning or end of the buffer, stop there."
       (move-beginning-of-line 1))))
 
 (defun samray/query-replace-dwim (replace-string)
-  "Enhance query and replace."
+  "Enhance query and replace REPLACE-STRING."
   (interactive
    (list (read-string (format "Do query-replace %s with :" (thing-at-point-or-at-region)))))
   (save-excursion

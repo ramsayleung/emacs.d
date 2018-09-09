@@ -98,8 +98,8 @@
 					  :docstring "projectile rg search"
 					  (samray/does-use-ivy) 'counsel-projectile-rg)
 				"p p" (general-predicate-dispatch 'helm-projectile-switch-project
-					  :docstring "projectile switch project"
-					  (samray/does-use-ivy) 'counsel-projectile-switch-project)
+					:docstring "projectile switch project"
+					(samray/does-use-ivy) 'counsel-projectile-switch-project)
 
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
@@ -108,12 +108,13 @@
 				"q r" 'samray/restart-emacs-resume-layouts
 				"v" 'er/expand-region
 				"s" '(:ignore t :which-key "search")
-				"s a" (general-predicate-dispatch 'helm-ag
+				"s a" (general-predicate-dispatch 'helm-do-grep-ag
 					:docstring "ag search"
 					(samray/does-use-ivy) 'counsel-ag)
-				;; "s g" 'counsel-git
+				"s g" (general-predicate-dispatch 'helm-grep-do-git-grep
+					(samray/does-use-ivy) 'counsel-git-grep)
 				"s i" 'iedit-mode
-				"s r" (general-predicate-dispatch 'helm-ag
+				"s r" (general-predicate-dispatch 'helm-do-grep-ag
 					:docstring "rg search"
 					(samray/does-use-ivy) 'counsel-rg)
 				"s s" (general-predicate-dispatch 'helm-swoop
