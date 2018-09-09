@@ -358,6 +358,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 				 "]"
 				 mode-line-front-space
 				 mode-line-mule-info
+
 				 ;; mode-line-client
 				 ;; mode-line-modified -- show buffer change or not
 				 ;; mode-line-remote -- no need to indicate this specially

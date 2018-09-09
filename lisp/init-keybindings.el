@@ -547,12 +547,14 @@
     (general-define-key
      "C-c C-z" popwin:keymap
      ))
-  (when (not(samray/does-use-ivy))
-    (require 'helm-config))
-  (with-eval-after-load 'helm-config
-    (general-define-key
-     "C-c h" 'helm-command-prefix
-     ))
+
+  ;; (when (not(samray/does-use-ivy))
+  ;;   (require 'helm-config))
+
+  ;; (with-eval-after-load 'helm-config
+  ;;   (general-define-key
+  ;;    "C-c h" 'helm-command-prefix
+  ;;    ))
   )
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
