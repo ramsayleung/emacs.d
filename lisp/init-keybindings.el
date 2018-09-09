@@ -440,7 +440,6 @@
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     [remap evil-repeat-pop-next] 'xref-find-definitions
-	     "C-k" 'sp-kill-hybrid-sexp
 	     "C-c a" 'org-agenda
 	     "C-c e" 'hydra-edit/body
 	     "C-c y p" 'youdao-dictionary-search-at-point+
