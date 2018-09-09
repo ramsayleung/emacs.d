@@ -52,17 +52,6 @@
    m
    '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
 
-;;; Comment #if 0 #endif region
-(defun samray/cc-mode/highlight-if-0 ()
-  "Highlight c/c++ #if 0 #endif macros."
-  (setq cpp-known-face 'default)
-  (setq cpp-unknown-face 'default)
-  (setq cpp-known-writable 't)
-  (setq cpp-unknown-writable 't)
-  (setq cpp-edit-list '(("0" '(foreground-color . "gray")  default both)
-                        ("1" default font-lock-comment-face both)))
-  (cpp-highlight-buffer t))
-
 ;; Add to c/c++ mode
 (defun samray/cc-mode/highlight-if-0-hook ()
   "Highlight if-0 in `cc-mode`."

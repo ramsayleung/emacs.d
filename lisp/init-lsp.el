@@ -50,7 +50,8 @@
 		 '(:completion (:detailedLabel t) :xref
 			       (:container t)
 			       :diagnostics (:frequencyMs 5000))
-		 )))
+		 )
+	   ))
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here
