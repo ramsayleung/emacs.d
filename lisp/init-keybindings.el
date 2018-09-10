@@ -117,7 +117,7 @@
 				"s r" (general-predicate-dispatch 'helm-do-grep-ag
 					:docstring "rg search"
 					(samray/does-use-ivy) 'counsel-rg)
-				"s s" (general-predicate-dispatch 'helm-swoop
+				"s s" (general-predicate-dispatch 'samray/helm-swoop
 					(samray/does-use-ivy) 'swiper)
 				"t" '(:ignore t :which-key "toggle")
 				"t g" 'samray/git-timemachine
@@ -150,7 +150,7 @@
 				"5"  'select-window-5)
 	    
 	    (general-define-key
-	     "C-s" (general-predicate-dispatch 'helm-swoop
+	     "C-s" (general-predicate-dispatch 'samray/helm-swoop
 		     (samray/does-use-ivy) 'counsel-grep-or-swiper)
 	     "C-h f" (general-predicate-dispatch 'describe-function
 		       (samray/does-use-ivy) 'counsel-describe-function)
@@ -390,6 +390,9 @@
 				[remap evil-complete-previous] 'company-select-previous
 				)
 
+	    ;; profiler-report-mode
+	    (general-define-key :keymaps 'profiler-report-mode-map
+				"<tab>" 'profiler-report-expand-entry)
 
 	    ;; Pdf view mode
 	    (general-define-key :states '(normal emacs)

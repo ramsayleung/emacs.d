@@ -57,12 +57,39 @@
 	   (helm-projectile-on)
 	   )
   )
+
+(defun samray/buffer-too-big-p ()
+  "Predicate if buffer is too big."
+  (or (> (buffer-size) (* 5000 80))
+      (> (line-number-at-pos (point-max)) 5000)))
+(defun samray/buffer-too-large-p ()
+  "Predicate if buffer is too large."
+  (or (> (buffer-size) (* 5000 800))
+      (> (line-number-at-pos (point-max)) 100000)))
 (use-package helm-swoop
   :ensure t
   :config (progn
 	    (setq helm-swoop-speed-or-color t)
+	    (defun samray/helm-swoop ()
+	      "Use helm-swoop dependen on buffer size."
+	      (interactive)
+	      (if (samray/buffer-too-big-p)
+		  (progn
+		    (if (samray/buffer-too-large-p)
+			(isearch-forward)
+		      (progn
+			;; Disable pre-input to improve `helm-swoop` preformance.
+			(setq helm-swoop-pre-input-function
+			      (lambda () ""))
+			;; Disable color to improve performance
+			(setq helm-swoop-speed-or-color nil)
+			(helm-swoop)
+			))
+		    )
+		(helm-swoop)))
 	    )
   )
+
 (use-package helm-themes
   :ensure t
   )
@@ -71,7 +98,6 @@
   :config (progn
 	    (setq xref-show-xrefs-function 'helm-xref-show-xrefs)
 	    ))
-
 (provide 'init-helm)
 
 ;;; init-helm.el ends here

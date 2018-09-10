@@ -49,17 +49,6 @@
 		     )))
 	    ))
 
-(use-package pangu-spacing
-  :ensure t
-  :config
-  (progn
-    ;; start pangu-spacing globally
-    (global-pangu-spacing-mode 1)
-    ;; Always insert `real' space in org-mode.
-    (add-hook 'org-mode-hook
-              '(lambda ()
-		 (set (make-local-variable 'pangu-spacing-real-insert-separtor) t))))
-  )
 ;;; Try out Emacs Package without install
 (use-package try
   :commands try
