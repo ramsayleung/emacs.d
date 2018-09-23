@@ -51,6 +51,31 @@
       (ivy-read "directories:" collection :action 'dired)))
   )
 
+(use-package ivy-posframe
+  :ensure t
+  :config (progn
+	    ;; (setq ivy-display-function #'ivy-posframe-display)
+	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
+	    ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
+	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
+	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
+	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
+	    (ivy-posframe-enable)
+	    (setq ivy-posframe-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
+	    (defun samray/setup-ivy-window()
+	      "Set up ivy height and width."
+	      (setq ivy-posframe-min-height (/(window-body-height)2))
+	      (setq ivy-posframe-height (/ (window-body-height)2))
+	      (setq ivy-posframe-width (round(* (window-body-width) 0.86)))
+	      (setq ivy-posframe-min-width (round(* (window-body-width) 0.86)))
+	      )
+	    (samray/setup-ivy-window)
+	    (defadvice select-window (after select-window-ivy activate)
+	      "Advice `select-window` to set up ivy-posframe-width/height dynamicly."
+	      (samray/setup-ivy-window)
+	      )
+	    ))
+
 (use-package counsel-projectile
   :ensure t
   :after projectile

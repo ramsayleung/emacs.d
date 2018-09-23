@@ -26,6 +26,15 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
+;;; Define some useful function
+(defun samray/mac-os-p ()
+  "Check whether Emacs is running on Mac os."
+  (string= system-type "darwin")
+  )
+(defun samray/linux-p ()
+  "Check whether Emacs is running on Linux."
+  (string= system-type "gnu/linux"))
+
 (defvar samray/completion-framework 'ivy)
 (defun samray/does-use-ivy ()
   "Return t if use `ivy` as completion framework."
