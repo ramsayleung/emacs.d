@@ -140,7 +140,7 @@ This code toggles between them."
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
 (add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
-;; (add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
+(add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
 ;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 (add-hook 'after-load-theme-hook (lambda ()
 				   (set-face-foreground 'hl-line nil)

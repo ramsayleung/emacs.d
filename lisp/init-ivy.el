@@ -37,7 +37,7 @@
   :config
   (ivy-mode 1)
   ;; does not count candidates
-  (setq ivy-count-format "")
+  (setq ivy-count-format "%d/%d ")
   (defun samray/counsel-goto-recent-directory ()
     "Open recent directory with dired"
     (interactive)

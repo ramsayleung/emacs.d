@@ -26,7 +26,7 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
-(defvar samray/completion-framework 'helm)
+(defvar samray/completion-framework 'ivy)
 (defun samray/does-use-ivy ()
   "Return t if use `ivy` as completion framework."
   (if (eq samray/completion-framework 'ivy) t nil))
@@ -34,7 +34,8 @@
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))
   (setq load-prefer-newer t)            ;avoid load outdated byte-compiled file
-  (package-initialize)
+  (when (version< emacs-version "27.0.50")
+    (package-initialize))
   (require 'package)
   (setq package-enable-at-startup nil)
 

@@ -39,8 +39,9 @@
 debug-init and load the given list of packages."
     (interactive
      (progn
-       (unless package--initialized
-	 (package-initialize t))
+       (when (version< emacs-version "27.0.50")
+	 (unless package--initialized
+	   (package-initialize t)))
        (let ((packages (append (mapcar 'car package-alist)
 			       (mapcar 'car package-archive-contents)
 			       (mapcar 'car package--builtins))))
@@ -52,7 +53,7 @@ debug-init and load the given list of packages."
 					   packages " ")))
       (samray/restart-emacs-debug-init
        (append (list "-q" "--execute"
-		     (concat "(progn (package-initialize) "
+		     (concat "(progn (when (version< emacs-version \"27.0.50\")(package-initialize))"
 			     "(require 'use-package)"
 			     load-packages-string ")"))
 	       args))))

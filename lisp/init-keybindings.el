@@ -433,9 +433,20 @@
 				"g l"            'pdf-view-goto-label
 				"g t"            'pdf-view-goto-page
 				)
-	    (when (not( samray/does-use-ivy))
-	      (require 'helm-config)
-	      (general-define-key "C-c h" 'helm-command-prefix)
+	    (if (not( samray/does-use-ivy))
+		(progn
+		  (require 'helm-config)
+		  (general-define-key "C-c h" 'helm-command-prefix)
+		  )
+	      (progn
+		(general-define-key "C-c h" '(:ignore t :which-key "ivy-command-prefix")
+				    "C-c h a" 'counsel-apropos
+				    "C-c h b" 'ivy-resume
+				    "C-c h c" 'counsel-colors-emacs
+				    "C-c h i" 'counsel-imenu
+				    "C-c h l" 'counsel-locate
+				    "C-c h p" 'counsel-list-processes
+				    ))
 	      )
 
 	    ;; non-evil ,without a prefix
@@ -463,8 +474,6 @@
 	     "M-i" 'symbol-overlay-put
 	     "<f5>" 'revert-buffer
 	     ))
-  (general-define-key
-   "C-c h" 'helm-command-prefix)
 
   ;; Format "buffer"
   ;; Python mode
