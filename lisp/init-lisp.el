@@ -14,6 +14,7 @@
 		  (not (derived-mode-p 'basic-mode
 				       'c++-mode
 				       'c-mode
+				       'cmake-mode
 				       'coffee-mode
 				       'csharp-mode
 				       'd-mode

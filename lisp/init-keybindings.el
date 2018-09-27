@@ -295,6 +295,9 @@
 				"m c C" 'samray/compile-clean
 				"m c x" 'samray/g++-compile-and-run
 				)
+	    (general-define-key :state '(insert)
+				:keymaps '(c-mode-map c++-mode-map)
+				"{" 'paredit-open-curly)
 	    ;; C mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'c-mode-map
