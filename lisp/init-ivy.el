@@ -35,20 +35,28 @@
 	    )
 	  )
   :config
-  (ivy-mode 1)
-  ;; does not count candidates
-  (setq ivy-count-format "%d/%d ")
-  (defun samray/counsel-goto-recent-directory ()
-    "Open recent directory with dired"
-    (interactive)
-    (unless recentf-mode (recentf-mode 1))
-    (let ((collection
-	   (delete-dups
-	    (append (mapcar 'file-name-directory recentf-list)
-		    ;; fasd history
-		    (if (executable-find "fasd")
-			(split-string (shell-command-to-string "fasd -ld") "\n" t))))))
-      (ivy-read "directories:" collection :action 'dired)))
+  (progn
+    (ivy-mode 1)
+    ;; does not count candidates
+    (setq ivy-count-format "%d/%d ")
+    (defun samray/counsel-goto-recent-directory ()
+      "Open recent directory with dired"
+      (interactive)
+      (unless recentf-mode (recentf-mode 1))
+      (let ((collection
+	     (delete-dups
+	      (append (mapcar 'file-name-directory recentf-list)
+		      ;; fasd history
+		      (if (executable-find "fasd")
+			  (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
+	(ivy-read "directories:" collection :action 'dired)))
+    (defun samray/counsel-grep-or-swiper ()
+      "Use `counsel-grep-or-swiper` dependen on buffer size."
+      (interactive)
+      (if (samray/buffer-too-big-p)
+	  (isearch-forward)
+	(counsel-grep-or-swiper)))
+    )
   )
 
 (use-package ivy-posframe

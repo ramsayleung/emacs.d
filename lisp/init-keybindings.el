@@ -151,7 +151,7 @@
 	    
 	    (general-define-key
 	     "C-s" (general-predicate-dispatch 'samray/helm-swoop
-		     (samray/does-use-ivy) 'counsel-grep-or-swiper)
+		     (samray/does-use-ivy) 'samray/counsel-grep-or-swiper)
 	     "C-h f" (general-predicate-dispatch 'describe-function
 		       (samray/does-use-ivy) 'counsel-describe-function)
 	     "C-h v" (general-predicate-dispatch 'describe-variable
