@@ -58,14 +58,6 @@
 	   )
   )
 
-(defun samray/buffer-too-big-p ()
-  "Predicate if buffer is too big."
-  (or (> (buffer-size) (* 5000 80))
-      (> (line-number-at-pos (point-max)) 50000)))
-(defun samray/buffer-too-large-p ()
-  "Predicate if buffer is too large."
-  (or (> (buffer-size) (* 5000 800))
-      (> (line-number-at-pos (point-max)) 100000)))
 (use-package helm-swoop
   :ensure t
   :config (progn
@@ -88,7 +80,8 @@
 		(progn
 		  (setq helm-swoop-speed-or-color t)
 		  (helm-swoop))
-		))
+		)
+	      )
 	    )
   )
 

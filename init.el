@@ -35,6 +35,16 @@
   "Check whether Emacs is running on Linux."
   (string= system-type "gnu/linux"))
 
+(defun samray/buffer-too-big-p ()
+  "Predicate if buffer is too big."
+  (or (> (buffer-size) (* 5000 80))
+      (> (line-number-at-pos (point-max)) 50000)))
+
+(defun samray/buffer-too-large-p ()
+  "Predicate if buffer is too large."
+  (or (> (buffer-size) (* 5000 800))
+      (> (line-number-at-pos (point-max)) 100000)))
+
 (defvar samray/completion-framework 'ivy)
 (defun samray/does-use-ivy ()
   "Return t if use `ivy` as completion framework."

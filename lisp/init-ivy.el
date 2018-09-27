@@ -35,20 +35,28 @@
 	    )
 	  )
   :config
-  (ivy-mode 1)
-  ;; does not count candidates
-  (setq ivy-count-format "%d/%d ")
-  (defun samray/counsel-goto-recent-directory ()
-    "Open recent directory with dired"
-    (interactive)
-    (unless recentf-mode (recentf-mode 1))
-    (let ((collection
-	   (delete-dups
-	    (append (mapcar 'file-name-directory recentf-list)
-		    ;; fasd history
-		    (if (executable-find "fasd")
-			(split-string (shell-command-to-string "fasd -ld") "\n" t))))))
-      (ivy-read "directories:" collection :action 'dired)))
+  (progn
+    (ivy-mode 1)
+    ;; does not count candidates
+    (setq ivy-count-format "%d/%d ")
+    (defun samray/counsel-goto-recent-directory ()
+      "Open recent directory with dired"
+      (interactive)
+      (unless recentf-mode (recentf-mode 1))
+      (let ((collection
+	     (delete-dups
+	      (append (mapcar 'file-name-directory recentf-list)
+		      ;; fasd history
+		      (if (executable-find "fasd")
+			  (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
+	(ivy-read "directories:" collection :action 'dired)))
+    (defun samray/counsel-grep-or-swiper ()
+      "Use `counsel-grep-or-swiper` dependen on buffer size."
+      (interactive)
+      (if (samray/buffer-too-big-p)
+	  (isearch-forward)
+	(counsel-grep-or-swiper)))
+    )
   )
 
 (use-package ivy-posframe
@@ -62,6 +70,7 @@
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
 	    (ivy-posframe-enable)
 	    (setq ivy-posframe-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
+	    ;; The behaviors of Ivy posframe is different between mac and linux
 	    (defun samray/setup-ivy-window()
 	      "Set up ivy height and width."
 	      (setq ivy-posframe-min-height (/(window-body-height)2))
@@ -69,11 +78,21 @@
 	      (setq ivy-posframe-width (round(* (window-body-width) 0.86)))
 	      (setq ivy-posframe-min-width (round(* (window-body-width) 0.86)))
 	      )
-	    (samray/setup-ivy-window)
+	    (defun samray/mac-setup-ivy-window()
+	      "Set up ivy height and width."
+	      (setq ivy-posframe-min-height (/(window-body-height)2))
+	      (setq ivy-posframe-height (/ (window-body-height)2))
+	      (setq ivy-posframe-width (window-body-width))
+	      (setq ivy-posframe-min-width (window-body-width))
+	      )
+	    (if (samray/mac-os-p)
+		(samray/mac-setup-ivy-window)
+	      (samray/setup-ivy-window))
 	    (defadvice select-window (after select-window-ivy activate)
 	      "Advice `select-window` to set up ivy-posframe-width/height dynamicly."
-	      (samray/setup-ivy-window)
-	      )
+	      (if (samray/mac-os-p)
+		  (samray/mac-setup-ivy-window)
+		(samray/setup-ivy-window)))
 	    ))
 
 (use-package counsel-projectile
