@@ -18,7 +18,7 @@
 				:prefix samray/leader-key
 				"" nil
 				";" 'evilnc-comment-operator
-				"'" 'shell-pop
+				"'" 'samray/eshell-pop
 				"." 'samray/repl-pop
 				"TAB" 'samray/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
@@ -499,6 +499,10 @@
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
 		      "C-c ." 'samray/indent-region-or-buffer)
+
+  (general-define-key :keymaps '(prog-mode-map)
+		      [remap paredit-convolute-sexp] 'xref-find-references
+		      "M-?" 'xref-find-references)
 
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map

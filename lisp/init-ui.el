@@ -53,7 +53,11 @@
 	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "gud-mode")
-	  ))
+	  ;; Make golden works with window-numbering-mode
+	  (add-hook 'buffer-list-update-hook #'golden-ratio)
+	  )
+  :config (progn
+	    ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
@@ -203,6 +207,11 @@ This code toggles between them."
   :ensure t
   :defer t
   )
+
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :defer t)
+
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
@@ -218,7 +227,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(defvar samray-theme-list '(zenburn manoj-dark))
+(setq-default samray-theme-list '(zenburn sanityinc-tomorrow-eighties manoj-dark))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()

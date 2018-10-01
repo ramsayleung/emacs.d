@@ -207,7 +207,7 @@
   (add-hook 'prog-mode-hook 'comment-auto-fill))
 
 (defun samray/switch-to-buffer (repl-buffer-name)
-  "Run REPL and switch to the  buffer REPL-BUFFER-NAME.
+  "Switch to the  buffer REPL-BUFFER-NAME.
 similar to shell-pop"
   (interactive)
   (if (get-buffer repl-buffer-name)
