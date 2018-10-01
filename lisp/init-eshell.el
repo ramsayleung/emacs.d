@@ -222,5 +222,7 @@
 
 (use-package company-eshell-autosuggest
   :load-path "~/.emacs.d/additional-packages/company-eshell-autosuggest.el")
+
+(message "loading init-eshell")
 (provide 'init-eshell)
 ;;; init-eshell.el ends here

@@ -21,8 +21,8 @@
 (use-package popwin
   :ensure t
   :config (progn
-
-	    (popwin-mode t)
+	    (run-with-idle-timer 1 nil 'popwin-mode)
+	    ;; (popwin-mode t)
 	    (push '(compilation-mode :noselect t) popwin:special-display-config)
 	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
 	    (push "*slime-apropos*" popwin:special-display-config)
@@ -46,9 +46,9 @@
 (use-package golden-ratio
   :diminish golden-ratio-mode
   :ensure t
-  :defer t
   :init (progn
 	  (golden-ratio-mode 1)
+	  ;; (run-with-idle-timer 1 nil 'golden-ratio-mode)
 	  (setq golden-ratio-auto-scale t)
 	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
@@ -140,6 +140,7 @@ This code toggles between them."
   )
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
+
 (defadvice load-theme (after run-after-load-theme-hook activate)
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
@@ -423,6 +424,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 (diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
 
+(message "loading init-ui")
 (provide 'init-ui)
 
 ;;; init-ui.el ends here

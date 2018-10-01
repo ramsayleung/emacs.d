@@ -5,7 +5,6 @@
 (use-package company
   :ensure t
   :diminish company-mode
-  :demand t
   :commands (company-mode
              company-complete
              company-complete-common
@@ -28,7 +27,9 @@
 	 company-idle-delay .4                         ; decrease delay before autocompletion popup shows
 	 company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
   :config (progn
-	    (global-company-mode t))
+	    (run-with-idle-timer 1 nil 'global-company-mode)
+	    ;; (global-company-mode t)
+	    )
   )
 
 (use-package company-quickhelp
@@ -36,12 +37,14 @@
   :defer t
   :init (progn
 	  (add-hook 'company-mode-hook 'company-quickhelp-mode)
-	  ))
+	  )
+  )
 
 (use-package company-statistics
   :ensure t
   :defer t
-  :init (add-hook 'company-mode-hook 'company-statistics-mode))
+  :init (add-hook 'company-mode-hook 'company-statistics-mode)
+  )
 
 (use-package company-anaconda
   :ensure t
@@ -161,5 +164,6 @@
 				     (add-to-list 'company-backends 'company-lsp)))
 	  ))
 
+(message "loading init-auto-completion")
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

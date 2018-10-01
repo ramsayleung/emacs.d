@@ -39,6 +39,7 @@
 	    )
   )
 
+(message "loading init-version-control")
 (provide 'init-version-control)
 
 ;;; init-version-control.el ends here

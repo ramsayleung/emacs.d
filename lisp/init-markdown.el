@@ -28,6 +28,7 @@
   :ensure t
   :commands (markdown-mode))
 
+(message "loading init-markdown")
 (provide 'init-markdown)
 
 ;;; init-markdown.el ends here

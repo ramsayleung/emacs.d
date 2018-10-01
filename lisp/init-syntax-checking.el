@@ -46,5 +46,6 @@
 	    )
   )
 
+(message "loading init-syntax-checking")
 (provide 'init-syntax-checking)
 ;;; init-syntax-checking.el ends here

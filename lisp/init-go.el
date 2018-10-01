@@ -35,5 +35,7 @@
   :config (progn
 			(add-hook 'go-mode-hook 'go-eldoc-setup)
 			))
+
+(message "loading init-go")
 (provide 'init-go)
 ;;; init-go.el ends here

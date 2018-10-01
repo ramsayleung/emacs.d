@@ -154,5 +154,6 @@ debug-init and load the given list of packages."
 	(remq 'process-kill-buffer-query-function
 	      kill-buffer-query-functions))
   )
+(message "loading init-better-default")
 (provide 'init-better-default)
 ;;; init-better-default.el ends here

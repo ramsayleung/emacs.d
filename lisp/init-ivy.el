@@ -156,7 +156,7 @@ bookmarks reccently opened files and window layout."
   (counsel-ag)
   )
 
+(message "loading init-ivy")
 (provide 'init-ivy)
 
 ;;; init-ivy.el ends here
-

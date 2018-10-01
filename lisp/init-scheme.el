@@ -23,6 +23,7 @@
 	)))
   )
 
+(message "loading init-scheme")
 (provide 'init-scheme)
 
 ;;; init-scheme.el ends here

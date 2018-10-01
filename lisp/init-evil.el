@@ -11,7 +11,7 @@
 	  )
   :config
   (progn
-    (evil-mode t)
+    (run-with-idle-timer 1 nil 'evil-mode)
     (evil-set-initial-state 'calendar-mode 'emacs)
     (evil-set-initial-state 'pdf-view-mode 'emacs)
     (evil-set-initial-state 'dired-mode 'emacs)
@@ -31,32 +31,40 @@
 
 (use-package evil-surround
   :ensure t
-  :commands evil-mode
-  :init
-  (global-evil-surround-mode t)
+  :init(progn
+	 (run-with-idle-timer 1 nil 'global-evil-surround-mode)
+	 ;; (global-evil-surround-mode t)
+	 )
   )
 
 (use-package evil-nerd-commenter
   :commands (evilnc-comment-operator)
   :ensure t
   )
-    
+
 ;; Vim matchit ported into Emacs
 (use-package evil-matchit
   :commands evil-mode
   :ensure t
-  :init (global-evil-matchit-mode 1))
+  :init (progn
+	  (run-with-idle-timer 1 nil 'global-evil-matchit-mode)
+	  ;; (global-evil-matchit-mode 1)
+	  ))
 
 (use-package evil-mc
   :ensure t
   :diminish evil-mc-mode
   :commands evil-mode
-  :init
-  (global-evil-mc-mode t)
+  :init (progn
+	  (run-with-idle-timer 2 nil 'global-evil-mc-mode)
+	  ;; (global-evil-mc-mode t)
+	  )
   )
 
 
 ;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
 ;; (evilnc-default-hotkeys)
+
+(message "loading init-evil")
 (provide 'init-evil)
 ;;; init-evil.el ends here

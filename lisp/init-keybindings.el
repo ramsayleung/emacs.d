@@ -48,7 +48,6 @@
 				"f" '(:ignore t :which-key "files")
 				"f c" 'samray/copy-current-file-path
 				"f d" 'samray/delete-current-buffer-file
-				"f D" 'samray/delete-whitespace-between-english-and-chinese-char
 				"f E" 'samray/sudo-edit
 				"f f" (general-predicate-dispatch 'helm-find-files
 					:docstring "find files"
@@ -768,5 +767,7 @@ Info-mode:
 	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/eshell-clear-buffer)
 	    (define-key eshell-mode-map (kbd "C-c C-l") #'samray/eshell-clear-buffer)
 	    ))
+
+(message "loading init-keybindings")
 (provide 'init-keybindings)
 ;;; init-keybindings ends here

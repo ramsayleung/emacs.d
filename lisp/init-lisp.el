@@ -33,6 +33,8 @@
 	    (add-to-list 'paredit-space-for-delimiter-predicates 'paredit/space-for-delimiter-p)
 	    )
   )
+
+(message "loading init-lisp")
 (provide 'init-lisp)
 
 ;;; init-lisp.el ends here

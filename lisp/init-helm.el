@@ -93,6 +93,8 @@
   :config (progn
 	    (setq xref-show-xrefs-function 'helm-xref-show-xrefs)
 	    ))
+
+(message "loading init-helm")
 (provide 'init-helm)
 
 ;;; init-helm.el ends here

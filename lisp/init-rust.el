@@ -53,5 +53,6 @@
   (interactive)
   (cargo-process-run-example (file-name-sans-extension (buffer-name))))
 
+(message "loading init-rust")
 (provide 'init-rust)
 ;;; init-rust.el ends here

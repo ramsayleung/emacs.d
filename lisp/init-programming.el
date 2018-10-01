@@ -29,7 +29,8 @@
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
-	    (yas-reload-all)
+	    (run-with-idle-timer 1 nil 'yas-reload-all)
+	    ;; (yas-reload-all)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
 
@@ -269,6 +270,8 @@ similar to shell-pop"
   (interactive)
   (kill-new (buffer-name))
   )
+
+(message "loading init-programming")
 (provide 'init-programming)
 
 ;;; init-programming.el ends here

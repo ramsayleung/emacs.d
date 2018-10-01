@@ -31,7 +31,13 @@
 
 ;;; Semantic Refactor is a C/C++ refactoring tool based on Semantic parser framework.
 (use-package srefactor
-  :ensure t)
+  :ensure t
+  :defer t
+  :init (progn
+	  (run-with-idle-timer 1 nil 'require 'srefactor)
+	  (run-with-idle-timer 1 nil 'require 'srefactor-lisp)
+	  )
+  )
 
 ;;; http://coldnew.github.io/coldnew-emacs/#orgheadline267
 ;;; Use regexp to find header is C++ header or not
@@ -122,6 +128,8 @@
   (font-lock-add-keywords
    m
    '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
+
+(message "loading init-c-c++")
 (provide 'init-c-c++)
 
 ;;; init-c-c++.el ends here

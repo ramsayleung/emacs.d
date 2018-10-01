@@ -152,6 +152,7 @@ Version 2017-03-12"
 	    (setq mmm-submode-decoration-level 0)
 	    ))
 
+(message "loading init-web")
 (provide 'init-web)
 
 ;;; init-web.el ends here
