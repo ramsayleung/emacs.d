@@ -169,6 +169,9 @@
 		       (progn
 			 (goto-char (point-max))
 			 (evil-insert-state)
+			 (eshell-kill-input)
+			 ;; There is somethings wrong with eshell/cd
+			 ;; So replace with `insert`
 			 (insert " cd " cwd)
 			 (eshell-send-input)
 			 ))))
