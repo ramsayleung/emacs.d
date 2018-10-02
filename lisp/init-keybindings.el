@@ -310,6 +310,7 @@
 	    ;; C/C++ mode
 	    (general-define-key :keymaps 'c-mode-base-map
 				"C-c ." 'clang-format-buffer
+				"M-RET" 'srefactor-refactor-at-point
 				)
 
 	    ;; Scheme mode
@@ -428,7 +429,6 @@
 				"r"              'pdf-view-revert-buffer
 				"u"              'pdf-view-scroll-down-or-previous-page
 				"v"              'evil-visual-char
-				"C-S-g"          'revert-buffer
 				"z r"            'pdf-view-scale-reset
 				"` `"            'pdf-history-backward
 				"g g"            'pdf-view-first-page
@@ -474,7 +474,10 @@
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
 	     "M-i" 'symbol-overlay-put
-	     "<f5>" 'revert-buffer
+	     "M-RET o" 'srefactor-lisp-one-line
+	     "M-RET m" 'srefactor-lisp-format-sexp
+	     "M-RET d" 'srefactor-lisp-format-defun
+	     "M-RET b" 'srefactor-lisp-format-buffer
 	     ))
 
   ;; Format "buffer"

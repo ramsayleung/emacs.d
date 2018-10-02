@@ -36,6 +36,8 @@
   :init (progn
 	  (run-with-idle-timer 1 nil 'require 'srefactor)
 	  (run-with-idle-timer 1 nil 'require 'srefactor-lisp)
+	  (add-hook 'c-mode-hook 'semantic-mode)
+	  (add-hook 'c++-mode-hook 'semantic-mode)
 	  )
   )
 

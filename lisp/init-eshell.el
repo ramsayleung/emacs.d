@@ -205,6 +205,57 @@
 	(funcall change-cwd)
 	)))
   )
+
+;;; Steal from
+;;; https://www.reddit.com/r/emacs/comments/7a14cp/fishlike_autosuggestions_in_eshell/
+;;; Make Eshell complete like fish with history from bash, zsh, eshell
+(require 'company)
+(require 'cl-lib)
+(defun samray/company-eshell-autosuggest-candidates (prefix)
+  "Select the first eshell history candidate with prefix PREFIX."
+  (let* ((esh-history (when (> (ring-size eshell-history-ring) 0)
+			(ring-elements eshell-history-ring)))
+	 (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
+	 (history
+          (delete-dups
+           (mapcar (lambda (str)
+                     (string-trim (substring-no-properties str)))
+                   all-shell-history)))
+         (most-similar (cl-find-if
+                        (lambda (str)
+                          (string-prefix-p prefix str))
+                        history)))
+    (when most-similar
+      `(,most-similar))))
+
+(defun samray/company-eshell-autosuggest--prefix ()
+  "Get current eshell input."
+  (let ((prefix
+         (string-trim-left
+          (buffer-substring-no-properties
+           (save-excursion
+             (eshell-bol))
+           (save-excursion (end-of-line) (point))))))
+    (if (not (string-empty-p prefix))
+        prefix
+      'stop)))
+
+(defun samray/company-eshell-autosuggest (command &optional arg &rest ignored)
+  "`company-mode' backend to provide eshell history suggestion."
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'company-eshell))
+    (prefix (and (eq major-mode 'eshell-mode)
+                 (samray/company-eshell-autosuggest--prefix)))
+    (candidates (samray/company-eshell-autosuggest-candidates arg))))
+
+(defun samray/setup-company-eshell-autosuggest ()
+  "Set up company completion for Eshell."
+  (with-eval-after-load 'company
+    (setq-local company-backends '(samray/company-eshell-autosuggest))
+    (setq-local company-frontends '(company-preview-frontend))))
+
+(add-hook 'eshell-mode-hook 'samray/setup-company-eshell-autosuggest)
 (use-package eshell-prompt-extras
   :ensure t
   :after eshell
@@ -212,16 +263,7 @@
 	  (setq eshell-highlight-prompt nil
 		eshell-prompt-function 'epe-theme-lambda)
 	  ))
-(defun samray/setup-company-eshell-autosuggest ()
-  "Set up company completion for Eshell."
-  (with-eval-after-load 'company
-    (setq-local company-backends '(company-eshell-autosuggest))
-    (setq-local company-frontends '(company-preview-frontend))))
 
-(add-hook 'eshell-mode-hook 'samray/setup-company-eshell-autosuggest)
-
-(use-package company-eshell-autosuggest
-  :load-path "~/.emacs.d/additional-packages/company-eshell-autosuggest.el")
 
 (message "loading init-eshell")
 (provide 'init-eshell)

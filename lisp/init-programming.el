@@ -74,8 +74,8 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  (if (eq system-type 'darwin)
-	      (exec-path-from-shell-initialize))
+	  ;;(if (eq system-type 'darwin)
+	      ;;(exec-path-from-shell-initialize))
 	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
 	  ;; when it is nil, exec-path-from-shell will read environment variable
 	  ;; from .zshenv instead of .zshrc, but makes sure that you put all

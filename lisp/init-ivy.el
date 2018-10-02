@@ -31,7 +31,7 @@
 		'((t . ivy--regex-plus)))
 	  (setq ivy-initial-inputs-alist nil)
 	  (when window-system
-	    (setq ivy-height (/ (window-body-height) 2))
+	    (setq ivy-height (or ivy-posframe-height (/ (window-body-height) 2)))
 	    )
 	  )
   :config
@@ -65,24 +65,13 @@
 	      "Set up ivy height and width."
 	      (setq ivy-posframe-min-height (/(window-body-height)2))
 	      (setq ivy-posframe-height (/ (window-body-height)2))
-	      (setq ivy-posframe-width (round(* (window-body-width) 0.86)))
-	      (setq ivy-posframe-min-width (round(* (window-body-width) 0.86)))
-	      )
-	    (defun samray/mac-setup-ivy-window()
-	      "Set up ivy height and width."
-	      (setq ivy-posframe-min-height (/(window-body-height)2))
-	      (setq ivy-posframe-height (/ (window-body-height)2))
 	      (setq ivy-posframe-width (window-body-width))
 	      (setq ivy-posframe-min-width (window-body-width))
 	      )
-	    (if (samray/mac-os-p)
-		(samray/mac-setup-ivy-window)
-	      (samray/setup-ivy-window))
+	    (samray/setup-ivy-window)
 	    (defadvice select-window (after select-window-ivy activate)
 	      "Advice `select-window` to set up ivy-posframe-width/height dynamicly."
-	      (if (samray/mac-os-p)
-		  (samray/mac-setup-ivy-window)
-		(samray/setup-ivy-window)))
+	      (samray/setup-ivy-window))
 	    ))
 
 (use-package counsel-projectile

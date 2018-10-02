@@ -7,56 +7,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(speedbar-show-unknown-files t))
+ )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
- '(beacon-color "#f2777a")
- '(company-quickhelp-color-background "#4F4F4F")
- '(company-quickhelp-color-foreground "#DCDCCC")
- '(custom-safe-themes
-   '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
- '(fci-rule-color "#383838")
- '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
- '(frame-background-mode 'dark)
- '(helm-ag-base-command "rg --no-heading")
- '(nrepl-message-colors
-   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
- '(org-agenda-files '("~/Dropbox/Org/agenda.org" "~/Dropbox/Org/todo.org"))
  '(package-selected-packages
-   '(helm-themes ccls helm-xref helm-ag helm-rg helm-swoop helm-yasnippet helm-projectile helm focus noflet 0blayout 2048-game pip-requirements pipenv ivy-posframe flycheck-posframe company-childframe lsp-clangd eyebrowse nov flycheck-google-cpplint rjsx-mode quickrun ob-rust smex spacemacs-theme org-preview-html lsp-ui company-rtags company-lsp ivy-rtags realgud es-mode adaptive-wrap em-cmpl company-eshell-autosuggest eshell-prompt-extra eshell-git-prompt golden-ratio org-journal nyan-mode treemacs-evil treemacs-projectile docker dockerfile-mode solarized-theme monokai-theme cnfonts toml-mode neotree ox-latex-chinese flycheck-irony company-irony-c-headers company-irony cmake-ide rtags chinese-pyim-basedict c++-mode cargo lsp-rust lsp-python lsp-mode nlinum ranger company-racer racer rust-mode company-go go-eldoc go-mode color-theme-sanityinc-tomorrow tabbar symbol-overlay molokai-theme ivy-hydra markdown-preview-mode pangu-spacing subatomic-theme avk-emacs-themes smart-mode-line evil-mc dired+ gotham-theme badwolf-theme))
- '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
- '(safe-local-variable-values
-   '((org-download-image-dir . "../../images/")
-     (no-byte-compile t)
-     (org-download-image-dir . "../images/")
-     (org-download-image-dir . "./images/")
-     (org-download-image-dir . "/tmp")))
- '(shell-pop-shell-type '("eshell" "*eshell*" (lambda nil (eshell))))
- '(vc-annotate-background "#2B2B2B")
- '(vc-annotate-color-map
-   '((20 . "#BC8383")
-     (40 . "#CC9393")
-     (60 . "#DFAF8F")
-     (80 . "#D0BF8F")
-     (100 . "#E0CF9F")
-     (120 . "#F0DFAF")
-     (140 . "#5F7F5F")
-     (160 . "#7F9F7F")
-     (180 . "#8FB28F")
-     (200 . "#9FC59F")
-     (220 . "#AFD8AF")
-     (240 . "#BFEBBF")
-     (260 . "#93E0E3")
-     (280 . "#6CA0A3")
-     (300 . "#7CB8BB")
-     (320 . "#8CD0D3")
-     (340 . "#94BFF3")
-     (360 . "#DC8CC3")))
- '(vc-annotate-very-old-color "#DC8CC3"))
+   '(vue-mode emmet-mode rjsx-mode ac-js2 js2-refactor nodejs-repl js2-mode web-mode web-beautify git-timemachine magit diminish color-theme-sanityinc-tomorrow zenburn-theme golden-ratio popwin flycheck-posframe flycheck-irony flycheck-rust geiser cargo toml-mode virtualenvwrapper py-isort py-autopep8 treemacs-projectile treemacs-evil treemacs symbol-overlay expand-region exec-path-from-shell nginx-mode docker dockerfile-mode es-mode yaml-mode column-enforce-mode yasnippet realgud org-download htmlize ox-twbs ob-rust ox-gfm org-bullets org-journal org-pomodoro try circe focus keyfreq eyebrowse pdf-tools markdown-preview-mode pandoc-mode ccls lsp-ui lsp-rust lsp-python paredit hydra general counsel-projectile ivy-posframe avy smex counsel go-eldoc evil-mc evil-matchit evil-nerd-commenter evil-surround evil eshell-prompt-extras pyim youdao-dictionary srefactor cmake-mode clang-format adaptive-wrap simpleclip popup wgrep undo-tree origami region-state highlight-indent-guides ztree beacon rainbow-delimiters which-key hungry-delete window-numbering noflet restart-emacs company-lsp company-racer company-go company-restclient company-c-headers company-shell company-web company-jedi company-statistics company-quickhelp company use-package)))
