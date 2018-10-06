@@ -196,16 +196,16 @@
 
 	    (general-define-key :states '(normal insert visual motion)
 				:keymaps 'org-mode-map
-				"M-l" '(org-metaright)
-				"M-h" '(org-metaleft)
-				"M-k" '(org-metaup)
-				"M-j" '(org-metadown)
-				"M-L" '(org-shiftmetaright)
-				"M-H" '(org-shiftmetaleft)
-				"M-K" '(org-shiftup)
-				"M-J" '(org-shiftdown)
-				"M-o" '(org-insert-heading)
-				"M-t" '(org-insert-todo-heading)
+				"M-l" 'org-metaright
+				"M-h" 'org-metaleft
+				"M-k" 'org-metaup
+				"M-j" 'org-metadown
+				"M-L" 'org-shiftmetaright
+				"M-H" 'org-shiftmetaleft
+				"M-K" 'org-shiftup
+				"M-J" 'org-shiftdown
+				"M-o" 'org-insert-heading
+				"M-t" 'org-insert-todo-heading
 				)
 
 	    (general-define-key :states '(normal visual motion)

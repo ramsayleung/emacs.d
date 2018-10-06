@@ -18,6 +18,7 @@
 
 (use-package pyim
   :ensure t
+  :if nil
   :config
   (progn
     ;; 激活 basedict 拼音词库

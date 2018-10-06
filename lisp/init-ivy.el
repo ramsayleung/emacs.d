@@ -1,4 +1,4 @@
-;;; package --- Summary -*- lexical-binding: t -*-
+					; PACKAGE --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
 
@@ -24,29 +24,27 @@
   :ensure t
   :diminish ivy-mode
   :init (progn
-	  ;; number of result lines to display, set height as width-body-height/2
-	  (setq ivy-height (/ (window-body-height) 2))
 	  (setq ivy-use-selectable-prompt t)
 	  (setq ivy-re-builders-alist
 		'((t . ivy--regex-plus)))
 	  (setq ivy-initial-inputs-alist nil)
-	  (when window-system
-	    (setq ivy-height (or ivy-posframe-height (/ (window-body-height) 2)))
-	    )
 	  )
-  :config
-  (progn
-    (ivy-mode 1)
-    ;; does not count candidates
-    (setq ivy-count-format "%d/%d ")
-
-    (defun samray/counsel-grep-or-swiper ()
-      "Use `counsel-grep-or-swiper` dependen on buffer size."
-      (interactive)
-      (if (samray/buffer-too-big-p)
-	  (isearch-forward)
-	(counsel-grep-or-swiper)))
-    )
+  :config(progn
+	   (ivy-mode 1)
+	   ;; Count candidates
+	   (setq ivy-count-format "%d/%d ")
+	   ;; Number of result lines to display, set height as width-body-height/2
+	   (defun samray/change-ivy-height-dynamicly ()
+	     (setq ivy-height (/ (window-body-height)2)))
+	   ;; Set `ivy-height` after Emacs startup.
+	   (run-with-idle-timer 2 nil 'samray/change-ivy-height-dynamicly)
+	   (defun samray/counsel-grep-or-swiper ()
+	     "Use `counsel-grep-or-swiper` dependen on buffer size."
+	     (interactive)
+	     (if (samray/buffer-too-big-p)
+		 (isearch-forward)
+	       (counsel-grep-or-swiper)))
+	   )
   )
 
 (use-package ivy-posframe
