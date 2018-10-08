@@ -18,7 +18,7 @@
 				:prefix samray/leader-key
 				"" nil
 				";" 'evilnc-comment-operator
-				"'" 'shell-pop
+				"'" 'samray/eshell-pop
 				"." 'samray/repl-pop
 				"TAB" 'samray/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
@@ -48,7 +48,6 @@
 				"f" '(:ignore t :which-key "files")
 				"f c" 'samray/copy-current-file-path
 				"f d" 'samray/delete-current-buffer-file
-				"f D" 'samray/delete-whitespace-between-english-and-chinese-char
 				"f E" 'samray/sudo-edit
 				"f f" (general-predicate-dispatch 'helm-find-files
 					:docstring "find files"
@@ -197,16 +196,16 @@
 
 	    (general-define-key :states '(normal insert visual motion)
 				:keymaps 'org-mode-map
-				"M-l" '(org-metaright)
-				"M-h" '(org-metaleft)
-				"M-k" '(org-metaup)
-				"M-j" '(org-metadown)
-				"M-L" '(org-shiftmetaright)
-				"M-H" '(org-shiftmetaleft)
-				"M-K" '(org-shiftup)
-				"M-J" '(org-shiftdown)
-				"M-o" '(org-insert-heading)
-				"M-t" '(org-insert-todo-heading)
+				"M-l" 'org-metaright
+				"M-h" 'org-metaleft
+				"M-k" 'org-metaup
+				"M-j" 'org-metadown
+				"M-L" 'org-shiftmetaright
+				"M-H" 'org-shiftmetaleft
+				"M-K" 'org-shiftup
+				"M-J" 'org-shiftdown
+				"M-o" 'org-insert-heading
+				"M-t" 'org-insert-todo-heading
 				)
 
 	    (general-define-key :states '(normal visual motion)
@@ -295,6 +294,9 @@
 				"m c C" 'samray/compile-clean
 				"m c x" 'samray/g++-compile-and-run
 				)
+	    (general-define-key :state '(insert)
+				:keymaps '(c-mode-map c++-mode-map)
+				"{" 'paredit-open-curly)
 	    ;; C mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'c-mode-map
@@ -308,6 +310,7 @@
 	    ;; C/C++ mode
 	    (general-define-key :keymaps 'c-mode-base-map
 				"C-c ." 'clang-format-buffer
+				"M-RET" 'srefactor-refactor-at-point
 				)
 
 	    ;; Scheme mode
@@ -426,7 +429,6 @@
 				"r"              'pdf-view-revert-buffer
 				"u"              'pdf-view-scroll-down-or-previous-page
 				"v"              'evil-visual-char
-				"C-S-g"          'revert-buffer
 				"z r"            'pdf-view-scale-reset
 				"` `"            'pdf-history-backward
 				"g g"            'pdf-view-first-page
@@ -472,7 +474,10 @@
 	     "C-x 2" 'samray/split-window-below-and-move
 	     "C-x 3" 'samray/split-window-right-and-move
 	     "M-i" 'symbol-overlay-put
-	     "<f5>" 'revert-buffer
+	     "M-RET o" 'srefactor-lisp-one-line
+	     "M-RET m" 'srefactor-lisp-format-sexp
+	     "M-RET d" 'srefactor-lisp-format-defun
+	     "M-RET b" 'srefactor-lisp-format-buffer
 	     ))
 
   ;; Format "buffer"
@@ -496,6 +501,10 @@
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
 		      "C-c ." 'samray/indent-region-or-buffer)
+
+  (general-define-key :keymaps '(prog-mode-map)
+		      [remap paredit-convolute-sexp] 'xref-find-references
+		      "M-?" 'xref-find-references)
 
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map
@@ -761,5 +770,7 @@ Info-mode:
 	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/eshell-clear-buffer)
 	    (define-key eshell-mode-map (kbd "C-c C-l") #'samray/eshell-clear-buffer)
 	    ))
+
+(message "loading init-keybindings")
 (provide 'init-keybindings)
 ;;; init-keybindings ends here

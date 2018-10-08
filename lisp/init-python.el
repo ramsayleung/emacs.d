@@ -140,5 +140,6 @@ completion in other major-modes"
     (backward-char)))
 (add-hook 'python-mode #'samray/setup-python-mode)
 
+(message "loading init-python")
 (provide 'init-python)
 ;;; init-python.el ends here

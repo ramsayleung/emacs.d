@@ -15,12 +15,6 @@
   :init (progn
 	  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 	  ))
-(use-package flycheck-irony
-  :ensure t
-  :defer t
-  :init (progn
-	  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)
-	  ))
 
 (add-hook 'c++-mode-hook (lambda ()
 			   (setq flycheck-clang-language-standard "c++14")
@@ -46,5 +40,6 @@
 	    )
   )
 
+(message "loading init-syntax-checking")
 (provide 'init-syntax-checking)
 ;;; init-syntax-checking.el ends here

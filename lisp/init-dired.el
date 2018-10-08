@@ -56,5 +56,7 @@ output file. %i path(s) are relative, while %o is absolute.")
 ;;; prevent Emacs from asking some annoying questions
 (put 'dired-find-alternate-file 'disabled nil)
 (setq dired-listing-switches "-alh")
+
+(message "loading init-dired")
 (provide 'init-dired)
 ;;; init-dired.el ends here

@@ -14,6 +14,7 @@
 		  (not (derived-mode-p 'basic-mode
 				       'c++-mode
 				       'c-mode
+				       'cmake-mode
 				       'coffee-mode
 				       'csharp-mode
 				       'd-mode
@@ -32,6 +33,8 @@
 	    (add-to-list 'paredit-space-for-delimiter-predicates 'paredit/space-for-delimiter-p)
 	    )
   )
+
+(message "loading init-lisp")
 (provide 'init-lisp)
 
 ;;; init-lisp.el ends here

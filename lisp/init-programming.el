@@ -29,7 +29,8 @@
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
-	    (yas-reload-all)
+	    (run-with-idle-timer 1 nil 'yas-reload-all)
+	    ;; (yas-reload-all)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
 
@@ -73,8 +74,8 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (progn
-	  (if (eq system-type 'darwin)
-	      (exec-path-from-shell-initialize))
+	  ;;(if (eq system-type 'darwin)
+	      ;;(exec-path-from-shell-initialize))
 	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
 	  ;; when it is nil, exec-path-from-shell will read environment variable
 	  ;; from .zshenv instead of .zshrc, but makes sure that you put all
@@ -207,7 +208,7 @@
   (add-hook 'prog-mode-hook 'comment-auto-fill))
 
 (defun samray/switch-to-buffer (repl-buffer-name)
-  "Run REPL and switch to the  buffer REPL-BUFFER-NAME.
+  "Switch to the  buffer REPL-BUFFER-NAME.
 similar to shell-pop"
   (interactive)
   (if (get-buffer repl-buffer-name)
@@ -269,6 +270,8 @@ similar to shell-pop"
   (interactive)
   (kill-new (buffer-name))
   )
+
+(message "loading init-programming")
 (provide 'init-programming)
 
 ;;; init-programming.el ends here

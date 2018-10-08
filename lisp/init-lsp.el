@@ -25,7 +25,6 @@
 
 (use-package lsp-ui
   :ensure t
-  :init
   :config (progn
 	    ;; It seems that sideline-mode has a bug, just disable it
   	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
@@ -53,5 +52,6 @@
 		 )
 	   ))
 
+(message "loading init-lsp")
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

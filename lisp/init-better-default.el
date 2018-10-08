@@ -39,9 +39,8 @@
 debug-init and load the given list of packages."
     (interactive
      (progn
-       (when (version< emacs-version "27.0.50")
-	 (unless package--initialized
-	   (package-initialize t)))
+       (unless package--initialized
+	 (package-initialize t))
        (let ((packages (append (mapcar 'car package-alist)
 			       (mapcar 'car package-archive-contents)
 			       (mapcar 'car package--builtins))))
@@ -53,7 +52,7 @@ debug-init and load the given list of packages."
 					   packages " ")))
       (samray/restart-emacs-debug-init
        (append (list "-q" "--execute"
-		     (concat "(progn (when (version< emacs-version \"27.0.50\")(package-initialize))"
+		     (concat "(progn (package-initialize))"
 			     "(require 'use-package)"
 			     load-packages-string ")"))
 	       args))))
@@ -154,5 +153,6 @@ debug-init and load the given list of packages."
 	(remq 'process-kill-buffer-query-function
 	      kill-buffer-query-functions))
   )
+(message "loading init-better-default")
 (provide 'init-better-default)
 ;;; init-better-default.el ends here

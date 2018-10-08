@@ -133,14 +133,14 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; pomodoro tech
 (use-package org-pomodoro
-  :if (and (not (eq system-type 'windows-nt))
+  :if (and (not (samray/windows-p))
 	   window-system)
   :commands (org-pomodoro)
   :ensure t)
 
 ;;; for journal
 (use-package org-journal
-  :if (and (not (eq system-type 'windows-nt))
+  :if (and (not (samray/windows-p))
 	   window-system)
   :ensure t
   :commands (org-journal-new-entry)
@@ -152,9 +152,9 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
-  :if (and (not (eq system-type 'windows-nt))
+  :if (and (not (samray/windows-p))
 	   window-system)
-  :after org
+  :defer t
   :ensure t
   :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   :config (progn
@@ -170,13 +170,13 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   )
 
 (use-package ob-rust
-  :if (and (not (eq system-type 'windows-nt))
+  :if (and (not (samray/windows-p))
 	   window-system)
   :ensure ob-rust
   )
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
-  :if (and (not (eq system-type 'windows-nt))
+  :if (and (not (samray/windows-p))
 	   window-system)
   :ensure ox-twbs
   )
@@ -199,15 +199,18 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
-  :if (and (not (eq system-type 'windows-nt))
+  :if (and (not (samray/windows-p))
 	   window-system)
   :ensure t)
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
-  :if (and (not (eq system-type 'windows-nt))
+  :if (and (not (samray/windows-p))
 	   window-system)
-  :ensure t)
+  :ensure t
+  :config (progn
+	    (run-with-idle-timer 1 nil 'org-download-enable))
+  )
 
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."
@@ -217,6 +220,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   "Disable emacs-lisp-checkdoc in org-src-mode."
   (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
+(message "loading init-org")
 (provide 'init-org)
 
 ;;; init-org.el ends here

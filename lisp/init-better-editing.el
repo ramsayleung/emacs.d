@@ -145,7 +145,8 @@
 (require 'recentf)
 (setq recentf-max-saved-items 1000
       recentf-exclude '("/tmp/" "/ssh:"))
-(recentf-mode 1)
+(run-with-idle-timer 1 t 'recentf-mode)
+;; (recentf-mode 1)
 
 ;;; Auto-refresh buffers when files have changed on disk
 (global-auto-revert-mode t)
@@ -379,5 +380,7 @@ lines up by reverse ARG."
 	 window-system)
     (global-visual-line-mode +1)
   )
+
+(message "loading init-better-editing")
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here

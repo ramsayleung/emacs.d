@@ -27,7 +27,7 @@
                          (".*\.zip" "unzip")
                          (".*\.Z" "uncompress")
                          (".*" "echo 'Could not unpack the file:'")))))
-    (let ((unpack-command(concat command " " file " " (mapconcat 'identity args " "))))
+    (let ((unpack-command (concat command " " file " " (mapconcat 'identity args " "))))
       (eshell/printnl "Unpack command: " unpack-command)
       (eshell-command-result unpack-command))
     ))
@@ -121,23 +121,6 @@
     (eshell/echo path)
     ))
 
-;; help you use shell easily on Emacs
-(use-package shell-pop
-  :ensure t
-  :commands shell-pop
-  :config (progn
-	    (setq
-	     shell-pop-window-position "bottom"
-	     shell-pop-window-size 35
-	     )
-	    ))
-
-(defun samray/shell-pop-dwim()
-  "Switch to shell mode and insert mode"
-  (shell-pop)
-  (evil-insert-state)
-  )
-
 (use-package eshell
   :commands eshell
   :init (progn
@@ -175,6 +158,104 @@
 					  (setq-local global-hl-line-mode nil)))
 	    ))
 
+;;; Replace shell-pop package with customized function
+(defun samray/eshell-pop ()
+  "Pop and hide eshell with this function."
+  (interactive)
+  (let* ((eshell-buffer-name "*eshell*")
+	 (eshell-window (get-buffer-window eshell-buffer-name 'visible))
+	 (cwd default-directory)
+	 (change-cwd (lambda ()
+		       (progn
+			 (goto-char (point-max))
+			 (evil-insert-state)
+			 (eshell-kill-input)
+			 ;; There is somethings wrong with eshell/cd
+			 ;; So replace with `insert`
+			 (insert " cd " cwd)
+			 (eshell-send-input)
+			 ))))
+    ;; Eshell buffer exists?
+    (if (get-buffer eshell-buffer-name)
+	;; Eshell buffer is visible?
+	(if eshell-window
+	    ;; Buffer in current window is eshell buffer?
+	    (if (string= (buffer-name (window-buffer)) eshell-buffer-name)
+		(if (not (one-window-p))
+		    (progn (bury-buffer)
+			   (delete-window)))
+	      ;; If not, select window which points to eshell bufffer.
+	      (select-window eshell-window)
+	      (funcall change-cwd)
+	      )
+	  ;; If eshell buffer is not visible, split a window and switch to it.
+	  (progn
+	    ;; Use `split-window-sensibly` to split window with policy
+	    ;; If window cannot be split, force to split split window horizontally
+	    (when (not (split-window-sensibly))
+	      (samray/split-window-below-and-move))
+	    (switch-to-buffer eshell-buffer-name)
+	    (funcall change-cwd)
+	    ))
+      ;; If eshell buffer doesn't exist, create one
+      (progn
+	(when (not (split-window-sensibly))
+	  (samray/split-window-below-and-move))
+	(eshell)
+	(funcall change-cwd)
+	)))
+  )
+
+;;; Steal from
+;;; https://www.reddit.com/r/emacs/comments/7a14cp/fishlike_autosuggestions_in_eshell/
+;;; Make Eshell complete like fish with history from bash, zsh, eshell
+(require 'company)
+(require 'cl-lib)
+(defun samray/company-eshell-autosuggest-candidates (prefix)
+  "Select the first eshell history candidate with prefix PREFIX."
+  (let* ((esh-history (when (> (ring-size eshell-history-ring) 0)
+			(ring-elements eshell-history-ring)))
+	 (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
+	 (history
+          (delete-dups
+           (mapcar (lambda (str)
+                     (string-trim (substring-no-properties str)))
+                   all-shell-history)))
+         (most-similar (cl-find-if
+                        (lambda (str)
+                          (string-prefix-p prefix str))
+                        history)))
+    (when most-similar
+      `(,most-similar))))
+
+(defun samray/company-eshell-autosuggest--prefix ()
+  "Get current eshell input."
+  (let ((prefix
+         (string-trim-left
+          (buffer-substring-no-properties
+           (save-excursion
+             (eshell-bol))
+           (save-excursion (end-of-line) (point))))))
+    (if (not (string-empty-p prefix))
+        prefix
+      'stop)))
+
+(defun samray/company-eshell-autosuggest (command &optional arg &rest ignored)
+  "`company-mode' backend to provide eshell history suggestion."
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'company-eshell))
+    (prefix (and (eq major-mode 'eshell-mode)
+                 (samray/company-eshell-autosuggest--prefix)))
+    (candidates (samray/company-eshell-autosuggest-candidates arg))))
+
+(defun samray/setup-company-eshell-autosuggest ()
+  "Set up company completion for Eshell."
+  (with-eval-after-load 'company
+    (setq-local company-backends '(samray/company-eshell-autosuggest))
+    (setq-local company-frontends '(company-preview-frontend))))
+
+(add-hook 'eshell-mode-hook 'samray/setup-company-eshell-autosuggest)
 (use-package eshell-prompt-extras
   :ensure t
   :after eshell
@@ -182,14 +263,8 @@
 	  (setq eshell-highlight-prompt nil
 		eshell-prompt-function 'epe-theme-lambda)
 	  ))
-(defun setup-company-eshell-autosuggest ()
-  (with-eval-after-load 'company
-    (setq-local company-backends '(company-eshell-autosuggest))
-    (setq-local company-frontends '(company-preview-frontend))))
 
-(add-hook 'eshell-mode-hook 'setup-company-eshell-autosuggest)
 
-(use-package company-eshell-autosuggest
-  :load-path "~/.emacs.d/additional-packages/company-eshell-autosuggest.el")
+(message "loading init-eshell")
 (provide 'init-eshell)
 ;;; init-eshell.el ends here
