@@ -154,7 +154,7 @@ This code toggles between them."
 ;;; Use default line-number-mode instead of nlinum of linum (require Emacs >= 26).
 (setq-default display-line-numbers-width 2)
 (setq display-line-numbers-current-absolute t)
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(global-display-line-numbers-mode t)
 
 ;; number of characters until the fill column
 (setq fill-column 80)
