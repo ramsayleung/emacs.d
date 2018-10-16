@@ -2,46 +2,12 @@
 ;;; code:
 ;;; Commentary:
 
-(use-package window-numbering
+(use-package ace-window
   :ensure t
-  :config(progn
-	   (window-numbering-mode t)))
+  :commands (ace-window)
+  )
 
-;; (use-package smartparens
-;;   :ensure t
-;;   :demand t
-;;   :diminish smartparens-mode
-;;   :config
-;;   (progn
-;;     (smartparens-global-mode t)
-;;     ;; show single quote "'" in emacs and lisp-interaction-mode instead of single quote pair "''"
-;;     (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode rust-mode) "'" nil :actions nil)
-;;     (sp-pair "<" ">" :actions '(wrap))
-;;     )
-;;   )
-
-;; (require 'cl)
-;; (defmacro def-pairs (pairs)
-;;   "Define PAIRS."
-;;   `(progn
-;;      ,@(loop for (key . val) in pairs
-;;              collect
-;;              `(defun ,(read (concat
-;;                              "wrap-with-"
-;;                              (prin1-to-string key)
-;;                              "s"))
-;;                   (&optional arg)
-;;                 (interactive "p")
-;;                 (sp-wrap-with-pair ,val)))))
-
-;; (def-pairs ((paren        . "(")
-;;             (bracket      . "[")
-;;             (brace        . "{")
-;;             (single-quote . "'")
-;;             (double-quote . "\"")
-;;             (back-quote   . "`")
-;;             (angle-bracket . "<")))
-;; delete spaces at once
+;; Delete spaces at once
 (use-package hungry-delete
   :ensure t
   :diminish hungry-delete-mode

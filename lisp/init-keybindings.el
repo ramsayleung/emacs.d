@@ -141,12 +141,7 @@
 				"w <down>" 'evil-window-down
 				"w <up>" 'evil-window-up
 				"w <right>" 'evil-window-right
-				"0"  'select-window-0
-				"1"  'select-window-1
-				"2"  'select-window-2
-				"3"  'select-window-3
-				"4"  'select-window-4
-				"5"  'select-window-5)
+				"1"  'ace-window)
 	    
 	    (general-define-key
 	     "C-s" (general-predicate-dispatch 'samray/helm-swoop
@@ -171,7 +166,6 @@
 
 	    (general-define-key :states '(normal visual insert motion)
 				"C-e" 'end-of-line
-				"C-a" 'samray/smarter-move-beginning-of-line
 				"C-y" 'yank
 				"C-w" 'backward-kill-word
 				)
@@ -294,9 +288,7 @@
 				"m c C" 'samray/compile-clean
 				"m c x" 'samray/g++-compile-and-run
 				)
-	    (general-define-key :state '(insert)
-				:keymaps '(c-mode-map c++-mode-map)
-				"{" 'paredit-open-curly)
+
 	    ;; C mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'c-mode-map
@@ -504,7 +496,13 @@
 
   (general-define-key :keymaps '(prog-mode-map)
 		      [remap paredit-convolute-sexp] 'xref-find-references
-		      "M-?" 'xref-find-references)
+		      "M-?" 'xref-find-references
+		      "{" 'paredit-open-curly
+		      "}" 'paredit-close-curly
+		      "<" 'paredit-open-angled
+		      ">" 'paredit-close-angled
+		      )
+  
 
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map

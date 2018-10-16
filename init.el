@@ -1,3 +1,4 @@
+
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
@@ -56,8 +57,8 @@
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))
   (setq load-prefer-newer t)            ;avoid load outdated byte-compiled file
-  ;; (when (version< emacs-version "27.0") (package-initialize))
-  (unless package--initialized (package-initialize t))
+  (when (version< emacs-version "27.0") (package-initialize))
+  ;;(unless package--initialized (package-initialize))
   (require 'package)
   (setq package-enable-at-startup nil)
 
@@ -117,35 +118,36 @@
     (package-refresh-contents)
     (package-install 'use-package))
 
+  (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "additional-packages" user-emacs-directory))
+  
   (defvar require-exclude-list '())
   (if (samray/does-use-ivy)
       (add-to-list 'require-exclude-list 'init-helm)
     (add-to-list 'require-exclude-list 'init-ivy))
   ;; Benchmark loading time file by file and display it in the *Messages* buffer
-  (when init-file-debug
-    (require 'benchmark))
+  (defun samray/startup-benchmark ()
+    (when init-file-debug
+      (require 'benchmark))
 
-  (let ((lisp-dir (expand-file-name "lisp" user-emacs-directory))
-	(manual-add-packages (expand-file-name "additional-packages" user-emacs-directory))
-	(total-load-time 0.0))
-    (add-to-list 'load-path lisp-dir)
-    (add-to-list 'load-path manual-add-packages)
-    (mapc (lambda (fname)
-            (let ((feat (intern (file-name-base fname))))
-	      (unless (member feat require-exclude-list)
-		(if init-file-debug
-		    (progn
-		      (let ((feat-load-time (benchmark-elapse (require feat fname))))
-			(message "Feature '%s' loaded in %.2fs" feat feat-load-time)
-			(setq total-load-time (+ total-load-time feat-load-time))))
-		  (require feat fname)))))
-          (directory-files lisp-dir t "\\.el"))
-    (message "All Feature loaded in %.2fs" total-load-time))
+    (let ((lisp-dir (expand-file-name "lisp" user-emacs-directory))
+	  (manual-add-packages (expand-file-name "additional-packages" user-emacs-directory))
+	  (total-load-time 0.0))
+      (add-to-list 'load-path lisp-dir)
+      (add-to-list 'load-path manual-add-packages)
+      (mapc (lambda (fname)
+              (let ((feat (intern (file-name-base fname))))
+		(unless (member feat require-exclude-list)
+		  (if init-file-debug
+		      (progn
+			(let ((feat-load-time (benchmark-elapse (require feat fname))))
+			  (message "Feature '%s' loaded in %.2fs" feat feat-load-time)
+			  (setq total-load-time (+ total-load-time feat-load-time))))
+		    (require feat fname)))))
+            (directory-files lisp-dir t "\\.el"))
+      (message "All Feature loaded in %.2fs" total-load-time))
+    )
 
-  ;; Display the total loading time in the minibuffer
-  (defun display-startup-echo-area-message ()
-    "Display startup echo area message."
-    (message "Initialized in %s" (emacs-init-time)))
 
   (require 'cl)
   (require 'init-auto-completion)
@@ -179,10 +181,15 @@
   (require 'init-ui)
   (require 'init-version-control)
   (require 'init-web)
+
   (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
   (when (file-exists-p custom-file)
     (run-with-idle-timer 1 nil 'load custom-file)
     )
+  ;; Display the total loading time in the minibuffer
+  (defun display-startup-echo-area-message ()
+    "Display startup echo area message."
+    (message "Initialized in %s" (emacs-init-time)))
   )
 ;;; Garbage collector - decrease threshold to 5 MB
 (add-hook 'after-init-hook (lambda () (setq gc-cons-threshold (* 5 1024 1024))))
