@@ -57,8 +57,8 @@
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))
   (setq load-prefer-newer t)            ;avoid load outdated byte-compiled file
-  (when (version< emacs-version "27.0") (package-initialize))
-  ;;(unless package--initialized (package-initialize))
+  ;;(when (version< emacs-version "27.0") (package-initialize t))
+  (unless package--initialized (package-initializet ))
   (require 'package)
   (setq package-enable-at-startup nil)
 

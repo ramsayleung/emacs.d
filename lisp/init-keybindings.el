@@ -498,7 +498,7 @@
 		      [remap paredit-convolute-sexp] (general-predicate-dispatch 'xref-find-references
 							(not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
 		      "M-?" (general-predicate-dispatch 'xref-find-references
-							(not (null lsp-ui-mode)) 'lsp-ui-peek-find-references))
+							(not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
 		      "{" 'paredit-open-curly
 		      "}" 'paredit-close-curly
 		      "<" 'paredit-open-angled
