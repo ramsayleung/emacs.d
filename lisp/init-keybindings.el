@@ -503,8 +503,10 @@
 		      "C-c ." 'samray/indent-region-or-buffer)
 
   (general-define-key :keymaps '(prog-mode-map)
-		      [remap paredit-convolute-sexp] 'xref-find-references
-		      "M-?" 'xref-find-references)
+		      [remap paredit-convolute-sexp] (general-predicate-dispatch 'xref-find-references
+							(not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
+		      "M-?" (general-predicate-dispatch 'xref-find-references
+							(not (null lsp-ui-mode)) 'lsp-ui-peek-find-references))
 
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map

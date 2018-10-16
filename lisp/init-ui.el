@@ -53,10 +53,11 @@
 	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "gud-mode")
-	  ;; Make golden works with window-numbering-mode
-	  (add-hook 'buffer-list-update-hook #'golden-ratio)
 	  )
   :config (progn
+	    (defadvice select-window-by-number
+		(after golden-ratio-resize-window activate)
+	      (golden-ratio) nil)
 	    ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
@@ -157,7 +158,7 @@ This code toggles between them."
 (setq inhibit-splash-screen t)
 
 ;;; Use default line-number-mode instead of nlinum of linum (require Emacs >= 26).
-(setq-default display-line-numbers-width 2)
+(setq-default display-line-numbers-width 1)
 (setq display-line-numbers-current-absolute t)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
@@ -228,7 +229,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(setq-default samray-theme-list '(zenburn sanityinc-tomorrow-eighties manoj-dark))
+(setq-default samray-theme-list '(zenburn manoj-dark sanityinc-tomorrow-eighties))
 
 (defvar samray-current-theme nil)
 (defun samray/cycle-theme ()
