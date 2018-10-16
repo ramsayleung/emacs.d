@@ -43,7 +43,8 @@
 	   (require 'company-lsp)
 	   (add-hook 'c-mode-hook 'lsp-ccls-enable)
 	   (add-hook 'c++-mode-hook 'lsp-ccls-enable)
-	   (setq ccls-executable "~/code/cpp/ccls/Release/ccls")
+	   (setq ccls-executable (or (file-exists-p "~/code/cpp/ccls/Release/ccls")
+				     (executable-find "ccls")))
 	   (setq ccls-sem-highlight-method 'font-lock)
 	   (setq ccls-extra-init-params
 		 '(:completion (:detailedLabel t) :xref
