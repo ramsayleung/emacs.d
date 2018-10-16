@@ -9,27 +9,27 @@
 	  (add-hook 'prog-mode-hook 'enable-paredit-mode)
 	  )
   :config (progn
+	    ;; Don't add a space before parentheses for non-lisp buffer.
 	    (defun paredit/space-for-delimiter-p (endp delm)
-	      (or (member 'font-lock-keyword-face (text-properties-at (1- (point))))
-		  (not (derived-mode-p 'basic-mode
-				       'c++-mode
-				       'c-mode
-				       'cmake-mode
-				       'coffee-mode
-				       'csharp-mode
-				       'd-mode
-				       'dart-mode
-				       'go-mode
-				       'java-mode
-				       'js-mode
-				       'lua-mode
-				       'objc-mode
-				       'pascal-mode
-				       'python-mode
-				       'r-mode
-				       'ruby-mode
-				       'rust-mode
-				       'typescript-mode))))
+	      (not (derived-mode-p 'basic-mode
+				   'c++-mode
+				   'c-mode
+				   'cmake-mode
+				   'coffee-mode
+				   'csharp-mode
+				   'd-mode
+				   'dart-mode
+				   'go-mode
+				   'java-mode
+				   'js-mode
+				   'lua-mode
+				   'objc-mode
+				   'pascal-mode
+				   'r-mode
+				   'python-mode
+				   'ruby-mode
+				   'rust-mode
+				   'typescript-mode)))
 	    (add-to-list 'paredit-space-for-delimiter-predicates 'paredit/space-for-delimiter-p)
 	    )
   )

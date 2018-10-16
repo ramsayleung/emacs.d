@@ -47,12 +47,34 @@
   :diminish golden-ratio-mode
   :ensure t
   :init (progn
+	  ;; Make `golden-ratio` works with `ace-window`
 	  (golden-ratio-mode 1)
-	  ;; (run-with-idle-timer 1 nil 'golden-ratio-mode)
+	  (add-to-list 'golden-ratio-extra-commands 'ace-window)
 	  (setq golden-ratio-auto-scale t)
 	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+	  (add-to-list 'golden-ratio-exclude-modes "helm-mode")
+	  (add-to-list 'golden-ratio-exclude-modes "dired-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "gud-mode")
+	  ;; do not enable golden-raio in thses modes
+	  (setq golden-ratio-exclude-modes '("ediff-mode"
+					     "lsp-ui-imenu-mode"
+					     "gud-mode"
+					     "gdb-locals-mode"
+					     "gdb-registers-mode"
+					     "gdb-breakpoints-mode"
+					     "gdb-threads-mode"
+					     "gdb-frames-mode"
+					     "gdb-inferior-io-mode"
+					     "gud-mode"
+					     "gdb-inferior-io-mode"
+					     "gdb-disassembly-mode"
+					     "gdb-memory-mode"
+					     "magit-log-mode"
+					     "magit-reflog-mode"
+					     "magit-status-mode"
+					     "IELM"
+					     "eshell-mode" "dired-mode"))
 	  )
   :config (progn
 	    (defadvice select-window-by-number
@@ -160,7 +182,7 @@ This code toggles between them."
 ;;; Use default line-number-mode instead of nlinum of linum (require Emacs >= 26).
 (setq-default display-line-numbers-width 1)
 (setq display-line-numbers-current-absolute t)
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(global-display-line-numbers-mode t)
 
 ;; number of characters until the fill column
 (setq fill-column 80)
@@ -363,11 +385,7 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;; Force redisplay git branch of the mode line.
 (setq auto-revert-check-vc-info t)
 ;;; customize mode line
-(setq-default mode-line-format '("["
-				 "%e"
-				 (:eval
-				  (window-numbering-get-number-string))
-				 "]"
+(setq-default mode-line-format '("%e"
 				 mode-line-front-space
 				 mode-line-mule-info
 
