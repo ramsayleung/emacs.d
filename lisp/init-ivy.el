@@ -57,7 +57,7 @@
 	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
 	    (ivy-posframe-enable)
-	    (setq ivy-posframe-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
+	    (setq ivy-posframe-font samray-current-font)
 	    ;; The behaviors of Ivy posframe is different between mac and linux
 	    (defun samray/setup-ivy-window()
 	      "Set up ivy height and width."

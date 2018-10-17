@@ -239,7 +239,6 @@ This code toggles between them."
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
 
-(defvar samray-current-font nil)
 (defun samray/reset-current-font (&rest args)
   "It seems a bug about EMACS that the font will change after
 load/'disable-theme', so reset it after load/disable-theme' ARGS"
@@ -248,124 +247,27 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
-(setq-default samray-theme-list '(zenburn sanityinc-tomorrow-eighties manoj-dark))
 
-(defvar samray-current-theme nil)
-(defun samray/cycle-theme ()
-  "Cycle through a list of themes, samray-theme-list."
-  (interactive)
-  (when samray-current-theme
-    (setq samray-theme-list (append samray-theme-list (list samray-current-theme))))
-  (setq samray-current-theme (pop samray-theme-list))
-  (load-theme  samray-current-theme t)
-  )
-
-;; Switch to the first theme in the list above
-(add-hook 'after-init-hook #'samray/cycle-theme)
-(add-hook 'after-init-hook #'samray/cycle-font)
-
-;; ====================================Themes automatically change =====================================
-;;timer for automatically changing themes
-(defvar samray--interval-timer nil)
-
-;;table is used to save (time themes) pair for automatically changing themes
-;;time should be a string. themes should be a variant , not symbos.
-(defvar samray--time-themes-table nil)
-
-(defun samray/config-time-themes-table (theme-table)
-  "Set time . THEME-TABLE for time-themes-table."
-  (setq samray--time-themes-table
-	;; sort firstly, get-themes-according require a sorted table.
-	(sort theme-table (lambda (x y) (< (string-to-number (car x)) (string-to-number (car y)))))
-        )
-  )
-
-(defun samray/get-themes-according (hour-string)
-  "This function return the theme according to HOUR-STRING;
-Value of hour-string should be between 1 and 24(including)."
-  (catch 'break
-    (let (
-          (now-time (string-to-number hour-string))
-          ;; init current-themes to the themes of final item
-          (correct-themes (cdr (car (last samray--time-themes-table))))
-          (loop-list samray--time-themes-table)
-          )
-
-      ;; loop to set correct themes to correct-themes
-      (while loop-list
-	(let ((v (car loop-list)))
-	  (let ((v-time (string-to-number (car v))) (v-themes (cdr v)))
-	    (if (< now-time v-time)
-                (throw 'break correct-themes)  ; t
-	      (setq correct-themes v-themes) ; nil
-	      )))
-	(setq loop-list (cdr loop-list))
-        )
-      ;; This is returned for value of hour-string is bigger than or equal to car of final item
-      (throw 'break correct-themes) ; t
-      ))
-  )
-
-(defun samray/check-time-and-modify-theme ()
-  "This function will get the theme of now according to time-table-themes;
-then check whether EMACS should to modify theme, if so, modify it."
-  (let ((new-theme (samray/get-themes-according (format-time-string "%H"))))
-    (unless (eq new-theme samray-current-theme)
-      (setq samray-current-theme new-theme)
-      (load-theme new-theme t)
-      ))
-  )
-
-(defun samray/open-themes-auto-change ()
-  "Start to automatically change themes."
-  (interactive)
-  (samray/check-time-and-modify-theme)
-  (setq
-   samray--interval-timer (run-at-time 1800 3600 'samray/check-time-and-modify-theme))
-  (message "themes auto change open.")
-  )
-
-(defun samray/close-themes-auto-change ()
-  "Stop automatically changing themes."
-  (interactive)
-  (cancel-timer samray--interval-timer)
-  (message "themes auto change close.")
-  )
-
-;; Usage
-;; item of time-themes-table: ( hours-in-string . theme-name)
-;; 6:00 - 17::00 use spacemacs-light, 17:00 - 24:00 use monokai, 24:00 - 6:00 use spacemacs-light
-;; you could add more items.
-(samray/config-time-themes-table '(("6" . zenburn) ("18" . manoj-dark) ))
 ;; (samray/open-themes-auto-change)
 ;;---------------;;
 ;;      Font     ;;
 ;;---------------;;
 
-(cond ((eq system-type 'gnu/linux)
-       (defvar samray-font-list '("Fantasque Sans Mono-12:weight=medium:slant=italic" )))
-      ((eq system-type 'darwin)
-       (defvar samray-font-list '("Fantasque Sans Mono-12:weight=medium:slant=italic" )))
-      ((eq system-type 'windows-nt)
-       (defvar samray-font-list '("Consolas-13"))))
-(set-frame-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
-
 (defun samray/font-exists-p (font)
   "Check if FONT exists."
   (member font (font-family-list)))
 
-(defun samray/cycle-font ()
-  "Cycle through a list of fonts,samray-font-list."
-  (interactive)
-  (when samray-current-font
-    (setq samray-font-list (append samray-font-list (list samray-current-font))))
-  (let ((current-font (pop samray-font-list)))
-    ;; (when (not (samray/font-exists-p current-font))
-    (setq current-font (pop samray-font-list))
-    ;; )
-    (setq samray-current-font current-font)
-    )
-  )
+(defun samray/set-theme ()
+  "Set theme."
+  (load-theme samray-current-theme t))
+
+(defun samray/set-font ()
+  "Set font"
+  (set-frame-font samray-current-font))
+
+;; Switch to the first theme in the list above
+(add-hook 'after-init-hook #'samray/set-theme)
+(add-hook 'after-init-hook #'samray/set-font)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
