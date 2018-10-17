@@ -11,7 +11,7 @@
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)
-(when (string= system-type "darwin")
+(when (samray/mac-os-p)
   (setq dired-use-ls-dired nil))
 (defvar dired-compress-files-alist
   '(("\\.tar\\.gz\\'" . "tar -c %i | gzip -c9 > %o")

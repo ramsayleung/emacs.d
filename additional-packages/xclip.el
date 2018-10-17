@@ -42,7 +42,7 @@ This is in addition to, but in preference to, the primary selection."
   :group 'killing)
 
 (defcustom xclip-use-pbcopy&paste (and xclip-select-enable-clipboard
-                                       (eq system-type 'darwin)
+                                       (samray/mac-os-p)
                                        (executable-find "pbcopy")
                                        t)
   "Non-nil means using pbcopy and pbpaste instead of xclip.

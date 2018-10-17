@@ -58,8 +58,8 @@
 (let ((file-name-handler-alist nil))
   (setq load-prefer-newer t)            ;avoid load outdated byte-compiled file
   ;;(when (version< emacs-version "27.0") (package-initialize t))
-  (unless package--initialized (package-initializet ))
   (require 'package)
+  (unless package--initialized (package-initialize t))
   (setq package-enable-at-startup nil)
 
   (defconst samray/query-public-ip-url "http://myexternalip.com/raw")

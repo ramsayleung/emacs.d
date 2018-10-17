@@ -3,6 +3,14 @@
 ;;; Code:
 ;;; Commentary:
 
+;;; Auto complete pair symbol, such as `()`, `{}`
+(add-hook 'rust-mode-hook 'electric-pair-mode)
+(add-hook 'c-mode-hook 'electric-pair-mode)
+(add-hook 'c++-mode-hook 'electric-pair-mode)
+(add-hook 'python-mode-hook 'electric-pair-mode)
+(add-hook 'go-mode-hook 'electric-pair-mode)
+(add-hook 'cmake-mode-hook 'electric-pair-mode)
+
 ;;; enhanced gud
 (use-package realgud
   :ensure t
@@ -61,7 +69,7 @@
   :ensure t
   :init (progn
 	  (when (samray/mac-os-p)
-	      (exec-path-from-shell-initialize))
+	    (exec-path-from-shell-initialize))
 	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
 	  ;; when it is nil, exec-path-from-shell will read environment variable
 	  ;; from .zshenv instead of .zshrc, but makes sure that you put all

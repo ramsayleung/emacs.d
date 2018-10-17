@@ -496,9 +496,12 @@
 
   (general-define-key :keymaps '(prog-mode-map)
 		      [remap paredit-convolute-sexp] (general-predicate-dispatch 'xref-find-references
-							(not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
+						       (not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
 		      "M-?" (general-predicate-dispatch 'xref-find-references
-							(not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
+			      (not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
+		      )
+  (general-define-key :keymaps '(emacs-lisp-mode-map ielm-mode-map lisp-mode-map scheme-mode-map
+						     lisp-interaction-mode-map)
 		      "{" 'paredit-open-curly
 		      "}" 'paredit-close-curly
 		      "<" 'paredit-open-angled

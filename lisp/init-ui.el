@@ -345,9 +345,9 @@ then check whether EMACS should to modify theme, if so, modify it."
 ;;      Font     ;;
 ;;---------------;;
 
-(cond ((eq system-type 'gnu/linux)
+(cond ((samray/linux-p)
        (defvar samray-font-list '("Fantasque Sans Mono-12:weight=medium:slant=italic" )))
-      ((eq system-type 'darwin)
+      ((samray/mac-os-p)
        (defvar samray-font-list '("Fantasque Sans Mono-12:weight=medium:slant=italic" )))
       ((eq system-type 'windows-nt)
        (defvar samray-font-list '("Consolas-13"))))
