@@ -93,8 +93,8 @@
 	  ))
 ;;; backends for go
 (use-package company-go
-  :load-path "~/.emacs.d/additional-packages/company-go.el"
   :ensure t
+  :defer t
   :init (progn
 	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-go)))
 	  )

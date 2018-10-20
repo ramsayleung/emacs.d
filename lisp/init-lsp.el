@@ -22,6 +22,10 @@
   :config (progn
 	    (add-hook 'rust-mode-hook #'lsp-rust-enable)
 	    ))
+(use-package lsp-go
+  :ensure t
+  :config (progn
+	    (add-hook 'go-mode-hook #'lsp-go-enable)))
 
 (use-package lsp-ui
   :ensure t

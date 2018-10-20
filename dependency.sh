@@ -93,20 +93,38 @@ install_go_dep(){
     if command -v "go">/dev/null;
     then
 	echo "go exists"
-	echo "Install gocode"
+	echo "Install goimports"
 	go get -u -v golang.org/x/tools/cmd/goimports
+	echo "Install oracle"
 	go get -u -v golang.org/x/tools/cmd/oracle
+	echo "Install gocode"
 	go get -u -v github.com/nsf/gocode
+	echo "Install godef"
 	go get -u -v github.com/rogpeppe/godef
+	echo "Install gogetdoc"
 	go get -u -v github.com/zmb3/gogetdoc
+	echo "Install golint"
 	go get -u -v github.com/golang/lint/golint
+	echo "Install go-outline"
 	go get -u -v github.com/lukehoban/go-outline
+	echo "Install goreturns"
 	go get -u -v sourcegraph.com/sqs/goreturns
+	echo "Install gorename"
 	go get -u -v golang.org/x/tools/cmd/gorename
+	echo "Install gogkgs"
 	go get -u -v github.com/tpng/gopkgs
+	echo "Install go-symbols"
 	go get -u -v github.com/newhook/go-symbols
+	echo "Install guru"
 	go get -u -v golang.org/x/tools/cmd/guru
-	go get -u -v github.com/cweill/gotests/...
+	echo "Install gotests"
+	go get -u -v github.com/cweill/gotests
+	echo "Install go-langserver"
+	go get -u github.com/sourcegraph/go-langserver
+	echo "Install gometalinter"
+	curl -L https://git.io/vp6lP | sh
+	echo "Install all available checkers"
+	gometalinter --install --update
     fi
 }
 

@@ -37,7 +37,7 @@
 	   (defun samray/change-ivy-height-dynamicly ()
 	     (setq ivy-height (/ (window-body-height)2)))
 	   ;; Set `ivy-height` after Emacs startup.
-	   (run-with-idle-timer 0.3 nil 'samray/change-ivy-height-dynamicly)
+	   (run-with-idle-timer 0.05 nil 'samray/change-ivy-height-dynamicly)
 	   (defun samray/counsel-grep-or-swiper ()
 	     "Use `counsel-grep-or-swiper` dependen on buffer size."
 	     (interactive)
@@ -50,7 +50,7 @@
 (use-package ivy-posframe
   :ensure t
   :config (progn
-	    (run-with-idle-timer 0.2 nil 'ivy-posframe-enable)
+	    (run-with-idle-timer 0.1 nil 'ivy-posframe-enable)
 	    ;; (setq ivy-display-function #'ivy-posframe-display)
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
 	    ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
