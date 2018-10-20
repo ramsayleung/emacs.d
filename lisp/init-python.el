@@ -11,10 +11,10 @@
   :mode("\\.py\\'" . python-mode)
   :ensure t
   :config (progn
-	    (when (executable-find "ipython3")
+	    (when (executable-find "ipython")
 	      ;;Ipython settings sections
-	      (setq python-shell-interpreter "ipython3"
-		    python-shell-interpreter-args " -i "))
+	      (setq python-shell-interpreter "ipython"
+		    python-shell-interpreter-args "--simple-prompt -i"))
 	    ;; https://github.com/jorgenschaefer/elpy/issues/887
 	    (with-eval-after-load 'python
 	      (defun python-shell-completion-native-try ()

@@ -3,14 +3,6 @@
 ;;; Code:
 ;;; Commentary:
 
-;;; Auto complete pair symbol, such as `()`, `{}`
-(add-hook 'rust-mode-hook 'electric-pair-mode)
-(add-hook 'c-mode-hook 'electric-pair-mode)
-(add-hook 'c++-mode-hook 'electric-pair-mode)
-(add-hook 'python-mode-hook 'electric-pair-mode)
-(add-hook 'go-mode-hook 'electric-pair-mode)
-(add-hook 'cmake-mode-hook 'electric-pair-mode)
-
 ;;; enhanced gud
 (use-package realgud
   :ensure t

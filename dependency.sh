@@ -78,10 +78,12 @@ install_python_dep(){
 
 	# install python-language-server
 	echo "Start to install language server"
-	pip3  install 'python-language-server[all]' --usera
+	pip3  install 'python-language-server[all]' --user
 	# install latex dependency -- Pygments
 	pip3 install Pygments --user
 
+	echo "Start to install jupyter"
+	pip3 install jupyter --user
 
     fi
 }

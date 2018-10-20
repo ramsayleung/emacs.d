@@ -12,6 +12,14 @@
 	  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 	  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 	  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+          ;;; Auto complete pair symbol, such as `()`, `{}`
+	  (add-hook 'rust-mode-hook 'electric-pair-mode)
+	  (add-hook 'c-mode-hook 'electric-pair-mode)
+	  (add-hook 'c++-mode-hook 'electric-pair-mode)
+	  (add-hook 'python-mode-hook 'electric-pair-mode)
+	  (add-hook 'go-mode-hook 'electric-pair-mode)
+	  (add-hook 'cmake-mode-hook 'electric-pair-mode)
+	  (add-hook 'inferior-python-mode-hook 'electric-pair-mode)
 	  )
   )
 

@@ -15,5 +15,7 @@
 ;;time should be a string. themes should be a variant , not symbos.
 (defvar samray--time-themes-table nil)
 
+(defvar samray-additional-packages-path (expand-file-name "additional-packages" user-emacs-directory))
+
 (provide 'init-constant)
 ;;; init-constant.el ends here

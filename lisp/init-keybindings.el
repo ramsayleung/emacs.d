@@ -500,13 +500,16 @@
 		      "M-?" (general-predicate-dispatch 'xref-find-references
 			      (not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
 		      )
-  (general-define-key :keymaps '(emacs-lisp-mode-map ielm-mode-map lisp-mode-map scheme-mode-map
-						     lisp-interaction-mode-map)
-		      "{" 'paredit-open-curly
-		      "}" 'paredit-close-curly
-		      "<" 'paredit-open-angled
-		      ">" 'paredit-close-angled
-		      )
+  (general-define-key :keymaps '(emacs-lisp-mode-map
+				 ielm-mode-map
+				 lisp-mode-map
+				 scheme-mode-map
+				 lisp-interaction-mode-map)
+  		      "{" 'paredit-open-curly
+  		      "}" 'paredit-close-curly
+  		      "<" 'paredit-open-angled
+  		      ">" 'paredit-close-angled
+  		      )
 
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map

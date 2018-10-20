@@ -52,7 +52,7 @@ debug-init and load the given list of packages."
 					   packages " ")))
       (samray/restart-emacs-debug-init
        (append (list "-q" "--execute"
-		     (concat "(progn (package-initialize))"
+		     (concat "(progn (when (version< emacs-version \"27.0\") (package-initialize))"
 			     "(require 'use-package)"
 			     load-packages-string ")"))
 	       args))))
