@@ -197,23 +197,41 @@
   "Switch to the  buffer REPL-BUFFER-NAME.
 similar to shell-pop"
   (interactive)
-  (if (get-buffer repl-buffer-name)
-      (if (string= (buffer-name) repl-buffer-name)
-	  (if (not (one-window-p))
-	      (progn (bury-buffer)
-		     (delete-window)))
-
-	(progn
-	  (samray/split-window-below-and-move)
-	  (switch-to-buffer repl-buffer-name)
-	  (goto-char (point-max))
+  ;; Shell buffer exists?
+  (let* ((shell-window (get-buffer-window repl-buffer-name 'visual)))
+    (if (get-buffer repl-buffer-name)
+	;; Shell buffer is visible?
+	(if shell-window
+	    ;; Buffer in current window is shell buffer?
+	    (if (string= (buffer-name (window-buffer)) repl-buffer-name)
+		(if (not (one-window-p))
+		    (progn (bury-buffer)
+			   (delete-window)))
+	      ;; If not, select window which points to shell bufffer.
+	      (progn
+		(select-window shell-window)
+		(when evil-mode
+		  (evil-insert-state)))
+	      )
+	  ;; If shell buffer is not visible, split a window and switch to it.
+	  (progn
+	    ;; Use `split-window-sensibly` to split window with policy
+	    ;; If window cannot be split, force to split split window horizontally
+	    (when (not (split-window-sensibly))
+	      (samray/split-window-below-and-move))
+	    (switch-to-buffer repl-buffer-name)
+	    (when evil-mode
+	      (evil-insert-state))
+	    ))
+      ;; If shell buffer doesn't exist, create one
+      (progn
+	(when (not (split-window-sensibly))
+	  (samray/split-window-below-and-move))
+	(run-python)
+	(when evil-mode
 	  (evil-insert-state))
-	)
-    (progn
-      (run-python)
-      (samray/split-window-below-and-move)
-      (switch-to-buffer repl-buffer-name)
-      (goto-char (point-max)))))
+	)))
+  )
 
 (defun samray/repl-pop ()
   "Run REPL for different major mode and switch to the repl buffer.
