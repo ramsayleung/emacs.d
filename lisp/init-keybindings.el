@@ -44,6 +44,9 @@
 				"cp" 'evilnc-comment-or-uncomment-paragraphs
 				"cr" 'comment-or-uncomment-region
 				"cv" 'evilnc-toggle-invert-comment-line-by-line
+				"d" '(:ignore t :which-key "dirs")
+				"d g" 'samray/golang-src-dir
+				"d t" 'samray/dired-tmp-dir
 				"e" 'hydra-flycheck/body
 				"f" '(:ignore t :which-key "files")
 				"f c" 'samray/copy-current-file-path
@@ -338,14 +341,22 @@
 				"m l c" 'geiser-load-current-buffer
 				"m l f" 'geiser-load-file
 				)
+
+	    ;; Go mode
+	    (general-define-key :states '(normal visual motion)
+				:keymaps 'go-mode-map
+				:prefix samray/leader-key
+				"m c" '(:ignore :which-key "compiling")
+				"m c c" 'samray/compile-go
+				"m c x" 'samray/run-go
+				)
 	    ;; Rust mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'rust-mode-map
 				:prefix samray/leader-key
 				"m c ." 'cargo-process-repeat
-				"m c C" 'cargo-process-clean
-				"m c X" 'samray/cargo-process-run-current-example
 				"m c c" 'cargo-process-build
+				"m c C" 'cargo-process-clean
 				"m c d" 'cargo-process-doc
 				"m c f" 'cargo-process-current-test
 				"m c i" 'cargo-process-init
@@ -357,6 +368,7 @@
 				"m c s" 'cargo-process-search
 				"m c u" 'cargo-process-update
 				"m c x" 'cargo-process-run
+				"m c X" 'samray/cargo-process-run-current-example
 				"m t" 'cargo-process-test
 				)
 	    ;; Origami mode
@@ -510,15 +522,12 @@
   		      "<" 'paredit-open-angled
   		      ">" 'paredit-close-angled
   		      )
-
-  ;; Markdown-mode
-  (general-define-key :keymaps 'markdown-mode-map
-		      "M-n" 'pyim-convert-code-at-point
-		      "C-c ." 'samray/indent-region-or-buffer)
-
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
-		      "C-c ." 'gofmt)
+		      "C-c ." 'gofmt
+		      "C-c C-r" 'go-remove-unused-imports
+		      "C-c C-g" 'go-goto-imports
+		      "C-c C-k" 'godoc)
   ;; Rust-mode
   (general-define-key :keymaps 'rust-mode-map
 		      "C-c ." 'rust-format-buffer)
@@ -532,7 +541,13 @@
     "C-v" 'evil-scroll-down
     "M-v" 'evil-scroll-up)
 
-;;; Org-agenda-mode
+  ;; Markdown-mode
+  (general-define-key :keymaps 'markdown-mode-map
+		      "M-n" 'pyim-convert-code-at-point
+		      "C-c ." 'samray/indent-region-or-buffer)
+
+
+  ;; Org-agenda-mode
   (with-eval-after-load 'org-mode
     (general-define-key :keymap 'org-agenda-mode
 			"v" 'hydra-org-agenda-view/body))
@@ -775,7 +790,6 @@ Info-mode:
 	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/eshell-clear-buffer)
 	    (define-key eshell-mode-map (kbd "C-c C-l") #'samray/eshell-clear-buffer)
 	    ))
-
 (message "loading init-keybindings")
 (provide 'init-keybindings)
 ;;; init-keybindings ends here

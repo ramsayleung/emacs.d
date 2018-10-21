@@ -1,0 +1,6 @@
+# -*- mode:snippet -*-
+# name: pacakge
+# key: pac
+# --
+package ${1:main}
+$0

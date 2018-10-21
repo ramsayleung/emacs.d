@@ -95,10 +95,8 @@ install_go_dep(){
 	echo "go exists"
 	echo "Install goimports"
 	go get -u -v golang.org/x/tools/cmd/goimports
-	echo "Install oracle"
-	go get -u -v golang.org/x/tools/cmd/oracle
 	echo "Install gocode"
-	go get -u -v github.com/nsf/gocode
+	go get -u -v github.com/mdempsky/gocode
 	echo "Install godef"
 	go get -u -v github.com/rogpeppe/godef
 	echo "Install gogetdoc"
@@ -119,12 +117,16 @@ install_go_dep(){
 	go get -u -v golang.org/x/tools/cmd/guru
 	echo "Install gotests"
 	go get -u -v github.com/cweill/gotests
+	echo "Install godoc"
+	go get -u -v golang.org/x/tools/cmd/godoc
 	echo "Install go-langserver"
 	go get -u github.com/sourcegraph/go-langserver
 	echo "Install gometalinter"
 	curl -L https://git.io/vp6lP | sh
 	echo "Install all available checkers"
 	gometalinter --install --update
+	echo "Install errcheck"
+	go get -u github.com/kisielk/errcheck
     fi
 }
 

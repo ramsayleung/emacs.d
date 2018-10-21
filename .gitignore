@@ -30,3 +30,5 @@ abbrev_defs
 custom.el
 srecode-map.el
 lisp/custom.el
+/npm-debug.log
+bin/*
