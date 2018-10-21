@@ -17,15 +17,12 @@
   :init
   (add-hook 'python-mode-hook #'lsp-python-enable)
   )
+
 (use-package lsp-rust
   :ensure t
   :config (progn
 	    (add-hook 'rust-mode-hook #'lsp-rust-enable)
 	    ))
-(use-package lsp-go
-  :ensure t
-  :config (progn
-	    (add-hook 'go-mode-hook #'lsp-go-enable)))
 
 (use-package lsp-ui
   :ensure t
@@ -56,7 +53,6 @@
 			       :diagnostics (:frequencyMs 5000))
 		 )
 	   ))
-
 (message "loading init-lsp")
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

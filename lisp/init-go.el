@@ -36,10 +36,10 @@
   :config (progn
 	    ;; Use goimports instead of go-fmt
 	    (setq gofmt-command "goimports")
-	    ;; Customize compile command to run go build
-	    (if (not (string-match "go" compile-command))
-		(set (make-local-variable 'compile-command)
-		     "go generate && go build -v && go test -v && go vet"))
+	    (when (not (getenv "GOROOT"))
+	      (setenv "GOROOT" "/usr/local/go"))
+	    (when (not (getenv "GOPATH"))
+	      (setenv "GOPATH" "~/code/go"))
 	    )
   )
 
