@@ -2,5 +2,5 @@
 # name: pacakge
 # key: pac
 # --
-package ${1:main}
+package ${1:`(samray/basename default-directory)`}
 $0

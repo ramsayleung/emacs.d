@@ -275,6 +275,11 @@ similar to shell-pop"
   (kill-new (buffer-name))
   )
 
+
+(defun samray/basename (path)
+  "Emacs version of `basename`."
+  (file-name-nondirectory (directory-file-name path)))
+
 (message "loading init-programming")
 (provide 'init-programming)
 
