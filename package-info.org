@@ -1,0 +1,163 @@
+package: comment 
+custom.el
+1. '(eglot elgot company-go ztree zenburn-theme youdao-dictionary yaml-mode which-key wgrep web-mode web-beautify vue-mode virtualenvwrapper use-package try treemacs-projectile treemacs-evil toml-mode symbol-overlay smex simpleclip rjsx-mode restart-emacs region-state realgud rainbow-delimiters pyim py-isort py-autopep8 popwin pdf-tools paredit-everywhere pandoc-mode ox-twbs ox-gfm origami org-pomodoro org-journal org-download org-bullets ob-rust noflet nodejs-repl nginx-mode markdown-preview-mode magit lsp-ui lsp-rust lsp-python lsp-go lispy keyfreq js2-refactor ivy-posframe hungry-delete htmlize highlight-indent-guides golden-ratio go-eldoc git-timemachine general geiser focus flycheck-rust flycheck-posframe flycheck-gometalinter eyebrowse expand-region exec-path-from-shell evil-surround evil-nerd-commenter evil-mc evil-matchit eshell-prompt-extras es-mode emmet-mode elpy dockerfile-mode docker diminish counsel-projectile company-web company-statistics company-shell company-restclient company-racer company-quickhelp company-lsp company-jedi company-c-headers column-enforce-mode color-theme-sanityinc-tomorrow cmake-mode clang-format circe ccls cargo beacon adaptive-wrap ac-js2))): '(package-selected-packages
+init-auto-completion.el
+2. company: None
+3. company-quickhelp: None
+4. company-statistics: None
+5. company-jedi: company-mode completion back-end for python JEDI
+6. company-web: HTML completion
+7. company-shell: Shell Script completion
+8. company-c-headers: C/C++ headers completion
+9. company-restclient: backends for restclient
+10. company-go: backends for go
+11. company-racer: backends for rust
+12. company-lsp: backends for lsp-mode
+init-better-default.el
+13. auto-save: auto save file when Emacs idle
+14. restart-emacs: code  from spacemacs
+15. (let ((load-packages-string (mapconcat (lambda (pkg) (format " %s)" pkg)): `(,val)))))
+16. "(require 'use-package)": (concat "(progn (when (version< emacs-version \"27.0\") (package-initialize))"
+17. xclip: In terminal Emacs, let emacs use system clipboard as GUI Emacs.
+18. noflet: Don't ask me when close emacs with process is running
+init-better-editing.el
+19. ace-window: None
+20. hungry-delete: Delete spaces at once
+21. which-key: None
+22. rainbow-delimiters: according to their depth
+23. beacon: A light that follows your cursor around so you don't lose it
+24. ztree: An useful package to compare directory tree
+25. highlight-indent-guides: Emacs minor mode to highlight indentation
+26. region-state: show information about selected region
+27. origami: folding based on indentation/syntax
+28. undo-tree: treat undo history as a tree
+29. wgrep: make grep buffer writable and apply the changes to files
+30. popup: Visual Popup Interface Library For Emacs
+31. simpleclip: Copy and Paste in x system in all platform
+32. adaptive-wrap: this is from my .emacs.d
+init-c-c++.el
+33. clang-format: None
+34. cc-mode: None
+35. google-c-style: Google C style
+36. cmake-mode: None
+37. ;;  srefactor: Semantic Refactor is a C/C++ refactoring tool based on Semantic parser framework.
+init-chinese.el
+38. youdao-dictionary: None
+39. pyim: None
+40. pyim-basedict: 激活 basedict 拼音词库
+init-constant.el
+init-constant.el~
+init-dired.el
+init-eshell.el
+41. eshell: None
+42. eshell-prompt-extras: (add-hook 'eshell-mode-hook 'samray/setup-company-eshell-autosuggest)
+init-evil.el
+43. evil: None
+44. evil-surround: None
+45. evil-nerd-commenter: None
+46. evil-matchit: Vim matchit ported into Emacs
+47. evil-mc: None
+init-go.el
+48. go-mode: None
+49. go-eldoc: None
+init-helm.el
+50. helm: None
+51. helm-projectile: )
+52. helm-swoop: None
+53. helm-themes: None
+54. helm-xref: )
+init-ivy.el
+55. counsel: None
+56. swiper: )
+57. smex: None
+58. avy: None
+59. ivy: None
+60. ivy-posframe: None
+61. counsel-projectile: None
+62. ivy-buffer-extend: None
+init-keybindings.el
+63. general: None
+64. hydra: None
+init-lisp.el
+65. paredit: None
+init-lsp.el
+66. lsp-mode: Code:
+67. lsp-python: None
+68. lsp-rust: None
+69. lsp-ui: None
+70. ccls: None
+init-markdown.el
+71. markdown-mode: major mode for markdown
+72. pandoc-mode: None
+73. markdown-preview-mode: None
+init-misc.el
+74. eyebrowse: Save and restore window configuration
+75. keyfreq: Track Emacs commands frequency
+76. focus: Dim the font color of text in surrounding paragraphs
+77. try: Try out Emacs Package without install
+init-org.el
+78. org: Code:
+79. org-pomodoro: pomodoro tech
+80. org-journal: for journal
+81. org-bullets: show org-mode bullets as UTF-8 character
+82. ox-gfm: Export to github flavored markdown
+83. ob-rust: None
+84. ox-twbs: Export to twitter bootstrap
+85. ;;  ox-reveal: Export to reveal for presentation
+86. ;;  ox-latex-chinese: fix org-mode/latex chinese char issue
+87. htmlize: Syntax Highlight in html file
+88. org-download: Drag and drop images to org-mode
+init-programming.el
+89. realgud: enhanced gud
+90. yasnippet: None
+91. column-enforce-mode: similar with fill-column-indicator,but a little bit different
+92. yaml-mode: None
+93. es-mode: :mode "\\.yml$")
+94. dockerfile-mode: None
+95. docker: :mode ("Dockerfile\\'" . dockerfile-mode))
+96. json-mode: None
+97. nginx-mode: None
+98. exec-path-from-shell: Make Emacs use the $PATH set up by the user's shell
+99. expand-region: Emacs extension to increate selected region by semantic units
+100. projectile: Projectile
+101. restclient: Rest client in Emacs
+102. treemacs: None
+103. treemacs-evil: (progn
+104. treemacs-projectile: None
+init-python.el
+105. python: None
+106. py-autopep8: Use pep8 to format python file
+107. py-isort: None
+108. virtualenvwrapper: virtualenvwrapper for virtualenv
+init-rust.el
+109. rust-mode: None
+110. toml-mode: None
+111. cargo: None
+init-scheme.el
+112. geiser: None
+init-syntax-checking.el
+113. flycheck: None
+114. flycheck-rust: None
+115. flycheck-posframe: ))
+init-ui.el
+116. popwin: of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
+117. golden-ratio: None
+118. zenburn-theme: None
+119. color-theme-sanityinc-tomorrow: None
+120. diminish: None
+init-useless.el
+init-version-control.el
+121. magit: None
+122. git-timemachine: like a time machine,to move to past versions of the current file
+init-web.el
+123. web-beautify: None
+124. web-mode: None
+125. js2-mode: improved Javascript editing mode
+126. nodejs-repl: None
+127. js2-refactor: None
+128. ac-js2: None
+129. rjsx-mode: None
+130. skewer-mode: From a js2-mode buffer with skewer-mode minor mode enabled, send forms to the browser to evaluate.
+131. emmet-mode: Generate Html and Css code
+132. vue-mode: None
+total package: 133

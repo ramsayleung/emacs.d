@@ -36,12 +36,7 @@
   :config (progn
 	    ;; Use goimports instead of go-fmt
 	    (setq gofmt-command "goimports")
-	    (when (not (getenv "GOROOT"))
-	      (setenv "GOROOT" "/usr/local/go"))
-	    (when (not (getenv "GOPATH"))
-	      (setenv "GOPATH" "~/code/go"))
-	    )
-  )
+	    ))
 
 (use-package go-eldoc
   :ensure t
