@@ -13,6 +13,7 @@ import (
 
 const USE_PACKGE_KEYWORD string = "use-package"
 const LISP_RELATIVE_PATH = ".emacs.d/lisp"
+const EXCLUDE_CUSTOM_NAME = "custom.el"
 
 func main() {
 	homePath := os.Getenv("HOME")
@@ -25,6 +26,9 @@ func main() {
 	buffer.WriteString("package: comment \n")
 	var index = 1
 	for _, file := range files {
+		if file.Name() == EXCLUDE_CUSTOM_NAME {
+			continue
+		}
 		absoluteLispFilePath := filepath.Join(absoluteLispDirPath, file.Name())
 		data, err := ioutil.ReadFile(absoluteLispFilePath)
 		if err != nil {
