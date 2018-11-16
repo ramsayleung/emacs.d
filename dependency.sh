@@ -126,7 +126,7 @@ install_go_dep(){
 	echo "Install all available checkers"
 	gometalinter --install --update
 	echo "Install errcheck"
-	go get -u github.com/kisielk/errcheck
+	go get -u -v github.com/kisielk/errcheck
     fi
 }
 

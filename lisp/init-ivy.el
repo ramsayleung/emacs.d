@@ -35,6 +35,7 @@
 	   (setq ivy-count-format "%d/%d ")
 	   ;; Number of result lines to display, set height as width-body-height/2
 	   (defun samray/change-ivy-height-dynamicly ()
+	     (interactive)
 	     (setq ivy-height (/ (window-body-height)2)))
 	   ;; Set `ivy-height` after Emacs startup.
 	   (run-with-idle-timer 0.05 nil 'samray/change-ivy-height-dynamicly)

@@ -53,7 +53,7 @@
 	    (if (samray/mac-os-p) (setenv "GOROOT" "/usr/local/opt/go/libexec")
 	      (setenv "GOROOT" "/usr/local/go")))
 	  (when (not (getenv "GOPATH"))
-	    (setenv "GOPATH" "~/.go"))
+	    (setenv "GOPATH" (expand-file-name "~/.go")))
 	  )
   )
 
