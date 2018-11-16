@@ -46,17 +46,6 @@
                              (tern-mode  t)))
   )
 
-(use-package nodejs-repl
-  :ensure t
-  :commands (nodejs-repl
-             nodejs-repl-send-buffer
-             nodejs-repl-switch-to-repl
-             nodejs-repl-send-region
-             nodejs-repl-send-last-sexp
-             nodejs-repl-execute
-             nodejs-repl-load-file)
-  )
-
 (use-package js2-refactor
   :defer t
   :ensure t
@@ -70,34 +59,6 @@
   :config (progn
 	    (setq ac-js2-evaluate-calls t)
 	    ))
-
-(use-package rjsx-mode
-  :ensure t
-  :mode ("\\.js\\'" . rjsx-mode)
-  :config (progn
-
-	    (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
-	    (with-eval-after-load 'rjsx-mode
-	      (setq emmet-expand-jsx-className? t)
-	      (define-key rjsx-mode-map "<" nil)
-	      (define-key rjsx-mode-map (kbd "C-d") nil)
-	      (define-key rjsx-mode-map ">" nil))
-	    )
-  )
-
-;;; live web development with Emacs
-;;; Provides live interaction with Javascript,Css,and Html in a web browser
-;;; Usage :
-;;; M-x run-skewer to attach a browser to Emacs
-;;; From a js2-mode buffer with skewer-mode minor mode enabled, send forms to the browser to evaluate.
-(use-package skewer-mode
-  :ensure t
-  :defer t
-  :init (progn
-	  (add-hook 'js2-mode-hook 'skewer-mode)
-	  (add-hook 'css-mode-hook 'skewer-css-mode)
-	  (add-hook 'html-mode-hook 'skewer-html-mode)
-	  ))
 
 ;;;----------------;;;
 ;;;   Html Mode    ;;;
@@ -141,6 +102,7 @@ Version 2017-03-12"
 (add-hook 'css-mode-hook 'xah-syntax-color-hex)
 (add-hook 'php-mode-hook 'xah-syntax-color-hex)
 (add-hook 'html-mode-hook 'xah-syntax-color-hex)
+
 ;;;----------------;;;
 ;;;   Vue Mode    ;;;
 ;;;----------------;;;

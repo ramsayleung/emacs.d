@@ -232,10 +232,6 @@ This code toggles between them."
   :defer t
   )
 
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :defer t)
-
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
