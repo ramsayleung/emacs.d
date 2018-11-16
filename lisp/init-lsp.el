@@ -53,6 +53,11 @@
 			       :diagnostics (:frequencyMs 5000))
 		 )
 	   ))
+(use-package lsp-go
+  :ensure t
+  :config (progn
+	    (add-hook 'go-mode-hook #'lsp-go-enable)
+	    ))
 (message "loading init-lsp")
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

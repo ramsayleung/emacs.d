@@ -24,10 +24,6 @@
   :commands (markdown-mode gfm-mode)
   )
 
-(use-package markdown-preview-mode
-  :ensure t
-  :commands (markdown-mode))
-
 (message "loading init-markdown")
 (provide 'init-markdown)
 

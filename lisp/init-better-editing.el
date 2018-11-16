@@ -31,23 +31,6 @@
   :defer t
   :init(add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-;;; A light that follows your cursor around so you don't lose it
-(use-package beacon
-  :if (and (not (eq system-type 'windows-nt))
-	   window-system)
-  :ensure t
-  :diminish beacon-mode
-  :defer t
-  :config
-  (beacon-mode t))
-
-;;; An useful package to compare directory tree
-(use-package ztree
-  :if (not (eq system-type 'windows-nt))
-  :ensure t
-  :commands (ztree-dir ztree-diff)
-  :init (setq ztree-dir-move-focus t))
-
 ;;; Emacs minor mode to highlight indentation
 (use-package highlight-indent-guides
   :ensure t

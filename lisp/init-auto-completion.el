@@ -46,22 +46,6 @@
   :hook (company-mode . company-statistics-mode)
   )
 
-;; company-mode completion back-end for python JEDI
-(use-package company-jedi
-  :ensure t
-  :defer t
-  :init(progn
-	 (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-jedi))))
-  )
-
-;; HTML completion
-(use-package company-web
-  :ensure t
-  :defer t
-  :init(progn
-	 (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-web-html))))
-  )
-
 ;;; Shell Script completion
 (use-package company-shell
   :ensure t
@@ -84,14 +68,6 @@
 	  )
   )
 
-;;; backends for restclient
-(use-package company-restclient
-  :ensure t
-  :defer t
-  :init (progn
-	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-restclient)))
-	  ))
-
 ;; backends for go
 (use-package company-go
   :ensure t
@@ -100,13 +76,6 @@
 	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-go)))
 	  )
   )
-;; backends for rust
-(use-package company-racer
-  :ensure t
-  :defer t
-  :init (progn
-	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-racer)))
-	  ))
 
 ;;; backends for lsp-mode
 (use-package company-lsp
@@ -115,7 +84,6 @@
   :init (progn
 	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-lsp)))
 	  ))
-
 
 (message "loading init-auto-completion")
 (provide 'init-auto-completion)

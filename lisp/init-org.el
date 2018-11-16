@@ -131,25 +131,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;; (add-hook 'after-init-hook (lambda ()
 ;; 			     (org-agenda nil "c")))
 
-;;; pomodoro tech
-(use-package org-pomodoro
-  :if (and (not (samray/windows-p))
-	   window-system)
-  :commands (org-pomodoro)
-  :ensure t)
-
-;;; for journal
-(use-package org-journal
-  :if (and (not (samray/windows-p))
-	   window-system)
-  :ensure t
-  :commands (org-journal-new-entry)
-  :after org
-  :init (progn
-	  (setq org-journal-dir "~/Dropbox/journal")
-	  )
-  )
-
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
   :if (and (not (samray/windows-p))
@@ -181,19 +162,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   :ensure ox-twbs
   )
 
-;;; Export to reveal for presentation
-;; (use-package ox-reveal
-;;   :if (and (not (eq system-type 'windows-nt))
-;; 	   window-system)
-;;   :ensure ox-reveal)
-
-;; ;;; fix org-mode/latex chinese char issue
-;; (use-package ox-latex-chinese
-;;   :ensure t
-;;   :init (progn
-;; 	  (require 'ox-latex-chinese)
-;; 	  (oxlc/toggle-ox-latex-chinese t)
-;; 	  ))
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
 (setq org-reveal-mathjax t)
 

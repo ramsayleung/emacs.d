@@ -27,6 +27,23 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
+;;; Define constnat variable for configuration
+
+(defvar samray-current-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+
+(defvar samray-current-theme 'zenburn)
+
+;;timer for automatically changing themes
+(defvar samray--interval-timer nil)
+
+;;table is used to save (time themes) pair for automatically changing themes
+;;time should be a string. themes should be a variant , not symbos.
+(defvar samray--time-themes-table nil)
+
+(defvar samray-additional-packages-path (expand-file-name "additional-packages" user-emacs-directory))
+
+(defvar samray/completion-framework 'ivy)
+
 ;;; Define some useful function
 (defun samray/mac-os-p ()
   "Check whether Emacs is running on Mac os."
@@ -48,8 +65,6 @@
   "Predicate if buffer is too large."
   (or (> (buffer-size) (* 5000 800))
       (> (line-number-at-pos (point-max)) 100000)))
-
-(defvar samray/completion-framework 'ivy)
 
 (defun samray/does-use-ivy ()
   "Return t if use `ivy` as completion framework."
@@ -75,7 +90,6 @@
   (add-to-list 'load-path (expand-file-name "additional-packages" user-emacs-directory))
 
   (require 'cl)
-  (require 'init-constant)
   (require 'init-auto-completion)
   (require 'init-better-editing)
   (require 'init-better-default)

@@ -139,9 +139,9 @@ install_rust_dep(){
     fi
     echo "Install racer dependency"
     rustup component add rust-src
-    cargo install racer
-    cargo install cargo-edit
-    cargo install cargo-script
+    cargo install racer --force
+    cargo install cargo-edit --force
+    cargo install cargo-script --force
 }
 
 main(){

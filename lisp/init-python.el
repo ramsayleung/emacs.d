@@ -34,11 +34,6 @@
   :ensure t
   )
 
-(use-package py-isort
-  :ensure t
-  :commands (py-isort-buffer py-isort-region)
-  )
-
 ;;; virtualenvwrapper for virtualenv
 (use-package virtualenvwrapper
   :after python-mode
