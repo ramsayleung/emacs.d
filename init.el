@@ -75,7 +75,6 @@
   (add-to-list 'load-path (expand-file-name "additional-packages" user-emacs-directory))
 
   (require 'cl)
-  (require 'init-constant)
   (require 'init-auto-completion)
   (require 'init-better-editing)
   (require 'init-better-default)

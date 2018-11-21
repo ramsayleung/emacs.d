@@ -250,17 +250,9 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
   "Check if FONT exists."
   (member font (font-family-list)))
 
-(defun samray/set-theme ()
-  "Set theme."
-  (load-theme samray-current-theme t))
+(load-theme 'zenburn t)
 
-(defun samray/set-font ()
-  "Set font"
-  (set-frame-font samray-current-font))
-
-;; Switch to the first theme in the list above
-(add-hook 'after-init-hook #'samray/set-theme)
-(add-hook 'after-init-hook #'samray/set-font)
+(set-frame-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
 
 ;;----------------;;
 ;;Major/Minor Mode;;
