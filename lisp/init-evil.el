@@ -51,18 +51,6 @@
 	  ;; (global-evil-matchit-mode 1)
 	  ))
 
-(use-package evil-mc
-  :ensure t
-  :diminish evil-mc-mode
-  :commands evil-mode
-  :init (progn
-	  (run-with-idle-timer 2 nil 'global-evil-mc-mode)
-	  ;; (global-evil-mc-mode t)
-	  )
-  )
-
-
-;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
 ;; (evilnc-default-hotkeys)
 
 (message "loading init-evil")

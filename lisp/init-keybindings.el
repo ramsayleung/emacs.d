@@ -37,7 +37,6 @@
 				"b D" 'samray/delete-blank-line-in-buffer
 				"b l" 'samray/ivy-switch-to-buffer-enhanced
 				"b n" 'samray/get-buffer-name
-				"b o" 'occur-dwim
 				"c" '(:ignore t :which-key "compile/comments")
 				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
 				"cc" 'evilnc-copy-and-comment-lines

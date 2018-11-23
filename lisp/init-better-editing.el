@@ -138,89 +138,11 @@ point reaches the beginning or end of the buffer, stop there."
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
-(defun samray/query-replace-dwim (replace-string)
-  "Enhance query and replace REPLACE-STRING."
-  (interactive
-   (list (read-string (format "Do query-replace %s with :" (thing-at-point-or-at-region)))))
-  (save-excursion
-    (let ((replaced-string (thing-at-point-or-at-region)))
-      (goto-char (point-min))
-      (query-replace replaced-string replace-string))))
-
-(defun thing-at-point-or-at-region ()
-  "Return string or word at the cursor or in the marked region."
-  (if (region-active-p)
-      (buffer-substring-no-properties
-       (region-beginning)
-       (region-end))
-    (thing-at-point 'symbol)))
-
-;;;Code from http://pragmaticemacs.com/emacs/aligning-text/
-;;; I change something
-(defun samray/align-whitespace (start end)
-  "Align columns by whitespace in region between START to END."
-  (interactive "r")
-  (save-excursion
-    (if (region-active-p)
-	(progn
-	  (align-regexp start end
-			"\\(\\s-*\\)\\s-" 1 0 t)
-	  (message "Align columns done"))
-      (message "You have to mark some region to align column"))))
-
-
 (defun samray/copy-current-file-path ()
   "Add current file path to kill ring.  Limits the filename to project root if possible."
   (interactive)
   (kill-new buffer-file-name))
 
-(defun samray/copy-to-end-of-line ()
-  "Replace vim keybinding `y$`."
-  (interactive)
-  (kill-ring-save (point)
-                  (line-end-position)))
-
-;;; Move line up or down and also a region if the region is selected
-;; https://www.emacswiki.org/emacs/move-text.el
-(defun samray/move-text-internal (arg)
-  (cond
-   ((and mark-active transient-mark-mode)
-    (if (> (point) (mark))
-        (exchange-point-and-mark))
-    (let ((column (current-column))
-          (text (delete-and-extract-region (point) (mark))))
-      (forward-line arg)
-      (move-to-column column t)
-      (set-mark (point))
-      (insert text)
-      (exchange-point-and-mark)
-      (setq deactivate-mark nil)))
-   (t
-    (let ((column (current-column)))
-      (beginning-of-line)
-      (when (or (> arg 0) (not (bobp)))
-        (forward-line)
-        (when (or (< arg 0) (not (eobp)))
-          (transpose-lines arg)
-          (when (and (eval-when-compile
-                       '(and (>= emacs-major-version 24)
-                             (>= emacs-minor-version 3)))
-                     (< arg 0))
-            (forward-line -1)))
-        (forward-line -1))
-      (move-to-column column t)))))
-
-(defun samray/move-text-down (arg)
-  "Move region (transient-mark-mode active) or current line ARG
-lines down."
-  (interactive "*p")
-  (samray/move-text-internal arg))
-
-(defun samray/move-text-up (arg)
-  "Move region `(transient-mark-mode active) or current line arg
-lines up by reverse ARG."
-  (interactive "*p")
-  (samray/move-text-internal (- arg)))
 
 ;;; http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html
 ;;; Copy and Paste in x system in all platform
@@ -241,95 +163,7 @@ lines up by reverse ARG."
 	     (insert (simpleclip-get-contents)))
 	   ))
 
-;;; Changing Ediff options
-;;; use window instead of weird frame
-;;; https://oremacs.com/2015/01/17/setting-up-ediff/
-
-(require 'ediff)
-(defmacro csetq (variable value)
-  `(funcall (or (get ',variable 'custom-set)
-                'set-default)
-            ',variable ,value))
-
-(csetq ediff-window-setup-function 'ediff-setup-windows-plain)
-(csetq ediff-split-window-function 'split-window-horizontally)
-
-;;; changing ediff key binding
-(defun samray/ediff-hook ()
-  (ediff-setup-keymap)
-  (define-key ediff-mode-map "j" 'ediff-next-difference)
-  (define-key ediff-mode-map "k" 'ediff-previous-difference))
-
-(add-hook 'ediff-mode-hook 'samray/ediff-hook)
-
-(defvar samray/ediff-last-windows nil)
-
-(defun samray/store-pre-ediff-winconfig ()
-  (setq samray/ediff-last-windows (current-window-configuration)))
-
-(defun samray/restore-pre-ediff-winconfig ()
-  (set-window-configuration samray/ediff-last-windows))
-
-(add-hook 'ediff-before-setup-hook #'samray/store-pre-ediff-winconfig)
-(add-hook 'ediff-quit-hook #'samray/restore-pre-ediff-winconfig)
-
-;; -*- lexical-binding: t -*-
-(defun samray/ediff-files ()
-  "Ediff in 'dired-mode'."
-  (interactive)
-  (let ((files (dired-get-marked-files))
-        (wnd (current-window-configuration)))
-    (if (<= (length files) 2)
-        (let ((file1 (car files))
-              (file2 (if (cdr files)
-                         (cadr files)
-                       (read-file-name
-                        "file: "
-                        (dired-dwim-target-directory)))))
-          (if (file-newer-than-file-p file1 file2)
-              (ediff-files file2 file1)
-            (ediff-files file1 file2))
-          (add-hook 'ediff-after-quit-hook-internal
-                    (lambda ()
-                      (setq ediff-after-quit-hook-internal nil)
-                      (set-window-configuration wnd))))
-      (error "No more than 2 files should be marked"))))
-(require 'dired)
-(define-key dired-mode-map "e" 'samray/ediff-files)
 (setq dired-dwim-target t)
-
-(defadvice upcase-word (before upcase-word-advice activate)
-  "Upcase a word until cursor is at the beginning of this word."
-  (unless (looking-back "\\b" 1)(backward-word)))
-
-(defadvice downcase-word (before downcase-word-advice activate)
-  "Downcase a word until cursor is at the beginning of this word."
-  (unless (looking-back "\\b" 1)(backward-word)))
-
-;; (defadvice capitalize-word (before capitalize-word-advice activate)
-;;   "Capitalize word dependen on 'subword-mode'."
-;;   (unless (or (looking-back "\\b" 1)
-;;               (bound-and-true-p subword-mode))
-;;     (backward-word)))
-
-;; this is from my .emacs.d
-(use-package adaptive-wrap
-  :ensure t
-  :init (progn
-	  (setq-default adaptive-wrap-extra-indent 2)
-	  ))
-
-(add-hook 'visual-line-mode-hook
-	  (lambda ()
-	    (adaptive-wrap-prefix-mode t)
-	    ))
-
-
-(if (and (not (eq system-type 'windows-nt))
-	 window-system)
-    (global-visual-line-mode +1)
-  )
-
 (message "loading init-better-editing")
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here
