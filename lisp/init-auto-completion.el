@@ -70,11 +70,9 @@
 
 ;; backends for go
 (use-package company-go
-  :ensure t
-  :defer t
+  :load-path "~/.emacs.d/additional-packages/company-go.el"
   :init (progn
-	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-go)))
-	  )
+  	  (add-to-list 'company-backends 'company-go))
   )
 
 ;;; backends for lsp-mode
@@ -82,7 +80,7 @@
   :ensure t
   :defer t
   :init (progn
-	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-lsp)))
+	  (add-to-list 'company-backends 'company-lsp)
 	  ))
 
 (message "loading init-auto-completion")

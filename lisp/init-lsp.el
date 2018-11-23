@@ -18,6 +18,20 @@
   (add-hook 'python-mode-hook #'lsp-python-enable)
   )
 
+(use-package lsp-go
+  :ensure t
+  :init (progn
+	  ;; Golang lsp
+	  (lsp-define-stdio-client
+	   lsp-go
+	   "go"
+	   (lambda () default-directory)
+	   '("go-langserver" "-mode=stdio" "-gocodecompletion")
+	   :ignore-regexps
+	   '("^langserver-go: reading on stdin, writing on stdout$"))
+	  (add-hook 'go-mode-hook 'lsp-go-enable)
+	  ))
+
 (use-package lsp-rust
   :ensure t
   :config (progn
