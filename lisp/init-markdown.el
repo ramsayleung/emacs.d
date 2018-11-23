@@ -10,23 +10,13 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
+
   :init (progn
-	  (setq markdown-command "/usr/local/bin/pandoc")
+	  (setq markdown-fontify-code-blocks-natively t)
 	  (add-hook 'markdown-mode-hook
 		    (lambda ()
 		      (when buffer-file-name
-			(add-hook 'after-save-hook
-				  'check-parens
-				  nil t))))))
-
-(use-package pandoc-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  )
-
-(use-package markdown-preview-mode
-  :ensure t
-  :commands (markdown-mode))
+			(add-hook 'after-save-hook 'check-parens nil t))))))
 
 (message "loading init-markdown")
 (provide 'init-markdown)

@@ -103,17 +103,6 @@ Version 2017-03-12"
 (add-hook 'php-mode-hook 'xah-syntax-color-hex)
 (add-hook 'html-mode-hook 'xah-syntax-color-hex)
 
-;;;----------------;;;
-;;;   Vue Mode    ;;;
-;;;----------------;;;
-
-(use-package vue-mode
-  :ensure t
-  :mode ("\\.vue\\'" . vue-mode)
-  :config (progn
-	    (setq mmm-submode-decoration-level 0)
-	    ))
-
 (message "loading init-web")
 (provide 'init-web)
 

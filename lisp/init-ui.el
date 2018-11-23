@@ -75,12 +75,7 @@
 					     "magit-status-mode"
 					     "IELM"
 					     "eshell-mode" "dired-mode"))
-	  )
-  :config (progn
-	    (defadvice select-window-by-number
-		(after golden-ratio-resize-window activate)
-	      (golden-ratio) nil)
-	    ))
+	  ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
@@ -125,8 +120,7 @@ This code toggles between them."
   (setq ns-use-proxy-icon nil)
   (setq frame-title-format nil)
 ;;; Disable mouse scrolling
-  (mouse-wheel-mode -1)
-  )
+  (mouse-wheel-mode -1))
 
 
 ;;; Change vertical-border for terminal Emacs.

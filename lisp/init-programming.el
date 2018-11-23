@@ -20,18 +20,10 @@
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
 
-;;; similar with fill-column-indicator,but a little bit different
-(use-package column-enforce-mode
-  :ensure t
-  :diminish column-enforce-mode
-  :defer t
-  :config
-  (setq column-enforce-column 79)
-  (add-hook 'prog-mode-hook 'column-enforce-mode))
-
 (use-package yaml-mode
   :ensure t
   :mode "\\.yml$")
+
 (use-package es-mode
   :ensure t
   :mode "\\.es$"
@@ -39,22 +31,11 @@
 	    (setq es-always-pretty-print t)
 	    ))
 
-(use-package dockerfile-mode
-  :ensure t
-  :mode ("Dockerfile\\'" . dockerfile-mode))
-(use-package docker
-  :ensure t
-  :commands (docker-images docker-containers docker-volumes docker-networks docker-machines))
-
 (use-package json-mode
   :ensure t
   :mode "\\.json$"
   :init (remove-hook 'json-mode 'tern-mode)
   )
-
-(use-package nginx-mode
-  :ensure t
-  :commands (nginx-mode))
 
 ;; Make Emacs use the $PATH set up by the user's shell
 (use-package exec-path-from-shell
@@ -68,6 +49,11 @@
 	  ;; environment variable you need in .zshenv rather than .zshrc
 	  (setq exec-path-from-shell-check-startup-files nil) ;
 	  (setq exec-path-from-shell-arguments '("-l")) ;remove -i read form .zshenv
+	  (when (not (getenv "GOROOT"))
+	    (if (samray/mac-os-p) (setenv "GOROOT" "/usr/local/opt/go/libexec")
+	      (setenv "GOROOT" "/usr/local/go")))
+	  (when (not (getenv "GOPATH"))
+	    (setenv "GOPATH" (expand-file-name "~/.go")))
 	  )
   )
 
@@ -93,76 +79,6 @@
     (add-to-list 'projectile-globally-ignored-directories "*CMakeFiles")
     )
   )
-
-;;; Rest client in Emacs
-(use-package restclient
-  :ensure t
-  :mode ("\\.rest\\'" . restclient-mode))
-
-;;; Evil is not especilly useful in the terminal,so
-;; (evil-set-initial-state 'term-mode 'emacs)
-
-(use-package treemacs
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (use-package treemacs-evil
-      :ensure t
-      :demand t)
-    (setq treemacs-follow-after-init          t
-          treemacs-width                      30
-          treemacs-indentation                2
-          treemacs-git-integration            t
-          treemacs-collapse-dirs              3
-          treemacs-silent-refresh             nil
-          treemacs-change-root-without-asking nil
-          treemacs-sorting                    'alphabetic-desc
-          treemacs-show-hidden-files          t
-          treemacs-never-persist              nil
-          treemacs-is-never-other-window      nil
-          treemacs-goto-tag-strategy          'refetch-index)
-
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t))
-  :bind
-  (:map global-map
-        ("C-c t t"        . treemacs-toggle)
-        ("C-c t e"    . treemacs)
-	))
-
-(use-package treemacs-projectile
-  :defer t
-  :ensure t
-  :config
-  (setq treemacs-header-function #'treemacs-projectile-create-header)
-  :bind (:map global-map
-              ("C-c t p" . treemacs-projectile)
-              ))
-(defun samray/speedbar-contract-all-lines ()
-  "Contract all items in the speedbar buffer."
-  (interactive)
-  (goto-char (point-min))
-  (while (not (eobp))
-    (forward-line)
-    (speedbar-contract-line)))
-
-(defun samray/projectile-speedbar-toggle ()
-  "Improve the default projectile speedbar toggle."
-  (interactive)
-  (if (buffer-file-name)
-      (let ((current-buffer (buffer-name)))
-	(sr-speedbar-toggle)
-	(if (sr-speedbar-exist-p)
-	    (progn
-	      (set-buffer current-buffer)
-	      (projectile-speedbar-open-current-buffer-in-tree)
-	      )
-	  ))
-    (progn
-      (sr-speedbar-toggle)
-      (sr-speedbar-refresh)
-      )))
 
 (defun samray/term-paste (&optional string)
   "Yanking in the term-mode doesn't quit work The text from the

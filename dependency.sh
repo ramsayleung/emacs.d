@@ -126,7 +126,7 @@ install_go_dep(){
 	echo "Install all available checkers"
 	gometalinter --install --update
 	echo "Install errcheck"
-	go get -u github.com/kisielk/errcheck
+	go get -u -v github.com/kisielk/errcheck
     fi
 }
 
@@ -139,9 +139,9 @@ install_rust_dep(){
     fi
     echo "Install racer dependency"
     rustup component add rust-src
-    cargo install racer
-    cargo install cargo-edit
-    cargo install cargo-script
+    cargo install racer --force
+    cargo install cargo-edit --force
+    cargo install cargo-script --force
 }
 
 main(){

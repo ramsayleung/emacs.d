@@ -28,6 +28,7 @@ output file. %i path(s) are relative, while %o is absolute.")
       '(("mkv" . "vlc")
         ("mp4" . "vlc")
         ("avi" . "vlc")))
+
 ;;; From http://oremacs.com/2015/01/12/dired-file-size/
 (defun dired-get-size ()
   "Get size of specified file."

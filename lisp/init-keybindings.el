@@ -124,9 +124,7 @@
 				"t" '(:ignore t :which-key "toggle")
 				"t g" 'samray/git-timemachine
 				"t i" 'imenu-list-smart-toggle
-				"t f" 'samray/cycle-font
 				"t o" 'origami-toggle-mode
-				"t t" 'samray/cycle-theme
 				"t w" 'samray/toggle-window-split
 				"w" '(:ignore t :which-key "windows")
 				"w d" 'delete-window
