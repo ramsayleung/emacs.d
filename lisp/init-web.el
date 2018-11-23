@@ -60,20 +60,6 @@
 	    (setq ac-js2-evaluate-calls t)
 	    ))
 
-(use-package rjsx-mode
-  :ensure t
-  :mode ("\\.js\\'" . rjsx-mode)
-  :config (progn
-
-	    (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
-	    (with-eval-after-load 'rjsx-mode
-	      (setq emmet-expand-jsx-className? t)
-	      (define-key rjsx-mode-map "<" nil)
-	      (define-key rjsx-mode-map (kbd "C-d") nil)
-	      (define-key rjsx-mode-map ">" nil))
-	    )
-  )
-
 ;;;----------------;;;
 ;;;   Html Mode    ;;;
 ;;;----------------;;;

@@ -43,7 +43,7 @@
   :init (progn
 	  (when (samray/mac-os-p)
 	    (exec-path-from-shell-initialize))
-	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH"))
+	  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PYTHONPATH" "GOPATH" "GOROOT"))
 	  ;; when it is nil, exec-path-from-shell will read environment variable
 	  ;; from .zshenv instead of .zshrc, but makes sure that you put all
 	  ;; environment variable you need in .zshenv rather than .zshrc

@@ -3,15 +3,6 @@
 ;;; Commentary:
 ;;; read pdf file in Emacs
 
-(use-package pdf-tools
-  :ensure t
-  :mode ("\\.pdf\\'" . pdf-view-mode)
-  :if (and (not (eq system-type 'windows-nt))
-	   window-system)
-  :init (progn
-	  (add-hook 'pdf-view-mode-hook (lambda () (company-mode nil))))
-  )
-
 ;;; Save and restore window configuration
 (use-package eyebrowse
   :ensure t
@@ -31,22 +22,6 @@
   :config (progn
 	    (focus-mode)
 	    (add-hook 'prog-mode-hook focus-mode)
-	    ))
-
-;;; use Irc in Emacs
-(use-package circe
-  :if (not (eq system-type 'windows-nt))
-  :ensure t
-  :commands circe-mode
-  :config (progn
-	    (setq circe-network-options
-		  '(("Freenode"
-		     :tls t
-		     :nick "SamrayL"
-		     :sasl-username "SamrayL"
-		     :sasl-password "123456"
-		     :channels ("#emacs")
-		     )))
 	    ))
 
 ;;; Try out Emacs Package without install
@@ -78,10 +53,6 @@
     (setq bookmark-alist (delq latest bookmark-alist))
     (add-to-list 'bookmark-alist latest)))
 
-(define-abbrev-table 'global-abbrev-table '(
-					    ;; signature
-					    ("8sa" "samray")
- 					    ))
 ;;; disable `ad-handle-definition: ‘bookmark-jump’ got redefined` warning.
 (setq ad-redefinition-action 'accept)
 
@@ -95,6 +66,7 @@
   "Indent the whole buffer."
   (interactive)
   (indent-region (point-min)(point-max)))
+
 (defun samray/indent-region-or-buffer()
   "Indent selected region or a whole buffer."
   (interactive)
@@ -124,6 +96,7 @@
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t)(replace-match "")))
+
 ;; dwim=do what i mean
 (defun occur-dwim()
   "Call `occur` with a sane default."
@@ -137,6 +110,7 @@
 	      (regexp-quote sym))))
 	regexp-history)
   (call-interactively 'occur))
+
 (defun samray/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the;
 current WINDOW."
@@ -154,6 +128,7 @@ current WINDOW."
                      (mapcar #'car (window-prev-buffers window)))
          ;; `other-buffer' honors `buffer-predicate' so no need to filter
          (other-buffer current-buffer t)))))
+
 ;; from magnars https://github.com/magnars
 (defun samray/rename-current-buffer-file ()
   "Renames current buffer and file it is visiting."
@@ -273,6 +248,7 @@ removal."
   (interactive)
   (kill-new (file-name-sans-extension (buffer-name)))
   )
+
 (defun samray/dired-tmp-dir ()
   "Open tmp directory."
   (interactive)
