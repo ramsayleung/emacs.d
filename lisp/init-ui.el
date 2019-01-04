@@ -1,4 +1,4 @@
-;;; package --- Summary  -*- lexical-binding: t -*-
+;; package --- Summary  -*- lexical-binding: t -*-
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -153,8 +153,8 @@ This code toggles between them."
 (defun samray/set-mode-line-width ()
   "Set mode line width, it is so cool."
   (set-face-attribute 'mode-line nil
-		      :box '())
-  )
+		      :box '()))
+
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
 
@@ -204,7 +204,8 @@ This code toggles between them."
 (blink-cursor-mode -1)
 
 ;; Only use `bar' type of cursor shape
-(add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
+;; (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
+(setq cursor-type 'box)
 
 ;; make sure transient mark mode is enabled (it should be by default,
 ;; but just in case)
@@ -226,35 +227,26 @@ This code toggles between them."
   :defer t
   )
 
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :defer t)
+
+(use-package atom-one-dark-theme
+  :ensure t
+  :defer t)
+
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-
-(defun samray/reset-current-font (&rest args)
-  "It seems a bug about EMACS that the font will change after
-load/'disable-theme', so reset it after load/disable-theme' ARGS"
-  (set-frame-font samray-current-font)
-  )
-
-(advice-add 'disable-theme :after 'samray/reset-current-font)
 ;; Cycle through this set of themes
 (defun samray/font-exists-p (font)
   "Check if FONT exists."
   (member font (font-family-list)))
 
-(defun samray/set-theme ()
-  "Set theme."
-  (load-theme samray-current-theme t))
-
-(defun samray/set-font ()
-  "Set font"
-  (set-frame-font samray-current-font))
-
-;; Switch to the first theme in the list above
-(add-hook 'after-init-hook #'samray/set-theme)
-(add-hook 'after-init-hook #'samray/set-font)
+(load-theme 'zenburn t)
+(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
 
 ;;----------------;;
 ;;Major/Minor Mode;;

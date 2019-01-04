@@ -29,17 +29,6 @@
 
 ;;; Define constnat variable for configuration
 
-(defvar samray-current-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
-
-(defvar samray-current-theme 'zenburn)
-
-;;timer for automatically changing themes
-(defvar samray--interval-timer nil)
-
-;;table is used to save (time themes) pair for automatically changing themes
-;;time should be a string. themes should be a variant , not symbos.
-(defvar samray--time-themes-table nil)
-
 (defvar samray-additional-packages-path (expand-file-name "additional-packages" user-emacs-directory))
 
 (defvar samray/completion-framework 'ivy)
@@ -65,6 +54,10 @@
   "Predicate if buffer is too large."
   (or (> (buffer-size) (* 5000 800))
       (> (line-number-at-pos (point-max)) 100000)))
+
+(defconst emacs/>=26p
+  (>= emacs-major-version 26)
+  "Emacs is 26 or above.")
 
 (defun samray/does-use-ivy ()
   "Return t if use `ivy` as completion framework."

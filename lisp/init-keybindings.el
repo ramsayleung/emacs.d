@@ -17,7 +17,7 @@
 	    (general-define-key :states '(normal visual motion )
 				:prefix samray/leader-key
 				"" nil
-				";" 'evilnc-comment-operator
+				";" 'comment-dwim
 				"'" 'samray/eshell-pop
 				"." 'samray/repl-pop
 				"TAB" 'samray/alternate-buffer

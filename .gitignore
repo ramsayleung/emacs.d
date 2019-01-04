@@ -32,3 +32,4 @@ srecode-map.el
 lisp/custom.el
 /npm-debug.log
 bin/*
+/.lsp-session-v1

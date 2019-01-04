@@ -71,7 +71,7 @@
   )
 
 (defvar samray-default-g++-compile-command "g++ -std=c++17 -g")
-(defvar samray-default-gcc-compile-command "g++ -std=c99 -g")
+(defvar samray-default-gcc-compile-command "gcc -std=c99 -g")
 (defvar samray-default-compile-command "make -k")
 
 (defun samray/g++-compile-and-run (command)

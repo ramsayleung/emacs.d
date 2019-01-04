@@ -34,13 +34,7 @@
   :init(progn
 	 (run-with-idle-timer 1 nil 'global-evil-surround-mode)
 	 ;; (global-evil-surround-mode t)
-	 )
-  )
-
-(use-package evil-nerd-commenter
-  :commands (evilnc-comment-operator)
-  :ensure t
-  )
+	 ))
 
 ;; Vim matchit ported into Emacs
 (use-package evil-matchit

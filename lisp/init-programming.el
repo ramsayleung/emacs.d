@@ -73,7 +73,10 @@
   :config
   (progn
     (projectile-mode)
-    (setq projectile-completion-system 'ivy)
+    (if (samray/does-use-ivy)
+	(setq projectile-completion-system 'ivy)
+      (setq projectile-completion-system 'helm))
+    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
     (add-to-list 'projectile-globally-ignored-directories "*.ccls-cache")
     (add-to-list 'projectile-globally-ignored-directories "*.cquery_cached_index")
     (add-to-list 'projectile-globally-ignored-directories "*CMakeFiles")
@@ -122,7 +125,7 @@ similar to shell-pop"
 	      ;; If not, select window which points to shell bufffer.
 	      (progn
 		(select-window shell-window)
-		(when evil-mode
+		(when (and (boundp 'evil-mode) evil-mode)
 		  (evil-insert-state)))
 	      )
 	  ;; If shell buffer is not visible, split a window and switch to it.
@@ -132,7 +135,8 @@ similar to shell-pop"
 	    (when (not (split-window-sensibly))
 	      (samray/split-window-below-and-move))
 	    (switch-to-buffer repl-buffer-name)
-	    (when evil-mode
+	    (when (and (boundp 'evil-mode) evil-mode)
+
 	      (evil-insert-state))
 	    ))
       ;; If shell buffer doesn't exist, create one

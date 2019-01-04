@@ -75,14 +75,6 @@
   	  (add-to-list 'company-backends 'company-go))
   )
 
-;;; backends for lsp-mode
-(use-package company-lsp
-  :ensure t
-  :defer t
-  :init (progn
-	  (add-to-list 'company-backends 'company-lsp)
-	  ))
-
 (message "loading init-auto-completion")
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here
