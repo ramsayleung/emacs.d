@@ -42,9 +42,8 @@
 (setq save-abbrevs t)
 
 ;; Only start server mode if I'm not root
-(unless (string-equal "root" (getenv "USER"))
-  (require 'server)
-  (unless (server-running-p) (server-start)))
+(require 'server)
+(unless (server-running-p) (server-start))
 
 
 (defadvice bookmark-jump (after bookmark-jump activate)
@@ -90,26 +89,6 @@
 					 try-complete-lisp-symbol-partially
 					 try-complete-lisp-symbol
 					 ))
-;;; remove windows end-of-line delimiter
-(defun remove-dos-eol ()
-  "Remove dos/windows eol."
-  (interactive)
-  (goto-char (point-min))
-  (while (search-forward "\r" nil t)(replace-match "")))
-
-;; dwim=do what i mean
-(defun occur-dwim()
-  "Call `occur` with a sane default."
-  (interactive)
-  (push (if (region-active-p)
-	    (buffer-substring-no-properties
-	     (region-beginning)
-	     (region-end))
-	  (let ((sym (thing-at-point 'symbol)))
-	    (when (stringp sym)
-	      (regexp-quote sym))))
-	regexp-history)
-  (call-interactively 'occur))
 
 (defun samray/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the;
@@ -155,6 +134,7 @@ current WINDOW."
                (when (and(projectile-project-p))
                  (call-interactively #'projectile-invalidate-cache))
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
+
 (defun samray/delete-file (filename &optional ask-user)
   "Remove specified file FILENAME or directory.
 Also kills associated buffer (if any exists) and invalidates
@@ -173,6 +153,7 @@ removal."
                  (projectile-project-p))
         (call-interactively #'projectile-invalidate-cache)))))
 ;; from magnars
+
 (defun samray/delete-current-buffer-file ()
   "Remove file connected to current buffer and kill buffer."
   (interactive)
@@ -187,6 +168,7 @@ removal."
         (when (projectile-project-p)
           (call-interactively #'projectile-invalidate-cache))
         (message "File '%s' successfully removed" filename)))))
+
 ;; from magnars
 (defun samray/sudo-edit (&optional arg)
   "Edit as root with ARG."
@@ -216,6 +198,7 @@ removal."
     (find-alternate-file
      (concat "/sudo:root@localhost:"
              buffer-file-name))))
+
 (defun samray/toggle-maximize-buffer ()
   "Maximize buffer."
   (interactive)
@@ -225,29 +208,11 @@ removal."
     (progn
       (window-configuration-to-register ?_)
       (delete-other-windows))))
-;;; http://blog.binchen.org/posts/open-readme-under-git-root-directory-in-emacs.html
-(defun samray/open-readme-in-git-root-directory ()
-  "Open README file at the root directory of my project."
-  (interactive)
-  (let (filename
-        (root-dir (locate-dominating-file (file-name-as-directory (file-name-directory buffer-file-name)) ".git"))
-        )
-    ;; (message "root-dir=%s" root-dir)
-    (and root-dir (file-name-as-directory root-dir))
-    (setq filename (concat root-dir "README.org"))
-    (if (not (file-exists-p filename))
-        (setq filename (concat root-dir "README.md"))
-      )
-    ;; (message "filename=%s" filename)
-    (if (file-exists-p filename)
-        (switch-to-buffer (find-file-noselect filename nil nil))
-      (message "NO README.org or README.md found!"))
-    ))
+
 (defun samray/copy-current-file-sans-extension ()
   "Copy current file without extension."
   (interactive)
-  (kill-new (file-name-sans-extension (buffer-name)))
-  )
+  (kill-new (file-name-sans-extension (buffer-name))))
 
 (defun samray/dired-tmp-dir ()
   "Open tmp directory."

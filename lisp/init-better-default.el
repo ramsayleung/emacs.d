@@ -101,8 +101,7 @@ debug-init and load the given list of packages."
   (setq mac-option-key-is-meta nil
 	mac-command-key-is-meta t
 	mac-command-modifier 'meta
-	mac-option-modifier 'none)
-  )
+	mac-option-modifier 'none))
 
 
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)

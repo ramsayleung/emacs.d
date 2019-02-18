@@ -74,9 +74,9 @@
   (progn
     (projectile-mode)
     (setq projectile-completion-system 'ivy)
-    (add-to-list 'projectile-globally-ignored-directories "*.ccls-cache")
-    (add-to-list 'projectile-globally-ignored-directories "*.cquery_cached_index")
-    (add-to-list 'projectile-globally-ignored-directories "*CMakeFiles")
+    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
+    (add-to-list 'projectile-globally-ignored-directories ".cquery_cached_index")
+    (add-to-list 'projectile-globally-ignored-directories "CMakeFiles")
     )
   )
 

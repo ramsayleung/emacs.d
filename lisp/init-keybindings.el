@@ -37,7 +37,6 @@
 				"b D" 'samray/delete-blank-line-in-buffer
 				"b l" 'samray/ivy-switch-to-buffer-enhanced
 				"b n" 'samray/get-buffer-name
-				"b o" 'occur-dwim
 				"c" '(:ignore t :which-key "compile/comments")
 				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
 				"cc" 'evilnc-copy-and-comment-lines
@@ -164,12 +163,6 @@
 				:states '(normal visual motion)
 				"C-j" 'ivy-next-line
 				"C-k" 'ivy-previous-line)
-
-	    (general-define-key :states '(normal visual insert motion)
-				"C-e" 'end-of-line
-				"C-y" 'yank
-				"C-w" 'backward-kill-word
-				)
 
 	    ;; Org-mode
 	    (general-define-key :states '(normal visual motion)
@@ -370,15 +363,15 @@
 				"m t" 'cargo-process-test
 				)
 	    ;; Origami mode
-	    (general-define-key		:states '(normal visual motion)
-					:keymaps 'origami-mode-map
-					:prefix samray/leader-key
-					"t o" '(:ignore t :which-key "origami")
-					"t o t" 'origami-toggle-node
-					"t o f" 'origami-forward-toggle-node
-					"t o r" 'origami-recursively-toggle-node
-					"t o a" 'origami-toggle-all-nodes
-					)
+	    (general-define-key :states '(normal visual motion)
+				:keymaps 'origami-mode-map
+				:prefix samray/leader-key
+				"t o" '(:ignore t :which-key "origami")
+				"t o t" 'origami-toggle-node
+				"t o f" 'origami-forward-toggle-node
+				"t o r" 'origami-recursively-toggle-node
+				"t o a" 'origami-toggle-all-nodes
+				)
 
 	    ;; Origami mode
 	    (general-define-key :keymaps 'origami-mode-map
@@ -450,14 +443,18 @@
 				    "C-c h i" 'counsel-imenu
 				    "C-c h l" 'counsel-locate
 				    "C-c h p" 'counsel-list-processes
-				    ))
-	      )
-
+				    )))
+	    
 	    ;; non-evil ,without a prefix
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
 	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
 	     [remap evil-repeat-pop-next] 'xref-find-definitions
+	     ;; remap C-n to `next-line`
+	     [remap evil-complete-next] 'company-select-next
+	     [remap evil-complete-previous] 'company-select-previous
+	     ;; map C-e to `move-end-of-line`
+	     [remap evil-scroll-line-down] 'move-end-of-line
 	     "C-c a" 'org-agenda
 	     "C-c e" 'hydra-edit/body
 	     "C-c y p" 'youdao-dictionary-search-at-point+
@@ -469,7 +466,6 @@
 	     "C-c p {" 'paredit-wrap-curly
 	     "C-c p <" 'paredit-wrap-angled
 	     "C-c p \"" 'paredit-meta-doublequote
-	     "C-e" 'end-of-line
 	     "C-x k" 'kill-this-buffer
 	     "C-x t" 'samray/dired-tmp-dir
 	     "C-x C-r" 'recentf-open-files
@@ -479,8 +475,12 @@
 	     "M-RET o" 'srefactor-lisp-one-line
 	     "M-RET m" 'srefactor-lisp-format-sexp
 	     "M-RET d" 'srefactor-lisp-format-defun
-	     "M-RET b" 'srefactor-lisp-format-buffer
-	     ))
+	     "M-RET b" 'srefactor-lisp-format-buffer)
+
+	    (general-define-key :states '(insert normal visual)
+				"C-w" 'kill-region
+				"C-y" 'yank)
+	    )
 
   ;; Format "buffer"
   ;; Python mode

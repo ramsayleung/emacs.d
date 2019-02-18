@@ -204,7 +204,9 @@ This code toggles between them."
 (blink-cursor-mode -1)
 
 ;; Only use `bar' type of cursor shape
-(add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
+(setq cursor-type 'box)
+(add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'box)))
+(add-hook 'eshell-mode-hook '(lambda () (setq cursor-type 'box)))
 
 ;; make sure transient mark mode is enabled (it should be by default,
 ;; but just in case)
@@ -244,17 +246,9 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
   "Check if FONT exists."
   (member font (font-family-list)))
 
-(defun samray/set-theme ()
-  "Set theme."
-  (load-theme samray-current-theme t))
+(load-theme 'zenburn t)
 
-(defun samray/set-font ()
-  "Set font"
-  (set-frame-font samray-current-font))
-
-;; Switch to the first theme in the list above
-(add-hook 'after-init-hook #'samray/set-theme)
-(add-hook 'after-init-hook #'samray/set-font)
+(set-frame-font "Fantasque Sans Mono-13:weight=medium:slant=italic")
 
 ;;----------------;;
 ;;Major/Minor Mode;;
