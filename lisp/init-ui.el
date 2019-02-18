@@ -204,7 +204,9 @@ This code toggles between them."
 (blink-cursor-mode -1)
 
 ;; Only use `bar' type of cursor shape
-(add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
+(setq cursor-type 'box)
+(add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'box)))
+(add-hook 'eshell-mode-hook '(lambda () (setq cursor-type 'box)))
 
 ;; make sure transient mark mode is enabled (it should be by default,
 ;; but just in case)
@@ -246,7 +248,7 @@ load/'disable-theme', so reset it after load/disable-theme' ARGS"
 
 (load-theme 'zenburn t)
 
-(set-frame-font "Fantasque Sans Mono-12:weight=medium:slant=italic")
+(set-frame-font "Fantasque Sans Mono-13:weight=medium:slant=italic")
 
 ;;----------------;;
 ;;Major/Minor Mode;;

@@ -7,8 +7,7 @@
   :ensure t
   :demand t
   :init (progn
-	  (setq evil-want-C-u-scroll t)
-	  )
+	  (setq evil-want-C-u-scroll t))
   :config
   (progn
     (run-with-idle-timer 0.1 nil 'evil-mode)
@@ -26,8 +25,10 @@
 	  evil-motion-state-tag   (propertize "[Motion]")
 	  evil-visual-state-tag   (propertize "[Visual]")
 	  evil-operator-state-tag (propertize "[Operator]"))
-
+    (setq evil-insert-state-cursor '(box "chartreuse3"))
+    (setq evil-normal-state-cursor '(box "white"))
     ))
+
 
 (use-package evil-surround
   :ensure t

@@ -49,6 +49,7 @@
   )
 
 (use-package ivy-posframe
+  :defer t
   :ensure t
   :config (progn
 	    (run-with-idle-timer 0.1 nil 'ivy-posframe-enable)
