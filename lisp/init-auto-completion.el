@@ -61,7 +61,7 @@
 	  (cond ((samray/linux-p)
 		 (setq company-c-headers-path-system '("/usr/include/c++/7" "/usr/include" "/usr/local/include")))
 		((samray/mac-os-p)
-		 (setq company-c-headers-path-system '("/usr/include/c++/4.2.1" "/usr/include" "/usr/local/include")))
+		 (setq company-c-headers-path-system '("/usr/local/include/c++/8.2.0" "/usr/include" "/usr/local/include")))
 		((eq system-type 'windows-nt)
 		 ))
 	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-c-headers)))

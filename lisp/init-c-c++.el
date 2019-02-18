@@ -16,6 +16,9 @@
    ("\\.h\\'" . c++-mode)
    ("\\.hpp\\'" . c++-mode)
    ("\\.cpp\\'" . c++-mode))
+  :config (progn
+	    (eval-after-load "cc-mode"
+	      '(define-key c-mode-base-map ";" nil)))
   )
 
 ;;; Google C style
@@ -60,7 +63,7 @@
   (let ((file-name (buffer-file-name))
 	(output (file-name-base (buffer-file-name))))
     (message output)
-    (compile (format "%s %s -o %s && ./%s" command file-name output output))
+    (compile (format "%s %s -o %s && ./%s && rm %s" command file-name output output output))
     )
   )
 

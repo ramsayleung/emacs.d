@@ -7,6 +7,7 @@
 ;;; Ignore case when searching
 (setq case-fold-search t)
 
+
 ;;;------------------;;;
 ;;; Windows & Frames ;;;
 ;;;------------------;;;
@@ -75,6 +76,7 @@
 					     "magit-status-mode"
 					     "IELM"
 					     "eshell-mode" "dired-mode"))
+	  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
 	  ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
@@ -204,8 +206,9 @@ This code toggles between them."
 (blink-cursor-mode -1)
 
 ;; Only use `bar' type of cursor shape
-;; (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'bar)))
 (setq cursor-type 'box)
+(add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'box)))
+(add-hook 'eshell-mode-hook '(lambda () (setq cursor-type 'box)))
 
 ;; make sure transient mark mode is enabled (it should be by default,
 ;; but just in case)
@@ -246,7 +249,8 @@ This code toggles between them."
   (member font (font-family-list)))
 
 (load-theme 'zenburn t)
-(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+
+(set-frame-font "Fantasque Sans Mono-13:weight=medium:slant=italic")
 
 ;;----------------;;
 ;;Major/Minor Mode;;

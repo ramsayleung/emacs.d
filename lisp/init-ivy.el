@@ -49,6 +49,7 @@
   )
 
 (use-package ivy-posframe
+  :defer t
   :ensure t
   :defer t
   :config (progn

@@ -5,6 +5,11 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package company-lsp
+  :ensure t
+  :config (progn
+	    (push 'company-lsp company-backends))
+  )
 
 (use-package lsp-mode
   :ensure t
@@ -50,34 +55,67 @@
   (setq lsp-clients-typescript-server "typescript-language-server"
         lsp-clients-typescript-server-args '("--stdio")))
 
+
 (use-package lsp-ui
   :ensure t
+  :hook (lsp-mode . lsp-ui-mode)
   :config (progn
-	    (setqlsp-ui-sideline-enable nil))
-  :bind (:map lsp-ui-mode-map
-              ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-              ([remap xref-find-references] . lsp-ui-peek-find-references)))
-
-(use-package company-lsp
-  :ensure t
+	    ;; It seems that sideline-mode has a bug, just disable it
+	    ;; bind peek key
+	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
+	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+	    (setq
+	     lsp-ui-sideline-enable nil
+	     lsp-enable-completion-at-point t
+	     lsp-ui-doc-position 'at-point
+	     lsp-ui-doc-header nil
+	     lsp-ui-doc-border nil)
+	    (setq lsp-ui-doc-frame-parameters '((left . -1)
+						(top . -1)
+						(no-accept-focus . t)
+						(min-width . 0)
+						(width . 0)
+						(min-height . 0)
+						(height . 0)
+						(internal-border-width . 5)
+						(vertical-scroll-bars)
+						(horizontal-scroll-bars)
+						(left-fringe . 0)
+						(right-fringe . 0)
+						(menu-bar-lines . 0)
+						(tool-bar-lines . 0)
+						(line-spacing . 0.1)
+						(unsplittable . t)
+						(undecorated . t)
+						(visibility . nil)
+						(mouse-wheel-frame . nil)
+						(no-other-frame . t)
+						(cursor-type)
+						(no-special-glyphs . t)))
+	    (defun samray/toggle-lsp-pop ()
+	      (interactive)
+	      (if lsp-ui-doc-include-signature
+	    	  (setq lsp-ui-doc-include-signature nil)
+	    	(setq lsp-ui-doc-include-signature t)))
+	    )
+  
   )
 
 ;; C/C++/Objective-C support
 (use-package ccls
   :ensure t
-  :defines projectile-project-root-files-top-down-recurring
-  :hook ((c-mode c++-mode objc-mode cuda-mode) . (lambda ()
-                                                   (require 'ccls)
-                                                   (lsp)))
-  :config
-  (setq ccls-executable (or (file-exists-p "~/code/cpp/ccls/Release/ccls")
-			    (executable-find "ccls")))
-  (with-eval-after-load 'projectile
-    (setq projectile-project-root-files-top-down-recurring
-          (append '("compile_commands.json"
-                    ".ccls")
-                  projectile-project-root-files-top-down-recurring))))
-
+  :hook ((c-mode c++-mode objc-mode) .
+         (lambda () (require 'ccls) (lsp)))
+  :config(progn
+	   (setq ccls-executable (if (file-exists-p (expand-file-name "~/code/cpp/ccls/Release/ccls"))
+				     (expand-file-name "~/code/cpp/ccls/Release/ccls")
+				   (executable-find "ccls")))
+	   (setq ccls-sem-highlight-method 'font-lock)
+	   (setq ccls-extra-init-params
+		 '(:completion (:detailedLabel t) :xref
+			       (:container t)
+			       :diagnostics (:frequencyMs 5000))
+		 )))
 (message "loading init-lsp")
 (provide 'init-lsp)
 ;;; init-lsp.el ends here
