@@ -266,10 +266,25 @@ This code toggles between them."
 (setq evil-mode-line-format '(before . mode-line-front-space))
 ;;; Force redisplay git branch of the mode line.
 (setq auto-revert-check-vc-info t)
+
+(defun replace-buffer-encoding ()
+  "Display the encoding and eol style of the buffer the same way atom does."
+  (propertize
+   (concat (pcase (coding-system-eol-type buffer-file-coding-system)
+	     (0 "LF") 			;LF: Line Feed, 换行符 '\n'
+	     (1 "CLF") 		;CLF: Carriage Return + Line Feed, '\r\n'
+	     (2 "CR"))			;CR: Carriage Return, 回车 '\r'
+	   (let ((sys (coding-system-plist buffer-file-coding-system)))
+	     (cond ((memq (plist-get sys :category)
+			  '(coding-category-undecided coding-category-utf-8))
+		    " UTF-8")
+		   (t (upcase (symbol-name (plist-get sys :name))))))
+	   " ")))
+
 ;;; customize mode line
 (setq-default mode-line-format '("%e"
 				 mode-line-front-space
-				 mode-line-mule-info
+				 (:eval (propertize (format "%s" (replace-buffer-encoding))))
 
 				 ;; mode-line-client
 				 ;; mode-line-modified -- show buffer change or not
@@ -283,10 +298,24 @@ This code toggles between them."
 				 " "
 				 mode-line-position
 				 (vc-mode vc-mode)
-				 " "
-				 ;; mode-line-modes -- move major-name above
-				 "["
-				 minor-mode-alist
+				 " ["
+				 (:eval
+				  (pcase flycheck-last-status-change
+				    (`finished (if flycheck-current-errors
+						   (let ((error-count (let-alist (flycheck-count-errors flycheck-current-errors)
+									(+ (or .error 0))))
+							 (warning-count (let-alist (flycheck-count-errors flycheck-current-errors)
+									  (+ (or .warning 0)))))
+						     (progn
+						       (propertize (concat (when (> error-count 0) (format "✖ %s Error%s "  error-count (if (eq 1 error-count) "" "s")) )
+									   (when (> warning-count 0) (format  "⚠ %s Warning%s"warning-count (if (eq 1 warning-count) "" "s") ))))
+						       ))
+						 (propertize "✔ No Issues")))
+				    (`running (propertize "⟲ Running..."))
+				    (`no-checker (propertize "⚠ No Checker"))
+				    (`not-checked "✖ Disabled")
+				    (`errored (propertize "⚠ Error"))
+				    (`interrupted "⛔ Interrupted")))
 				 "]"
 				 mode-line-misc-info
 				 ;; mode-line-end-spaces

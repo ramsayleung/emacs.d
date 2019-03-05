@@ -14,7 +14,7 @@
 (use-package lsp-mode
   :ensure t
   :defines (lsp-clients-typescript-server lsp-clients-typescript-server-args)
-  :hook ((python-mode rust-mode) . lsp)
+  :hook ((go-mode python-mode rust-mode) . lsp)
   :init
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck

@@ -12,6 +12,9 @@
          ("\\.markdown\\'" . markdown-mode))
 
   :init (progn
+	  (custom-set-faces
+	   '(markdown-code-face ((t (:inherit fixed-pitch :family "Fantasque Sans Mono")))))
+
 	  (setq markdown-fontify-code-blocks-natively t)
 	  (add-hook 'markdown-mode-hook
 		    (lambda ()

@@ -25,7 +25,7 @@
   (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
 
   (setq dired-sidebar-subtree-line-prefix "__")
-  (setq dired-sidebar-theme 'none)
+  (setq dired-sidebar-theme 'ascii)
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
 
