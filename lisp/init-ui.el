@@ -248,7 +248,7 @@ This code toggles between them."
   "Check if FONT exists."
   (member font (font-family-list)))
 
-(load-theme 'zenburn t)
+(load-theme 'sanityinc-tomorrow-eighties t)
 
 (set-frame-font "Fantasque Sans Mono-13:weight=medium:slant=italic")
 
