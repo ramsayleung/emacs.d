@@ -2,6 +2,22 @@
 ;;; code:
 ;;; Commentary:
 
+;;; 支持ivy使用拼音进行匹配
+(use-package pyim
+  :after ivy
+  :ensure t
+  :config
+  (defun pinyin-ivy-cregexp (str)
+    (let ((a (ivy--regex-plus str))
+          (b (let ((case-fold-search nil))
+               (pyim-cregexp-build str))))
+      (if (and a (stringp a))
+          (concat a "\\|" b)
+        a)))
+
+  (setq ivy-re-builders-alist
+        '((t . pinyin-ivy-cregexp))))
+
 (use-package youdao-dictionary
   :ensure t
   :commands (youdao-dictionary-search-at-point+ youdao-dictionary-search-from-input)
