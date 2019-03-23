@@ -185,6 +185,8 @@ This code toggles between them."
 ;; show the current line and column numbers in the stats bar as well
 (line-number-mode t)
 (column-number-mode t)
+;; Disable line wrap '\'
+(set-display-table-slot standard-display-table 'wrap ?\ )
 ;;; make sure my code stays within 100 characters always
 ;;; and prefer the soft line wrap while writing prose
 ;;; https://www.emacswiki.org/emacs/TruncateLines
