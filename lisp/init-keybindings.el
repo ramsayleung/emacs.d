@@ -782,12 +782,7 @@ Info-mode:
   (define-key keymap keybinding function)
   )
 (add-hook 'eshell-mode-hook
-          (lambda ()
-	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-r")] #'samray/esh-history)
-	    (define-key eshell-mode-map (kbd "C-c C-r") #'samray/esh-history)
-	    (define-key eshell-mode-map [remap (lookup-key eshell-mode-map "C-c C-l")] #'samray/eshell-clear-buffer)
-	    (define-key eshell-mode-map (kbd "C-c C-l") #'samray/eshell-clear-buffer)
-	    ))
+          (lambda ()))
 (message "loading init-keybindings")
 (provide 'init-keybindings)
 ;;; init-keybindings ends here

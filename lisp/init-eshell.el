@@ -156,7 +156,15 @@
 		      (lambda ()(eshell-cmpl-initialize)))
 	    (add-hook 'eshell-mode-hook (lambda ()
 					  (setq-local global-hl-line-mode nil)))
-	    ))
+	    )
+  :bind (([remap kill-region] . kill-word)
+	 ("C-w" . kill-word)
+	 ([remap evil-insert-digraph] . paredit-kill)
+	 ("C-k" . paredit-kill)
+	 ([remap evil-paste-from-register] . samray/esh-history)
+	 ("C-r" . samray/esh-history)
+	 ("C-l" . samray/eshell-clear-buffer))
+  )
 
 ;;; Replace shell-pop package with customized function
 (defun samray/eshell-pop ()

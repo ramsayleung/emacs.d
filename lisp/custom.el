@@ -13,11 +13,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(beacon-color "#f2777a")
- '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
- '(frame-background-mode (quote dark))
  '(package-selected-packages
    (quote
-    (powerline-evil powerline neotree treemacs dired-sidebar emmet-mode ac-js2 js2-refactor js2-mode web-mode web-beautify git-timemachine magit diminish zenburn-theme golden-ratio popwin flycheck-posframe flycheck-rust flycheck geiser cargo toml-mode rust-mode expand-region exec-path-from-shell json-mode es-mode yaml-mode yasnippet realgud virtualenvwrapper py-autopep8 org-download htmlize ox-twbs ob-rust ox-gfm org-bullets try focus keyfreq eyebrowse ccls lsp-ui paredit hydra general counsel-projectile ivy-posframe smex counsel go-eldoc go-mode evil-matchit evil-nerd-commenter evil-surround evil eshell-prompt-extras cmake-mode clang-format youdao-dictionary restart-emacs simpleclip popup wgrep undo-tree origami region-state highlight-indent-guides rainbow-delimiters which-key hungry-delete ace-window company-lsp company-c-headers company-shell company-statistics company-quickhelp company use-package))))
+    (pyim zenburn-theme youdao-dictionary yaml-mode which-key wgrep web-mode web-beautify virtualenvwrapper use-package try treemacs toml-mode smex simpleclip restart-emacs region-state realgud rainbow-delimiters py-autopep8 powerline-evil popwin paredit ox-twbs ox-gfm origami org-download org-bullets ob-rust neotree magit lsp-ui keyfreq json-mode js2-refactor ivy-posframe hungry-delete htmlize highlight-indent-guides golden-ratio go-eldoc git-timemachine general geiser focus flycheck-rust flycheck-posframe eyebrowse expand-region exec-path-from-shell evil-surround evil-nerd-commenter evil-mc evil-matchit eshell-prompt-extras es-mode emmet-mode dired-sidebar diminish counsel-projectile company-statistics company-shell company-quickhelp company-lsp company-c-headers color-theme-sanityinc-tomorrow cmake-mode clang-format ccls cargo atom-one-dark-theme adaptive-wrap ac-js2))))
