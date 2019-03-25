@@ -74,6 +74,21 @@
 	      "Advice `select-window` to set up ivy-posframe-width/height dynamicly."
 	      (samray/setup-ivy-window))))
 
+;;; 支持ivy使用拼音进行匹配
+(use-package pyim
+  :ensure t
+  :config
+  (defun pinyin-ivy-cregexp (str)
+    (let ((a (ivy--regex-plus str))
+          (b (let ((case-fold-search nil))
+               (pyim-cregexp-build str))))
+      (if (and a (stringp a))
+          (concat a "\\|" b)
+        a)))
+
+  (setq ivy-re-builders-alist
+        '((t . pinyin-ivy-cregexp))))
+
 (use-package counsel-projectile
   :ensure t
   :after projectile
