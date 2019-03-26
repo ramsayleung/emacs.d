@@ -37,43 +37,43 @@ install_python_dep(){
 
 install_go_dep(){
     # if go is installed, install go dependency
-    if command -v "go">/dev/null;
+    if command -v "go">/dev/null && command -v "graftcp">/dev/null;
     then
 	echo "go exists"
 	echo "Install goimports"
-	go get -u -v golang.org/x/tools/cmd/goimports
+	graftcp go get -u -v golang.org/x/tools/cmd/goimports
 	echo "Install gocode"
-	go get -u -v github.com/mdempsky/gocode
+	graftcp go get -u -v github.com/mdempsky/gocode
 	echo "Install godef"
-	go get -u -v github.com/rogpeppe/godef
+	graftcp go get -u -v github.com/rogpeppe/godef
 	echo "Install gogetdoc"
-	go get -u -v github.com/zmb3/gogetdoc
+	graftcp go get -u -v github.com/zmb3/gogetdoc
 	echo "Install golint"
-	go get -u -v github.com/golang/lint/golint
+	graftcp go get -u -v github.com/golang/lint/golint
 	echo "Install go-outline"
-	go get -u -v github.com/lukehoban/go-outline
+	graftcp go get -u -v github.com/lukehoban/go-outline
 	echo "Install goreturns"
-	go get -u -v sourcegraph.com/sqs/goreturns
+	graftcp go get -u -v sourcegraph.com/sqs/goreturns
 	echo "Install gorename"
-	go get -u -v golang.org/x/tools/cmd/gorename
+	graftcp go get -u -v golang.org/x/tools/cmd/gorename
 	echo "Install gogkgs"
-	go get -u -v github.com/tpng/gopkgs
+	graftcp go get -u -v github.com/tpng/gopkgs
 	echo "Install go-symbols"
-	go get -u -v github.com/newhook/go-symbols
+	graftcp go get -u -v github.com/newhook/go-symbols
 	echo "Install guru"
-	go get -u -v golang.org/x/tools/cmd/guru
+	graftcp go get -u -v golang.org/x/tools/cmd/guru
 	echo "Install gotests"
-	go get -u -v github.com/cweill/gotests
+	graftcp go get -u -v github.com/cweill/gotests
 	echo "Install godoc"
-	go get -u -v golang.org/x/tools/cmd/godoc
+	graftcp go get -u -v golang.org/x/tools/cmd/godoc
 	echo "Install go-langserver"
-	go get -u github.com/sourcegraph/go-langserver
+	graftcp go get -u github.com/sourcegraph/go-langserver
 	echo "Install gometalinter"
 	curl -L https://git.io/vp6lP | sh
 	echo "Install all available checkers"
-	gometalinter --install --update
+	graftcp gometalinter --install --update
 	echo "Install errcheck"
-	go get -u -v github.com/kisielk/errcheck
+	graftcp go get -u -v github.com/kisielk/errcheck
     fi
 }
 
@@ -96,6 +96,6 @@ main(){
     install_javascript_dep
     install_python_dep
     install_rust_dep
-    # install_go_dep
+    install_go_dep
 }
 main
