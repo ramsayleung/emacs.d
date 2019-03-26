@@ -17,8 +17,8 @@
 	  ))
 
 (add-hook 'c++-mode-hook (lambda ()
-			   (setq flycheck-clang-language-standard "c++14")
-			   (setq irony-additional-clang-options '("-std=c++14"))
+			   (setq flycheck-clang-language-standard "c++17")
+			   (setq flycheck-gcc-language-standard "c++17")
 			   ))
 (use-package flycheck-posframe
   :ensure t
