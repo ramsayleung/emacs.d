@@ -33,3 +33,4 @@ lisp/custom.el
 /npm-debug.log
 bin/*
 /.lsp-session-v1
+lisp/custom.el

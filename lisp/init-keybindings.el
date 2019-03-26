@@ -614,6 +614,7 @@
 	      ("f"  flycheck-error-list-set-filter                            "Filter")
 	      ("j"  flycheck-next-error                                       "Next")
 	      ("k"  flycheck-previous-error                                   "Previous")
+	      ("y"  flycheck-copy-errors-as-kill                              "Yank/Copy")
 	      ("gg" flycheck-first-error                                      "First")
 	      ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
 	      ("q"  nil))
