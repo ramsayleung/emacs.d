@@ -105,7 +105,7 @@
 (use-package ccls
   :ensure t
   :hook ((c-mode c++-mode objc-mode) .
-         (lambda () (require 'ccls) (lsp)))
+         (lambda () (require 'ccls) (lsp) (setq-local flycheck-checker 'c/c++-clang)))
   :config(progn
 	   (setq ccls-executable (if (file-exists-p (expand-file-name "~/code/cpp/ccls/Release/ccls"))
 				     (expand-file-name "~/code/cpp/ccls/Release/ccls")
