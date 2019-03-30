@@ -1,13 +1,6 @@
 ;;; Package --- Summary
 ;;; code:
 ;;; commentary:
-(defun samray/ivy-helm (ivy-func helm-func)
-  "Run IVY-FUNC or HELM-FUNC dependens on framework."
-  (interactive)
-  (if (samray/does-use-ivy)
-      (call-interactively ivy-func)
-    (call-interactively helm-func)))
-
 (use-package general
   :ensure t
   :config (progn
@@ -51,10 +44,8 @@
 				"f c" 'samray/copy-current-file-path
 				"f d" 'samray/delete-current-buffer-file
 				"f E" 'samray/sudo-edit
-				"f f" (general-predicate-dispatch 'helm-find-files
-					:docstring "find files"
-					(samray/does-use-ivy) 'counsel-find-file)
-				;; "f g" 'samray/counsel-goto-recent-directory
+				"f f"  'counsel-find-file
+				"f g" 'samray/counsel-goto-recent-directory
 				"f r" 'samray/rename-current-buffer-file
 				"f R" 'recentf-open-files
 				"f s" 'save-buffer
@@ -63,15 +54,9 @@
 				"h" '(:ignore t :which-key "help")
 				"h d" '(:ignore t :which-key "help-describe")
 				"h d d" 'apropos-documentation
-				"h d f" (general-predicate-dispatch 'describe-function
-					  :docstring "describe function"
-					  (samray/does-use-ivy) 'counsel-describe-function)
-				"h d k" (general-predicate-dispatch 'describe-key
-					  :docstring "describe keybinding"
-					  (samray/does-use-ivy) 'counsel-describe-key)
-				"h d v" (general-predicate-dispatch 'describe-variable
-					  :docstring "describe keybinding"
-					  (samray/does-use-ivy) 'counsel-describe-variable)
+				"h d f" 'counsel-describe-function
+				"h d k" 'counsel-describe-key
+				"h d v" 'counsel-describe-variable
 				"g" '(:ignore t :which-key "git/version-control")
 				"g s" 'magit-status
 				"g m" 'magit-dispatch-popup
@@ -82,25 +67,13 @@
 				"j w" 'avy-goto-word-1
 				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
-				"p f" (general-predicate-dispatch 'helm-projectile-find-file-dwim
-					:docstring "projectile find files"
-					(samray/does-use-ivy) 'counsel-projectile-find-file)
-				"p d" (general-predicate-dispatch 'helm-projectile-find-dir
-					:docstring "projectile find dir"
-					(samray/does-use-ivy) 'counsel-projectile-find-dir)
-				"p b" (general-predicate-dispatch 'helm-projectile-switch-to-buffer
-					:docstring "projectile switch buffer"
-					(samray/does-use-ivy) 'counsel-projectile-switch-to-buffer)
+				"p f" 'counsel-projectile-find-file
+				"p d" 'counsel-projectile-find-dir
+				"p b" 'counsel-projectile-switch-to-buffer
 				"p s" '(:ignore t :which-key "projectile search")
-				"p s s" (general-predicate-dispatch 'helm-projectile-ag
-					  :docstring "projectile ag search"
-					  (samray/does-use-ivy) 'counsel-projectile-ag)
-				"p s r" (general-predicate-dispatch 'helm-projectile-rg
-					  :docstring "projectile rg search"
-					  (samray/does-use-ivy) 'counsel-projectile-rg)
-				"p p" (general-predicate-dispatch 'helm-projectile-switch-project
-					:docstring "projectile switch project"
-					(samray/does-use-ivy) 'counsel-projectile-switch-project)
+				"p s s" 'counsel-projectile-ag
+				"p s r" 'counsel-projectile-rg
+				"p p" 'counsel-projectile-switch-project
 
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
@@ -109,17 +82,11 @@
 				"q r" 'samray/restart-emacs-resume-layouts
 				"v" 'er/expand-region
 				"s" '(:ignore t :which-key "search")
-				"s a" (general-predicate-dispatch 'helm-do-grep-ag
-					:docstring "ag search"
-					(samray/does-use-ivy) 'counsel-ag)
-				"s g" (general-predicate-dispatch 'helm-grep-do-git-grep
-					(samray/does-use-ivy) 'counsel-git-grep)
+				"s a" 'counsel-ag
+				"s g" 'counsel-git-grep
 				"s i" 'iedit-mode
-				"s r" (general-predicate-dispatch 'helm-do-grep-ag
-					:docstring "rg search"
-					(samray/does-use-ivy) 'counsel-rg)
-				"s s" (general-predicate-dispatch 'samray/helm-swoop
-					(samray/does-use-ivy) 'swiper)
+				"s r" 'counsel-rg
+				"s s" 'swiper
 				"t" '(:ignore t :which-key "toggle")
 				"t g" 'samray/git-timemachine
 				"t i" 'imenu-list-smart-toggle
@@ -144,21 +111,13 @@
 				"1"  'ace-window)
 	    
 	    (general-define-key
-	     "C-s" (general-predicate-dispatch 'samray/helm-swoop
-		     (samray/does-use-ivy) 'samray/counsel-grep-or-swiper)
-	     "C-h f" (general-predicate-dispatch 'describe-function
-		       (samray/does-use-ivy) 'counsel-describe-function)
-	     "C-h v" (general-predicate-dispatch 'describe-variable
-		       (samray/does-use-ivy) 'counsel-describe-variable)
-	     "C-h l" (general-predicate-dispatch 'helm-find-library-at-point
-		       (samray/does-use-ivy) 'counsel-find-library)
-	     "C-x b" (general-predicate-dispatch 'helm-mini
-		       (samray/does-use-ivy) 'samray/ivy-switch-to-buffer-enhanced)
-	     "C-x C-f" (general-predicate-dispatch 'helm-find-files
-			 (samray/does-use-ivy) 'counsel-find-file)
-	     "M-x" (general-predicate-dispatch 'helm-M-x
-		     (samray/does-use-ivy) 'counsel-M-x)
-	     )
+	     "C-s" 'samray/counsel-grep-or-swiper
+	     "C-h f" 'counsel-describe-function
+	     "C-h v" 'counsel-describe-variable
+	     "C-h l" 'counsel-find-library
+	     "C-x b"  'samray/ivy-switch-to-buffer-enhanced
+	     "C-x C-f" 'counsel-find-file
+	     "M-x" 'counsel-M-x)
 	    (general-define-key :keymaps 'counsel-find-file-map
 				:states '(normal visual motion)
 				"C-j" 'ivy-next-line
@@ -430,21 +389,15 @@
 				"g l"            'pdf-view-goto-label
 				"g t"            'pdf-view-goto-page
 				)
-	    (if (not( samray/does-use-ivy))
-		(progn
-		  (require 'helm-config)
-		  (general-define-key "C-c h" 'helm-command-prefix)
-		  )
-	      (progn
-		(general-define-key "C-c h" '(:ignore t :which-key "ivy-command-prefix")
-				    "C-c h a" 'counsel-apropos
-				    "C-c h b" 'ivy-resume
-				    "C-c h c" 'counsel-colors-emacs
-				    "C-c h i" 'counsel-imenu
-				    "C-c h l" 'counsel-locate
-				    "C-c h p" 'counsel-list-processes
-				    )))
 	    
+	    (general-define-key "C-c h" '(:ignore t :which-key "ivy-command-prefix")
+				"C-c h a" 'counsel-apropos
+				"C-c h b" 'ivy-resume
+				"C-c h c" 'counsel-colors-emacs
+				"C-c h i" 'counsel-imenu
+				"C-c h l" 'counsel-locate
+				"C-c h p" 'counsel-list-processes
+				)
 	    ;; non-evil ,without a prefix
 	    (general-define-key
 	     ;; remap c-a to `samray/smarter-move-beginning-of-line
@@ -587,21 +540,10 @@
      "C-c C-z" popwin:keymap
      ))
 
-  ;; (when (not(samray/does-use-ivy))
-  ;;   (require 'helm-config))
-
-  ;; (with-eval-after-load 'helm-config
-  ;;   (general-define-key
-  ;;    "C-c h" 'helm-command-prefix
-  ;;    ))
   )
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-
-(with-eval-after-load 'helm
-  (define-key helm-find-files-map "\t" 'helm-execute-persistent-action)
-  )
 
 (use-package hydra
   :ensure t

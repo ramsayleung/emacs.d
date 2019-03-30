@@ -53,7 +53,6 @@
 	  (add-to-list 'golden-ratio-extra-commands 'ace-window)
 	  (setq golden-ratio-auto-scale t)
 	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
-	  (add-to-list 'golden-ratio-exclude-modes "helm-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "dired-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "gud-mode")

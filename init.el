@@ -31,8 +31,6 @@
 
 (defvar samray-additional-packages-path (expand-file-name "additional-packages" user-emacs-directory))
 
-(defvar samray/completion-framework 'ivy)
-
 ;;; Define some useful function
 (defun samray/mac-os-p ()
   "Check whether Emacs is running on Mac os."
@@ -92,14 +90,7 @@
   (require 'init-eshell)
   (require 'init-evil)
   (require 'init-go)
-  (if (samray/does-use-ivy)
-      (progn
-	(message "Use ivy as completion framework")
-	(require 'init-ivy))
-    (progn
-      (message "Use helm as completion framework")
-      (require 'init-helm))
-    )
+  (require 'init-ivy)
   (require 'init-keybindings)
   (require 'init-lisp)
   (require 'init-lsp)

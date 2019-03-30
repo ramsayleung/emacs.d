@@ -33,6 +33,13 @@
     ))
 
 
+(defun samray/kill-word-backward ()
+  "Let Eshell kill word acting like zsh."
+  (interactive)
+  (set-mark-command nil)
+  (backward-word)
+  (call-interactively 'kill-region))
+
 (defun samray/eshell-sudo-toggle ()
   "Add/Remove sudo in the begining of command line."
   (interactive)
@@ -159,8 +166,8 @@
 	    )
   :bind (([remap samray/smarter-move-beginning-of-line] . eshell-bol)
 	 ("C-a" . eshell-bol)
-	 ([remap kill-region] . kill-word)
-	 ("C-w" . kill-word)
+	 ([remap kill-region] . samray/kill-word-backward)
+	 ("C-w" . samray/kill-word-backward)
 	 ([remap evil-insert-digraph] . paredit-kill)
 	 ("C-k" . paredit-kill)
 	 ([remap evil-paste-from-register] . samray/esh-history)

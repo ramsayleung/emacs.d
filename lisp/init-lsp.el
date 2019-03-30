@@ -107,9 +107,9 @@
   :hook ((c-mode c++-mode objc-mode) .
          (lambda () (require 'ccls) (lsp)))
   :config(progn
-	   (setq ccls-executable (if (file-exists-p (expand-file-name "~/code/cpp/ccls/Release/ccls"))
-				     (expand-file-name "~/code/cpp/ccls/Release/ccls")
-				   (executable-find "ccls")))
+	   (setq ccls-executable (if (samray/linux-p)
+				     (executable-find "ccls")
+				   (expand-file-name "~/code/cpp/ccls/Release/ccls")))
 	   (setq ccls-sem-highlight-method 'font-lock)
 	   (setq ccls-extra-init-params
 		 '(:completion (:detailedLabel t) :xref
