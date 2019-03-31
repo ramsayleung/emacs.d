@@ -18,6 +18,8 @@
   :init
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
+  (set-face-attribute 'lsp-face-highlight-textual nil
+  		      :background "#666" :foreground "MediumPurple2")
 
   ;; Support LSP in org babel
   ;; https://github.com/emacs-lsp/lsp-mode/issues/377
@@ -48,12 +50,8 @@
   (dolist (lang org-babel-lang-list)
     (eval `(lsp-org-babel-enbale ,lang)))
 
-  (with-eval-after-load 'lsp
-    (set-face-attribute 'lsp-face-highlight-textual nil
-  			:background "#666" :foreground "#ffffff")
-    )
-  (setq lsp-clients-typescript-server "typescript-language-server"
-        lsp-clients-typescript-server-args '("--stdio")))
+
+  )
 
 
 (use-package lsp-ui
@@ -64,6 +62,7 @@
 	    ;; bind peek key
 	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
 	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+	    (setq lsp-ui-peek-fontify 'always)
 	    (setq
 	     lsp-ui-sideline-enable nil
 	     lsp-enable-completion-at-point t
@@ -105,7 +104,9 @@
 (use-package ccls
   :ensure t
   :hook ((c-mode c++-mode objc-mode) .
-         (lambda () (require 'ccls) (lsp)))
+         (lambda ()
+	   (require 'ccls)
+	   (lsp)))
   :config(progn
 	   (setq ccls-executable (if (samray/linux-p)
 				     (executable-find "ccls")

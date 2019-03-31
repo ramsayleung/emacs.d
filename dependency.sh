@@ -85,7 +85,7 @@ install_rust_dep(){
 	curl https://sh.rustup.rs -sSf | sh
     fi
     echo "Install racer dependency"
-    rustup component add rls-preview rust-analysis rust-src 
+    rustup component add rls-preview rust-analysis rust-src rustfmt
     # Throw an error if binary exists
     cargo install racer 
     cargo install cargo-edit 

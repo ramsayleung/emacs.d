@@ -417,6 +417,10 @@
 	     "C-c p {" 'paredit-wrap-curly
 	     "C-c p <" 'paredit-wrap-angled
 	     "C-c p \"" 'paredit-meta-doublequote
+	     [remap evil-paste-pop-next] 'next-line
+	     "C-n" 'next-line
+	     [remap evil-paste-pop] 'previous-line
+	     "C-p" 'previous-line
 	     "C-x k" 'kill-this-buffer
 	     "C-x t" 'samray/dired-tmp-dir
 	     "C-x C-r" 'recentf-open-files

@@ -318,7 +318,7 @@ This code toggles between them."
 				    (`errored (propertize "⚠ Error"))
 				    (`interrupted "⛔ Interrupted")))
 				 "]"
-				 mode-line-misc-info
+				 ;; mode-line-misc-info
 				 ;; mode-line-end-spaces
 				 ))
 ;;; Use Miminish minor modes to change the mode line
