@@ -3,6 +3,7 @@
 # key: #
 # --
 #!/usr/bin/env bash
-#Auther :Samray <samrayleung@gmail.com>
+#Auther :Ramsay <ramsayleung@gmail.com>
 #Description:
-$0
+#$0
+set -x
