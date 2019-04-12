@@ -268,8 +268,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
       (set-fontset-font (frame-parameter nil 'font)
                         charset zh-font))))
 (samray/set-font
- '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=17"
- '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") 16)
+ '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=14"
+ '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") 14)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
