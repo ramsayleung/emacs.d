@@ -14,12 +14,12 @@
 (use-package lsp-mode
   :ensure t
   :defines (lsp-clients-typescript-server lsp-clients-typescript-server-args)
-  :hook ((go-mode python-mode rust-mode) . lsp)
+  :hook ((go-mode python-mode rust-mode sh-mode) . lsp)
   :init
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
   (set-face-attribute 'lsp-face-highlight-textual nil
-  		      :background "#666" :foreground "MediumPurple2")
+  		      :background "#666" :foreground "#ffffff")
 
   ;; Support LSP in org babel
   ;; https://github.com/emacs-lsp/lsp-mode/issues/377
@@ -63,6 +63,7 @@
 	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
 	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 	    (setq lsp-ui-peek-fontify 'always)
+	    (setq lsp-eldoc-enable-hover nil)
 	    (setq
 	     lsp-ui-sideline-enable nil
 	     lsp-enable-completion-at-point t
@@ -91,11 +92,6 @@
 						(no-other-frame . t)
 						(cursor-type)
 						(no-special-glyphs . t)))
-	    (defun samray/toggle-lsp-pop ()
-	      (interactive)
-	      (if lsp-ui-doc-include-signature
-	    	  (setq lsp-ui-doc-include-signature nil)
-	    	(setq lsp-ui-doc-include-signature t)))
 	    )
   
   )
@@ -108,9 +104,9 @@
 	   (require 'ccls)
 	   (lsp)))
   :config(progn
-	   (setq ccls-executable (if (samray/linux-p)
-				     (executable-find "ccls")
-				   (expand-file-name "~/code/cpp/ccls/Release/ccls")))
+	   (setq ccls-executable (if (file-exists-p (expand-file-name "~/code/cpp/ccls/Release/ccls"))
+                                     (expand-file-name "~/code/cpp/ccls/Release/ccls")
+                                   (executable-find "ccls")))
 	   (setq ccls-sem-highlight-method 'font-lock)
 	   (setq ccls-extra-init-params
 		 '(:completion (:detailedLabel t) :xref

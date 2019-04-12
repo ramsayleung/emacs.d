@@ -19,6 +19,9 @@ install_javascript_dep(){
 	echo "start to install Javascript synatx checker"
 	cnpm list -g eslint || sudo cnpm install eslint -g
 	#install required Python packages for Elpy
+
+	# install bash language server
+	cnpm list -g bash-language-server || sudo cnpm install bash-language-server -g 
 	#if [ $(pip install rope;echo $?) != 0 ]
     fi
 }
