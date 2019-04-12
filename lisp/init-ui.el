@@ -133,10 +133,9 @@ This code toggles between them."
                       :background (face-background 'default)))
 
 
-(defun samray/set-mode-line-width ()
-  "Set mode line width, it is so cool."
-  (set-face-attribute 'mode-line nil
-		      :box '()))
+(set-face-attribute 'mode-line nil
+		    :font "Fantasque Sans Mono-12:weight=medium:slant=italic"
+		    :box '())
 
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
@@ -145,7 +144,6 @@ This code toggles between them."
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
 (add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
-(add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
 ;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 (add-hook 'after-load-theme-hook (lambda ()
 				   (set-face-foreground 'hl-line nil)
@@ -222,7 +220,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'sanityinc-tomorrow-eighties t)
 
 ;;; Steal from http://zhuoqiang.me/torture-emacs.html
 (defun samray/font-exists-p (font)
@@ -239,9 +237,9 @@ This code toggles between them."
     (format "%s %s" font-name font-size)))
 
 (defun samray/set-font (english-fonts
-                       english-font-size
-                       chinese-fonts
-                       &optional chinese-font-size)
+			english-font-size
+			chinese-fonts
+			&optional chinese-font-size)
 
   "Set font from ENGLISH-FONTS which exists  ENGLISH-FONT-SIZE could be set to \":pixelsize=18\" or a integer.
 If set/leave chinese-font-size to nil, it will follow english-font-size"
@@ -267,9 +265,14 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font)
                         charset zh-font))))
+(defvar chinese-font-size 16)
+(defvar english-font-size ":pixelsize=17")
+(when (samray/mac-os-p)
+  (setq chinese-font-size 14)
+  (setq english-font-size ":pixelsize=14"))
 (samray/set-font
- '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=14"
- '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") 14)
+ '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
+ '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") chinese-font-size)
 
 ;;----------------;;
 ;;Major/Minor Mode;;

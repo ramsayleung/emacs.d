@@ -44,8 +44,7 @@
 	     (interactive)
 	     (if (samray/buffer-too-big-p)
 		 (isearch-forward)
-	       (save-excursion
-		 (counsel-grep-or-swiper (thing-at-point 'word)))))
+	       (counsel-grep-or-swiper (thing-at-point 'word))))
 	   )
   )
 
