@@ -161,8 +161,6 @@
 				[remap org-beginning-of-line] 'evil-backward-char
 				[remap org-end-of-line] 'evil-forward-char
 				;; "l" 'evil-forward-char
-				"J" 'org-next-visible-heading
-				"K" 'org-previous-visible-heading
 				)
 
 	    (general-define-key :states 'normal
@@ -430,7 +428,8 @@
 	     "M-RET o" 'srefactor-lisp-one-line
 	     "M-RET m" 'srefactor-lisp-format-sexp
 	     "M-RET d" 'srefactor-lisp-format-defun
-	     "M-RET b" 'srefactor-lisp-format-buffer)
+	     "M-RET b" 'srefactor-lisp-format-buffer
+	     "S-<f6>" 'lsp-rename)
 
 	    (general-define-key :states '(insert normal visual motion)
 				"C-a" 'samray/smarter-move-beginning-of-line

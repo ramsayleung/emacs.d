@@ -56,25 +56,7 @@
 	  (add-to-list 'golden-ratio-exclude-modes "dired-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
 	  (add-to-list 'golden-ratio-exclude-modes "gud-mode")
-	  ;; do not enable golden-raio in thses modes
-	  (setq golden-ratio-exclude-modes '("ediff-mode"
-					     "lsp-ui-imenu-mode"
-					     "gud-mode"
-					     "gdb-locals-mode"
-					     "gdb-registers-mode"
-					     "gdb-breakpoints-mode"
-					     "gdb-threads-mode"
-					     "gdb-frames-mode"
-					     "gdb-inferior-io-mode"
-					     "gud-mode"
-					     "gdb-inferior-io-mode"
-					     "gdb-disassembly-mode"
-					     "gdb-memory-mode"
-					     "magit-log-mode"
-					     "magit-reflog-mode"
-					     "magit-status-mode"
-					     "IELM"
-					     "eshell-mode" "dired-mode"))
+	  (add-to-list 'golden-ratio-exclude-modes "comint-mode")
 	  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
 	  ))
 

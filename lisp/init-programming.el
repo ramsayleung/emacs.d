@@ -7,6 +7,8 @@
 (use-package realgud
   :ensure t
   :commands (realgud:gdb realgud:pdb)
+  :init
+  (setq realgud:pdb-command-name "python -m pdb")
   )
 
 (use-package yasnippet

@@ -34,10 +34,10 @@
 	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
 	  (setq org-todo-keyword-faces
 		'(
-		  ("PROCESSING" . (:foreground "gold" :weight bold))
+		  ("PENDING" . (:foreground "gold" :weight bold))
 		  ))
 	  (setq org-todo-keywords
-		'((sequence "TODO" "PROCESSING" "DONE")))
+		'((sequence "TODO" "PENDING" "DONE")))
 	  (setq org-priority-faces '(
 				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "blue"))

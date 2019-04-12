@@ -19,7 +19,7 @@
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
   (set-face-attribute 'lsp-face-highlight-textual nil
-  		      :background "#666" :foreground "MediumPurple2")
+  		      :background "#666" :foreground "#ffffff")
 
   ;; Support LSP in org babel
   ;; https://github.com/emacs-lsp/lsp-mode/issues/377
@@ -49,8 +49,7 @@
   (add-to-list 'org-babel-lang-list (if emacs/>=26p "shell" "sh"))
   (dolist (lang org-babel-lang-list)
     (eval `(lsp-org-babel-enbale ,lang)))
-
-
+  (setq lsp-eldoc-enable-hover nil)
   )
 
 
@@ -91,11 +90,7 @@
 						(no-other-frame . t)
 						(cursor-type)
 						(no-special-glyphs . t)))
-	    (defun samray/toggle-lsp-pop ()
-	      (interactive)
-	      (if lsp-ui-doc-include-signature
-	    	  (setq lsp-ui-doc-include-signature nil)
-	    	(setq lsp-ui-doc-include-signature t)))
+	    (setq lsp-ui-doc-include-signature nil)
 	    )
   
   )

@@ -36,6 +36,7 @@
   :config (progn
 	    ;; Use goimports instead of go-fmt
 	    (setq gofmt-command "goimports")
+	    (setq go-packages-function 'go-packages-go-list)
 	    ))
 
 (use-package go-eldoc
