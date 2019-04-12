@@ -45,7 +45,7 @@
 
 (defun samray/buffer-too-big-p ()
   "Predicate if buffer is too big."
-  (or (> (buffer-size) (* 5000 80))
+  (or (> (buffer-size) (* 1024 1024))
       (> (line-number-at-pos (point-max)) 50000)))
 
 (defun samray/buffer-too-large-p ()
