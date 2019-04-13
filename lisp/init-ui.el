@@ -133,9 +133,12 @@ This code toggles between them."
                       :background (face-background 'default)))
 
 
-(set-face-attribute 'mode-line nil
-		    :font "Fantasque Sans Mono-12:weight=medium:slant=italic"
-		    :box '())
+(defun samray/set-mode-line-attribute ()
+  "Set mode line face attribute."
+  (set-face-attribute 'mode-line nil
+		      :font "Fantasque Sans Mono-13:weight=medium:slant=italic"
+		      :height 110
+		      :box '()))
 
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
@@ -143,7 +146,8 @@ This code toggles between them."
 (defadvice load-theme (after run-after-load-theme-hook activate)
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
-(add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
+(add-hook 'after-load-theme-hook #'samray/tone-down-fringes)
+(add-hook 'after-load-theme-hook #'samray/set-mode-line-attribute)
 ;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 (add-hook 'after-load-theme-hook (lambda ()
 				   (set-face-foreground 'hl-line nil)

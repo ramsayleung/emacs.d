@@ -38,13 +38,13 @@
 	     (interactive)
 	     (setq ivy-height (/ (window-body-height)2)))
 	   ;; Set `ivy-height` after Emacs startup.
-	   (run-with-idle-timer 0.5 nil 'samray/change-ivy-height-dynamicly)
+	   (run-with-idle-timer 1 nil 'samray/change-ivy-height-dynamicly)
 	   (defun samray/counsel-grep-or-swiper ()
 	     "Use `counsel-grep-or-swiper` dependen on buffer size."
 	     (interactive)
 	     (if (samray/buffer-too-big-p)
 		 (isearch-forward)
-	       (counsel-grep-or-swiper (thing-at-point 'word))))
+	       (counsel-grep-or-swiper)))
 	   )
   )
 
