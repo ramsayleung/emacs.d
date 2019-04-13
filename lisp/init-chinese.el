@@ -249,7 +249,7 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
        "#+LATEX_CLASS: samray-org-article"\n
        "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n)))
 ;;; Adds hook to find-files-hook
-(run-with-idle-timer 1 nil 'auto-insert-mode)
+(run-with-idle-timer samray-idle-time nil 'auto-insert-mode)
 (setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
 
 (message "loading init-chinese")

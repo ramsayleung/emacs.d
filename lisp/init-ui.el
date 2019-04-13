@@ -22,7 +22,7 @@
 (use-package popwin
   :ensure t
   :config (progn
-	    (run-with-idle-timer 1 nil 'popwin-mode)
+	    (run-with-idle-timer samray-idle-time nil 'popwin-mode)
 	    ;; (popwin-mode t)
 	    (push '(compilation-mode :noselect t) popwin:special-display-config)
 	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
@@ -44,7 +44,13 @@
   (or (< (display-pixel-height)800)
       (< (display-pixel-width)1400)))
 
+(defun samray/big-monitor-p ()
+  "Detect current sreen whether is it a big monitor or not."
+  (or (> (display-pixel-width) 1200)
+      (> (display-pixel-height) 1920))
+  )
 (use-package golden-ratio
+  :if (not (samray/big-monitor-p))
   :diminish golden-ratio-mode
   :ensure t
   :init (progn

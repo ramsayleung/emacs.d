@@ -4,7 +4,7 @@
 
 (defmacro samray/after-stack-clears (&rest body)
   "Do BODY after the call stack is clear."
-  `(run-with-timer 1 nil (lambda () ,@body)))
+  `(run-with-timer samray-idle-time nil (lambda () ,@body)))
 
 (use-package counsel
   :ensure t
@@ -38,7 +38,7 @@
 	     (interactive)
 	     (setq ivy-height (/ (window-body-height)2)))
 	   ;; Set `ivy-height` after Emacs startup.
-	   (run-with-idle-timer 1 nil 'samray/change-ivy-height-dynamicly)
+	   (run-with-idle-timer samray-idle-time nil 'samray/change-ivy-height-dynamicly)
 	   (defun samray/counsel-grep-or-swiper ()
 	     "Use `counsel-grep-or-swiper` dependen on buffer size."
 	     (interactive)
@@ -49,27 +49,26 @@
   )
 
 (use-package ivy-posframe
-  :defer t
   :ensure t
-  :defer t
+  :init (progn
+	  ;; (setq ivy-display-function #'ivy-posframe-display)
+	  ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
+	  ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
+	  ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
+	  (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
+	  ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
+	  (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+	  ;; The behaviors of Ivy posframe is different between mac and linux
+	  (defun samray/setup-ivy-window()
+	    "Set up ivy height and width."
+	    (setq ivy-posframe-min-height (/(window-body-height)2))
+	    (setq ivy-posframe-height (/ (window-body-height)2))
+	    (setq ivy-posframe-width (window-body-width))
+	    (setq ivy-posframe-min-width (window-body-width)))
+	  )
   :config (progn
-	    (run-with-idle-timer 0.1 nil 'ivy-posframe-enable)
-	    ;; (setq ivy-display-function #'ivy-posframe-display)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
-	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
-	    ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
-	    (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
-	    ;; The behaviors of Ivy posframe is different between mac and linux
-	    (defun samray/setup-ivy-window()
-	      "Set up ivy height and width."
-	      (setq ivy-posframe-min-height (/(window-body-height)2))
-	      (setq ivy-posframe-height (/ (window-body-height)2))
-	      (setq ivy-posframe-width (window-body-width))
-	      (setq ivy-posframe-min-width (window-body-width))
-	      )
-	    (samray/setup-ivy-window)
+	    (run-with-idle-timer samray-idle-time nil 'ivy-posframe-enable)
+	    (run-with-idle-timer samray-idle-time nil 'samray/setup-ivy-window)
 	    (defadvice select-window (after select-window-ivy activate)
 	      "Advice `select-window` to set up ivy-posframe-width/height dynamicly."
 	      (samray/setup-ivy-window))))

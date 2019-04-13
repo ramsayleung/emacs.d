@@ -17,7 +17,7 @@
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
-	    (run-with-idle-timer 1 nil 'yas-reload-all)
+	    (run-with-idle-timer samray-idle-time nil 'yas-reload-all)
 	    ;; (yas-reload-all)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))

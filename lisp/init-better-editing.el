@@ -94,7 +94,7 @@
 (require 'recentf)
 (setq recentf-max-saved-items 1000
       recentf-exclude '("/tmp/" "/ssh:"))
-(run-with-idle-timer 1 t 'recentf-mode)
+(run-with-idle-timer samray-idle-time t 'recentf-mode)
 ;; (recentf-mode 1)
 
 ;;; Auto-refresh buffers when files have changed on disk

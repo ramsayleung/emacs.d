@@ -30,6 +30,7 @@
 ;;; Define constnat variable for configuration
 
 (defvar samray-additional-packages-path (expand-file-name "additional-packages" user-emacs-directory))
+(defvar samray-idle-time 1)
 
 ;;; Define some useful function
 (defun samray/mac-os-p ()
@@ -108,7 +109,7 @@
 
   (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
   (when (file-exists-p custom-file)
-    (run-with-idle-timer 1 nil 'load custom-file)
+    (run-with-idle-timer samray-idle-time nil 'load custom-file)
     )
   ;; Display the total loading time in the minibuffer
   (defun display-startup-echo-area-message ()
