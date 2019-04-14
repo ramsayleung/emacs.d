@@ -38,7 +38,8 @@
 	     (interactive)
 	     (setq ivy-height (/ (window-body-height)2)))
 	   ;; Set `ivy-height` after Emacs startup.
-	   (run-with-idle-timer samray-idle-time nil 'samray/change-ivy-height-dynamicly)
+	   (add-hook 'after-init-hook (lambda ()
+					(run-with-idle-timer samray-idle-time nil 'samray/change-ivy-height-dynamicly)))
 	   (defun samray/counsel-grep-or-swiper ()
 	     "Use `counsel-grep-or-swiper` dependen on buffer size."
 	     (interactive)
@@ -51,27 +52,57 @@
 (use-package ivy-posframe
   :ensure t
   :init (progn
-	  ;; (setq ivy-display-function #'ivy-posframe-display)
+	  (defvar samray-ivy-posframe-border-exteral-witdth 2)
+	  (defvar samray-ivy-posframe-threshold 25)
+	  (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-right)
+	  ;; (setq ivy-display-function #'ivy-posfram-display)
 	  ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
 	  ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
 	  ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
-	  (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
+	  ;; (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
 	  ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
 	  (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
-	  ;; The behaviors of Ivy posframe is different between mac and linux
-	  (defun samray/setup-ivy-window()
-	    "Set up ivy height and width."
-	    (setq ivy-posframe-min-height (/(window-body-height)2))
-	    (setq ivy-posframe-height (/ (window-body-height)2))
-	    (setq ivy-posframe-width (window-body-width))
-	    (setq ivy-posframe-min-width (window-body-width)))
+	  (setq ivy-posframe-border-width 0)
 	  )
   :config (progn
 	    (run-with-idle-timer samray-idle-time nil 'ivy-posframe-enable)
 	    (run-with-idle-timer samray-idle-time nil 'samray/setup-ivy-window)
-	    (defadvice select-window (after select-window-ivy activate)
+	    (defun ivy-posframe-display-at-window-bottom-right (str)
+	      (ivy-posframe--display str #'posframe-poshandler-window-bottom-right-corner))
+	    (defun samray/get-display-line-number-width ()
+	      "Get line number width"
+	      (let ((width (line-number-display-width)))
+		(if (> width (or display-line-numbers-width 1))
+		    width
+		  (or display-line-numbers-width 1))))
+	    ;; The behaviors of Ivy posframe is different between mac and linux
+	    (defun samray/setup-ivy-window()
+	      "Set up ivy height and width."
+	      (let* ((samray-ivy-posframe-height (if (< (/(window-body-height)2) samray-ivy-posframe-threshold)
+						     (if (< (window-body-height) samray-ivy-posframe-threshold)
+							 (window-body-height)
+						       samray-ivy-posframe-threshold)
+						   (/(window-body-height)2)))
+		     (samray-ivy-posframe-width (- (window-body-width)
+						   (+ ivy-posframe-border-width samray-ivy-posframe-border-exteral-witdth
+						      (samray/get-display-line-number-width)))))
+		(setq ivy-posframe-min-height samray-ivy-posframe-height)
+		(setq ivy-posframe-height samray-ivy-posframe-height)
+		(setq ivy-posframe-width samray-ivy-posframe-width)
+		(setq ivy-posframe-min-width samray-ivy-posframe-width)))
+	    (defun samray/setup-ivy-height ()
+	      "Set up `ivy-height` variable to default value"
+	      (when (= ivy-posframe-height (window-body-height))
+		(setq ivy-height 10)))
+	    (defun select-window@after (&rest _)
 	      "Advice `select-window` to set up ivy-posframe-width/height dynamicly."
-	      (samray/setup-ivy-window))))
+	      (samray/setup-ivy-window))
+	    (advice-add 'select-window :after 'select-window@after)
+
+	    (defun ace-window@after (&rest _)
+	      "Advice `ace-window` to set up ivy-posframe-width/height dynamicly."
+	      (samray/setup-ivy-window))
+	    (advice-add 'ace-window :after 'ace-window@after)))
 
 ;;; 支持ivy使用拼音进行匹配
 (use-package pyim

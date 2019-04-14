@@ -37,6 +37,7 @@
 	    (push "*vc-diff*" popwin:special-display-config)
 	    (push "*vc-change-log*" popwin:special-display-config)
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
+	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
 	    ))
 
 (defun samray/toggle-golden-ratio()
@@ -164,8 +165,8 @@ This code toggles between them."
 ;; turn off startup help menu
 (setq inhibit-splash-screen t)
 
-;;; Use default line-number-mode instead of nlinum of linum (require Emacs >= 26).
-(setq-default display-line-numbers-width 1)
+;;; Use default line-number-mode instead of nlinum or linum (require Emacs >= 26).
+;; (setq-default display-line-numbers-width 1)
 (setq display-line-numbers-current-absolute t)
 (global-display-line-numbers-mode t)
 
