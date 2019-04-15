@@ -1,4 +1,4 @@
-					; PACKAGE --- Summary -*- lexical-binding: t -*-
+;;; PACKAGE --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
 
@@ -28,6 +28,9 @@
 	  (setq ivy-re-builders-alist
 		'((t . ivy--regex-plus)))
 	  (setq ivy-initial-inputs-alist nil)
+	  ;; Use grep instead of grep
+	  (setq counsel-grep-base-command
+		"rg -i -M 120 --no-heading --line-number --color never %s %s")
 	  )
   :config(progn
 	   (ivy-mode 1)

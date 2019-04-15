@@ -407,7 +407,6 @@
 	     "C-c a" 'org-agenda
 	     "C-c e" 'hydra-edit/body
 	     "C-c y p" 'youdao-dictionary-search-at-point+
-	     "C-c t" '(:ignore t :which-key "treemacs")
 	     "C-c w" 'hydra-window-resize/body
 	     "C-c p" '(:ignore t :which-key "paredit")
 	     "C-c p (" 'paredit-wrap-round

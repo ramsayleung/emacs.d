@@ -31,8 +31,12 @@
 ;; Use pep8 to format python file
 (use-package py-autopep8
   :commands (py-autopep8 py-autopep8-buffer)
+  :ensure t)
+
+;;; Use isort to sort import
+(use-package py-isort
   :ensure t
-  )
+  :commands (py-isort-buffer))
 
 ;;; virtualenvwrapper for virtualenv
 (use-package virtualenvwrapper
@@ -93,7 +97,7 @@
   (evil-insert-state))
 
 (defun samray/python-execute-file (arg)
-  "Execute a python script in a shell."
+  "Execute a python script with ARG in a shell."
   (interactive "P")
   ;; set compile command to buffer-file-name
   ;; universal argument put compile buffer in comint mode
@@ -107,7 +111,7 @@
 	(inferior-python-mode)))))
 
 (defun samray/python-execute-file-focus (arg)
-  "Execute a python script in a shell and switch to the shell buffer in
+  "Execute a python script with ARG in a shell and switch to the shell buffer in
 `insert state'."
   (interactive "P")
   (samray/python-execute-file arg)

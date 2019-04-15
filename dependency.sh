@@ -35,6 +35,10 @@ install_python_dep(){
 	#Either of these
 	echo "Start to install language server"
 	pip3  install 'python-language-server[all]' --user
+	echo "Start to install autopep8"
+	pip3 install autopep8 --user
+	echo "Start to install isort"
+	pip3 install isort --user
     fi
 }
 
