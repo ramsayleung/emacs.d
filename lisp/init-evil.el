@@ -10,7 +10,7 @@
 	  (setq evil-want-C-u-scroll t))
   :config
   (progn
-    (run-with-idle-timer 0.1 nil 'evil-mode)
+    (run-with-idle-timer samray-idle-time nil 'evil-mode)
     (evil-set-initial-state 'calendar-mode 'emacs)
     (evil-set-initial-state 'pdf-view-mode 'emacs)
     (evil-set-initial-state 'dired-mode 'emacs)
@@ -33,7 +33,7 @@
 (use-package evil-surround
   :ensure t
   :init(progn
-	 (run-with-idle-timer 0.1 nil 'global-evil-surround-mode)
+	 (run-with-idle-timer samray-idle-time nil 'global-evil-surround-mode)
 	 ;; (global-evil-surround-mode t)
 	 ))
 
@@ -42,7 +42,7 @@
   :commands evil-mode
   :ensure t
   :init (progn
-	  (run-with-idle-timer 1 nil 'global-evil-matchit-mode)
+	  (run-with-idle-timer samray-idle-time nil 'global-evil-matchit-mode)
 	  ;; (global-evil-matchit-mode 1)
 	  ))
 

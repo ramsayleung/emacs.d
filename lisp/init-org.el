@@ -177,7 +177,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 	   window-system)
   :ensure t
   :config (progn
-	    (run-with-idle-timer 1 nil 'org-download-enable))
+	    (run-with-idle-timer samray-idle-time nil 'org-download-enable))
   )
 
 (defun org-file-path (filename)

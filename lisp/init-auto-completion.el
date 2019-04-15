@@ -51,7 +51,7 @@
   :ensure t
   :defer t
   :init(progn
-	 (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-shell))))
+	 (run-with-idle-timer samray-idle-time nil (lambda () (add-to-list 'company-backends 'company-shell))))
   )
 
 ;;; C/C++ headers completion
@@ -64,7 +64,7 @@
 		 (setq company-c-headers-path-system '("/usr/local/include/c++/8.2.0" "/usr/include" "/usr/local/include")))
 		((eq system-type 'windows-nt)
 		 ))
-	  (run-with-idle-timer 1 nil (lambda () (add-to-list 'company-backends 'company-c-headers)))
+	  (run-with-idle-timer samray-idle-time nil (lambda () (add-to-list 'company-backends 'company-c-headers)))
 	  )
   )
 

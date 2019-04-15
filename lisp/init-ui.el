@@ -22,7 +22,7 @@
 (use-package popwin
   :ensure t
   :config (progn
-	    (run-with-idle-timer 1 nil 'popwin-mode)
+	    (run-with-idle-timer samray-idle-time nil 'popwin-mode)
 	    ;; (popwin-mode t)
 	    (push '(compilation-mode :noselect t) popwin:special-display-config)
 	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
@@ -37,6 +37,7 @@
 	    (push "*vc-diff*" popwin:special-display-config)
 	    (push "*vc-change-log*" popwin:special-display-config)
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
+	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
 	    ))
 
 (defun samray/toggle-golden-ratio()
@@ -44,7 +45,13 @@
   (or (< (display-pixel-height)800)
       (< (display-pixel-width)1400)))
 
+(defun samray/big-monitor-p ()
+  "Detect current sreen whether is it a big monitor or not."
+  (or (> (display-pixel-width) 1200)
+      (> (display-pixel-height) 1920))
+  )
 (use-package golden-ratio
+  :if (not (samray/big-monitor-p))
   :diminish golden-ratio-mode
   :ensure t
   :init (progn
@@ -133,9 +140,11 @@ This code toggles between them."
                       :background (face-background 'default)))
 
 
-(defun samray/set-mode-line-width ()
-  "Set mode line width, it is so cool."
+(defun samray/set-mode-line-attribute ()
+  "Set mode line face attribute."
   (set-face-attribute 'mode-line nil
+		      :font "Fantasque Sans Mono-13:weight=medium:slant=italic"
+		      :height 110
 		      :box '()))
 
 (defvar after-load-theme-hook nil
@@ -144,8 +153,8 @@ This code toggles between them."
 (defadvice load-theme (after run-after-load-theme-hook activate)
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
-(add-hook 'after-load-theme-hook 'samray/tone-down-fringes)
-(add-hook 'after-load-theme-hook #'samray/set-mode-line-width)
+(add-hook 'after-load-theme-hook #'samray/tone-down-fringes)
+(add-hook 'after-load-theme-hook #'samray/set-mode-line-attribute)
 ;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
 (add-hook 'after-load-theme-hook (lambda ()
 				   (set-face-foreground 'hl-line nil)
@@ -156,8 +165,8 @@ This code toggles between them."
 ;; turn off startup help menu
 (setq inhibit-splash-screen t)
 
-;;; Use default line-number-mode instead of nlinum of linum (require Emacs >= 26).
-(setq-default display-line-numbers-width 1)
+;;; Use default line-number-mode instead of nlinum or linum (require Emacs >= 26).
+;; (setq-default display-line-numbers-width 1)
 (setq display-line-numbers-current-absolute t)
 (global-display-line-numbers-mode t)
 
@@ -222,7 +231,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'sanityinc-tomorrow-eighties t)
 
 ;;; Steal from http://zhuoqiang.me/torture-emacs.html
 (defun samray/font-exists-p (font)
@@ -239,9 +248,9 @@ This code toggles between them."
     (format "%s %s" font-name font-size)))
 
 (defun samray/set-font (english-fonts
-                       english-font-size
-                       chinese-fonts
-                       &optional chinese-font-size)
+			english-font-size
+			chinese-fonts
+			&optional chinese-font-size)
 
   "Set font from ENGLISH-FONTS which exists  ENGLISH-FONT-SIZE could be set to \":pixelsize=18\" or a integer.
 If set/leave chinese-font-size to nil, it will follow english-font-size"
@@ -267,9 +276,14 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font)
                         charset zh-font))))
+(defvar chinese-font-size 16)
+(defvar english-font-size ":pixelsize=17")
+(when (samray/mac-os-p)
+  (setq chinese-font-size 14)
+  (setq english-font-size ":pixelsize=14"))
 (samray/set-font
- '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=14"
- '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") 14)
+ '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
+ '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") chinese-font-size)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
