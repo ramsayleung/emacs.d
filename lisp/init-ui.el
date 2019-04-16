@@ -1,4 +1,4 @@
-; package --- Summary  -*- lexical-binding: t -*-
+					; package --- Summary  -*- lexical-binding: t -*-
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -217,7 +217,6 @@ This code toggles between them."
 ;;  Color Theme  ;;
 ;;---------------;;
 
-
 (use-package zenburn-theme
   :ensure t
   :defer t
@@ -280,10 +279,10 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (defvar chinese-font-size 16)
 (defvar english-font-size ":pixelsize=17")
 (when (samray/mac-os-p)
-  (setq chinese-font-size 14)
-  (setq english-font-size ":pixelsize=14"))
+  (setq chinese-font-size 13)
+  (setq english-font-size ":pixelsize=13"))
 (samray/set-font
- '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
+ '("Consolas:slant=italic" "Fantasque Sans Mono:weight=medium:slant=italic"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
  '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") chinese-font-size)
 
 ;;----------------;;
