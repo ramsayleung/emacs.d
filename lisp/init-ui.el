@@ -1,4 +1,4 @@
-;; package --- Summary  -*- lexical-binding: t -*-
+; package --- Summary  -*- lexical-binding: t -*-
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -142,10 +142,11 @@ This code toggles between them."
 
 (defun samray/set-mode-line-attribute ()
   "Set mode line face attribute."
-  (set-face-attribute 'mode-line nil
-		      :font "Fantasque Sans Mono-13:weight=medium:slant=italic"
-		      :height 110
-		      :box '()))
+  (let ((mode-line-height (if (samray/linux-p) 110 125)))
+    (set-face-attribute 'mode-line nil
+			:font "Fantasque Sans Mono-13:weight=medium:slant=italic"
+			:height mode-line-height
+			:box '())))
 
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")

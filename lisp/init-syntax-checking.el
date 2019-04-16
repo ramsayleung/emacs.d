@@ -22,21 +22,28 @@
 			   ))
 (use-package flycheck-posframe
   :ensure t
-  :after flycheck
+  :hook (flycheck-mode . flycheck-posframe-mode)
   :config (progn
-	    (set-face-attribute 'flycheck-posframe-warning-face nil
-				:inherit nil
-				:stipple nil
-				:background "black"
-				:foreground "yellow")
+	    (defun samray/set-flycheck-face-attribute()
+	      (set-face-attribute 'flycheck-posframe-warning-face nil
+				  :inherit nil
+				  :stipple nil
+				  :background (face-attribute 'default :background)
+				  :foreground (face-attribute 'flycheck-fringe-warning :foreground))
 
+	      (set-face-attribute 'flycheck-posframe-error-face nil
+				  :inherit nil
+				  :stipple nil
+				  :background (face-attribute 'default :background)
+				  :foreground (face-attribute 'flycheck-fringe-error :foreground)))
+	    (samray/set-flycheck-face-attribute)
 
-	    (set-face-attribute 'flycheck-posframe-error-face nil
-				:inherit nil
-				:stipple nil
-				:background "black"
-				:foreground "brown")
-	    (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
+	    (defun load-theme@after (&rest _)
+	      (when flycheck-mode
+		(when (not flycheck-posframe-mode)
+		  (flycheck-posframe-mode))
+		(samray/set-flycheck-face-attribute)))
+	    (advice-add 'load-theme :after 'load-theme@after)
 	    )
   )
 

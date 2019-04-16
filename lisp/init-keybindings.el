@@ -39,7 +39,7 @@
 				"d" '(:ignore t :which-key "dirs")
 				"d g" 'samray/golang-src-dir
 				"d t" 'samray/dired-tmp-dir
-				"e" 'hydra-flycheck/body
+				"e" #'hydra-flycheck/body
 				"f" '(:ignore t :which-key "files")
 				"f c" 'samray/copy-current-file-path
 				"f d" 'samray/delete-current-buffer-file
@@ -551,8 +551,8 @@
   :ensure t
   :config (progn
 	    (defhydra hydra-flycheck
-	      (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
-		    :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+	      (:pre (progn (setq hydra-hint-display-type 'lv) (flycheck-list-errors))
+		    :post (progn (setq hydra-hint-display-type 'lv) (quit-windows-on "*Flycheck errors*"))
 		    :hint nil)
 	      "errors"
 	      ("f"  flycheck-error-list-set-filter                            "Filter")
@@ -700,6 +700,7 @@ Info-mode:
 	      )
 	    )
   )
+
 
 (add-hook 'dired-mode-hook
 	  (lambda ()
