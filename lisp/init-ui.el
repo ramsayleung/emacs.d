@@ -282,7 +282,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (setq chinese-font-size 13)
   (setq english-font-size ":pixelsize=13"))
 (samray/set-font
- '("Consolas:slant=italic" "Fantasque Sans Mono:weight=medium:slant=italic"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
+ '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas:slant=italic"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
  '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") chinese-font-size)
 
 ;;----------------;;
