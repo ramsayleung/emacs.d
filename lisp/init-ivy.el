@@ -5,7 +5,6 @@
 (defmacro samray/after-stack-clears (&rest body)
   "Do BODY after the call stack is clear."
   `(run-with-timer samray-idle-time nil (lambda () ,@body)))
-
 (use-package counsel
   :ensure t
   :init ()
@@ -41,8 +40,7 @@
 	     (interactive)
 	     (setq ivy-height (/ (window-body-height)2)))
 	   ;; Set `ivy-height` after Emacs startup.
-	   (add-hook 'after-init-hook (lambda ()
-					(run-with-idle-timer samray-idle-time nil 'samray/change-ivy-height-dynamicly)))
+	   (run-with-idle-timer (+ samray-idle-time 1) nil 'samray/change-ivy-height-dynamicly)
 	   (defun samray/counsel-grep-or-swiper ()
 	     "Use `counsel-grep-or-swiper` dependen on buffer size."
 	     (interactive)

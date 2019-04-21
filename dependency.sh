@@ -75,10 +75,8 @@ install_go_dep(){
 	graftcp go get -u -v golang.org/x/tools/cmd/godoc
 	echo "Install go-langserver"
 	graftcp go get -u github.com/sourcegraph/go-langserver
-	echo "Install gometalinter"
-	curl -L https://git.io/vp6lP | sh
-	echo "Install all available checkers"
-	graftcp gometalinter --install --update
+	echo "Install golangci-lint"
+	graftcp go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 	echo "Install errcheck"
 	graftcp go get -u -v github.com/kisielk/errcheck
     fi

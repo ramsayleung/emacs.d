@@ -143,10 +143,11 @@ This code toggles between them."
 (defun samray/set-mode-line-attribute ()
   "Set mode line face attribute."
   (let ((mode-line-height (if (samray/linux-p) 110 125)))
-    (set-face-attribute 'mode-line nil
-			:font "Fantasque Sans Mono-13:weight=medium:slant=italic"
-			:height mode-line-height
-			:box '())))
+    (dolist (face '(mode-line mode-line-inactive))
+      (set-face-attribute face nil
+			  :font "Fantasque Sans Mono-13:weight=medium:slant=italic"
+			  :height mode-line-height
+			  :box '()))))
 
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
@@ -219,8 +220,11 @@ This code toggles between them."
 
 (use-package zenburn-theme
   :ensure t
-  :defer t
-  )
+  :defer t)
+
+(use-package monokai-theme
+  :ensure t
+  :defer t)
 
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
@@ -231,7 +235,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'sanityinc-tomorrow-eighties t)
+(load-theme 'monokai t)
 
 ;;; Steal from http://zhuoqiang.me/torture-emacs.html
 (defun samray/font-exists-p (font)
@@ -282,7 +286,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (setq chinese-font-size 13)
   (setq english-font-size ":pixelsize=13"))
 (samray/set-font
- '("Consolas:slant=italic" "Fantasque Sans Mono:weight=medium:slant=italic"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
+ '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas:slant=italic"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
  '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") chinese-font-size)
 
 ;;----------------;;

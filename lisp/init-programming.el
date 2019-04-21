@@ -52,10 +52,9 @@
 	  (setq exec-path-from-shell-check-startup-files nil) ;
 	  (setq exec-path-from-shell-arguments '("-l")) ;remove -i read form .zshenv
 	  (when (not (getenv "GOROOT"))
-	    (if (samray/mac-os-p) (setenv "GOROOT" "/usr/local/opt/go/libexec")
-	      (setenv "GOROOT" "/usr/local/go")))
+	    (setenv "GOROOT" (replace-regexp-in-string "\n$" "" (shell-command-to-string "go env GOROOT"))))
 	  (when (not (getenv "GOPATH"))
-	    (setenv "GOPATH" (expand-file-name "~/.go")))
+	    (setenv "GOPATH" (expand-file-name "~/code/go")))
 	  )
   )
 
