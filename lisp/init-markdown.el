@@ -15,11 +15,7 @@
 	  (custom-set-faces
 	   '(markdown-code-face ((t (:inherit fixed-pitch :family "Fantasque Sans Mono")))))
 
-	  (setq markdown-fontify-code-blocks-natively t)
-	  (add-hook 'markdown-mode-hook
-		    (lambda ()
-		      (when buffer-file-name
-			(add-hook 'after-save-hook 'check-parens nil t))))))
+	  (setq markdown-fontify-code-blocks-natively t)))
 
 (message "loading init-markdown")
 (provide 'init-markdown)
