@@ -706,8 +706,10 @@ Info-mode:
 	  (lambda ()
 	    (define-key dired-mode-map (kbd "i")
 	      (lambda () (interactive) (find-alternate-file "..")))))
+
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 (define-key dired-mode-map "j" 'dired-next-line)
 (define-key dired-mode-map "k" 'dired-previous-line)
 (define-key dired-mode-map "z" 'dired-get-size)

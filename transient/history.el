@@ -1,6 +1,4 @@
-((magit-blame
-  ("-w"))
- (magit-commit nil)
+((magit-commit nil)
  (magit-log
   ("-n256"
    ("--" "~/.emacs.d/lisp/init-lsp.el")

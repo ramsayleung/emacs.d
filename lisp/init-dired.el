@@ -45,15 +45,6 @@ output file. %i path(s) are relative, while %o is absolute.")
 (setq dired-garbage-files-regexp
       "\\.idx\\|\\.run\\.xml$\\|\\.bbl$\\|\\.bcf$\\|.blg$\\|-blx.bib$\\|.nav$\\|.snm$\\|.out$\\|.synctex.gz$\\|\\(?:\\.\\(?:aux\\|bak\\|dvi\\|log\\|orig\\|rej\\|toc\\|pyg\\)\\)\\'")
 
-;;; steal from http://kuanyui.github.io/2014/06/21/dired-tutorial-and-essential-configs/
-;; reuse dired buffer instead of open a lof of new buffers
-(defun samray/dired-find-alternate-file ()
-  (interactive)
-  (if (file-regular-p (dired-get-filename))
-      (dired-find-file)
-    (dired-find-alternate-file)))
-;;; press Enter to open a buffer
-(define-key dired-mode-map (kbd "RET") 'samray/dired-find-alternate-file)
 ;;; prevent Emacs from asking some annoying questions
 (put 'dired-find-alternate-file 'disabled nil)
 (setq dired-listing-switches "-alh")
