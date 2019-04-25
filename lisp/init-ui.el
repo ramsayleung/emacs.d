@@ -222,10 +222,6 @@ This code toggles between them."
   :ensure t
   :defer t)
 
-(use-package monokai-theme
-  :ensure t
-  :defer t)
-
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :defer t)
@@ -235,7 +231,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'monokai t)
+(load-theme 'sanityinc-tomorrow-eighties t)
 
 ;;; Steal from http://zhuoqiang.me/torture-emacs.html
 (defun samray/font-exists-p (font)

@@ -64,9 +64,9 @@
 		  (when (and (not (samray/buffer-contain-string-p go-list-all-warning)))
 		    (delete-file go-list-index-file-path)
 		    (append-to-file (point-min) (point-max) go-list-index-file-path))
-		  ;; (kill-buffer go-list-buffer-name)
-		  ))
-	      (shell-command-sentinel process signal)))
+		  (kill-buffer go-list-buffer-name)))
+	      ;; (shell-command-sentinel process signal)
+	      ))
 
 	  (defun samray/process-go-list-index ()
 	    "Process go list index file"

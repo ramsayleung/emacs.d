@@ -36,6 +36,7 @@
 	   ;; Count candidates
 	   (setq ivy-count-format "%d/%d ")
 	   ;; Number of result lines to display, set height as width-body-height/2
+	   (setq ivy-height 25)
 	   (defun samray/change-ivy-height-dynamicly ()
 	     (interactive)
 	     (setq ivy-height (/ (window-body-height)2)))
@@ -52,24 +53,16 @@
 
 (use-package ivy-posframe
   :ensure t
-  :init (progn
-	  (defvar samray-ivy-posframe-border-exteral-witdth 2)
-	  (defvar samray-ivy-posframe-threshold 25)
-	  (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-right)
-	  ;; (setq ivy-display-function #'ivy-posfram-display)
-	  ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-center)
-	  ;; (setq ivy-display-function #'ivy-posframe-display-at-window-center)
-	  ;; (setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
-	  ;; (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
-	  ;; (setq ivy-display-function #'ivy-posframe-display-at-point)
-	  (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
-	  (setq ivy-posframe-border-width 0)
-	  )
   :config (progn
-	    (run-with-idle-timer samray-idle-time nil 'ivy-posframe-enable)
-	    (run-with-idle-timer samray-idle-time nil 'samray/setup-ivy-window)
+	    (defvar samray-ivy-posframe-border-exteral-witdth 2)
+	    (defvar samray-ivy-posframe-threshold 25)
 	    (defun ivy-posframe-display-at-window-bottom-right (str)
 	      (ivy-posframe--display str #'posframe-poshandler-window-bottom-right-corner))
+	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-right)
+	    (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+	    (setq ivy-posframe-border-width 0)
+	    (run-with-idle-timer samray-idle-time nil 'ivy-posframe-enable)
+	    (run-with-idle-timer samray-idle-time nil 'samray/setup-ivy-window)
 	    (defun samray/get-display-line-number-width ()
 	      "Get line number width"
 	      (let ((width (line-number-display-width)))
