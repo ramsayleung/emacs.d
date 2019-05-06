@@ -67,15 +67,10 @@
     )
   )
 
-(defun samray/compile-clean ()
-  "Clean compiled object."
-  (interactive)
-  (compile "make clean")
-  )
-
 (defvar samray-default-g++-compile-command "g++ -std=c++17 -g")
 (defvar samray-default-gcc-compile-command "gcc -std=c99 -g")
-(defvar samray-default-compile-command "make -k")
+(defvar samray-default-compile-command "make -j 4 -k")
+(defvar samray-default-clean-command "make clean")
 
 (defun samray/g++-compile-and-run (command)
   "Compile cpp with g++ and run it with COMMAND."
@@ -95,6 +90,14 @@
   "Compile with input COMMAND or samray-default-compile-command."
   (interactive
    (list (read-string (format "compile command [default: %s]: " samray-default-compile-command) nil nil samray-default-compile-command)))
+  ;; (setq samray-default-compile-command command)
+  (compile command)
+  )
+
+(defun samray/compile-clean (command)
+  "Clean compiled object with COMMAND."
+  (interactive
+   (list (read-string (format "clean command [default: %s]: " samray-default-clean-command) nil nil samray-default-compile-command)))
   ;; (setq samray-default-compile-command command)
   (compile command)
   )

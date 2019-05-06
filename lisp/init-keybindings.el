@@ -232,22 +232,12 @@
 
 	    ;; C++ mode
 	    (general-define-key :states '(normal visual motion)
-				:keymaps '(c++-mode-map cmake-mode-map)
+				:keymaps '(c-mode-map c++-mode-map cmake-mode-map)
 				:prefix samray/leader-key
 				"m c" '(:ignore t :which-key "compiling")
 				"m c c" 'samray/compile
 				"m c C" 'samray/compile-clean
 				"m c x" 'samray/g++-compile-and-run
-				)
-
-	    ;; C mode
-	    (general-define-key :states '(normal visual motion)
-				:keymaps 'c-mode-map
-				:prefix samray/leader-key
-				"m c" '(:ignore t :which-key "compiling")
-				"m c c" 'samray/compile
-				"m c C" 'samray/compile-clean
-				"m c x" 'samray/gcc-compile-and-run
 				)
 
 	    ;; C/C++ mode
