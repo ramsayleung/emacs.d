@@ -38,6 +38,7 @@
 	    (save-excursion
 	      (goto-char (point-min))
 	      (search-forward string nil t)))
+	  (setq async-shell-command-buffer 'new-buffer)
 	  (defvar go-list-index-file-path "/tmp/go-list.index")
 	  (defvar go-list-buffer-name "*go-package-go-list*")
 	  (defvar go-list-all-warning "go: warning: \"all\" matched no packages")

@@ -1,7 +1,6 @@
 ;;; package --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
-
 (use-package youdao-dictionary
   :ensure t
   :commands (youdao-dictionary-search-at-point+ youdao-dictionary-search-from-input)
@@ -234,13 +233,6 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-;; (setq org-latex-pdf-process
-;;       '("xelatex -interaction nonstopmode -output-directory %o %f"
-;;         ;;"biber %b" "xelatex -interaction nonstopmode -output-directory %o %f"
-;;         "bibtex %b"
-;;         "xelatex -interaction nonstopmode -output-directory %o %f"
-;;         "xelatex -interaction nonstopmode -output-directory %o %f"))
 
 ;; 在创建 org-mode buffer, 自动添加 latex class 解决生成中文pdf 问题
 (eval-after-load 'autoinsert
