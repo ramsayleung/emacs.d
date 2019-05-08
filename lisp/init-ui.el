@@ -142,12 +142,13 @@ This code toggles between them."
 
 (defun samray/set-mode-line-attribute ()
   "Set mode line face attribute."
-  (let ((mode-line-height (if (samray/linux-p) 110 125)))
+  (interactive)
+  (let ((mode-line-height (if (samray/linux-p) 120 135)))
     (dolist (face '(mode-line mode-line-inactive))
       (set-face-attribute face nil
-			  :font "Fantasque Sans Mono-13:weight=medium:slant=italic"
+			  :font "Fantasque Sans Mono-14:weight=medium:slant=italic"
 			  :height mode-line-height
-			  :box '()))))
+			  :box nil))))
 
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
@@ -279,8 +280,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (defvar chinese-font-size 16)
 (defvar english-font-size ":pixelsize=19")
 (when (samray/mac-os-p)
-  (setq chinese-font-size 13)
-  (setq english-font-size ":pixelsize=13"))
+  (setq chinese-font-size 14)
+  (setq english-font-size ":pixelsize=14"))
 (samray/set-font
  '("Fantasque Sans Mono:weight=medium:slant=italic"
    "Consolas:slant=italic"  "Monaco" "DejaVu Sans Mono"
