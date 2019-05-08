@@ -19,14 +19,14 @@ For example:
 (ivy--cands-get-details my_format_spec my_info_fns '(\"audi\"))
 -->  ((make-upper-case . \"AUDI\") (add-gmbh . \"audi GmbH\"))."
   (cl-flet* ((calc-symbol-entry
-	     (entry info_sym)
-	     (let ((info_fn (cdr (assq info_sym cand_info_fns))))
-	       (cons info_sym (funcall info_fn entry))))
+	      (entry info_sym)
+	      (let ((info_fn (cdr (assq info_sym cand_info_fns))))
+		(cons info_sym (funcall info_fn entry))))
 
-	    (calc-all-symbols-entry
-	     (info_symbols entry)
-	     (mapcar (apply-partially #'calc-symbol-entry entry) info_symbols))
-	    )
+	     (calc-all-symbols-entry
+	      (info_symbols entry)
+	      (mapcar (apply-partially #'calc-symbol-entry entry) info_symbols))
+	     )
     
     (let ((info_symbols
 	   (mapcar
@@ -215,11 +215,17 @@ Plus a bit."
 ;; User customizable display settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar ivy-buffer-format
-  '(
-    buffer-name   "<col>"  " "
-                  ;; mode process  "<col>"  " "
-                  dir file-name "<col>"  "      "
-                  )
+  (if (samray/mac-os-p)
+      '(
+	buffer-name   "<col>"  " "
+	dir file-name "<col>"  "      "
+	)
+    '(
+      buffer-name   "<col>"  " "
+      mode process  "<col>"  " "
+      dir file-name "<col>"  "      "
+      )
+    )
   "Describe the display format for `ivy-switch-buffer'.
 It is a list containing elements that are symbols, cons cells,
 or strings.

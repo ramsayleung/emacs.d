@@ -186,7 +186,7 @@ This code toggles between them."
 ;; (setq-default truncate-lines t)
 ;; (setq truncate-partial-width-windows nil)
 ;; make emacs full-screen at startup
-(setq initial-frame-alist (quote ((fullscreen . maximized))))
+(toggle-frame-maximized)
 ;;; show customized phrase in scratch
 ;;; From Purcell https://github.com/purcell/emacs.d
 (setq-default initial-scratch-message
@@ -283,8 +283,12 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
   (setq chinese-font-size 14)
   (setq english-font-size ":pixelsize=14"))
 (samray/set-font
- '("Fantasque Sans Mono:weight=medium:slant=italic" "Consolas:slant=italic"  "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") english-font-size
- '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") chinese-font-size)
+ '("Fantasque Sans Mono:weight=medium:slant=italic"
+   "Consolas:slant=italic"  "Monaco" "DejaVu Sans Mono"
+   "Monospace" "Courier New")
+ english-font-size
+ '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体")
+ chinese-font-size)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
