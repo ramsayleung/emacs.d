@@ -277,7 +277,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
       (set-fontset-font (frame-parameter nil 'font)
                         charset zh-font))))
 (defvar chinese-font-size 16)
-(defvar english-font-size ":pixelsize=17")
+(defvar english-font-size ":pixelsize=19")
 (when (samray/mac-os-p)
   (setq chinese-font-size 13)
   (setq english-font-size ":pixelsize=13"))
