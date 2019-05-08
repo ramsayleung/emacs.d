@@ -18,6 +18,7 @@
   :init
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
+  (add-to-list 'company-lsp-filter-candidates '(gopls . nil))
   (set-face-attribute 'lsp-face-highlight-textual nil
   		      :background "#666" :foreground "#ffffff")
 
@@ -50,6 +51,13 @@
   (dolist (lang org-babel-lang-list)
     (eval `(lsp-org-babel-enbale ,lang)))
   (setq lsp-eldoc-enable-hover nil)
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection
+                                     (-const "~/code/go/bin/gopls"))
+                    :major-modes '(go-mode)
+                    :notification-handlers (ht ("client/registerCapability" 'ignore))
+                    :priority -1
+                    :server-id 'go-language-server))
   )
 
 
@@ -65,7 +73,7 @@
 	    (setq lsp-eldoc-enable-hover nil)
 	    (setq
 	     lsp-ui-sideline-enable nil
-	     lsp-enable-completion-at-point t
+	     lsp-enable-completion-at-point nil
 	     lsp-ui-doc-position 'at-point
 	     lsp-ui-doc-header nil
 	     lsp-ui-doc-border nil)

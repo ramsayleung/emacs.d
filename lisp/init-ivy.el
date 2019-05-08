@@ -59,7 +59,7 @@
 	    (defun ivy-posframe-display-at-window-bottom-right (str)
 	      (ivy-posframe--display str #'posframe-poshandler-window-bottom-right-corner))
 	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-right)
-	    (setq ivy-posframe-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+	    (setq ivy-posframe-font "Fantasque Sans Mono-15:weight=medium:slant=italic")
 	    (setq ivy-posframe-border-width 0)
 	    (run-with-idle-timer samray-idle-time nil 'ivy-posframe-enable)
 	    (run-with-idle-timer samray-idle-time nil 'samray/setup-ivy-window)
