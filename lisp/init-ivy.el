@@ -56,6 +56,8 @@
   :config (progn
 	    (defvar samray-ivy-posframe-border-exteral-witdth 2)
 	    (defvar samray-ivy-posframe-threshold 25)
+	    (defvar samray-border-exclude-mode '(neotree-mode))
+
 	    (defun ivy-posframe-display-at-window-bottom-right (str)
 	      (ivy-posframe--display str #'posframe-poshandler-window-bottom-right-corner))
 	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-right)
@@ -77,18 +79,23 @@
 	    ;; The behaviors of Ivy posframe is different between mac and linux
 	    (defun samray/setup-ivy-window()
 	      "Set up ivy height and width."
-	      (let* ((samray-ivy-posframe-height (if (< (/(window-body-height)2) samray-ivy-posframe-threshold)
-						     (if (< (window-body-height) samray-ivy-posframe-threshold)
-							 (window-body-height)
-						       samray-ivy-posframe-threshold)
-						   (/(window-body-height)2)))
-		     (samray-ivy-posframe-width (- (window-body-width)
-						   (+ ivy-posframe-border-width samray-ivy-posframe-border-exteral-witdth
-						      (samray/get-display-line-number-width)))))
-		(setq ivy-posframe-min-height samray-ivy-posframe-height)
-		(setq ivy-posframe-height samray-ivy-posframe-height)
-		(setq ivy-posframe-width samray-ivy-posframe-width)
-		(setq ivy-posframe-min-width samray-ivy-posframe-width)))
+	      (let ((samray-current-buffer-mode (with-current-buffer (current-buffer) major-mode))
+		    (samray-ivy-posframe-border-exteral-witdth-old samray-ivy-posframe-border-exteral-witdth))
+		(when (member samray-current-buffer-mode samray-border-exclude-mode)
+		  (setq samray-ivy-posframe-border-exteral-witdth -2))
+		(let* ((samray-ivy-posframe-height (if (< (/(window-body-height)2) samray-ivy-posframe-threshold)
+						       (if (< (window-body-height) samray-ivy-posframe-threshold)
+							   (window-body-height)
+							 samray-ivy-posframe-threshold)
+						     (/(window-body-height)2)))
+		       (samray-ivy-posframe-width (- (window-body-width)
+						     (+ ivy-posframe-border-width samray-ivy-posframe-border-exteral-witdth
+							(samray/get-display-line-number-width)))))
+		  (setq ivy-posframe-min-height samray-ivy-posframe-height)
+		  (setq ivy-posframe-height samray-ivy-posframe-height)
+		  (setq ivy-posframe-width samray-ivy-posframe-width)
+		  (setq ivy-posframe-min-width samray-ivy-posframe-width)
+		  (setq samray-ivy-posframe-border-exteral-witdth samray-ivy-posframe-border-exteral-witdth-old))))
 	    (defun samray/setup-ivy-height ()
 	      "Set up `ivy-height` variable to default value"
 	      (when (= ivy-posframe-height (window-body-height))

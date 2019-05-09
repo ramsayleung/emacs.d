@@ -4,7 +4,6 @@
  (magit-dispatch nil)
  (magit-gitignore nil)
  (magit-log
-  ("-n256" "--graph" "--decorate")
   ("-n256"
    ("--" "~/.emacs.d/lisp/init-lsp.el")
    "--graph" "--decorate" "--patch"))

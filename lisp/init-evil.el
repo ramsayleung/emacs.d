@@ -18,6 +18,7 @@
     (evil-set-initial-state 'artist-mode 'emacs)
     (evil-set-initial-state 'eshell-mode 'insert)
     (evil-set-initial-state 'term-mode 'emacs)
+    (evil-set-initial-state 'neotree-mode 'emacs)
     ;;; modify evil-state-tag
     (setq evil-normal-state-tag   (propertize "[Normal]")
 	  evil-emacs-state-tag    (propertize "[Emacs]")
