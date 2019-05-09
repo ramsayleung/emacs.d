@@ -7,6 +7,19 @@
 ;; Keywords:
 ;; Copyright (C) 2017
 
+(use-package neotree
+  :ensure t
+  :init
+  (setq neo-theme (if (display-graphic-p) 'classic 'nerd))
+  (setq neo-window-width 30)
+  (setq-default neo-persist-show t)
+  (when neo-persist-show
+    (add-hook 'popwin:before-popup-hook
+              (lambda () (setq neo-persist-show nil)))
+    (add-hook 'popwin:after-popup-hook
+              (lambda () (setq neo-persist-show t))))
+  :bind (([f8] . neotree-toggle)))
+
 (require 'dired-x)
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
