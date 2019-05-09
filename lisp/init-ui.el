@@ -143,7 +143,7 @@ This code toggles between them."
 (defun samray/set-mode-line-attribute ()
   "Set mode line face attribute."
   (interactive)
-  (let ((mode-line-height (if (samray/linux-p) 120 135)))
+  (let ((mode-line-height (if (samray/linux-p) 130 135)))
     (dolist (face '(mode-line mode-line-inactive))
       (set-face-attribute face nil
 			  :font "Fantasque Sans Mono-14:weight=medium:slant=italic"
@@ -186,6 +186,7 @@ This code toggles between them."
 ;; (setq-default truncate-lines t)
 ;; (setq truncate-partial-width-windows nil)
 ;; make emacs full-screen at startup
+
 (toggle-frame-maximized)
 ;;; show customized phrase in scratch
 ;;; From Purcell https://github.com/purcell/emacs.d

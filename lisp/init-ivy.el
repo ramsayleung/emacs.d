@@ -61,8 +61,13 @@
 	    (setq ivy-display-function #'ivy-posframe-display-at-window-bottom-right)
 	    (setq ivy-posframe-font "Fantasque Sans Mono-15:weight=medium:slant=italic")
 	    (setq ivy-posframe-border-width 0)
-	    (run-with-idle-timer samray-idle-time nil 'ivy-posframe-enable)
-	    (run-with-idle-timer samray-idle-time nil 'samray/setup-ivy-window)
+	    (defun toggle-frame-maximized@after (&rest _)
+	      "Call customized functions after frame maximized."
+	      (ivy-posframe-enable)
+	      (samray/setup-ivy-window)
+	      (samray/change-ivy-height-dynamicly))
+	    (advice-add 'toggle-frame-maximized :after 'toggle-frame-maximized@after)
+
 	    (defun samray/get-display-line-number-width ()
 	      "Get line number width"
 	      (let ((width (line-number-display-width)))

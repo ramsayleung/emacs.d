@@ -92,7 +92,7 @@
 	    (setq go-packages-function 'samray/process-go-list-index)
 
 	    ;; (completing-read "Package: " (samray/process-go-list-index))
-	    (add-hook 'after-init-hook 'samray/generate-go-list-index)
+	    (add-hook 'go-mode-hook 'samray/generate-go-list-index)
 	    ;; regenerate go list index every 10 min;
 	    (run-with-timer 60 (* 30 60) 'samray/generate-go-list-index)
 	    ))
