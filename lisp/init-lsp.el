@@ -70,7 +70,7 @@
 	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
 	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 	    (setq lsp-ui-peek-fontify 'always)
-	    (setq lsp-ui-doc-delay 0.5)
+	    (setq lsp-ui-doc-delay 1)
 	    (setq lsp-eldoc-enable-hover nil)
 	    (setq
 	     lsp-ui-sideline-enable nil
