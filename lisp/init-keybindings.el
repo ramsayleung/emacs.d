@@ -339,6 +339,13 @@
 	    (general-define-key :keymaps 'profiler-report-mode-map
 				"<tab>" 'profiler-report-expand-entry)
 
+	    (general-define-key :states '(emacs)
+				:keymaps 'neotree-mode-map
+				"C-s" 'isearch-forward
+				"C-M-S" 'isearch-forward-regexp
+				"C-r" 'isearch-backward
+				"C-M-r" 'isearch-backward-regexp)
+
 	    ;; Pdf view mode
 	    (general-define-key :states '(normal emacs)
 				:keymaps 'pdf-view-mode-map
@@ -449,22 +456,17 @@
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
 		      "C-c ." 'samray/indent-region-or-buffer)
 
-  (general-define-key :keymaps '(prog-mode-map)
-		      [remap paredit-convolute-sexp] (general-predicate-dispatch 'xref-find-references
-						       (not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
-		      "M-?" (general-predicate-dispatch 'xref-find-references
-			      (not (null lsp-ui-mode)) 'lsp-ui-peek-find-references)
-		      )
   (general-define-key :keymaps '(emacs-lisp-mode-map
 				 ielm-mode-map
 				 lisp-mode-map
 				 scheme-mode-map
 				 lisp-interaction-mode-map)
+		      [remap paredit-convolute-sexp] 'xref-find-references
+		      "M-?" 'xref-find-references
   		      "{" 'paredit-open-curly
   		      "}" 'paredit-close-curly
   		      "<" 'paredit-open-angled
-  		      ">" 'paredit-close-angled
-  		      )
+  		      ">" 'paredit-close-angled)
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
 		      "C-c ." 'gofmt

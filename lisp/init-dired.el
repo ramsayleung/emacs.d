@@ -13,6 +13,17 @@
   (setq neo-theme (if (display-graphic-p) 'classic 'nerd))
   (setq neo-window-width 30)
   (setq-default neo-persist-show t)
+  (setq-default neo-smart-open t)
+  (setq projectile-switch-project-action 'neotree-projectile-action)
+  (setq neo-vc-integration '(face char))
+  (setq neo-show-hidden-files t)
+  (setq neo-toggle-window-keep-p t)
+  (setq neo-force-change-root t)
+  ;; face customizations
+  (set-face-attribute 'neo-vc-edited-face nil
+                      :foreground "#E2C08D")
+  (set-face-attribute 'neo-vc-added-face nil
+                      :foreground "green4")
   (when neo-persist-show
     (add-hook 'popwin:before-popup-hook
               (lambda () (setq neo-persist-show nil)))
