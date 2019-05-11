@@ -39,6 +39,8 @@ install_python_dep(){
 	pip3 install autopep8 --user
 	echo "Start to install isort"
 	pip3 install isort --user
+	echo "Start to install mypy" # type linter
+	pip3 install mypy --user
     fi
 }
 

@@ -28,6 +28,14 @@
 	    )
   )
 
+(use-package pipenv
+  :ensure t
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq
+   pipenv-projectile-after-switch-function
+   #'pipenv-projectile-after-switch-extended))
+
 ;; Use pep8 to format python file
 (use-package py-autopep8
   :commands (py-autopep8 py-autopep8-buffer)

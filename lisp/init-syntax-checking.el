@@ -20,6 +20,16 @@
 			   (setq flycheck-clang-language-standard "c++17")
 			   (setq flycheck-gcc-language-standard "c++17")
 			   ))
+(use-package flycheck-pycheckers
+  :ensure t
+  :after flycheck
+  :hook (flycheck-mode . flycheck-pycheckers-setup)
+  :init (progn
+	  (setq flycheck-pycheckers-checkers '(pylint mypy3))
+	  ;; (with-eval-after-load 'flycheck
+	  ;;   (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+	  ))
+
 (use-package flycheck-posframe
   :ensure t
   :hook (flycheck-mode . flycheck-posframe-mode)

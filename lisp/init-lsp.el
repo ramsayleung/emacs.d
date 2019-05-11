@@ -69,6 +69,22 @@
 	    ;; bind peek key
 	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
 	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+	    ;; lsp-ui-flycheck is too much aggressive, see this issue https://github.com/emacs-lsp/lsp-ui/issues/190
+	    ;; fix this problem by override `'lsp-ui-flycheck-enable`'
+	    (defun lsp-ui-flycheck-enable@override (&rest _)
+	      "Enable flycheck integration for the current buffer."
+	      (message "Calling lsp-ui-flycheck-enable@override")
+	      (when lsp-ui-flycheck-live-reporting
+		(setq-local flycheck-check-syntax-automatically nil))
+	      (cond ((string= 'python-mode (with-current-buffer (current-buffer) major-mode))
+		     (setq-local flycheck-checker 'python-pycheckers))
+	      	    (t (setq-local flycheck-checker 'lsp-ui)))
+
+	      (lsp-ui-flycheck-add-mode major-mode)
+	      (add-to-list 'flycheck-checkers 'lsp-ui)
+	      (add-hook 'lsp-after-diagnostics-hook 'lsp-ui-flycheck--report nil t))
+	    (advice-add 'lsp-ui-flycheck-enable :override 'lsp-ui-flycheck-enable@override)
+
 	    (setq lsp-ui-peek-fontify 'always)
 	    (setq lsp-ui-doc-delay 1)
 	    (setq lsp-eldoc-enable-hover nil)
