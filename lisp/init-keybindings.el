@@ -12,7 +12,7 @@
 				"" nil
 				";" 'comment-dwim
 				"'" 'samray/eshell-pop
-				"." 'samray/repl-pop
+				"." 'samray/python-send-repl-echo-switch
 				"TAB" 'samray/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired

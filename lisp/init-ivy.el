@@ -40,8 +40,6 @@
 	   (defun samray/change-ivy-height-dynamicly ()
 	     (interactive)
 	     (setq ivy-height (/ (window-body-height)2)))
-	   ;; Set `ivy-height` after Emacs startup.
-	   (run-with-idle-timer (+ samray-idle-time 1) nil 'samray/change-ivy-height-dynamicly)
 	   (defun samray/counsel-grep-or-swiper ()
 	     "Use `counsel-grep-or-swiper` dependen on buffer size."
 	     (interactive)
@@ -65,8 +63,10 @@
 	    (setq ivy-posframe-border-width 0)
 	    (defun toggle-frame-maximized@after (&rest _)
 	      "Call customized functions after frame maximized."
+	      (message "After toggle-frame-maximized")
 	      (ivy-posframe-enable)
 	      (samray/setup-ivy-window)
+	   ;; Set `ivy-height` after Emacs startup.
 	      (samray/change-ivy-height-dynamicly))
 	    (advice-add 'toggle-frame-maximized :after 'toggle-frame-maximized@after)
 
