@@ -67,6 +67,7 @@
   :ensure t
   :init (progn
 	  (setq projectile-indexing-method 'hybrid)
+	  (setq projectile-git-submodule-command nil)
 	  (setq projectile-mode-line '(:eval(format " P(%s)"
 						    (projectile-project-name))))
 	  )

@@ -1,6 +1,4 @@
-((magit-blame
-  ("-w"))
- (magit-commit nil)
+((magit-commit nil)
  (magit-dispatch nil)
  (magit-gitignore nil)
  (magit-log
@@ -10,6 +8,5 @@
    "--graph" "--decorate" "--patch"))
  (magit-pull nil)
  (magit-push nil)
- (magit-remote
-  ("-f"))
+ (magit-submodule nil)
  (magit:-- "~/.emacs.d/lisp/init-lsp.el" ""))

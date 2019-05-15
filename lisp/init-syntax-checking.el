@@ -25,6 +25,8 @@
   :after flycheck
   :hook (flycheck-mode . flycheck-pycheckers-setup)
   :init (progn
+	  (setq flycheck-python-flake8-executable (if (samray/mac-os-p) (expand-file-name "~/Library/Python/3.7/bin/flake8")))
+	  (setq flycheck-python-pylint-executable (if (samray/mac-os-p) (expand-file-name "~/Library/Python/3.7/bin/pylint")))
 	  (setq flycheck-pycheckers-checkers '(pylint mypy3))
 	  ;; (with-eval-after-load 'flycheck
 	  ;;   (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))

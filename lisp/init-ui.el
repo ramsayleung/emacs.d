@@ -143,10 +143,10 @@ This code toggles between them."
 (defun samray/set-mode-line-attribute ()
   "Set mode line face attribute."
   (interactive)
-  (let ((mode-line-height (if (samray/linux-p) 130 135)))
+  (let ((mode-line-height (if (samray/linux-p) 130 145)))
     (dolist (face '(mode-line mode-line-inactive))
       (set-face-attribute face nil
-			  :font "Fantasque Sans Mono-14:weight=medium:slant=italic"
+			  :font "Fantasque Sans Mono-15:weight=medium:slant=italic"
 			  :height mode-line-height
 			  :box nil))))
 
@@ -281,8 +281,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (defvar chinese-font-size 16)
 (defvar english-font-size ":pixelsize=19")
 (when (samray/mac-os-p)
-  (setq chinese-font-size 14)
-  (setq english-font-size ":pixelsize=14"))
+  (setq chinese-font-size 15)
+  (setq english-font-size ":pixelsize=15"))
 (samray/set-font
  '("Fantasque Sans Mono:weight=medium:slant=italic"
    "Consolas:slant=italic"  "Monaco" "DejaVu Sans Mono"
@@ -303,8 +303,6 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 
 ;;;Move evil tag to beginning of mode line
 (setq evil-mode-line-format '(before . mode-line-front-space))
-;;; Force redisplay git branch of the mode line.
-(setq auto-revert-check-vc-info t)
 
 (defun replace-buffer-encoding ()
   "Display the encoding and eol style of the buffer the same way atom does."
@@ -319,6 +317,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 		    " UTF-8")
 		   (t (upcase (symbol-name (plist-get sys :name))))))
 	   " ")))
+
 
 ;;; customize mode line
 (setq-default mode-line-format '("%e"

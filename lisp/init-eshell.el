@@ -274,12 +274,15 @@
 
 (add-hook 'eshell-mode-hook 'samray/setup-company-eshell-autosuggest)
 (use-package eshell-prompt-extras
-  :ensure t
+  :load-path "~/.emacs.d/additional-packages/eshell-prompt-extras.el"
   :after eshell
   :init (progn
-	  (setq eshell-highlight-prompt nil
-		eshell-prompt-function 'epe-theme-lambda)
-	  ))
+	  (with-eval-after-load "esh-opt"
+	    (require 'virtualenvwrapper)
+	    (venv-initialize-eshell)
+	    (autoload 'epe-theme-lambda "eshell-prompt-extras")
+	    (setq eshell-highlight-prompt nil
+		  eshell-prompt-function 'epe-theme-funky))))
 
 
 (message "loading init-eshell")

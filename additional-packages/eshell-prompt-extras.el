@@ -142,6 +142,12 @@
   "Face of git info in prompt."
   :group 'epe)
 
+(defface epe-funky-git-face
+  '((t (:foreground "LightGreen")))
+  "Face of git info in prompt."
+  :group 'epe)
+
+
 (defface epe-symbol-face
   `((t (:inherit ,(if (facep 'eshell-ls-unreadable)
                       'eshell-ls-unreadable
@@ -160,12 +166,12 @@
   :group 'epe)
 
 (defface epe-pipeline-user-face
-  '((t :foreground "red"))
+  '((t :foreground "LimeGreen"))
   "Face for user in pipeline theme."
   :group 'epe)
 
 (defface epe-pipeline-host-face
-  '((t :foreground "DeepSkyBlue"))
+  '((t :foreground "orange3"))
   "Face for host in pipeline theme."
   :group 'epe)
 
@@ -236,7 +242,7 @@ length of PATH (sans directory slashes) down to MAX-LEN."
 
 (defun epe-remote-host ()
   "Return remote host."
-  (tramp-file-name-real-host (tramp-dissect-file-name default-directory)))
+  (tramp-file-name-host (tramp-dissect-file-name default-directory)))
 
 
 ;; git info
@@ -434,14 +440,18 @@ length of PATH (sans directory slashes) down to MAX-LEN."
     (epe-colorize-with-face "]──[" 'epe-pipeline-delimiter-face)
     (epe-colorize-with-face (format-time-string "%H:%M" (current-time)) 'epe-pipeline-time-face)
     (epe-colorize-with-face "]──[" 'epe-pipeline-delimiter-face)
-    (epe-colorize-with-face (concat (eshell/pwd)) 'epe-dir-face)
+    (let ((f (cond ((eq epe-path-style 'fish) 'epe-fish-path)
+                   ((eq epe-path-style 'single) 'epe-abbrev-dir-name)
+                   ((eq epe-path-style 'full) 'abbreviate-file-name))))
+      (epe-colorize-with-face (funcall f (eshell/pwd)) 'epe-dir-face))
     (epe-colorize-with-face  "]\n" 'epe-pipeline-delimiter-face)
     (epe-colorize-with-face "└─>" 'epe-pipeline-delimiter-face)
     )
+   ;; Display python virtualenv message
    (when epe-show-python-info
      (when (fboundp 'epe-venv-p)
        (when (and (epe-venv-p) venv-current-name)
-	 (epe-colorize-with-face (concat "(" venv-current-name ") ") 'epe-venv-face))))
+         (epe-colorize-with-face (concat "(" venv-current-name ") ") 'epe-venv-face))))
    (when (epe-git-p)
      (concat
       (epe-colorize-with-face ":" 'epe-dir-face)
@@ -456,6 +466,60 @@ length of PATH (sans directory slashes) down to MAX-LEN."
    (epe-colorize-with-face " λ" 'epe-symbol-face)
    (epe-colorize-with-face (if (= (user-uid) 0) "#" "") 'epe-sudo-symbol-face)
    " "))
+
+(defun epe-theme-funky ()
+  "A eshell-prompt theme with full path, smiliar to oh-my-zsh theme."
+  (setq eshell-prompt-regexp "^[^#\n─>]*─>[#]* ")
+  (concat
+   (if (epe-remote-p)
+       (progn
+	 (concat
+	  (epe-colorize-with-face "[Remote] " 'epe-remote-face)
+	  (epe-colorize-with-face (epe-remote-user) 'epe-pipeline-user-face)
+	  (epe-colorize-with-face "@" 'epe-pipeline-delimiter-face)
+	  (epe-colorize-with-face (epe-remote-host) 'epe-pipeline-host-face))
+	 )
+     (progn
+       (concat
+	(epe-colorize-with-face (user-login-name) 'epe-pipeline-user-face)
+	(epe-colorize-with-face "@" 'epe-pipeline-delimiter-face)
+	(epe-colorize-with-face (system-name) 'epe-pipeline-host-face)))
+     )
+   (concat
+    (epe-colorize-with-face " " 'epe-pipeline-delimiter-face)
+    (let ((f (cond ((eq epe-path-style 'fish) 'epe-fish-path)
+                   ((eq epe-path-style 'single) 'epe-abbrev-dir-name)
+                   ((eq epe-path-style 'full) 'abbreviate-file-name))))
+      (epe-colorize-with-face (funcall f (eshell/pwd)) 'epe-dir-face))
+    " "
+    )
+   ;; Display python virtualenv message
+   (when epe-show-python-info
+     (when (fboundp 'epe-venv-p)
+       (when (and (epe-venv-p) venv-current-name)
+         (epe-colorize-with-face (concat "(" venv-current-name ") ") 'epe-venv-face))))
+   ;; Display version control message
+   (when (epe-git-p)
+     (concat
+      (epe-colorize-with-face "git" 'epe-funky-git-face)
+      (epe-colorize-with-face ":" 'epe-funky-git-face)
+      (epe-colorize-with-face
+       (concat (epe-git-branch)
+	       (epe-git-dirty)
+	       (epe-git-untracked)
+	       (let ((unpushed (epe-git-unpushed-number)))
+		 (unless (= unpushed 0)
+		   (concat ":" (number-to-string unpushed)))))
+       'epe-funky-git-face)))
+   (epe-colorize-with-face  "\n" 'epe-pipeline-delimiter-face)
+   (epe-colorize-with-face "─>" 'epe-symbol-face)
+   (epe-colorize-with-face (if (= (user-uid) 0) "#" "") 'epe-sudo-symbol-face)
+   " "))
+
+(defun epe-pyton-and-version-control ()
+  "Display python information and version control information."
+  )
+
 (provide 'eshell-prompt-extras)
 
 ;;; eshell-prompt-extras.el ends here

@@ -242,7 +242,7 @@
 
 	    ;; C/C++ mode
 	    (general-define-key :keymaps 'c-mode-base-map
-				"C-c ." 'clang-format-buffer
+				"C-M-\\" 'clang-format-buffer
 				"M-RET" 'srefactor-refactor-at-point
 				)
 
@@ -437,24 +437,24 @@
   ;; Format "buffer"
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
-		      "C-c ." 'samray/python-format-and-isort-buffer)
+		      "C-M-\\" 'samray/python-format-and-isort-buffer)
 
   ;; Web mode|Html mode
   (general-define-key :keymaps '(web-mode-map html-mode-map)
-		      "C-c ." 'web-beautify-html)
+		      "C-M-\\" 'web-beautify-html)
 
   ;; Css mode
   (general-define-key :keymaps 'css-mode-map
-		      "C-c ." 'web-beautify-css)
+		      "C-M-\\" 'web-beautify-css)
 
 
   ;; Js|Js2|Json mode
   (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
-		      "C-c ." 'web-beautify-js)
+		      "C-M-\\" 'web-beautify-js)
 
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
-		      "C-c ." 'samray/indent-region-or-buffer)
+		      "C-M-\\" 'samray/indent-region-or-buffer)
 
   (general-define-key :keymaps '(emacs-lisp-mode-map
 				 ielm-mode-map
@@ -469,13 +469,13 @@
   		      ">" 'paredit-close-angled)
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
-		      "C-c ." 'gofmt
+		      "C-M-\\" 'gofmt
 		      "C-c C-r" 'go-remove-unused-imports
 		      "C-c C-g" 'go-goto-imports
 		      "C-c C-k" 'godoc)
   ;; Rust-mode
   (general-define-key :keymaps 'rust-mode-map
-		      "C-c ." 'rust-format-buffer)
+		      "C-M-\\" 'rust-format-buffer)
 
   ;; Emacs Lisp mode
   (general-define-key :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
@@ -489,7 +489,7 @@
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map
 		      "M-n" 'pyim-convert-code-at-point
-		      "C-c ." 'samray/indent-region-or-buffer)
+		      "C-M-\\" 'samray/indent-region-or-buffer)
 
 
   ;; Org-agenda-mode

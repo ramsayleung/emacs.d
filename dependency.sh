@@ -41,6 +41,10 @@ install_python_dep(){
 	pip3 install isort --user
 	echo "Start to install mypy" # type linter
 	pip3 install mypy --user
+	echo "Start to install pep8"
+	pip3 install pep8 --user --upgrade
+	echo "Start to install flake8"
+	pip3 install flake8 --user --upgrade
     fi
 }
 
