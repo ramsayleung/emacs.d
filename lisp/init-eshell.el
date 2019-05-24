@@ -227,7 +227,9 @@
 ;;; https://www.reddit.com/r/emacs/comments/7a14cp/fishlike_autosuggestions_in_eshell/
 ;;; Make Eshell complete like fish with history from bash, zsh, eshell
 (require 'company)
-(require 'cl-lib)
+(if (samray/linux-p)
+    (require 'cl-lib)
+  (require 'cl-extra))
 (defun samray/company-eshell-autosuggest-candidates (prefix)
   "Select the first eshell history candidate with prefix PREFIX."
   (let* ((esh-history (when (> (ring-size eshell-history-ring) 0)

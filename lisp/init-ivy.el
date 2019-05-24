@@ -39,7 +39,10 @@
 	   (setq ivy-height 25)
 	   (defun samray/change-ivy-height-dynamicly ()
 	     (interactive)
-	     (setq ivy-height (/ (window-body-height)2)))
+	     (let ((window-split-height (/ (window-body-height)2)))
+	       (if (< window-split-height 25)
+		   (setq ivy-height 25)
+		 (setq ivy-height window-split-height))))
 	   (defun samray/counsel-grep-or-swiper ()
 	     "Use `counsel-grep-or-swiper` dependen on buffer size."
 	     (interactive)
@@ -66,7 +69,7 @@
 	      (message "After toggle-frame-maximized")
 	      (ivy-posframe-enable)
 	      (samray/setup-ivy-window)
-	   ;; Set `ivy-height` after Emacs startup.
+	      ;; Set `ivy-height` after Emacs startup.
 	      (samray/change-ivy-height-dynamicly))
 	    (advice-add 'toggle-frame-maximized :after 'toggle-frame-maximized@after)
 

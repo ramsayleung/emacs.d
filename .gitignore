@@ -34,3 +34,4 @@ lisp/custom.el
 bin/*
 /.lsp-session-v1
 lisp/custom.el
+log/
