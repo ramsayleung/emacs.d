@@ -8,7 +8,7 @@
 (set-variable 'python-indent-guess-indent-offset nil)
 
 (use-package python
-  :mode("\\.py\\'" . python-mode)
+  ;; :mode("\\.py\\'" . python-mode)
   :ensure t
   :config (progn
 	    (setq

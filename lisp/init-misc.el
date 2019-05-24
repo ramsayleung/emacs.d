@@ -16,14 +16,6 @@
   :ensure t
   :config (keyfreq-mode 1) (keyfreq-autosave-mode 1))
 
-;; Dim the font color of text in surrounding paragraphs
-(use-package focus
-  :ensure t
-  :config (progn
-	    (focus-mode)
-	    (add-hook 'prog-mode-hook focus-mode)
-	    ))
-
 ;;; Try out Emacs Package without install
 (use-package try
   :commands try
@@ -42,8 +34,8 @@
 (setq save-abbrevs t)
 
 ;; Only start server mode if I'm not root
-(require 'server)
-(unless (server-running-p) (server-start))
+;; (require 'server)
+;; (unless (server-running-p) (server-start))
 
 
 (defadvice bookmark-jump (after bookmark-jump activate)
