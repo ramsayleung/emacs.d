@@ -235,7 +235,7 @@ This code toggles between them."
   (mapc #'disable-theme custom-enabled-themes))
 (load-theme 'sanityinc-tomorrow-night t)
 
-(set-frame-font "Fantasque Sans Mono-13:weight=medium:slant=italic")
+(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
 
 ;;----------------;;
 ;;Major/Minor Mode;;
