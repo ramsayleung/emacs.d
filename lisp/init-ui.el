@@ -40,32 +40,6 @@
 	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
 	    ))
 
-(defun samray/toggle-golden-ratio()
-  "Check whether turn on golden ratio."
-  (or (< (display-pixel-height)800)
-      (< (display-pixel-width)1400)))
-
-(defun samray/big-monitor-p ()
-  "Detect current sreen whether is it a big monitor or not."
-  (or (> (display-pixel-width) 1200)
-      (> (display-pixel-height) 1920))
-  )
-(use-package golden-ratio
-  :if (not (samray/big-monitor-p))
-  :diminish golden-ratio-mode
-  :ensure t
-  :init (progn
-	  ;; Make `golden-ratio` works with `ace-window`
-	  (golden-ratio-mode 1)
-	  (add-to-list 'golden-ratio-extra-commands 'ace-window)
-	  (setq golden-ratio-auto-scale t)
-	  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
-	  (add-to-list 'golden-ratio-exclude-modes "dired-mode")
-	  (add-to-list 'golden-ratio-exclude-modes "lsp-ui-imenu-mode")
-	  (add-to-list 'golden-ratio-exclude-modes "gud-mode")
-	  (add-to-list 'golden-ratio-exclude-modes "comint-mode")
-	  (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
-	  ))
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun samray/toggle-window-split ()
@@ -133,35 +107,6 @@ This code toggles between them."
                             (make-glyph-code ?┃))
     )
   )
-(defun samray/tone-down-fringes ()
-  "Set the fringe colors to whatever is the background color."
-  (set-face-attribute 'fringe nil
-                      :foreground (face-foreground 'default)
-                      :background (face-background 'default)))
-
-
-(defun samray/set-mode-line-attribute ()
-  "Set mode line face attribute."
-  (interactive)
-  (let ((mode-line-height (if (samray/linux-p) 140 155)))
-    (dolist (face '(mode-line mode-line-inactive))
-      (set-face-attribute face nil
-			  :font "Fantasque Sans Mono-15:weight=medium:slant=italic"
-			  :height mode-line-height
-			  :box nil))))
-
-(defvar after-load-theme-hook nil
-  "Hook run after a color theme is loaded using `load-theme'.")
-
-(defadvice load-theme (after run-after-load-theme-hook activate)
-  "Run `after-load-theme-hook'."
-  (run-hooks 'after-load-theme-hook))
-(add-hook 'after-load-theme-hook #'samray/tone-down-fringes)
-(add-hook 'after-load-theme-hook #'samray/set-mode-line-attribute)
-;; https://stackoverflow.com/questions/17701576/changing-highlight-line-color-in-emacs
-(add-hook 'after-load-theme-hook (lambda ()
-				   (set-face-foreground 'hl-line nil)
-				   ))
 
 ;; no menubar
 (menu-bar-mode -1)
@@ -233,9 +178,10 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'zenburn t)
 
-(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+(set-frame-font "Fantaque Sans Mono-14:weight=medium:slant=italic")
+
 
 ;;----------------;;
 ;;Major/Minor Mode;;
@@ -249,62 +195,6 @@ This code toggles between them."
 
 ;;;Move evil tag to beginning of mode line
 (setq evil-mode-line-format '(before . mode-line-front-space))
-
-(defun replace-buffer-encoding ()
-  "Display the encoding and eol style of the buffer the same way atom does."
-  (propertize
-   (concat (pcase (coding-system-eol-type buffer-file-coding-system)
-	     (0 "LF") 			;LF: Line Feed, 换行符 '\n'
-	     (1 "CLF") 		;CLF: Carriage Return + Line Feed, '\r\n'
-	     (2 "CR"))			;CR: Carriage Return, 回车 '\r'
-	   (let ((sys (coding-system-plist buffer-file-coding-system)))
-	     (cond ((memq (plist-get sys :category)
-			  '(coding-category-undecided coding-category-utf-8))
-		    " UTF-8")
-		   (t (upcase (symbol-name (plist-get sys :name))))))
-	   " ")))
-
-
-;;; customize mode line
-(setq-default mode-line-format '("%e"
-				 mode-line-front-space
-				 (:eval (propertize (format "%s" (replace-buffer-encoding))))
-
-				 ;; mode-line-client
-				 ;; mode-line-modified -- show buffer change or not
-				 ;; mode-line-remote -- no need to indicate this specially
-				 ;; mode-line-frame-identification -- this is for text-mode emacs only
-				 "["
-				 mode-name
-				 ":"
-				 mode-line-buffer-identification
-				 "]"
-				 " "
-				 mode-line-position
-				 (vc-mode vc-mode)
-				 " ["
-				 (:eval
-				  (pcase flycheck-last-status-change
-				    (`finished (if flycheck-current-errors
-						   (let ((error-count (let-alist (flycheck-count-errors flycheck-current-errors)
-									(+ (or .error 0))))
-							 (warning-count (let-alist (flycheck-count-errors flycheck-current-errors)
-									  (+ (or .warning 0)))))
-						     (progn
-						       (propertize (concat (when (> error-count 0) (format "✖ %s Error%s "  error-count (if (eq 1 error-count) "" "s")) )
-									   (when (> warning-count 0) (format  "⚠ %s Warning%s"warning-count (if (eq 1 warning-count) "" "s") ))))
-						       ))
-						 (propertize "✔ No Issues")))
-				    (`running (propertize "⟲ Running..."))
-				    (`no-checker (propertize "⚠ No Checker"))
-				    (`not-checked "✖ Disabled")
-				    (`errored (propertize "⚠ Error"))
-				    (`interrupted "⛔ Interrupted")))
-				 "]"
-				 ;; mode-line-misc-info
-				 ;; mode-line-end-spaces
-				 ))
-;;; Use Miminish minor modes to change the mode line
 
 (use-package diminish
   :ensure t
