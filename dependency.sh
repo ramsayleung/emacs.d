@@ -56,7 +56,7 @@ install_go_dep(){
 	echo "Install goimports"
 	graftcp go get -u -v golang.org/x/tools/cmd/goimports
 	echo "Install gocode"
-	graftcp go get -u -v github.com/mdempsky/gocode
+	graftcp go get -v github.com/mdempsky/gocode
 	echo "Install godef"
 	graftcp go get -u -v github.com/rogpeppe/godef
 	echo "Install gogetdoc"
@@ -85,6 +85,8 @@ install_go_dep(){
 	graftcp go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 	echo "Install errcheck"
 	graftcp go get -u -v github.com/kisielk/errcheck
+	echo "Install go-outline"
+	graftcp go get -u -v github.com/ramya-rao-a/go-outline
     fi
 }
 
@@ -104,9 +106,9 @@ install_rust_dep(){
 }
 
 main(){
-    install_javascript_dep
-    install_python_dep
-    install_rust_dep
+    # install_javascript_dep
+    # install_python_dep
+    # install_rust_dep
     install_go_dep
 }
 main

@@ -53,6 +53,7 @@
   )
 
 (use-package ivy-posframe
+  :defer t
   :ensure t
   :config (progn
 	    (defvar samray-ivy-posframe-border-exteral-witdth 2)

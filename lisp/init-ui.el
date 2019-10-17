@@ -143,7 +143,7 @@ This code toggles between them."
 (defun samray/set-mode-line-attribute ()
   "Set mode line face attribute."
   (interactive)
-  (let ((mode-line-height (if (samray/linux-p) 130 145)))
+  (let ((mode-line-height (if (samray/linux-p) 140 155)))
     (dolist (face '(mode-line mode-line-inactive))
       (set-face-attribute face nil
 			  :font "Fantasque Sans Mono-15:weight=medium:slant=italic"
@@ -235,7 +235,7 @@ This code toggles between them."
   (mapc #'disable-theme custom-enabled-themes))
 (load-theme 'sanityinc-tomorrow-night t)
 
-(set-frame-font "Fantasque Sans Mono-13:weight=medium:slant=italic")
+(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
 
 ;;----------------;;
 ;;Major/Minor Mode;;
