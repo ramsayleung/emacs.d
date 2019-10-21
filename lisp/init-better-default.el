@@ -8,7 +8,7 @@
   :config (progn
             (auto-save-enable)
             (setq auto-save-slient t)
-            (setq auto-save-idle 1)
+            (setq auto-save-idle 3)
             ))
 
 (use-package dired-sidebar

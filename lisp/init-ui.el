@@ -72,7 +72,7 @@ This code toggles between them."
 ;; Specify the fringe width for windows -- this sets the left to 10 and
 ;; right fringes to 0
 (fringe-mode '(0 . 0))
-(when window-system
+;; (when window-system
   ;; Turn off tool bar
   (tool-bar-mode -1)
   ;; Turn off file scroll bar
@@ -84,8 +84,11 @@ This code toggles between them."
   (setq ns-use-proxy-icon nil)
   (setq frame-title-format nil)
 ;;; Disable mouse scrolling
-  (mouse-wheel-mode -1))
-
+(mouse-wheel-mode -1)
+;; )
+(set-frame-font "Fantasque Sans Mono-14:weight=medium:slant=italic")
+(add-to-list 'default-frame-alist
+	     '(font . "Fantasque Sans Mono-14:weight=medium:slant=italic"))
 
 ;;; Change vertical-border for terminal Emacs.
 ;;; Vertical-border in terminal is ugly, fix it.
@@ -179,8 +182,6 @@ This code toggles between them."
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
 (load-theme 'zenburn t)
-
-(set-frame-font "Fantaque Sans Mono-14:weight=medium:slant=italic")
 
 
 ;;----------------;;
