@@ -180,7 +180,8 @@ This code toggles between them."
   (mapc #'disable-theme custom-enabled-themes))
 (load-theme 'zenburn t)
 
-(set-frame-font "Fantaque Sans Mono-14:weight=medium:slant=italic")
+(set-frame-font "Fantasque Sans Mono-15:weight=medium:slant=italic")
+(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium:slant=italic")
 
 
 ;;----------------;;
