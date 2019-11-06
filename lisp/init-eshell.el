@@ -260,7 +260,7 @@
       'stop)))
 
 (defun samray/company-eshell-autosuggest (command &optional arg &rest ignored)
-  "`company-mode' backend to provide eshell history suggestion."
+ "`company-mode' backend to provide eshell history suggestion."
   (interactive (list 'interactive))
   (cl-case command
     (interactive (company-begin-backend 'company-eshell))

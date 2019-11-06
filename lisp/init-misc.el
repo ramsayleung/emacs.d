@@ -21,13 +21,6 @@
   :commands try
   :ensure t)
 
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-        (t (save-excursion
-             (ignore-errors (backward-up-list))
-             (funcall fn)))))
-
 ;;; abbrev-mode or abbreviation mode is a built-in mode that auto-corrects the
 ;;; word you mistype on pressing space.For how I practically use it
 (setq abbrev-mode 'silently)
@@ -182,14 +175,6 @@ removal."
                 (insert (format "|sudo:%s" (or last-ssh-hostname "localhost"))))
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
-
-(defun samray/file-reopen-as-root ()
-  "Reopen current file as root."
-  (interactive)
-  (when buffer-file-name
-    (find-alternate-file
-     (concat "/sudo:root@localhost:"
-             buffer-file-name))))
 
 (defun samray/toggle-maximize-buffer ()
   "Maximize buffer."
