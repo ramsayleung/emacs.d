@@ -82,20 +82,6 @@
     )
   )
 
-(defun samray/term-paste (&optional string)
-  "Yanking in the term-mode doesn't quit work The text from the
-   paste appears in the buffer but isn't sent to the shell."
-  (interactive)
-  (process-send-string
-   (get-buffer-process (current-buffer))
-   (if string string
-     (current-kill 0)))
-  )
-(add-hook 'term-mode-hook
-	  (lambda ()
-	    (goto-address-mode)
-	    (setq yas-dont-activate-functions t)))
-
 ;;; https://www.emacswiki.org/emacs/AutoFillMode
 ;;; auto format comment to 80-char long
 (setq-default fill-column 80)
