@@ -39,8 +39,8 @@
 
 (defvar samray-default-g++-compile-command "g++ -std=c++17 -Wall")
 (defvar samray-default-gcc-compile-command "gcc -std=c99 -Wall")
-(defvar samray-default-compile-command "make -j 4 -k")
-(defvar samray-default-clean-command "make clean")
+(defvar samray-default-compile-command "cmake --build . -j 4")
+(defvar samray-default-clean-command "cmake --build . --target clean")
 
 (defun samray/g++-compile-and-run (command)
   "Compile cpp with g++ and run it with COMMAND."
