@@ -35,3 +35,4 @@ bin/*
 /.lsp-session-v1
 lisp/custom.el
 log/
+transient/
