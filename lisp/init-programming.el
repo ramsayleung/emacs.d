@@ -68,9 +68,7 @@
   :init (progn
 	  (setq projectile-indexing-method 'hybrid)
 	  (setq projectile-git-submodule-command nil)
-	  (setq projectile-mode-line '(:eval(format " P(%s)"
-						    (projectile-project-name))))
-	  )
+	  (setq projectile-mode-line-prefix " Proj"))
   :commands (counsel-projectile-switch-project counsel-projectile-find-file)
   :config
   (progn

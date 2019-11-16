@@ -36,3 +36,4 @@ bin/*
 lisp/custom.el
 log/
 transient/
+/cnfonts/
