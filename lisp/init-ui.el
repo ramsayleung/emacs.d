@@ -73,24 +73,43 @@ This code toggles between them."
 ;; right fringes to 0
 (fringe-mode '(0 . 0))
 ;; (when window-system
-  ;; Turn off tool bar
-  (tool-bar-mode -1)
-  ;; Turn off file scroll bar
-  (scroll-bar-mode -1)
-  ;; Turn off title bar
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  ;; Assuming you are using a dark theme
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
-  (setq ns-use-proxy-icon nil)
-  (setq frame-title-format nil)
+;; Turn off tool bar
+(tool-bar-mode -1)
+;; Turn off file scroll bar
+(scroll-bar-mode -1)
+;; Turn off title bar
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+;; Assuming you are using a dark theme
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+(setq ns-use-proxy-icon nil)
+(setq frame-title-format nil)
 ;;; Disable mouse scrolling
 (mouse-wheel-mode -1)
 ;; )
-(set-frame-font "Fantasque Sans Mono-15:weight=medium:slant=italic")
-(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium:slant=italic")
 
-(add-to-list 'default-frame-alist
-	     '(font . "Fantasque Sans Mono-14:weight=medium:slant=italic"))
+;;; 设置中英文等高字体设置. 等高与等宽, 两者只能其一. 如果想设置等宽, 将
+;;; WenQuanYi的size 设置为16.5
+(defun ramsay/set-font ()
+  "Set font."
+  (if window-system
+      (progn
+	(set-face-attribute
+	 'default nil
+	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+			  :weight 'normal
+			  :slant 'normal
+			  :size 15.0))
+	(dolist (charset '(kana han symbol cjk-misc bopomofo))
+	  (set-fontset-font
+	   (frame-parameter nil 'font)
+	   charset
+	   (font-spec :name "-WQYF-WenQuanYi Micro Hei Mono-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+		      :weight 'normal
+		      :slant 'normal
+		      :size 14.5))))
+    (add-to-list 'default-frame-alist
+		 '(font . "Fantasque Sans Mono-15:weight=medium"))))
+(ramsay/set-font)
 
 ;;; Change vertical-border for terminal Emacs.
 ;;; Vertical-border in terminal is ugly, fix it.
