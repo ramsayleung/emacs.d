@@ -109,6 +109,8 @@ This code toggles between them."
 		      :size 14.5))))
     (add-to-list 'default-frame-alist
 		 '(font . "Fantasque Sans Mono-15:weight=medium"))))
+
+(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
 (ramsay/set-font)
 
 ;;; Change vertical-border for terminal Emacs.
