@@ -88,11 +88,13 @@ This code toggles between them."
 ;; )
 
 ;;; 设置中英文等高字体设置. 等高与等宽, 两者只能其一. 如果想设置等宽, 将
-;;; WenQuanYi的size 设置为16.5
+;;; WenQuanYi 的 size 设置为 16.5
 (defun ramsay/set-font ()
   "Set font."
+  (interactive)
   (if window-system
       (progn
+	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
 	(set-face-attribute
 	 'default nil
 	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
@@ -109,8 +111,6 @@ This code toggles between them."
 		      :size 14.5))))
     (add-to-list 'default-frame-alist
 		 '(font . "Fantasque Sans Mono-15:weight=medium"))))
-
-(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
 (ramsay/set-font)
 
 ;;; Change vertical-border for terminal Emacs.
