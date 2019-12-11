@@ -68,9 +68,7 @@
   :init (progn
 	  (setq projectile-indexing-method 'hybrid)
 	  (setq projectile-git-submodule-command nil)
-	  (setq projectile-mode-line '(:eval(format " P(%s)"
-						    (projectile-project-name))))
-	  )
+	  (setq projectile-mode-line-prefix " Proj"))
   :commands (counsel-projectile-switch-project counsel-projectile-find-file)
   :config
   (progn
@@ -78,23 +76,10 @@
     (setq projectile-completion-system 'ivy)
     (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
     (add-to-list 'projectile-globally-ignored-directories ".cquery_cached_index")
+    (add-to-list 'projectile-globally-ignored-directories ".vscode")
     (add-to-list 'projectile-globally-ignored-directories "CMakeFiles")
     )
   )
-
-(defun samray/term-paste (&optional string)
-  "Yanking in the term-mode doesn't quit work The text from the
-   paste appears in the buffer but isn't sent to the shell."
-  (interactive)
-  (process-send-string
-   (get-buffer-process (current-buffer))
-   (if string string
-     (current-kill 0)))
-  )
-(add-hook 'term-mode-hook
-	  (lambda ()
-	    (goto-address-mode)
-	    (setq yas-dont-activate-functions t)))
 
 ;;; https://www.emacswiki.org/emacs/AutoFillMode
 ;;; auto format comment to 80-char long

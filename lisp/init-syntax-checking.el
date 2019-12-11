@@ -40,12 +40,14 @@
 	      (set-face-attribute 'flycheck-posframe-warning-face nil
 				  :inherit nil
 				  :stipple nil
+				  :font "Consolas:15"
 				  :background (face-attribute 'default :background)
 				  :foreground (face-attribute 'flycheck-fringe-warning :foreground))
 
 	      (set-face-attribute 'flycheck-posframe-error-face nil
 				  :inherit nil
 				  :stipple nil
+				  :font "Consolas:15"
 				  :background (face-attribute 'default :background)
 				  :foreground (face-attribute 'flycheck-fringe-error :foreground)))
 	    (samray/set-flycheck-face-attribute)

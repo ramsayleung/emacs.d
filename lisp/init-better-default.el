@@ -8,7 +8,7 @@
   :config (progn
             (auto-save-enable)
             (setq auto-save-slient t)
-            (setq auto-save-idle 1)
+            (setq auto-save-idle 3)
             ))
 
 (use-package dired-sidebar
@@ -115,7 +115,7 @@ debug-init and load the given list of packages."
 (setq tramp-use-ssh-controlmaster-options nil)
 
 ;;; set "Meta" key to be the mac command key
-(when (memq window-system '(mac ns))
+(when (samray/mac-os-p)
   (setq mac-option-key-is-meta nil
 	mac-command-key-is-meta t
 	mac-command-modifier 'meta

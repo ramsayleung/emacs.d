@@ -161,17 +161,17 @@
   :group 'epe)
 
 (defface epe-pipeline-delimiter-face
-  '((t :foreground "green"))
+  '((t :foreground "white"))
   "Face for pipeline theme delimiter."
   :group 'epe)
 
 (defface epe-pipeline-user-face
-  '((t :foreground "LimeGreen"))
+  '((t :foreground "#709080"))
   "Face for user in pipeline theme."
   :group 'epe)
 
 (defface epe-pipeline-host-face
-  '((t :foreground "orange3"))
+  '((t :foreground "#f0dfaf"))
   "Face for host in pipeline theme."
   :group 'epe)
 
