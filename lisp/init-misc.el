@@ -21,6 +21,11 @@
   :commands try
   :ensure t)
 
+(use-package graphviz-dot-mode
+  :mode "\\.dot$"
+  :ensure t
+  :commands graphviz-dot-indent-graph graphviz-dot-preview)
+
 ;;; abbrev-mode or abbreviation mode is a built-in mode that auto-corrects the
 ;;; word you mistype on pressing space.For how I practically use it
 (setq abbrev-mode 'silently)

@@ -455,6 +455,9 @@
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
 		      "C-M-\\" 'samray/indent-region-or-buffer)
+  ;; Graphviz-dot-mode
+  (general-define-key :keymaps '(graphviz-dot-mode)
+		      "C-M-\\" 'graphviz-dot-indent-graph)
 
   (general-define-key :keymaps '(emacs-lisp-mode-map
 				 ielm-mode-map
