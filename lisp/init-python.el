@@ -36,7 +36,7 @@
 		   nil "_"))))
 
 	    
-	    (defun samray/python-shell-send-buffer-switch ()
+	    (defun ramsay/python-shell-send-buffer-switch ()
 	      "Send buffer content to shell and switch to it in insert mode."
 	      (interactive)
 	      (python-shell-send-buffer)
@@ -44,14 +44,14 @@
 	      (evil-insert-state)
 	      )
 
-	    (defun samray/python-shell-send-defun-switch ()
+	    (defun ramsay/python-shell-send-defun-switch ()
 	      "Send function content to shell and switch to it in insert mode."
 	      (interactive)
 	      (python-shell-send-defun nil)
 	      (python-shell-switch-to-shell)
 	      (evil-insert-state))
 
-	    (defun samray/python-send-repl-echo-switch ()
+	    (defun ramsay/python-send-repl-echo-switch ()
 	      "Pop and hide python with this function."
 	      (interactive )
 	      (let* ((python-buffer-name "*Python*")
@@ -86,15 +86,15 @@
 			;; Use `split-window-sensibly` to split window with policy
 			;; If window cannot be split, force to split split window horizontally
 			(when (not (split-window-sensibly))
-			  (samray/split-window-below-and-move))
+			  (ramsay/split-window-below-and-move))
 			(switch-to-buffer python-buffer-name)
 			(funcall python-clear-repl)
 			))
 		  ;; If python buffer doesn't exist, create one
-		  (samray/python-start-or-switch-repl)
+		  (ramsay/python-start-or-switch-repl)
 		  (funcall python-clear-repl))))
 
-	    (defun samray/python-start-or-switch-repl ()
+	    (defun ramsay/python-start-or-switch-repl ()
 	      "Start and/or switch to the REPL."
 	      (interactive)
 	      (let ((shell-process
@@ -114,14 +114,14 @@
 		(pop-to-buffer (process-buffer shell-process))
 		(evil-insert-state)))
 
-	    (defun samray/python-shell-send-region-switch (start end)
+	    (defun ramsay/python-shell-send-region-switch (start end)
 	      "Send region  content from START to END to shell and switch to it in insert mode."
 	      (interactive "r")
 	      (python-shell-send-region start end)
 	      (python-shell-switch-to-shell)
 	      (evil-insert-state))
 
-	    (defun samray/python-execute-file (arg)
+	    (defun ramsay/python-execute-file (arg)
 	      "Execute a python script with ARG in a shell."
 	      (interactive "P")
 	      ;; set compile command to buffer-file-name
@@ -135,16 +135,16 @@
 		  (with-current-buffer (get-buffer "*compilation*")
 		    (inferior-python-mode)))))
 
-	    (defun samray/python-execute-file-focus (arg)
+	    (defun ramsay/python-execute-file-focus (arg)
 	      "Execute a python script with ARG in a shell and switch to the shell buffer in
 `insert state'."
 	      (interactive "P")
-	      (samray/python-execute-file arg)
+	      (ramsay/python-execute-file arg)
 	      (switch-to-buffer-other-window "*compilation*")
 	      (end-of-buffer)
 	      (evil-insert-state))
 
-	    (defun samray/python-format-and-isort-buffer ()
+	    (defun ramsay/python-format-and-isort-buffer ()
 	      "Format and isort buffer with autopep8 and isort."
 	      (interactive)
 	      (save-excursion
@@ -152,17 +152,17 @@
 		(py-autopep8-buffer)
 		)
 	      )
-	    (defun samray/setup-python-mode ()
+	    (defun ramsay/setup-python-mode ()
 	      "Make sure we add to hook locally so that we do not mess up
 completion in other major-modes"
-	      (add-hook 'company-completion-finished-hook #'samray/company-insert-parens-function t))
+	      (add-hook 'company-completion-finished-hook #'ramsay/company-insert-parens-function t))
 
-	    (defun samray/company-insert-parens-function (candidate)
+	    (defun ramsay/company-insert-parens-function (candidate)
 	      "This part will be different for different backends."
 	      (when (string= (plist-get (text-properties-at 0 candidate) :symbol) "f")
 		(insert "()")
 		(backward-char)))
-	    (add-hook 'python-mode #'samray/setup-python-mode)
+	    (add-hook 'python-mode #'ramsay/setup-python-mode)
 	    )
   )
 

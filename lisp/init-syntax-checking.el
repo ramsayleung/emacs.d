@@ -25,8 +25,8 @@
   :after flycheck
   :hook (flycheck-mode . flycheck-pycheckers-setup)
   :init (progn
-	  (setq flycheck-python-flake8-executable (if (samray/mac-os-p) (expand-file-name "~/Library/Python/3.7/bin/flake8")))
-	  (setq flycheck-python-pylint-executable (if (samray/mac-os-p) (expand-file-name "~/Library/Python/3.7/bin/pylint")))
+	  (setq flycheck-python-flake8-executable (if (ramsay/mac-os-p) (expand-file-name "~/Library/Python/3.7/bin/flake8")))
+	  (setq flycheck-python-pylint-executable (if (ramsay/mac-os-p) (expand-file-name "~/Library/Python/3.7/bin/pylint")))
 	  (setq flycheck-pycheckers-checkers '(pylint mypy3))
 	  ;; (with-eval-after-load 'flycheck
 	  ;;   (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
@@ -36,7 +36,7 @@
   :ensure t
   :hook (flycheck-mode . flycheck-posframe-mode)
   :config (progn
-	    (defun samray/set-flycheck-face-attribute()
+	    (defun ramsay/set-flycheck-face-attribute()
 	      (set-face-attribute 'flycheck-posframe-warning-face nil
 				  :inherit nil
 				  :stipple nil
@@ -50,13 +50,13 @@
 				  :font "Consolas:15"
 				  :background (face-attribute 'default :background)
 				  :foreground (face-attribute 'flycheck-fringe-error :foreground)))
-	    (samray/set-flycheck-face-attribute)
+	    (ramsay/set-flycheck-face-attribute)
 
 	    (defun load-theme@after (&rest _)
 	      (when flycheck-mode
 		(when (not flycheck-posframe-mode)
 		  (flycheck-posframe-mode))
-		(samray/set-flycheck-face-attribute)))
+		(ramsay/set-flycheck-face-attribute)))
 	    (advice-add 'load-theme :after 'load-theme@after)
 	    )
   )

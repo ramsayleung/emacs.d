@@ -4,7 +4,7 @@ alias ff find-file-other-window $1
 alias dow dired-other-window $1
 alias cbd cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug . $1
 alias dnfi sudo dnf install $1
-alias z samray/eshell-fasd-z $1
+alias z ramsay/eshell-fasd-z $1
 alias zz fasd_cd -d -i # cd with interactive selection
 alias sf fasd -sif     # interactive file selection
 alias sd fasd -sid     # interactive directory selection

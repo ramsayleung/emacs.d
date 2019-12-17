@@ -8,7 +8,7 @@
 * Install
   Before install this .emacs.d, make sure you have backup your configuration.
   #+BEGIN_SRC shell
-    git clone https://github.com/samrayleung/emacs.d.git ~/.emacs.d
+    git clone https://github.com/ramsayleung/emacs.d.git ~/.emacs.d
   #+END_SRC
   And then run ~dependency.sh~ to install dependencies
   #+BEGIN_SRC shell

@@ -47,7 +47,7 @@ init-constant.el
 init-dired.el
 init-eshell.el
 40. eshell: None
-41. eshell-prompt-extras: (add-hook 'eshell-mode-hook 'samray/setup-company-eshell-autosuggest)
+41. eshell-prompt-extras: (add-hook 'eshell-mode-hook 'ramsay/setup-company-eshell-autosuggest)
 init-evil.el
 42. evil: None
 43. evil-surround: None

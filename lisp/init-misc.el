@@ -77,18 +77,24 @@
 ;;; disable `ad-handle-definition: ‘bookmark-jump’ got redefined` warning.
 (setq ad-redefinition-action 'accept)
 
-(defun samray/delete-blank-line-in-buffer ()
+(defun ramsay/delete-blank-line-in-buffer ()
   "Delete blank line in this buffer from current cursor to the end of buffer."
   (interactive)
   (flush-lines "^$"))
 
 ;; auto indent file before save file
-(defun samray/indent-buffer()
+(defun ramsay/indent-buffer()
   "Indent the whole buffer."
   (interactive)
   (indent-region (point-min)(point-max)))
 
-(defun samray/indent-region-or-buffer()
+(defun ramsay/kill-other-buffers ()
+  "Kill all other buffers but current one and *scratch*."
+  (interactive)
+  (mapc 'kill-buffer
+	(delq "**scratch"(delq (current-buffer) (buffer-list)))))
+
+(defun ramsay/indent-region-or-buffer()
   "Indent selected region or a whole buffer."
   (interactive)
   (save-excursion
@@ -97,7 +103,7 @@
 	  (indent-region (region-beginning) (region-end))
 	  (message "Indented selected region"))
       (progn
-	(samray/indent-buffer)
+	(ramsay/indent-buffer)
 	(message "Indented buffer")))))
 ;; enable hippie-mode to enhance auto-completion
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
@@ -112,7 +118,7 @@
 					 try-complete-lisp-symbol
 					 ))
 
-(defun samray/alternate-buffer (&optional window)
+(defun ramsay/alternate-buffer (&optional window)
   "Switch back and forth between current and last buffer in the;
 current WINDOW."
   (interactive)
@@ -131,7 +137,7 @@ current WINDOW."
          (other-buffer current-buffer t)))))
 
 ;; from magnars https://github.com/magnars
-(defun samray/rename-current-buffer-file ()
+(defun ramsay/rename-current-buffer-file ()
   "Renames current buffer and file it is visiting."
   (interactive)
   (let* ((name (buffer-name))
@@ -157,7 +163,7 @@ current WINDOW."
                  (call-interactively #'projectile-invalidate-cache))
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
 
-(defun samray/delete-file (filename &optional ask-user)
+(defun ramsay/delete-file (filename &optional ask-user)
   "Remove specified file FILENAME or directory.
 Also kills associated buffer (if any exists) and invalidates
 projectile cache when it's possible.
@@ -176,7 +182,7 @@ removal."
         (call-interactively #'projectile-invalidate-cache)))))
 ;; from magnars
 
-(defun samray/delete-current-buffer-file ()
+(defun ramsay/delete-current-buffer-file ()
   "Remove file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
@@ -192,7 +198,7 @@ removal."
         (message "File '%s' successfully removed" filename)))))
 
 ;; from magnars
-(defun samray/sudo-edit (&optional arg)
+(defun ramsay/sudo-edit (&optional arg)
   "Edit as root with ARG."
   (interactive "p")
   (let ((fname (if (or arg (not buffer-file-name))
@@ -213,7 +219,7 @@ removal."
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
 
-(defun samray/toggle-maximize-buffer ()
+(defun ramsay/toggle-maximize-buffer ()
   "Maximize buffer."
   (interactive)
   (if (and (= 1 (length (window-list)))
@@ -223,12 +229,12 @@ removal."
       (window-configuration-to-register ?_)
       (delete-other-windows))))
 
-(defun samray/copy-current-file-sans-extension ()
+(defun ramsay/copy-current-file-sans-extension ()
   "Copy current file without extension."
   (interactive)
   (kill-new (file-name-sans-extension (buffer-name))))
 
-(defun samray/dired-tmp-dir ()
+(defun ramsay/dired-tmp-dir ()
   "Open tmp directory."
   (interactive)
   (if (eq system-type 'windows-nt)

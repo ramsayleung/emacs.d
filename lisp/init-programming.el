@@ -17,7 +17,7 @@
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
-	    (run-with-idle-timer samray-idle-time nil 'yas-reload-all)
+	    (run-with-idle-timer ramsay-idle-time nil 'yas-reload-all)
 	    ;; (yas-reload-all)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
@@ -92,7 +92,7 @@
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook 'comment-auto-fill))
 
-(defun samray/switch-to-buffer (repl-buffer-name)
+(defun ramsay/switch-to-buffer (repl-buffer-name)
   "Switch to the  buffer REPL-BUFFER-NAME.
 similar to shell-pop"
   (interactive)
@@ -117,7 +117,7 @@ similar to shell-pop"
 	    ;; Use `split-window-sensibly` to split window with policy
 	    ;; If window cannot be split, force to split split window horizontally
 	    (when (not (split-window-sensibly))
-	      (samray/split-window-below-and-move))
+	      (ramsay/split-window-below-and-move))
 	    (switch-to-buffer repl-buffer-name)
 	    (when (and (boundp 'evil-mode) evil-mode)
 
@@ -126,14 +126,14 @@ similar to shell-pop"
       ;; If shell buffer doesn't exist, create one
       (progn
 	(when (not (split-window-sensibly))
-	  (samray/split-window-below-and-move))
+	  (ramsay/split-window-below-and-move))
 	(run-python)
 	(when evil-mode
 	  (evil-insert-state))
 	)))
   )
 
-(defun samray/repl-pop ()
+(defun ramsay/repl-pop ()
   "Run REPL for different major mode and switch to the repl buffer.
 similar to shell-pop"
   (interactive)
@@ -142,12 +142,12 @@ similar to shell-pop"
     (cond ((or (derived-mode-p 'python-mode) (derived-mode-p 'inferior-python-mode))
 	   (progn
 ;;; To fix issue that there is weird eshell output with ipython
-	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
+	     (ramsay/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
 	  ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
-	   (samray/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
+	   (ramsay/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
 	  ((or (derived-mode-p 'prog-mode)(derived-mode-p 'inferior-python-mode))
 	   (progn
-	     (samray/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
+	     (ramsay/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
 	  )))
 ;;; Treating terms in CamelCase symbols as separate words makes editing a
 ;;; little easier for me, so I like to use subword-mode everywhere.
@@ -162,21 +162,21 @@ similar to shell-pop"
 (setq compilation-scroll-output t)
 
 
-(defun samray/imenu ()
+(defun ramsay/imenu ()
   "Call lsp-ui-imenu firstly, if lsp-mode is disable, call counsel-imenu instead."
   (interactive)
   (if lsp-mode
       (lsp-ui-imenu)
     (counsel-imenu)))
 
-(defun samray/get-buffer-name ()
+(defun ramsay/get-buffer-name ()
   "Get current buffer name."
   (interactive)
   (kill-new (buffer-name))
   )
 
 
-(defun samray/basename (path)
+(defun ramsay/basename (path)
   "Emacs version of `basename`."
   (file-name-nondirectory (directory-file-name path)))
 

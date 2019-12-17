@@ -31,26 +31,17 @@
 	  (setq org-latex-listings 'minted)
 	  (setq org-export-latex-listings 'minted)
 	  (add-to-list 'org-latex-packages-alist '("" "minted"))
-	  (add-hook 'org-src-mode-hook 'samray/disable-flycheck-in-org-src-block)
+	  (add-hook 'org-src-mode-hook 'ramsay/disable-flycheck-in-org-src-block)
 	  (setq org-todo-keyword-faces
 		'(
-		  ("PENDING" . (:foreground "gold" :weight bold))
+		  ("PROCESSING" . (:foreground "gold" :weight bold))
 		  ))
 	  (setq org-todo-keywords
-		'((sequence "TODO" "PENDING" "DONE")))
+		'((sequence "TODO" "PROCESSING" "DONE")))
 	  (setq org-priority-faces '(
 				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "blue"))
 				     (?C . (:foreground "green"))))
-	  (defun samray/org-skip-subtree-if-priority (priority)
-	    "Skip an agenda subtree if it has a priority of PRIORITY.
-PRIORITY may be one of the characters ?A, ?B, or ?C."
-	    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-		  (pri-value (* 1000 (- org-lowest-priority priority)))
-		  (pri-current (org-get-priority (thing-at-point 'line t))))
-	      (if (= pri-value pri-current)
-		  subtree-end
-		nil)))
 	  )
   :config(progn
 	   (when (not (eq system-type 'windows-nt))
@@ -76,7 +67,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		(sql . t)
 		(sqlite . t)))
 
-	     (setq org-agenda-files '("~/Dropbox/Org/agenda.org" "~/Dropbox/Org/todo.org"))
+	     (setq org-agenda-files (directory-files "~/dropbox/org" t "\\.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
 		      ((tags "PRIORITY=\"A\""
@@ -86,21 +77,21 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 		       (alltodo ""
 				((org-agenda-skip-function
 				  '(or
-				    (samray/org-skip-subtree-if-priority ?A)
+				    (ramsay/org-skip-subtree-if-priority ?A)
 				    (org-agenda-skip-if nil '(scheduled deadline))))))))))
 	     (setq org-capture-templates
-		   '(("a" "Agenda" entry (file  "~/Dropbox/Org/agenda.org" "Agenda")
+		   '(("a" "Agenda" entry (file  "~/dropbox/org/agenda.org" "Agenda")
 		      "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
-		     ("n" "Note" entry (file+headline "~/Dropbox/Org/notes.org" "Notes")
-		      "* Note %?\n%T")
-		     ("l" "Link" entry (file+headline "~/Dropbox/Org/links.org" "Links")
-		      "* %? %^L %^g \n%T" :prepend t)
-		     ("b" "Blog idea" entry (file+headline "~/Dropbox/Org/blog.org" "Blog Topics:")
-		      "* %?\n%T" :prepend t)
-		     ("t" "To Do Item" entry (file+headline "~/Dropbox/Org/todo.org" "To Do Items")
-		      "* TODO  %?\n  %i\n" :prepend t)
-		     ("j" "Journal" entry (file+datetree "~/Dropbox/Org/journal.org")
-		      "* %?\nEntered on %U\n  %i\n  %a")
+		     ("w" "Work Note" entry (file+headline "~/dropbox/org/work_notes.org" "Notes about work")
+		      "** Work Note %?\n%T")
+		     ("l" "Life Note" entry (file+headline "~/dropbox/org/life_notes.org" "Notes about life")
+		      "** Life Note %?\n%T")
+		     ("b" "Blog idea" entry (file+headline "~/dropbox/org/blog.org" "Blog Topics:")
+		      "** %?\n%T" :prepend t)
+		     ("t" "GTD Item" entry (file+headline "~/dropbox/org/gtd.org" "gtd: To Do Items")
+		      "** TODO %?\n  %i\n" :prepend t)
+		     ("j" "Journal" entry (file+datetree "~/dropbox/org/journal.org")
+		      "** %?\nEntered on %U\n  %i\n  %a")
 		     ))
 
 
@@ -133,7 +124,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; show org-mode bullets as UTF-8 character
 (use-package org-bullets
-  :if (and (not (samray/windows-p))
+  :if (and (not (ramsay/windows-p))
 	   window-system)
   :defer t
   :ensure t
@@ -151,13 +142,13 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   )
 
 (use-package ob-rust
-  :if (and (not (samray/windows-p))
+  :if (and (not (ramsay/windows-p))
 	   window-system)
   :ensure ob-rust
   )
 ;;; Export to twitter bootstrap
 (use-package ox-twbs
-  :if (and (not (samray/windows-p))
+  :if (and (not (ramsay/windows-p))
 	   window-system)
   :ensure ox-twbs
   )
@@ -167,24 +158,24 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
-  :if (and (not (samray/windows-p))
+  :if (and (not (ramsay/windows-p))
 	   window-system)
   :ensure t)
 
 ;;; Drag and drop images to org-mode
 (use-package org-download
-  :if (and (not (samray/windows-p))
+  :if (and (not (ramsay/windows-p))
 	   window-system)
   :ensure t
   :config (progn
-	    (run-with-idle-timer samray-idle-time nil 'org-download-enable))
+	    (run-with-idle-timer ramsay-idle-time nil 'org-download-enable))
   )
 
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."
   (concat (file-name-as-directory org-directory) filename))
 
-(defun samray/disable-flycheck-in-org-src-block ()
+(defun ramsay/disable-flycheck-in-org-src-block ()
   "Disable emacs-lisp-checkdoc in org-src-mode."
   (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 

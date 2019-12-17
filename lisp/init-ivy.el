@@ -2,9 +2,9 @@
 ;;; code:
 ;;; Commentary:
 
-(defmacro samray/after-stack-clears (&rest body)
+(defmacro ramsay/after-stack-clears (&rest body)
   "Do BODY after the call stack is clear."
-  `(run-with-timer samray-idle-time nil (lambda () ,@body)))
+  `(run-with-timer ramsay-idle-time nil (lambda () ,@body)))
 (use-package counsel
   :ensure t
   :init ()
@@ -37,16 +37,16 @@
 	   (setq ivy-count-format "%d/%d ")
 	   ;; Number of result lines to display, set height as width-body-height/2
 	   (setq ivy-height 25)
-	   (defun samray/change-ivy-height-dynamicly ()
+	   (defun ramsay/change-ivy-height-dynamicly ()
 	     (interactive)
 	     (let ((window-split-height (/ (window-body-height)2)))
 	       (if (< window-split-height 25)
 		   (setq ivy-height 25)
 		 (setq ivy-height window-split-height))))
-	   (defun samray/counsel-grep-or-swiper ()
+	   (defun ramsay/counsel-grep-or-swiper ()
 	     "Use `counsel-grep-or-swiper` dependen on buffer size."
 	     (interactive)
-	     (if (samray/buffer-too-big-p)
+	     (if (ramsay/buffer-too-big-p)
 		 (isearch-forward)
 	       (counsel-grep-or-swiper)))
 	   )
@@ -110,7 +110,7 @@
 (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
 
 ;;; Sometimes I find too many buffers is distracted
-(defun samray/switch-to-current-open-buffer ()
+(defun ramsay/switch-to-current-open-buffer ()
   "Switch to current open bufffer instead of also including;
 bookmarks reccently opened files and window layout."
   (interactive)
@@ -118,20 +118,20 @@ bookmarks reccently opened files and window layout."
   (ivy-switch-buffer)
   )
 
-(defun samray/ivy-switch-to-buffer-enhanced ()
+(defun ramsay/ivy-switch-to-buffer-enhanced ()
   "Ivy-switch-to-buffer with recentf."
   (interactive)
   (setq ivy-use-virtual-buffers t)
   (ivy-switch-buffer))
 
 ;; http://emacs.stackexchange.com/questions/10393/how-can-i-answer-a-minibuffer-prompt-from-elisp
-(defun samray/insert-symbol-at-point ()
+(defun ramsay/insert-symbol-at-point ()
   (if (> (length cached-symbol-at-point) 0)
       (insert cached-symbol-at-point))
   (remove-hook 'post-command-hook 'insert-symbol-at-point)
   )
 
-(defun samray/counsel-ag-symbol-at-point ()
+(defun ramsay/counsel-ag-symbol-at-point ()
   "Search for number at point using counsel-ag."
   (interactive)
   (setq cached-symbol-at-point (thing-at-point `symbol))

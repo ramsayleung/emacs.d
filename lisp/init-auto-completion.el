@@ -51,16 +51,16 @@
   :ensure t
   :defer t
   :init(progn
-	 (run-with-idle-timer samray-idle-time nil (lambda () (add-to-list 'company-backends 'company-shell))))
+	 (run-with-idle-timer ramsay-idle-time nil (lambda () (add-to-list 'company-backends 'company-shell))))
   )
 
 ;;; C/C++ headers completion
 (use-package company-c-headers
   :ensure t
   :init (progn
-	  (cond ((samray/linux-p)
+	  (cond ((ramsay/linux-p)
 		 (setq company-c-headers-path-system '("/usr/include/c++/7" "/usr/include" "/usr/local/include")))
-		((samray/mac-os-p)
+		((ramsay/mac-os-p)
 		 (setq company-c-headers-path-system '("/usr/local/include/c++/8.3.0"
 						       "/usr/include"
 						       "/usr/local/include"
@@ -68,7 +68,7 @@
 						       "/Library/Developer/CommandLineTools/usr/include/c++/v1")))
 		((eq system-type 'windows-nt)
 		 ))
-	  (run-with-idle-timer samray-idle-time nil (lambda () (add-to-list 'company-backends 'company-c-headers)))
+	  (run-with-idle-timer ramsay-idle-time nil (lambda () (add-to-list 'company-backends 'company-c-headers)))
 	  )
   )
 

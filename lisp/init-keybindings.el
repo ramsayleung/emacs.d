@@ -5,15 +5,15 @@
   :ensure t
   :config (progn
 	    (general-evil-setup t)
-	    (defvar samray/leader-key "SPC") ;
-	    (defvar samray/second-leader-key "/")
+	    (defvar ramsay/leader-key "SPC") ;
+	    (defvar ramsay/second-leader-key "/")
 	    (general-define-key :states '(normal visual motion )
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"" nil
 				";" 'comment-dwim
-				"'" 'samray/eshell-pop
-				"." 'samray/python-send-repl-echo-switch
-				"TAB" 'samray/alternate-buffer
+				"'" 'ramsay/eshell-pop
+				"." 'ramsay/python-send-repl-echo-switch
+				"TAB" 'ramsay/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
 				"a c" 'circe
@@ -25,11 +25,12 @@
 				"a z d" 'ztree-dir
 				"a z c" 'ztree-diff
 				"b" '(:ignore t :which-key "buffers")
-				"b b" 'samray/switch-to-current-open-buffer
+				"b b" 'ramsay/switch-to-current-open-buffer
 				"b d" 'kill-this-buffer
-				"b D" 'samray/delete-blank-line-in-buffer
-				"b l" 'samray/ivy-switch-to-buffer-enhanced
-				"b n" 'samray/get-buffer-name
+				"b k" 'ramsay/kill-other-buffers
+				"b D" 'ramsay/delete-blank-line-in-buffer
+				"b l" 'ramsay/ivy-switch-to-buffer-enhanced
+				"b n" 'ramsay/get-buffer-name
 				"c" '(:ignore t :which-key "compile/comments")
 				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
 				"cc" 'evilnc-copy-and-comment-lines
@@ -37,20 +38,20 @@
 				"cr" 'comment-or-uncomment-region
 				"cv" 'evilnc-toggle-invert-comment-line-by-line
 				"d" '(:ignore t :which-key "dirs")
-				"d g" 'samray/golang-src-dir
-				"d t" 'samray/dired-tmp-dir
+				"d g" 'ramsay/golang-src-dir
+				"d t" 'ramsay/dired-tmp-dir
 				"e" #'hydra-flycheck/body
 				"f" '(:ignore t :which-key "files")
-				"f c" 'samray/copy-current-file-path
-				"f d" 'samray/delete-current-buffer-file
-				"f E" 'samray/sudo-edit
+				"f c" 'ramsay/copy-current-file-path
+				"f d" 'ramsay/delete-current-buffer-file
+				"f E" 'ramsay/sudo-edit
 				"f f"  'counsel-find-file
-				"f g" 'samray/counsel-goto-recent-directory
-				"f r" 'samray/rename-current-buffer-file
+				"f g" 'ramsay/counsel-goto-recent-directory
+				"f r" 'ramsay/rename-current-buffer-file
 				"f R" 'recentf-open-files
 				"f s" 'save-buffer
 				"f e" '(:ignore t :which-key "emacs")
-				"f e d" 'open-samray/file
+				"f e d" 'open-ramsay/file
 				"h" '(:ignore t :which-key "help")
 				"h d" '(:ignore t :which-key "help-describe")
 				"h d d" 'apropos-documentation
@@ -77,9 +78,9 @@
 
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
-				"q d" 'samray/restart-emacs-debug-init
-				"q D" 'samray/restart-stock-emacs-with-packages
-				"q r" 'samray/restart-emacs-resume-layouts
+				"q d" 'ramsay/restart-emacs-debug-init
+				"q D" 'ramsay/restart-stock-emacs-with-packages
+				"q r" 'ramsay/restart-emacs-resume-layouts
 				"v" 'er/expand-region
 				"s" '(:ignore t :which-key "search")
 				"s a" 'counsel-ag
@@ -88,22 +89,22 @@
 				"s r" 'counsel-rg
 				"s s" 'swiper
 				"t" '(:ignore t :which-key "toggle")
-				"t g" 'samray/git-timemachine
+				"t g" 'ramsay/git-timemachine
 				"t i" 'imenu-list-smart-toggle
 				"t o" 'origami-toggle-mode
-				"t w" 'samray/toggle-window-split
+				"t w" 'ramsay/toggle-window-split
 				"w" '(:ignore t :which-key "windows")
 				"w d" 'delete-window
 				"w D" 'delete-other-windows
 				"w h" 'winner-undo
 				"w l" 'winner-redo
-				"w -" 'samray/split-window-below-and-move
-				"w /" 'samray/split-window-right-and-move
+				"w -" 'ramsay/split-window-below-and-move
+				"w /" 'ramsay/split-window-right-and-move
 				"w h" 'evil-window-left
 				"w j" 'evil-window-down
 				"w k" 'evil-window-up
 				"w l" 'evil-window-right
-				"w m" 'samray/toggle-maximize-buffer
+				"w m" 'ramsay/toggle-maximize-buffer
 				"w <left>" 'evil-window-left
 				"w <down>" 'evil-window-down
 				"w <up>" 'evil-window-up
@@ -111,11 +112,11 @@
 				"1"  'ace-window)
 	    
 	    (general-define-key
-	     "C-s" 'samray/counsel-grep-or-swiper
+	     "C-s" 'ramsay/counsel-grep-or-swiper
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
 	     "C-h l" 'counsel-find-library
-	     "C-x b"  'samray/ivy-switch-to-buffer-enhanced
+	     "C-x b"  'ramsay/ivy-switch-to-buffer-enhanced
 	     "C-x C-f" 'counsel-find-file
 	     "M-x" 'counsel-M-x)
 	    (general-define-key :keymaps 'counsel-find-file-map
@@ -126,7 +127,7 @@
 	    ;; Org-mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'org-mode-map
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"a o" '(:ignore t :which-key "org-mode" )
 				"a o a" 'org-agenda-list
 				"a o c" 'org-capture
@@ -153,6 +154,7 @@
 				"M-J" 'org-shiftdown
 				"M-o" 'org-insert-heading
 				"M-t" 'org-insert-todo-heading
+				"C-c c" 'org-capture
 				)
 
 	    (general-define-key :states '(normal visual motion)
@@ -179,7 +181,7 @@
 	    ;; Markdown-mode
 	    (general-define-key :states '(normal visual motion )
 				:keymaps 'markdown-mode-map
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"m -" 'markdown-insert-hr
 				"m h" '(:ignore t :which-key "markdown/header")
 				"m h i" 'markdown-insert-header-dwim
@@ -214,18 +216,18 @@
 	    ;; Python mode
 	    (general-define-key :states '(normal visual  motion)
 				:keymaps 'python-mode-map
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"m c" '(:ignore t :which-key "excute")
-				"m c c" 'samray/python-execute-file
-				"m c C" 'samray/python-execute-file-focus
+				"m c c" 'ramsay/python-execute-file
+				"m c C" 'ramsay/python-execute-file-focus
 				"m s" '(:ignore t :which-key "Send to REPL")
 				"m s b" 'python-shell-send-buffer
-				"m s B" 'samray/python-shell-send-buffer-switch
+				"m s B" 'ramsay/python-shell-send-buffer-switch
 				"m s f" 'python-shell-send-defun
-				"m s F" 'samray/python-shell-send-defun-switch
-				"m s i" 'samray/python-start-or-switch-repl
+				"m s F" 'ramsay/python-shell-send-defun-switch
+				"m s i" 'ramsay/python-start-or-switch-repl
 				"m s r" 'python-shell-send-region
-				"m s R" 'samray/python-shell-send-region-switch
+				"m s R" 'ramsay/python-shell-send-region-switch
 				"m v" 'venv-set-location
 				)
 
@@ -233,11 +235,11 @@
 	    ;; C++ mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps '(c-mode-map c++-mode-map cmake-mode-map)
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"m c" '(:ignore t :which-key "compiling")
-				"m c c" 'samray/compile
-				"m c C" 'samray/compile-clean
-				"m c x" 'samray/g++-compile-and-run
+				"m c c" 'ramsay/compile
+				"m c C" 'ramsay/compile-clean
+				"m c x" 'ramsay/g++-compile-and-run
 				)
 
 	    ;; C/C++ mode
@@ -249,7 +251,7 @@
 	    ;; Scheme mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'scheme-mode-map
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"m c" '(:ignore t :which-key "compiling")
 				"m c c" 'geiser-compile-current-buffer
 				"m c p" 'geiser-add-to-path
@@ -283,15 +285,15 @@
 	    ;; Go mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'go-mode-map
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"m c" '(:ignore :which-key "compiling")
-				"m c c" 'samray/compile-go
-				"m c x" 'samray/run-go
+				"m c c" 'ramsay/compile-go
+				"m c x" 'ramsay/run-go
 				)
 	    ;; Rust mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'rust-mode-map
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"m c ." 'cargo-process-repeat
 				"m c c" 'cargo-process-build
 				"m c C" 'cargo-process-clean
@@ -302,17 +304,17 @@
 				"m c l" 'cargo-process-clippy
 				"m c n" 'cargo-process-new
 				"m c o" 'cargo-process-current-file-tests
-				"m c r" 'samray/cargo-process-script
+				"m c r" 'ramsay/cargo-process-script
 				"m c s" 'cargo-process-search
 				"m c u" 'cargo-process-update
 				"m c x" 'cargo-process-run
-				"m c X" 'samray/cargo-process-run-current-example
+				"m c X" 'ramsay/cargo-process-run-current-example
 				"m t" 'cargo-process-test
 				)
 	    ;; Origami mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'origami-mode-map
-				:prefix samray/leader-key
+				:prefix ramsay/leader-key
 				"t o" '(:ignore t :which-key "origami")
 				"t o t" 'origami-toggle-node
 				"t o f" 'origami-forward-toggle-node
@@ -395,8 +397,8 @@
 				)
 	    ;; non-evil ,without a prefix
 	    (general-define-key
-	     ;; remap c-a to `samray/smarter-move-beginning-of-line
-	     [remap move-beginning-of-line] 'samray/smarter-move-beginning-of-line
+	     ;; remap c-a to `ramsay/smarter-move-beginning-of-line
+	     [remap move-beginning-of-line] 'ramsay/smarter-move-beginning-of-line
 	     [remap evil-repeat-pop-next] 'xref-find-definitions
 	     ;; remap C-n to `next-line`
 	     [remap evil-complete-next] 'company-select-next
@@ -416,10 +418,10 @@
 	     [remap evil-paste-pop] 'previous-line
 	     "C-p" 'previous-line
 	     "C-x k" 'kill-this-buffer
-	     "C-x t" 'samray/dired-tmp-dir
+	     "C-x t" 'ramsay/dired-tmp-dir
 	     "C-x C-r" 'recentf-open-files
-	     "C-x 2" 'samray/split-window-below-and-move
-	     "C-x 3" 'samray/split-window-right-and-move
+	     "C-x 2" 'ramsay/split-window-below-and-move
+	     "C-x 3" 'ramsay/split-window-right-and-move
 	     "M-i" 'symbol-overlay-put
 	     "M-RET o" 'srefactor-lisp-one-line
 	     "M-RET m" 'srefactor-lisp-format-sexp
@@ -428,7 +430,7 @@
 	     "S-<f6>" 'lsp-rename)
 
 	    (general-define-key :states '(insert normal visual motion)
-				"C-a" 'samray/smarter-move-beginning-of-line
+				"C-a" 'ramsay/smarter-move-beginning-of-line
 				"C-e" 'move-end-of-line
 				"C-w" 'kill-region
 				"C-y" 'yank)
@@ -437,7 +439,7 @@
   ;; Format "buffer"
   ;; Python mode
   (general-define-key :keymaps 'python-mode-map
-		      "C-M-\\" 'samray/python-format-and-isort-buffer)
+		      "C-M-\\" 'ramsay/python-format-and-isort-buffer)
 
   ;; Web mode|Html mode
   (general-define-key :keymaps '(web-mode-map html-mode-map)
@@ -454,7 +456,7 @@
 
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
-		      "C-M-\\" 'samray/indent-region-or-buffer)
+		      "C-M-\\" 'ramsay/indent-region-or-buffer)
   ;; Graphviz-dot-mode
   (general-define-key :keymaps '(graphviz-dot-mode-map)
 		      "C-M-\\" 'graphviz-dot-indent-graph
@@ -493,7 +495,7 @@
   ;; Markdown-mode
   (general-define-key :keymaps 'markdown-mode-map
 		      "M-n" 'pyim-convert-code-at-point
-		      "C-M-\\" 'samray/indent-region-or-buffer)
+		      "C-M-\\" 'ramsay/indent-region-or-buffer)
 
 
   ;; Org-agenda-mode
@@ -503,13 +505,13 @@
 
 
   (general-define-key :states '(normal visual )
-		      :prefix samray/second-leader-key
+		      :prefix ramsay/second-leader-key
 		      "e" '(:ignore t :which-key "eval")
 		      "e b" 'evil-buffer
 		      "f" '(:ignore t :which-key "file")
-		      "f r" 'samray/open-readme-in-git-root-directory
+		      "f r" 'ramsay/open-readme-in-git-root-directory
 		      "r" '(:ignore t :which-key "refactor")
-		      "r s" 'samray/evilcvn-change-symbol-in-defun
+		      "r s" 'ramsay/evilcvn-change-symbol-in-defun
 		      )
 
   (general-define-key :keymaps 'emacs-lisp-mode-map
@@ -520,7 +522,7 @@
 		      "C-c s" 'find-function-at-point)
 
   (general-define-key :keymaps 'term-raw-map
-		      "C-y" 'samray/term-paste)
+		      "C-y" 'ramsay/term-paste)
 
   (general-define-key :states '(normal emacs)
 		      :keymaps 'geiser-repl-mode-map
@@ -537,7 +539,6 @@
     (general-define-key
      "C-c C-z" popwin:keymap
      ))
-
   )
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
@@ -561,8 +562,8 @@
 
 	    (defhydra hydra-edit ()
 	      "edit"
-	      ("j" samray/move-text-down "down")
-	      ("k" samray/move-text-up "up")
+	      ("j" ramsay/move-text-down "down")
+	      ("k" ramsay/move-text-up "up")
 	      ("q" nil)
 	      )
 
@@ -720,7 +721,7 @@ Info-mode:
 ;;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2016-02/msg01532.html
 ;;; https://github.com/noctuid/general.el/issues/80
 ;; Eshll-mode
-(defun samray/eshell-define-key-dwim (keymap keybinding function)
+(defun ramsay/eshell-define-key-dwim (keymap keybinding function)
   "Unset original keybinding in KEYMAP, and then set KEYBINDING with FUNCTION."
   (define-key keymap [remap (lookup-key keymap keybinding)] function)
   (define-key keymap keybinding function)

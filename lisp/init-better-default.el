@@ -32,27 +32,27 @@
 ;;; code  from spacemacs
 (use-package restart-emacs
   :ensure t
-  :commands (samray/restart-emacs
-	     samray/restart-emacs-debug-init
-	     samray/restart-emacs-resume-layout)
+  :commands (ramsay/restart-emacs
+	     ramsay/restart-emacs-debug-init
+	     ramsay/restart-emacs-resume-layout)
   :init
-  (defun samray/restart-emacs (&optional args)
+  (defun ramsay/restart-emacs (&optional args)
     "Restart emacs."
     (interactive)
     ;; (setq spacemacs-really-kill-emacs t)
     (restart-emacs args))
 
-  (defun samray/restart-emacs-resume-layouts (&optional args)
+  (defun ramsay/restart-emacs-resume-layouts (&optional args)
     "Restart emacs and resume layouts."
     (interactive)
-    (samray/restart-emacs (cons "--resume-layouts" args)))
+    (ramsay/restart-emacs (cons "--resume-layouts" args)))
 
-  (defun samray/restart-emacs-debug-init (&optional args)
+  (defun ramsay/restart-emacs-debug-init (&optional args)
     "Restart emacs and enable debug-init."
     (interactive)
-    (samray/restart-emacs (cons "--debug-init" args)))
+    (ramsay/restart-emacs (cons "--debug-init" args)))
 
-  (defun samray/restart-stock-emacs-with-packages (packages &optional args)
+  (defun ramsay/restart-stock-emacs-with-packages (packages &optional args)
     "Restart emacs without the spacemacs configuration, enable
 debug-init and load the given list of packages."
     (interactive
@@ -68,7 +68,7 @@ debug-init and load the given list of packages."
 	   `(,val)))))
     (let ((load-packages-string (mapconcat (lambda (pkg) (format "(use-package %s)" pkg))
 					   packages " ")))
-      (samray/restart-emacs-debug-init
+      (ramsay/restart-emacs-debug-init
        (append (list "-q" "--execute"
 		     (concat "(progn (when (version< emacs-version \"27.0\") (package-initialize))"
 			     "(require 'use-package)"
@@ -102,7 +102,7 @@ debug-init and load the given list of packages."
 
 ;;; Some information about myself.
 (setq user-full-name "Samray, Leung")
-(setq user-mail-address "samrayleung@gmail.com")
+(setq user-mail-address "ramsayleung@gmail.com")
 
 ;;; While we are in the topic of prompting, a lot of the default prompts ask
 ;;; for a yes or a no. I’m lazy and so I don’t want to type the full words.
@@ -115,7 +115,7 @@ debug-init and load the given list of packages."
 (setq tramp-use-ssh-controlmaster-options nil)
 
 ;;; set "Meta" key to be the mac command key
-(when (samray/mac-os-p)
+(when (ramsay/mac-os-p)
   (setq mac-option-key-is-meta nil
 	mac-command-key-is-meta t
 	mac-command-modifier 'meta

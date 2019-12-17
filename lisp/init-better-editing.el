@@ -77,7 +77,7 @@
 (use-package popup
   :ensure t
   :config (progn
- 	    (defun samray/popup-which-function ()
+ 	    (defun ramsay/popup-which-function ()
 	      (interactive)
 	      (let ((function-name (which-function)))
 		(popup-tip function-name)))))
@@ -94,20 +94,20 @@
 (require 'recentf)
 (setq recentf-max-saved-items 1000
       recentf-exclude '("/tmp/" "/ssh:"))
-(run-with-idle-timer samray-idle-time t 'recentf-mode)
+(run-with-idle-timer ramsay-idle-time t 'recentf-mode)
 ;; (recentf-mode 1)
 
 ;;; Auto-refresh buffers when files have changed on disk
 (global-auto-revert-mode t)
 
-(defun samray/split-window-right-and-move ()
+(defun ramsay/split-window-right-and-move ()
   "Split window vertically and move to the other window."
   (interactive)
   (split-window-right)
   (other-window 1)
   )
 
-(defun samray/split-window-below-and-move ()
+(defun ramsay/split-window-below-and-move ()
   "Split window horizontally and move to the other window!"
   (interactive)
   (split-window-below)
@@ -115,7 +115,7 @@
   )
 
 ;;; http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
-(defun samray/smarter-move-beginning-of-line (arg)
+(defun ramsay/smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
 
 Move point to the first non-whitespace character on this line.
@@ -138,7 +138,7 @@ point reaches the beginning or end of the buffer, stop there."
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
 
-(defun samray/copy-current-file-path ()
+(defun ramsay/copy-current-file-path ()
   "Add current file path to kill ring.  Limits the filename to project root if possible."
   (interactive)
   (kill-new buffer-file-name))
@@ -149,7 +149,7 @@ point reaches the beginning or end of the buffer, stop there."
 (use-package simpleclip
   :ensure t
   :config(progn
-	   (defun samray/copy-to-x-clipboard ()
+	   (defun ramsay/copy-to-x-clipboard ()
 	     (interactive)
 	     (let ((thing (if (region-active-p)
 			      (buffer-substring-no-properties (region-beginning) (region-end))
@@ -157,7 +157,7 @@ point reaches the beginning or end of the buffer, stop there."
 	       (simpleclip-set-contents thing)
 	       (message "thing => clipboard!")))
 
-	   (defun samray/paste-from-x-clipboard()
+	   (defun ramsay/paste-from-x-clipboard()
 	     "Paste string clipboard"
 	     (interactive)
 	     (insert (simpleclip-get-contents)))

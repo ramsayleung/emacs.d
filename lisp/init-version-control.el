@@ -24,7 +24,7 @@
 	     git-timemachine-switch-toggle)
   ;; http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html
   :config (progn
-	    (defun samray/git-timemachine-show-selected-revision ()
+	    (defun ramsay/git-timemachine-show-selected-revision ()
 	      "Show last (current) revision of file."
 	      (interactive)
 	      (let* ((collection (mapcar (lambda (rev)
@@ -39,12 +39,12 @@
 				      (setq rev (cdr rev)))
 				    (git-timemachine-show-revision rev)))))
 
-	    (defun samray/git-timemachine ()
+	    (defun ramsay/git-timemachine ()
 	      "Open git snapshot with the selected version.  Based on ivy-mode."
 	      (interactive)
 	      (unless (featurep 'git-timemachine)
 		(require 'git-timemachine))
-	      (git-timemachine--start #'samray/git-timemachine-show-selected-revision))
+	      (git-timemachine--start #'ramsay/git-timemachine-show-selected-revision))
 
 	    )
   )

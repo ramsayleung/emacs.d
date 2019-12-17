@@ -1,31 +1,31 @@
 ;;; package --- Summary:
 ;;; Commentary:
 ;;; Code:
-(defvar samray-default-go-compile-command "go build")
-(defvar samray-default-go-run-command "go run")
+(defvar ramsay-default-go-compile-command "go build")
+(defvar ramsay-default-go-run-command "go run")
 
-(defun samray/compile-go-with-command (command)
+(defun ramsay/compile-go-with-command (command)
   "Compile go with COMMAND and run it."
   (let ((file-name (buffer-file-name)))
     (compile (format "%s %s" command file-name))
     )
   )
 
-(defun samray/compile-go (command)
+(defun ramsay/compile-go (command)
   "Compile go with COMMAND."
   (interactive
-   (list (read-string (format "Compile command [default: %s]: " samray-default-go-compile-command) nil nil samray-default-go-compile-command)))
-  (samray/compile-go-with-command command)
+   (list (read-string (format "Compile command [default: %s]: " ramsay-default-go-compile-command) nil nil ramsay-default-go-compile-command)))
+  (ramsay/compile-go-with-command command)
   )
 
-(defun samray/run-go (command)
+(defun ramsay/run-go (command)
   "Run go with COMMAND."
   (interactive
-   (list (read-string (format "Run command [default: %s]: " samray-default-go-run-command) nil nil samray-default-go-run-command)))
-  (samray/compile-go-with-command command)
+   (list (read-string (format "Run command [default: %s]: " ramsay-default-go-run-command) nil nil ramsay-default-go-run-command)))
+  (ramsay/compile-go-with-command command)
   )
 
-(defun samray/golang-src-dir ()
+(defun ramsay/golang-src-dir ()
   "Open tmp directory."
   (interactive)
   (dired (concat (getenv "GOPATH") "/src")))

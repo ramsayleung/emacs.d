@@ -22,7 +22,7 @@
 (use-package popwin
   :ensure t
   :config (progn
-	    (run-with-idle-timer samray-idle-time nil 'popwin-mode)
+	    (run-with-idle-timer ramsay-idle-time nil 'popwin-mode)
 	    ;; (popwin-mode t)
 	    (push '(compilation-mode :noselect t) popwin:special-display-config)
 	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
@@ -42,7 +42,7 @@
 
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
-(defun samray/toggle-window-split ()
+(defun ramsay/toggle-window-split ()
   "Vertical split show more of each line, horizontal split show more lines.
 This code toggles between them."
   (interactive)

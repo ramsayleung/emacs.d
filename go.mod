@@ -1,3 +1,3 @@
-module github.com/samrayleung/emacs.d
+module github.com/ramsayleung/emacs.d
 
 go 1.12

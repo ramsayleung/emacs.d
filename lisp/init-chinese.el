@@ -6,7 +6,7 @@
   :commands (youdao-dictionary-search-at-point+ youdao-dictionary-search-from-input)
   :init
   (progn
-    (defun samray/youdao-dictionary-buffer-quit ()
+    (defun ramsay/youdao-dictionary-buffer-quit ()
       "Quit youdao-dictionary Buffer and delete window"
       (interactive)
       (kill-this-buffer)
@@ -64,7 +64,7 @@
 	     '("Lenny" "fncychap" t))
 
 (add-to-list 'org-latex-classes
-	     '("samray-org-book"
+	     '("ramsay-org-book"
 	       "\\documentclass{book}
 \\usepackage[slantfont, boldfont]{xeCJK}
 % chapter set
@@ -124,7 +124,7 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
 
 ;; \\usepackage[slantfont, boldfont]{xeCJK}
 (add-to-list 'org-latex-classes
-             '("samray-org-article"
+             '("ramsay-org-article"
                "\\documentclass{article}
 \\usepackage[CJKspace]{xeCJK}
 \\usepackage{titlesec}
@@ -179,7 +179,7 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 (add-to-list 'org-latex-classes
-             '("samray-org-beamer"
+             '("ramsay-org-beamer"
                "\\documentclass{beamer}
 \\usepackage[slantfont, boldfont]{xeCJK}
 % beamer set
@@ -238,10 +238,10 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
 (eval-after-load 'autoinsert
   '(define-auto-insert '(org-mode . "Chinese Org skeleton")
      '("Description: "
-       "#+LATEX_CLASS: samray-org-article"\n
+       "#+LATEX_CLASS: ramsay-org-article"\n
        "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n)))
 ;;; Adds hook to find-files-hook
-(run-with-idle-timer samray-idle-time nil 'auto-insert-mode)
+(run-with-idle-timer ramsay-idle-time nil 'auto-insert-mode)
 (setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
 
 (message "loading init-chinese")

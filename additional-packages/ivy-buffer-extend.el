@@ -215,7 +215,7 @@ Plus a bit."
 ;; User customizable display settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar ivy-buffer-format
-  (if (samray/mac-os-p)
+  (if (ramsay/mac-os-p)
       '(
 	buffer-name   "<col>"  " "
 	dir file-name "<col>"  "      "

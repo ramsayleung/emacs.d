@@ -29,27 +29,27 @@
 
 ;;; Define constnat variable for configuration
 
-(defvar samray-additional-packages-path (expand-file-name "additional-packages" user-emacs-directory))
-(defvar samray-idle-time 1)
+(defvar ramsay-additional-packages-path (expand-file-name "additional-packages" user-emacs-directory))
+(defvar ramsay-idle-time 1)
 
 ;;; Define some useful function
-(defun samray/mac-os-p ()
+(defun ramsay/mac-os-p ()
   "Check whether Emacs is running on Mac os."
   (string= system-type "darwin")
   )
-(defun samray/linux-p ()
+(defun ramsay/linux-p ()
   "Check whether Emacs is running on Linux."
   (string= system-type "gnu/linux"))
-(defun samray/windows-p ()
+(defun ramsay/windows-p ()
   "Detect whether Emacs is running on Windows."
   (eq system-type 'windows-nt))
 
-(defun samray/buffer-too-big-p ()
+(defun ramsay/buffer-too-big-p ()
   "Predicate if buffer is too big."
   (or (> (buffer-size) (* 1024 1024))
       (> (line-number-at-pos (point-max)) 50000)))
 
-(defun samray/buffer-too-large-p ()
+(defun ramsay/buffer-too-large-p ()
   "Predicate if buffer is too large."
   (or (> (buffer-size) (* 5000 800))
       (> (line-number-at-pos (point-max)) 100000)))
@@ -58,9 +58,9 @@
   (>= emacs-major-version 26)
   "Emacs is 26 or above.")
 
-(defun samray/does-use-ivy ()
+(defun ramsay/does-use-ivy ()
   "Return t if use `ivy` as completion framework."
-  (if (eq samray/completion-framework 'ivy) t nil))
+  (if (eq ramsay/completion-framework 'ivy) t nil))
 
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))
@@ -109,7 +109,7 @@
 
   (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
   (when (file-exists-p custom-file)
-    (run-with-idle-timer samray-idle-time nil 'load custom-file)
+    (run-with-idle-timer ramsay-idle-time nil 'load custom-file)
     )
   ;; Display the total loading time in the minibuffer
   (defun display-startup-echo-area-message ()

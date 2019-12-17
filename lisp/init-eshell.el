@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; https://www.emacswiki.org/emacs/EshellFunctions
-(defun samray/eshell-maybe-bol ()
+(defun ramsay/eshell-maybe-bol ()
   "Go to the beginning of command line,or begining of line."
   (interactive)
   (let ((p (point)))
@@ -33,14 +33,14 @@
     ))
 
 
-(defun samray/kill-word-backward ()
+(defun ramsay/kill-word-backward ()
   "Let Eshell kill word acting like zsh."
   (interactive)
   (set-mark-command nil)
   (backward-word)
   (call-interactively 'kill-region))
 
-(defun samray/eshell-sudo-toggle ()
+(defun ramsay/eshell-sudo-toggle ()
   "Add/Remove sudo in the begining of command line."
   (interactive)
   (save-excursion
@@ -56,7 +56,7 @@
 	  (insert "sudo ")
 	  )))))
 ;;; Inspire by http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
-(defun samray/parse-bash-history ()
+(defun ramsay/parse-bash-history ()
   "Parse the bash history."
   (interactive)
   (let (collection bash_history)
@@ -71,7 +71,7 @@
                (setq bash_history collection))
       bash_history)))
 
-(defun samray/parse-zsh-history ()
+(defun ramsay/parse-zsh-history ()
   "Parse the bash history."
   (interactive)
   (let (collection zsh_history)
@@ -86,7 +86,7 @@
                (setq zsh_history collection))
       zsh_history)))
 
-(defun samray/esh-history ()
+(defun ramsay/esh-history ()
   "Interactive search eshell history."
   (interactive)
   (require 'em-hist)
@@ -95,7 +95,7 @@
 	   (input (eshell-get-old-input))
 	   (esh-history (when (> (ring-size eshell-history-ring) 0)
 			  (ring-elements eshell-history-ring)))
-	   (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
+	   (all-shell-history (append esh-history (ramsay/parse-zsh-history) (ramsay/parse-bash-history)))
 	   )
       (let* ((command (ivy-read "Command: "
 				(delete-dups all-shell-history)
@@ -110,14 +110,14 @@
   (end-of-line))
 
 
-(defun samray/eshell-clear-buffer ()
+(defun ramsay/eshell-clear-buffer ()
   "Clear terminal."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)
     (eshell-send-input)))
 
-(defun samray/eshell-fasd-z (&rest args)
+(defun ramsay/eshell-fasd-z (&rest args)
   "Use fasd to change directory more effectively by passing ARGS."
   (setq args (eshell-flatten-list args))
   (let* ((fasd (concat "fasd " (car args)))
@@ -164,19 +164,19 @@
 	    (add-hook 'eshell-mode-hook (lambda ()
 					  (setq-local global-hl-line-mode nil)))
 	    )
-  :bind (([remap samray/smarter-move-beginning-of-line] . eshell-bol)
+  :bind (([remap ramsay/smarter-move-beginning-of-line] . eshell-bol)
 	 ("C-a" . eshell-bol)
-	 ([remap kill-region] . samray/kill-word-backward)
-	 ("C-w" . samray/kill-word-backward)
+	 ([remap kill-region] . ramsay/kill-word-backward)
+	 ("C-w" . ramsay/kill-word-backward)
 	 ([remap evil-insert-digraph] . paredit-kill)
 	 ("C-k" . paredit-kill)
-	 ([remap evil-paste-from-register] . samray/esh-history)
-	 ("C-r" . samray/esh-history)
-	 ("C-l" . samray/eshell-clear-buffer))
+	 ([remap evil-paste-from-register] . ramsay/esh-history)
+	 ("C-r" . ramsay/esh-history)
+	 ("C-l" . ramsay/eshell-clear-buffer))
   )
 
 ;;; Replace shell-pop package with customized function
-(defun samray/eshell-pop ()
+(defun ramsay/eshell-pop ()
   "Pop and hide eshell with this function."
   (interactive)
   (let* ((eshell-buffer-name "*eshell*")
@@ -210,14 +210,14 @@
 	    ;; Use `split-window-sensibly` to split window with policy
 	    ;; If window cannot be split, force to split split window horizontally
 	    (when (not (split-window-sensibly))
-	      (samray/split-window-below-and-move))
+	      (ramsay/split-window-below-and-move))
 	    (switch-to-buffer eshell-buffer-name)
 	    (funcall change-cwd)
 	    ))
       ;; If eshell buffer doesn't exist, create one
       (progn
 	(when (not (split-window-sensibly))
-	  (samray/split-window-below-and-move))
+	  (ramsay/split-window-below-and-move))
 	(eshell)
 	(funcall change-cwd)
 	)))
@@ -227,14 +227,14 @@
 ;;; https://www.reddit.com/r/emacs/comments/7a14cp/fishlike_autosuggestions_in_eshell/
 ;;; Make Eshell complete like fish with history from bash, zsh, eshell
 (require 'company)
-(if (samray/linux-p)
+(if (ramsay/linux-p)
     (require 'cl-lib)
   (require 'cl-extra))
-(defun samray/company-eshell-autosuggest-candidates (prefix)
+(defun ramsay/company-eshell-autosuggest-candidates (prefix)
   "Select the first eshell history candidate with prefix PREFIX."
   (let* ((esh-history (when (> (ring-size eshell-history-ring) 0)
 			(ring-elements eshell-history-ring)))
-	 (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
+	 (all-shell-history (append esh-history (ramsay/parse-zsh-history) (ramsay/parse-bash-history)))
 	 (history
           (delete-dups
            (mapcar (lambda (str)
@@ -247,7 +247,7 @@
     (when most-similar
       `(,most-similar))))
 
-(defun samray/company-eshell-autosuggest--prefix ()
+(defun ramsay/company-eshell-autosuggest--prefix ()
   "Get current eshell input."
   (let ((prefix
          (string-trim-left
@@ -259,22 +259,22 @@
         prefix
       'stop)))
 
-(defun samray/company-eshell-autosuggest (command &optional arg &rest ignored)
+(defun ramsay/company-eshell-autosuggest (command &optional arg &rest ignored)
  "`company-mode' backend to provide eshell history suggestion."
   (interactive (list 'interactive))
   (cl-case command
     (interactive (company-begin-backend 'company-eshell))
     (prefix (and (eq major-mode 'eshell-mode)
-                 (samray/company-eshell-autosuggest--prefix)))
-    (candidates (samray/company-eshell-autosuggest-candidates arg))))
+                 (ramsay/company-eshell-autosuggest--prefix)))
+    (candidates (ramsay/company-eshell-autosuggest-candidates arg))))
 
-(defun samray/setup-company-eshell-autosuggest ()
+(defun ramsay/setup-company-eshell-autosuggest ()
   "Set up company completion for Eshell."
   (with-eval-after-load 'company
-    (setq-local company-backends '(samray/company-eshell-autosuggest))
+    (setq-local company-backends '(ramsay/company-eshell-autosuggest))
     (setq-local company-frontends '(company-preview-frontend))))
 
-(add-hook 'eshell-mode-hook 'samray/setup-company-eshell-autosuggest)
+(add-hook 'eshell-mode-hook 'ramsay/setup-company-eshell-autosuggest)
 (use-package eshell-prompt-extras
   :load-path "~/.emacs.d/additional-packages/eshell-prompt-extras.el"
   :after eshell
