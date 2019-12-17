@@ -24,7 +24,39 @@
 (use-package graphviz-dot-mode
   :mode "\\.dot$"
   :ensure t
-  :commands graphviz-dot-indent-graph graphviz-dot-preview)
+  :commands graphviz-dot-indent-graph graphviz-dot-preview
+  :config
+  (defun ramsay/graphviz-dot-preview ()
+    "Compile the graph and preview it in an other buffer."
+    (interactive)
+    (save-buffer)
+    (let ((windows (window-list))
+	  (f-name (graphviz-output-file-name (substring compile-command (+(cl-search "-o" compile-command) 3))))
+	  (command-result (string-trim (shell-command-to-string compile-command))))
+      (if (string-prefix-p "Error:" command-result)
+	  (message command-result)
+	(progn
+	  (sleep-for 0 graphviz-dot-revert-delay)
+	  (when (= (length windows) 1)
+	    (split-window-sensibly))
+	  (with-selected-window (selected-window)
+	    (switch-to-buffer-other-window (find-file-noselect f-name t))
+	    (revert-buffer t t))))))
+  (defun graphviz-compile-command@override (f-name)
+    (message "calling graphviz-compile-command@around")
+    (when f-name
+      (setq compile-command
+	    (concat graphviz-dot-dot-program
+		    " -T" graphviz-dot-preview-extension " "
+		    (shell-quote-argument f-name)
+		    " -o "
+		    (shell-quote-argument
+		     (graphviz-output-file-name (concat (file-name-directory f-name)
+							"output/"
+							(file-name-nondirectory f-name))
+						))))))
+  (advice-add 'graphviz-compile-command :override 'graphviz-compile-command@override)
+  )
 
 ;;; abbrev-mode or abbreviation mode is a built-in mode that auto-corrects the
 ;;; word you mistype on pressing space.For how I practically use it
