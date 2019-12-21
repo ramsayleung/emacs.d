@@ -460,7 +460,8 @@
   ;; Graphviz-dot-mode
   (general-define-key :keymaps '(graphviz-dot-mode-map)
 		      "C-M-\\" 'graphviz-dot-indent-graph
-		      [remap graphviz-dot-preview] 'ramsay/graphviz-dot-preview)
+		      [remap graphviz-dot-preview] 'ramsay/graphviz-dot-preview
+		      "C-c C-u" 'ramsay/graphviz-dot-preview-with-external-viewer)
 
   (general-define-key :keymaps '(emacs-lisp-mode-map
 				 ielm-mode-map

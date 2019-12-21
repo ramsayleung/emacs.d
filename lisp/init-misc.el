@@ -6,9 +6,9 @@
 ;;; Save and restore window configuration
 (use-package eyebrowse
   :ensure t
-  :init (progn
-	  (eyebrowse-mode)
-	  )
+  :commands eyebrowse-switch-to-window-config-0 eyebrowse-switch-to-window-config-1 eyebrowse-switch-to-window-config-2 eyebrowse-create-window-config
+  :init
+  (eyebrowse-mode)
   )
 
 ;;; Track Emacs commands frequency
@@ -42,6 +42,18 @@
 	  (with-selected-window (selected-window)
 	    (switch-to-buffer-other-window (find-file-noselect f-name t))
 	    (revert-buffer t t))))))
+  (defun ramsay/graphviz-dot-preview-with-external-viewer ()
+    "Compile the graph and preview it in an external image viewer."
+    (interactive)
+    (save-buffer)
+    (let ((windows (window-list))
+	  (f-name (graphviz-output-file-name (substring compile-command (+(cl-search "-o" compile-command) 3))))
+	  (command-result (string-trim (shell-command-to-string compile-command)))
+	  (external-viewer (if (ramsay/mac-os-p) "open " "feh ")))
+      (if (string-prefix-p "Error:" command-result)
+	  (message command-result)
+	(shell-command-to-string (concat external-viewer f-name))
+	)))
   (defun graphviz-compile-command@override (f-name)
     (message "calling graphviz-compile-command@around")
     (when f-name
