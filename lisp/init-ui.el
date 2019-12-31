@@ -145,11 +145,14 @@ This code toggles between them."
 (global-display-line-numbers-mode t)
 
 ;; number of characters until the fill column
-(setq fill-column 80)
+(setq fill-column 120)
 ;; show the current line and column numbers in the stats bar as well
 (line-number-mode t)
 (column-number-mode t)
+
 ;; Disable line wrap '\'
+(global-visual-line-mode)
+(setq line-move-visual t)
 (set-display-table-slot standard-display-table 'wrap ?\ )
 ;;; make sure my code stays within 100 characters always
 ;;; and prefer the soft line wrap while writing prose

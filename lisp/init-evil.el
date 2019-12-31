@@ -7,6 +7,7 @@
   :ensure t
   :demand t
   :init (progn
+	  (setq evil-respect-visual-line-mode t)
 	  (setq evil-want-C-u-scroll t))
   :config
   (progn

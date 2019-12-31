@@ -34,7 +34,7 @@
 	  (add-hook 'org-src-mode-hook 'ramsay/disable-flycheck-in-org-src-block)
 	  (setq org-todo-keyword-faces
 		'(
-		  ("PROCESSING" . (:foreground "gold" :weight bold))
+		  ("PROCESSING" . (:foreground "gold"))
 		  ))
 	  (setq org-todo-keywords
 		'((sequence "TODO" "PROCESSING" "DONE")))
@@ -67,7 +67,7 @@
 		(sql . t)
 		(sqlite . t)))
 
-	     (setq org-agenda-files (directory-files "~/dropbox/org" t "\\.org"))
+	     (setq org-agenda-files (directory-files "~/Dropbox/org" t "\\.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
 		      ((tags "PRIORITY=\"A\""
@@ -80,17 +80,13 @@
 				    (ramsay/org-skip-subtree-if-priority ?A)
 				    (org-agenda-skip-if nil '(scheduled deadline))))))))))
 	     (setq org-capture-templates
-		   '(("a" "Agenda" entry (file  "~/dropbox/org/agenda.org" "Agenda")
+		   '(("a" "Agenda" entry (file  "~/Dropbox/org/agenda.org" "Agenda")
 		      "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
-		     ("w" "Work Note" entry (file+headline "~/dropbox/org/work_notes.org" "Notes about work")
+		     ("w" "Work Note" entry (file+headline "~/Dropbox/org/work_notes.org" "Notes about work")
 		      "** Work Note %?\n%T")
-		     ("l" "Life Note" entry (file+headline "~/dropbox/org/life_notes.org" "Notes about life")
-		      "** Life Note %?\n%T")
-		     ("b" "Blog idea" entry (file+headline "~/dropbox/org/blog.org" "Blog Topics:")
-		      "** %?\n%T" :prepend t)
-		     ("t" "GTD Item" entry (file+headline "~/dropbox/org/gtd.org" "gtd: To Do Items")
-		      "** TODO %?\n  %i\n" :prepend t)
-		     ("j" "Journal" entry (file+datetree "~/dropbox/org/journal.org")
+		     ("l" "Not work Note" entry (file+headline "~/Dropbox/org/notes.org" "Notes not about work")
+		      "** %?\n%T")
+		     ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
 		      "** %?\nEntered on %U\n  %i\n  %a")
 		     ))
 
