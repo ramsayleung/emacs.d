@@ -21,6 +21,8 @@
   (add-to-list 'company-lsp-filter-candidates '(gopls . nil))
   (add-hook 'c++-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
   (add-hook 'c-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
+  (add-hook 'rust-mode-hook (lambda () (with-eval-after-load 'flycheck
+					 (flycheck-select-checker 'rust-cargo))))
   (set-face-attribute 'lsp-face-highlight-textual nil
   		      :background "#666" :foreground "#ffffff")
   )

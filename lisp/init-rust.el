@@ -35,6 +35,7 @@
 (setq rust-match-angle-brackets nil)
 
 (use-package cargo
+  :diminish cargo-minor-mode
   :ensure t
   :defer t
   :init (progn

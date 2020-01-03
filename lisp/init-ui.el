@@ -92,6 +92,7 @@ This code toggles between them."
 (defun ramsay/set-font ()
   "Set font."
   (interactive)
+  (message "Update font configuration.")
   (if window-system
       (progn
 	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
@@ -100,7 +101,7 @@ This code toggles between them."
 	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
 			  :weight 'normal
 			  :slant 'normal
-			  :size 15.0))
+			  :size 16.0))
 	(dolist (charset '(kana han symbol cjk-misc bopomofo))
 	  (set-fontset-font
 	   (frame-parameter nil 'font)
@@ -108,9 +109,14 @@ This code toggles between them."
 	   (font-spec :name "-WQYF-WenQuanYi Micro Hei Mono-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
 		      :weight 'normal
 		      :slant 'normal
-		      :size 14.5))))
+		      :size 14))))
     (add-to-list 'default-frame-alist
-		 '(font . "Fantasque Sans Mono-15:weight=medium"))))
+		 '(font . "Fantasque Sans Mono-16:weight=medium"))))
+
+(defun ramsay/set-font-at-time ()
+  "Set font with `run-at-time`."
+  (run-at-time "5 sec" nil 'ramsay/set-font))
+
 (ramsay/set-font)
 
 ;;; Change vertical-border for terminal Emacs.
