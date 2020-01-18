@@ -95,12 +95,12 @@ This code toggles between them."
   (message "Update font configuration.")
   (if window-system
       (progn
-	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
+	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium:slant=italic")
 	(set-face-attribute
 	 'default nil
 	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
 			  :weight 'normal
-			  :slant 'normal
+			  :slant 'italic
 			  :size 16.0))
 	(dolist (charset '(kana han symbol cjk-misc bopomofo))
 	  (set-fontset-font
@@ -111,7 +111,7 @@ This code toggles between them."
 		      :slant 'normal
 		      :size 15.2))))
     (add-to-list 'default-frame-alist
-		 '(font . "Fantasque Sans Mono-16:weight=medium"))))
+		 '(font . "Fantasque Sans Mono-16:weight=medium:slant=italic"))))
 
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
@@ -217,7 +217,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'spacemacs-dark t)
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
