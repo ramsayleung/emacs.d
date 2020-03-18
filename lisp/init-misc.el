@@ -104,7 +104,7 @@
   "Kill all other buffers but current one and *scratch*."
   (interactive)
   (mapc 'kill-buffer
-	(delq "**scratch"(delq (current-buffer) (buffer-list)))))
+	(delq "*scratch*"(delq (current-buffer) (buffer-list)))))
 
 (defun ramsay/indent-region-or-buffer()
   "Indent selected region or a whole buffer."
