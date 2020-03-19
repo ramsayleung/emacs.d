@@ -106,7 +106,7 @@ This code toggles between them."
 	  (set-fontset-font
 	   (frame-parameter nil 'font)
 	   charset
-	   (font-spec :name "-WQYF-WenQuanYi Micro Hei Mono-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+	   (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
 		      :weight 'normal
 		      :slant 'normal
 		      :size 15.2))))
@@ -217,7 +217,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'zenburn t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
