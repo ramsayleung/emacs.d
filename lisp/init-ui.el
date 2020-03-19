@@ -102,14 +102,18 @@ This code toggles between them."
 			  :weight 'normal
 			  :slant 'italic
 			  :size 16.0))
-	(dolist (charset '(kana han symbol cjk-misc bopomofo))
-	  (set-fontset-font
-	   (frame-parameter nil 'font)
-	   charset
-	   (font-spec :name "-WQYF-Microsoft YaHei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-		      :weight 'normal
-		      :slant 'normal
-		      :size 15.2))))
+	(let ((chinese-font (if (ramsay/mac-os-p)
+				"-WQYF-Microsoft YaHei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+			      "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1")))
+	  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+	    (set-fontset-font
+	     (frame-parameter nil 'font)
+	     charset
+	     (font-spec :name chinese-font
+			:weight 'normal
+			:slant 'normal
+			:size 15.2))))
+	)
     (add-to-list 'default-frame-alist
 		 '(font . "Fantasque Sans Mono-16:weight=medium:slant=italic"))))
 
@@ -217,7 +221,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'zenburn t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;

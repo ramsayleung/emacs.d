@@ -67,7 +67,7 @@
 		(sql . t)
 		(sqlite . t)))
 
-	     (setq org-agenda-files (directory-files "~/Dropbox/org" t "\\.org"))
+	     (setq org-agenda-files (directory-files "~/btsync/org" t "\\.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
 		      ((tags "PRIORITY=\"A\""
@@ -80,13 +80,13 @@
 				    (ramsay/org-skip-subtree-if-priority ?A)
 				    (org-agenda-skip-if nil '(scheduled deadline))))))))))
 	     (setq org-capture-templates
-		   '(("a" "Agenda" entry (file  "~/Dropbox/org/agenda.org" "Agenda")
+		   '(("a" "Agenda" entry (file  "~/btsync/org/agenda.org" "Agenda")
 		      "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
-		     ("w" "Work Note" entry (file+headline "~/Dropbox/org/work_notes.org" "Notes about work")
+		     ("w" "Work Note" entry (file+headline "~/btsync/org/work_notes.org" "Notes about work")
 		      "** Work Note %?\n%T")
-		     ("l" "Not work Note" entry (file+headline "~/Dropbox/org/notes.org" "Notes not about work")
+		     ("l" "Not work Note" entry (file+headline "~/btsync/org/notes.org" "Notes not about work")
 		      "** %?\n%T")
-		     ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
+		     ("j" "Journal" entry (file+datetree "~/btsync/org/journal.org")
 		      "** %?\nEntered on %U\n  %i\n  %a")
 		     ))
 
