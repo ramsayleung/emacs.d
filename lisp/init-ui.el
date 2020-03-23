@@ -119,8 +119,7 @@ This code toggles between them."
 
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
-  (run-at-time "5 sec" nil 'ramsay/set-font))
-
+  (run-with-timer 2 nil 'ramsay/set-font))
 (ramsay/set-font)
 
 ;;; Change vertical-border for terminal Emacs.
