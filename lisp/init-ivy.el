@@ -53,6 +53,18 @@
   )
 
 
+(use-package ivy-posframe
+  :ensure t
+  :config (progn
+	    (setq ivy-posframe-font "Fantasque Sans Mono-16:weight=medium:slant=italic")
+	    (ivy-posframe-mode 1)
+	    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+	    (setq ivy-posframe-parameters
+		  '((left-fringe . 8)
+		    (right-fringe . 8)))
+	    )
+  )
+
 ;;; 支持ivy使用拼音进行匹配
 (use-package pyim
   :ensure t

@@ -13,7 +13,7 @@
 
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . " Ya")
+  :diminish (yas-minor-mode . " yas")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
@@ -68,7 +68,7 @@
   :init (progn
 	  (setq projectile-indexing-method 'hybrid)
 	  (setq projectile-git-submodule-command nil)
-	  (setq projectile-mode-line-prefix " Proj"))
+	  (setq projectile-mode-line-prefix " proj"))
   :commands (counsel-projectile-switch-project counsel-projectile-find-file)
   :config
   (progn

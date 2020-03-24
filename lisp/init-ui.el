@@ -220,7 +220,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'zenburn t)
+(load-theme 'sanityinc-tomorrow-bright t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
@@ -263,9 +263,9 @@ This code toggles between them."
 (diminish-minor-mode 'auto-revert 'auto-revert-mode)
 (diminish-minor-mode 'simple 'auto-fill-function )
 (diminish-minor-mode 'eldoc 'eldoc-mode)
-(diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
-(diminish-major-mode 'lisp-interaction-mode-hook "λ")
-(diminish-major-mode 'python-mode-hook "Py")
+(diminish-major-mode 'emacs-lisp-mode-hook "elisp")
+(diminish-major-mode 'lisp-interaction-mode-hook "lisp")
+(diminish-major-mode 'python-mode-hook "py")
 
 (message "loading init-ui")
 (provide 'init-ui)
