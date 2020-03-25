@@ -62,6 +62,21 @@
 	    (setq ivy-posframe-parameters
 		  '((left-fringe . 8)
 		    (right-fringe . 8)))
+
+	    ;; The behaviors of Ivy posframe is different between mac and linux
+	    (defun ramsay/setup-ivy-window()
+	      "Set up ivy height and width."
+	      (let* ((ramsay-ivy-posframe-height (if (< (/(frame-height)2) ramsay-ivy-posframe-threshold)
+						     (if (< (frame-height) ramsay-ivy-posframe-threshold)
+							 (frame-height)
+						       ramsay-ivy-posframe-threshold)
+						   (/(frame-height)2)))
+		     )
+		(setq ivy-posframe-min-height ramsay-ivy-posframe-height)
+		(setq ivy-posframe-height ramsay-ivy-posframe-height)
+		(setq ivy-posframe-width (* (/(frame-width)5)4))
+		(setq ivy-posframe-min-width (* (/(frame-width)5)4))))
+	    (add-to-list 'window-size-change-functions 'ramsay/setup-ivy-window)
 	    )
   )
 

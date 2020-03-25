@@ -215,17 +215,11 @@ Plus a bit."
 ;; User customizable display settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar ivy-buffer-format
-  (if (ramsay/mac-os-p)
       '(
 	buffer-name   "<col>"  " "
 	dir file-name "<col>"  "      "
 	)
-    '(
-      buffer-name   "<col>"  " "
-      mode process  "<col>"  " "
-      dir file-name "<col>"  "      "
-      )
-    )
+    
   "Describe the display format for `ivy-switch-buffer'.
 It is a list containing elements that are symbols, cons cells,
 or strings.
