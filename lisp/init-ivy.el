@@ -60,7 +60,9 @@
 	    (ivy-posframe-mode 1)
 	    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
 	    (setq ivy-posframe-parameters
-		  '((left-fringe . 8)
+		  '(
+		    (left-fringe . 8)
+		    (background-color . "grey20")
 		    (right-fringe . 8)))
 
 	    ;; The behaviors of Ivy posframe is different between mac and linux
