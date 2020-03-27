@@ -217,7 +217,7 @@ Plus a bit."
 (defvar ivy-buffer-format
       '(
 	buffer-name   "<col>"  " "
-	dir file-name "<col>"  "      "
+	dir "<col>"  "      "
 	)
     
   "Describe the display format for `ivy-switch-buffer'.
