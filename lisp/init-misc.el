@@ -94,6 +94,28 @@
   (interactive)
   (flush-lines "^$"))
 
+
+(defun ramsay/format-xml (begin end)
+  "Pretty format XML markup in region. You need to have nxml-mode
+http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
+this.  The function inserts linebreaks to separate tags that have
+nothing but whitespace between them.  It then indents the markup
+by using nxml's indentation rules."
+  (interactive "r")
+  (save-excursion
+    (nxml-mode)
+    (goto-char begin)
+    (while (search-forward-regexp "\>[ \\t]*\<" nil t)
+      (backward-char) (insert "\n"))
+    (indent-region begin end))
+  (message "Formated xml!"))
+
+(defun ramsay/empty-buffer ()
+  "Open a new clean window with a buffer named untitled<N>.  The buffer is not associated with a file."
+  (interactive)
+  (switch-to-buffer-other-window (generate-new-buffer "untitled"))
+  (delete-other-windows))
+
 ;; auto indent file before save file
 (defun ramsay/indent-buffer()
   "Indent the whole buffer."

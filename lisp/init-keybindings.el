@@ -405,6 +405,7 @@
 	     [remap evil-complete-previous] 'company-select-previous
 	     "C-c a" 'org-agenda
 	     "C-c e" 'hydra-edit/body
+	     "C-c n" 'ramsay/empty-buffer
 	     "C-c y p" 'youdao-dictionary-search-at-point+
 	     "C-c w" 'hydra-window-resize/body
 	     "C-c p" '(:ignore t :which-key "paredit")
@@ -449,6 +450,9 @@
   (general-define-key :keymaps 'css-mode-map
 		      "C-M-\\" 'web-beautify-css)
 
+  ;; Nxml/xml mode
+  (general-define-key :keymaps '(nxml-mode-map)
+		      "C-M-\\" 'ramsay/format-xml)
 
   ;; Js|Js2|Json mode
   (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
