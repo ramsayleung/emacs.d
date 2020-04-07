@@ -75,11 +75,6 @@ debug-init and load the given list of packages."
 			     load-packages-string ")"))
 	       args))))
   )
-;;; In terminal Emacs, let emacs use system clipboard as GUI Emacs.
-(use-package xclip
-  :load-path "~/.emacs.d/additional-packages/xclip.el"
-  :config (xclip-mode 1)
-  )
 
 ;;; File encoding system
 ;;; UTF-8 works for most of the files i tend to used

@@ -87,6 +87,10 @@ This code toggles between them."
 (mouse-wheel-mode -1)
 ;; )
 
+(defun ramsay/font-exists-p (font)
+  "Check if FONT exists."
+  (if (null (x-list-fonts font)) nil t))
+
 ;;; 设置中英文等高字体设置. 等高与等宽, 两者只能其一. 如果想设置等宽, 将
 ;;; WenQuanYi 的 size 设置为 16.5
 (defun ramsay/set-font ()
@@ -95,9 +99,7 @@ This code toggles between them."
   (message "Update font configuration.")
   (if window-system
       (progn
-	(if (ramsay/linux-p)
-	    (set-face-attribute 'mode-line nil :font "Ubuntu Mono-14:weight=medium")
-	  (set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium"))
+	(set-face-attribute 'mode-line nil :font (if (ramsay/font-exists-p "Ubuntu Mono-16:weight=medium") "Ubuntu Mono-16:weight=medium" "Fantasque Sans Mono-16:weight=medium"))
 	(set-face-attribute
 	 'default nil
 	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
