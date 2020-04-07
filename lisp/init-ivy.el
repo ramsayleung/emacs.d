@@ -54,6 +54,7 @@
 
 
 (use-package ivy-posframe
+  :defer t
   :ensure t
   :config (progn
 	    (setq ivy-posframe-font "Fantasque Sans Mono-16:weight=medium:slant=italic")

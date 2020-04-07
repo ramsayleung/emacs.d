@@ -95,12 +95,13 @@ This code toggles between them."
   (message "Update font configuration.")
   (if window-system
       (progn
-	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium:slant=italic")
+	(if (ramsay/linux-p)
+	    (set-face-attribute 'mode-line nil :font "Ubuntu Mono-14:weight=medium")
+	  (set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium"))
 	(set-face-attribute
 	 'default nil
 	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
 			  :weight 'normal
-			  :slant 'italic
 			  :size 16.0))
 	(let ((chinese-font (if (ramsay/mac-os-p)
 				"-WQYF-Microsoft YaHei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
@@ -115,7 +116,7 @@ This code toggles between them."
 			:size 15.2))))
 	)
     (add-to-list 'default-frame-alist
-		 '(font . "Fantasque Sans Mono-16:weight=medium:slant=italic"))))
+		 '(font . "Fantasque Sans Mono-16:weight=medium"))))
 
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
