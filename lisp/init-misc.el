@@ -113,8 +113,7 @@ by using nxml's indentation rules."
 (defun ramsay/empty-buffer ()
   "Open a new clean window with a buffer named untitled<N>.  The buffer is not associated with a file."
   (interactive)
-  (switch-to-buffer-other-window (generate-new-buffer "untitled"))
-  (delete-other-windows))
+  (switch-to-buffer-other-window (generate-new-buffer "untitled")))
 
 ;; auto indent file before save file
 (defun ramsay/indent-buffer()

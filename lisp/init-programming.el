@@ -22,6 +22,11 @@
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
 
+;;; velecity mode
+(use-package vtl
+  :load-path "~/.emacs.d/additional-packages/vtl.el"
+  :mode "\\.vm$")
+
 (use-package yaml-mode
   :ensure t
   :mode "\\.yml$")
