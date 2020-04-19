@@ -18,10 +18,7 @@
 	  (setq org-src-fontify-natively t
 		org-src-tab-acts-natively t)
 
-	  ;; I like seeing a little downward-pointing arrow instead of the
-	  ;;usual ellipsis (...) that org displays when there’s stuff under
-	  ;; a header.
-	  (setq org-ellipsis "⤵")
+	  (setq org-ellipsis " [+]")
 
 	  ;;Its default value is (ascii html icalendar latex)
 	  (setq org-export-backends '(latex icalendar))
@@ -47,6 +44,7 @@
 	   (when (not (eq system-type 'windows-nt))
 	     (require 'ox-md nil t)
 	     (require 'org-indent)
+	     (require 'org-tempo)
 	     (org-indent-mode -1)         ;disable org-indent-mode
 	     ;; let org-mode to delete those auxiliary files after export
 	     ;;automatically
@@ -67,6 +65,7 @@
 		(sql . t)
 		(sqlite . t)))
 
+	     (setq org-startup-with-inline-images t)
 	     (setq org-agenda-files (directory-files "~/btsync/org" t "\\.org"))
 	     (setq org-agenda-custom-commands
 		   '(("c" "agenda view with alltodo sorted by priorities"
@@ -107,6 +106,18 @@
 	     (setf org-latex-default-packages-alist
 		   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
 	     
+	     (eval-after-load 'autoinsert
+	       '(define-auto-insert '(org-mode . "Chinese Org skeleton")
+		  '("Description: "
+		    "#+LATEX_CLASS: ramsay-org-article"\n
+		    "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n
+		    "#+AUTHOR: Ramsay Leung"\n
+		    "#+EMAIL: ramsayleung@gmail.com"\n
+		    "#+DATE: "
+		    (format-time-string "%Y-%m-%dT%H:%M:%S")> \n
+		    > _ \n
+		    )))
+
 
 	     (defun add-pcomplete-to-capf ()
 	       (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
@@ -128,6 +139,13 @@
   :config (progn
 	    (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
 	    ))
+(use-package org-download
+  :ensure t
+  ;; There is something wrong with `hook`, so redefine it with my own :hook
+  :init (add-hook 'org-mode-hook (lambda () (require 'org-download)))
+  :config
+  (setq-default org-download-image-dir "../images")
+  (put 'org-download-image-dir 'safe-local-variable (lambda (_) t)))
 
 ;; Org extra exports
 ;; Export to github flavored markdown

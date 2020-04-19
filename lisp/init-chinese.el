@@ -234,12 +234,6 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-;; 在创建 org-mode buffer, 自动添加 latex class 解决生成中文pdf 问题
-(eval-after-load 'autoinsert
-  '(define-auto-insert '(org-mode . "Chinese Org skeleton")
-     '("Description: "
-       "#+LATEX_CLASS: ramsay-org-article"\n
-       "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n)))
 ;;; Adds hook to find-files-hook
 (run-with-idle-timer ramsay-idle-time nil 'auto-insert-mode)
 (setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
