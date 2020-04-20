@@ -13,11 +13,8 @@
 	  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 	  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
           ;;; Auto complete pair symbol, such as `()`, `{}`
-	  (defvar ramsay/electic-pair-modes '(emacs-lisp-mode lisp-mode scheme-mode lisp-interaction-mode))
-	  (defun ramsay/inhibit-electric-pair-mode (char)
-	    (member major-mode ramsay/electic-pair-modes))
-	  (setq electric-pair-inhibit-predicate #'ramsay/inhibit-electric-pair-mode)
-	  (add-hook 'prog-mode-hook 'electric-pair-mode)
+	  (dolist (hook '(emacs-lisp-mode-hook lisp-mode-hook scheme-mode-hook lisp-interaction-mode-hook python-mode-hook rust-mode-hook c++-mode-hook))
+ 	    (add-hook hook 'electric-pair-mode))
 	  )
   )
 
