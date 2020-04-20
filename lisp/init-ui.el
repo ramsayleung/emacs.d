@@ -223,7 +223,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'spacemacs-dark t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
