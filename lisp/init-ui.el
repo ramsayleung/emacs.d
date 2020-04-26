@@ -12,7 +12,7 @@
 ;;; Windows & Frames ;;;
 ;;;------------------;;;
 
-;; language
+					; language
 ;;; always split windows horizontally rather than vertically
 ;; (setq split-height-threshold nil)
 (setq current-language-environment "English")
@@ -212,6 +212,8 @@ This code toggles between them."
 
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
+  :init
+  (set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal)
   :defer t)
 
 (use-package spacemacs-theme
@@ -223,7 +225,7 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'spacemacs-dark t)
+(load-theme 'spacemacs-light t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
