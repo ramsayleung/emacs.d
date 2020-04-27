@@ -28,8 +28,7 @@
 	  evil-motion-state-tag   (propertize "[Motion]")
 	  evil-visual-state-tag   (propertize "[Visual]")
 	  evil-operator-state-tag (propertize "[Operator]"))
-    (setq evil-insert-state-cursor '(box "green"))
-    (setq evil-normal-state-cursor '(box "white"))
+    (setq evil-insert-state-cursor '(box))
     ))
 
 
