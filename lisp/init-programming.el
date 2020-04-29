@@ -11,6 +11,10 @@
   (setq realgud:pdb-command-name "python3 -m pdb")
   )
 
+(use-package groovy-mode
+  :ensure t
+  :mode "\\.groovy$")
+
 (use-package yasnippet
   :ensure t
   :diminish (yas-minor-mode . " yas")
@@ -23,7 +27,7 @@
 	    ))
 
 ;;; velecity mode
-(use-package vtl
+(use-package vtl-mode
   :load-path "~/.emacs.d/additional-packages/vtl.el"
   :mode "\\.vm$")
 
