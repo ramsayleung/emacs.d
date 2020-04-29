@@ -122,6 +122,15 @@
 	     (defun add-pcomplete-to-capf ()
 	       (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
 	     (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
+
+	     
+	     (dolist (face '(org-level-1
+			     org-level-2
+			     org-level-3
+			     org-level-4
+			     org-level-5))
+	       (set-face-attribute face nil :weight 'semi-bold
+				   :font "Ubuntu Mono-16:weight=medium"))
 	     )
 	   )
   )

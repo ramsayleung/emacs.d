@@ -213,7 +213,6 @@ This code toggles between them."
 (use-package color-theme-sanityinc-tomorrow
   :ensure t
   :init
-  (set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal)
   :defer t)
 
 (use-package spacemacs-theme
@@ -225,7 +224,8 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(load-theme 'spacemacs-light t)
+(set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal)
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
