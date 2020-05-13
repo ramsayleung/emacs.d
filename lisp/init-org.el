@@ -147,6 +147,13 @@
   (setq-default org-download-image-dir "../images")
   (put 'org-download-image-dir 'safe-local-variable (lambda (_) t)))
 
+;;; Generate table of content.
+;;; https://github.com/snosov1/toc-org
+(use-package toc-org
+  :ensure t
+  :init
+  (add-hook 'org-mode-hook 'toc-org-mode))
+
 ;; Org extra exports
 ;; Export to github flavored markdown
 (use-package ox-gfm
