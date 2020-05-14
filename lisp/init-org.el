@@ -139,6 +139,13 @@
   :config (progn
 	    (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
 	    ))
+(use-package org-journal
+  :ensure t
+  :defer t
+  :custom
+  (org-journal-dir "~/btsync/journal")
+  (org-journal-date-format "%A, %d %B %Y"))
+
 (use-package org-download
   :ensure t
   ;; There is something wrong with `hook`, so redefine it with my own :hook
