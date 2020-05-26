@@ -51,13 +51,6 @@
 				  :background (face-attribute 'default :background)
 				  :foreground (face-attribute 'flycheck-fringe-error :foreground)))
 	    (ramsay/set-flycheck-face-attribute)
-
-	    (defun load-theme@after (&rest _)
-	      (when flycheck-mode
-		(when (not flycheck-posframe-mode)
-		  (flycheck-posframe-mode))
-		(ramsay/set-flycheck-face-attribute)))
-	    (advice-add 'load-theme :after 'load-theme@after)
 	    )
   )
 
