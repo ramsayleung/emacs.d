@@ -99,7 +99,7 @@ This code toggles between them."
   (message "Update font configuration.")
   (if window-system
       (progn
-	(set-face-attribute 'mode-line nil :font (if (ramsay/font-exists-p "Ubuntu Mono-16:weight=medium") "Ubuntu Mono-16:weight=medium" "Fantasque Sans Mono-16:weight=medium"))
+	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
 	(set-face-attribute
 	 'default nil
 	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
@@ -224,7 +224,14 @@ This code toggles between them."
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal)
+(defun load-theme@after (&rest _)
+  (when flycheck-mode
+    (when (not flycheck-posframe-mode)
+      (flycheck-posframe-mode))
+    (ramsay/set-flycheck-face-attribute))
+  (set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal))
+(advice-add 'load-theme :after 'load-theme@after)
+
 (load-theme 'sanityinc-tomorrow-night t)
 
 ;;----------------;;
@@ -239,6 +246,10 @@ This code toggles between them."
 
 ;;;Move evil tag to beginning of mode line
 (setq evil-mode-line-format '(before . mode-line-front-space))
+(setq-default mode-line-buffer-identification
+              (let ((orig  (car mode-line-buffer-identification)))
+                `(:eval (cons (concat (when (buffer-file-name) (concat (file-name-nondirectory (directory-file-name default-directory)) "/" ))  ,orig )
+                              (cdr mode-line-buffer-identification)))))
 
 (use-package diminish
   :ensure t
