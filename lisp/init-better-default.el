@@ -10,6 +10,9 @@
             (setq auto-save-slient t)
             (setq auto-save-idle 3)
             ))
+(use-package autorevert
+  :ensure nil
+  :hook (after-init . global-auto-revert-mode))
 
 (use-package dired-sidebar
   :bind (([f8] . dired-sidebar-toggle-sidebar))
