@@ -18,10 +18,11 @@
   :init
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
+  (setq lsp-rust-server 'rust-analyzer)
   (add-to-list 'company-lsp-filter-candidates '(gopls . nil))
   (add-hook 'c++-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
   (add-hook 'c-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
-  (add-hook 'rust-mode-hook (lambda ()(flycheck-select-checker 'rust-cargo) (setq lsp-rust-server 'rust-analyzer)))
+  (add-hook 'rust-mode-hook (lambda ()(flycheck-select-checker 'rust-cargo)))
   (add-hook 'python-mode-hook (lambda () (flycheck-select-checker 'python-flake8)))
   (set-face-attribute 'lsp-face-highlight-textual nil
   		      :background "#666" :foreground "#ffffff")
