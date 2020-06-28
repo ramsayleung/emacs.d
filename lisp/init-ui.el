@@ -105,18 +105,23 @@ This code toggles between them."
 	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
 			  :weight 'normal
 			  :size 16.7))
-	(let ((chinese-font (if (ramsay/mac-os-p)
-				"-WQYF-Microsoft YaHei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-			      "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1")))
+	(if (ramsay/mac-os-p)
+	    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+	      (set-fontset-font
+	       (frame-parameter nil 'font)
+	       charset
+	       (font-spec :name "-WQYF-Microsoft YaHei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+			  :weight 'normal
+			  :slant 'normal
+			  :size 16)))
 	  (dolist (charset '(kana han symbol cjk-misc bopomofo))
 	    (set-fontset-font
 	     (frame-parameter nil 'font)
 	     charset
-	     (font-spec :name chinese-font
+	     (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
 			:weight 'normal
 			:slant 'normal
-			:size 16))))
-	)
+			:size 16.1)))))
     (add-to-list 'default-frame-alist
 		 '(font . "Fantasque Sans Mono-16.7:weight=medium"))))
 
