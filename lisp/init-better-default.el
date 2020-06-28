@@ -10,6 +10,11 @@
             (setq auto-save-slient t)
             (setq auto-save-idle 3)
             ))
+(use-package valign
+  :load-path "~/.emacs.d/additional-packages/valign.el"
+  :diminish valign-mode
+  :hook (org-mode . valign-mode))
+
 (use-package autorevert
   :ensure nil
   :hook (after-init . global-auto-revert-mode))

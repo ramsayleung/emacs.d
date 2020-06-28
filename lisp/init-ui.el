@@ -232,7 +232,7 @@ This code toggles between them."
   (set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal))
 (advice-add 'load-theme :after 'load-theme@after)
 
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'zenburn t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
