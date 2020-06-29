@@ -123,7 +123,7 @@ This code toggles between them."
 			:slant 'normal
 			:size 16.1)))))
     (add-to-list 'default-frame-alist
-		 '(font . "Fantasque Sans Mono-16.7:weight=medium"))))
+		 '(font . "Fantasque Sans Mono-17:weight=medium"))))
 
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
@@ -237,7 +237,7 @@ This code toggles between them."
   (set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal))
 (advice-add 'load-theme :after 'load-theme@after)
 
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'zenburn t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
