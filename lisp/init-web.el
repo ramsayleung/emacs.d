@@ -17,6 +17,10 @@
              web-beautify-js
              web-beautify-js-buffer))
 
+(use-package php-mode
+  :ensure t
+  :mode (("\\.php\\'" . php-mode)))
+
 (use-package web-mode
   :ensure t
   :mode (

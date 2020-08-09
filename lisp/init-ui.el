@@ -99,12 +99,8 @@ This code toggles between them."
   (message "Update font configuration.")
   (if window-system
       (progn
-	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-17:weight=medium")
-	(set-face-attribute
-	 'default nil
-	 :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-			  :weight 'normal
-			  :size 16.7))
+	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
+	(set-frame-font "Fantasque Sans Mono-16")
 	(if (ramsay/mac-os-p)
 	    (dolist (charset '(kana han symbol cjk-misc bopomofo))
 	      (set-fontset-font
@@ -121,9 +117,9 @@ This code toggles between them."
 	     (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
 			:weight 'normal
 			:slant 'normal
-			:size 16.1)))))
+			:size 16.0)))))
     (add-to-list 'default-frame-alist
-		 '(font . "Fantasque Sans Mono-17:weight=medium"))))
+		 '(font . "Fantasque Sans Mono-16:weight=medium"))))
 
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."

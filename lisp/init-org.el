@@ -20,6 +20,8 @@
 
 	  (setq org-ellipsis " [+]")
 
+	  (setq org-html-htmlize-output-type nil)
+
 	  ;;Its default value is (ascii html icalendar latex)
 	  (setq org-export-backends '(latex icalendar))
 	  ;; Show org-edit-special in the other-window
@@ -44,7 +46,7 @@
 	   (when (not (eq system-type 'windows-nt))
 	     (require 'ox-md nil t)
 	     (require 'org-indent)
-	     (require 'org-tempo)
+	     (when (version< "9.2" org-version) (require 'org-tempo))
 	     (org-indent-mode -1)         ;disable org-indent-mode
 	     ;; let org-mode to delete those auxiliary files after export
 	     ;;automatically
@@ -109,6 +111,7 @@
 	     (eval-after-load 'autoinsert
 	       '(define-auto-insert '(org-mode . "Chinese Org skeleton")
 		  '("Description: "
+		    "#+SETUPFILE: /home/ramsay/btsync/conf/org-html-theme/theme-readtheorg.setup"\n
 		    "#+LATEX_CLASS: ramsay-org-article"\n
 		    "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n
 		    "#+AUTHOR: Ramsay Leung"\n
