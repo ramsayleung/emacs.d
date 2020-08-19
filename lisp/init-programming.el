@@ -183,6 +183,11 @@ similar to shell-pop"
   (interactive)
   (kill-new (buffer-name))
   )
+(defun ramsay/get-buffer-full-name()
+  "Get the full path name of current buffer."
+  (interactive)
+  (kill-new (buffer-file-name))
+  )
 
 
 (defun ramsay/basename (path)

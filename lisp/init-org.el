@@ -111,7 +111,7 @@
 	     (eval-after-load 'autoinsert
 	       '(define-auto-insert '(org-mode . "Chinese Org skeleton")
 		  '("Description: "
-		    "#+SETUPFILE: /home/ramsay/btsync/conf/org-html-theme/theme-readtheorg.setup"\n
+		    "#+SETUPFILE: ~/btsync/conf/org-html-theme/theme-readtheorg.setup"\n
 		    "#+LATEX_CLASS: ramsay-org-article"\n
 		    "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n
 		    "#+AUTHOR: Ramsay Leung"\n
@@ -147,6 +147,7 @@
   :defer t
   :custom
   (org-journal-dir "~/btsync/journal")
+  (org-journal-file-format "%Y%m%d.org")
   (org-journal-date-format "%A, %d %B %Y"))
 
 (use-package org-download
@@ -163,6 +164,37 @@
   :ensure t
   :init
   (add-hook 'org-mode-hook 'toc-org-mode))
+
+(use-package org-roam
+  :ensure t
+  :hook
+  (after-init . org-roam-mode)
+  :config
+  (require 'org-roam-protocol)
+  ;; (setq org-roam-capture-templates
+  ;; 	'(
+  ;;         ("d" "default" plain (function org-roam-capture--get-point)
+  ;;          "%?"
+  ;;          :file-name "%<%Y%m%d%H%M%S>-${slug}"
+  ;;          :head "#+title: ${title}\n#+roam_alias: \n#+roam_tags: \n")))
+  :custom
+  (org-roam-db-location "~/.org-roam.db")
+  (org-roam-directory "~/btsync"))
+(use-package org-roam-server
+  :ensure t
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 1234
+        org-roam-server-authenticate nil
+        org-roam-server-export-inline-images t
+        org-roam-server-serve-files nil
+        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+        org-roam-server-network-poll t
+        org-roam-server-network-arrows nil
+        org-roam-server-network-label-truncate t
+        org-roam-server-network-label-truncate-length 60
+        org-roam-server-network-label-wrap-length 20)
+  )
 
 ;; Org extra exports
 ;; Export to github flavored markdown

@@ -99,7 +99,7 @@ This code toggles between them."
   (message "Update font configuration.")
   (if window-system
       (progn
-	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
+	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-17:weight=medium")
 	(set-frame-font "Fantasque Sans Mono-16")
 	(if (ramsay/mac-os-p)
 	    (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -233,7 +233,7 @@ This code toggles between them."
   (set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal))
 (advice-add 'load-theme :after 'load-theme@after)
 
-(load-theme 'zenburn t)
+(load-theme 'spacemacs-light t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;

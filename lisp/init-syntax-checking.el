@@ -40,14 +40,14 @@
 	      (set-face-attribute 'flycheck-posframe-warning-face nil
 				  :inherit nil
 				  :stipple nil
-				  :font "Consolas:15"
+				  :font "Fantasque Sans Mono:15"
 				  :background (face-attribute 'default :background)
 				  :foreground (face-attribute 'flycheck-fringe-warning :foreground))
 
 	      (set-face-attribute 'flycheck-posframe-error-face nil
 				  :inherit nil
 				  :stipple nil
-				  :font "Consolas:15"
+				  :font "Fantasque Sans Mono:15"
 				  :background (face-attribute 'default :background)
 				  :foreground (face-attribute 'flycheck-fringe-error :foreground)))
 	    (ramsay/set-flycheck-face-attribute)

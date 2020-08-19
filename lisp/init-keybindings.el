@@ -27,6 +27,7 @@
 				"b" '(:ignore t :which-key "buffers")
 				"b b" 'ramsay/switch-to-current-open-buffer
 				"b d" 'kill-this-buffer
+				"b f" 'ramsay/get-buffer-full-name
 				"b k" 'ramsay/kill-other-buffers
 				"b D" 'ramsay/delete-blank-line-in-buffer
 				"b l" 'ramsay/ivy-switch-to-buffer-enhanced
@@ -155,6 +156,14 @@
 				"M-o" 'org-insert-heading
 				"M-t" 'org-insert-todo-heading
 				"C-c c" 'org-capture
+				"C-c n i" 'org-roam-insert
+				"C-c n I" 'org-roam-insert-immediate
+				)
+	    (general-define-key :states '(normal insert visual motion)
+				:keymaps 'org-roam-mode-map
+				"C-c n l" 'org-roam
+				"C-c n f" 'org-roam-find-file
+				"C-c n g" 'org-roam-graph
 				)
 
 	    (general-define-key :states '(normal visual motion)
