@@ -20,7 +20,6 @@
     (if (eq system-type 'windows-nt)
 	(concat strip-path "\\lib\\rustlib\\src\\rust\\src")
       (concat strip-path "/lib/rustlib/src/rust/src"))))
-(setenv "RUST_SRC_PATH" (ramsay/get-rust-src-path))
 (defun ramsay/set-rust-ld-library-path ()
   "Set rust link library path."
   (let* ((command (concat "rustc --print sysroot"))
@@ -29,7 +28,8 @@
     (if (eq system-type 'windows-nt)
 	(concat strip-path "\\lib\\")
       (concat strip-path "/lib/"))))
-(setenv "LD_LIBRARY_PATH" (ramsay/set-rust-ld-library-path))
+;; (setenv "RUST_SRC_PATH" (ramsay/get-rust-src-path))
+;; (setenv "LD_LIBRARY_PATH" (ramsay/set-rust-ld-library-path))
 
 ;;; https://github.com/rust-lang/rust-mode/issues/208
 (setq rust-match-angle-brackets nil)

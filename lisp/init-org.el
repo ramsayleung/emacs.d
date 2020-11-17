@@ -167,19 +167,17 @@
 
 (use-package org-roam
   :ensure t
-  :hook
-  (after-init . org-roam-mode)
   :config
   (require 'org-roam-protocol)
-  ;; (setq org-roam-capture-templates
-  ;; 	'(
-  ;;         ("d" "default" plain (function org-roam-capture--get-point)
-  ;;          "%?"
-  ;;          :file-name "%<%Y%m%d%H%M%S>-${slug}"
-  ;;          :head "#+title: ${title}\n#+roam_alias: \n#+roam_tags: \n")))
+  (setq org-roam-capture-templates
+	'(
+          ("d" "default" plain (function org-roam-capture--get-point)
+           "%?"
+           :file-name "%<%Y%m%d%H%M%S>-${slug}"
+           :head "#+title: ${title}\n#+roam_alias: \n#+roam_tags: \n")))
   :custom
   (org-roam-db-location "~/.org-roam.db")
-  (org-roam-directory "~/btsync"))
+  (org-roam-directory "~/btsync/org"))
 (use-package org-roam-server
   :ensure t
   :config

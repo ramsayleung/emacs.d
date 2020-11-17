@@ -1,4 +1,4 @@
-					; package --- Summary  -*- lexical-binding: t -*-
+;;; package --- Summary  -*- lexical-binding: t -*-
 ;;; Code:
 ;;; Commentary:
 ;;;----------------;;;
@@ -39,6 +39,10 @@
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
 	    ))
+(use-package nyan-mode
+  :ensure t
+  :init
+  (nyan-mode))
 
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
@@ -99,7 +103,7 @@ This code toggles between them."
   (message "Update font configuration.")
   (if window-system
       (progn
-	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-17:weight=medium")
+	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
 	(set-frame-font "Fantasque Sans Mono-16")
 	(if (ramsay/mac-os-p)
 	    (dolist (charset '(kana han symbol cjk-misc bopomofo))

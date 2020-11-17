@@ -5,29 +5,28 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package company-lsp
-  :ensure t
-  :config (progn
-	    (push 'company-lsp company-backends))
-  )
-
 (use-package lsp-mode
   :ensure t
   :defines (lsp-clients-typescript-server lsp-clients-typescript-server-args)
-  :hook ((go-mode python-mode rust-mode sh-mode c-mode c++-mode objc-mode) . lsp)
+  :hook
+  ((go-mode python-mode rust-mode sh-mode c-mode c++-mode objc-mode) . lsp)
   :init
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
   (setq lsp-rust-server 'rust-analyzer)
-  (add-to-list 'company-lsp-filter-candidates '(gopls . nil))
+  (setq lsp-modeline-code-actions-segments '(name count))
   (add-hook 'c++-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
   (add-hook 'c-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
-  (add-hook 'rust-mode-hook (lambda ()(flycheck-select-checker 'rust-cargo)))
+  ;; (add-hook 'rust-mode-hook (lambda ()(flycheck-select-checker 'rust-cargo)))
   (add-hook 'python-mode-hook (lambda () (flycheck-select-checker 'python-flake8)))
   (set-face-attribute 'lsp-face-highlight-textual nil
-  		      :background "#666" :foreground "#ffffff")
+		      :background "#666"
+		      :foreground "#ffffff")
+  :config
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'lsp-mode-hook (apply-partially #'lsp-enable-which-key-integration t)))
   )
-
 
 (use-package lsp-ui
   :ensure t

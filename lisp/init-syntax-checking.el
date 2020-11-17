@@ -32,27 +32,28 @@
 	  ;;   (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 	  ))
 
-(use-package flycheck-posframe
-  :ensure t
-  :hook (flycheck-mode . flycheck-posframe-mode)
-  :config (progn
-	    (defun ramsay/set-flycheck-face-attribute()
-	      (set-face-attribute 'flycheck-posframe-warning-face nil
-				  :inherit nil
-				  :stipple nil
-				  :font "Fantasque Sans Mono:15"
-				  :background (face-attribute 'default :background)
-				  :foreground (face-attribute 'flycheck-fringe-warning :foreground))
+;; (use-package flycheck-posframe
+;;   :ensure t
+;;   :defer t
+;;   :hook (flycheck-mode . flycheck-posframe-mode)
+;;   :config (progn
+;; 	    (defun ramsay/set-flycheck-face-attribute()
+;; 	      (set-face-attribute 'flycheck-posframe-warning-face nil
+;; 				  :inherit nil
+;; 				  :stipple nil
+;; 				  :font "Fantasque Sans Mono:15"
+;; 				  :background (face-attribute 'default :background)
+;; 				  :foreground (face-attribute 'flycheck-fringe-warning :foreground))
 
-	      (set-face-attribute 'flycheck-posframe-error-face nil
-				  :inherit nil
-				  :stipple nil
-				  :font "Fantasque Sans Mono:15"
-				  :background (face-attribute 'default :background)
-				  :foreground (face-attribute 'flycheck-fringe-error :foreground)))
-	    (ramsay/set-flycheck-face-attribute)
-	    )
-  )
+;; 	      (set-face-attribute 'flycheck-posframe-error-face nil
+;; 				  :inherit nil
+;; 				  :stipple nil
+;; 				  :font "Fantasque Sans Mono:15"
+;; 				  :background (face-attribute 'default :background)
+;; 				  :foreground (face-attribute 'flycheck-fringe-error :foreground)))
+;; 	    (ramsay/set-flycheck-face-attribute)
+;; 	    )
+;;   )
 
 (message "loading init-syntax-checking")
 (provide 'init-syntax-checking)
