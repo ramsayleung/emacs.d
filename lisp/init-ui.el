@@ -125,6 +125,13 @@ This code toggles between them."
     (add-to-list 'default-frame-alist
 		 '(font . "Fantasque Sans Mono-16:weight=medium"))))
 
+;;; Apply text-scale-adjust for all buffer
+(defadvice text-scale-increase (around all-buffers (arg) activate)
+  "Text scale adjust for all buffer."
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      ad-do-it)))
+
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
   (run-with-timer 2 nil 'ramsay/set-font))
