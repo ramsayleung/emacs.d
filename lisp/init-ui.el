@@ -97,33 +97,44 @@ This code toggles between them."
 
 ;;; 设置中英文等高字体设置. 等高与等宽, 两者只能其一. 如果想设置等宽, 将
 ;;; WenQuanYi 的 size 设置为 16.5
-(defun ramsay/set-font ()
+(defun ramsay/set-chinese-font ()
   "Set font."
   (interactive)
-  (message "Update font configuration.")
-  (if window-system
-      (progn
-	(set-face-attribute 'mode-line nil :font "Fantasque Sans Mono-16:weight=medium")
-	(set-frame-font "Fantasque Sans Mono-16")
-	(if (ramsay/mac-os-p)
-	    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-	      (set-fontset-font
-	       (frame-parameter nil 'font)
-	       charset
-	       (font-spec :name "-WQYF-Microsoft YaHei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-			  :weight 'normal
-			  :slant 'normal
-			  :size 16)))
-	  (dolist (charset '(kana han symbol cjk-misc bopomofo))
-	    (set-fontset-font
-	     (frame-parameter nil 'font)
-	     charset
-	     (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-			:weight 'normal
-			:slant 'normal
-			:size 16.0)))))
-    (add-to-list 'default-frame-alist
-		 '(font . "Fantasque Sans Mono-16:weight=medium"))))
+  (when window-system
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font
+       (frame-parameter nil 'font)
+       charset
+       (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+		  :weight 'normal
+		  :slant 'normal
+		  :size 16.0)))))
+
+(setq default-font-size-pt 18)
+(add-to-list 'default-frame-alist
+	     '(font . "Fantasque Sans Mono-18:weight=medium"))
+
+(defun modi/font-size-adj (&optional arg)
+  "The default C-x C-0/-/= bindings do an excellent job of font resizing.
+They, though, do not change the font sizes for the text outside the buffer,
+example in mode-line. Below function changes the font size in those areas too.
+
+M-<NUM> M-x modi/font-size-adj increases font size by NUM points if NUM is +ve,
+                               decreases font size by NUM points if NUM is -ve
+                               resets    font size if NUM is 0."
+  (interactive "p")
+  (if (= arg 0)
+      (setq font-size-pt default-font-size-pt)
+    (setq font-size-pt (+ font-size-pt arg)))
+  ;; The internal font size value is 10x the font size in points unit.
+  ;; So a 10pt font size is equal to 100 in internal font size value.
+  (set-face-attribute 'default nil :height (* font-size-pt 10)))
+
+(defun modi/font-size-incr ()  (interactive) (modi/font-size-adj +1))
+(defun modi/font-size-decr ()  (interactive) (modi/font-size-adj -1))
+(defun modi/font-size-reset () (interactive) (modi/font-size-adj 0))
+
+(modi/font-size-reset) ; Initialize font-size-pt var to the default value
 
 ;;; Apply text-scale-adjust for all buffer
 (defadvice text-scale-increase (around all-buffers (arg) activate)
@@ -244,7 +255,7 @@ This code toggles between them."
   (set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal))
 (advice-add 'load-theme :after 'load-theme@after)
 
-(load-theme 'spacemacs-light t)
+(load-theme 'zenburn t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;

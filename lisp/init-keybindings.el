@@ -592,6 +592,13 @@
 	      ("r" counsel-rg "ripgreg")
 	      )
 
+	    (defhydra hydra-font-resize
+	      (global-map "C-M-=")
+	      "font-resize"
+	      ("-"   modi/font-size-decr  "Decrease")
+	      ("="   modi/font-size-incr  "Increase")
+	      ("0"   modi/font-size-reset "Reset to default size"))
+
 	    (defhydra hydra-info (:color blue
 					 :hint nil)
 	      "

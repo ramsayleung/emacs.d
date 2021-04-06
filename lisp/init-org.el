@@ -132,16 +132,6 @@
 ;; (add-hook 'after-init-hook (lambda ()
 ;; 			     (org-agenda nil "c")))
 
-;;; show org-mode bullets as UTF-8 character
-(use-package org-bullets
-  :if (and (not (ramsay/windows-p))
-	   window-system)
-  :defer t
-  :ensure t
-  :init (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  :config (progn
-	    (setq org-bullets-bullet-list '("☯" "☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷"))
-	    ))
 (use-package org-journal
   :ensure t
   :defer t
