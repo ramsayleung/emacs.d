@@ -97,7 +97,7 @@ This code toggles between them."
 
 ;;; 设置中英文等高字体设置. 等高与等宽, 两者只能其一. 如果想设置等宽, 将
 ;;; WenQuanYi 的 size 设置为 16.5
-(defun ramsay/set-chinese-font ()
+(defun ramsay/set-chinese-font (&optional arg)
   "Set font."
   (interactive)
   (when window-system
@@ -108,33 +108,48 @@ This code toggles between them."
        (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
 		  :weight 'normal
 		  :slant 'normal
-		  :size 16.0)))))
+		  :height arg)))))
 
 (setq default-font-size-pt 18)
+(setq default-chinese-size-pt 16)
 (add-to-list 'default-frame-alist
 	     '(font . "Fantasque Sans Mono-18:weight=medium"))
 
-(defun modi/font-size-adj (&optional arg)
+(defun ramsay/font-size-adj (&optional arg)
   "The default C-x C-0/-/= bindings do an excellent job of font resizing.
 They, though, do not change the font sizes for the text outside the buffer,
 example in mode-line. Below function changes the font size in those areas too.
 
-M-<NUM> M-x modi/font-size-adj increases font size by NUM points if NUM is +ve,
+M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve,
                                decreases font size by NUM points if NUM is -ve
                                resets    font size if NUM is 0."
   (interactive "p")
   (if (= arg 0)
-      (setq font-size-pt default-font-size-pt)
-    (setq font-size-pt (+ font-size-pt arg)))
+      (progn
+	(setq font-size-pt default-font-size-pt)
+	(setq chinese-size-pt default-chinese-size-pt))
+    (progn
+      (setq font-size-pt (+ font-size-pt arg))
+      (setq chinese-size-pt (+ chinese-size-pt arg))
+      ))
   ;; The internal font size value is 10x the font size in points unit.
   ;; So a 10pt font size is equal to 100 in internal font size value.
-  (set-face-attribute 'default nil :height (* font-size-pt 10)))
+  (set-face-attribute 'default nil :height (* font-size-pt 10))
+  (ramsay/set-chinese-font (* 10 chinese-size-pt)))
 
-(defun modi/font-size-incr ()  (interactive) (modi/font-size-adj +1))
-(defun modi/font-size-decr ()  (interactive) (modi/font-size-adj -1))
-(defun modi/font-size-reset () (interactive) (modi/font-size-adj 0))
+(defun ramsay/font-size-incr ()
+  "Increase font size for all size."
+  (interactive) (ramsay/font-size-adj +1))
 
-(modi/font-size-reset) ; Initialize font-size-pt var to the default value
+(defun ramsay/font-size-decr ()
+  "Decrease font size for all size."
+  (interactive) (ramsay/font-size-adj -1))
+
+(defun ramsay/font-size-reset ()
+  "Reset font size."
+  (interactive) (ramsay/font-size-adj 0))
+
+(ramsay/font-size-reset) ; Initialize font-size-pt var to the default value
 
 ;;; Apply text-scale-adjust for all buffer
 (defadvice text-scale-increase (around all-buffers (arg) activate)
@@ -146,7 +161,7 @@ M-<NUM> M-x modi/font-size-adj increases font size by NUM points if NUM is +ve,
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
   (run-with-timer 2 nil 'ramsay/set-font))
-(ramsay/set-font)
+(ramsay/set-chinese-font default-chinese-size-pt)
 
 ;;; Change vertical-border for terminal Emacs.
 ;;; Vertical-border in terminal is ugly, fix it.
