@@ -25,8 +25,7 @@
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (with-eval-after-load 'lsp-mode
-    (add-hook 'lsp-mode-hook (apply-partially #'lsp-enable-which-key-integration t)))
-  )
+    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
 
 (use-package lsp-ui
   :ensure t

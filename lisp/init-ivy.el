@@ -123,20 +123,6 @@ bookmarks reccently opened files and window layout."
   (setq ivy-use-virtual-buffers t)
   (ivy-switch-buffer))
 
-;; http://emacs.stackexchange.com/questions/10393/how-can-i-answer-a-minibuffer-prompt-from-elisp
-(defun ramsay/insert-symbol-at-point ()
-  (if (> (length cached-symbol-at-point) 0)
-      (insert cached-symbol-at-point))
-  (remove-hook 'post-command-hook 'insert-symbol-at-point)
-  )
-
-(defun ramsay/counsel-ag-symbol-at-point ()
-  "Search for number at point using counsel-ag."
-  (interactive)
-  (setq cached-symbol-at-point (thing-at-point `symbol))
-  (add-hook 'post-command-hook 'insert-symbol-at-point)
-  (counsel-ag)
-  )
 
 (message "loading init-ivy")
 (provide 'init-ivy)

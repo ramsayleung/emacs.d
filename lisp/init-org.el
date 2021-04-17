@@ -172,7 +172,7 @@
   :ensure t
   :config
   (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 1234
+        org-roam-server-port 8080
         org-roam-server-authenticate nil
         org-roam-server-export-inline-images t
         org-roam-server-serve-files nil
