@@ -21,18 +21,14 @@
 
 (use-package ivy
   :ensure t
+  :hook (after-init . ivy-mode)
   :diminish ivy-mode
-  :init (progn
-	  (setq ivy-use-selectable-prompt t)
-	  (setq ivy-re-builders-alist
-		'((t . ivy--regex-plus)))
-	  (setq ivy-initial-inputs-alist nil)
-	  ;; Use grep instead of grep
-	  (setq counsel-grep-base-command
-		"rg -i -M 120 --no-heading --line-number --color never %s %s")
-	  )
   :config(progn
-	   (ivy-mode 1)
+	   (setq ivy-use-selectable-prompt t)
+	   (setq ivy-initial-inputs-alist nil)
+	   ;; Use grep instead of grep
+	   (setq counsel-grep-base-command
+		 "rg -i -M 120 --no-heading --line-number --color never %s %s")
 	   ;; Count candidates
 	   (setq ivy-count-format "%d/%d ")
 	   ;; Number of result lines to display, set height as width-body-height/2
@@ -65,7 +61,12 @@
         a)))
 
   (setq ivy-re-builders-alist
-        '((t . pinyin-ivy-cregexp))))
+	'(
+	  (counsel-describe-function . ivy--regex-plus)
+	  (counsel-describe-variable . ivy--regex-plus)
+	  (t . pinyin-ivy-cregexp)
+	  ))
+  )
 
 (use-package counsel-projectile
   :ensure t
