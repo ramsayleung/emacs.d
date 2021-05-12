@@ -113,7 +113,7 @@
 				"1"  'ace-window)
 	    
 	    (general-define-key
-	     "C-s" 'ramsay/counsel-grep-or-swiper
+	     "C-s" 'swiper-isearch
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
 	     "C-h l" 'counsel-find-library
@@ -413,6 +413,7 @@
 	     [remap evil-complete-next] 'company-select-next
 	     [remap evil-complete-previous] 'company-select-previous
 	     "C-c a" 'org-agenda
+	     "C-c l" 'org-store-link
 	     "C-c e" 'hydra-edit/body
 	     "C-c n" 'ramsay/empty-buffer
 	     "C-c y p" 'youdao-dictionary-search-at-point+
@@ -429,6 +430,7 @@
 	     "C-p" 'previous-line
 	     "C-x k" 'kill-this-buffer
 	     "C-x t" 'ramsay/dired-tmp-dir
+	     "C-x u" 'undo-tree-visualize
 	     "C-x C-r" 'recentf-open-files
 	     "C-x 2" 'ramsay/split-window-below-and-move
 	     "C-x 3" 'ramsay/split-window-right-and-move

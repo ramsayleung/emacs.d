@@ -39,12 +39,6 @@
 	       (if (< window-split-height 25)
 		   (setq ivy-height 25)
 		 (setq ivy-height window-split-height))))
-	   (defun ramsay/counsel-grep-or-swiper ()
-	     "Use `counsel-grep-or-swiper` dependen on buffer size."
-	     (interactive)
-	     (if (ramsay/buffer-too-big-p)
-		 (isearch-forward)
-	       (counsel-grep-or-swiper)))
 	   )
   )
 

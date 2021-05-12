@@ -33,10 +33,21 @@
 	  (add-hook 'org-src-mode-hook 'ramsay/disable-flycheck-in-org-src-block)
 	  (setq org-todo-keyword-faces
 		'(
-		  ("PROCESSING" . (:foreground "gold"))
+		  ("PLANNED" . (:foreground "orange" :weight bold))
+		  ("NEXT" . (:foreground "salmon" :weight bold))
+		  ("DONE" . (:foreground "LimeGreen" :weight bold))
+		  ("STARTED" . (:foreground "gold" :weight bold))
+		  ("CANCELLED" . (:foreground "DeepSkyBlue" :weight bold))
 		  ))
+	  ;;; PLANNED: A planned thing which contains several TODO items
+	  ;;; NEXT: A things need to be done in this week, which might contains several TODO items
+	  ;;; few TODO items
+	  ;;; TODO: The atomic Todo item , containing a few checklist
+	  ;;; STARTED: The started/processing TODO item
+	  ;;; DONE: The finished TODO item
+	  ;;; CANCELLED: The cancelled TODO item
 	  (setq org-todo-keywords
-		'((sequence "TODO" "PROCESSING" "DONE")))
+		'((sequence "PLANNED" "NEXT" "TODO" "STARTED" "|" "DONE" "CANCELLED")))
 	  (setq org-priority-faces '(
 				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "blue"))
@@ -68,18 +79,15 @@
 		(sqlite . t)))
 
 	     (setq org-startup-with-inline-images t)
-	     (setq org-agenda-files (directory-files "~/btsync/org" t "\\.org"))
+	     (setq org-agenda-files '("~/btsync/org"))
 	     (setq org-agenda-custom-commands
-		   '(("c" "agenda view with alltodo sorted by priorities"
-		      ((tags "PRIORITY=\"A\""
-			     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-			      (org-agenda-overriding-header "High-priority unfinished tasks:")))
-		       (agenda "")
-		       (alltodo ""
-				((org-agenda-skip-function
-				  '(or
-				    (ramsay/org-skip-subtree-if-priority ?A)
-				    (org-agenda-skip-if nil '(scheduled deadline))))))))))
+		   '(
+		     ("w" "Weekly Review"
+		      agenda ""
+		      ((org-agenda-start-with-log-mode '(closed))
+		       (org-agenda-overriding-header "Weekly Review")
+                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("PROJ" "DONE" "CANCELLED")))))
+		     ))
 	     (setq org-capture-templates
 		   '(("a" "Agenda" entry (file  "~/btsync/org/agenda.org" "Agenda")
 		      "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
@@ -111,7 +119,6 @@
 	     (eval-after-load 'autoinsert
 	       '(define-auto-insert '(org-mode . "Chinese Org skeleton")
 		  '("Description: "
-		    "#+SETUPFILE: ~/btsync/conf/org-html-theme/theme-readtheorg.setup"\n
 		    "#+LATEX_CLASS: ramsay-org-article"\n
 		    "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n
 		    "#+AUTHOR: Ramsay Leung"\n
@@ -154,35 +161,6 @@
   :ensure t
   :init
   (add-hook 'org-mode-hook 'toc-org-mode))
-
-(use-package org-roam
-  :ensure t
-  :config
-  (require 'org-roam-protocol)
-  (setq org-roam-capture-templates
-	'(
-          ("d" "default" plain (function org-roam-capture--get-point)
-           "%?"
-           :file-name "%<%Y%m%d%H%M%S>-${slug}"
-           :head "#+title: ${title}\n#+roam_alias: \n#+roam_tags: \n")))
-  :custom
-  (org-roam-db-location "~/.org-roam.db")
-  (org-roam-directory "~/btsync/org"))
-(use-package org-roam-server
-  :ensure t
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8080
-        org-roam-server-authenticate nil
-        org-roam-server-export-inline-images t
-        org-roam-server-serve-files nil
-        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20)
-  )
 
 ;; Org extra exports
 ;; Export to github flavored markdown

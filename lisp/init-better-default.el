@@ -15,6 +15,30 @@
   :diminish valign-mode
   :hook (org-mode . valign-mode))
 
+(use-package so-long
+  :ensure nil
+  :config (global-so-long-mode 1))
+
+(use-package saveplace
+  :ensure nil
+  :hook (after-init . save-place-mode))
+
+(use-package paren
+  :ensure nil
+  :hook (after-init . show-paren-mode)
+  :config
+  (setq show-paren-when-point-inside-paren t
+        show-paren-when-point-in-periphery t))
+
+(use-package isearch
+  :ensure nil
+  :bind (:map isearch-mode-map
+              ([remap isearch-delete-char] . isearch-del-char))
+  :custom
+  (isearch-lazy-count t)
+  (lazy-count-prefix-format "%s/%s ")
+  (lazy-highlight-cleanup nil))
+
 (use-package autorevert
   :ensure nil
   :hook (after-init . global-auto-revert-mode))
