@@ -37,3 +37,4 @@ lisp/custom.el
 log/
 transient/
 /cnfonts/
+/places

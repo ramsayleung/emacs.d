@@ -79,8 +79,8 @@
 (setq save-abbrevs t)
 
 ;; Only start server mode if I'm not root
-;; (require 'server)
-;; (unless (server-running-p) (server-start))
+(require 'server)
+(unless (server-running-p) (server-start))
 
 
 (defadvice bookmark-jump (after bookmark-jump activate)
