@@ -48,6 +48,15 @@
   :init (remove-hook 'json-mode 'tern-mode)
   )
 
+(use-package plantuml-mode
+  :ensure t
+  :mode "\\.plantuml$"
+  :config
+  (setq plantuml-default-exec-mode 'executable)
+  (setq plantuml-executable-path (epe-trim-newline (shell-command-to-string "which plantuml")))
+  (setq org-plantuml-exec-mode 'plantuml)
+  )
+
 ;; Make Emacs use the $PATH set up by the user's shell
 (use-package exec-path-from-shell
   :ensure t

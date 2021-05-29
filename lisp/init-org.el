@@ -56,9 +56,11 @@
   :config(progn
 	   (when (not (eq system-type 'windows-nt))
 	     (require 'ox-md nil t)
-	     (require 'org-indent)
 	     (when (version< "9.2" org-version) (require 'org-tempo))
-	     (org-indent-mode -1)         ;disable org-indent-mode
+	     (require 'org-indent)
+             (add-hook 'org-mode-hook 'org-indent-mode)
+             (setq org-indent-mode-turns-on-hiding-stars nil)
+
 	     ;; let org-mode to delete those auxiliary files after export
 	     ;;automatically
 	     (setq org-latex-logfiles-extensions (quote
@@ -66,6 +68,7 @@
 	     (org-babel-do-load-languages
 	      'org-babel-load-languages
 	      '((clojure . t)
+                (dot . t)
 		(lisp . t)
 		(org . t)
 		(js . t)
@@ -73,6 +76,7 @@
 		(ruby . t)
 		(shell . t)
 		(python . t)
+		(plantuml . t)
 		(emacs-lisp . t)
 		(awk . t)
 		(sql . t)
