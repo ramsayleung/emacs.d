@@ -31,6 +31,15 @@
 	  (setq org-export-latex-listings 'minted)
 	  (add-to-list 'org-latex-packages-alist '("" "minted"))
 	  (add-hook 'org-src-mode-hook 'ramsay/disable-flycheck-in-org-src-block)
+	  ;; from plan9-theme
+	  (custom-set-faces
+	   '(org-level-1 ((t (:height 1.4 :weight bold
+				      :family (face-attribute 'default :font)
+				      :box (:line-width 1 :style released-button))))))
+
+	  (custom-set-faces
+	   '(org-level-2 ((t (:height 1.2
+				      :box (:line-width 1 :style released-button))))))
 	  (setq org-todo-keyword-faces
 		'(
 		  ("PLANNED" . (:foreground "orange" :weight bold))
@@ -50,7 +59,7 @@
 		'((sequence "PLANNED" "NEXT" "TODO" "STARTED" "|" "DONE" "CANCELLED")))
 	  (setq org-priority-faces '(
 				     (?A . (:foreground "red" :weight 'bold))
-				     (?B . (:foreground "blue"))
+				     (?B . (:foreground "DarkOrange"))
 				     (?C . (:foreground "green"))))
 	  )
   :config(progn
