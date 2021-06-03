@@ -248,7 +248,7 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
   :ensure t
   :defer t)
 
-(use-package color-theme-sanityinc-tomorrow
+(use-package plan9-theme
   :ensure t
   :init
   :defer t)
@@ -262,15 +262,8 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
-(defun load-theme@after (&rest _)
-  (when flycheck-mode
-    (when (not flycheck-posframe-mode)
-      (flycheck-posframe-mode))
-    (ramsay/set-flycheck-face-attribute))
-  (set-face-attribute 'font-lock-comment-face nil :weight 'medium :slant 'normal))
-(advice-add 'load-theme :after 'load-theme@after)
 
-(load-theme 'zenburn t)
+(load-theme 'plan9 t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;

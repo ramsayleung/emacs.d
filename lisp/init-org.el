@@ -34,7 +34,7 @@
 	  ;; from plan9-theme
 	  (custom-set-faces
 	   '(org-level-1 ((t (:height 1.4 :weight bold
-				      :family (face-attribute 'default :font)
+				      :family "Fantasque Sans Mono"
 				      :box (:line-width 1 :style released-button))))))
 
 	  (custom-set-faces
