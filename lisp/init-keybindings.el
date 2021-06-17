@@ -16,7 +16,6 @@
 				"TAB" 'ramsay/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
-				"a c" 'circe
 				"a w" 'wttrin
 				"a y" '(:ignore t :which-key "youdao-dictionary")
 				"a y i" 'youdao-dictionary-search-from-input

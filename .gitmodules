@@ -1,3 +1,0 @@
-[submodule "additional-packages/emacs-ccls"]
-	path = additional-packages/emacs-ccls
-	url = git@github.com:MaskRay/emacs-ccls.git

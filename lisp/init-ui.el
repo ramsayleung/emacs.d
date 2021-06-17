@@ -76,20 +76,20 @@ This code toggles between them."
 ;; Specify the fringe width for windows -- this sets the left to 10 and
 ;; right fringes to 0
 (fringe-mode '(0 . 0))
-;; (when window-system
-;; Turn off tool bar
-(tool-bar-mode -1)
-;; Turn off file scroll bar
-(scroll-bar-mode -1)
-;; Turn off title bar
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-;; Assuming you are using a dark theme
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
-(setq ns-use-proxy-icon nil)
-(setq frame-title-format nil)
+(when window-system
+  ;; Turn off tool bar
+  (tool-bar-mode -1)
+  ;; Turn off file scroll bar
+  (scroll-bar-mode -1)
+  ;; Turn off title bar
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  ;; Assuming you are using a dark theme
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (setq ns-use-proxy-icon nil)
+  (setq frame-title-format nil)
 ;;; Disable mouse scrolling
-(mouse-wheel-mode -1)
-;; )
+  (mouse-wheel-mode -1)
+  )
 
 (defun ramsay/font-exists-p (font)
   "Check if FONT exists."

@@ -67,7 +67,7 @@
 	     (require 'ox-md nil t)
 	     (when (version< "9.2" org-version) (require 'org-tempo))
 	     (require 'org-indent)
-             (add-hook 'org-mode-hook 'org-indent-mode)
+             ;; (add-hook 'org-mode-hook 'org-indent-mode)
              (setq org-indent-mode-turns-on-hiding-stars nil)
 
 	     ;; let org-mode to delete those auxiliary files after export
@@ -203,15 +203,6 @@
   :if (and (not (ramsay/windows-p))
 	   window-system)
   :ensure t)
-
-;;; Drag and drop images to org-mode
-(use-package org-download
-  :if (and (not (ramsay/windows-p))
-	   window-system)
-  :ensure t
-  :config (progn
-	    (run-with-idle-timer ramsay-idle-time nil 'org-download-enable))
-  )
 
 (defun org-file-path (filename)
   "Return the absolute address of an org file FILENAME, given its relative name."
