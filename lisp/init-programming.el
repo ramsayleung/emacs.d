@@ -19,10 +19,8 @@
   :ensure t
   :diminish (yas-minor-mode . " yas")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
-  :init (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config (progn
-	    (run-with-idle-timer ramsay-idle-time nil 'yas-reload-all)
-	    ;; (yas-reload-all)
+	    (yas-reload-all)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
 	    ))
 
@@ -53,7 +51,7 @@
   :mode "\\.plantuml$"
   :config
   (setq plantuml-default-exec-mode 'executable)
-  (setq plantuml-executable-path (epe-trim-newline (shell-command-to-string "which plantuml")))
+  (setq plantuml-executable-path (string-trim (shell-command-to-string "which plantuml")))
   (setq org-plantuml-exec-mode 'plantuml)
   )
 
