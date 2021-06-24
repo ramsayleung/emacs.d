@@ -41,6 +41,7 @@
 	    ))
 (use-package nyan-mode
   :ensure t
+  :if (window-system)
   :init
   (nyan-mode))
 
@@ -73,10 +74,10 @@ This code toggles between them."
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
 
-;; Specify the fringe width for windows -- this sets the left to 10 and
-;; right fringes to 0
-(fringe-mode '(0 . 0))
 (when window-system
+  ;; Specify the fringe width for windows -- this sets the left to 10 and
+  ;; right fringes to 0
+  (fringe-mode '(0 . 0))
   ;; Turn off tool bar
   (tool-bar-mode -1)
   ;; Turn off file scroll bar

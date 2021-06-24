@@ -84,7 +84,7 @@
 				"v" 'er/expand-region
 				"s" '(:ignore t :which-key "search")
 				"s a" 'counsel-ag
-				"s g" 'counsel-git-grep
+				"s g" 'counsel-grep
 				"s i" 'iedit-mode
 				"s r" 'counsel-rg
 				"s s" 'swiper
