@@ -12,7 +12,7 @@
 ;;; Windows & Frames ;;;
 ;;;------------------;;;
 
-					; language
+;;; language
 ;;; always split windows horizontally rather than vertically
 ;; (setq split-height-threshold nil)
 (setq current-language-environment "English")
@@ -248,7 +248,7 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
   :ensure t
   :defer t)
 
-(use-package plan9-theme
+(use-package acme-theme
   :ensure t
   :init
   :defer t)
@@ -263,7 +263,7 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
 
-(load-theme 'plan9 t)
+(load-theme 'acme t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
