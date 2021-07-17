@@ -116,6 +116,11 @@
 	     "C-h f" 'counsel-describe-function
 	     "C-h v" 'counsel-describe-variable
 	     "C-h l" 'counsel-find-library
+	     "C-x 7 w" 'langtool-check
+	     "C-x 7 W" 'langtool-check-done
+	     "C-x 7 l" 'langtool-switch-default-language
+	     "C-x 7 7" 'langtool-show-message-at-point
+	     "C-x 7 c" 'langtool-correct-buffer
 	     "C-x b"  'ramsay/ivy-switch-to-buffer-enhanced
 	     "C-x C-f" 'counsel-find-file
 	     "M-x" 'counsel-M-x)

@@ -70,6 +70,14 @@
              ;; (add-hook 'org-mode-hook 'org-indent-mode)
              (setq org-indent-mode-turns-on-hiding-stars nil)
 
+	     ;; 让中文也可以不加空格就使用行内格式, 粗体, 下划线等等
+	     (setcar (nthcdr 0 org-emphasis-regexp-components) " \t('\"{[:nonascii:]")
+	     (setcar (nthcdr 1 org-emphasis-regexp-components) "- \t.,:!?;'\")}\\[[:nonascii:]")
+	     (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+	     (org-element-update-syntax)
+	     ;; 规定上下标必须加 {}，否则中文使用下划线时它会以为是两个连着的下标
+	     (setq org-use-sub-superscripts "{}")
+
 	     ;; let org-mode to delete those auxiliary files after export
 	     ;;automatically
 	     (setq org-latex-logfiles-extensions (quote

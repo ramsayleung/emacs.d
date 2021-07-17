@@ -26,8 +26,13 @@
 (use-package langtool
   :ensure t
   :config
-  (executable-find "languagetool"
-		   (setq langtool-bin (executable-find "languagetool")))
+  (cond ((ramsay/linux-p)
+	 (setq langtool-java-classpath
+	       "/usr/share/languagetool:/usr/share/java/languagetool/*"))
+	((ramsay/mac-os-p)
+	 (executable-find "languagetool"
+			  (setq langtool-bin (executable-find "languagetool")))))
+  
 
   (defun langtool-autoshow-detail-popup (overlays)
     (when (require 'popup nil t)
