@@ -60,6 +60,7 @@
 	  (counsel-describe-variable . ivy--regex-plus)
 	  (t . pinyin-ivy-cregexp)
 	  ))
+  (pyim-isearch-mode t)
   )
 
 (use-package counsel-projectile

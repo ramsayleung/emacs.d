@@ -87,7 +87,7 @@
 				"s g" 'counsel-git-grep
 				"s i" 'iedit-mode
 				"s r" 'counsel-rg
-				"s s" 'swiper
+				"s s" 'isearch-forward
 				"t" '(:ignore t :which-key "toggle")
 				"t g" 'ramsay/git-timemachine
 				"t i" 'imenu-list-smart-toggle
@@ -412,6 +412,10 @@
 	     [remap evil-complete-next] 'company-select-next
 	     [remap evil-complete-previous] 'company-select-previous
 	     "C-c a" 'org-agenda
+	     "C-x c j" 'citre-jump
+	     "C-x c J" 'citre-jump-back
+	     "C-x c p" 'citre-ace-peek
+	     "C-x c u" 'citre-update-this-tags-file
 	     "C-c l" 'org-store-link
 	     "C-c e" 'hydra-edit/body
 	     "C-c n" 'ramsay/empty-buffer
