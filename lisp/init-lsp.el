@@ -6,6 +6,7 @@
 ;;; Code:
 (use-package citre
   :defer t
+  :after projectile
   :init
   ;; This is needed in `:init' block for lazy load to work.
   (require 'citre-config)

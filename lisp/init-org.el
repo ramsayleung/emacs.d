@@ -149,10 +149,16 @@
 		    > _ \n
 		    )))
 
-
-	     (defun add-pcomplete-to-capf ()
-	       (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
-	     (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
+	     ;; Encryption
+	     (require 'epa-file)
+	     (epa-file-enable)
+	     (setq epa-file-select-keys nil) 
+	     (require 'org-crypt)
+	     (org-crypt-use-before-save-magic)
+	     (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+	     ;; GPG key to use for encryption
+	     ;; Either the Key ID or set to nil to use symmetric encryption.
+	     (setq org-crypt-key nil)
 	     )
 	   )
   )
