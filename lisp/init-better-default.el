@@ -23,13 +23,6 @@
   :ensure nil
   :hook (after-init . save-place-mode))
 
-(use-package paren
-  :ensure nil
-  :hook (after-init . show-paren-mode)
-  :config
-  (setq show-paren-when-point-inside-paren t
-        show-paren-when-point-in-periphery t))
-
 (use-package isearch
   :ensure nil
   :bind (:map isearch-mode-map
