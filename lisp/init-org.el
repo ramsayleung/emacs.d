@@ -42,8 +42,6 @@
 				      :box (:line-width 1 :style released-button))))))
 	  (setq org-todo-keyword-faces
 		'(
-		  ("PLANNED" . (:foreground "orange" :weight bold))
-		  ("NEXT" . (:foreground "salmon" :weight bold))
 		  ("DONE" . (:foreground "LimeGreen" :weight bold))
 		  ("STARTED" . (:foreground "gold" :weight bold))
 		  ("CANCELLED" . (:foreground "DeepSkyBlue" :weight bold))
@@ -56,7 +54,7 @@
 	  ;;; DONE: The finished TODO item
 	  ;;; CANCELLED: The cancelled TODO item
 	  (setq org-todo-keywords
-		'((sequence "PLANNED" "NEXT" "TODO" "STARTED" "|" "DONE" "CANCELLED")))
+		'((sequence "TODO" "STARTED" "|" "DONE" "CANCELLED")))
 	  (setq org-priority-faces '(
 				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "DarkOrange"))
