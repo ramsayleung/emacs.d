@@ -119,6 +119,15 @@ debug-init and load the given list of packages."
 
 (delete-selection-mode t)
 
+;;; native-comp
+(when (and (fboundp 'native-comp-available-p)
+           (native-comp-available-p))
+  (progn
+    (setq native-comp-async-report-warnings-errors nil)
+    (setq comp-deferred-compilation t)
+    (add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory))
+    (setq package-native-compile t)
+    ))
 
 ;;; Some information about myself.
 (setq user-full-name "Samray, Leung")
