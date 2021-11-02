@@ -42,9 +42,10 @@
 				      :box (:line-width 1 :style released-button))))))
 	  (setq org-todo-keyword-faces
 		'(
+		  ("TODO" . (:foreground "peru" :weight bold))
+		  ("STARTED" . (:foreground "DarkOrange" :weight bold))
 		  ("DONE" . (:foreground "LimeGreen" :weight bold))
-		  ("STARTED" . (:foreground "gold" :weight bold))
-		  ("CANCELLED" . (:foreground "DeepSkyBlue" :weight bold))
+		  ("CANCELLED" . (:foreground "LightGray" :weight bold))
 		  ))
 	  ;;; PLANNED: A planned thing which contains several TODO items
 	  ;;; NEXT: A things need to be done in this week, which might contains several TODO items
@@ -54,7 +55,10 @@
 	  ;;; DONE: The finished TODO item
 	  ;;; CANCELLED: The cancelled TODO item
 	  (setq org-todo-keywords
-		'((sequence "TODO" "STARTED" "|" "DONE" "CANCELLED")))
+		'((sequence "TODO" "STARTED(!)" "|" "DONE" "CANCELLED")))
+	  ;; https://orgmode.org/org.html#Tracking-TODO-state-changes
+	  (setq org-log-into-drawer 'LOGBOOK)
+
 	  (setq org-priority-faces '(
 				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "DarkOrange"))
