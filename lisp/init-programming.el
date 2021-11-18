@@ -78,6 +78,15 @@
   :ensure t
   :commands er/expand-region
   )
+
+(use-package deadgrep
+  :ensure t
+  :commands (deadgrep))
+
+(use-package helpful
+  :ensure t
+  :commands (helpful-callable helpful-function helpful-macro helpful-command helpful-key helpful-variable helpful-at-point))
+
 ;; Projectile
 (use-package projectile
   :ensure t

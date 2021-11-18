@@ -294,6 +294,7 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
   :diminish mail-abbrevs-mode
   :diminish highlight-indentation-mode
   :diminish visual-line-mode
+  :diminish terminal-focus-reporting-mode
   :diminish subword-mode)
 
 ;;; Stolen From https://github.com/hrs/dotfiles/blob/master/emacs.d/configuration.org

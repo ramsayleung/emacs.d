@@ -416,6 +416,7 @@
 	     ;; remap C-n to `next-line`
 	     [remap evil-complete-next] 'company-select-next
 	     [remap evil-complete-previous] 'company-select-previous
+	     "<f5>" 'deadgrep
 	     "C-c a" 'org-agenda
 	     "C-x c j" 'citre-jump
 	     "C-x c J" 'citre-jump-back
@@ -567,6 +568,13 @@
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+
+(global-set-key (kbd "C-h f") #'helpful-callable)
+(global-set-key (kbd "C-h v") #'helpful-variable)
+(global-set-key (kbd "C-h k") #'helpful-key)
+(global-set-key (kbd "C-c C-d") #'helpful-at-point)
+(global-set-key (kbd "C-h F") #'helpful-function)
+(global-set-key (kbd "C-h C") #'helpful-command)
 
 (use-package hydra
   :ensure t
