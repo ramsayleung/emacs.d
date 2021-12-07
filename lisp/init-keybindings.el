@@ -91,7 +91,6 @@
 				"t" '(:ignore t :which-key "toggle")
 				"t g" 'ramsay/git-timemachine
 				"t i" 'imenu-list-smart-toggle
-				"t o" 'origami-toggle-mode
 				"t w" 'ramsay/toggle-window-split
 				"w" '(:ignore t :which-key "windows")
 				"w d" 'delete-window
@@ -323,24 +322,6 @@
 				"m c x" 'cargo-process-run
 				"m c X" 'ramsay/cargo-process-run-current-example
 				"m t" 'cargo-process-test
-				)
-	    ;; Origami mode
-	    (general-define-key :states '(normal visual motion)
-				:keymaps 'origami-mode-map
-				:prefix ramsay/leader-key
-				"t o" '(:ignore t :which-key "origami")
-				"t o t" 'origami-toggle-node
-				"t o f" 'origami-forward-toggle-node
-				"t o r" 'origami-recursively-toggle-node
-				"t o a" 'origami-toggle-all-nodes
-				)
-
-	    ;; Origami mode
-	    (general-define-key :keymaps 'origami-mode-map
-				"C-=" 'origami-recursively-toggle-node
-				"C--" 'origami-close-node-recursively
-				"C-+" 'origami-open-node-recursively
-				"C-c C-o" 'origami-show-only-node
 				)
 
 	    ;; Company node

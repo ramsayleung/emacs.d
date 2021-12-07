@@ -46,15 +46,6 @@
   :ensure t
   :config (region-state-mode t))
 
-;;; folding based on indentation/syntax
-(use-package origami
-  :if (not (eq system-type 'windows-nt))
-  :ensure t
-  :defer t
-  :init (progn
-	  (add-hook 'prog-mode-hook (lambda () (origami-mode t)))
-	  ))
-
 ;;; treat undo history as a tree
 (use-package undo-tree
   :ensure t
