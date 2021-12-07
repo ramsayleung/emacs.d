@@ -32,15 +32,6 @@
   :defer t
   :init(add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-;;; Emacs minor mode to highlight indentation
-(use-package highlight-indent-guides
-  :ensure t
-  :defer t
-  :config (progn
-	    (setq highlight-indent-guides-method 'character)
-	    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
-  )
-
 ;;; show information about selected region
 (use-package region-state
   :ensure t
@@ -52,13 +43,6 @@
   :diminish undo-tree-mode
   :commands undo-tree-visualize
   :config (global-undo-tree-mode t))
-
-;;; make grep buffer writable and apply the changes to files
-(use-package wgrep
-  :ensure t
-  :config (progn
-	    (setq wgrep-auto-save-buffer t)
-	    ))
 
 ;;; Emacs always for confirmation whether we really wanna open
 ;;; large file.However,the default limit is so low,so it prompt often
