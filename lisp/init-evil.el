@@ -23,6 +23,7 @@
     (evil-set-initial-state 'neotree-mode 'emacs)
     (evil-set-initial-state 'deadgrep-mode 'emacs)
     (evil-set-initial-state 'helpful-mode 'emacs)
+    (evil-set-initial-state 'rectangle-mark-mode 'emacs)
     ;;; modify evil-state-tag
     (setq evil-normal-state-tag   (propertize "[Normal]")
 	  evil-emacs-state-tag    (propertize "[Emacs]")

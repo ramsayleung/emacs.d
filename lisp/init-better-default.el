@@ -54,53 +54,6 @@
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
 
-;;; code  from spacemacs
-(use-package restart-emacs
-  :ensure t
-  :commands (ramsay/restart-emacs
-	     ramsay/restart-emacs-debug-init
-	     ramsay/restart-emacs-resume-layout)
-  :init
-  (defun ramsay/restart-emacs (&optional args)
-    "Restart emacs."
-    (interactive)
-    ;; (setq spacemacs-really-kill-emacs t)
-    (restart-emacs args))
-
-  (defun ramsay/restart-emacs-resume-layouts (&optional args)
-    "Restart emacs and resume layouts."
-    (interactive)
-    (ramsay/restart-emacs (cons "--resume-layouts" args)))
-
-  (defun ramsay/restart-emacs-debug-init (&optional args)
-    "Restart emacs and enable debug-init."
-    (interactive)
-    (ramsay/restart-emacs (cons "--debug-init" args)))
-
-  (defun ramsay/restart-stock-emacs-with-packages (packages &optional args)
-    "Restart emacs without the spacemacs configuration, enable
-debug-init and load the given list of packages."
-    (interactive
-     (progn
-       (unless package--initialized
-	 (package-initialize t))
-       (let ((packages (append (mapcar 'car package-alist)
-			       (mapcar 'car package-archive-contents)
-			       (mapcar 'car package--builtins))))
-	 (setq packages (mapcar 'symbol-name packages))
-	 (let ((val (completing-read-multiple "Packages to load (comma separated): "
-					      packages nil t)))
-	   `(,val)))))
-    (let ((load-packages-string (mapconcat (lambda (pkg) (format "(use-package %s)" pkg))
-					   packages " ")))
-      (ramsay/restart-emacs-debug-init
-       (append (list "-q" "--execute"
-		     (concat "(progn (when (version< emacs-version \"27.0\") (package-initialize))"
-			     "(require 'use-package)"
-			     load-packages-string ")"))
-	       args))))
-  )
-
 ;;; File encoding system
 ;;; UTF-8 works for most of the files i tend to used
 (prefer-coding-system 'utf-8)
@@ -130,7 +83,7 @@ debug-init and load the given list of packages."
     ))
 
 ;;; Some information about myself.
-(setq user-full-name "Samray, Leung")
+(setq user-full-name "Ramsay, Leung")
 (setq user-mail-address "ramsayleung@gmail.com")
 
 ;;; While we are in the topic of prompting, a lot of the default prompts ask
