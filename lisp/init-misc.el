@@ -173,6 +173,7 @@ current WINDOW."
          (other-buffer current-buffer t)))))
 
 ;; from magnars https://github.com/magnars
+;;; After Emacs 28 releasing, this can replaced with `rename-buffer`
 (defun ramsay/rename-current-buffer-file ()
   "Renames current buffer and file it is visiting."
   (interactive)
