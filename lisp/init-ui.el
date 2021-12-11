@@ -164,11 +164,11 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
 
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
-  (run-with-timer 2 nil 'ramsay/set-font)
+  (run-with-timer 2 nil 'ramsay/set-chinese-font)
   (run-with-timer 2 nil 'ramsay/hide-bar)
   )
 (ramsay/set-chinese-font default-chinese-size-pt)
- 
+
 
 ;;; Change vertical-border for terminal Emacs.
 ;;; Vertical-border in terminal is ugly, fix it.

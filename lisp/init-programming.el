@@ -89,6 +89,7 @@
 
 ;; Projectile
 (use-package projectile
+  :if (not emacs/>=28p)
   :ensure t
   :init (progn
 	  (setq projectile-indexing-method 'hybrid)

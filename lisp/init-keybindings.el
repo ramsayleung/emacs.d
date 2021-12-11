@@ -46,7 +46,7 @@
 				"f E" 'ramsay/sudo-edit
 				"f f"  'counsel-find-file
 				"f g" 'ramsay/counsel-goto-recent-directory
-				"f r" 'ramsay/rename-current-buffer-file
+				"f r" (general-predicate-dispatch  'rename-buffer (not emacs/>=28p) 'ramsay/rename-current-buffer-file)
 				"f R" 'recentf-open-files
 				"f s" 'save-buffer
 				"f e" '(:ignore t :which-key "emacs")
@@ -67,19 +67,12 @@
 				"j w" 'avy-goto-word-1
 				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
-				"p f" 'counsel-projectile-find-file
-				"p d" 'counsel-projectile-find-dir
-				"p b" 'counsel-projectile-switch-to-buffer
-				"p s" '(:ignore t :which-key "projectile search")
-				"p s s" 'counsel-projectile-ag
-				"p s r" 'counsel-projectile-rg
-				"p p" 'counsel-projectile-switch-project
-
+				"p f" (general-predicate-dispatch 'project-find-file (not emacs/>=28p) 'counsel-projectile-find-file)
+				"p d" (general-predicate-dispatch 'project-find-dir (not emacs/>=28p) 'counsel-projectile-find-dir)
+				"p b" (general-predicate-dispatch 'project-switch-to-buffer (not emacs/>=28p) 'counsel-projectile-switch-to-buffer)
+				"p p" (general-predicate-dispatch 'project-switch-project (not emacs/>=28p) 'counsel-projectile-switch-project) 
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
-				"q d" 'ramsay/restart-emacs-debug-init
-				"q D" 'ramsay/restart-stock-emacs-with-packages
-				"q r" 'ramsay/restart-emacs-resume-layouts
 				"v" 'er/expand-region
 				"s" '(:ignore t :which-key "search")
 				"s a" 'counsel-ag

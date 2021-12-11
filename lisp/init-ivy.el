@@ -64,6 +64,7 @@
   )
 
 (use-package counsel-projectile
+  :if (not emacs/>=28p)
   :ensure t
   :after projectile
   :init (counsel-projectile-mode)
