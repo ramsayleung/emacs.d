@@ -54,13 +54,9 @@
   (or (> (buffer-size) (* 5000 800))
       (> (line-number-at-pos (point-max)) 100000)))
 
-(defconst emacs/>=26p
-  (>= emacs-major-version 26)
-  "Emacs is 26 or above.")
-
-(defun ramsay/does-use-ivy ()
-  "Return t if use `ivy` as completion framework."
-  (if (eq ramsay/completion-framework 'ivy) t nil))
+(defconst emacs/>=28p
+  (>= emacs-major-version 28)
+  "Emacs is 28 or above.")
 
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))

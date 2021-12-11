@@ -13,7 +13,6 @@
 				";" 'comment-dwim
 				"'" 'ramsay/eshell-pop
 				"." 'ramsay/python-send-repl-echo-switch
-				"TAB" 'ramsay/alternate-buffer
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
 				"a w" 'wttrin
@@ -112,9 +111,6 @@
 	    
 	    (general-define-key
 	     "C-s" 'swiper-isearch
-	     "C-h f" 'counsel-describe-function
-	     "C-h v" 'counsel-describe-variable
-	     "C-h l" 'counsel-find-library
 	     "C-x 7 w" 'langtool-check
 	     "C-x 7 W" 'langtool-check-done
 	     "C-x 7 l" 'langtool-switch-default-language
@@ -474,11 +470,8 @@
 				 scheme-mode-map
 				 lisp-interaction-mode-map)
 		      [remap paredit-convolute-sexp] 'xref-find-references
-		      "M-?" 'xref-find-references
-  		      "{" 'paredit-open-curly
-  		      "}" 'paredit-close-curly
-  		      "<" 'paredit-open-angled
-  		      ">" 'paredit-close-angled)
+		      "M-?" 'xref-find-references)
+
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
 		      "C-M-\\" 'gofmt

@@ -74,23 +74,26 @@ This code toggles between them."
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
 
-(when window-system
-  ;; Specify the fringe width for windows -- this sets the left to 10 and
-  ;; right fringes to 0
-  (fringe-mode '(0 . 0))
-  ;; Turn off tool bar
-  (tool-bar-mode -1)
-  ;; Turn off file scroll bar
-  (scroll-bar-mode -1)
-  ;; Turn off title bar
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  ;; Assuming you are using a dark theme
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
-  (setq ns-use-proxy-icon nil)
-  (setq frame-title-format nil)
+(defun ramsay/hide-bar ()
+  "Hide bar."
+  (when window-system
+    ;; Specify the fringe width for windows -- this sets the left to 10 and
+    ;; right fringes to 0
+    (fringe-mode '(0 . 0))
+    ;; Turn off tool bar
+    (tool-bar-mode -1)
+    ;; Turn off file scroll bar
+    (scroll-bar-mode -1)
+    ;; Turn off title bar
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    ;; Assuming you are using a dark theme
+    (add-to-list 'default-frame-alist '(ns-appearance . dark))
+    (setq ns-use-proxy-icon nil)
+    (setq frame-title-format nil)
 ;;; Disable mouse scrolling
-  (mouse-wheel-mode -1)
-  )
+    (mouse-wheel-mode -1)
+    ))
+(ramsay/hide-bar)
 
 (defun ramsay/font-exists-p (font)
   "Check if FONT exists."
@@ -161,8 +164,11 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
 
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
-  (run-with-timer 2 nil 'ramsay/set-font))
+  (run-with-timer 2 nil 'ramsay/set-font)
+  (run-with-timer 2 nil 'ramsay/hide-bar)
+  )
 (ramsay/set-chinese-font default-chinese-size-pt)
+ 
 
 ;;; Change vertical-border for terminal Emacs.
 ;;; Vertical-border in terminal is ugly, fix it.

@@ -97,8 +97,7 @@
 (setq tramp-use-ssh-controlmaster-options nil)
 
 ;;; xref
-(when (version< emacs-version "28.0") (setq xref-search-program 'rg))
-
+(when emacs/>=28p  (setq xref-search-program 'rg))
 
 ;;; set "Meta" key to be the mac command key
 (when (ramsay/mac-os-p)

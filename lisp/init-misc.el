@@ -141,6 +141,7 @@ by using nxml's indentation rules."
       (progn
 	(ramsay/indent-buffer)
 	(message "Indented buffer")))))
+
 ;; enable hippie-mode to enhance auto-completion
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
 					 try-expand-dabbrev-all-buffers
@@ -153,24 +154,6 @@ by using nxml's indentation rules."
 					 try-complete-lisp-symbol-partially
 					 try-complete-lisp-symbol
 					 ))
-
-(defun ramsay/alternate-buffer (&optional window)
-  "Switch back and forth between current and last buffer in the;
-current WINDOW."
-  (interactive)
-  (let ((current-buffer (window-buffer window))
-        (buffer-predicate
-         (frame-parameter (window-frame window) 'buffer-predicate)))
-    ;; switch to first buffer previously shown in this window that matches
-    ;; frame-parameter `buffer-predicate'
-    (switch-to-buffer
-     (or (cl-find-if (lambda (buffer)
-                       (and (not (eq buffer current-buffer))
-                            (or (null buffer-predicate)
-                                (funcall buffer-predicate buffer))))
-                     (mapcar #'car (window-prev-buffers window)))
-         ;; `other-buffer' honors `buffer-predicate' so no need to filter
-         (other-buffer current-buffer t)))))
 
 ;; from magnars https://github.com/magnars
 ;;; After Emacs 28 releasing, this can replaced with `rename-buffer`
