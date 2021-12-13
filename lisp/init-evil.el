@@ -24,6 +24,7 @@
     (evil-set-initial-state 'deadgrep-mode 'emacs)
     (evil-set-initial-state 'helpful-mode 'emacs)
     (evil-set-initial-state 'rectangle-mark-mode 'emacs)
+    (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
     ;;; modify evil-state-tag
     (setq evil-normal-state-tag   (propertize "[Normal]")
 	  evil-emacs-state-tag    (propertize "[Emacs]")
