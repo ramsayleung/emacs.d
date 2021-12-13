@@ -71,13 +71,13 @@
 				"p d" (general-predicate-dispatch 'project-find-dir (not emacs/>=28p) 'counsel-projectile-find-dir)
 				"p b" (general-predicate-dispatch 'project-switch-to-buffer (not emacs/>=28p) 'counsel-projectile-switch-to-buffer)
 				"p p" (general-predicate-dispatch 'project-switch-project (not emacs/>=28p) 'counsel-projectile-switch-project) 
+				"p s" '(:ignore t :which-key "project search")
+				"p s r" (general-predicate-dispatch 'project-find-regexp (not emacs/>=28p) 'counsel-projectile-rg)
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
 				"v" 'er/expand-region
 				"s" '(:ignore t :which-key "search")
-				"s a" 'counsel-ag
 				"s g" 'counsel-grep
-				"s i" 'iedit-mode
 				"s r" 'counsel-rg
 				"s s" 'isearch-forward
 				"t" '(:ignore t :which-key "toggle")
