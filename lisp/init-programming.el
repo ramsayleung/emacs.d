@@ -187,14 +187,6 @@ similar to shell-pop"
 ;;; automatically,instead shows in other window
 (setq compilation-scroll-output t)
 
-
-(defun ramsay/imenu ()
-  "Call lsp-ui-imenu firstly, if lsp-mode is disable, call counsel-imenu instead."
-  (interactive)
-  (if lsp-mode
-      (lsp-ui-imenu)
-    (counsel-imenu)))
-
 (defun ramsay/get-buffer-name ()
   "Get current buffer name."
   (interactive)
