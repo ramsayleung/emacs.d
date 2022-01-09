@@ -20,6 +20,8 @@
 
 	  (setq org-ellipsis " [+]")
 
+	  (setq org-hide-emphasis-markers t)
+
 	  (setq org-html-htmlize-output-type nil)
 
 	  ;;Its default value is (ascii html icalendar latex)
@@ -63,6 +65,7 @@
 				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "DarkOrange"))
 				     (?C . (:foreground "green"))))
+
 	  ;; Make verbatim with highlight text background.
 	  (add-to-list 'org-emphasis-alist
 		       '("=" (:background "#fef7ca")))
@@ -71,110 +74,109 @@
 		       '("+" (:foreground "dark gray"
 					  :strike-through t)))
 	  ;; Make code style around with box.
-	  (add-to-list 'org-emphasis-alist '("~" (:box (:line-width 1
-								    :color "grey75"
-								    :style released-button))))
+	  (add-to-list 'org-emphasis-alist
+		       '("~" (:box (:line-width 1
+						:color "grey75"
+						:style released-button))))
 	  )
-  :config(progn
-	   (when (not (eq system-type 'windows-nt))
-	     (require 'ox-md nil t)
-	     (when (version< "9.2" org-version) (require 'org-tempo))
-	     (require 'org-indent)
-             ;; (add-hook 'org-mode-hook 'org-indent-mode)
-             (setq org-indent-mode-turns-on-hiding-stars nil)
+  :config (progn
+	    (when (not (eq system-type 'windows-nt))
+	      (require 'ox-md nil t)
+	      (when (version< "9.2" org-version) (require 'org-tempo))
+	      (require 'org-indent)
+              ;; (add-hook 'org-mode-hook 'org-indent-mode)
+              (setq org-indent-mode-turns-on-hiding-stars nil)
+	      ;; 让中文也可以不加空格就使用行内格式, 粗体, 下划线等等
+	      (setcar (nthcdr 0 org-emphasis-regexp-components) " \t('\"{[:nonascii:]")
+	      (setcar (nthcdr 1 org-emphasis-regexp-components) "- \t.,:!?;'\")}\\[[:nonascii:]")
+	      (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+	      (org-element-update-syntax)
+	      ;; 规定上下标必须加 {}，否则中文使用下划线时它会以为是两个连着的下标
+	      (setq org-use-sub-superscripts "{}")
 
-	     ;; 让中文也可以不加空格就使用行内格式, 粗体, 下划线等等
-	     (setcar (nthcdr 0 org-emphasis-regexp-components) " \t('\"{[:nonascii:]")
-	     (setcar (nthcdr 1 org-emphasis-regexp-components) "- \t.,:!?;'\")}\\[[:nonascii:]")
-	     (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
-	     (org-element-update-syntax)
-	     ;; 规定上下标必须加 {}，否则中文使用下划线时它会以为是两个连着的下标
-	     (setq org-use-sub-superscripts "{}")
+	      ;; https://emacs-china.org/t/org-9-5-2/19491/3
+	      (setq org-adapt-indentation t)
 
-	     ;; let org-mode to delete those auxiliary files after export
-	     ;;automatically
-	     (setq org-latex-logfiles-extensions (quote
-						  ("lof" "lot" "tex" "aux" "idx" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
-	     (org-babel-do-load-languages
-	      'org-babel-load-languages
-	      '((clojure . t)
-                (dot . t)
-		(lisp . t)
-		(org . t)
-		(js . t)
-		(latex . t)
-		(ruby . t)
-		(shell . t)
-		(python . t)
-		(plantuml . t)
-		(emacs-lisp . t)
-		(awk . t)
-		(sql . t)
-		(sqlite . t)))
+	      ;; let org-mode to delete those auxiliary files after export
+	      ;;automatically
+	      (setq org-latex-logfiles-extensions (quote
+						   ("lof" "lot" "tex" "aux" "idx" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+	      (org-babel-do-load-languages
+	       'org-babel-load-languages
+	       '((clojure . t)
+                 (dot . t)
+		 (lisp . t)
+		 (org . t)
+		 (js . t)
+		 (latex . t)
+		 (ruby . t)
+		 (shell . t)
+		 (python . t)
+		 (plantuml . t)
+		 (emacs-lisp . t)
+		 (awk . t)
+		 (sql . t)
+		 (sqlite . t)))
 
-	     (setq org-startup-with-inline-images t)
-	     (setq org-agenda-files '("~/btsync/org"))
-	     (setq org-agenda-custom-commands
-		   '(
-		     ("w" "Weekly Review"
-		      agenda ""
-		      ((org-agenda-start-with-log-mode '(closed))
-		       (org-agenda-overriding-header "Weekly Review")
-                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("PROJ" "DONE" "CANCELLED")))))
-		     ))
-	     (setq org-capture-templates
-		   '(("a" "Agenda" entry (file  "~/btsync/org/agenda.org" "Agenda")
-		      "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
-		     ("w" "Work Note" entry (file+headline "~/btsync/org/work_notes.org" "Notes about work")
-		      "** Work Note %?\n%T")
-		     ("l" "Not work Note" entry (file+headline "~/btsync/org/notes.org" "Notes not about work")
-		      "** %?\n%T")
-		     ("j" "Journal" entry (file+datetree "~/btsync/org/journal.org")
-		      "** %?\nEntered on %U\n  %i\n  %a")
-		     ))
+	      (setq org-startup-with-inline-images t)
+	      (setq org-agenda-files '("~/btsync/org"))
+	      (setq org-agenda-custom-commands
+		    '(
+		      ("w" "Weekly Review"
+		       agenda ""
+		       ((org-agenda-start-with-log-mode '(closed))
+			(org-agenda-overriding-header "Weekly Review")
+			(org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("PROJ" "DONE" "CANCELLED")))))
+		      ))
+	      (setq org-capture-templates
+		    '(("a" "Agenda" entry (file  "~/btsync/org/agenda.org" "Agenda")
+		       "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
+		      ("w" "Work Note" entry (file+headline "~/btsync/org/work_notes.org" "Notes about work")
+		       "** Work Note %?\n%T")
+		      ("l" "Not work Note" entry (file+headline "~/btsync/org/notes.org" "Notes not about work")
+		       "** %?\n%T")
+		      ("j" "Journal" entry (file+datetree "~/btsync/org/journal.org")
+		       "** %?\nEntered on %U\n  %i\n  %a")
+		      ))
 
+	      (require 'ox-latex )
+	      ;; execute code without confirm
+	      (setq org-confirm-babel-evaluate nil)
+	      ;; set latex to xelatex
+	      (setq org-latex-pdf-process
+		    '("xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
+		      "xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
+		      "xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"))
+	      ;; export cn character
+	      (setf org-latex-default-packages-alist
+		    (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
+	      
+	      (eval-after-load 'autoinsert
+		'(define-auto-insert '(org-mode . "Chinese Org skeleton")
+		   '("Description: "
+		     "#+LATEX_CLASS: ramsay-org-article"\n
+		     "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n
+		     "#+AUTHOR: Ramsay Leung"\n
+		     "#+EMAIL: ramsayleung@gmail.com"\n
+		     "#+DATE: "
+		     (format-time-string "%Y-%m-%dT%H:%M:%S")> \n
+		     > _ \n
+		     )))
 
-	     ;; Set color for "~"(eg, ~code~)
-	     (add-to-list 'org-emphasis-alist
-			  '("~" (:foreground "darkseagreen")
-			    ))
-	     (require 'ox-latex )
-	     ;; execute code without confirm
-	     (setq org-confirm-babel-evaluate nil)
-	     ;; set latex to xelatex
-	     (setq org-latex-pdf-process
-		   '("xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
-		     "xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
-		     "xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"))
-	     ;; export cn character
-	     (setf org-latex-default-packages-alist
-		   (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
-	     
-	     (eval-after-load 'autoinsert
-	       '(define-auto-insert '(org-mode . "Chinese Org skeleton")
-		  '("Description: "
-		    "#+LATEX_CLASS: ramsay-org-article"\n
-		    "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n
-		    "#+AUTHOR: Ramsay Leung"\n
-		    "#+EMAIL: ramsayleung@gmail.com"\n
-		    "#+DATE: "
-		    (format-time-string "%Y-%m-%dT%H:%M:%S")> \n
-		    > _ \n
-		    )))
-
-	     ;; Encryption
-	     (require 'epa-file)
-	     (epa-file-enable)
-	     (setq epa-file-select-keys nil) 
-	     (require 'org-crypt)
-	     (org-crypt-use-before-save-magic)
-	     (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-	     ;; GPG key to use for encryption
-	     ;; Either the Key ID or set to nil to use symmetric encryption.
-	     (setq org-crypt-key nil)
-	     )
-	   )
+	      ;; Encryption
+	      (require 'epa-file)
+	      (epa-file-enable)
+	      (setq epa-file-select-keys nil) 
+	      (require 'org-crypt)
+	      (org-crypt-use-before-save-magic)
+	      (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+	      ;; GPG key to use for encryption
+	      ;; Either the Key ID or set to nil to use symmetric encryption.
+	      (setq org-crypt-key nil)
+	      )
+	    )
   )
+
 ;; automatically open your agenda when start Emacs
 ;; (add-hook 'after-init-hook (lambda ()
 ;; 			     (org-agenda nil "c")))
