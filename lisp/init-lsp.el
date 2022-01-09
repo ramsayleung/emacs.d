@@ -18,9 +18,6 @@
   (setq lsp-modeline-code-actions-segments '(name count))
   (add-hook 'c++-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
   (add-hook 'c-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
-  ;; (add-hook 'rust-mode-hook (lambda ()(flycheck-select-checker 'rust-cargo)))
-  (add-hook 'python-mode-hook (lambda () (flycheck-select-checker 'python-flake8)))
-
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (with-eval-after-load 'lsp-mode
