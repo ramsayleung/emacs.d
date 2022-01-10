@@ -11,6 +11,16 @@
   (eyebrowse-mode)
   )
 
+(use-package ledger-mode
+  :ensure t
+  :mode ("\\.dat\\'"
+         "\\.ledger\\'")
+  :custom (ledger-clear-whole-transactions t))
+
+(use-package flycheck-ledger
+  :ensure t
+  :after ledger-mode)
+
 (use-package docker-tramp
   :ensure t)
 

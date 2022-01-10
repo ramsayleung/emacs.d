@@ -260,10 +260,6 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
   :init
   :defer t)
 
-(use-package spacemacs-theme
-  :ensure t
-  :defer t)
-
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
