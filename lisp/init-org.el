@@ -20,8 +20,6 @@
 
 	  (setq org-ellipsis " [+]")
 
-	  (setq org-hide-emphasis-markers t)
-
 	  (setq org-html-htmlize-output-type nil)
 
 	  ;;Its default value is (ascii html icalendar latex)
