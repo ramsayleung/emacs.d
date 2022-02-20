@@ -45,6 +45,20 @@
   :init
   (nyan-mode))
 
+(use-package writeroom-mode
+  :hook (emacs-startup . global-writeroom-mode)
+  :ensure t
+  :config
+  (setq split-width-threshold 120
+        writeroom-width 128
+        writeroom-bottom-divider-width 0
+        writeroom-fringes-outside-margins t
+        writeroom-fullscreen-effect nil
+        writeroom-major-modes '(org-mode markdown-mode text-mode)
+        writeroom-major-modes-exceptions '(process-menu-mode proced-mode)
+        writeroom-maximize-window nil)
+  (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
+  )
 
 ;;; https://www.emacswiki.org/emacs/ToggleWindowSplit
 (defun ramsay/toggle-window-split ()

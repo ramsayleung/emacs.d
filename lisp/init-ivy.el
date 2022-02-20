@@ -33,18 +33,13 @@
 	   (setq ivy-count-format "%d/%d ")
 	   ;; Number of result lines to display, set height as width-body-height/2
 	   (setq ivy-height 25)
-	   (defun ramsay/change-ivy-height-dynamicly ()
-	     (interactive)
-	     (let ((window-split-height (/ (window-body-height)2)))
-	       (if (< window-split-height 25)
-		   (setq ivy-height 25)
-		 (setq ivy-height window-split-height))))
 	   )
   )
 
 ;;; 支持ivy使用拼音进行匹配
 (use-package pyim
   :ensure t
+  :diminish pyim-isearch-mode
   :config
   (defun pinyin-ivy-cregexp (str)
     (let ((a (ivy--regex-plus str))

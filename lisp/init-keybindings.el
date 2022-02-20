@@ -23,7 +23,6 @@
 				"a z d" 'ztree-dir
 				"a z c" 'ztree-diff
 				"b" '(:ignore t :which-key "buffers")
-				"b b" 'ramsay/switch-to-current-open-buffer
 				"b d" 'kill-this-buffer
 				"b f" 'ramsay/get-buffer-full-name
 				"b k" 'ramsay/kill-other-buffers
@@ -103,15 +102,18 @@
 				"1"  'ace-window)
 	    
 	    (general-define-key
-	     "C-s" 'swiper-isearch
+	     "C-s" 'counsel-grep-or-swiper
 	     "C-x 7 w" 'langtool-check
 	     "C-x 7 W" 'langtool-check-done
 	     "C-x 7 l" 'langtool-switch-default-language
 	     "C-x 7 7" 'langtool-show-message-at-point
 	     "C-x 7 c" 'langtool-correct-buffer
 	     "C-x b"  'ramsay/ivy-switch-to-buffer-enhanced
+	     "C-x C-b" 'bs-show
+	     "C-x C-r" 'counsel-recentf
 	     "C-x C-f" 'counsel-find-file
 	     "M-x" 'counsel-M-x)
+
 	    (general-define-key :keymaps 'counsel-find-file-map
 				:states '(normal visual motion)
 				"C-j" 'ivy-next-line
