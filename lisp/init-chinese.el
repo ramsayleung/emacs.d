@@ -37,7 +37,8 @@
 
      ;; Other language input source: "rime", "sogou" or another one.
      ;; "im.rime.inputmethod.Squirrel.Rime"
-     "com.sogou.inputmethod.sogouWB.wubi"))
+     ;; "com.sogou.inputmethod.sogouWB.wubi" => "wubi"
+     "im.rime.inputmethod.Squirrel.Rime"))
 
   ;; enable the /cursor color/ mode
   ;; (sis-global-cursor-color-mode t)

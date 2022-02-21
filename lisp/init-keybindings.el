@@ -45,7 +45,7 @@
 				"f E" 'ramsay/sudo-edit
 				"f f"  'counsel-find-file
 				"f g" 'ramsay/counsel-goto-recent-directory
-				"f r" (general-predicate-dispatch  'rename-buffer (not emacs/>=28p) 'ramsay/rename-current-buffer-file)
+				"f r" 'ramsay/rename-current-buffer-file
 				"f R" 'recentf-open-files
 				"f s" 'save-buffer
 				"f e" '(:ignore t :which-key "emacs")
@@ -69,7 +69,7 @@
 				"p f" (general-predicate-dispatch 'project-find-file (not emacs/>=28p) 'counsel-projectile-find-file)
 				"p d" (general-predicate-dispatch 'project-find-dir (not emacs/>=28p) 'counsel-projectile-find-dir)
 				"p b" (general-predicate-dispatch 'project-switch-to-buffer (not emacs/>=28p) 'counsel-projectile-switch-to-buffer)
-				"p p" (general-predicate-dispatch 'project-switch-project (not emacs/>=28p) 'counsel-projectile-switch-project) 
+				"p p" (general-predicate-dispatch 'project-switch-project (not emacs/>=28p) 'counsel-projectile-switch-project)
 				"p s" '(:ignore t :which-key "project search")
 				"p s r" (general-predicate-dispatch 'project-find-regexp (not emacs/>=28p) 'counsel-projectile-rg)
 				"q" '(:ignore t :which-key "quit")
