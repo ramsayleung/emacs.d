@@ -54,6 +54,22 @@
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
 
+;;; Steal from https://emacstalk.github.io/post/010/
+;;; Use `fd` command to find file.
+(defun ramsay/project-files-in-directory (dir)
+  "Use `fd' to list files in DIR."
+  (let* ((default-directory dir)
+         (localdir (file-local-name (expand-file-name dir)))
+         (command (format "fd -H -t f -0 . %s" localdir)))
+    (project--remote-file-names
+     (sort (split-string (shell-command-to-string command) "\0" t)
+           #'string<))))
+
+(cl-defmethod project-files ((project (head local)) &optional dirs)
+  "Override `project-files' to use `fd' in local projects."
+  (mapcan #'ramsay/project-files-in-directory
+          (or dirs (list (project-root project)))))
+
 ;;; File encoding system
 ;;; UTF-8 works for most of the files i tend to used
 (prefer-coding-system 'utf-8)

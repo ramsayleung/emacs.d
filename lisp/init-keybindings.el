@@ -27,7 +27,7 @@
 				"b f" 'ramsay/get-buffer-full-name
 				"b k" 'ramsay/kill-other-buffers
 				"b D" 'ramsay/delete-blank-line-in-buffer
-				"b l" 'ramsay/ivy-switch-to-buffer-enhanced
+				"b l" 'ivy-switch-buffer
 				"b n" 'ramsay/get-buffer-name
 				"c" '(:ignore t :which-key "compile/comments")
 				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
@@ -101,19 +101,6 @@
 				"w <right>" 'evil-window-right
 				"1"  'ace-window)
 	    
-	    (general-define-key
-	     "C-s" 'counsel-grep-or-swiper
-	     "C-x 7 w" 'langtool-check
-	     "C-x 7 W" 'langtool-check-done
-	     "C-x 7 l" 'langtool-switch-default-language
-	     "C-x 7 7" 'langtool-show-message-at-point
-	     "C-x 7 c" 'langtool-correct-buffer
-	     "C-x b"  'ramsay/ivy-switch-to-buffer-enhanced
-	     "C-x C-b" 'bs-show
-	     "C-x C-r" 'counsel-recentf
-	     "C-x C-f" 'counsel-find-file
-	     "M-x" 'counsel-M-x)
-
 	    (general-define-key :keymaps 'counsel-find-file-map
 				:states '(normal visual motion)
 				"C-j" 'ivy-next-line
@@ -380,6 +367,19 @@
 				"C-c h l" 'counsel-locate
 				"C-c h p" 'counsel-list-processes
 				)
+	    (general-define-key
+	     "C-s" 'counsel-grep-or-swiper
+	     "C-x 7 w" 'langtool-check
+	     "C-x 7 W" 'langtool-check-done
+	     "C-x 7 l" 'langtool-switch-default-language
+	     "C-x 7 7" 'langtool-show-message-at-point
+	     "C-x 7 c" 'langtool-correct-buffer
+	     "C-x b"  'switch-to-buffer
+	     "C-x C-b" 'bs-show
+	     "C-x C-r" 'counsel-recentf
+	     "C-x C-f" 'counsel-find-file
+	     "M-x" 'counsel-M-x)
+
 	    ;; non-evil ,without a prefix
 	    (general-define-key
 	     ;; remap c-a to `ramsay/smarter-move-beginning-of-line
@@ -412,7 +412,6 @@
 	     "C-x k" 'kill-this-buffer
 	     "C-x t" 'ramsay/dired-tmp-dir
 	     "C-x u" 'undo-tree-visualize
-	     "C-x C-r" 'recentf-open-files
 	     "C-x 2" 'ramsay/split-window-below-and-move
 	     "C-x 3" 'ramsay/split-window-right-and-move
 	     "M-i" 'symbol-overlay-put
