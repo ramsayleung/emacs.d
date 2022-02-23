@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: hugo
+# key: hugo
+# --
+#+OPTIONS: author:nil ^:{}
+#+HUGO_BASE_DIR: ../../
+#+HUGO_SECTION: post/`(format-time-string "%Y")`
+#+HUGO_CUSTOM_FRONT_MATTER: :toc true
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_DRAFT: false
+#+DATE: `(format-time-string "[%Y-%m-%d %a %H:%M]")`
+#+TITLE: $1
+#+HUGO_TAGS: $2
+#+HUGO_CATEGORIES: $3
+
+$0

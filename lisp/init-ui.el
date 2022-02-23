@@ -50,10 +50,9 @@
   :ensure t
   :config
   (setq writeroom-width 128
-	writeroom-maximize-window nil
-	;; writeroom-fullscreen-effect nil
-	writeroom-major-modes '(org-mode markdown-mode text-mode)
-	writeroom-major-modes-exceptions '(process-menu-mode proced-mode))
+	;; writeroom-maximize-window nil
+	writeroom-fullscreen-effect 'maximized
+	writeroom-major-modes '(org-mode markdown-mode text-mode))
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
   )
 

@@ -210,6 +210,14 @@
   :ensure ox-gfm
   )
 
+(use-package ox-hugo
+  :ensure t   ;Auto-install the package from Melpa
+  :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
+  :config
+  (setq org-hugo-default-section-directory (concat "post/" (format-time-string "%Y")))
+  (setq org-hugo-export-with-section-numbers "num:3")
+  :after ox)
+
 (use-package ob-rust
   :if (and (not (ramsay/windows-p))
 	   window-system)
