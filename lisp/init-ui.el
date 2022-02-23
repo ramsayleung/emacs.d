@@ -54,7 +54,7 @@
         writeroom-bottom-divider-width 0
         writeroom-fringes-outside-margins t
         writeroom-fullscreen-effect nil
-        writeroom-major-modes '(org-mode markdown-mode text-mode)
+        writeroom-major-modes '(org-mode markdown-mode)
         writeroom-major-modes-exceptions '(process-menu-mode proced-mode)
         writeroom-maximize-window nil)
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))

@@ -83,7 +83,7 @@
     ))
 
 ;;; Some information about myself.
-(setq user-full-name "Ramsay, Leung")
+(setq user-full-name "Ramsay Leung")
 (setq user-mail-address "ramsayleung@gmail.com")
 
 ;;; While we are in the topic of prompting, a lot of the default prompts ask
