@@ -22,6 +22,7 @@
   :config (progn
 	    (yas-reload-all)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+	    (add-hook 'org-mode-hook 'yas-minor-mode)
 	    ))
 
 ;;; velecity mode
