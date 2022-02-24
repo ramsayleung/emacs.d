@@ -150,16 +150,26 @@
 		    (remove '("AUTO" "inputenc" t) org-latex-default-packages-alist))
 	      
 	      (eval-after-load 'autoinsert
-		'(define-auto-insert '(org-mode . "Chinese Org skeleton")
+		'(define-auto-insert '(org-mode . "Chinese Export and Hugo skeleton")
 		   '("Description: "
 		     "#+LATEX_CLASS: ramsay-org-article"\n
 		     "#+LATEX_CLASS_OPTIONS: [oneside,A4paper,12pt]"\n
 		     "#+AUTHOR: Ramsay Leung"\n
 		     "#+EMAIL: ramsayleung@gmail.com"\n
 		     "#+DATE: "
-		     (format-time-string "%Y-%m-%dT%H:%M:%S")> \n
+		     (format-time-string "%Y-%m-%d %a %H:%M")> \n
+		     "#+TITLE:" > _ \n
+		     "#+OPTIONS: author:nil ^:{}"\n
+		     "#+HUGO_BASE_DIR: ~/code/org/ramsayleung.github.io"\n
+		     "#+HUGO_SECTION: post/"(format-time-string "%Y")\n
+		     "#+HUGO_CUSTOM_FRONT_MATTER: :toc true"\n
+		     "#+HUGO_AUTO_SET_LASTMOD: t"\n
+		     "#+HUGO_DRAFT: false"\n
+		     "#+HUGO_TAGS:"> _ \n
+		     "#+HUGO_CATEGORIES:"> _ \n
 		     > _ \n
-		     )))
+		     ))
+		)
 
 	      ;; Encryption
 	      (require 'epa-file)
