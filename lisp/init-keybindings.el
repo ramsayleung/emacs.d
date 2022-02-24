@@ -27,7 +27,7 @@
 				"b f" 'ramsay/get-buffer-full-name
 				"b k" 'ramsay/kill-other-buffers
 				"b D" 'ramsay/delete-blank-line-in-buffer
-				"b l" 'ivy-switch-buffer
+				"b l" 'ramsay/ivy-switch-to-buffer-enhanced
 				"b n" 'ramsay/get-buffer-name
 				"c" '(:ignore t :which-key "compile/comments")
 				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
@@ -374,7 +374,7 @@
 	     "C-x 7 l" 'langtool-switch-default-language
 	     "C-x 7 7" 'langtool-show-message-at-point
 	     "C-x 7 c" 'langtool-correct-buffer
-	     "C-x b"  'switch-to-buffer
+	     "C-x b"  'ramsay/ivy-switch-to-buffer-enhanced
 	     "C-x C-b" 'bs-show
 	     "C-x C-r" 'counsel-recentf
 	     "C-x C-f" 'counsel-find-file

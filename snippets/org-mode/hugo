@@ -3,7 +3,7 @@
 # key: hugo
 # --
 #+OPTIONS: author:nil ^:{}
-#+HUGO_BASE_DIR: ../../
+#+HUGO_BASE_DIR: ~/code/org/ramsayleung.github.io
 #+HUGO_SECTION: post/`(format-time-string "%Y")`
 #+HUGO_CUSTOM_FRONT_MATTER: :toc true
 #+HUGO_AUTO_SET_LASTMOD: t
