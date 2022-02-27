@@ -92,6 +92,7 @@
 (use-package projectile
   :if (not emacs/>=28p)
   :ensure t
+  :defer t
   :init (progn
 	  (setq projectile-indexing-method 'hybrid)
 	  (setq projectile-git-submodule-command nil)

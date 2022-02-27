@@ -368,7 +368,7 @@
 				"C-c h p" 'counsel-list-processes
 				)
 	    (general-define-key
-	     "C-s" 'counsel-grep-or-swiper
+	     "C-s" 'swiper-isearch
 	     "C-x 7 w" 'langtool-check
 	     "C-x 7 W" 'langtool-check-done
 	     "C-x 7 l" 'langtool-switch-default-language
