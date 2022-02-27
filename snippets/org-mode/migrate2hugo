@@ -2,9 +2,11 @@
 # name: migrate_org_page_2_ox_hugo
 # key: mh
 # --
+#+TITLE:
+#+DATE: []
 #+OPTIONS: author:nil ^:{}
 #+HUGO_BASE_DIR: ~/code/org/ramsayleung.github.io
-#+HUGO_SECTION: post/2017
+#+HUGO_SECTION: post/2021
 #+HUGO_CUSTOM_FRONT_MATTER: :toc true
 #+HUGO_AUTO_SET_LASTMOD: t
 #+HUGO_DRAFT: false

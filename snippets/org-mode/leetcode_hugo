@@ -1,0 +1,12 @@
+# -*- mode: org-mode -*-
+# name: leetcode_hugo
+# key: lh
+# --
+#+HUGO_BASE_DIR: ~/code/org/leetcode_book
+#+HUGO_SECTION: docs/
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_DRAFT: false
+#+DATE: `(format-time-string "[%Y-%m-%d %a %H:%M]")`
+#+TITLE: $1
+
+$0
