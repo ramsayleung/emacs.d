@@ -2,14 +2,10 @@
 ;;; code:
 ;;; Commentary:
 
-;;; auto save file when Emacs idle
-(use-package auto-save
-  :load-path "~/.emacs.d/additional-packages/auto-save.el"
-  :config (progn
-            (auto-save-enable)
-            (setq auto-save-slient t)
-            (setq auto-save-idle 3)
-            ))
+;;; Auto save file when Emacs idle
+(auto-save-visited-mode +1)
+(setq auto-save-visited-interval 3)
+
 (use-package valign
   :load-path "~/.emacs.d/additional-packages/valign.el"
   :diminish valign-mode
