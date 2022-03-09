@@ -4,69 +4,26 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(use-package lsp-mode
-  :ensure t
-  :defines (lsp-clients-typescript-server lsp-clients-typescript-server-args)
-  :hook
-  ((go-mode python-mode rust-mode sh-mode c-mode c++-mode objc-mode) . lsp)
-  :init
-  (setq lsp-auto-guess-root t)       ; Detect project root
-  (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
-  (setq lsp-rust-server 'rust-analyzer)
-  (setq rustic-lsp-server 'rust-analyzer)
-  (setq lsp-rust-analyzer-store-path (executable-find "rust-analyzer"))
-  (setq lsp-modeline-code-actions-segments '(name count))
-  (add-hook 'c++-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
-  (add-hook 'c-mode-hook (lambda () (flycheck-select-checker 'c/c++-clang)))
+(use-package nox
+  :load-path "~/.emacs.d/additional-packages/nox.el"
   :config
-  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-  (with-eval-after-load 'lsp-mode
-    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
-
-(use-package lsp-ui
-  :ensure t
-  :hook (lsp-mode . lsp-ui-mode)
-  :config (progn
-	    ;; It seems that sideline-mode has a bug, just disable it
-	    ;; bind peek key
-	    (define-key lsp-ui-mode-map [remap evil-repeat-pop-next] #'lsp-ui-peek-find-definitions)
-	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-
-	    (setq lsp-ui-peek-fontify 'always)
-	    (setq lsp-eldoc-enable-hover nil)
-	    (setq lsp-ui-doc-enable nil)
-	    (setq
-	     lsp-ui-sideline-enable nil
-	     lsp-enable-completion-at-point nil
-	     lsp-ui-doc-position 'at-point
-	     lsp-ui-doc-header nil
-	     lsp-ui-doc-border nil)
-	    (setq lsp-ui-doc-frame-parameters '((left . -1)
-						(top . -1)
-						(no-accept-focus . t)
-						(min-width . 0)
-						(width . 0)
-						(min-height . 0)
-						(height . 0)
-						(internal-border-width . 5)
-						(vertical-scroll-bars)
-						(horizontal-scroll-bars)
-						(left-fringe . 0)
-						(right-fringe . 0)
-						(menu-bar-lines . 0)
-						(tool-bar-lines . 0)
-						(line-spacing . 0.1)
-						(unsplittable . t)
-						(undecorated . t)
-						(visibility . nil)
-						(mouse-wheel-frame . nil)
-						(no-other-frame . t)
-						(cursor-type)
-						(no-special-glyphs . t)))
-	    (setq lsp-ui-doc-include-signature nil)
-	    )
+  (dolist (hook (list
+		 'js-mode-hook
+		 'rust-mode-hook
+		 'python-mode-hook
+		 'java-mode-hook
+		 'sh-mode-hook
+		 'php-mode-hook
+		 'c-mode-common-hook
+		 'c-mode-hook
+		 'c++-mode-hook
+		 'prog-mode-hook
+		 ))
+    (add-hook hook '(lambda () (nox-ensure))))
+  (add-to-list 'nox-server-programs
+               '(rust-mode . ("rust-analyzer")))
   )
 
-;; (message "loading init-lsp")
+(message "loading init-lsp")
 (provide 'init-lsp)
 ;;; init-lsp.el ends here

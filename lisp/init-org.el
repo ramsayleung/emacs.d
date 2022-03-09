@@ -158,15 +158,6 @@
 		     "#+EMAIL: ramsayleung@gmail.com"\n
 		     "#+DATE: "
 		     (format-time-string "%Y-%m-%d %a %H:%M")> \n
-		     "#+TITLE:" > _ \n
-		     "#+OPTIONS: author:nil ^:{}"\n
-		     "#+HUGO_BASE_DIR: ~/code/org/ramsayleung.github.io"\n
-		     "#+HUGO_SECTION: post/"(format-time-string "%Y")\n
-		     "#+HUGO_CUSTOM_FRONT_MATTER: :toc true"\n
-		     "#+HUGO_AUTO_SET_LASTMOD: t"\n
-		     "#+HUGO_DRAFT: false"\n
-		     "#+HUGO_TAGS:"> _ \n
-		     "#+HUGO_CATEGORIES:"> _ \n
 		     > _ \n
 		     ))
 		)

@@ -8,5 +8,6 @@
 #+HUGO_DRAFT: false
 #+DATE: `(format-time-string "[%Y-%m-%d %a %H:%M]")`
 #+TITLE: $1
+#+HUGO_WEIGHT: $2
 
 $0
