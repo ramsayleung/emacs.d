@@ -20,9 +20,10 @@
   :diminish (yas-minor-mode . " yas")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :config (progn
-	    (yas-reload-all)
 	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+	    (yas-reload-all)
 	    (add-hook 'org-mode-hook 'yas-minor-mode)
+	    (add-hook 'prog-mode-hook 'yas-minor-mode)
 	    ))
 
 ;;; velecity mode

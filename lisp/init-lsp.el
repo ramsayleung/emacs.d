@@ -20,8 +20,10 @@
 		 'prog-mode-hook
 		 ))
     (add-hook hook '(lambda () (nox-ensure))))
+  (setq nox-python-server "pyright")
   (add-to-list 'nox-server-programs
-               '(rust-mode . ("rust-analyzer")))
+               '(rust-mode . ("rust-analyzer"))
+	       '(c++-mode . ("clangd")))
   )
 
 (message "loading init-lsp")

@@ -102,6 +102,7 @@
 	      (org-babel-do-load-languages
 	       'org-babel-load-languages
 	       '((clojure . t)
+		 (C . t)
                  (dot . t)
 		 (lisp . t)
 		 (org . t)

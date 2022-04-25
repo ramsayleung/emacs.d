@@ -368,7 +368,7 @@
 				"C-c h p" 'counsel-list-processes
 				)
 	    (general-define-key
-	     "C-s" 'swiper-isearch
+	     "C-s" 'counsel-grep-or-swiper
 	     "C-x 7 w" 'langtool-check
 	     "C-x 7 W" 'langtool-check-done
 	     "C-x 7 l" 'langtool-switch-default-language
@@ -710,7 +710,7 @@ Info-mode:
 (add-hook 'dired-mode-hook
 	  (lambda ()
 	    (define-key dired-mode-map (kbd "i")
-	      (lambda () (interactive) (find-alternate-file "..")))))
+			(lambda () (interactive) (find-alternate-file "..")))))
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
@@ -720,9 +720,9 @@ Info-mode:
 (define-key dired-mode-map "z" 'dired-get-size)
 (define-key dired-mode-map "l" 'dired-find-file)
 (define-key dired-mode-map "h"
-  (lambda ()
-    (interactive)
-    (find-alternate-file "..")))
+	    (lambda ()
+	      (interactive)
+	      (find-alternate-file "..")))
 (define-key dired-mode-map "F" 'find-name-dired)
 (define-key dired-mode-map (kbd "%^") 'dired-flag-garbage-files)
 ;;; There is a bug with eshell-mode-map, so I change keybinding with add-hook

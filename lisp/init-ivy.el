@@ -41,19 +41,18 @@
   :ensure t
   :diminish pyim-isearch-mode
   :config
-  (defun pinyin-ivy-cregexp (str)
-    (let ((a (ivy--regex-plus str))
-          (b (let ((case-fold-search nil))
-               (pyim-cregexp-build str))))
-      (if (and a (stringp a))
-          (concat a "\\|" b)
-        a)))
+  ;; from https://emacs-china.org/t/ivy-read/2432/6
+  (defun eh-ivy-cregexp (str)
+    (concat
+     (ivy--regex-plus str)
+     "\\|"
+     (pyim-cregexp-build str)))
 
   (setq ivy-re-builders-alist
 	'(
 	  (counsel-describe-function . ivy--regex-plus)
 	  (counsel-describe-variable . ivy--regex-plus)
-	  (t . pinyin-ivy-cregexp)
+	  (t . eh-ivy-cregexp)
 	  ))
   (pyim-isearch-mode t)
   )
