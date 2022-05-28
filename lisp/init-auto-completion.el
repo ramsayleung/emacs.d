@@ -35,47 +35,14 @@
   :ensure t
   :defer t
   :hook (company-mode . company-quickhelp-mode)
-  :init (progn
-	  )
-  )
-
-(use-package company-statistics
-  :ensure t
-  :defer t
-  :hook (company-mode . company-statistics-mode)
   )
 
 ;;; Shell Script completion
 (use-package company-shell
   :ensure t
   :defer t
-  :init(progn
-	 (run-with-idle-timer ramsay-idle-time nil (lambda () (add-to-list 'company-backends 'company-shell))))
-  )
-
-;;; C/C++ headers completion
-(use-package company-c-headers
-  :ensure t
-  :init (progn
-	  (cond ((ramsay/linux-p)
-		 (setq company-c-headers-path-system '("/usr/include/c++/7" "/usr/include" "/usr/local/include")))
-		((ramsay/mac-os-p)
-		 (setq company-c-headers-path-system '("/usr/local/include/c++/8.3.0"
-						       "/usr/include"
-						       "/usr/local/include"
-						       "/usr/local/opt"
-						       "/Library/Developer/CommandLineTools/usr/include/c++/v1")))
-		((eq system-type 'windows-nt)
-		 ))
-	  (run-with-idle-timer ramsay-idle-time nil (lambda () (add-to-list 'company-backends 'company-c-headers)))
-	  )
-  )
-
-;; backends for go
-(use-package company-go
-  :load-path "~/.emacs.d/additional-packages/company-go.el"
-  :init (progn
-  	  (add-to-list 'company-backends 'company-go))
+  :config
+  (add-to-list 'company-backends 'company-shell)
   )
 
 (message "loading init-auto-completion")

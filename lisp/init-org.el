@@ -220,21 +220,6 @@
   (setq org-hugo-export-with-section-numbers "num:3")
   :after ox)
 
-(use-package ob-rust
-  :if (and (not (ramsay/windows-p))
-	   window-system)
-  :ensure ob-rust
-  )
-;;; Export to twitter bootstrap
-(use-package ox-twbs
-  :if (and (not (ramsay/windows-p))
-	   window-system)
-  :ensure ox-twbs
-  )
-
-(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-(setq org-reveal-mathjax t)
-
 ;;; Syntax Highlight in html file
 (use-package htmlize
   :if (and (not (ramsay/windows-p))

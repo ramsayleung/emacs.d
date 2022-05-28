@@ -113,7 +113,5 @@
     "Display startup echo area message."
     (message "Initialized in %s" (emacs-init-time)))
   )
-;;; Garbage collector - decrease threshold to 5 MB
-(add-hook 'after-init-hook (lambda () (setq gc-cons-threshold (* 5 1024 1024))))
 (provide 'init)
 ;;; init.el ends here

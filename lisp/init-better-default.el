@@ -6,11 +6,6 @@
 (auto-save-visited-mode +1)
 (setq auto-save-visited-interval 3)
 
-(use-package valign
-  :load-path "~/.emacs.d/additional-packages/valign.el"
-  :diminish valign-mode
-  :hook (org-mode . valign-mode))
-
 (use-package so-long
   :ensure nil
   :config (global-so-long-mode 1))

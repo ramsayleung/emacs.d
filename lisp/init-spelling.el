@@ -23,28 +23,7 @@
 
 ;;; Code:
 
-(use-package langtool
-  :ensure t
-  :config
-  (cond ((ramsay/linux-p)
-	 (setq langtool-java-classpath
-	       "/usr/share/languagetool:/usr/share/java/languagetool/*"))
-	((ramsay/mac-os-p)
-	 (executable-find "languagetool"
-			  (setq langtool-bin (executable-find "languagetool")))))
-  
-
-  (defun langtool-autoshow-detail-popup (overlays)
-    (when (require 'popup nil t)
-      ;; Do not interrupt current popup
-      (unless (or popup-instances
-                  ;; suppress popup after type `C-g` .
-                  (memq last-command '(keyboard-quit)))
-	(let ((msg (langtool-details-error-message overlays)))
-          (popup-tip msg)))))
-  (setq langtool-autoshow-message-function
-	'langtool-autoshow-detail-popup)
-  )
+(setq ispell-dictionary "en")
 (provide 'init-spelling)
 ;;; init-spelling.el ends here
 

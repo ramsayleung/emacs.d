@@ -50,20 +50,6 @@
                              (tern-mode  t)))
   )
 
-(use-package js2-refactor
-  :defer t
-  :ensure t
-  :init (add-hook 'js2-mode-hook 'js2-refactor-mode))
-;;; Javascript auto-completion in Emacs using js2-mode's parser and Skewer-mode
-
-(use-package ac-js2
-  :ensure t
-  :defer t
-  :init (add-hook 'js2-mode-hook 'ac-js2-mode)
-  :config (progn
-	    (setq ac-js2-evaluate-calls t)
-	    ))
-
 ;;;----------------;;;
 ;;;   Html Mode    ;;;
 ;;;----------------;;;

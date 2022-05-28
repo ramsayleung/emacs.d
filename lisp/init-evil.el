@@ -40,20 +40,8 @@
 (use-package evil-surround
   :ensure t
   :init(progn
-	 (run-with-idle-timer ramsay-idle-time nil 'global-evil-surround-mode)
-	 ;; (global-evil-surround-mode t)
+	 (global-evil-surround-mode t)
 	 ))
-
-;; Vim matchit ported into Emacs
-(use-package evil-matchit
-  :commands evil-mode
-  :ensure t
-  :init (progn
-	  (run-with-idle-timer ramsay-idle-time nil 'global-evil-matchit-mode)
-	  ;; (global-evil-matchit-mode 1)
-	  ))
-
-;; (evilnc-default-hotkeys)
 
 (message "loading init-evil")
 (provide 'init-evil)
