@@ -40,21 +40,6 @@
   (backward-word)
   (call-interactively 'kill-region))
 
-(defun ramsay/eshell-sudo-toggle ()
-  "Add/Remove sudo in the begining of command line."
-  (interactive)
-  (save-excursion
-    (let ((commands (buffer-substring-no-properties
-		     (eshell-bol) (point-max))))
-      (if (string-match-p "^sudo " commands)
-	  (progn
-	    (eshell-bol)
-	    (while (re-search-forward "sudo " nil t)
-	      (replace-match "" t nil)))
-	(progn
-	  (eshell-bol)
-	  (insert "sudo ")
-	  )))))
 ;;; Inspire by http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
 (defun ramsay/parse-bash-history ()
   "Parse the bash history."
@@ -117,17 +102,6 @@
     (erase-buffer)
     (eshell-send-input)))
 
-(defun ramsay/eshell-fasd-z (&rest args)
-  "Use fasd to change directory more effectively by passing ARGS."
-  (setq args (eshell-flatten-list args))
-  (let* ((fasd (concat "fasd " (car args)))
-         (fasd-result (shell-command-to-string fasd))
-         (path (replace-regexp-in-string "\n$" "" fasd-result))
-         )
-    (eshell/cd path)
-    (eshell/echo path)
-    ))
-
 (use-package eshell
   :commands eshell
   :init (progn
@@ -175,54 +149,6 @@
 	 ("C-l" . ramsay/eshell-clear-buffer))
   )
 
-;;; Replace shell-pop package with customized function
-(defun ramsay/eshell-pop ()
-  "Pop and hide eshell with this function."
-  (interactive)
-  (let* ((eshell-buffer-name "*eshell*")
-	 (eshell-window (get-buffer-window eshell-buffer-name 'visible))
-	 (cwd default-directory)
-	 (change-cwd (lambda ()
-		       (progn
-			 (goto-char (point-max))
-			 (evil-insert-state)
-			 (eshell-kill-input)
-			 ;; There is somethings wrong with eshell/cd
-			 ;; So replace with `insert`
-			 (insert " cd " cwd)
-			 (eshell-send-input)
-			 ))))
-    ;; Eshell buffer exists?
-    (if (get-buffer eshell-buffer-name)
-	;; Eshell buffer is visible?
-	(if eshell-window
-	    ;; Buffer in current window is eshell buffer?
-	    (if (string= (buffer-name (window-buffer)) eshell-buffer-name)
-		(if (not (one-window-p))
-		    (progn (bury-buffer)
-			   (delete-window)))
-	      ;; If not, select window which points to eshell bufffer.
-	      (select-window eshell-window)
-	      (funcall change-cwd)
-	      )
-	  ;; If eshell buffer is not visible, split a window and switch to it.
-	  (progn
-	    ;; Use `split-window-sensibly` to split window with policy
-	    ;; If window cannot be split, force to split split window horizontally
-	    (when (not (split-window-sensibly))
-	      (ramsay/split-window-below-and-move))
-	    (switch-to-buffer eshell-buffer-name)
-	    (funcall change-cwd)
-	    ))
-      ;; If eshell buffer doesn't exist, create one
-      (progn
-	(when (not (split-window-sensibly))
-	  (ramsay/split-window-below-and-move))
-	(eshell)
-	(funcall change-cwd)
-	)))
-  )
-
 ;;; Steal from
 ;;; https://www.reddit.com/r/emacs/comments/7a14cp/fishlike_autosuggestions_in_eshell/
 ;;; Make Eshell complete like fish with history from bash, zsh, eshell
@@ -260,7 +186,7 @@
       'stop)))
 
 (defun ramsay/company-eshell-autosuggest (command &optional arg &rest ignored)
- "`company-mode' backend to provide eshell history suggestion."
+  "`company-mode' backend to provide eshell history suggestion."
   (interactive (list 'interactive))
   (cl-case command
     (interactive (company-begin-backend 'company-eshell))

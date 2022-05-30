@@ -1,7 +1,6 @@
 ;; package --- Summary
 ;;; code:
 ;;; Commentary:
-;;; read pdf file in Emacs
 
 ;;; Save and restore window configuration
 (use-package eyebrowse
@@ -33,55 +32,6 @@
 (use-package try
   :commands try
   :ensure t)
-
-(use-package graphviz-dot-mode
-  :mode "\\.dot$"
-  :ensure t
-  :commands graphviz-dot-indent-graph graphviz-dot-preview
-  :config
-  (defun ramsay/graphviz-dot-preview ()
-    "Compile the graph and preview it in an other buffer."
-    (interactive)
-    (save-buffer)
-    (let ((windows (window-list))
-	  (f-name (graphviz-output-file-name (substring compile-command (+(cl-search "-o" compile-command) 3))))
-	  (command-result (string-trim (shell-command-to-string compile-command))))
-      (if (string-prefix-p "Error:" command-result)
-	  (message command-result)
-	(progn
-	  (sleep-for 0 graphviz-dot-revert-delay)
-	  (when (= (length windows) 1)
-	    (split-window-sensibly))
-	  (with-selected-window (selected-window)
-	    (switch-to-buffer-other-window (find-file-noselect f-name t))
-	    (revert-buffer t t))))))
-  (defun ramsay/graphviz-dot-preview-with-external-viewer ()
-    "Compile the graph and preview it in an external image viewer."
-    (interactive)
-    (save-buffer)
-    (let ((windows (window-list))
-	  (f-name (graphviz-output-file-name (substring compile-command (+(cl-search "-o" compile-command) 3))))
-	  (command-result (string-trim (shell-command-to-string compile-command)))
-	  (external-viewer (if (ramsay/mac-os-p) "open " "feh ")))
-      (if (string-prefix-p "Error:" command-result)
-	  (message command-result)
-	(shell-command-to-string (concat external-viewer f-name))
-	)))
-  (defun graphviz-compile-command@override (f-name)
-    (message "calling graphviz-compile-command@around")
-    (when f-name
-      (setq compile-command
-	    (concat graphviz-dot-dot-program
-		    " -T" graphviz-dot-preview-extension " "
-		    (shell-quote-argument f-name)
-		    " -o "
-		    (shell-quote-argument
-		     (graphviz-output-file-name (concat (file-name-directory f-name)
-							"output/"
-							(file-name-nondirectory f-name))
-						))))))
-  (advice-add 'graphviz-compile-command :override 'graphviz-compile-command@override)
-  )
 
 ;;; abbrev-mode or abbreviation mode is a built-in mode that auto-corrects the
 ;;; word you mistype on pressing space.For how I practically use it
@@ -248,16 +198,6 @@ removal."
                 (insert (format "|sudo:%s" (or last-ssh-hostname "localhost"))))
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
-
-(defun ramsay/toggle-maximize-buffer ()
-  "Maximize buffer."
-  (interactive)
-  (if (and (= 1 (length (window-list)))
-           (assoc ?_ register-alist))
-      (jump-to-register ?_)
-    (progn
-      (window-configuration-to-register ?_)
-      (delete-other-windows))))
 
 (defun ramsay/copy-current-file-sans-extension ()
   "Copy current file without extension."

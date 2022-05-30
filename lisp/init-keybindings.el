@@ -11,7 +11,7 @@
 				:prefix ramsay/leader-key
 				"" nil
 				";" 'comment-dwim
-				"'" 'ramsay/eshell-pop
+				"'" 'eshell
 				"." 'ramsay/python-send-repl-echo-switch
 				"a" '(:ignore t :which-key "applications")
 				"a d" 'dired
@@ -78,26 +78,6 @@
 				"s g" 'counsel-grep
 				"s r" 'counsel-rg
 				"s s" 'isearch-forward
-				"t" '(:ignore t :which-key "toggle")
-				"t g" 'ramsay/git-timemachine
-				"t i" 'imenu-list-smart-toggle
-				"t w" 'ramsay/toggle-window-split
-				"w" '(:ignore t :which-key "windows")
-				"w d" 'delete-window
-				"w D" 'delete-other-windows
-				"w h" 'winner-undo
-				"w l" 'winner-redo
-				"w -" 'ramsay/split-window-below-and-move
-				"w /" 'ramsay/split-window-right-and-move
-				"w h" 'evil-window-left
-				"w j" 'evil-window-down
-				"w k" 'evil-window-up
-				"w l" 'evil-window-right
-				"w m" 'ramsay/toggle-maximize-buffer
-				"w <left>" 'evil-window-left
-				"w <down>" 'evil-window-down
-				"w <up>" 'evil-window-up
-				"w <right>" 'evil-window-right
 				"1"  'ace-window)
 	    
 	    (general-define-key :keymaps 'counsel-find-file-map
@@ -139,12 +119,6 @@
 				"C-c n i" 'org-roam-insert
 				"C-c n I" 'org-roam-insert-immediate
 				)
-	    (general-define-key :states '(normal insert visual motion)
-				:keymaps 'org-roam-mode-map
-				"C-c n l" 'org-roam
-				"C-c n f" 'org-roam-find-file
-				"C-c n g" 'org-roam-graph
-				)
 
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'org-mode-map
@@ -166,60 +140,6 @@
 				"t" 'org-todo
 				"h" 'org-beginning-of-line
 				"l" 'org-end-of-line)
-
-	    ;; Markdown-mode
-	    (general-define-key :states '(normal visual motion )
-				:keymaps 'markdown-mode-map
-				:prefix ramsay/leader-key
-				"m -" 'markdown-insert-hr
-				"m h" '(:ignore t :which-key "markdown/header")
-				"m h i" 'markdown-insert-header-dwim
-				"m h i" 'markdown-insert-header-setext-dwim
-				"m h 1" 'markdown-insert-header-atx-1
-				"m h 2" 'markdown-insert-header-atx-2
-				"m h 3" 'markdown-insert-header-atx-3
-				"m h 4" 'markdown-insert-header-atx-4
-				"m h 5" 'markdown-insert-header-atx-5
-				"m h 6" 'markdown-insert-header-atx-6
-				"m h !" 'markdown-insert-header-setext-1
-				"m h @" 'markdown-insert-header-setext-2
-				"m i" '(:ignore t :which-key "markdown/insert")
-				"m i l" 'markdown-insert-link
-				"m i l" 'markdown-insert-reference-link-dwim
-				"m i u" 'markdown-insert-uri
-				"m i f" 'markdown-insert-footnote
-				"m i w" 'markdown-insert-wiki-link
-				"m i i" 'markdown-insert-image
-				"m i i" 'markdown-insert-reference-image
-				"m x" '(:ignore t :which-key "markdown/text")
-				"m x b" 'markdown-insert-bold
-				"m x i" 'markdown-insert-italic
-				"m x c" 'markdown-insert-code
-				"m x c" 'markdown-insert-gfm-code-block
-				"m x q" 'markdown-insert-blockquote
-				"m x q" 'markdown-blockquote-region
-				"m x p" 'markdown-insert-pre
-				"m x p" 'markdown-pre-region
-				)
-
-	    ;; Python mode
-	    (general-define-key :states '(normal visual  motion)
-				:keymaps 'python-mode-map
-				:prefix ramsay/leader-key
-				"m c" '(:ignore t :which-key "excute")
-				"m c c" 'ramsay/python-execute-file
-				"m c C" 'ramsay/python-execute-file-focus
-				"m s" '(:ignore t :which-key "Send to REPL")
-				"m s b" 'python-shell-send-buffer
-				"m s B" 'ramsay/python-shell-send-buffer-switch
-				"m s f" 'python-shell-send-defun
-				"m s F" 'ramsay/python-shell-send-defun-switch
-				"m s i" 'ramsay/python-start-or-switch-repl
-				"m s r" 'python-shell-send-region
-				"m s R" 'ramsay/python-shell-send-region-switch
-				"m v" 'venv-set-location
-				)
-
 
 	    ;; C++ mode
 	    (general-define-key :states '(normal visual motion)
@@ -271,14 +191,6 @@
 				"m l f" 'geiser-load-file
 				)
 
-	    ;; Go mode
-	    (general-define-key :states '(normal visual motion)
-				:keymaps 'go-mode-map
-				:prefix ramsay/leader-key
-				"m c" '(:ignore :which-key "compiling")
-				"m c c" 'ramsay/compile-go
-				"m c x" 'ramsay/run-go
-				)
 	    ;; Rust mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'rust-mode-map
@@ -319,44 +231,6 @@
 				"C-r" 'isearch-backward
 				"C-M-r" 'isearch-backward-regexp)
 
-	    ;; Pdf view mode
-	    (general-define-key :states '(normal emacs)
-				:keymaps 'pdf-view-mode-map
-				"C-b"            'evil-scroll-page-up
-				"C-d"            'pdf-view-scroll-up-or-next-page
-				"C-n"            'image-next-file
-				"C-u"            'pdf-view-scroll-down-or-previous-page
-				"C-y"            'evil-scroll-line-up
-				"C-z"            'evil-emacs-state
-				"$"              'image-eol
-				"'"              'image-scroll-up
-				"/"              'isearch-forward
-				"0"              'image-bol
-				":"              'evil-ex
-				"?"              'isearch-backward
-				"G"              'pdf-view-last-page
-				"H"              'describe-mode
-				"J"              'pdf-view-next-page
-				"K"              'pdf-view-previous-page
-				"N"              'evil-search-previous
-				"O"              'pdf-outline
-				"V"              'evil-visual-line
-				"d"              'pdf-view-scroll-up-or-next-page
-				"h"              'image-backward-hscroll
-				"j"              'pdf-view-next-line-or-next-page
-				"k"              'pdf-view-previous-line-or-previous-page
-				"l"              'image-forward-hscroll
-				"n"              'evil-search-next
-				"o"              'pdf-links-action-perform
-				"r"              'pdf-view-revert-buffer
-				"u"              'pdf-view-scroll-down-or-previous-page
-				"v"              'evil-visual-char
-				"z r"            'pdf-view-scale-reset
-				"` `"            'pdf-history-backward
-				"g g"            'pdf-view-first-page
-				"g l"            'pdf-view-goto-label
-				"g t"            'pdf-view-goto-page
-				)
 	    
 	    (general-define-key "C-c h" '(:ignore t :which-key "ivy-command-prefix")
 				"C-c h a" 'counsel-apropos

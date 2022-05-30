@@ -12,9 +12,6 @@
 (use-package swiper
   :ensure t)
 
-(use-package smex
-  :ensure t)
-
 (use-package avy
   :commands (avy-goto-char avy-goto-line)
   :ensure t)
