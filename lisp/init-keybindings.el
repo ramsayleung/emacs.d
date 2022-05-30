@@ -19,9 +19,6 @@
 				"a y" '(:ignore t :which-key "youdao-dictionary")
 				"a y i" 'youdao-dictionary-search-from-input
 				"a y p" 'youdao-dictionary-search-at-point+
-				"a z" '(:ignore t :which-key "ztree")
-				"a z d" 'ztree-dir
-				"a z c" 'ztree-diff
 				"b" '(:ignore t :which-key "buffers")
 				"b d" 'kill-this-buffer
 				"b f" 'ramsay/get-buffer-full-name
@@ -35,7 +32,6 @@
 				"cr" 'comment-or-uncomment-region
 				"cv" 'evilnc-toggle-invert-comment-line-by-line
 				"d" '(:ignore t :which-key "dirs")
-				"d g" 'ramsay/golang-src-dir
 				"d t" 'ramsay/dired-tmp-dir
 				"e" #'hydra-flycheck/body
 				"f" '(:ignore t :which-key "files")

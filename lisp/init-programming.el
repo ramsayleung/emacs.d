@@ -121,63 +121,6 @@
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook 'comment-auto-fill))
 
-(defun ramsay/switch-to-buffer (repl-buffer-name)
-  "Switch to the  buffer REPL-BUFFER-NAME.
-similar to shell-pop"
-  (interactive)
-  ;; Shell buffer exists?
-  (let* ((shell-window (get-buffer-window repl-buffer-name 'visual)))
-    (if (get-buffer repl-buffer-name)
-	;; Shell buffer is visible?
-	(if shell-window
-	    ;; Buffer in current window is shell buffer?
-	    (if (string= (buffer-name (window-buffer)) repl-buffer-name)
-		(if (not (one-window-p))
-		    (progn (bury-buffer)
-			   (delete-window)))
-	      ;; If not, select window which points to shell bufffer.
-	      (progn
-		(select-window shell-window)
-		(when (and (boundp 'evil-mode) evil-mode)
-		  (evil-insert-state)))
-	      )
-	  ;; If shell buffer is not visible, split a window and switch to it.
-	  (progn
-	    ;; Use `split-window-sensibly` to split window with policy
-	    ;; If window cannot be split, force to split split window horizontally
-	    (when (not (split-window-sensibly))
-	      (ramsay/split-window-below-and-move))
-	    (switch-to-buffer repl-buffer-name)
-	    (when (and (boundp 'evil-mode) evil-mode)
-
-	      (evil-insert-state))
-	    ))
-      ;; If shell buffer doesn't exist, create one
-      (progn
-	(when (not (split-window-sensibly))
-	  (ramsay/split-window-below-and-move))
-	(run-python)
-	(when evil-mode
-	  (evil-insert-state))
-	)))
-  )
-
-(defun ramsay/repl-pop ()
-  "Run REPL for different major mode and switch to the repl buffer.
-similar to shell-pop"
-  (interactive)
-  (let* ((repl-modes '((python-mode . "*Python*")
-		       (scheme-mode . "* Mit REPL *"))))
-    (cond ((or (derived-mode-p 'python-mode) (derived-mode-p 'inferior-python-mode))
-	   (progn
-;;; To fix issue that there is weird eshell output with ipython
-	     (ramsay/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
-	  ((or (derived-mode-p 'scheme-mode) (derived-mode-p 'geiser-repl-mode))
-	   (ramsay/switch-to-buffer (cdr (assoc 'scheme-mode repl-modes))))
-	  ((or (derived-mode-p 'prog-mode)(derived-mode-p 'inferior-python-mode))
-	   (progn
-	     (ramsay/switch-to-buffer (cdr (assoc 'python-mode repl-modes)))))
-	  )))
 ;;; Treating terms in CamelCase symbols as separate words makes editing a
 ;;; little easier for me, so I like to use subword-mode everywhere.
 ;;;  Nomenclature           Subwords
