@@ -44,32 +44,34 @@
 (defun ramsay/parse-bash-history ()
   "Parse the bash history."
   (interactive)
-  (let (collection bash_history)
-    (shell-command "history -r") ; reload history
-    (setq collection
-          (nreverse
-           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
-                                           (buffer-string))
-                         "\n"
-                         t)))
-    (when (and collection (> (length collection) 0)
-               (setq bash_history collection))
-      bash_history)))
+  (when (file-exists-p "~/.bash_history")
+    (let (collection bash_history)
+      (shell-command "history -r") ; reload history
+      (setq collection
+            (nreverse
+             (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
+                                             (buffer-string))
+                           "\n"
+                           t)))
+      (when (and collection (> (length collection) 0)
+		 (setq bash_history collection))
+	bash_history))))
 
 (defun ramsay/parse-zsh-history ()
   "Parse the bash history."
   (interactive)
-  (let (collection zsh_history)
-    (shell-command "history -r") ; reload history
-    (setq collection
-          (nreverse
-           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.zsh_history"))
-                                           (replace-regexp-in-string "^:[^;]*;" "" (buffer-string)))
-                         "\n"
-                         t)))
-    (when (and collection (> (length collection) 0)
-               (setq zsh_history collection))
-      zsh_history)))
+  (when (file-exists-p "~/.zsh_history")
+    (let (collection zsh_history)
+      (shell-command "history -r") ; reload history
+      (setq collection
+            (nreverse
+             (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.zsh_history"))
+                                             (replace-regexp-in-string "^:[^;]*;" "" (buffer-string)))
+                           "\n"
+                           t)))
+      (when (and collection (> (length collection) 0)
+		 (setq zsh_history collection))
+	zsh_history))))
 
 (defun ramsay/esh-history ()
   "Interactive search eshell history."

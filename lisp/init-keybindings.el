@@ -425,24 +425,6 @@
 	      ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
 	      ("q"  nil))
 
-	    (defhydra hydra-edit ()
-	      "edit"
-	      ("j" ramsay/move-text-down "down")
-	      ("k" ramsay/move-text-up "up")
-	      ("q" nil)
-	      )
-
-	    (defhydra hydra-counsel (:color teal
-					    :hint nil)
-	      "counsel"
-	      ("a" counsel-ag "ag")
-	      ("g" counsel-git "git-grep")
-	      ("j" counsel-grep "grep")
-	      ("l" counsel-locate "locate")
-	      ("s" swiper-all "swiper-all")
-	      ("r" counsel-rg "ripgreg")
-	      )
-
 	    (defhydra hydra-font-resize
 	      (global-map "C-M-=")
 	      "font-resize"
@@ -574,7 +556,7 @@ Info-mode:
 (add-hook 'dired-mode-hook
 	  (lambda ()
 	    (define-key dired-mode-map (kbd "i")
-			(lambda () (interactive) (find-alternate-file "..")))))
+	      (lambda () (interactive) (find-alternate-file "..")))))
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
@@ -584,9 +566,9 @@ Info-mode:
 (define-key dired-mode-map "z" 'dired-get-size)
 (define-key dired-mode-map "l" 'dired-find-file)
 (define-key dired-mode-map "h"
-	    (lambda ()
-	      (interactive)
-	      (find-alternate-file "..")))
+  (lambda ()
+    (interactive)
+    (find-alternate-file "..")))
 (define-key dired-mode-map "F" 'find-name-dired)
 (define-key dired-mode-map (kbd "%^") 'dired-flag-garbage-files)
 ;;; There is a bug with eshell-mode-map, so I change keybinding with add-hook
