@@ -25,24 +25,12 @@
   (ramsay/compile-go-with-command command)
   )
 
-(defun ramsay/golang-src-dir ()
-  "Open tmp directory."
-  (interactive)
-  (dired (concat (getenv "GOPATH") "/src")))
-
 (use-package go-mode
   :ensure t
   :mode ("\\.go\\'" . go-mode)
   :config (progn
 	    ;; Use goimports instead of go-fmt
 	    (setq gofmt-command "goimports")
-	    ))
-
-(use-package go-eldoc
-  :ensure t
-  :defer t
-  :config (progn
-	    (add-hook 'go-mode-hook 'go-eldoc-setup)
 	    ))
 
 (message "loading init-go")
