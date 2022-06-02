@@ -14,25 +14,15 @@
 				"'" 'eshell
 				"." 'ramsay/python-send-repl-echo-switch
 				"a" '(:ignore t :which-key "applications")
-				"a d" 'dired
-				"a w" 'wttrin
 				"a y" '(:ignore t :which-key "youdao-dictionary")
 				"a y i" 'youdao-dictionary-search-from-input
 				"a y p" 'youdao-dictionary-search-at-point+
 				"b" '(:ignore t :which-key "buffers")
-				"b d" 'kill-this-buffer
 				"b f" 'ramsay/get-buffer-full-name
 				"b k" 'ramsay/kill-other-buffers
 				"b D" 'ramsay/delete-blank-line-in-buffer
 				"b n" 'ramsay/get-buffer-name
 				"c" '(:ignore t :which-key "compile/comments")
-				"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-				"cc" 'evilnc-copy-and-comment-lines
-				"cp" 'evilnc-comment-or-uncomment-paragraphs
-				"cr" 'comment-or-uncomment-region
-				"cv" 'evilnc-toggle-invert-comment-line-by-line
-				"d" '(:ignore t :which-key "dirs")
-				"d t" 'ramsay/dired-tmp-dir
 				"e" #'hydra-flycheck/body
 				"f" '(:ignore t :which-key "files")
 				"f c" 'ramsay/copy-current-file-path
@@ -54,7 +44,6 @@
 				"g" '(:ignore t :which-key "git/version-control")
 				"g s" 'magit-status
 				"g m" 'magit-dispatch-popup
-				"g t" 'git-timemachine-switch-branch
 				"j" '(:ignore t :which-key "jump/join/split")
 				"j l" 'avy-goto-line
 				"j j" 'avy-goto-char
