@@ -333,10 +333,7 @@
 
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
-		      "C-M-\\" 'gofmt
-		      "C-c C-r" 'go-remove-unused-imports
-		      "C-c C-g" 'go-goto-imports
-		      "C-c C-k" 'godoc)
+		      "C-M-\\" 'gofmt)
   ;; Rust-mode
   (general-define-key :keymaps 'rust-mode-map
 		      "C-M-\\" 'rust-format-buffer)
@@ -346,6 +343,7 @@
 		      [remap evil-repeat-pop-next] 'xref-find-definitions
 		      "M-." 'xref-find-definitions
 		      "M-," 'xref-pop-marker-stack)
+
   (general-emacs-define-key 'global
     "C-v" 'evil-scroll-down
     "M-v" 'evil-scroll-up)
@@ -355,44 +353,13 @@
 		      "M-n" 'pyim-convert-code-at-point
 		      "C-M-\\" 'ramsay/indent-region-or-buffer)
 
-
-  ;; Org-agenda-mode
-  (with-eval-after-load 'org-mode
-    (general-define-key :keymap 'org-agenda-mode
-			"v" 'hydra-org-agenda-view/body))
-
-
-  (general-define-key :states '(normal visual )
-		      :prefix ramsay/second-leader-key
-		      "e" '(:ignore t :which-key "eval")
-		      "e b" 'evil-buffer
-		      "f" '(:ignore t :which-key "file")
-		      "f r" 'ramsay/open-readme-in-git-root-directory
-		      "r" '(:ignore t :which-key "refactor")
-		      "r s" 'ramsay/evilcvn-change-symbol-in-defun
-		      )
-
   (general-define-key :keymaps 'emacs-lisp-mode-map
 		      :states 'insert
 		      "DEL" 'hungry-delete-backward)
 
-  (general-define-key :keymaps 'emacs-lisp-mode-map
-		      "C-c s" 'find-function-at-point)
-
   (general-define-key :keymaps 'term-raw-map
 		      "C-y" 'ramsay/term-paste)
 
-  (general-define-key :states '(normal emacs)
-		      :keymaps 'geiser-repl-mode-map
-		      "q" '(progn (bury-buffer) (delete-window)))
-
-  (general-define-key :states '(normal emacs)
-		      :keymaps 'inferior-python-mode-map
-		      "q" '(progn (bury-buffer) (delete-window))
-		      )
-  (general-define-key :states '(normal emacs)
-		      :keymaps 'messages-buffer-mode-map
-		      "q" '(progn (bury-buffer) (delete-window)))
   (with-eval-after-load 'popwin
     (general-define-key
      "C-c C-z" popwin:keymap
@@ -432,8 +399,7 @@
 	      ("="   ramsay/font-size-incr  "Increase")
 	      ("0"   ramsay/font-size-reset "Reset to default size"))
 
-	    (defhydra hydra-info (:color blue
-					 :hint nil)
+	    (defhydra hydra-info (:color blue :exit nil)
 	      "
 Info-mode:
 
@@ -488,59 +454,6 @@ Info-mode:
 	      ("C-g" nil "cancel" :color blue))
 	    (define-key Info-mode-map (kbd "?") #'hydra-info/body)
 
-	    (defun org-agenda-cts ()
-	      (let ((args (get-text-property
-			   (min (1- (point-max)) (point))
-			   'org-last-args)))
-		(nth 2 args)))
-	    (defhydra hydra-org-agenda-view (:hint none)
-	      "
-	_a_: arch-trees     _A_: arch-files    _d_: ?d? day       _D_: diary=?D?             _SPC_: reset-view
-        _e_: entry =?e?     _f_: follow=?f?    _g_: time grid=?g? _k_: capture-templates     _L__l__c_:=?l?
-	_m_: ?m? month      _r_: report=?r?    _w_: ?w? week      _y_: ?y? year              _!_: toggle-deadline
-        _t_: ?t? fortnight  _[_: inactive      _J_: clock-goto    _j_: goto-date             _q_: quit
-"
-	      ("SPC" org-agenda-reset-view)
-	      ("d" org-agenda-day-view
-	       (if (eq 'day (org-agenda-cts))
-		   "[x]" "[ ]"))
-	      ("w" org-agenda-week-view
-	       (if (eq 'week (org-agenda-cts))
-		   "[x]" "[ ]"))
-	      ("t" org-agenda-fortnight-view
-	       (if (eq 'fortnight (org-agenda-cts))
-		   "[x]" "[ ]"))
-	      ("m" org-agenda-month-view
-	       (if (eq 'month (org-agenda-cts)) "[x]" "[ ]"))
-	      ("y" org-agenda-year-view
-	       (if (eq 'year (org-agenda-cts)) "[x]" "[ ]"))
-	      ("l" org-agenda-log-mode
-	       (format "% -3S" org-agenda-show-log))
-	      ("L" (org-agenda-log-mode '(4)))
-	      ("c" (org-agenda-log-mode 'clockcheck))
-	      ("." org-agenda-goto-today)
-	      ("j" org-agenda-goto-date)
-	      ("J" org-agenda-clock-goto "clock-goto")
-	      ("k" org-capture-templates)
-	      ("f" org-agenda-follow-mode
-	       (format "% -3S" org-agenda-follow-mode))
-	      ("a" org-agenda-archives-mode)
-	      ("A" (org-agenda-archives-mode 'files))
-	      ("r" org-agenda-clockreport-mode
-	       (format "% -3S" org-agenda-clockreport-mode))
-	      ("e" org-agenda-entry-text-mode
-	       (format "% -3S" org-agenda-entry-text-mode))
-	      ("g" org-agenda-toggle-time-grid
-	       (format "% -3S" org-agenda-use-time-grid))
-	      ("D" org-agenda-toggle-diary
-	       (format "% -3S" org-agenda-include-diary))
-	      ("!" org-agenda-toggle-deadlines)
-	      ("["
-	       (let ((org-agenda-include-inactive-timestamps t))
-		 (org-agenda-check-type t 'timeline 'agenda)
-		 (org-agenda-redo)))
-	      ("q" (message "Abort") :exit t))
-
 	    (defhydra hydra-window-resize ()
 	      "Window resize"
 	      ("l" shrink-window-horizontally "shrink-right-window")
@@ -561,16 +474,10 @@ Info-mode:
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-(define-key dired-mode-map "j" 'dired-next-line)
-(define-key dired-mode-map "k" 'dired-previous-line)
 (define-key dired-mode-map "z" 'dired-get-size)
-(define-key dired-mode-map "l" 'dired-find-file)
-(define-key dired-mode-map "h"
-  (lambda ()
-    (interactive)
-    (find-alternate-file "..")))
 (define-key dired-mode-map "F" 'find-name-dired)
 (define-key dired-mode-map (kbd "%^") 'dired-flag-garbage-files)
+
 ;;; There is a bug with eshell-mode-map, so I change keybinding with add-hook
 ;;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2016-02/msg01532.html
 ;;; https://github.com/noctuid/general.el/issues/80

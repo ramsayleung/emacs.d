@@ -14,6 +14,7 @@
     (run-with-idle-timer ramsay-idle-time nil 'evil-mode)
     (evil-set-initial-state 'calendar-mode 'emacs)
     (evil-set-initial-state 'pdf-view-mode 'emacs)
+    (evil-set-initial-state 'Info-mode 'emacs)
     (evil-set-initial-state 'dired-mode 'emacs)
     (evil-set-initial-state 'imenu-list-major-mode 'emacs)
     (evil-set-initial-state 'artist-mode 'emacs)
