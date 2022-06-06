@@ -10,10 +10,6 @@
   #+BEGIN_SRC shell
     git clone https://github.com/ramsayleung/emacs.d.git ~/.emacs.d
   #+END_SRC
-  And then run ~dependency.sh~ to install dependencies
-  #+BEGIN_SRC shell
-    bash dependency.sh
-  #+END_SRC
 * Features
 ** Evil
    Even though I am an Emacser now, I have to admit that the way Vim edit file
