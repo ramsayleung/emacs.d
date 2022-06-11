@@ -4,7 +4,7 @@
 
 ;;; Auto save file when Emacs idle
 (auto-save-visited-mode +1)
-(setq auto-save-visited-interval 3)
+(setq auto-save-visited-interval 2)
 
 (use-package so-long
   :ensure nil
