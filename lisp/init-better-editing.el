@@ -7,13 +7,6 @@
   :commands (ace-window)
   )
 
-;; Delete spaces at once
-(use-package hungry-delete
-  :diminish
-  :hook (after-init . global-hungry-delete-mode)
-  :init (setq hungry-delete-except-modes
-              '(help-mode minibuffer-mode minibuffer-inactive-mode calc-mode)))
-
 (use-package which-key
   :ensure t
   :diminish which-key-mode

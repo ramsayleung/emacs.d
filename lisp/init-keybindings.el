@@ -341,11 +341,7 @@
   (general-define-key :keymaps 'markdown-mode-map
 		      "M-n" 'pyim-convert-code-at-point
 		      "C-M-\\" 'ramsay/indent-region-or-buffer)
-
-  (general-define-key :keymaps 'emacs-lisp-mode-map
-		      :states 'insert
-		      "DEL" 'hungry-delete-backward)
-
+  
   (general-define-key :keymaps 'term-raw-map
 		      "C-y" 'ramsay/term-paste)
 
@@ -458,7 +454,7 @@ Info-mode:
 (add-hook 'dired-mode-hook
 	  (lambda ()
 	    (define-key dired-mode-map (kbd "i")
-	      (lambda () (interactive) (find-alternate-file "..")))))
+			(lambda () (interactive) (find-alternate-file "..")))))
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
