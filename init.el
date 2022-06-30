@@ -65,8 +65,8 @@
   (when (version< emacs-version "27.0") (package-initialize))
   ;;(unless package--initialized (package-initialize))
 
-  (setq package-archives '(("gnu"   . "https://elpa.zilongshanren.com/gnu/")
-                           ("melpa" . "https://elpa.zilongshanren.com/melpa/")))
+  (setq package-archives '(("gnu"   . "http://1.15.88.122/gnu/")
+                           ("melpa" . "http://1.15.88.122/melpa/")))
   ;; (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
   ;;                          ("melpa" . "https://melpa.org/packages/")))
   (setq package-enable-at-startup nil)
