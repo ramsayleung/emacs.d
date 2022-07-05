@@ -63,8 +63,7 @@
 (require 'recentf)
 (setq recentf-max-saved-items 1000
       recentf-exclude '("/tmp/" "/ssh:"))
-(run-with-idle-timer ramsay-idle-time t 'recentf-mode)
-;; (recentf-mode 1)
+(recentf-mode 1)
 
 ;;; Auto-refresh buffers when files have changed on disk
 (global-auto-revert-mode t)

@@ -2,9 +2,6 @@
 ;;; code:
 ;;; Commentary:
 
-(defmacro ramsay/after-stack-clears (&rest body)
-  "Do BODY after the call stack is clear."
-  `(run-with-timer ramsay-idle-time nil (lambda () ,@body)))
 (use-package counsel
   :ensure t
   :init ()

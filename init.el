@@ -30,7 +30,6 @@
 ;;; Define constnat variable for configuration
 
 (defvar ramsay-additional-packages-path (expand-file-name "additional-packages" user-emacs-directory))
-(defvar ramsay-idle-time 1)
 
 ;;; Define some useful function
 (defun ramsay/mac-os-p ()
@@ -106,7 +105,7 @@
 
   (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
   (when (file-exists-p custom-file)
-    (run-with-idle-timer ramsay-idle-time nil 'load custom-file)
+    (load custom-file)
     )
   ;; Display the total loading time in the minibuffer
   (defun display-startup-echo-area-message ()

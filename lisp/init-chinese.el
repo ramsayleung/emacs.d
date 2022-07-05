@@ -269,7 +269,7 @@ rulesepcolor= \\color{ red!20!green!20!blue!20}
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 ;;; Adds hook to find-files-hook
-(run-with-idle-timer ramsay-idle-time nil 'auto-insert-mode)
+(auto-insert-mode t)
 (setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
 
 (message "loading init-chinese")

@@ -22,8 +22,7 @@
 (use-package popwin
   :ensure t
   :config (progn
-	    (run-with-idle-timer ramsay-idle-time nil 'popwin-mode)
-	    ;; (popwin-mode t)
+	    (popwin-mode t)
 	    (push '(compilation-mode :noselect t) popwin:special-display-config)
 	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
 	    (push "*slime-apropos*" popwin:special-display-config)
