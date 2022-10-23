@@ -232,6 +232,9 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
 ;;  Color Theme  ;;
 ;;---------------;;
 
+;;; modus themes, the default theme for emacs.
+;;; https://protesilaos.com/emacs/modus-themes
+
 (use-package zenburn-theme
   :ensure t
   :defer t)
