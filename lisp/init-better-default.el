@@ -134,6 +134,18 @@
       (remq 'process-kill-buffer-query-function
 	    kill-buffer-query-functions))
 
+;;; Shorten the file-name when calling `bs-show`
+(defun ramsay-bs--get-file-name (orig-fun &rest args)
+  "Overriding the ORIG-FUN `bs--get-file-name` function wtih ARGS to shorten the file name."
+  (propertize (or (and buffer-file-name
+		       (file-name-directory (abbreviate-file-name buffer-file-name)))
+		  (bound-and-true-p list-buffers-directory)
+		  "")
+              'mouse-face 'highlight
+              'help-echo "mouse-2: select this buffer, mouse-3: select in other frame"))
+
+(advice-add 'bs--get-file-name :around #'ramsay-bs--get-file-name)
+
 (message "loading init-better-default")
 (provide 'init-better-default)
 ;;; init-better-default.el ends here

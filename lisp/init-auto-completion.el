@@ -26,9 +26,7 @@
 	 company-tooltip-align-annotations 't          ; align annotations to the right tooltip border
 	 company-idle-delay .4                         ; decrease delay before autocompletion popup shows
 	 company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-  :config (progn
-	    (global-company-mode t)
-	    )
+  (global-company-mode t)
   )
 
 (use-package company-quickhelp
