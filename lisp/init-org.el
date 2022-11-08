@@ -17,7 +17,7 @@
 	  ;;language’s major mode.
 	  (setq org-src-fontify-natively t
 		org-src-tab-acts-natively t)
-
+	  (setq org-src-window-setup 'current-window)
 	  (setq org-ellipsis " [+]")
 
 	  (setq org-html-htmlize-output-type nil)
@@ -115,6 +115,7 @@
 		 (emacs-lisp . t)
 		 (awk . t)
 		 (sql . t)
+		 (scheme . t)
 		 (sqlite . t)))
 
 	      (setq org-startup-with-inline-images t)
