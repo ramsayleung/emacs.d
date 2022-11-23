@@ -35,6 +35,8 @@
   :ensure t
   :diminish undo-tree-mode
   :commands undo-tree-visualize
+  :init
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   :config (global-undo-tree-mode t))
 
 ;;; Emacs always for confirmation whether we really wanna open

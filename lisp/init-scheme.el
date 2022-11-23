@@ -13,6 +13,11 @@
     :defer t)
   )
 
+(use-package racket-mode
+  :mode("\\.rkt\\'" . racket-mode)
+  :ensure t
+  )
+
 (message "loading init-scheme")
 (provide 'init-scheme)
 
