@@ -281,11 +281,6 @@
 				"C-y" 'yank)
 	    )
 
-  ;; Format "buffer"
-  ;; Python mode
-  (general-define-key :keymaps 'python-mode-map
-		      "C-M-\\" 'ramsay/python-format-and-isort-buffer)
-
   ;; Web mode|Html mode
   (general-define-key :keymaps '(web-mode-map html-mode-map)
 		      "C-M-\\" 'web-beautify-html)
