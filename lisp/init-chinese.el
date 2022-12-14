@@ -52,14 +52,13 @@
 ;;; org-mode 导出中文的问题解决
 ;; org-mode export to latex
 (require 'ox-latex)
-(setq org-export-latex-listings t)
 
 (add-to-list 'org-latex-packages-alist
 	     '("" "xcolor" t))
 (add-to-list 'org-latex-packages-alist
 	     '("" "listings" t))
-(add-to-list 'org-latex-packages-alist
-	     '("" "fontspec" t))
+;; (add-to-list 'org-latex-packages-alist
+;; 	     '("" "fontspec" t))
 (add-to-list 'org-latex-packages-alist
 	     '("" "indentfirst" t))
 (add-to-list 'org-latex-packages-alist

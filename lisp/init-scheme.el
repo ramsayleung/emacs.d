@@ -6,9 +6,9 @@
   :ensure t
   :defer t
   :init
-  (setq geiser-active-implementations '(guile))
+  (setq geiser-active-implementations '(racket))
   (add-hook 'scheme-mode-hook 'geiser-mode)
-  (use-package geiser-guile
+  (use-package geiser-racket
     :ensure t
     :defer t)
   )

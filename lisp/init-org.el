@@ -17,7 +17,6 @@
 	  ;;language’s major mode.
 	  (setq org-src-fontify-natively t
 		org-src-tab-acts-natively t)
-	  (setq org-src-window-setup 'current-window)
 	  (setq org-ellipsis " [+]")
 
 	  (setq org-html-htmlize-output-type nil)
@@ -26,6 +25,8 @@
 	  (setq org-export-backends '(latex icalendar))
 	  ;; Show org-edit-special in the other-window
 	  (setq org-src-window-setup 'other-window)
+	  ;; The directory of storing latax image
+	  (setq org-latex-preview-ltxpng-directory "/tmp/org-ltximg")
 	  ;; use minted to highlight code in latex
 	  (setq org-latex-listings 'minted)
 	  (setq org-export-latex-listings 'minted)
