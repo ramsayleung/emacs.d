@@ -38,11 +38,6 @@
 	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
 	    ))
-(use-package nyan-mode
-  :ensure t
-  :if (window-system)
-  :init
-  (nyan-mode))
 
 (use-package writeroom-mode
   :hook (emacs-startup . global-writeroom-mode)

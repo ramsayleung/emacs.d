@@ -42,11 +42,6 @@
   :commands (py-autopep8 py-autopep8-buffer)
   :ensure t)
 
-;;; Use isort to sort import
-(use-package py-isort
-  :ensure t
-  :commands (py-isort-buffer))
-
 (message "loading init-python")
 (provide 'init-python)
 ;;; init-python.el ends here
