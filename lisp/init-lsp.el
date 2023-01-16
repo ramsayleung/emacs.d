@@ -7,18 +7,7 @@
 (use-package eglot
   :ensure t
   :init
-  (dolist (hook (list
-		 'js-mode-hook
-		 'rust-mode-hook
-		 'python-mode-hook
-		 'java-mode-hook
-		 'sh-mode-hook
-		 'php-mode-hook
-		 'c-mode-common-hook
-		 'c-mode-hook
-		 'c++-mode-hook
-		 ))
-    (add-hook hook '(lambda () (eglot-ensure))))
+  (add-hook 'prog-mode-hook 'eglot-ensure)
   )
 
 

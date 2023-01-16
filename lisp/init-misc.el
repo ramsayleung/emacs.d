@@ -20,9 +20,6 @@
   :ensure t
   :after ledger-mode)
 
-(use-package docker-tramp
-  :ensure t)
-
 ;;; Track Emacs commands frequency
 (use-package keyfreq
   :ensure t

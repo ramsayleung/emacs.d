@@ -39,3 +39,4 @@ transient/
 /cnfonts/
 /places
 /projects
+*.so
