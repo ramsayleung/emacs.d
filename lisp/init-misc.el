@@ -20,11 +20,6 @@
   :ensure t
   :after ledger-mode)
 
-;;; Track Emacs commands frequency
-(use-package keyfreq
-  :ensure t
-  :config (keyfreq-mode 1) (keyfreq-autosave-mode 1))
-
 ;;; Try out Emacs Package without install
 (use-package try
   :commands try
@@ -71,7 +66,8 @@ by using nxml's indentation rules."
   (message "Formated xml!"))
 
 (defun ramsay/empty-buffer ()
-  "Open a new clean window with a buffer named untitled<N>.  The buffer is not associated with a file."
+  "Open a new clean window with a buffer named untitled<N>.
+The buffer is not associated with a file."
   (interactive)
   (switch-to-buffer-other-window (generate-new-buffer "untitled")))
 

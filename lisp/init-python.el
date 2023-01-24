@@ -37,11 +37,6 @@
 	    )
   )
 
-;; Use pep8 to format python file
-(use-package py-autopep8
-  :commands (py-autopep8 py-autopep8-buffer)
-  :ensure t)
-
 (message "loading init-python")
 (provide 'init-python)
 ;;; init-python.el ends here
