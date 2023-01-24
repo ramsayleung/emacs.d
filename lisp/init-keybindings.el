@@ -205,6 +205,9 @@
 				[remap evil-complete-previous] 'company-select-previous
 				)
 
+	    (general-define-key :keymaps 'smerge-mode-map
+				"C-c ^ ^" 'hydra-smerge/body)
+
 	    ;; profiler-report-mode
 	    (general-define-key :keymaps 'profiler-report-mode-map
 				"<tab>" 'profiler-report-expand-entry)
@@ -379,6 +382,30 @@
 	      ("="   ramsay/font-size-incr  "Increase")
 	      ("0"   ramsay/font-size-reset "Reset to default size"))
 
+	    (defhydra hydra-smerge (:color red :hint nil)
+	      "
+Navigate       Keep               other
+----------------------------------------
+_p_: previous  _c_: current       _e_: ediff
+_n_: next      _m_: mine  <<      _u_: undo
+_j_: up        _o_: other >>      _r_: refine
+_k_: down      _a_: combine       _q_: quit
+               _b_: base
+"
+	      ("n" smerge-next)
+	      ("p" smerge-prev)
+	      ("c" smerge-keep-current)
+	      ("m" smerge-keep-mine)
+	      ("o" smerge-keep-other)
+	      ("b" smerge-keep-base)
+	      ("a" smerge-keep-all)
+	      ("e" smerge-ediff)
+	      ("j" previous-line)
+	      ("k" forward-line)
+	      ("r" smerge-refine)
+	      ("u" undo)
+	      ("q" nil :exit t))
+
 	    (defhydra hydra-info (:color blue :exit nil)
 	      "
 Info-mode:
@@ -449,7 +476,7 @@ Info-mode:
 (add-hook 'dired-mode-hook
 	  (lambda ()
 	    (define-key dired-mode-map (kbd "i")
-			(lambda () (interactive) (find-alternate-file "..")))))
+	      (lambda () (interactive) (find-alternate-file "..")))))
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
