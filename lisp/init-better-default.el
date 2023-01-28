@@ -109,6 +109,18 @@
 ;;; xref
 (when emacs/>=28p  (setq xref-search-program 'ripgrep))
 
+;;; ediff
+(use-package ediff
+  :config
+  (custom-set-variables
+   '(ediff-diff-options "-w") ; ignore whitespace
+   '(ediff-split-window-function (quote split-window-horizontally)) ; split side
+					; by side
+   '(ediff-window-setup-function (quote ediff-setup-windows-plain))) ;prevent popup
+  ;; restore the windows after ediff quit
+  (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+  )
+
 ;;; set "Meta" key to be the mac command key
 (when (ramsay/mac-os-p)
   (setq mac-option-key-is-meta nil
