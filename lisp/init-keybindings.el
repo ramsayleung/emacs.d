@@ -136,12 +136,6 @@
 				"m c x" 'ramsay/g++-compile-and-run
 				)
 
-	    ;; C/C++ mode
-	    (general-define-key :keymaps 'c-mode-base-map
-				"C-M-\\" 'clang-format-buffer
-				"M-RET" 'srefactor-refactor-at-point
-				)
-
 	    ;; Scheme mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'scheme-mode-map
@@ -284,21 +278,7 @@
 				"C-y" 'yank)
 	    )
 
-  ;; Web mode|Html mode
-  (general-define-key :keymaps '(web-mode-map html-mode-map)
-		      "C-M-\\" 'web-beautify-html)
 
-  ;; Css mode
-  (general-define-key :keymaps 'css-mode-map
-		      "C-M-\\" 'web-beautify-css)
-
-  ;; Nxml/xml mode
-  (general-define-key :keymaps '(nxml-mode-map)
-		      "C-M-\\" 'ramsay/format-xml)
-
-  ;; Js|Js2|Json mode
-  (general-define-key :keymaps '(js-mode-map js2-mode-map json-mode-map)
-		      "C-M-\\" 'web-beautify-js)
 
   ;; Prog-mode  Org-mode
   (general-define-key :keymaps '(prog-mode-map org-mode-map)
@@ -317,7 +297,6 @@
 		      [remap paredit-convolute-sexp] 'xref-find-references
 		      "M-?" 'xref-find-references)
   
-
   ;; Go-mode
   (general-define-key :keymaps 'go-mode-map
 		      "C-M-\\" 'gofmt)
@@ -334,11 +313,6 @@
   (general-emacs-define-key 'global
     "C-v" 'evil-scroll-down
     "M-v" 'evil-scroll-up)
-
-  ;; Markdown-mode
-  (general-define-key :keymaps 'markdown-mode-map
-		      "M-n" 'pyim-convert-code-at-point
-		      "C-M-\\" 'ramsay/indent-region-or-buffer)
   
   (general-define-key :keymaps 'term-raw-map
 		      "C-y" 'ramsay/term-paste)

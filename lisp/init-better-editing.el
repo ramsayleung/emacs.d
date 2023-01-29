@@ -113,7 +113,6 @@ point reaches the beginning or end of the buffer, stop there."
   (interactive)
   (kill-new buffer-file-name))
 
-
 ;;; http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html
 ;;; Copy and Paste in x system in all platform
 (use-package simpleclip

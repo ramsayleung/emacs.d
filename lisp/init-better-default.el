@@ -23,6 +23,21 @@
   (lazy-count-prefix-format "%s/%s ")
   (lazy-highlight-cleanup nil))
 
+
+(use-package ediff
+  :ensure t
+  :init
+  ;; ignore whitespace
+  (setq ediff-diff-options "-w")
+  ;; split side by side
+  (setq ediff-split-window-function 'split-window-horizontally)
+  ;; prevent popup
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  ;; restore the windows after ediff quit
+  (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+  )
+
+
 (use-package autorevert
   :ensure nil
   :hook (after-init . global-auto-revert-mode))
@@ -108,18 +123,6 @@
 
 ;;; xref
 (when emacs/>=28p  (setq xref-search-program 'ripgrep))
-
-;;; ediff
-(use-package ediff
-  :config
-  (custom-set-variables
-   '(ediff-diff-options "-w") ; ignore whitespace
-   '(ediff-split-window-function (quote split-window-horizontally)) ; split side
-					; by side
-   '(ediff-window-setup-function (quote ediff-setup-windows-plain))) ;prevent popup
-  ;; restore the windows after ediff quit
-  (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
-  )
 
 ;;; set "Meta" key to be the mac command key
 (when (ramsay/mac-os-p)
