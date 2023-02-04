@@ -64,7 +64,6 @@
 ;;; Use `fd` command to find file.
 (use-package project
   :config
-  (add-to-list 'project-switch-commands '(magit-status "Magit"))
   (defun ramsay/project-files-in-directory (dir)
     "Use `fd' to list files in DIR."
     (let* ((default-directory dir)

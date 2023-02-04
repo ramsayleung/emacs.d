@@ -286,7 +286,6 @@
   ;; Graphviz-dot-mode
   (general-define-key :keymaps '(graphviz-dot-mode-map)
 		      "C-M-\\" 'graphviz-dot-indent-graph
-		      [remap graphviz-dot-preview] 'ramsay/graphviz-dot-preview
 		      "C-c C-u" 'ramsay/graphviz-dot-preview-with-external-viewer)
 
   (general-define-key :keymaps '(emacs-lisp-mode-map
@@ -450,7 +449,7 @@ Info-mode:
 (add-hook 'dired-mode-hook
 	  (lambda ()
 	    (define-key dired-mode-map (kbd "i")
-	      (lambda () (interactive) (find-alternate-file "..")))))
+			(lambda () (interactive) (find-alternate-file "..")))))
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
