@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package org
+  :pin gnu
   :ensure t
   :mode ("\\.org\\'" . org-mode)
   :init (progn
