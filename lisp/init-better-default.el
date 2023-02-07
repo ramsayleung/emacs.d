@@ -63,6 +63,7 @@
 ;;; Steal from https://emacstalk.github.io/post/010/
 ;;; Use `fd` command to find file.
 (use-package project
+  :ensure t
   :config
   (defun ramsay/project-files-in-directory (dir)
     "Use `fd' to list files in DIR."
