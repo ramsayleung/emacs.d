@@ -4,8 +4,11 @@
 
 (use-package counsel
   :ensure t
-  :init ()
+  :init
+  (use-package smex
+    :ensure t)
   )
+
 (use-package swiper
   :ensure t)
 
