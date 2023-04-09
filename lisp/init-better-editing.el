@@ -2,29 +2,6 @@
 ;;; code:
 ;;; Commentary:
 
-(defun ramsay/hugo2md-base(script-path suffix)
-  "Convert hugo markdown to standard markdown
-  and replace image link refering to specific repository"
-  (when buffer-file-name
-    (shell-command-to-string (concat "sh " script-path " " (file-truename buffer-file-name)
-				     " "
-				     (concat "/tmp/" (file-name-sans-extension (buffer-name))
-					     "-"
-					     suffix
-					     "."
-					     (file-name-extension (buffer-name)))
-				     ))))
-
-(defun ramsay/hugo2md-github ()
-  "Replace image link to refer to github repository."
-  (interactive)
-  (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-github.sh" "github"))
-
-(defun ramsay/hugo2md-gitea ()
-  "Replace image link to refer to gitea repository."
-  (interactive)
-  (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-gitea.sh" "gitea"))
-
 (use-package ace-window
   :ensure t
   :commands (ace-window)

@@ -64,6 +64,7 @@
 ;;; Use `fd` command to find file.
 (use-package project
   :config
+  (add-to-list 'project-switch-commands '(magit-project-status "Magit" ?m))
   (defun ramsay/project-files-in-directory (dir)
     "Use `fd' to list files in DIR."
     (let* ((default-directory dir)
@@ -142,11 +143,6 @@
 	      )
 	  (keyboard-quit))
 	))))
-
-;;; Don't ask me when kill process buffer
-(setq kill-buffer-query-functions
-      (remq 'process-kill-buffer-query-function
-	    kill-buffer-query-functions))
 
 ;;; Shorten the file-name when calling `bs-show`
 (defun ramsay-bs--get-file-name (orig-fun &rest args)

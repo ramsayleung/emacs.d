@@ -218,10 +218,47 @@
 (use-package ox-hugo
   :ensure t   ;Auto-install the package from Melpa
   :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
+  :after ox
   :config
   (setq org-hugo-default-section-directory (concat "post/" (format-time-string "%Y")))
   (setq org-hugo-export-with-section-numbers "num:3")
-  :after ox)
+  (defun ramsay/hugo2md-base(script-path md-path suffix)
+    "Convert hugo markdown to standard markdown
+  and replace image link refering to specific repository"
+    (let* ((output-file-path (concat "/tmp/" (file-name-sans-extension (file-name-nondirectory md-path))
+				     "-"
+				     suffix
+				     "."
+				     (file-name-extension (file-name-nondirectory md-path)))))
+      (shell-command-to-string (concat "sh " script-path " " md-path " " output-file-path))
+
+      ;; Copy generated markdown to clipboard
+      (save-window-excursion
+	(switch-to-buffer (find-file-noselect output-file-path))
+	(kill-new (buffer-substring-no-properties (point-min) (point-max)))
+	(kill-current-buffer))
+      ))
+  
+  (defun ramsay/hugo2md-github ()
+    "Replace image link to refer to github repository."
+    (interactive)
+    (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-github.sh" (buffer-file-name) "github"))
+
+  (defun ramsay/hugo2md-gitea ()
+    "Replace image link to refer to gitea repository."
+    (interactive)
+    (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-gitea.sh" (buffer-file-name) "gitea"))
+
+  (defun ramsay/org-hugo-export-to-std-md (orig-fun &rest args)
+    "Generate standard markdown file base on the exported hugo markdown."
+    (let ((res (apply orig-fun args)))
+      (message "Generate the standard markdown from %S" res)
+      (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-gitea.sh" res "gitea")
+      res))
+
+  (advice-add 'org-hugo-export-to-md :around #'ramsay/org-hugo-export-to-std-md)
+  )
+
 
 ;;; Syntax Highlight in html file
 (use-package htmlize
