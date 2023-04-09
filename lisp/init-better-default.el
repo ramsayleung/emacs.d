@@ -63,6 +63,7 @@
 ;;; Steal from https://emacstalk.github.io/post/010/
 ;;; Use `fd` command to find file.
 (use-package project
+  :ensure t
   :config
   (add-to-list 'project-switch-commands '(magit-project-status "Magit" ?m))
   (defun ramsay/project-files-in-directory (dir)
