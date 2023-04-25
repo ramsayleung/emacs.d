@@ -222,7 +222,7 @@
 				"C-c h p" 'counsel-list-processes
 				)
 	    (general-define-key
-	     "C-s" 'counsel-grep-or-swiper
+	     "C-s" 'swiper-isearch
 	     "C-x b"  'switch-to-buffer
 	     "C-x C-b" 'bs-show
 	     "C-x C-r" 'counsel-recentf
@@ -258,7 +258,7 @@
 	     "C-n" 'next-line
 	     [remap evil-paste-pop] 'previous-line
 	     "C-p" 'previous-line
-	     "C-x k" 'kill-this-buffer
+	     "C-x k" 'kill-current-buffer
 	     "C-x t" 'ramsay/dired-tmp-dir
 	     "C-x u" 'undo-tree-visualize
 	     "C-x 2" 'ramsay/split-window-below-and-move

@@ -36,9 +36,11 @@
   "Check whether Emacs is running on Mac os."
   (string= system-type "darwin")
   )
+
 (defun ramsay/linux-p ()
   "Check whether Emacs is running on Linux."
   (string= system-type "gnu/linux"))
+
 (defun ramsay/windows-p ()
   "Detect whether Emacs is running on Windows."
   (eq system-type 'windows-nt))
@@ -53,6 +55,11 @@
   (or (> (buffer-size) (* 5000 800))
       (> (line-number-at-pos (point-max)) 100000)))
 
+(defun ramsay/intercepted-by-gfw-p (&optional host)
+  "Check if intercepted by GFW with HOST."
+  (not (= 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1"
+			  (if host host "www.google.com")))))
+
 (defconst emacs/>=28p
   (>= emacs-major-version 28)
   "Emacs is 28 or above.")
@@ -64,10 +71,12 @@
   (when (version< emacs-version "27.0") (package-initialize))
   ;;(unless package--initialized (package-initialize))
 
-  (setq package-archives '(("gnu"   . "http://1.15.88.122/gnu/")
-                           ("melpa" . "http://1.15.88.122/melpa/")))
-  ;; (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-  ;;                          ("melpa" . "https://melpa.org/packages/")))
+  (if (ramsay/intercepted-by-gfw-p)
+      ;; Use mirror if it's in China.
+      (setq package-archives '(("gnu"   . "http://1.15.88.122/gnu/")
+                               ("melpa" . "http://1.15.88.122/melpa/")))
+    (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                             ("melpa" . "https://melpa.org/packages/"))))
   (setq package-enable-at-startup nil)
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)

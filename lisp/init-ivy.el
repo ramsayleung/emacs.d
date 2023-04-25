@@ -38,18 +38,11 @@
   :ensure t
   :diminish pyim-isearch-mode
   :config
-  ;; from https://emacs-china.org/t/ivy-read/2432/6
-  (defun eh-ivy-cregexp (str)
-    (concat
-     (ivy--regex-plus str)
-     "\\|"
-     (pyim-cregexp-build str)))
-
   (setq ivy-re-builders-alist
 	'(
 	  (counsel-describe-function . ivy--regex-plus)
 	  (counsel-describe-variable . ivy--regex-plus)
-	  (t . eh-ivy-cregexp)
+	  (t . pyim-cregexp-ivy)
 	  ))
   (pyim-isearch-mode t)
   )
@@ -64,15 +57,6 @@
 
 (use-package ivy-buffer-extend
   :load-path "~/.emacs.d/additional-packages/ivy-buffer-extend.el")
-
-;;; Sometimes I find too many buffers is distracted
-(defun ramsay/switch-to-current-open-buffer ()
-  "Switch to current open bufffer instead of also including;
-bookmarks reccently opened files and window layout."
-  (interactive)
-  (setq ivy-use-virtual-buffers nil)
-  (ivy-switch-buffer)
-  )
 
 (defun ramsay/ivy-switch-to-buffer-enhanced ()
   "Ivy-switch-to-buffer with recentf."
