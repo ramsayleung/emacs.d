@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: hugo
-# key: hugo
+# name: en hugo
+# key: en
 # --
 #+OPTIONS: author:nil ^:{}
 #+HUGO_BASE_DIR: ~/code/org/ramsayleung.github.io
-#+HUGO_SECTION: post/`(format-time-string "%Y")`
+#+HUGO_SECTION: en/post/`(format-time-string "%Y")`
 #+HUGO_CUSTOM_FRONT_MATTER: :toc true
 #+HUGO_AUTO_SET_LASTMOD: t
 #+HUGO_DRAFT: false
