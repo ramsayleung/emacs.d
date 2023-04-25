@@ -26,11 +26,6 @@
 	    (add-hook 'prog-mode-hook 'yas-minor-mode)
 	    ))
 
-;;; velecity mode
-(use-package vtl-mode
-  :load-path "~/.emacs.d/additional-packages/vtl.el"
-  :mode "\\.vm$")
-
 (use-package yaml-mode
   :ensure t
   :mode "\\.yml$")

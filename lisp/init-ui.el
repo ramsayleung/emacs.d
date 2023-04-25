@@ -35,7 +35,6 @@
 	    (push 'slime-connection-list-mode popwin:special-display-config)
 	    (push "*vc-diff*" popwin:special-display-config)
 	    (push "*vc-change-log*" popwin:special-display-config)
-	    (push '("*Youdao Dictionary*" :noselect t :width 0.2 :position bottom) popwin:special-display-config)
 	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
 	    ))
 

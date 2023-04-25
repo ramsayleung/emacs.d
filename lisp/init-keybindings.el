@@ -14,9 +14,8 @@
 				"'" 'eshell
 				"." 'ramsay/python-send-repl-echo-switch
 				"a" '(:ignore t :which-key "applications")
-				"a y" '(:ignore t :which-key "youdao-dictionary")
-				"a y i" 'youdao-dictionary-search-from-input
-				"a y p" 'youdao-dictionary-search-at-point+
+				"a t" '(:ignore t :which-key "translator")
+				"a t d" 'gts-do-translate
 				"b" '(:ignore t :which-key "buffers")
 				"b f" 'ramsay/get-buffer-full-name
 				"b k" 'ramsay/kill-other-buffers
@@ -247,7 +246,7 @@
 	     "C-c l" 'org-store-link
 	     "C-c e" 'hydra-edit/body
 	     "C-c n" 'ramsay/empty-buffer
-	     "C-c y p" 'youdao-dictionary-search-at-point+
+	     "C-c t d" 'gts-do-translate
 	     "C-c w" 'hydra-window-resize/body
 	     "C-c p" '(:ignore t :which-key "paredit")
 	     "C-c p (" 'paredit-wrap-round

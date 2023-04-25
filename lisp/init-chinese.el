@@ -1,19 +1,18 @@
 ;;; package --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
-(use-package youdao-dictionary
+
+(use-package go-translate
+  :commands (gts-do-translate)
   :ensure t
-  :commands (youdao-dictionary-search-at-point+ youdao-dictionary-search-from-input)
-  :init
-  (progn
-    (defun ramsay/youdao-dictionary-buffer-quit ()
-      "Quit youdao-dictionary Buffer and delete window"
-      (interactive)
-      (kill-this-buffer)
-      (delete-window)))
-  :config (progn
-	    (setq url-automatic-caching t)
-	    ))
+  :config
+  (setq gts-translate-list '(("en" "zh")))
+  (setq gts-default-translator
+	(gts-translator
+	 :picker (gts-noprompt-picker)
+	 :engines (list (gts-bing-engine) (gts-google-engine))
+	 :render (gts-buffer-render)))
+  )
 
 ;;; 智能中英文切换
 (use-package sis
@@ -46,7 +45,7 @@
      ))
 
   ;; enable the /cursor color/ mode
-  (sis-global-cursor-color-mode t)
+  ;; (sis-global-cursor-color-mode t)
   ;; enable the /respect/ mode
   (sis-global-respect-mode t)
   ;; enable the /context/ mode for all buffers
