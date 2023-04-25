@@ -203,17 +203,6 @@
     (setq-local company-frontends '(company-preview-frontend))))
 
 (add-hook 'eshell-mode-hook 'ramsay/setup-company-eshell-autosuggest)
-(use-package eshell-prompt-extras
-  :load-path "~/.emacs.d/additional-packages/eshell-prompt-extras.el"
-  :after eshell
-  :init (progn
-	  (with-eval-after-load "esh-opt"
-	    (require 'virtualenvwrapper)
-	    (venv-initialize-eshell)
-	    (autoload 'epe-theme-lambda "eshell-prompt-extras")
-	    (setq eshell-highlight-prompt nil
-		  eshell-prompt-function 'epe-theme-funky))))
-
 
 (message "loading init-eshell")
 (provide 'init-eshell)
