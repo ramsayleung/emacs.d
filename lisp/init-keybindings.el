@@ -231,18 +231,12 @@
 
 	    ;; non-evil ,without a prefix
 	    (general-define-key
-	     ;; remap c-a to `ramsay/smarter-move-beginning-of-line
-	     [remap move-beginning-of-line] 'ramsay/smarter-move-beginning-of-line
 	     [remap evil-repeat-pop-next] 'xref-find-definitions
 	     ;; remap C-n to `next-line`
 	     [remap evil-complete-next] 'company-select-next
 	     [remap evil-complete-previous] 'company-select-previous
 	     "<f5>" 'deadgrep
 	     "C-c a" 'org-agenda
-	     "C-x c j" 'citre-jump
-	     "C-x c J" 'citre-jump-back
-	     "C-x c p" 'citre-ace-peek
-	     "C-x c u" 'citre-update-this-tags-file
 	     "C-c l" 'org-store-link
 	     "C-c e" 'hydra-edit/body
 	     "C-c n" 'ramsay/empty-buffer
@@ -271,7 +265,7 @@
 	     "S-<f6>" 'lsp-rename)
 
 	    (general-define-key :states '(insert normal visual motion)
-				"C-a" 'ramsay/smarter-move-beginning-of-line
+				"C-a" 'move-beginning-of-line
 				"C-e" 'move-end-of-line
 				"C-w" 'kill-region
 				"C-y" 'yank)

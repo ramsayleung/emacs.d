@@ -140,15 +140,14 @@
 	    (add-hook 'eshell-mode-hook (lambda ()
 					  (setq-local global-hl-line-mode nil)))
 	    )
-  :bind (([remap ramsay/smarter-move-beginning-of-line] . eshell-bol)
-	 ("C-a" . eshell-bol)
-	 ([remap kill-region] . ramsay/kill-word-backward)
-	 ("C-w" . ramsay/kill-word-backward)
-	 ([remap evil-insert-digraph] . paredit-kill)
-	 ("C-k" . paredit-kill)
-	 ([remap evil-paste-from-register] . ramsay/esh-history)
-	 ("C-r" . ramsay/esh-history)
-	 ("C-l" . ramsay/eshell-clear-buffer))
+  :bind (:map eshell-mode-map
+	      ([remap kill-region] . ramsay/kill-word-backward)
+	      ("C-w" . ramsay/kill-word-backward)
+	      ([remap evil-insert-digraph] . paredit-kill)
+	      ("C-k" . paredit-kill)
+	      ([remap evil-paste-from-register] . ramsay/esh-history)
+	      ("C-r" . ramsay/esh-history)
+	      ("C-l" . ramsay/eshell-clear-buffer))
   )
 
 ;;; Steal from
