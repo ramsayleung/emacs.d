@@ -92,7 +92,7 @@
 (setq default-font-size-pt 18)
 (setq default-chinese-size-pt 16)
 (add-to-list 'default-frame-alist
-	     '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-23-*-*-*-m-0-iso10646-1"))
+	     '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-20-*-*-*-m-0-iso10646-1"))
 
 (defun ramsay/font-size-adj (&optional arg)
   "The default C-x C-0/-/= bindings do an excellent job of font resizing.
