@@ -10,13 +10,11 @@
 (use-package which-key
   :ensure t
   :diminish which-key-mode
-  :init (progn
-	  (setq which-key-idle-delay 0.3)
-	  (setq which-key-enable-extended-define-key t)
-	  )
-  :config(progn
-	   (which-key-mode t)
-	   ))
+  :init
+  (setq which-key-idle-delay 0.3)
+  (setq which-key-enable-extended-define-key t)
+  (which-key-mode t)
+  )
 
 ;;; Highlight delimiter such as parenthese,brackets or braces
 ;;; according to their depth
@@ -32,6 +30,7 @@
   :commands undo-tree-visualize
   :init
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+  (setq undo-tree-auto-save-history t)
   :config (global-undo-tree-mode t))
 
 ;;; Emacs always for confirmation whether we really wanna open
