@@ -25,11 +25,6 @@
   :defer t
   :init(add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-;;; show information about selected region
-(use-package region-state
-  :ensure t
-  :config (region-state-mode t))
-
 ;;; treat undo history as a tree
 (use-package undo-tree
   :ensure t
@@ -53,9 +48,6 @@
 	      (let ((function-name (which-function)))
 		(popup-tip function-name)))))
 
-;;;Winner mode is an Emacs built-in package that lets you undo and redo window
-;;;configurations. Incredibly useful since I keep splitting and merging windows
-;;;https://www.emacswiki.org/emacs/WinnerMode
 (when (fboundp 'winner-mode)
   (winner-mode t))
 
