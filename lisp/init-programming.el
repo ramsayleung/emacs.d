@@ -86,23 +86,28 @@
 
 ;; Projectile
 (use-package projectile
-  :if (not emacs/>=28p)
+  ;; if built-in project.el library doesn't exist, rollback to install projectile
+  :if (not (fboundp 'project-find-file))
   :ensure t
   :defer t
-  :init (progn
-	  (setq projectile-indexing-method 'hybrid)
-	  (setq projectile-git-submodule-command nil)
-	  (setq projectile-mode-line-prefix " proj"))
+  :init
+  (setq projectile-indexing-method 'hybrid)
+  (setq projectile-git-submodule-command nil)
+  (setq projectile-mode-line-prefix " proj")
+  (use-package counsel-projectile
+    :ensure t
+    :defer t
+    :after projectile
+    :init (counsel-projectile-mode))
   :commands (counsel-projectile-switch-project counsel-projectile-find-file)
   :config
-  (progn
-    (projectile-mode)
-    (setq projectile-completion-system 'ivy)
-    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
-    (add-to-list 'projectile-globally-ignored-directories ".cquery_cached_index")
-    (add-to-list 'projectile-globally-ignored-directories ".vscode")
-    (add-to-list 'projectile-globally-ignored-directories "CMakeFiles")
-    )
+  (projectile-mode)
+  (setq projectile-completion-system 'ivy)
+  (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
+  (add-to-list 'projectile-globally-ignored-directories ".cquery_cached_index")
+  (add-to-list 'projectile-globally-ignored-directories ".vscode")
+  (add-to-list 'projectile-globally-ignored-directories "CMakeFiles")
+  
   )
 
 ;;; https://www.emacswiki.org/emacs/AutoFillMode

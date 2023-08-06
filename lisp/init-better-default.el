@@ -98,6 +98,13 @@
 
 (delete-selection-mode t)
 
+;;; pixel scroll
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode 1)
+  (setq pixel-scroll-precision-interpolate-page t)
+  (defalias 'scroll-up-command 'pixel-scroll-interpolate-down)
+  (defalias 'scroll-down-command 'pixel-scroll-interpolate-up))
+
 ;;; native-comp
 (when (and (fboundp 'native-comp-available-p)
            (native-comp-available-p))
@@ -123,7 +130,8 @@
 (setq tramp-use-ssh-controlmaster-options nil)
 
 ;;; xref
-(when emacs/>=28p  (setq xref-search-program 'ripgrep))
+(when (boundp 'xref-search-program)
+  (setq xref-search-program 'ripgrep))
 
 ;;; set "Meta" key to be the mac command key
 (when (ramsay/mac-os-p)

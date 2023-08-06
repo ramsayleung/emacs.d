@@ -47,14 +47,6 @@
   (pyim-isearch-mode t)
   )
 
-(use-package counsel-projectile
-  :if (not emacs/>=28p)
-  :ensure t
-  :defer t
-  :after projectile
-  :init (counsel-projectile-mode)
-  )
-
 (use-package ivy-buffer-extend
   :load-path "~/.emacs.d/additional-packages/ivy-buffer-extend.el")
 

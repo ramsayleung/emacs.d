@@ -60,16 +60,11 @@
   (not (= 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1"
 			  (if host host "www.google.com")))))
 
-(defconst emacs/>=28p
-  (>= emacs-major-version 28)
-  "Emacs is 28 or above.")
-
 (setq gc-cons-threshold (* 128 1024 1024))
 (let ((file-name-handler-alist nil))
   (setq load-prefer-newer t)            ;avoid load outdated byte-compiled file
   (require 'package)
-  (when (version< emacs-version "27.0") (package-initialize))
-  ;;(unless package--initialized (package-initialize))
+  (unless package--initialized (package-initialize))
 
   (if (ramsay/intercepted-by-gfw-p)
       ;; Use mirror if it's in China.
@@ -86,7 +81,6 @@
   (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
   (add-to-list 'load-path (expand-file-name "additional-packages" user-emacs-directory))
 
-  (require 'cl)
   (require 'init-auto-completion)
   (require 'init-better-editing)
   (require 'init-better-default)

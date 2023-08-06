@@ -49,12 +49,12 @@
 				"j w" 'avy-goto-word-1
 				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
-				"p f" (general-predicate-dispatch 'project-find-file (not emacs/>=28p) 'counsel-projectile-find-file)
-				"p d" (general-predicate-dispatch 'project-find-dir (not emacs/>=28p) 'counsel-projectile-find-dir)
-				"p b" (general-predicate-dispatch 'project-switch-to-buffer (not emacs/>=28p) 'counsel-projectile-switch-to-buffer)
-				"p p" (general-predicate-dispatch 'project-switch-project (not emacs/>=28p) 'counsel-projectile-switch-project)
+				"p f" (general-predicate-dispatch 'project-find-file (not (fboundp 'project-find-file)) 'counsel-projectile-find-file)
+				"p d" (general-predicate-dispatch 'project-find-dir (not (fboundp 'project-find-dir)) 'counsel-projectile-find-dir)
+				"p b" (general-predicate-dispatch 'project-switch-to-buffer (not (fboundp 'project-switch-to-buffer)) 'counsel-projectile-switch-to-buffer)
+				"p p" (general-predicate-dispatch 'project-switch-project (not (fboundp 'project-switch-to-buffer)) 'counsel-projectile-switch-project)
 				"p s" '(:ignore t :which-key "project search")
-				"p s r" (general-predicate-dispatch 'project-find-regexp (not emacs/>=28p) 'counsel-projectile-rg)
+				"p s r" (general-predicate-dispatch 'project-find-regexp (not (fboundp 'project-find-regexp)) 'counsel-projectile-rg)
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
 				"v" 'er/expand-region
@@ -451,17 +451,6 @@ Info-mode:
 (define-key dired-mode-map "F" 'find-name-dired)
 (define-key dired-mode-map (kbd "%^") 'dired-flag-garbage-files)
 
-;;; There is a bug with eshell-mode-map, so I change keybinding with add-hook
-;;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2016-02/msg01532.html
-;;; https://github.com/noctuid/general.el/issues/80
-;; Eshll-mode
-(defun ramsay/eshell-define-key-dwim (keymap keybinding function)
-  "Unset original keybinding in KEYMAP, and then set KEYBINDING with FUNCTION."
-  (define-key keymap [remap (lookup-key keymap keybinding)] function)
-  (define-key keymap keybinding function)
-  )
-(add-hook 'eshell-mode-hook
-          (lambda ()))
 (message "loading init-keybindings")
 (provide 'init-keybindings)
 ;;; init-keybindings ends here
