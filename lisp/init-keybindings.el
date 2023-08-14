@@ -19,7 +19,6 @@
 				"b" '(:ignore t :which-key "buffers")
 				"b f" 'ramsay/get-buffer-full-name
 				"b k" 'ramsay/kill-other-buffers
-				"b D" 'ramsay/delete-blank-line-in-buffer
 				"b n" 'ramsay/get-buffer-name
 				"c" '(:ignore t :which-key "compile/comments")
 				"e" #'hydra-flycheck/body
@@ -32,8 +31,6 @@
 				"f r" 'ramsay/rename-current-buffer-file
 				"f R" 'recentf-open-files
 				"f s" 'save-buffer
-				"f e" '(:ignore t :which-key "emacs")
-				"f e d" 'open-ramsay/file
 				"h" '(:ignore t :which-key "help")
 				"h d" '(:ignore t :which-key "help-describe")
 				"h d d" 'apropos-documentation
