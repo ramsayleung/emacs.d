@@ -35,6 +35,7 @@
   :bind (([f8] . neotree-toggle)))
 
 (require 'dired-x)
+(setq dired-dwim-target t)
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)

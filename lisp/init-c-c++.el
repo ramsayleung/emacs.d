@@ -6,8 +6,8 @@
 (use-package clang-format
   :ensure t
   :commands (clang-format-region clang-format-buffer)
-  :config (progn
-	    (setq clang-format-style "llvm"))
+  :config
+  (setq clang-format-style "llvm")
   )
 
 (use-package cc-mode
@@ -16,9 +16,9 @@
    ("\\.h\\'" . c++-mode)
    ("\\.hpp\\'" . c++-mode)
    ("\\.cpp\\'" . c++-mode))
-  :config (progn
-	    (eval-after-load "cc-mode"
-	      '(define-key c-mode-base-map ";" nil)))
+  :config
+  (eval-after-load "cc-mode"
+    '(define-key c-mode-base-map ";" nil))
   )
 
 (use-package cmake-mode

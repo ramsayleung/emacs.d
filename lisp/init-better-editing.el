@@ -40,12 +40,7 @@
 
 ;;; Visual Popup Interface Library For Emacs
 (use-package popup
-  :ensure t
-  :config (progn
- 	    (defun ramsay/popup-which-function ()
-	      (interactive)
-	      (let ((function-name (which-function)))
-		(popup-tip function-name)))))
+  :ensure t)
 
 (when (fboundp 'winner-mode)
   (winner-mode t))
@@ -75,11 +70,6 @@
   (other-window 1)
   )
 
-(defun ramsay/copy-current-file-path ()
-  "Add current file path to kill ring.  Limits the filename to project root if possible."
-  (interactive)
-  (kill-new buffer-file-name))
-
 ;;; http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html
 ;;; Copy and Paste in x system in all platform
 (use-package simpleclip
@@ -98,8 +88,6 @@
 	     (interactive)
 	     (insert (simpleclip-get-contents)))
 	   ))
-
-(setq dired-dwim-target t)
 (message "loading init-better-editing")
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here

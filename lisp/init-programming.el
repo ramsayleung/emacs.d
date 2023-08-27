@@ -11,36 +11,16 @@
   (setq realgud:pdb-command-name "python3 -m pdb")
   )
 
-(use-package groovy-mode
-  :ensure t
-  :mode "\\.groovy$")
-
 (use-package yasnippet
   :ensure t
   :diminish (yas-minor-mode . " yas")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
-  :config (progn
-	    (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
-	    (yas-reload-all)
-	    (add-hook 'org-mode-hook 'yas-minor-mode)
-	    (add-hook 'prog-mode-hook 'yas-minor-mode)
-	    ))
-
-(use-package yaml-mode
-  :ensure t
-  :mode "\\.yml$")
-
-(use-package es-mode
-  :ensure t
-  :mode "\\.es$"
-  :config (progn
-	    (setq es-always-pretty-print t)
-	    ))
-
-(use-package json-mode
-  :ensure t
-  :mode "\\.json$"
-  :init (remove-hook 'json-mode 'tern-mode)
+  :hook
+  (org-mode . yas-minor-mode)
+  (prog-mode . yas-minor-mode)
+  :init
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+  (yas-reload-all)
   )
 
 (use-package plantuml-mode
@@ -143,10 +123,6 @@
   (interactive)
   (kill-new (buffer-file-name))
   )
-
-(defun ramsay/basename (path)
-  "Emacs version of `basename`."
-  (file-name-nondirectory (directory-file-name path)))
 
 ;;; Enable tree-sitter after Emacs-29
 (when (not (version<= emacs-version "29.0"))

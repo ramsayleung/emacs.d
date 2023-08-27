@@ -23,7 +23,6 @@
 				"c" '(:ignore t :which-key "compile/comments")
 				"e" #'hydra-flycheck/body
 				"f" '(:ignore t :which-key "files")
-				"f c" 'ramsay/copy-current-file-path
 				"f d" 'ramsay/delete-current-buffer-file
 				"f E" 'ramsay/sudo-edit
 				"f f"  'counsel-find-file
