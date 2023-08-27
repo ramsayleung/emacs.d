@@ -33,15 +33,6 @@
 	  (setq org-export-latex-listings 'minted)
 	  (add-to-list 'org-latex-packages-alist '("" "minted"))
 	  (add-hook 'org-src-mode-hook 'ramsay/disable-flycheck-in-org-src-block)
-	  ;; from plan9-theme
-	  (custom-set-faces
-	   '(org-level-1 ((t (:height 1.4 :weight bold
-				      :family "Fantasque Sans Mono"
-				      :box (:line-width 1 :style released-button))))))
-
-	  (custom-set-faces
-	   '(org-level-2 ((t (:height 1.2
-				      :box (:line-width 1 :style released-button))))))
 	  (setq org-todo-keyword-faces
 		'(
 		  ("TODO" . (:foreground "peru" :weight bold))
@@ -60,7 +51,6 @@
 		'((sequence "TODO" "STARTED(!)" "|" "DONE" "CANCELLED")))
 	  ;; https://orgmode.org/org.html#Tracking-TODO-state-changes
 	  (setq org-log-into-drawer 'LOGBOOK)
-
 	  (setq org-priority-faces '(
 				     (?A . (:foreground "red" :weight 'bold))
 				     (?B . (:foreground "DarkOrange"))
@@ -80,8 +70,9 @@
 						:style released-button))))
 	  )
   :config (progn
-	    (when (not (eq system-type 'windows-nt))
+	    (when (not (ramsay/windows-p))
 	      (require 'ox-md nil t)
+	      (require 'ox-latex )
 	      (when (version< "9.2" org-version) (require 'org-tempo))
 	      (require 'org-indent)
               ;; (add-hook 'org-mode-hook 'org-indent-mode)
@@ -119,6 +110,8 @@
 		 (sql . t)
 		 (scheme . t)
 		 (sqlite . t)))
+	      ;; execute code without confirm
+	      (setq org-confirm-babel-evaluate nil)
 
 	      (setq org-startup-with-inline-images t)
 	      (setq org-agenda-files '("~/btsync/org"))
@@ -128,22 +121,9 @@
 		       agenda ""
 		       ((org-agenda-start-with-log-mode '(closed))
 			(org-agenda-overriding-header "Weekly Review")
-			(org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("PROJ" "DONE" "CANCELLED")))))
-		      ))
-	      (setq org-capture-templates
-		    '(("a" "Agenda" entry (file  "~/btsync/org/agenda.org" "Agenda")
-		       "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
-		      ("w" "Work Note" entry (file+headline "~/btsync/org/work_notes.org" "Notes about work")
-		       "** Work Note %?\n%T")
-		      ("l" "Not work Note" entry (file+headline "~/btsync/org/notes.org" "Notes not about work")
-		       "** %?\n%T")
-		      ("j" "Journal" entry (file+datetree "~/btsync/org/journal.org")
-		       "** %?\nEntered on %U\n  %i\n  %a")
+			(org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "CANCELLED")))))
 		      ))
 
-	      (require 'ox-latex )
-	      ;; execute code without confirm
-	      (setq org-confirm-babel-evaluate nil)
 	      ;; set latex to xelatex
 	      (setq org-latex-pdf-process
 		    '("xelatex -8bit --shell-escape  -interaction=nonstopmode -output-directory %o %f"
@@ -165,17 +145,6 @@
 		     > _ \n
 		     ))
 		)
-
-	      ;; Encryption
-	      (require 'epa-file)
-	      (epa-file-enable)
-	      (setq epa-file-select-keys nil) 
-	      (require 'org-crypt)
-	      (org-crypt-use-before-save-magic)
-	      (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-	      ;; GPG key to use for encryption
-	      ;; Either the Key ID or set to nil to use symmetric encryption.
-	      (setq org-crypt-key nil)
 	      )
 	    )
   )
@@ -199,21 +168,6 @@
   :config
   (setq-default org-download-image-dir "../images")
   (put 'org-download-image-dir 'safe-local-variable (lambda (_) t)))
-
-;;; Generate table of content.
-;;; https://github.com/snosov1/toc-org
-(use-package toc-org
-  :ensure t
-  :init
-  (add-hook 'org-mode-hook 'toc-org-mode))
-
-;; Org extra exports
-;; Export to github flavored markdown
-(use-package ox-gfm
-  :if (and (not (eq system-type 'windows-nt))
-	   window-system)
-  :ensure ox-gfm
-  )
 
 (use-package ox-hugo
   :ensure t   ;Auto-install the package from Melpa
@@ -260,17 +214,6 @@
 
   (advice-add 'org-hugo-export-to-md :around #'ramsay/org-hugo-export-to-std-md)
   )
-
-
-;;; Syntax Highlight in html file
-(use-package htmlize
-  :if (and (not (ramsay/windows-p))
-	   window-system)
-  :ensure t)
-
-(defun org-file-path (filename)
-  "Return the absolute address of an org file FILENAME, given its relative name."
-  (concat (file-name-as-directory org-directory) filename))
 
 (defun ramsay/disable-flycheck-in-org-src-block ()
   "Disable emacs-lisp-checkdoc in org-src-mode."
