@@ -20,7 +20,7 @@
 	 company-minimum-prefix-length 2
 	 company-require-match 0
 	 company-selection-wrap-around t
-	 company-dabbrev-downcase nil
+	 company-dabbrev-downcase nil 	; case sensitive
 	 company-echo-delay 0                          ; remove annoying blinking
 	 company-tooltip-limit 20                      ; bigger popup window
 	 company-tooltip-align-annotations 't          ; align annotations to the right tooltip border
