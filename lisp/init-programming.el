@@ -13,7 +13,7 @@
 
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . " yas")
+  :diminish (yas-minor-mode . " Yas")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :hook
   (org-mode . yas-minor-mode)
@@ -21,15 +21,6 @@
   :init
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
   (yas-reload-all)
-  )
-
-(use-package plantuml-mode
-  :ensure t
-  :mode "\\.plantuml$"
-  :config
-  (setq plantuml-default-exec-mode 'executable)
-  (setq plantuml-executable-path (string-trim (shell-command-to-string "which plantuml")))
-  (setq org-plantuml-exec-mode 'plantuml)
   )
 
 ;; Make Emacs use the $PATH set up by the user's shell

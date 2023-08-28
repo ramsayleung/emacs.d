@@ -234,7 +234,6 @@
 	     "<f5>" 'deadgrep
 	     "C-c a" 'org-agenda
 	     "C-c l" 'org-store-link
-	     "C-c e" 'hydra-edit/body
 	     "C-c n" 'ramsay/empty-buffer
 	     "C-c t d" 'gts-do-translate
 	     "C-c w" 'hydra-window-resize/body
@@ -267,16 +266,6 @@
 				"C-y" 'yank)
 	    )
 
-
-
-  ;; Prog-mode  Org-mode
-  (general-define-key :keymaps '(prog-mode-map org-mode-map)
-		      "C-M-\\" 'ramsay/indent-region-or-buffer)
-  ;; Graphviz-dot-mode
-  (general-define-key :keymaps '(graphviz-dot-mode-map)
-		      "C-M-\\" 'graphviz-dot-indent-graph
-		      "C-c C-u" 'ramsay/graphviz-dot-preview-with-external-viewer)
-
   (general-define-key :keymaps '(emacs-lisp-mode-map
 				 ielm-mode-map
 				 lisp-mode-map
@@ -284,13 +273,15 @@
 				 lisp-interaction-mode-map)
 		      [remap paredit-convolute-sexp] 'xref-find-references
 		      "M-?" 'xref-find-references)
-  
-  ;; Go-mode
-  (general-define-key :keymaps 'go-mode-map
-		      "C-M-\\" 'gofmt)
-  ;; Rust-mode
-  (general-define-key :keymaps 'rust-mode-map
-		      "C-M-\\" 'rust-format-buffer)
+
+  ;; Loop through the list and set up keybindings
+  (dolist (pair '((prog-mode-map . ramsay/indent-region-or-buffer)
+		  (org-mode-map . ramsay/indent-region-or-buffer)
+		  (go-mode-map . gofmt)
+		  (rust-mode-map . rust-format-buffer)
+		  (sgml-mode-map . ramsay/format-xml)))
+    (general-define-key :keymaps (car pair)
+			"C-M-\\" (cdr pair)))
 
   ;; Emacs Lisp mode
   (general-define-key :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)

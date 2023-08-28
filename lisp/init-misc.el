@@ -2,23 +2,16 @@
 ;;; code:
 ;;; Commentary:
 
-;;; Save and restore window configuration
-(use-package eyebrowse
-  :ensure t
-  :commands eyebrowse-switch-to-window-config-0 eyebrowse-switch-to-window-config-1 eyebrowse-switch-to-window-config-2 eyebrowse-create-window-config
-  :init
-  (eyebrowse-mode)
-  )
-
 (use-package ledger-mode
   :ensure t
   :mode ("\\.dat\\'"
          "\\.ledger\\'")
-  :custom (ledger-clear-whole-transactions t))
-
-(use-package flycheck-ledger
-  :ensure t
-  :after ledger-mode)
+  :custom (ledger-clear-whole-transactions t)
+  :config
+  (use-package flycheck-ledger
+    :ensure t
+    :after ledger-mode)
+  )
 
 ;;; Try out Emacs Package without install
 (use-package try
@@ -34,7 +27,6 @@
 (require 'server)
 (unless (server-running-p) (server-start))
 
-
 (defadvice bookmark-jump (after bookmark-jump activate)
   "Find frequently used bookmarks easily."
   (let ((latest (bookmark-get-bookmark bookmark)))
@@ -45,7 +37,7 @@
 (setq ad-redefinition-action 'accept)
 
 (defun ramsay/format-xml (begin end)
-  "Pretty format XML markup in region. You need to have nxml-mode
+  "Pretty format XML markup in region, from BEGIN to END. You need to have nxml-mode.
 http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
 this.  The function inserts linebreaks to separate tags that have
 nothing but whitespace between them.  It then indents the markup
@@ -130,25 +122,7 @@ The buffer is not associated with a file."
                  (call-interactively #'projectile-invalidate-cache))
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
 
-(defun ramsay/delete-file (filename &optional ask-user)
-  "Remove specified file FILENAME or directory.
-Also kills associated buffer (if any exists) and invalidates
-projectile cache when it's possible.
-When ASK-USER is non-nil, user will be asked to confirm file
-removal."
-  (interactive "f")
-  (when (and filename (file-exists-p filename))
-    (let ((buffer (find-buffer-visiting filename)))
-      (when buffer
-        (kill-buffer buffer)))
-    (when (or (not ask-user)
-              (yes-or-no-p "Are you sure you want to delete this file? "))
-      (delete-file filename)
-      (when (and (configuration-layer/package-usedp 'projectile)
-                 (projectile-project-p))
-        (call-interactively #'projectile-invalidate-cache)))))
 ;; from magnars
-
 (defun ramsay/delete-current-buffer-file ()
   "Remove file connected to current buffer and kill buffer."
   (interactive)
@@ -185,11 +159,6 @@ removal."
                 (insert (format "|sudo:%s" (or last-ssh-hostname "localhost"))))
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
-
-(defun ramsay/copy-current-file-sans-extension ()
-  "Copy current file without extension."
-  (interactive)
-  (kill-new (file-name-sans-extension (buffer-name))))
 
 (defun ramsay/dired-tmp-dir ()
   "Open tmp directory."
