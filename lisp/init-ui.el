@@ -240,7 +240,7 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
 
-(load-theme 'acme t)
+(load-theme 'modus-operandi t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;
@@ -288,9 +288,9 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
 (diminish-minor-mode 'auto-revert 'auto-revert-mode)
 (diminish-minor-mode 'simple 'auto-fill-function )
 (diminish-minor-mode 'eldoc 'eldoc-mode)
-(diminish-major-mode 'emacs-lisp-mode-hook "elisp")
-(diminish-major-mode 'lisp-interaction-mode-hook "lisp")
-(diminish-major-mode 'python-mode-hook "py")
+(diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
+(diminish-major-mode 'lisp-interaction-mode-hook "Lisp")
+(diminish-major-mode 'python-mode-hook "Py")
 
 (message "loading init-ui")
 (provide 'init-ui)

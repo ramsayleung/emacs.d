@@ -39,6 +39,7 @@
 (setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)
+(setq dired-kill-when-opening-new-dired-buffer t)
 (when (ramsay/mac-os-p)
   (setq dired-use-ls-dired nil))
 (defvar dired-compress-files-alist

@@ -26,8 +26,9 @@
   (evil-set-initial-state 'rectangle-mark-mode 'emacs)
   (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
   (evil-set-initial-state 'ledger-report-mode 'emacs)
+  (evil-set-initial-state 'compilation-mode 'emacs)
   (add-to-list 'evil-buffer-regexps
-             '("\\*Go-Translate*\\*" . emacs))
+               '("\\*Go-Translate*\\*" . emacs))
     ;;; modify evil-state-tag
   (setq evil-normal-state-tag   (propertize "[Normal]")
 	evil-emacs-state-tag    (propertize "[Emacs]")

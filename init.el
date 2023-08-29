@@ -95,10 +95,9 @@
 (require 'init-version-control)
 (require 'init-web)
 
-(let ((custom-file (expand-file-name "lisp/custom.el" user-emacs-directory)))
-  (when (file-exists-p custom-file)
-    (load custom-file)
-    ))
+(setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
 ;; Display the total loading time in the minibuffer
 
 (defun display-startup-echo-area-message ()
