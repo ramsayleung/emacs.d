@@ -6,6 +6,14 @@
 (auto-save-visited-mode +1)
 (setq auto-save-visited-interval 1)
 
+;;; Handle long line
+;;; https://emacs-china.org/t/topic/25811/7
+(setq-default bidi-display-reordering nil)
+(setq bidi-inhibit-bpa t
+      long-line-threshold 1000
+      large-hscroll-threshold 1000
+      syntax-wholeline-max 1000)
+
 (use-package so-long
   :ensure nil
   :config (global-so-long-mode 1))

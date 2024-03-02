@@ -41,3 +41,4 @@ transient/
 /projects
 *.so
 history
+org-persist/
