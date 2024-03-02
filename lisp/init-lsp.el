@@ -23,7 +23,8 @@
 	 (c-ts-mode . eglot-ensure))
   )
 
-
+;;; Ensure to put emacs-lsp-booster: https://github.com/blahgeek/emacs-lsp-booster into PATH
+(package-vc-install '(eglot-booster :url "https://github.com/jdtsmith/eglot-booster"))
 
 (message "loading init-lsp")
 (provide 'init-lsp)

@@ -57,6 +57,11 @@
                            ("melpa" . "https://melpa.org/packages/"))))
 
 (setq gc-cons-threshold (* 128 1024 1024))
+;;; Prompt Emacs to GC whenever it loses focus
+(add-function :after
+              after-focus-change-function
+              (lambda () (unless (frame-focus-state) (garbage-collect))))
+
 (require 'package)
 (unless package--initialized (package-initialize))
 (setq load-prefer-newer t)            ;avoid load outdated byte-compiled file
