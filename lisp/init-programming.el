@@ -2,15 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 ;;; Commentary:
-
-;;; enhanced gud
-(use-package realgud
-  :ensure t
-  :commands (realgud:gdb realgud:pdb)
-  :init
-  (setq realgud:pdb-command-name "python3 -m pdb")
-  )
-
 (use-package yasnippet
   :ensure t
   :diminish (yas-minor-mode . " Yas")
@@ -18,7 +9,7 @@
   :hook
   (org-mode . yas-minor-mode)
   (prog-mode . yas-minor-mode)
-  :init
+  :config
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
   (yas-reload-all)
   )
@@ -116,24 +107,10 @@
   )
 
 ;;; Enable tree-sitter after Emacs-29
-(when (not (version<= emacs-version "29.0"))
-  (require 'treesit)
-  (when (treesit-available-p)
-    (setq major-mode-remap-alist
-          '((c-mode          . c-ts-mode)
-	    (c++-mode        . c++-ts-mode)
-	    (conf-toml-mode  . toml-ts-mode)
-	    (csharp-mode     . csharp-ts-mode)
-	    (css-mode        . css-ts-mode)
-	    (java-mode       . java-ts-mode)
-	    (js-mode         . js-ts-mode)
-	    (javascript-mode . js-ts-mode)
-	    (js-json-mode    . json-ts-mode)
-	    (python-mode     . python-ts-mode)
-	    (ruby-mode       . ruby-ts-mode)
-	    (rust-mode       . rust-ts-mode)
-	    (sh-mode         . bash-ts-mode)))
-    ))
+(use-package treesit-auto
+  :ensure t
+  :config
+  (global-treesit-auto-mode))
 
 (message "loading init-programming")
 (provide 'init-programming)
