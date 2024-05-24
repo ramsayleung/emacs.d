@@ -2,7 +2,7 @@
 # name: en hugo
 # key: en
 # --
-#+OPTIONS: author:nil ^:{} \n:t
+#+OPTIONS: author:nil ^:{} \n:t H:4
 #+HUGO_BASE_DIR: ~/code/org/ramsayleung.github.io
 #+HUGO_SECTION: en/post/`(format-time-string "%Y")`
 #+HUGO_CUSTOM_FRONT_MATTER: :toc true
