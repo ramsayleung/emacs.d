@@ -42,3 +42,4 @@ transient/
 *.so
 history
 org-persist/
+/tree-sitter/

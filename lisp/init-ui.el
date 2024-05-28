@@ -240,7 +240,8 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
 
-(load-theme 'modus-operandi t)
+;; (load-theme 'modus-operandi t)
+(load-theme 'acme t)
 
 ;;----------------;;
 ;;Major/Minor Mode;;

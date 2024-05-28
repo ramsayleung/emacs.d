@@ -13,7 +13,7 @@
 	 (rust-mode . eglot-ensure)
 	 (rust-ts-mode . eglot-ensure)
 	 (shell-mode . eglot-ensure)
-	 (javascript-mode . eglot-ensure)
+	 (js-mode . eglot-ensure)
 	 (js-ts-mode . eglot-ensure)
 	 (c++-mode . eglot-ensure)
 	 (c++-ts-mode . eglot-ensure)

@@ -39,6 +39,7 @@
 	evil-visual-state-tag   (propertize "[Visual]")
 	evil-operator-state-tag (propertize "[Operator]"))
   (setq evil-insert-state-cursor '(box))
+  (setq evil-undo-system 'undo-tree)
   )
 
 
