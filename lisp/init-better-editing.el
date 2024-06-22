@@ -7,6 +7,9 @@
   :commands (ace-window)
   )
 
+(use-package wgrep
+  :ensure t)
+
 (use-package which-key
   :ensure t
   :diminish which-key-mode

@@ -275,7 +275,7 @@
 		      "M-?" 'xref-find-references)
 
   ;; Loop through the list and set up keybindings
-  (dolist (pair '((prog-mode-map . ramsay/indent-region-or-buffer)
+  (dolist (pair '((prog-mode-map . eglot-format)
 		  (org-mode-map . ramsay/indent-region-or-buffer)
 		  (go-mode-map . gofmt)
 		  (rust-mode-map . rust-format-buffer)

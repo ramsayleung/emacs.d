@@ -26,6 +26,9 @@
 (use-package eglot-booster
   :ensure t
   :init (ramsay/vc-install :fetcher "github" :repo "jdtsmith/eglot-booster")
+  :after eglot
+  :config
+  (eglot-booster-mode)
   )
 
 ;;; Ensure to put emacs-lsp-booster: https://github.com/blahgeek/emacs-lsp-booster into PATH

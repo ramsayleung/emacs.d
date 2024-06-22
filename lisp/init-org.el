@@ -161,14 +161,6 @@
   (org-journal-file-format "%Y%m%d.org")
   (org-journal-date-format "%A, %d %B %Y"))
 
-(use-package org-download
-  :ensure t
-  ;; There is something wrong with `hook`, so redefine it with my own :hook
-  :init (add-hook 'org-mode-hook (lambda () (require 'org-download)))
-  :config
-  (setq-default org-download-image-dir "../images")
-  (put 'org-download-image-dir 'safe-local-variable (lambda (_) t)))
-
 (use-package ox-hugo
   :ensure t   ;Auto-install the package from Melpa
   :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
