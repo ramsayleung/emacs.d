@@ -11,7 +11,7 @@
 				:prefix ramsay/leader-key
 				"" nil
 				";" 'comment-dwim
-				"'" 'eshell
+				"'" 'shell-pop
 				"." 'ramsay/python-send-repl-echo-switch
 				"a" '(:ignore t :which-key "applications")
 				"a t" '(:ignore t :which-key "translator")
@@ -218,6 +218,7 @@
 				"C-c h p" 'counsel-list-processes
 				)
 	    (general-define-key
+	     "C-`" 'shell-pop
 	     "C-s" 'swiper-isearch
 	     "C-x b"  'switch-to-buffer
 	     "C-x C-b" 'bs-show
@@ -275,7 +276,11 @@
 		      "M-?" 'xref-find-references)
 
   ;; Loop through the list and set up keybindings
-  (dolist (pair '((prog-mode-map . eglot-format)
+  (dolist (pair '((python-ts-mode-map . lsp-format-region)
+		  (python-mode-map . lsp-format-region)
+		  (js-ts-mode-map . lsp-format-region)
+		  (js-mode-map . lsp-format-region)
+		  (emacs-lisp-mode-map . ramsay/indent-region-or-buffer)
 		  (org-mode-map . ramsay/indent-region-or-buffer)
 		  (go-mode-map . gofmt)
 		  (rust-mode-map . rust-format-buffer)

@@ -2,6 +2,15 @@
 ;;; code:
 ;;; Commentary:
 
+(use-package vterm
+    :ensure t)
+
+(use-package shell-pop
+  :ensure t
+  :custom
+  (shell-pop-window-size 50)
+  (shell-pop-shell-type '("vterm" "*vterm*" (lambda () (vterm)))))
+
 ;;; https://www.emacswiki.org/emacs/EshellFunctions
 (defun ramsay/eshell-maybe-bol ()
   "Go to the beginning of command line,or begining of line."
@@ -197,6 +206,6 @@
 
 (add-hook 'eshell-mode-hook 'ramsay/setup-company-eshell-autosuggest)
 
-(message "loading init-eshell")
-(provide 'init-eshell)
-;;; init-eshell.el ends here
+(message "loading init-shell")
+(provide 'init-shell)
+;;; init-shell.el ends here

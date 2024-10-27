@@ -54,7 +54,8 @@
     (setq package-archives '(("gnu"   . "http://1.15.88.122/gnu/")
                              ("melpa" . "http://1.15.88.122/melpa/")))
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                           ("melpa" . "https://melpa.org/packages/"))))
+                           ("melpa" . "https://melpa.org/packages/")
+			   ("nongnu" . "https://elpa.nongnu.org/nongnu/"))))
 
 (setq gc-cons-threshold (* 128 1024 1024))
 ;;; Prompt Emacs to GC whenever it loses focus
@@ -103,7 +104,7 @@ named arguments:
 (require 'init-chinese)
 (require 'init-c-c++)
 (require 'init-dired)
-(require 'init-eshell)
+(require 'init-shell)
 (require 'init-evil)
 (require 'init-go)
 (require 'init-ivy)
