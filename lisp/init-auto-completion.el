@@ -18,13 +18,12 @@
              )
   :init (setq
 	 company-minimum-prefix-length 2
-	 company-require-match 0
+	 company-require-match nil
 	 company-selection-wrap-around t
-	 company-dabbrev-downcase nil 	; case sensitive
 	 company-echo-delay 0                          ; remove annoying blinking
-	 company-tooltip-limit 20                      ; bigger popup window
+	 company-tooltip-limit 10                      ; bigger popup window
 	 company-tooltip-align-annotations 't          ; align annotations to the right tooltip border
-	 company-idle-delay .4                         ; decrease delay before autocompletion popup shows
+	 company-idle-delay .15                         ; decrease delay before autocompletion popup shows
 	 company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
   (global-company-mode t)
   )
@@ -33,14 +32,6 @@
   :ensure t
   :defer t
   :hook (company-mode . company-quickhelp-mode)
-  )
-
-;;; Shell Script completion
-(use-package company-shell
-  :ensure t
-  :defer t
-  :config
-  (add-to-list 'company-backends 'company-shell)
   )
 
 (message "loading init-auto-completion")
