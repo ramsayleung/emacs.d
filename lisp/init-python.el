@@ -37,6 +37,10 @@
 	    )
   )
 
+(use-package pyvenv
+  :ensure t
+  :commands pyvenv-activate)
+
 (message "loading init-python")
 (provide 'init-python)
 ;;; init-python.el ends here
