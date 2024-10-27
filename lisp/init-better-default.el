@@ -6,6 +6,11 @@
 (auto-save-visited-mode +1)
 (setq auto-save-visited-interval 1)
 
+;;; Never delete *scratch* buffer
+;;; https://emacs.stackexchange.com/questions/19254/never-close-scratch
+(add-hook 'kill-buffer-query-functions
+          (lambda() (not (equal (buffer-name) "*scratch*"))))
+
 ;;; Handle long line
 ;;; https://emacs-china.org/t/topic/25811/7
 (setq-default bidi-display-reordering nil)
