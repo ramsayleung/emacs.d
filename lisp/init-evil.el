@@ -27,10 +27,16 @@
   (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
   (evil-set-initial-state 'ledger-report-mode 'emacs)
   (evil-set-initial-state 'compilation-mode 'emacs)
-  (add-to-list 'evil-buffer-regexps
-               '("\\*Go-Translate*\\*" . emacs)
-               '("\\*Warnings*\\*" . emacs)
-	       )
+  (setq-default evil-buffer-regexps
+              '(("**testing snippet:" . insert)
+                ("*compile*" . normal)
+                ("*Org Src" . insert)
+                ("*Org Export Dispatcher*" . insert)
+                ("*Async Shell Command*" . normal)
+		("\\*Go-Translate*\\*" . emacs)
+		("\\*Warnings*\\*" . emacs)
+		("")
+                ("^ \\*load\\*")))
     ;;; modify evil-state-tag
   (setq evil-normal-state-tag   (propertize "[Normal]")
 	evil-emacs-state-tag    (propertize "[Emacs]")
