@@ -22,6 +22,13 @@
 
 	  (setq org-html-htmlize-output-type nil)
 
+	  ;; encrypt file with symmetric encryption
+	  (require 'epa-file)
+	  (epa-file-enable)
+	  (setq epa-file-encrypt-to nil)
+	  (setq epa-file-select-keys nil)
+	  (setq epa-pinentry-mode 'loopback)
+
 	  ;;Its default value is (ascii html icalendar latex)
 	  (setq org-export-backends '(latex icalendar))
 	  ;; Show org-edit-special in the other-window
