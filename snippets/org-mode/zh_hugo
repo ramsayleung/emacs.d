@@ -2,7 +2,7 @@
 # name: zh hugo
 # key: zh
 # --
-#+OPTIONS: author:nil ^:{} \n:t H:4
+#+OPTIONS: author:nil ^:{} H:4
 #+HUGO_BASE_DIR: ~/code/org/ramsayleung.github.io
 #+HUGO_SECTION: zh/post/`(format-time-string "%Y")`
 #+HUGO_CUSTOM_FRONT_MATTER: :toc true
