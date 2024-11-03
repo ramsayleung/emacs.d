@@ -34,6 +34,14 @@
   :hook (company-mode . company-quickhelp-mode)
   )
 
+(use-package company-posframe
+  :diminish company-posframe-mode
+  :ensure t
+  :init
+  (company-posframe-mode 1)
+  )
+
+
 (message "loading init-auto-completion")
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

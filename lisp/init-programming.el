@@ -44,6 +44,8 @@
 
 (use-package helpful
   :ensure t
+  :init
+  (setq helpful-max-buffers 1)
   :commands (helpful-callable helpful-function helpful-macro helpful-command helpful-key helpful-variable helpful-at-point))
 
 ;; Projectile

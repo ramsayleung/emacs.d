@@ -35,8 +35,8 @@
                 ("*Async Shell Command*" . normal)
 		("\\*Go-Translate*\\*" . emacs)
 		("\\*Warnings*\\*" . emacs)
-		("")
-                ("^ \\*load\\*")))
+		("\\*vterm*\\*" . emacs)
+		))
     ;;; modify evil-state-tag
   (setq evil-normal-state-tag   (propertize "[Normal]")
 	evil-emacs-state-tag    (propertize "[Emacs]")
