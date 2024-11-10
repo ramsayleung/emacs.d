@@ -1,4 +1,5 @@
 elpa/*
+lite/elpa/*
 *.elc
 recentf*
 *~

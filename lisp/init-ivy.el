@@ -30,7 +30,6 @@
   (setq ivy-count-format "%d/%d ")
   ;; Number of result lines to display, set height as width-body-height/2
   (setq ivy-height 25)
-  
   (use-package ivy-xref
     :ensure t
     :init
