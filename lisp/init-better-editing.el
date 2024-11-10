@@ -41,10 +41,6 @@
 ;;; So increase limit to solve it.
 (setq large-file-warning-threshold (* 15 1024 1024)) ;15MB
 
-;;; Visual Popup Interface Library For Emacs
-(use-package popup
-  :ensure t)
-
 (when (fboundp 'winner-mode)
   (winner-mode t))
 

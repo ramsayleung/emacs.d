@@ -55,24 +55,6 @@
   :ensure nil
   :hook (after-init . global-auto-revert-mode))
 
-(use-package dired-sidebar
-  :bind (([f8] . dired-sidebar-toggle-sidebar))
-  :ensure t
-  :commands (dired-sidebar-toggle-sidebar)
-  :init
-  (add-hook 'dired-sidebar-mode-hook
-            (lambda ()
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode))))
-  :config
-  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
-  (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
-
-  (setq dired-sidebar-subtree-line-prefix "__")
-  (setq dired-sidebar-theme 'ascii)
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t))
-
 ;;; Steal from https://emacstalk.github.io/post/010/
 ;;; Use `fd` command to find file.
 (use-package project

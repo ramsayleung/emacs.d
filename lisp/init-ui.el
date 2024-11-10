@@ -22,30 +22,30 @@
 (use-package popwin
   :ensure t
   :config (progn
-	    (popwin-mode t)
-	    (push '(compilation-mode :noselect t) popwin:special-display-config)
-	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
-	    (push "*slime-apropos*" popwin:special-display-config)
-	    (push "*slime-macroexpansion*" popwin:special-display-config)
-	    (push "*slime-description*" popwin:special-display-config)
-	    (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
-	    (push "*slime-xref*" popwin:special-display-config)
-	    (push '(sldb-mode :stick t) popwin:special-display-config)
-	    (push 'slime-repl-mode popwin:special-display-config)
-	    (push 'slime-connection-list-mode popwin:special-display-config)
-	    (push "*vc-diff*" popwin:special-display-config)
-	    (push "*vc-change-log*" popwin:special-display-config)
-	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
-	    ))
+	          (popwin-mode t)
+	          (push '(compilation-mode :noselect t) popwin:special-display-config)
+	          ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
+	          (push "*slime-apropos*" popwin:special-display-config)
+	          (push "*slime-macroexpansion*" popwin:special-display-config)
+	          (push "*slime-description*" popwin:special-display-config)
+	          (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
+	          (push "*slime-xref*" popwin:special-display-config)
+	          (push '(sldb-mode :stick t) popwin:special-display-config)
+	          (push 'slime-repl-mode popwin:special-display-config)
+	          (push 'slime-connection-list-mode popwin:special-display-config)
+	          (push "*vc-diff*" popwin:special-display-config)
+	          (push "*vc-change-log*" popwin:special-display-config)
+	          (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
+	          ))
 
 (use-package writeroom-mode
   :hook (emacs-startup . global-writeroom-mode)
   :ensure t
   :config
   (setq writeroom-width 128
-	writeroom-maximize-window nil
-	writeroom-fullscreen-effect 'maximized
-	writeroom-major-modes '(org-mode markdown-mode))
+	      writeroom-maximize-window nil
+	      writeroom-fullscreen-effect 'maximized
+	      writeroom-major-modes '(org-mode markdown-mode))
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
   )
 
@@ -70,10 +70,6 @@
     ))
 (ramsay/hide-bar)
 
-(defun ramsay/font-exists-p (font)
-  "Check if FONT exists."
-  (if (null (x-list-fonts font)) nil t))
-
 ;;; 设置中英文等高字体设置. 等高与等宽, 两者只能其一. 如果想设置等宽, 将
 ;;; WenQuanYi 的 size 设置为 16.5
 (defun ramsay/set-chinese-font (&optional arg)
@@ -85,50 +81,12 @@
        (frame-parameter nil 'font)
        charset
        (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-		  :weight 'normal
-		  :slant 'normal
-		  :height arg)))))
+		              :weight 'normal
+		              :slant 'normal
+		              :height arg)))))
 
-(setq default-font-size-pt 18)
-(setq default-chinese-size-pt 16)
 (add-to-list 'default-frame-alist
-	     '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-19-*-*-*-m-0-iso10646-1"))
-
-(defun ramsay/font-size-adj (&optional arg)
-  "The default C-x C-0/-/= bindings do an excellent job of font resizing.
-They, though, do not change the font sizes for the text outside the buffer,
-example in mode-line. Below function changes the font size in those areas too.
-
-M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve,
-                               decreases font size by NUM points if NUM is -ve
-                               resets    font size if NUM is 0."
-  (interactive "p")
-  (if (= arg 0)
-      (progn
-	(setq font-size-pt default-font-size-pt)
-	(setq chinese-size-pt default-chinese-size-pt))
-    (progn
-      (setq font-size-pt (+ font-size-pt arg))
-      (setq chinese-size-pt (+ chinese-size-pt arg))
-      ))
-  ;; The internal font size value is 10x the font size in points unit.
-  ;; So a 10pt font size is equal to 100 in internal font size value.
-  (set-face-attribute 'default nil :height (* font-size-pt 10))
-  (ramsay/set-chinese-font (* 10 chinese-size-pt)))
-
-(defun ramsay/font-size-incr ()
-  "Increase font size for all size."
-  (interactive) (ramsay/font-size-adj +1))
-
-(defun ramsay/font-size-decr ()
-  "Decrease font size for all size."
-  (interactive) (ramsay/font-size-adj -1))
-
-(defun ramsay/font-size-reset ()
-  "Reset font size."
-  (interactive) (ramsay/font-size-adj 0))
-
-(ramsay/font-size-reset) ; Initialize font-size-pt var to the default value
+	           '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-19-*-*-*-m-0-iso10646-1"))
 
 ;;; Apply text-scale-adjust for all buffer
 (defadvice text-scale-increase (around all-buffers (arg) activate)
@@ -142,8 +100,7 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
   (run-with-timer 2 nil 'ramsay/set-chinese-font)
   (run-with-timer 2 nil 'ramsay/hide-bar)
   )
-(ramsay/set-chinese-font default-chinese-size-pt)
-
+(ramsay/set-chinese-font 16)
 
 ;;; Change vertical-border for terminal Emacs.
 ;;; Vertical-border in terminal is ugly, fix it.
@@ -172,7 +129,6 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
 (setq inhibit-splash-screen t)
 
 ;;; Use default line-number-mode instead of nlinum or linum (require Emacs >= 26).
-;; (setq-default display-line-numbers-width 1)
 (setq display-line-numbers-current-absolute t)
 (global-display-line-numbers-mode t)
 
@@ -186,13 +142,8 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
 (global-visual-line-mode)
 (setq line-move-visual t)
 (set-display-table-slot standard-display-table 'wrap ?\ )
-;;; make sure my code stays within 100 characters always
-;;; and prefer the soft line wrap while writing prose
-;;; https://www.emacswiki.org/emacs/TruncateLines
-;; (setq-default truncate-lines t)
-;; (setq truncate-partial-width-windows nil)
-;; make emacs full-screen at startup
 
+;; make emacs full-screen at startup
 (toggle-frame-maximized)
 ;;; show customized phrase in scratch
 ;;; From Purcell https://github.com/purcell/emacs.d
@@ -212,12 +163,6 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
 (add-hook 'minibuffer-setup-hook '(lambda () (setq cursor-type 'box)))
 (add-hook 'eshell-mode-hook '(lambda () (setq cursor-type 'box)))
 
-;; make sure transient mark mode is enabled (it should be by default,
-;; but just in case)
-(transient-mark-mode t)
-;; turn on mouse wheel support for scrolling
-;; (mouse-wheel-mode t)
-
 ;;; Turn-off Alarm Bell
 (setq ring-bell-function #'ignore)
 ;;; Use visible bell instead of buzzer
@@ -225,9 +170,6 @@ M-<NUM> M-x ramsay/font-size-adj increases font size by NUM points if NUM is +ve
 
 ;;  Color Theme  ;;
 ;;---------------;;
-
-;;; modus themes, the default theme for emacs.
-;;; https://protesilaos.com/emacs/modus-themes
 
 (use-package acme-theme
   :ensure t

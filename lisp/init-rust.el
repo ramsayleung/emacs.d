@@ -12,25 +12,6 @@
   :ensure t
   :mode ("\\.toml\\'" . toml-mode))
 
-(defun ramsay/get-rust-src-path ()
-  "Get rust src path by `rustc`."
-  (let* ((command (concat "rustc --print sysroot"))
-	 (rustc-sysroot-path (shell-command-to-string command))
-	 (strip-path (replace-regexp-in-string "\n$" "" rustc-sysroot-path)))
-    (if (eq system-type 'windows-nt)
-	(concat strip-path "\\lib\\rustlib\\src\\rust\\src")
-      (concat strip-path "/lib/rustlib/src/rust/src"))))
-(defun ramsay/set-rust-ld-library-path ()
-  "Set rust link library path."
-  (let* ((command (concat "rustc --print sysroot"))
-	 (rustc-sysroot-path (shell-command-to-string command))
-	 (strip-path (replace-regexp-in-string "\n$" "" rustc-sysroot-path)))
-    (if (eq system-type 'windows-nt)
-	(concat strip-path "\\lib\\")
-      (concat strip-path "/lib/"))))
-;; (setenv "RUST_SRC_PATH" (ramsay/get-rust-src-path))
-;; (setenv "LD_LIBRARY_PATH" (ramsay/set-rust-ld-library-path))
-
 ;;; https://github.com/rust-lang/rust-mode/issues/208
 (setq rust-match-angle-brackets nil)
 
@@ -39,7 +20,8 @@
   :ensure t
   :defer t
   :init (progn
-	  (add-hook 'rust-mode-hook 'cargo-minor-mode)))
+	        (add-hook 'rust-mode-hook 'cargo-minor-mode)))
+
 (defvar ramsay/cargo-process--command-script "script")
 (defun ramsay/cargo-process-script ()
   "Run cargo script command to compile and run a single file."
