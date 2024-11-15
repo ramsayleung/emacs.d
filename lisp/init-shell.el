@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 (use-package vterm
-    :ensure t)
+  :ensure t)
 
 (use-package shell-pop
   :ensure t
@@ -18,7 +18,7 @@
   (let ((p (point)))
     (eshell-bol)
     (if (= p (point))
-	(beginning-of-line))))
+	      (beginning-of-line))))
 
 (defun eshell/unpack (file &rest args)
   "Unpack FILE with ARGS using default command."
@@ -63,8 +63,8 @@
                            "\n"
                            t)))
       (when (and collection (> (length collection) 0)
-		 (setq bash_history collection))
-	bash_history))))
+		             (setq bash_history collection))
+	      bash_history))))
 
 (defun ramsay/parse-zsh-history ()
   "Parse the bash history."
@@ -79,8 +79,8 @@
                            "\n"
                            t)))
       (when (and collection (> (length collection) 0)
-		 (setq zsh_history collection))
-	zsh_history))))
+		             (setq zsh_history collection))
+	      zsh_history))))
 
 (defun ramsay/esh-history ()
   "Interactive search eshell history."
@@ -88,20 +88,20 @@
   (require 'em-hist)
   (save-excursion
     (let* ((start-pos (eshell-beginning-of-input))
-	   (input (eshell-get-old-input))
-	   (esh-history (when (> (ring-size eshell-history-ring) 0)
-			  (ring-elements eshell-history-ring)))
-	   (all-shell-history (append esh-history (ramsay/parse-zsh-history) (ramsay/parse-bash-history)))
-	   )
+	         (input (eshell-get-old-input))
+	         (esh-history (when (> (ring-size eshell-history-ring) 0)
+			                    (ring-elements eshell-history-ring)))
+	         (all-shell-history (append esh-history (ramsay/parse-zsh-history) (ramsay/parse-bash-history)))
+	         )
       (let* ((command (ivy-read "Command: "
-				(delete-dups all-shell-history)
-				:initial-input input
-				:require-match t
-				:action #'ivy-completion-in-region-action))
-	     )
-	(eshell-kill-input)
-	(insert command)
-	)))
+				                        (delete-dups all-shell-history)
+				                        :initial-input input
+				                        :require-match t
+				                        :action #'ivy-completion-in-region-action))
+	           )
+	      (eshell-kill-input)
+	      (insert command)
+	      )))
   ;; move cursor to eol
   (end-of-line))
 
@@ -133,9 +133,9 @@
    )
   ;; Visual commands
   (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
-				 "ncftp" "pine" "tin" "trn" "elm" "vim"
-				 "nmtui" "alsamixer" "htop" "el" "elinks"
-				 ))
+				                         "ncftp" "pine" "tin" "trn" "elm" "vim"
+				                         "nmtui" "alsamixer" "htop" "el" "elinks"
+				                         ))
   (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
   (require 'esh-mode) ; eshell-mode-map
   :config
@@ -144,67 +144,17 @@
       "Use Emacs grep facility instead of calling external grep."
       (eshell-grep "rgrep" args t)))
   (add-hook 'eshell-mode-hook
-	    (lambda ()(eshell-cmpl-initialize)))
+	          (lambda ()(eshell-cmpl-initialize)))
   (add-hook 'eshell-mode-hook (lambda ()
-				(setq-local global-hl-line-mode nil)))
+				                        (setq-local global-hl-line-mode nil)))
   
   :bind (:map eshell-mode-map
-	      (("C-a" . ramsay/eshell-maybe-bol)
-	       ("C-w" . ramsay/kill-word-backward)
-	       ("C-k" . paredit-kill)
-	       ("C-r" . ramsay/esh-history)
-	       ("C-l" . ramsay/eshell-clear-buffer)))
+	            (("C-a" . ramsay/eshell-maybe-bol)
+	             ("C-w" . ramsay/kill-word-backward)
+	             ("C-k" . paredit-kill)
+	             ("C-r" . ramsay/esh-history)
+	             ("C-l" . ramsay/eshell-clear-buffer)))
   )
-
-(require 'company)
-(if (ramsay/linux-p)
-    (require 'cl-lib)
-  (require 'cl-extra))
-(defun ramsay/company-eshell-autosuggest-candidates (prefix)
-  "Select the first eshell history candidate with prefix PREFIX."
-  (let* ((esh-history (when (> (ring-size eshell-history-ring) 0)
-			(ring-elements eshell-history-ring)))
-	 (all-shell-history (append esh-history (ramsay/parse-zsh-history) (ramsay/parse-bash-history)))
-	 (history
-          (delete-dups
-           (mapcar (lambda (str)
-                     (string-trim (substring-no-properties str)))
-                   all-shell-history)))
-         (most-similar (cl-find-if
-                        (lambda (str)
-                          (string-prefix-p prefix str))
-                        history)))
-    (when most-similar
-      `(,most-similar))))
-
-(defun ramsay/company-eshell-autosuggest--prefix ()
-  "Get current eshell input."
-  (let ((prefix
-         (string-trim-left
-          (buffer-substring-no-properties
-           (save-excursion
-             (eshell-bol))
-           (save-excursion (end-of-line) (point))))))
-    (if (not (string-empty-p prefix))
-        prefix
-      'stop)))
-
-(defun ramsay/company-eshell-autosuggest (command &optional arg &rest ignored)
-  "`company-mode' backend to provide eshell history suggestion."
-  (interactive (list 'interactive))
-  (cl-case command
-    (interactive (company-begin-backend 'company-eshell))
-    (prefix (and (eq major-mode 'eshell-mode)
-                 (ramsay/company-eshell-autosuggest--prefix)))
-    (candidates (ramsay/company-eshell-autosuggest-candidates arg))))
-
-(defun ramsay/setup-company-eshell-autosuggest ()
-  "Set up company completion for Eshell."
-  (with-eval-after-load 'company
-    (setq-local company-backends '(ramsay/company-eshell-autosuggest))
-    (setq-local company-frontends '(company-preview-frontend))))
-
-(add-hook 'eshell-mode-hook 'ramsay/setup-company-eshell-autosuggest)
 
 (message "loading init-shell")
 (provide 'init-shell)

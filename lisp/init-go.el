@@ -3,11 +3,7 @@
 ;;; Code:
 (use-package go-mode
   :ensure t
-  :mode ("\\.go\\'" . go-mode)
-  :config (progn
-	          ;; Use goimports instead of go-fmt
-	          (setq gofmt-command "goimports")
-	          ))
+  :mode ("\\.go\\'" . go-mode))
 
 (message "loading init-go")
 (provide 'init-go)

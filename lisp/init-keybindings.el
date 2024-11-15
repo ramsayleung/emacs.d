@@ -65,24 +65,6 @@
 				                        "C-j" 'ivy-next-line
 				                        "C-k" 'ivy-previous-line)
 
-	          ;; Org-mode
-	          (general-define-key :states '(normal visual motion)
-				                        :keymaps 'org-mode-map
-				                        :prefix ramsay/leader-key
-				                        "a o" '(:ignore t :which-key "org-mode" )
-				                        "a o a" 'org-agenda-list
-				                        "a o c" 'org-capture
-				                        "a o i" 'org-clock-in
-				                        "a o m" 'org-tags-view
-				                        "a o o" 'org-agenda
-				                        "a o O" 'org-clock-out
-				                        "a o s" 'org-search-view
-				                        "a o t" 'org-todo-list
-				                        "a o p" 'org-pomodoro
-				                        "t p" 'org-preview-html-mode
-				                        "t d" 'org-indent-mode
-				                        )
-
 	          (general-define-key :states '(normal insert visual motion)
 				                        :keymaps 'org-mode-map
 				                        "M-l" 'org-metaright
@@ -111,15 +93,7 @@
 	          (general-define-key :states 'normal
 				                        :keymaps 'org-mode-map
 				                        "TAB" 'org-cycle
-				                        "$" 'org-end-of-line
-				                        "^" 'org-beginning-of-line
-				                        "gh" 'outline-up-heading
-				                        "gj" 'org-forward-heading-same-level
-				                        "gk" 'org-backward-heading-same-level
-				                        "gl" 'outline-next-visible-heading
-				                        "t" 'org-todo
-				                        "h" 'org-beginning-of-line
-				                        "l" 'org-end-of-line)
+				                        "t" 'org-todo)
 
 	          ;; C++ mode
 	          (general-define-key :states '(normal visual motion)
@@ -129,40 +103,6 @@
 				                        "m c c" 'ramsay/compile
 				                        "m c C" 'ramsay/compile-clean
 				                        "m c x" 'ramsay/g++-compile-and-run
-				                        )
-
-	          ;; Scheme mode
-	          (general-define-key :states '(normal visual motion)
-				                        :keymaps 'scheme-mode-map
-				                        :prefix ramsay/leader-key
-				                        "m c" '(:ignore t :which-key "compiling")
-				                        "m c c" 'geiser-compile-current-buffer
-				                        "m c p" 'geiser-add-to-path
-				                        "m e" '(:ignore t :which-key "Evaluation")
-				                        "m e b" 'geiser-eval-buffer
-				                        "m e e" 'geiser-eval-last-sexp
-				                        "m e f" 'geiser-eval-definition
-				                        "m e l" 'lisp-state-eval-sexp-end-of-line
-				                        "m e r" 'geiser-eval-region
-				                        "m i" '(:ignore t :which-key "insertion")
-				                        "m i l" 'geiser-insert-lambda
-				                        "m m" '(:ignore t :which-key "macroexpansion")
-				                        "m m e" 'geiser-expand-last-sexp
-				                        "m m f" 'geiser-expand-definition
-				                        "m m r" 'geiser-expand-region
-				                        "m s" '(:ignore t :which-key "repl")
-				                        "m s i" 'geiser-switch-to-repl
-				                        "m s s" 'geiser-set-scheme
-				                        "m s b" 'geiser-eval-buffer
-				                        "m s B" 'geiser-eval-buffer-and-go
-				                        "m s f" 'geiser-eval-definition
-				                        "m s F" 'geiser-eval-definition-and-go
-				                        "m s e" 'geiser-eval-last-sexp
-				                        "m s r" 'geiser-eval-region
-				                        "m s R" 'geiser-eval-region-and-go
-				                        "m l" '(:ignore t :which-key "load")
-				                        "m l c" 'geiser-load-current-buffer
-				                        "m l f" 'geiser-load-file
 				                        )
 
 	          ;; Rust mode

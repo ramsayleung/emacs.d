@@ -25,7 +25,7 @@
   (setq ivy-initial-inputs-alist nil)
   ;; Use grep instead of grep
   (setq counsel-grep-base-command
-	"rg -i -M 120 --no-heading --line-number --color never %s %s")
+	      "rg -i -M 120 --no-heading --line-number --color never %s %s")
   ;; Count candidates
   (setq ivy-count-format "%d/%d ")
   ;; Number of result lines to display, set height as width-body-height/2
@@ -49,11 +49,11 @@
   :diminish pyim-isearch-mode
   :config
   (setq ivy-re-builders-alist
-	'(
-	  (counsel-describe-function . ivy--regex-plus)
-	  (counsel-describe-variable . ivy--regex-plus)
-	  (t . pyim-cregexp-ivy)
-	  ))
+	      '(
+	        (counsel-describe-function . ivy--regex-plus)
+	        (counsel-describe-variable . ivy--regex-plus)
+	        (t . pyim-cregexp-ivy)
+	        ))
   (pyim-isearch-mode t)
   )
 

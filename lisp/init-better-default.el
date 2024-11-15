@@ -91,8 +91,6 @@
       kept-old-versions 2
       version-control t)
 
-(delete-selection-mode t)
-
 ;;; pixel scroll
 (when (fboundp 'pixel-scroll-precision-mode)
   (pixel-scroll-precision-mode 1)
@@ -110,30 +108,20 @@
     (setq package-native-compile t)
     ))
 
-;;; Some information about myself.
-(setq user-full-name "Ramsay Leung")
-(setq user-mail-address "ramsayleung@gmail.com")
-
 ;;; While we are in the topic of prompting, a lot of the default prompts ask
 ;;; for a yes or a no. I’m lazy and so I don’t want to type the full words.
 ;;; Let’s just make it accept y or n
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;;; Tramp
-(require 'tramp)
-(setq tramp-default-method "ssh")
-(setq tramp-use-ssh-controlmaster-options nil)
 
 ;;; xref
 (when (boundp 'xref-search-program)
   (setq xref-search-program 'ripgrep))
 
 ;;; set "Meta" key to be the mac command key
-(when (ramsay/mac-os-p)
-  (setq mac-option-key-is-meta nil
-	mac-command-key-is-meta t
-	mac-command-modifier 'meta
-	mac-option-modifier 'none))
+(setq mac-option-key-is-meta nil
+	    mac-command-key-is-meta t
+	    mac-command-modifier 'meta
+	    mac-option-modifier 'none)
 
 
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
@@ -141,20 +129,20 @@
   (unless (file-exists-p filename)
     (let ((dir (file-name-directory filename)))
       (unless (file-exists-p dir)
-	(if (y-or-n-p (format "Directory %s does not exist,do you want you create it? " dir))
-	    (progn
-	      (make-directory dir)
-	      )
-	  (keyboard-quit))
-	))))
+	      (if (y-or-n-p (format "Directory %s does not exist,do you want you create it? " dir))
+	          (progn
+	            (make-directory dir)
+	            )
+	        (keyboard-quit))
+	      ))))
 
 ;;; Shorten the file-name when calling `bs-show`
 (defun ramsay-bs--get-file-name (orig-fun &rest args)
   "Overriding the ORIG-FUN `bs--get-file-name` function wtih ARGS to shorten the file name."
   (propertize (or (and buffer-file-name
-		       (file-name-directory (abbreviate-file-name buffer-file-name)))
-		  (bound-and-true-p list-buffers-directory)
-		  "")
+		                   (file-name-directory (abbreviate-file-name buffer-file-name)))
+		              (bound-and-true-p list-buffers-directory)
+		              "")
               'mouse-face 'highlight
               'help-echo "mouse-2: select this buffer, mouse-3: select in other frame"))
 

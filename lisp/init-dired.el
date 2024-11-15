@@ -13,8 +13,7 @@
 (setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)
 (setq dired-kill-when-opening-new-dired-buffer t)
-(when (ramsay/mac-os-p)
-  (setq dired-use-ls-dired nil))
+(setq dired-use-ls-dired nil)
 
 ;;;to get rid of the garbage produced by a LaTeX
 (setq dired-garbage-files-regexp

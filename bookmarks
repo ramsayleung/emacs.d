@@ -1,8 +1,14 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-hfs -*-
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-hfs; mode: lisp-data -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-capture-last-stored"
+(("multi_token_wallets.json"
+ (filename . "~/code/python/scientist_toolkit/data/multi_token_wallets.json")
+ (front-context-string . "9D866901d6281B82")
+ (rear-context-string . "\"0xa97bB0C80c16F")
+ (position . 10929)
+ (last-modified 26418 58100 968267 0))
+("org-capture-last-stored"
  (filename . "~/btsync/org/running_a_macos_service_for_open_with_emacs_failed_with_emacsclient_could_not_get_terminal_name_mac_stack_overflow.org")
  (front-context-string . "#+title: Running")
  (rear-context-string . "-08-19T20:53:21\n")

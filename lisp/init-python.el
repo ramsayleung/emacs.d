@@ -10,31 +10,16 @@
 (use-package python-mode
   ;; :mode("\\.py\\'" . python-mode)
   :ensure t
-  :config (progn
-	    (setq
-	     python-shell-prompt-regexp "In \\[[0-9]+\\]: "
-	     python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
-	     python-shell-completion-setup-code
-	     "from IPython.core.completerlib import module_completion"
-	     python-shell-completion-module-string-code
-	     "';'.join(module_completion('''%s'''))\n"
-	     python-shell-completion-string-code
-	     "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
-	    (when (executable-find "ipython")
-	      ;;Ipython settings sections
-	      (setq python-shell-interpreter "ipython"
-		    python-shell-interpreter-args "--colors=Linux --profile=default"))
-	    ;; https://github.com/jorgenschaefer/elpy/issues/887
-	    (with-eval-after-load 'python
-	      (defun python-shell-completion-native-try ()
+  :config 
+	;; https://github.com/jorgenschaefer/elpy/issues/887
+	(defun python-shell-completion-native-try ()
 		"Return non-nil if can trigger native completion."
 		(let ((python-shell-completion-native-enable t)
 		      (python-shell-completion-native-output-timeout
 		       python-shell-completion-native-try-output-timeout))
 		  (python-shell-completion-native-get-completions
 		   (get-buffer-process (current-buffer))
-		   nil "_"))))
-	    )
+		   nil "_")))
   )
 
 (use-package pyvenv
