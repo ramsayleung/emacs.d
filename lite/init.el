@@ -38,7 +38,6 @@
 (setq make-backup-files nil
       auto-save-default nil
       inhibit-splash-screen t
-      confirm-kill-emacs 'yes-or-no-p
       visible-bell nil)
 
 (menu-bar-mode -1)
