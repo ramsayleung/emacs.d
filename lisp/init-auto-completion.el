@@ -23,7 +23,7 @@
 	 company-echo-delay 0                          ; remove annoying blinking
 	 company-tooltip-limit 10                      ; bigger popup window
 	 company-tooltip-align-annotations 't          ; align annotations to the right tooltip border
-	 company-idle-delay .15                         ; decrease delay before autocompletion popup shows
+	 company-idle-delay 0.01                         ; decrease delay before autocompletion popup shows
 	 company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
   (global-company-mode t)
   )
@@ -40,7 +40,6 @@
   :init
   (company-posframe-mode 1)
   )
-
 
 (message "loading init-auto-completion")
 (provide 'init-auto-completion)
