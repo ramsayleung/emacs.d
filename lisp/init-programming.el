@@ -14,17 +14,17 @@
   (yas-reload-all)
   )
 
+
 ;; Make Emacs use the $PATH set up by the user's shell
 (use-package exec-path-from-shell
   :ensure t
+  :if (or (memq window-system '(mac ns x))
+	  (daemonp))
   :init
-	(exec-path-from-shell-initialize)
-	(setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PATH" "PYTHONPATH" "GOPATH" "GOROOT"))
-	;; when it is nil, exec-path-from-shell will read environment variable
-	;; from .zshenv instead of .zshrc, but makes sure that you put all
-	;; environment variable you need in .zshenv rather than .zshrc
-	(setq exec-path-from-shell-check-startup-files nil) ;
-	(setq exec-path-from-shell-arguments '("-l")) ;remove -i read form .zshenv
+  (setq exec-path-from-shell-debug t)
+  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PATH" "PYTHONPATH" "GOPATH" "GOROOT"))
+  (setq exec-path-from-shell-arguments '("-l")) ;remove -i read form .zshenv
+  (exec-path-from-shell-initialize)
   )
 
 ;; Emacs extension to increate selected region by semantic units

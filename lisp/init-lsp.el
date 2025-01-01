@@ -4,6 +4,7 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+
 (use-package eglot
   :ensure t
   :hook ((python-mode . eglot-ensure)
@@ -23,16 +24,19 @@
 	 (c-ts-mode . eglot-ensure))
   )
 
+
+(use-package pet
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
+
 (use-package eglot-booster
-  :ensure t
+  :disable
   :init (ramsay/vc-install :fetcher "github" :repo "jdtsmith/eglot-booster")
   :after eglot
   :config
   (eglot-booster-mode)
+  ;; eglot booster doesn't work well with python project with virtual environment
   )
-
-;;; Ensure to put emacs-lsp-booster: https://github.com/blahgeek/emacs-lsp-booster into PATH
-;;;(package-vc-install '(eglot-booster :url "https://github.com/jdtsmith/eglot-booster"))
 
 (message "loading init-lsp")
 (provide 'init-lsp)

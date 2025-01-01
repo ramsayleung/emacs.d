@@ -11,20 +11,16 @@
   ;; :mode("\\.py\\'" . python-mode)
   :ensure t
   :config 
-	;; https://github.com/jorgenschaefer/elpy/issues/887
-	(defun python-shell-completion-native-try ()
-		"Return non-nil if can trigger native completion."
-		(let ((python-shell-completion-native-enable t)
-		      (python-shell-completion-native-output-timeout
-		       python-shell-completion-native-try-output-timeout))
-		  (python-shell-completion-native-get-completions
-		   (get-buffer-process (current-buffer))
-		   nil "_")))
+  ;; https://github.com/jorgenschaefer/elpy/issues/887
+  (defun python-shell-completion-native-try ()
+    "Return non-nil if can trigger native completion."
+    (let ((python-shell-completion-native-enable t)
+	  (python-shell-completion-native-output-timeout
+	   python-shell-completion-native-try-output-timeout))
+      (python-shell-completion-native-get-completions
+       (get-buffer-process (current-buffer))
+       nil "_")))
   )
-
-(use-package pyvenv
-  :ensure t
-  :commands pyvenv-activate)
 
 (message "loading init-python")
 (provide 'init-python)

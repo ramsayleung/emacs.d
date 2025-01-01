@@ -38,7 +38,6 @@
 	  ;; use minted to highlight code in latex
 	  (setq org-latex-listings 'minted)
 	  (setq org-export-latex-listings 'minted)
-	  (add-to-list 'org-latex-packages-alist '("" "minted"))
 	  (add-hook 'org-src-mode-hook 'ramsay/disable-flycheck-in-org-src-block)
 
 	  ;; https://orgmode.org/org.html#Tracking-TODO-state-changes
