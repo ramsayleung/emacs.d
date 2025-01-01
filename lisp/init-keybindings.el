@@ -77,7 +77,10 @@
 				"m c C" 'ramsay/compile-clean
 				"m c x" 'ramsay/g++-compile-and-run
 				)
-
+	    (general-define-key :states 'normal
+				:keymaps 'org-mode-map
+				"TAB" 'org-cycle
+				"t" 'org-todo)
 	    ;; Rust mode
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'rust-mode-map

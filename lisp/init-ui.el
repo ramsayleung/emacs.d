@@ -22,30 +22,30 @@
 (use-package popwin
   :ensure t
   :config (progn
-	          (popwin-mode t)
-	          (push '(compilation-mode :noselect t) popwin:special-display-config)
-	          ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
-	          (push "*slime-apropos*" popwin:special-display-config)
-	          (push "*slime-macroexpansion*" popwin:special-display-config)
-	          (push "*slime-description*" popwin:special-display-config)
-	          (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
-	          (push "*slime-xref*" popwin:special-display-config)
-	          (push '(sldb-mode :stick t) popwin:special-display-config)
-	          (push 'slime-repl-mode popwin:special-display-config)
-	          (push 'slime-connection-list-mode popwin:special-display-config)
-	          (push "*vc-diff*" popwin:special-display-config)
-	          (push "*vc-change-log*" popwin:special-display-config)
-	          (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
-	          ))
+	    (popwin-mode t)
+	    (push '(compilation-mode :noselect t) popwin:special-display-config)
+	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
+	    (push "*slime-apropos*" popwin:special-display-config)
+	    (push "*slime-macroexpansion*" popwin:special-display-config)
+	    (push "*slime-description*" popwin:special-display-config)
+	    (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
+	    (push "*slime-xref*" popwin:special-display-config)
+	    (push '(sldb-mode :stick t) popwin:special-display-config)
+	    (push 'slime-repl-mode popwin:special-display-config)
+	    (push 'slime-connection-list-mode popwin:special-display-config)
+	    (push "*vc-diff*" popwin:special-display-config)
+	    (push "*vc-change-log*" popwin:special-display-config)
+	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
+	    ))
 
 (use-package writeroom-mode
   :hook (emacs-startup . global-writeroom-mode)
   :ensure t
   :config
   (setq writeroom-width 128
-	      writeroom-maximize-window nil
-	      writeroom-fullscreen-effect 'maximized
-	      writeroom-major-modes '(org-mode markdown-mode))
+	writeroom-maximize-window nil
+	writeroom-fullscreen-effect 'maximized
+	writeroom-major-modes '(org-mode markdown-mode))
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
   )
 
@@ -81,12 +81,12 @@
        (frame-parameter nil 'font)
        charset
        (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-		              :weight 'normal
-		              :slant 'normal
-		              :height arg)))))
+		  :weight 'normal
+		  :slant 'normal
+		  :height arg)))))
 
 (add-to-list 'default-frame-alist
-	           '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-19-*-*-*-m-0-iso10646-1"))
+	     '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-19-*-*-*-m-0-iso10646-1"))
 
 ;;; Apply text-scale-adjust for all buffer
 (defadvice text-scale-increase (around all-buffers (arg) activate)
@@ -185,10 +185,6 @@
 ;; (load-theme 'modus-operandi t)
 (load-theme 'acme t)
 
-;;----------------;;
-;;Major/Minor Mode;;
-;;----------------;;
-
 ;;; customize default mode line
 ;;; disable status of "read only" or "wriable"
 (setq-default mode-line-modified nil)
@@ -197,10 +193,6 @@
 
 ;;;Move evil tag to beginning of mode line
 (setq evil-mode-line-format '(before . mode-line-front-space))
-(setq-default mode-line-buffer-identification
-              (let ((orig  (car mode-line-buffer-identification)))
-                `(:eval (cons (concat (when (buffer-file-name) (concat (file-name-nondirectory (directory-file-name default-directory)) "/" ))  ,orig )
-                              (cdr mode-line-buffer-identification)))))
 
 (use-package diminish
   :ensure t
