@@ -47,18 +47,6 @@
 				     (?B . (:foreground "DarkOrange"))
 				     (?C . (:foreground "green"))))
 
-	  ;; Make verbatim with highlight text background.
-	  (add-to-list 'org-emphasis-alist
-		       '("=" (:background "#fef7ca")))
-	  ;; Make deletion(obsolote) text foreground with dark gray.
-	  (add-to-list 'org-emphasis-alist
-		       '("+" (:foreground "dark gray"
-					  :strike-through t)))
-	  ;; Make code style around with box.
-	  (add-to-list 'org-emphasis-alist
-		       '("~" (:box (:line-width 1
-						:color "grey75"
-						:style released-button))))
 	  )
   :config (progn
 	    (when (not (ramsay/windows-p))
@@ -90,6 +78,18 @@
 		      ("DONE" . (:foreground "LimeGreen" :weight bold))
 		      ))
 
+	      ;; Make verbatim with highlight text background.
+	      (add-to-list 'org-emphasis-alist
+			   '("=" (:background "#fef7ca")))
+	      ;; Make deletion(obsolote) text foreground with dark gray.
+	      (add-to-list 'org-emphasis-alist
+			   '("+" (:foreground "dark gray"
+					      :strike-through t)))
+	      ;; Make code style around with box.
+	      (add-to-list 'org-emphasis-alist
+			   '("~" (:box (:line-width 1
+						    :color "grey75"
+						    :style released-button))))
 	      ;; let org-mode to delete those auxiliary files after export
 	      ;;automatically
 	      (setq org-latex-logfiles-extensions (quote

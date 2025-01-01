@@ -22,8 +22,6 @@
 ;; 
 
 ;;; Code:
-
-(setq ispell-dictionary "en")
 (provide 'init-spelling)
 ;;; init-spelling.el ends here
 
