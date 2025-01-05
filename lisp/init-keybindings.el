@@ -130,9 +130,6 @@
 	    ;; non-evil ,without a prefix
 	    (general-define-key
 	     [remap evil-repeat-pop-next] 'xref-find-definitions
-	     ;; remap C-n to `next-line`
-	     [remap evil-complete-next] 'company-select-next
-	     [remap evil-complete-previous] 'company-select-previous
 	     "<f5>" 'deadgrep
 	     "C-c a" 'org-agenda
 	     "C-c l" 'org-store-link
@@ -155,11 +152,9 @@
 	     "C-x 2" 'ramsay/split-window-below-and-move
 	     "C-x 3" 'ramsay/split-window-right-and-move
 	     "M-i" 'symbol-overlay-put
-	     "M-RET o" 'srefactor-lisp-one-line
-	     "M-RET m" 'srefactor-lisp-format-sexp
-	     "M-RET d" 'srefactor-lisp-format-defun
-	     "M-RET b" 'srefactor-lisp-format-buffer
-	     "S-<f6>" 'lsp-rename)
+	     "S-<f6>" 'eglot-rename
+	     "C-M-\\" 'ramsay/format-with-fallback
+	     )
 
 	    (general-define-key :states '(insert normal visual motion)
 				"C-a" 'move-beginning-of-line
@@ -175,20 +170,6 @@
 				 lisp-interaction-mode-map)
 		      [remap paredit-convolute-sexp] 'xref-find-references
 		      "M-?" 'xref-find-references)
-
-  ;; Loop through the list and set up keybindings
-  (dolist (pair '((python-ts-mode-map . lsp-format-region)
-		  (python-mode-map . lsp-format-region)
-		  (js-ts-mode-map . lsp-format-region)
-		  (js-mode-map . lsp-format-region)
-		  (emacs-lisp-mode-map . ramsay/indent-region-or-buffer)
-		  (org-mode-map . ramsay/indent-region-or-buffer)
-		  (go-mode-map . gofmt)
-		  (rust-mode-map . rust-format-buffer)
-		  (sgml-mode-map . ramsay/format-xml)))
-    (general-define-key :keymaps (car pair)
-			"C-M-\\" (cdr pair)))
-
   ;; Emacs Lisp mode
   (general-define-key :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
 		      [remap evil-repeat-pop-next] 'xref-find-definitions

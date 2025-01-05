@@ -18,29 +18,7 @@
   (let ((p (point)))
     (eshell-bol)
     (if (= p (point))
-	      (beginning-of-line))))
-
-(defun eshell/unpack (file &rest args)
-  "Unpack FILE with ARGS using default command."
-  (let ((command (some (lambda (x)
-                         (if (string-match-p (car x) file)
-                             (cadr x)))
-                       '((".*\.tar.bz2" "tar xjf")
-                         (".*\.tar.gz" "tar xzf")
-                         (".*\.bz2" "bunzip2")
-                         (".*\.rar" "unrar x")
-                         (".*\.gz" "gunzip")
-                         (".*\.tar" "tar xf")
-                         (".*\.tbz2" "tar xjf")
-                         (".*\.tgz" "tar xzf")
-                         (".*\.zip" "unzip")
-                         (".*\.Z" "uncompress")
-                         (".*" "echo 'Could not unpack the file:'")))))
-    (let ((unpack-command (concat command " " file " " (mapconcat 'identity args " "))))
-      (eshell/printnl "Unpack command: " unpack-command)
-      (eshell-command-result unpack-command))
-    ))
-
+	(beginning-of-line))))
 
 (defun ramsay/kill-word-backward ()
   "Let Eshell kill word acting like zsh."
@@ -63,8 +41,8 @@
                            "\n"
                            t)))
       (when (and collection (> (length collection) 0)
-		             (setq bash_history collection))
-	      bash_history))))
+		 (setq bash_history collection))
+	bash_history))))
 
 (defun ramsay/parse-zsh-history ()
   "Parse the bash history."
@@ -79,8 +57,8 @@
                            "\n"
                            t)))
       (when (and collection (> (length collection) 0)
-		             (setq zsh_history collection))
-	      zsh_history))))
+		 (setq zsh_history collection))
+	zsh_history))))
 
 (defun ramsay/esh-history ()
   "Interactive search eshell history."
@@ -88,20 +66,20 @@
   (require 'em-hist)
   (save-excursion
     (let* ((start-pos (eshell-beginning-of-input))
-	         (input (eshell-get-old-input))
-	         (esh-history (when (> (ring-size eshell-history-ring) 0)
-			                    (ring-elements eshell-history-ring)))
-	         (all-shell-history (append esh-history (ramsay/parse-zsh-history) (ramsay/parse-bash-history)))
-	         )
+	   (input (eshell-get-old-input))
+	   (esh-history (when (> (ring-size eshell-history-ring) 0)
+			  (ring-elements eshell-history-ring)))
+	   (all-shell-history (append esh-history (ramsay/parse-zsh-history) (ramsay/parse-bash-history)))
+	   )
       (let* ((command (ivy-read "Command: "
-				                        (delete-dups all-shell-history)
-				                        :initial-input input
-				                        :require-match t
-				                        :action #'ivy-completion-in-region-action))
-	           )
-	      (eshell-kill-input)
-	      (insert command)
-	      )))
+				(delete-dups all-shell-history)
+				:initial-input input
+				:require-match t
+				:action #'ivy-completion-in-region-action))
+	     )
+	(eshell-kill-input)
+	(insert command)
+	)))
   ;; move cursor to eol
   (end-of-line))
 
@@ -133,9 +111,9 @@
    )
   ;; Visual commands
   (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
-				                         "ncftp" "pine" "tin" "trn" "elm" "vim"
-				                         "nmtui" "alsamixer" "htop" "el" "elinks"
-				                         ))
+				 "ncftp" "pine" "tin" "trn" "elm" "vim"
+				 "nmtui" "alsamixer" "htop" "el" "elinks"
+				 ))
   (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
   (require 'esh-mode) ; eshell-mode-map
   :config
@@ -144,16 +122,16 @@
       "Use Emacs grep facility instead of calling external grep."
       (eshell-grep "rgrep" args t)))
   (add-hook 'eshell-mode-hook
-	          (lambda ()(eshell-cmpl-initialize)))
+	    (lambda ()(eshell-cmpl-initialize)))
   (add-hook 'eshell-mode-hook (lambda ()
-				                        (setq-local global-hl-line-mode nil)))
+				(setq-local global-hl-line-mode nil)))
   
   :bind (:map eshell-mode-map
-	            (("C-a" . ramsay/eshell-maybe-bol)
-	             ("C-w" . ramsay/kill-word-backward)
-	             ("C-k" . paredit-kill)
-	             ("C-r" . ramsay/esh-history)
-	             ("C-l" . ramsay/eshell-clear-buffer)))
+	      (("C-a" . ramsay/eshell-maybe-bol)
+	       ("C-w" . ramsay/kill-word-backward)
+	       ("C-k" . paredit-kill)
+	       ("C-r" . ramsay/esh-history)
+	       ("C-l" . ramsay/eshell-clear-buffer)))
   )
 
 (message "loading init-shell")

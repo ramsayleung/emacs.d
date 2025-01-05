@@ -1,16 +1,9 @@
 ;;; package --- Summary  -*- lexical-binding: t -*-
 ;;; Code:
 ;;; Commentary:
-;;;----------------;;;
-;;; User Interface ;;;
 
 ;;; Ignore case when searching
 (setq case-fold-search t)
-
-
-;;;------------------;;;
-;;; Windows & Frames ;;;
-;;;------------------;;;
 
 ;;; language
 ;;; always split windows horizontally rather than vertically
@@ -148,11 +141,8 @@
 ;;; show customized phrase in scratch
 ;;; From Purcell https://github.com/purcell/emacs.d
 (setq-default initial-scratch-message
-              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
+              (concat ";; Happy hacking, " user-login-name " - Emacs ♥  you!\n\n"))
 
-;;----------;;
-;;  Cursor  ;;
-;;----------;;
 ;; highlight current line
 (global-hl-line-mode 1)
 ;; don't blink the cursor
@@ -168,22 +158,13 @@
 ;;; Use visible bell instead of buzzer
 (setq visible-bell t)
 
-;;  Color Theme  ;;
-;;---------------;;
-
-(use-package acme-theme
-  :ensure t
-  :init
-  :defer t)
-
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
 
-;; (load-theme 'modus-operandi t)
-(load-theme 'acme t)
+(load-theme 'modus-operandi t)
 
 ;;; customize default mode line
 ;;; disable status of "read only" or "wriable"

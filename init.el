@@ -107,7 +107,6 @@ named arguments:
 (require 'init-evil)
 (require 'init-ivy)
 (require 'init-keybindings)
-(require 'init-lsp)
 (require 'init-markdown)
 (require 'init-misc)
 (require 'init-org)
