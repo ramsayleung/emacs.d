@@ -52,19 +52,30 @@ The buffer is not associated with a file."
   "Kill all other buffers but current one and *scratch*."
   (interactive)
   (mapc 'kill-buffer
-	      (delq "*scratch*"(delq (current-buffer) (buffer-list)))))
+	(delq "*scratch*"(delq (current-buffer) (buffer-list)))))
 
-(defun ramsay/indent-region-or-buffer()
-  "Indent selected region or a whole buffer."
+(defun ramsay/format-with-fallback ()
+  "Format buffer using mode-specific formatters with fallback.
+For Rust, uses rust-format-buffer
+For Go, uses gofmt
+Otherwise tries eglot-format, then falls back to ramsay/indent-region-or-buffer"
   (interactive)
-  (save-excursion
-    (if (region-active-p)
-	      (progn
-	        (indent-region (region-beginning) (region-end))
-	        (message "Indented selected region"))
-      (progn
-	      (ramsay/indent-buffer)
-	      (message "Indented buffer")))))
+  (cond
+   ;; Rust mode
+   ((eq major-mode 'rust-mode)
+    (call-interactively 'rust-format-buffer))
+   
+   ;; Go mode
+   ((eq major-mode 'go-mode)
+    (call-interactively 'gofmt))
+   
+   ;; Other modes - try eglot first, then fallback
+   (t
+    (condition-case err
+        (call-interactively 'eglot-format)
+      (error
+       (message "eglot-format failed, falling back to indent: %s" (error-message-string err))
+       (call-interactively 'ramsay/indent-buffer))))))
 
 ;; from magnars
 (defun ramsay/delete-current-buffer-file ()
