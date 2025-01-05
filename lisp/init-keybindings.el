@@ -38,11 +38,11 @@
 				"h d v" 'counsel-describe-variable
 				"g" '(:ignore t :which-key "git/version-control")
 				"g s" 'magit-status
-				"g m" 'magit-dispatch-popup
 				"j" '(:ignore t :which-key "jump/join/split")
 				"j l" 'avy-goto-line
 				"j j" 'avy-goto-char
 				"j w" 'avy-goto-word-1
+				"k" #'hydra-flymake/body
 				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
 				"p f" (general-predicate-dispatch 'project-find-file (not (fboundp 'project-find-file)) 'counsel-projectile-find-file)
@@ -213,6 +213,19 @@
 	      ("y"  flycheck-copy-errors-as-kill                              "Yank/Copy")
 	      ("gg" flycheck-first-error                                      "First")
 	      ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+	      ("q"  nil))
+
+	    (defhydra hydra-flymake
+	      (:pre (progn (setq hydra-hint-display-type 'lv) (flymake-show-buffer-diagnostics))
+		    :post (progn
+			    (setq hydra-hint-display-type 'lv)
+			    (dolist (window (window-list))
+			      (let ((buffer (window-buffer window)))
+				(when (string-prefix-p "*Flymake" (buffer-name buffer))
+				  (quit-window nil window)))))		    :hint nil)
+	      "errors"
+	      ("j"  flymake-goto-next-error                                       "Next")
+	      ("k"  flymake-goto-prev-error                                   "Previous")
 	      ("q"  nil))
 
 	    (defhydra hydra-font-resize

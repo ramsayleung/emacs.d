@@ -19,11 +19,12 @@
               ("M-SPC"      . corfu-insert-separator)
               ("TAB"        . corfu-next)
               ([tab]        . corfu-next)
-              ("C-n"        . corfu-next)
-              ("C-p"        . corfu-previous)
+              ([remap evil-complete-next] . corfu-next)
+              ([remap evil-complete-previous] . corfu-previous)
               ("S-TAB"      . corfu-previous)
               ([backtab]    . corfu-previous)
-              ("RET" . corfu-insert))
+              ("RET" . corfu-insert)
+	      )
 
   :init
   (global-corfu-mode)
