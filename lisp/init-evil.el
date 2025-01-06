@@ -36,6 +36,7 @@
 		("\\*Go-Translate*\\*" . emacs)
 		("\\*Warnings*\\*" . emacs)
 		("\\*vterm*\\*" . emacs)
+		("\\*compilation*\\*" . emacs)
 		))
     ;;; modify evil-state-tag
   (setq evil-normal-state-tag   (propertize "[Normal]")

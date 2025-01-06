@@ -20,7 +20,6 @@
 				"b f" 'ramsay/get-buffer-full-name
 				"b k" 'ramsay/kill-other-buffers
 				"b n" 'ramsay/get-buffer-name
-				"c" '(:ignore t :which-key "compile/comments")
 				"e" #'hydra-flycheck/body
 				"f" '(:ignore t :which-key "files")
 				"f d" 'ramsay/delete-current-buffer-file
@@ -68,15 +67,6 @@
 				;; "l" 'evil-forward-char
 				)
 
-	    ;; C++ mode
-	    (general-define-key :states '(normal visual motion)
-				:keymaps '(c-mode-map c++-mode-map cmake-mode-map)
-				:prefix ramsay/leader-key
-				"m c" '(:ignore t :which-key "compiling")
-				"m c c" 'ramsay/compile
-				"m c C" 'ramsay/compile-clean
-				"m c x" 'ramsay/g++-compile-and-run
-				)
 	    (general-define-key :states 'normal
 				:keymaps 'org-mode-map
 				"TAB" 'org-cycle
@@ -132,6 +122,7 @@
 	     [remap evil-repeat-pop-next] 'xref-find-definitions
 	     "<f5>" 'deadgrep
 	     "C-c a" 'org-agenda
+	     "C-c c" 'compile
 	     "C-c l" 'org-store-link
 	     "C-c n" 'ramsay/empty-buffer
 	     "C-c t d" 'gts-do-translate
@@ -151,9 +142,7 @@
 	     "C-x u" 'undo-tree-visualize
 	     "C-x 2" 'ramsay/split-window-below-and-move
 	     "C-x 3" 'ramsay/split-window-right-and-move
-	     "M-i" 'symbol-overlay-put
 	     "S-<f6>" 'eglot-rename
-	     "C-M-\\" 'ramsay/format-with-fallback
 	     )
 
 	    (general-define-key :states '(insert normal visual motion)
@@ -170,6 +159,14 @@
 				 lisp-interaction-mode-map)
 		      [remap paredit-convolute-sexp] 'xref-find-references
 		      "M-?" 'xref-find-references)
+
+  ;; Loop through the list and set up keybindings
+  (dolist (pair '((go-mode-map . gofmt)
+		  (rust-mode-map . rust-format-buffer)
+		  (sgml-mode-map . ramsay/format-xml)))
+    (general-define-key :keymaps (car pair)
+			"C-M-\\" (cdr pair)))
+
   ;; Emacs Lisp mode
   (general-define-key :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
 		      [remap evil-repeat-pop-next] 'xref-find-definitions

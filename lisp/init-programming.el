@@ -8,6 +8,7 @@
   :ensure t
   :hook ((python-mode . eglot-ensure)
 	 (python-ts-mode . eglot-ensure)
+	 (typescript-ts-mode . eglot-ensure)
 	 (ruby-mode . eglot-ensure)
 	 (ruby-ts-mode . eglot-ensure)
 	 (rust-mode . eglot-ensure)
@@ -63,49 +64,21 @@
 	 ("\\.cmake\\'" . cmake-mode)
 	 ))
 
-(defun ramsay/compile-with-command-and-run (command)
-  "Compile c/c++ with COMMAND and run it."
-  (let ((file-name (buffer-file-name))
-	(output (file-name-base (buffer-file-name))))
-    (message output)
-    (compile (format "%s %s -o %s && ./%s && rm %s" command file-name output output output))
-    )
-  )
-
-(defvar ramsay-default-g++-compile-command "g++ -std=c++17 -Wall")
-(defvar ramsay-default-gcc-compile-command "gcc -std=c99 -Wall")
-(defvar ramsay-default-compile-command "cmake --build . -j 4")
-(defvar ramsay-default-clean-command "cmake --build . --target clean")
-
-(defun ramsay/g++-compile-and-run (command)
-  "Compile cpp with g++ and run it with COMMAND."
-  (interactive
-   (list (read-string (format "compile and run command [default: %s]: " ramsay-default-g++-compile-command) nil nil ramsay-default-g++-compile-command)))
-  (ramsay/compile-with-command-and-run command)
-  )
-
-(defun ramsay/gcc-compile-and-run (command)
-  "Compile c with gcc and run it COMMAND."
-  (interactive
-   (list (read-string (format "compile and run command [default: %s]: " ramsay-default-gcc-compile-command) nil nil ramsay-default-gcc-compile-command)))
-  (ramsay/compile-with-command-and-run command)
-  )
-
-(defun ramsay/compile (command)
-  "Compile with input COMMAND or ramsay-default-compile-command."
-  (interactive
-   (list (read-string (format "compile command [default: %s]: " ramsay-default-compile-command) nil nil ramsay-default-compile-command)))
-  ;; (setq ramsay-default-compile-command command)
-  (compile command)
-  )
-
-(defun ramsay/compile-clean (command)
-  "Clean compiled object with COMMAND."
-  (interactive
-   (list (read-string (format "clean command [default: %s]: " ramsay-default-clean-command) nil nil ramsay-default-compile-command)))
-  ;; (setq ramsay-default-compile-command command)
-  (compile command)
-  )
+(require 'compile)
+;;; Translate ANSI escape sequence
+(require 'ansi-color)
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+(setq compilation-scroll-output t)
+(defun ramsay/run-with-python ()
+  "Set the default \"compile-command\" to run the current file with python."
+  (setq-local compile-command
+	      (concat "python3 " (when buffer-file-name
+				   (shell-quote-argument buffer-file-name)))))
+(add-hook 'python-base-mode-hook 'ramsay/run-with-python)
+(defun ramsay/compile-rust ()
+  "Set the default \"compile-command\" for Rust project."
+  (setq-local compile-command "cargo build"))
+(add-hook 'rust-ts-mode-hook 'ramsay/compile-rust)
 
 ;;; Python
 ;; Code navigation,documentation lookup and completing for python
@@ -286,9 +259,6 @@
   (add-hook 'prog-mode-hook 'comment-auto-fill))
 
 (global-subword-mode t)
-;;; Put *compilation* buffer in the bottom of window which will disappears
-;;; automatically,instead shows in other window
-(setq compilation-scroll-output t)
 
 (defun ramsay/get-buffer-name ()
   "Get current buffer name."

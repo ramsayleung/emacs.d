@@ -37,15 +37,11 @@
      ;; Other language input source: "rime", "sogou" or another one.
      ;; "im.rime.inputmethod.Squirrel.Rime"
      ;; "com.sogou.inputmethod.sogouWB.wubi" => "wubi"
-     ;; "im.rime.inputmethod.Squirrel.Rime"
-     (if (string-match-p "does not exist" (shell-command-to-string "macism im.rime.inputmethod.Squirrel.Rime"))
-	       "im.rime.inputmethod.Squirrel.Hans"
-       "im.rime.inputmethod.Squirrel.Rime"
-       )
+     "im.rime.inputmethod.Squirrel.Hans"
      ))
 
   ;; enable the /cursor color/ mode
-  ;; (sis-global-cursor-color-mode t)
+  (sis-global-cursor-color-mode t)
   ;; enable the /respect/ mode
   (sis-global-respect-mode t)
   ;; enable the /context/ mode for all buffers
