@@ -1,19 +1,6 @@
 ;;; package --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
-
-(use-package go-translate
-  :commands (gts-do-translate)
-  :ensure t
-  :config
-  (setq gts-translate-list '(("en" "zh")))
-  (setq gts-default-translator
-	      (gts-translator
-	       :picker (gts-noprompt-picker)
-	       :engines (list (gts-bing-engine) (gts-google-engine))
-	       :render (gts-buffer-render)))
-  )
-
 ;;; 智能中英文切换
 (use-package sis
   :ensure t
@@ -42,6 +29,7 @@
 
   ;; enable the /cursor color/ mode
   (sis-global-cursor-color-mode t)
+  (setq sis-other-cursor-color "#FF2121")
   ;; enable the /respect/ mode
   (sis-global-respect-mode t)
   ;; enable the /context/ mode for all buffers
