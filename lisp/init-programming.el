@@ -7,35 +7,29 @@
 (use-package eglot
   :ensure t
   :hook ((python-mode . eglot-ensure)
-	 (python-ts-mode . eglot-ensure)
-	 (typescript-ts-mode . eglot-ensure)
-	 (ruby-mode . eglot-ensure)
-	 (ruby-ts-mode . eglot-ensure)
-	 (rust-mode . eglot-ensure)
-	 (rust-ts-mode . eglot-ensure)
-	 (shell-mode . eglot-ensure)
-	 (js-mode . eglot-ensure)
-	 (js-ts-mode . eglot-ensure)
-	 (c++-mode . eglot-ensure)
-	 (c++-ts-mode . eglot-ensure)
-	 (go-mode . eglot-ensure)
-	 (go-ts-mode . eglot-ensure)
-	 (c-mode . eglot-ensure)
-	 (c-ts-mode . eglot-ensure))
+		 (python-ts-mode . eglot-ensure)
+		 (typescript-ts-mode . eglot-ensure)
+		 (typescript-ts-base-mode . eglot-ensure)
+		 (ruby-mode . eglot-ensure)
+		 (ruby-ts-mode . eglot-ensure)
+		 (rust-mode . eglot-ensure)
+		 (rust-ts-mode . eglot-ensure)
+		 (shell-mode . eglot-ensure)
+		 (js-mode . eglot-ensure)
+		 (js-ts-mode . eglot-ensure)
+		 (c++-mode . eglot-ensure)
+		 (c++-ts-mode . eglot-ensure)
+		 (go-mode . eglot-ensure)
+		 (go-ts-mode . eglot-ensure)
+		 (c-mode . eglot-ensure)
+		 (c-ts-mode . eglot-ensure))
   )
 
-
-(use-package pet
-  :config
-  (add-hook 'python-base-mode-hook 'pet-mode -10))
-
 (use-package eglot-booster
-  :defer t
   :init (ramsay/vc-install :fetcher "github" :repo "jdtsmith/eglot-booster")
   :after eglot
   :config
   (eglot-booster-mode)
-  ;; eglot booster doesn't work well with python project with virtual environment
   )
 
 ;;; C family
@@ -60,9 +54,9 @@
 (use-package cmake-mode
   :ensure t
   :mode (
-	 ("CMakeLists\\.txt\\'" . cmake-mode)
-	 ("\\.cmake\\'" . cmake-mode)
-	 ))
+		 ("CMakeLists\\.txt\\'" . cmake-mode)
+		 ("\\.cmake\\'" . cmake-mode)
+		 ))
 
 (require 'compile)
 ;;; Translate ANSI escape sequence
@@ -72,8 +66,8 @@
 (defun ramsay/run-with-python ()
   "Set the default \"compile-command\" to run the current file with python."
   (setq-local compile-command
-	      (concat "python3 " (when buffer-file-name
-				   (shell-quote-argument buffer-file-name)))))
+			  (concat "python3 " (when buffer-file-name
+								   (shell-quote-argument buffer-file-name)))))
 (add-hook 'python-base-mode-hook 'ramsay/run-with-python)
 (defun ramsay/compile-rust ()
   "Set the default \"compile-command\" for Rust project."
@@ -94,11 +88,60 @@
   (defun python-shell-completion-native-try ()
     "Return non-nil if can trigger native completion."
     (let ((python-shell-completion-native-enable t)
-	  (python-shell-completion-native-output-timeout
-	   python-shell-completion-native-try-output-timeout))
+		  (python-shell-completion-native-output-timeout
+		   python-shell-completion-native-try-output-timeout))
       (python-shell-completion-native-get-completions
        (get-buffer-process (current-buffer))
        nil "_")))
+
+  (defun ramsay/pyrightconfig-find-venv-directories (project-root)
+	"Find potential virtual environment directories for a project in PROJECT-ROOT."
+	(let* ((common-venv-names '(".venv" ".env" "venv" "env"))
+           (common-venv-locations (list project-root))
+           (potential-paths '()))
+      
+      ;; Check common locations in project root and home directory
+      (dolist (location common-venv-locations)
+		(dolist (name common-venv-names)
+          (let ((full-path (expand-file-name name location)))
+			(when (file-directory-p full-path)
+              (push full-path potential-paths)))))
+      
+      ;; Return found paths
+      (reverse potential-paths)))
+
+  (defun ramsay/pyrightconfig-suggest ()
+	"Interactively select a virtualenv and write pyrightconfig.json."
+	(interactive)
+	(let* ((project-root (or (vc-git-root default-directory)
+							 default-directory))
+           (venv-paths (ramsay/pyrightconfig-find-venv-directories project-root))
+           (selected-venv
+			(completing-read
+			 "Select virtual environment: "
+			 (append venv-paths
+					 ;; Add option to specify custom path
+					 '("[Custom path...]"))
+			 nil t)))
+      
+      (if (string= selected-venv "[Custom path...]")
+          ;; If custom path selected, call original function
+          (call-interactively #'ramsay/pyrightconfig-write)
+		;; Otherwise use selected path
+		(ramsay/pyrightconfig-write selected-venv))))
+
+  ;; Derived from https://robbmann.io/posts/emacs-eglot-pyrightconfig/
+  (defun ramsay/pyrightconfig-write (virtualenv)
+	"Write pyrightconfig.json for the given VIRTUALENV path."
+	(interactive "DEnv: ")
+	(let* ((venv-dir (tramp-file-local-name (file-truename virtualenv)))
+           (venv-file-name (directory-file-name venv-dir))
+           (venvPath (file-name-directory venv-file-name))
+           (venv (file-name-base venv-file-name))
+           (base-dir (vc-git-root default-directory))
+           (out-file (expand-file-name "pyrightconfig.json" base-dir))
+           (out-contents (json-encode (list :venvPath venvPath :venv venv))))
+      (with-temp-file out-file (insert out-contents))))
   )
 
 ;;; Rust
@@ -120,7 +163,7 @@
   :ensure t
   :defer t
   :init (progn
-	  (add-hook 'rust-mode-hook 'cargo-minor-mode)))
+		  (add-hook 'rust-mode-hook 'cargo-minor-mode)))
 
 (defvar ramsay/cargo-process--command-script "script")
 (defun ramsay/cargo-process-script ()
@@ -157,41 +200,41 @@
   :ensure t
   :diminish paredit-mode
   :init (progn
-	  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-	  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-	  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-	  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-	  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-	  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-	  (add-hook 'racket-mode-hook           #'enable-paredit-mode)
+		  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+		  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+		  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+		  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+		  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+		  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+		  (add-hook 'racket-mode-hook           #'enable-paredit-mode)
           ;;; Auto complete pair symbol, such as `()`, `{}`
-	  (dolist (hook '(emacs-lisp-mode-hook lisp-mode-hook scheme-mode-hook lisp-interaction-mode-hook python-mode-hook rust-mode-hook c++-mode-hook racket-mode-hook))
- 	    (add-hook hook 'electric-pair-mode))
-	  )
+		  (dolist (hook '(emacs-lisp-mode-hook lisp-mode-hook scheme-mode-hook lisp-interaction-mode-hook python-mode-hook rust-mode-hook c++-mode-hook racket-mode-hook))
+ 			(add-hook hook 'electric-pair-mode))
+		  )
   )
 
 (use-package web-mode
   :ensure t
   :mode (
-	 ".erb$"
-	 ".phtml$"
-	 ".php$"
-	 ".[agj]sp$"
-	 ".as[cp]x$"
-	 ".mustache$"
-	 ".djhtml$"
-	 )
+		 ".erb$"
+		 ".phtml$"
+		 ".php$"
+		 ".[agj]sp$"
+		 ".as[cp]x$"
+		 ".mustache$"
+		 ".djhtml$"
+		 )
   :init
   (setq web-mode-extra-snippets
-	'(("erb" . (("toto" . "<% toto | %>\n\n<% end %>")))
+		'(("erb" . (("toto" . "<% toto | %>\n\n<% end %>")))
           ("php" . (("dowhile" . "<?php do { ?>\n\n<?php } while (|); ?>")
                     ("debug" . "<?php error_log(__LINE__); ?>")))
-	  ))
+		  ))
   (setq web-mode-extra-auto-pairs
-	'(("erb"  . (("beg" "end")))
+		'(("erb"  . (("beg" "end")))
           ("php"  . (("beg" "end")
                      ("beg" "end")))
-	  ))
+		  ))
   )
 
 (use-package go-mode
@@ -227,7 +270,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :if (or (memq window-system '(mac ns x))
-	  (daemonp))
+		  (daemonp))
   :init
   (setq exec-path-from-shell-debug t)
   (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PATH" "PYTHONPATH" "GOPATH" "GOROOT"))
