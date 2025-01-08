@@ -31,6 +31,13 @@
   (corfu-history-mode)
   (corfu-popupinfo-mode)) ; Popup completion info
 
+(use-package corfu-terminal
+  :init (ramsay/vc-install :fetcher "codeberg" :repo "akib/emacs-corfu-terminal")
+  :config
+  (unless (display-graphic-p)
+    (corfu-terminal-mode +1))
+  )
+
 (message "loading init-auto-completion")
 (provide 'init-auto-completion)
 ;;; init-auto-completion.el ends here

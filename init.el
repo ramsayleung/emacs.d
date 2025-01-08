@@ -81,7 +81,11 @@ named arguments:
 
 - NAME, REV, and BACKEND are as in `package-vc-install' (which
   see)."
-  (let* ((url (format "https://www.%s.com/%s" fetcher repo))
+  (let* ((url (cond
+               ((string= fetcher "codeberg")
+                (format "https://codeberg.org/%s" repo))
+               (t
+                (format "https://www.%s.com/%s" fetcher repo))))
          (iname (when name (intern name)))
          (pac-name (or iname (intern (file-name-base repo)))))
     (unless (package-installed-p pac-name)
