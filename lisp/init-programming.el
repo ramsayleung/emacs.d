@@ -213,6 +213,11 @@
 		  )
   )
 
+(use-package js2-mode
+  :ensure t
+  :config
+  (add-hook 'js-mode-hook 'js2-minor-mode))
+
 (use-package web-mode
   :ensure t
   :mode (

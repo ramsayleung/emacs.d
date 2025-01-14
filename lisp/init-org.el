@@ -114,6 +114,7 @@
 		 (sqlite . t)))
 	      ;; execute code without confirm
 	      (setq org-confirm-babel-evaluate nil)
+	      (setq org-plantuml-jar-path (executable-find "plantuml"))
 
 	      (setq org-startup-with-inline-images t)
 	      (setq org-agenda-files '("~/btsync/org"))
