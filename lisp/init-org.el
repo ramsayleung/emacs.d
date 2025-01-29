@@ -68,14 +68,14 @@
 	      (setq org-adapt-indentation t)
 
 	      (setq org-todo-keywords
-		    '((sequence "TODO" "DOING(!)" "|" "DONE")))
+		    '((sequence "TODO" "DOING(!)" "|" "DONE(!)" "CANCELED(!)")))
 
 	      (setq org-todo-keyword-faces
 		    '(
 		      ("TODO" . (:foreground "peru" :weight bold))
 		      ("DOING" . (:foreground "DarkOrange" :weight bold))
-		      ("STARTED" . (:foreground "DarkOrange" :weight bold))
 		      ("DONE" . (:foreground "LimeGreen" :weight bold))
+		      ("CANCELLED" . (:foreground "DarkGray" :weight bold))
 		      ))
 
 	      ;; Make verbatim with highlight text background.
@@ -114,7 +114,8 @@
 		 (sqlite . t)))
 	      ;; execute code without confirm
 	      (setq org-confirm-babel-evaluate nil)
-	      (setq org-plantuml-jar-path (executable-find "plantuml"))
+	      (setq org-plantuml-exec-mode 'plantuml)
+	      (setq org-plantuml-executable-path (executable-find "plantuml"))
 
 	      (setq org-startup-with-inline-images t)
 	      (setq org-agenda-files '("~/btsync/org"))
