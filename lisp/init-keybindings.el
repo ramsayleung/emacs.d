@@ -44,12 +44,12 @@
 				"k" #'hydra-flymake/body
 				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
-				"p f" (general-predicate-dispatch 'project-find-file (not (fboundp 'project-find-file)) 'counsel-projectile-find-file)
-				"p d" (general-predicate-dispatch 'project-find-dir (not (fboundp 'project-find-dir)) 'counsel-projectile-find-dir)
-				"p b" (general-predicate-dispatch 'project-switch-to-buffer (not (fboundp 'project-switch-to-buffer)) 'counsel-projectile-switch-to-buffer)
-				"p p" (general-predicate-dispatch 'project-switch-project (not (fboundp 'project-switch-to-buffer)) 'counsel-projectile-switch-project)
+				"p f" 'project-find-file
+				"p d" 'project-find-dir
+				"p b" 'project-switch-to-buffer
+				"p p" 'project-switch-to-buffer
 				"p s" '(:ignore t :which-key "project search")
-				"p s r" (general-predicate-dispatch 'project-find-regexp (not (fboundp 'project-find-regexp)) 'counsel-projectile-rg)
+				"p s r" 'project-find-regexp
 				"q" '(:ignore t :which-key "quit")
 				"q s" 'save-buffers-kill-terminal
 				"v" 'er/expand-region

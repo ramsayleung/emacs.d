@@ -54,9 +54,9 @@
 (use-package cmake-mode
   :ensure t
   :mode (
-		 ("CMakeLists\\.txt\\'" . cmake-mode)
-		 ("\\.cmake\\'" . cmake-mode)
-		 ))
+	 ("CMakeLists\\.txt\\'" . cmake-mode)
+	 ("\\.cmake\\'" . cmake-mode)
+	 ))
 
 (require 'compile)
 ;;; Translate ANSI escape sequence
@@ -66,13 +66,17 @@
 (defun ramsay/run-with-python ()
   "Set the default \"compile-command\" to run the current file with python."
   (setq-local compile-command
-			  (concat "python3 " (when buffer-file-name
-								   (shell-quote-argument buffer-file-name)))))
+	      (concat "python3 " (when buffer-file-name
+				   (shell-quote-argument buffer-file-name)))))
 (add-hook 'python-base-mode-hook 'ramsay/run-with-python)
 (defun ramsay/compile-rust ()
   "Set the default \"compile-command\" for Rust project."
-  (setq-local compile-command "cargo build"))
+  (setq-local compile-command "cargo run"))
 (add-hook 'rust-ts-mode-hook 'ramsay/compile-rust)
+(add-to-list 'compilation-error-regexp-alist 'rg)
+;;; Pair with "rg --no-heading"
+(add-to-list 'compilation-error-regexp-alist-alist
+             '(rg "^\\(.+?\\):\\([0-9]+\\):" 1 2))
 
 ;;; Python
 ;; Code navigation,documentation lookup and completing for python

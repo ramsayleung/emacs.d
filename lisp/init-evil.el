@@ -12,8 +12,9 @@
   :config
   (evil-mode t)
   (setq evil-default-state 'emacs)
-  (dolist (mode '(mhtml-mode css-mode text-mode markdown-mode org-mode prog-mode))
+  (dolist (mode '(mhtml-mode css-mode text-mode markdown-mode org-mode prog-mode fundamental-mode))
     (add-to-list 'evil-normal-state-modes mode))
+
 ;;; modify evil-state-tag
   (setq evil-normal-state-tag   (propertize "[Normal]")
 	evil-emacs-state-tag    (propertize "[Emacs]")
