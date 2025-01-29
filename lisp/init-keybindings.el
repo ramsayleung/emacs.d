@@ -112,7 +112,7 @@
 	     "C-`" 'shell-pop
 	     "C-s" 'swiper-isearch
 	     "C-x b"  'switch-to-buffer
-	     "C-x C-b" 'bs-show
+	     "C-x C-b" 'ibuffer
 	     "C-x C-r" 'counsel-recentf
 	     "C-x C-f" 'counsel-find-file
 	     "M-x" 'counsel-M-x)
