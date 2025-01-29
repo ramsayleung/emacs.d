@@ -2,63 +2,39 @@
 ;;; code:
 ;;; Commentary:
 
-(use-package vterm
-  :ensure t)
-
 (use-package shell-pop
   :ensure t
   :custom
-  (shell-pop-window-size 50)
-  (shell-pop-shell-type '("vterm" "*vterm*" (lambda () (vterm)))))
+  (shell-pop-shell-type '("eshell" "*eshell*" (lambda () (eshell))))
+  (shell-pop-term-shell "eshell")
+  (shell-pop-window-size 70))
 
-;;; https://www.emacswiki.org/emacs/EshellFunctions
-(defun ramsay/eshell-maybe-bol ()
-  "Go to the beginning of command line,or begining of line."
-  (interactive)
-  (let ((p (point)))
-    (eshell-bol)
-    (if (= p (point))
-	(beginning-of-line))))
+(defvar ramsay/zsh-history-cache nil
+  "Cache for zsh history commands.")
 
-(defun ramsay/kill-word-backward ()
-  "Let Eshell kill word acting like zsh."
-  (interactive)
-  (set-mark-command nil)
-  (backward-word)
-  (call-interactively 'kill-region))
-
-;;; Inspire by http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
-(defun ramsay/parse-bash-history ()
-  "Parse the bash history."
-  (interactive)
-  (when (file-exists-p "~/.bash_history")
-    (let (collection bash_history)
-      (shell-command "history -r") ; reload history
-      (setq collection
-            (nreverse
-             (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
-                                             (buffer-string))
-                           "\n"
-                           t)))
-      (when (and collection (> (length collection) 0)
-		 (setq bash_history collection))
-	bash_history))))
+(defvar ramsay/zsh-history-last-modified nil
+  "Last modification time of the zsh history file.")
 
 (defun ramsay/parse-zsh-history ()
-  "Parse the bash history."
+  "Parse the zsh history, updating cache only if the history file has changed."
   (interactive)
-  (when (file-exists-p "~/.zsh_history")
-    (let (collection zsh_history)
-      (shell-command "history -r") ; reload history
-      (setq collection
-            (nreverse
-             (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.zsh_history"))
-                                             (replace-regexp-in-string "^:[^;]*;" "" (buffer-string)))
-                           "\n"
-                           t)))
-      (when (and collection (> (length collection) 0)
-		 (setq zsh_history collection))
-	zsh_history))))
+  (let* ((history-file (expand-file-name "~/.zsh_history"))
+         (current-mod-time (and (file-exists-p history-file)
+				(file-attribute-modification-time
+                                 (file-attributes history-file)))))
+    (when (and current-mod-time
+               (or (null ramsay/zsh-history-last-modified)
+                   (time-less-p ramsay/zsh-history-last-modified current-mod-time)))
+      ;; Update cache only if file has been modified
+      (setq ramsay/zsh-history-cache
+            (with-temp-buffer
+              (insert-file-contents history-file)
+              ;; Remove the zsh history metadata (e.g., ": 1738134318:0;")
+              (let ((history (replace-regexp-in-string "^:[^;]*;" "" (buffer-string))))
+                ;; Split the cleaned history into lines and reverse the order
+                (nreverse (split-string history "\n" t))))
+            ramsay/zsh-history-last-modified current-mod-time)))
+  ramsay/zsh-history-cache)
 
 (defun ramsay/esh-history ()
   "Interactive search eshell history."
@@ -69,20 +45,19 @@
 	   (input (eshell-get-old-input))
 	   (esh-history (when (> (ring-size eshell-history-ring) 0)
 			  (ring-elements eshell-history-ring)))
-	   (all-shell-history (append esh-history (ramsay/parse-zsh-history) (ramsay/parse-bash-history)))
+	   (all-shell-history (append esh-history (ramsay/parse-zsh-history)))
 	   )
-      (let* ((command (ivy-read "Command: "
-				(delete-dups all-shell-history)
-				:initial-input input
-				:require-match t
-				:action #'ivy-completion-in-region-action))
-	     )
-	(eshell-kill-input)
-	(insert command)
-	)))
+      (if (not all-shell-history)
+	  (message "No shell history available.")
+	(let* ((command (completing-read "Command: "
+					 (seq-uniq all-shell-history)
+					 nil nil input))
+	       )
+	  (eshell-kill-input)
+	  (insert command)
+	  ))))
   ;; move cursor to eol
   (end-of-line))
-
 
 (defun ramsay/eshell-clear-buffer ()
   "Clear terminal."
@@ -92,12 +67,12 @@
     (eshell-send-input)))
 
 (use-package eshell
-  :commands eshell
+  :commands (eshell shell-pop)
   :init
   (setq
    eshell-highlight-prompt nil
    eshell-buffer-shorthand t
-   eshell-history-size 5000
+   eshell-history-size 50000
    ;;  ;; auto truncate after 12k lines
    eshell-buffer-maximum-lines 12000
    eshell-hist-ignoredups t
@@ -121,17 +96,11 @@
     (defun eshell/rgrep (&rest args)
       "Use Emacs grep facility instead of calling external grep."
       (eshell-grep "rgrep" args t)))
-  (add-hook 'eshell-mode-hook
-	    (lambda ()(eshell-cmpl-initialize)))
-  (add-hook 'eshell-mode-hook (lambda ()
-				(setq-local global-hl-line-mode nil)))
-  
-  :bind (:map eshell-mode-map
-	      (("C-a" . ramsay/eshell-maybe-bol)
-	       ("C-w" . ramsay/kill-word-backward)
-	       ("C-k" . paredit-kill)
-	       ("C-r" . ramsay/esh-history)
-	       ("C-l" . ramsay/eshell-clear-buffer)))
+
+  (add-hook 'eshell-mode-hook (lambda ()(eshell-cmpl-initialize)))
+  (add-hook 'eshell-mode-hook (lambda ()(setq-local global-hl-line-mode nil)))
+  (define-key eshell-mode-map [remap eshell-list-history] 'ramsay/eshell-clear-buffer)
+  (define-key eshell-mode-map (kbd "C-c C-r") 'ramsay/esh-history)
   )
 
 (message "loading init-shell")
