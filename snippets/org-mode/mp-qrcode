@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: mp-qrcode
+# key: mp
+# --
+#+ATTR_HTML: :class qr-container
+#+ATTR_HTML: :width 160px :height 160px :center t
+[[file:~/btsync/org/images/wechat_mp/qrcode_gh_e06d750e626f_1.jpg]] 
+公号同步更新，欢迎关注👻

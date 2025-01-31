@@ -81,8 +81,7 @@
    eshell-scroll-to-bottom-on-input 'all
    eshell-list-files-after-cd t
    eshell-aliases-file (concat user-emacs-directory "eshell/alias")
-   eshell-banner-message ""
-   ;; eshell-banner-message "What would you like to do?\n\n"
+   eshell-banner-message "Have fun with Eshell ♥  \n\n"
    )
   ;; Visual commands
   (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
@@ -96,6 +95,38 @@
     (defun eshell/rgrep (&rest args)
       "Use Emacs grep facility instead of calling external grep."
       (eshell-grep "rgrep" args t)))
+
+  (defun ramsay/eshell-prompt ()
+    "Customize the Eshell prompt to mimic the Zsh prompt with colors."
+    (let* ((user (propertize (getenv "USER") 'face '(:foreground "green" :weight bold)))
+           (host (propertize (car (split-string (system-name) "\\.")) 'face '(:foreground "green" :weight bold)))
+           (time (propertize (format-time-string "%H:%M:%S") 'face '(:foreground "blue")))
+           (dir (abbreviate-file-name (eshell/pwd)))
+           (dir-formatted (propertize dir 'face '(:foreground "gray")))
+           (git-branch (when (magit-toplevel dir)
+			 (magit-get-current-branch)))
+           (dirty (when git-branch
+                    (if (magit-anything-modified-p)
+			"*"
+                      ""))))
+      (concat
+       user "@" host " "
+       "[" time "] "
+       "[" dir-formatted "] "
+       (if git-branch
+           (concat
+            (propertize (format "[%s" git-branch) 'face '(:foreground "green"))
+            (propertize (format "%s" dirty) 'face '(:foreground "red"))
+            (propertize "]" 'face '(:foreground "green"))
+	    )
+	 "")
+       "\n"
+       (propertize "->" 'face '(:foreground "green"))
+       (propertize " " 'face 'default))))
+
+  (setq eshell-prompt-function 'ramsay/eshell-prompt)
+  (setq eshell-prompt-regexp "-> ")
+
 
   (add-hook 'eshell-mode-hook (lambda ()(eshell-cmpl-initialize)))
   (add-hook 'eshell-mode-hook (lambda ()(setq-local global-hl-line-mode nil)))
