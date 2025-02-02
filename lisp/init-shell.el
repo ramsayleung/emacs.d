@@ -94,7 +94,7 @@
   (when (not (functionp 'eshell/rgrep))
     (defun eshell/rgrep (&rest args)
       "Use Emacs grep facility instead of calling external grep."
-      (eshell-grep "rgrep" args t)))
+      (eshell-grep "rg --no-heading" args t)))
 
   (defun ramsay/eshell-prompt ()
     "Customize the Eshell prompt to mimic the Zsh prompt with colors."
@@ -103,10 +103,11 @@
            (time (propertize (format-time-string "%H:%M:%S") 'face '(:foreground "blue")))
            (dir (abbreviate-file-name (eshell/pwd)))
            (dir-formatted (propertize dir 'face '(:foreground "gray")))
-           (git-branch (when (magit-toplevel dir)
-			 (magit-get-current-branch)))
-           (dirty (when git-branch
-                    (if (magit-anything-modified-p)
+           (git-root (vc-git-root dir))
+           (git-branch (when git-root
+			 (vc-git--symbolic-ref git-root)))
+           (dirty (when git-root
+                    (if (vc-git-state dir)
 			"*"
                       ""))))
       (concat
