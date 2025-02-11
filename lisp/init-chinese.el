@@ -29,6 +29,7 @@
 
   ;; enable the /cursor color/ mode
   (sis-global-cursor-color-mode t)
+  (setq sis-default-cursor-color nil)
   (setq sis-other-cursor-color "#FF2121")
   ;; enable the /respect/ mode
   (sis-global-respect-mode t)

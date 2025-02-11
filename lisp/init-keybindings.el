@@ -163,7 +163,8 @@
   ;; Loop through the list and set up keybindings
   (dolist (pair '((go-mode-map . gofmt)
 		  (rust-mode-map . rust-format-buffer)
-		  (sgml-mode-map . ramsay/format-xml)))
+		  (rust-ts-mode-map . rust-format-buffer)
+		  (prog-mode-map . ramsay/indent-region-or-buffer)))
     (general-define-key :keymaps (car pair)
 			"C-M-\\" (cdr pair)))
 

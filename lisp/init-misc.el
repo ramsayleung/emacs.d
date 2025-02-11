@@ -92,6 +92,17 @@ The buffer is not associated with a file."
     (dired "/tmp")
     ))
 
+(defun ramsay/indent-region-or-buffer()
+  "Indent selected region or a whole buffer."
+  (interactive)
+  (save-excursion
+    (if (region-active-p)
+	(progn
+	  (indent-region (region-beginning) (region-end))
+	  (message "Indented selected region"))
+      (progn
+	(indent-region (point-min) (point-max))
+	(message "Indented buffer")))))
 (message "loading init-misc")
 (provide 'init-misc)
 ;;; init-misc.el ends here
