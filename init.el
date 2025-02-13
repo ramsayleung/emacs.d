@@ -92,6 +92,8 @@ named arguments:
       (package-vc-install url iname rev backend))))
 
 (setq load-prefer-newer t)            ;avoid load outdated byte-compiled file
+(unless package-archive-contents
+  (package-refresh-contents))
 
 (setq package-enable-at-startup nil)
 ;; Bootstrap `use-package'
