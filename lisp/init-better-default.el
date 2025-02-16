@@ -6,6 +6,10 @@
 (auto-save-visited-mode +1)
 (setq auto-save-visited-interval 1)
 
+(setq-default indent-tabs-mode nil)  ; Use spaces instead of tabs
+(setq-default tab-width 4)           ; Set width for tabs
+(setq standard-indent 4)             ; Set the standard indent width
+
 ;;; Never delete *scratch* buffer
 ;;; https://emacs.stackexchange.com/questions/19254/never-close-scratch
 (add-hook 'kill-buffer-query-functions

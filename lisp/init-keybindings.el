@@ -64,7 +64,7 @@
 				;; "h" 'evil-backward-char
 				[remap org-beginning-of-line] 'evil-backward-char
 				[remap org-end-of-line] 'evil-forward-char
-				;; "l" 'evil-forward-char
+				"C-c k" 'ramsay/insert-key
 				)
 
 	    (general-define-key :states 'normal
