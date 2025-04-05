@@ -7,18 +7,24 @@
 (use-package lsp-mode
   :ensure t
   :init
+  (use-package lsp-pyright
+    :ensure t
+    :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (lsp))))  ; or lsp-deferred
   (defun lsp-booster--advice-json-parse (old-fn &rest args)
     "Try to parse bytecode instead of json."
     (or
      (when (equal (following-char) ?#)
        (let ((bytecode (read (current-buffer))))
-	 (when (byte-code-function-p bytecode)
+	     (when (byte-code-function-p bytecode)
            (funcall bytecode))))
      (apply old-fn args)))
   (advice-add (if (progn (require 'json)
-			 (fboundp 'json-parse-buffer))
+			             (fboundp 'json-parse-buffer))
                   'json-parse-buffer
-		'json-read)
+		        'json-read)
               :around
               #'lsp-booster--advice-json-parse)
 
@@ -35,30 +41,30 @@
               (setcar orig-result command-from-exec-path))
             (message "Using emacs-lsp-booster for %s!" orig-result)
             (cons "emacs-lsp-booster" orig-result))
-	orig-result)))
+	    orig-result)))
   (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
   ;; Configure LSP to use Corfu completion
   (setq lsp-completion-provider :none)
   :hook ((python-mode . lsp)
-	 (python-ts-mode . lsp)
-	 (typescript-ts-mode . lsp)
-	 (typescript-ts-base-mode . lsp)
-	 (ruby-mode . lsp)
-	 (ruby-ts-mode . lsp)
-	 (rust-mode . lsp)
-	 (rust-ts-mode . lsp)
-	 (shell-mode . lsp)
-	 (js-mode . lsp)
-	 (js-ts-mode . lsp)
-	 (c++-mode . lsp)
-	 (c++-ts-mode . lsp)
-	 (go-mode . lsp)
-	 (go-ts-mode . lsp)
-	 (c-mode . lsp)
-	 (c-ts-mode . lsp)
+	     (python-ts-mode . lsp)
+	     (typescript-ts-mode . lsp)
+	     (typescript-ts-base-mode . lsp)
+	     (ruby-mode . lsp)
+	     (ruby-ts-mode . lsp)
+	     (rust-mode . lsp)
+	     (rust-ts-mode . lsp)
+	     (shell-mode . lsp)
+	     (js-mode . lsp)
+	     (js-ts-mode . lsp)
+	     (c++-mode . lsp)
+	     (c++-ts-mode . lsp)
+	     (go-mode . lsp)
+	     (go-ts-mode . lsp)
+	     (c-mode . lsp)
+	     (c-ts-mode . lsp)
          ;; if you want which-key integration
-	 (lsp-mode . lsp-enable-which-key-integration)
-	 )
+	     (lsp-mode . lsp-enable-which-key-integration)
+	     )
   :commands lsp)
 
 ;;; C family
@@ -83,9 +89,9 @@
 (use-package cmake-mode
   :ensure t
   :mode (
-	 ("CMakeLists\\.txt\\'" . cmake-mode)
-	 ("\\.cmake\\'" . cmake-mode)
-	 ))
+	     ("CMakeLists\\.txt\\'" . cmake-mode)
+	     ("\\.cmake\\'" . cmake-mode)
+	     ))
 
 (require 'compile)
 ;;; Translate ANSI escape sequence
@@ -95,8 +101,8 @@
 (defun ramsay/run-with-python ()
   "Set the default \"compile-command\" to run the current file with python."
   (setq-local compile-command
-	      (concat "python3 " (when buffer-file-name
-				   (shell-quote-argument buffer-file-name)))))
+	          (concat "python3 " (when buffer-file-name
+				                   (shell-quote-argument buffer-file-name)))))
 (add-hook 'python-base-mode-hook 'ramsay/run-with-python)
 (defun ramsay/compile-rust ()
   "Set the default \"compile-command\" for Rust project."
@@ -121,8 +127,8 @@
   (defun python-shell-completion-native-try ()
     "Return non-nil if can trigger native completion."
     (let ((python-shell-completion-native-enable t)
-	  (python-shell-completion-native-output-timeout
-	   python-shell-completion-native-try-output-timeout))
+	      (python-shell-completion-native-output-timeout
+	       python-shell-completion-native-try-output-timeout))
       (python-shell-completion-native-get-completions
        (get-buffer-process (current-buffer))
        nil "_")))
@@ -135,9 +141,9 @@
       
       ;; Check common locations in project root and home directory
       (dolist (location common-venv-locations)
-	(dolist (name common-venv-names)
+	    (dolist (name common-venv-names)
           (let ((full-path (expand-file-name name location)))
-	    (when (file-directory-p full-path)
+	        (when (file-directory-p full-path)
               (push full-path potential-paths)))))
       
       ;; Return found paths
@@ -147,21 +153,21 @@
     "Interactively select a virtualenv and write pyrightconfig.json."
     (interactive)
     (let* ((project-root (or (vc-git-root default-directory)
-			     default-directory))
+			                 default-directory))
            (venv-paths (ramsay/pyrightconfig-find-venv-directories project-root))
            (selected-venv
-	    (completing-read
-	     "Select virtual environment: "
-	     (append venv-paths
-		     ;; Add option to specify custom path
-		     '("[Custom path...]"))
-	     nil t)))
+	        (completing-read
+	         "Select virtual environment: "
+	         (append venv-paths
+		             ;; Add option to specify custom path
+		             '("[Custom path...]"))
+	         nil t)))
       
       (if (string= selected-venv "[Custom path...]")
           ;; If custom path selected, call original function
           (call-interactively #'ramsay/pyrightconfig-write)
-	;; Otherwise use selected path
-	(ramsay/pyrightconfig-write selected-venv))))
+	    ;; Otherwise use selected path
+	    (ramsay/pyrightconfig-write selected-venv))))
 
   ;; Derived from https://robbmann.io/posts/emacs-eglot-pyrightconfig/
   (defun ramsay/pyrightconfig-write (virtualenv)
@@ -196,7 +202,7 @@
   :ensure t
   :defer t
   :init (progn
-	  (add-hook 'rust-mode-hook 'cargo-minor-mode)))
+	      (add-hook 'rust-mode-hook 'cargo-minor-mode)))
 
 (defvar ramsay/cargo-process--command-script "script")
 (defun ramsay/cargo-process-script ()
@@ -233,17 +239,17 @@
   :ensure t
   :diminish paredit-mode
   :init (progn
-	  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-	  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-	  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-	  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-	  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-	  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-	  (add-hook 'racket-mode-hook           #'enable-paredit-mode)
+	      (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+	      (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+	      (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+	      (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+	      (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+	      (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+	      (add-hook 'racket-mode-hook           #'enable-paredit-mode)
           ;;; Auto complete pair symbol, such as `()`, `{}`
-	  (dolist (hook '(emacs-lisp-mode-hook lisp-mode-hook scheme-mode-hook lisp-interaction-mode-hook python-mode-hook rust-mode-hook c++-mode-hook racket-mode-hook))
- 	    (add-hook hook 'electric-pair-mode))
-	  )
+	      (dolist (hook '(emacs-lisp-mode-hook lisp-mode-hook scheme-mode-hook lisp-interaction-mode-hook python-mode-hook rust-mode-hook c++-mode-hook racket-mode-hook))
+ 	        (add-hook hook 'electric-pair-mode))
+	      )
   )
 
 (use-package js2-mode
@@ -254,25 +260,25 @@
 (use-package web-mode
   :ensure t
   :mode (
-	 ".erb$"
-	 ".phtml$"
-	 ".php$"
-	 ".[agj]sp$"
-	 ".as[cp]x$"
-	 ".mustache$"
-	 ".djhtml$"
-	 )
+	     ".erb$"
+	     ".phtml$"
+	     ".php$"
+	     ".[agj]sp$"
+	     ".as[cp]x$"
+	     ".mustache$"
+	     ".djhtml$"
+	     )
   :init
   (setq web-mode-extra-snippets
-	'(("erb" . (("toto" . "<% toto | %>\n\n<% end %>")))
+	    '(("erb" . (("toto" . "<% toto | %>\n\n<% end %>")))
           ("php" . (("dowhile" . "<?php do { ?>\n\n<?php } while (|); ?>")
                     ("debug" . "<?php error_log(__LINE__); ?>")))
-	  ))
+	      ))
   (setq web-mode-extra-auto-pairs
-	'(("erb"  . (("beg" "end")))
+	    '(("erb"  . (("beg" "end")))
           ("php"  . (("beg" "end")
                      ("beg" "end")))
-	  ))
+	      ))
   )
 
 (use-package go-mode
@@ -288,6 +294,7 @@
   (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
   (add-hook 'js2-mode-hook 'emmet-mode)
   (add-hook 'rjsx-mode-hook 'emmet-mode)
+  (add-hook 'js-ts-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
   )
 
@@ -308,7 +315,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :if (or (memq window-system '(mac ns x))
-	  (daemonp))
+	      (daemonp))
   :init
   (setq exec-path-from-shell-debug t)
   (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PATH" "PYTHONPATH" "GOPATH" "GOROOT"))

@@ -81,7 +81,7 @@
 	      (setq org-adapt-indentation t)
 
 	      (setq org-todo-keywords
-		    '((sequence "TODO" "DOING(!)" "|" "DONE(!)" "CANCELED(!)")))
+		    '((sequence "TODO" "DOING(!)" "|" "DONE(!)" "CANCELLED(!)")))
 
 	      (setq org-todo-keyword-faces
 		    '(

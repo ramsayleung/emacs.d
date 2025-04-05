@@ -20,7 +20,7 @@
   (interactive)
   (let* ((history-file (expand-file-name "~/.zsh_history"))
          (current-mod-time (and (file-exists-p history-file)
-				(file-attribute-modification-time
+				                (file-attribute-modification-time
                                  (file-attributes history-file)))))
     (when (and current-mod-time
                (or (null ramsay/zsh-history-last-modified)
@@ -42,20 +42,20 @@
   (require 'em-hist)
   (save-excursion
     (let* ((start-pos (eshell-beginning-of-input))
-	   (input (eshell-get-old-input))
-	   (esh-history (when (> (ring-size eshell-history-ring) 0)
-			  (ring-elements eshell-history-ring)))
-	   (all-shell-history (append esh-history (ramsay/parse-zsh-history)))
-	   )
-      (if (not all-shell-history)
-	  (message "No shell history available.")
-	(let* ((command (completing-read "Command: "
-					 (seq-uniq all-shell-history)
-					 nil nil input))
+	       (input (eshell-get-old-input))
+	       (esh-history (when (> (ring-size eshell-history-ring) 0)
+			              (ring-elements eshell-history-ring)))
+	       (all-shell-history (append esh-history (ramsay/parse-zsh-history)))
 	       )
-	  (eshell-kill-input)
-	  (insert command)
-	  ))))
+      (if (not all-shell-history)
+	      (message "No shell history available.")
+	    (let* ((command (completing-read "Command: "
+					                     (seq-uniq all-shell-history)
+					                     nil nil input))
+	           )
+	      (eshell-kill-input)
+	      (insert command)
+	      ))))
   ;; move cursor to eol
   (end-of-line))
 
@@ -70,6 +70,8 @@
   :commands (eshell shell-pop)
   :init
   (setq
+   ;; prevent eshell automatically change working dir
+   shell-pop-autocd-to-working-dir nil
    eshell-highlight-prompt nil
    eshell-buffer-shorthand t
    eshell-history-size 50000
@@ -85,9 +87,9 @@
    )
   ;; Visual commands
   (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
-				 "ncftp" "pine" "tin" "trn" "elm" "vim"
-				 "nmtui" "alsamixer" "htop" "el" "elinks"
-				 ))
+				                 "ncftp" "pine" "tin" "trn" "elm" "vim"
+				                 "nmtui" "alsamixer" "htop" "el" "elinks"
+				                 ))
   (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
   (require 'esh-mode) ; eshell-mode-map
   :config
@@ -105,10 +107,10 @@
            (dir-formatted (propertize dir 'face '(:foreground "gray")))
            (git-root (vc-git-root dir))
            (git-branch (when git-root
-			 (vc-git--symbolic-ref git-root)))
+			             (vc-git--symbolic-ref git-root)))
            (dirty (when git-root
                     (if (vc-git-state dir)
-			"*"
+			            "*"
                       ""))))
       (concat
        user "@" host " "
@@ -119,8 +121,8 @@
             (propertize (format "[%s" git-branch) 'face '(:foreground "green"))
             (propertize (format "%s" dirty) 'face '(:foreground "red"))
             (propertize "]" 'face '(:foreground "green"))
-	    )
-	 "")
+	        )
+	     "")
        "\n"
        (propertize "->" 'face '(:foreground "green"))
        (propertize " " 'face 'default))))
