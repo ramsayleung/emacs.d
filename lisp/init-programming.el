@@ -13,6 +13,7 @@
     :hook (python-mode . (lambda ()
                            (require 'lsp-pyright)
                            (lsp))))  ; or lsp-deferred
+  ;; Use lsp-booster to improve LSP performance
   (defun lsp-booster--advice-json-parse (old-fn &rest args)
     "Try to parse bytecode instead of json."
     (or
@@ -43,8 +44,7 @@
             (cons "emacs-lsp-booster" orig-result))
 	    orig-result)))
   (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
-  ;; Configure LSP to use Corfu completion
-  (setq lsp-completion-provider :none)
+  (setq lsp-modeline-diagnostics-enable -1)
   :hook ((python-mode . lsp)
 	     (python-ts-mode . lsp)
 	     (typescript-ts-mode . lsp)

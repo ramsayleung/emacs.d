@@ -56,8 +56,7 @@
 				"s" '(:ignore t :which-key "search")
 				"s g" 'counsel-grep
 				"s r" 'counsel-rg
-				"s s" 'isearch-forward
-				"1"  'ace-window)
+				"s s" 'isearch-forward)
 
 	    (general-define-key :states '(normal visual motion)
 				:keymaps 'org-mode-map
@@ -68,7 +67,7 @@
 				)
 
 	    (general-define-key :states 'normal
-				:keymaps 'org-mode-map
+			:keymaps 'org-mode-map
 				"TAB" 'org-cycle
 				"t" 'org-todo)
 	    ;; Rust mode
@@ -94,7 +93,7 @@
 				)
 
 	    (general-define-key :keymaps 'smerge-mode-map
-				"C-c ^ ^" 'hydra-smerge/body)
+				"C-c ^" 'hydra-smerge/body)
 
 	    ;; profiler-report-mode
 	    (general-define-key :keymaps 'profiler-report-mode-map
@@ -111,7 +110,8 @@
 	    (general-define-key
 	     "C-`" 'shell-pop
 	     "C-s" 'swiper-isearch
-	     "C-x b"  'switch-to-buffer
+	     "C-x b" 'switch-to-buffer
+         "C-x o" 'ace-window
 	     "C-x C-b" 'ibuffer
 	     "C-x C-r" 'counsel-recentf
 	     "C-x C-f" 'counsel-find-file
@@ -126,7 +126,6 @@
 	     "C-c l" 'org-store-link
 	     "C-c n" 'ramsay/empty-buffer
 	     "C-c t d" 'gts-do-translate
-	     "C-c w" 'hydra-window-resize/body
 	     "C-c p" '(:ignore t :which-key "paredit")
 	     "C-c p (" 'paredit-wrap-round
 	     "C-c p [" 'paredit-wrap-square
@@ -142,6 +141,7 @@
 	     "C-x u" 'undo-tree-visualize
 	     "C-x 2" 'ramsay/split-window-below-and-move
 	     "C-x 3" 'ramsay/split-window-right-and-move
+         "C-x w d" 'hydra-window/body
 	     "S-<f6>" 'eglot-rename
 	     )
 
@@ -259,14 +259,30 @@ _k_: down      _a_: combine       _q_: quit
 
 	    (define-key Info-mode-map (kbd "?") #'hydra-info/body)
 
-	    (defhydra hydra-window-resize ()
-	      "Window resize"
-	      ("l" shrink-window-horizontally "shrink-right-window")
-	      ("h" enlarge-window-horizontally "shrink-left-windo")
-	      ("k" enlarge-window "shrink-up-window")
-	      ("j" shrink-window "shrink-below-window")
-	      ("q" nil "quit" :exit t)
-	      )
+(defhydra hydra-window (:color pink :hint nil :timeout 20)
+"
+          Move                        Resize                Operation
+-------------------------------------------------------------------------
+         ^_<up>_^                    ^_M-<up>_^             
+          ^^▲^^                         ^^▲^^               
+ _<left>_ ◀   ▶ _<right>_    _M-<left>_ ◀   ▶ _M-<right>_   delete: [_d_]
+          ^^▼^^                         ^^▼^^               quit: [_q_]  
+        ^_<down>_^                  ^_M-<down>_^            
+"
+  ("<left>" windmove-left)
+  ("<down>" windmove-down)
+  ("<up>" windmove-up)
+  ("<right>" windmove-right)
+  ("d" delete-window)
+  ("h" windmove-left)
+  ("j" windmove-down)
+  ("k" windmove-up)
+  ("l" windmove-right)
+  ("M-<left>" enlarge-window-horizontally)
+  ("M-<right>" shrink-window-horizontally)
+  ("M-<up>" shrink-window)
+  ("M-<down>" enlarge-window)
+  ("q" nil :exit t))
 	    )
   )
 
