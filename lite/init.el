@@ -211,19 +211,13 @@
   ;; Number of result lines to display, set height as width-body-height/2
   (setq ivy-height 25))
 
-(use-package acme-theme
-  :ensure t
-  :init
-  :defer t)
-
 ;;; Disable theme before load a new theme
 (defadvice load-theme
     (before theme-dont-propagate activate)
   "Disable theme before load theme."
   (mapc #'disable-theme custom-enabled-themes))
 
-;; (load-theme 'modus-operandi t)
-(load-theme 'acme t)
+(load-theme 'modus-operandi t)
 
 ;;; Use default line-number-mode instead of nlinum or linum (require Emacs >= 26).
 ;; (setq-default display-line-numbers-width 1)
