@@ -26,10 +26,9 @@
      ;; "com.sogou.inputmethod.sogouWB.wubi" => "wubi"
      "im.rime.inputmethod.Squirrel.Hans"
      ))
-
   ;; enable the /cursor color/ mode
   (sis-global-cursor-color-mode t)
-  (setq sis-default-cursor-color nil)
+  (setq sis-default-cursor-color (frame-parameter nil 'cursor-color))
   (setq sis-other-cursor-color "#FF2121")
   ;; enable the /respect/ mode
   (sis-global-respect-mode t)

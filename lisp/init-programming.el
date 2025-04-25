@@ -44,7 +44,9 @@
             (cons "emacs-lsp-booster" orig-result))
 	    orig-result)))
   (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
-  (setq lsp-modeline-diagnostics-enable -1)
+  (setq lsp-modeline-diagnostics-enable nil)
+  ;; Configure LSP to use Corfu completion
+  (setq lsp-completion-provider :none)
   :hook ((python-mode . lsp)
 	     (python-ts-mode . lsp)
 	     (typescript-ts-mode . lsp)
