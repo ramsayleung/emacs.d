@@ -204,8 +204,9 @@
 (diminish-minor-mode 'auto-revert 'auto-revert-mode)
 (diminish-minor-mode 'simple 'auto-fill-function )
 (diminish-minor-mode 'eldoc 'eldoc-mode)
-(diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
-(diminish-major-mode 'lisp-interaction-mode-hook "Lisp")
+(diminish-major-mode 'emacs-lisp-mode-hook "Eλ")
+(diminish-major-mode 'typescript-ts-mode-hook "TS")
+(diminish-major-mode 'lisp-interaction-mode-hook "λ")
 (diminish-major-mode 'python-mode-hook "Py")
 
 (message "loading init-ui")

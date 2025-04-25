@@ -44,6 +44,8 @@
             (cons "emacs-lsp-booster" orig-result))
 	    orig-result)))
   (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
+  ;; "λ" "+-"
+  (setq lsp-modeline-code-action-fallback-icon "+-")
   (setq lsp-modeline-diagnostics-enable nil)
   ;; Configure LSP to use Corfu completion
   (setq lsp-completion-provider :none)

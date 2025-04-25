@@ -6,7 +6,6 @@
   :ensure t
   :demand t
   :config
-  (setq flycheck-mode-line-prefix "FC")
   (global-flycheck-mode t))
 
 (use-package flycheck-rust
