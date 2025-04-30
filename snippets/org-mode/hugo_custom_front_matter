@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Hugo Custom Front Matter
+# key: fm
+# --
+#+HUGO_CUSTOM_FRONT_MATTER: $0
