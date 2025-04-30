@@ -6,9 +6,9 @@
 (use-package evil
   :ensure t
   :demand t
-  :init (progn
-	      (setq evil-respect-visual-line-mode t)
-	      (setq evil-want-C-u-scroll t))
+  :init
+  (setq evil-respect-visual-line-mode t)
+  (setq evil-want-C-u-scroll t)
   :config
   (evil-mode t)
   (setq evil-default-state 'emacs)
@@ -27,9 +27,9 @@
 
 (use-package evil-surround
   :ensure t
-  :init(progn
-	     (global-evil-surround-mode t)
-	     ))
+  :init
+  (global-evil-surround-mode t)
+  )
 
 (message "loading init-evil")
 (provide 'init-evil)

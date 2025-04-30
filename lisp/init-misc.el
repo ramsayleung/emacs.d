@@ -46,7 +46,7 @@ The buffer is not associated with a file."
   "Kill all other buffers but current one and *scratch*."
   (interactive)
   (mapc 'kill-buffer
-	(delq "*scratch*"(delq (current-buffer) (buffer-list)))))
+	    (delq "*scratch*"(delq (current-buffer) (buffer-list)))))
 
 ;; from magnars
 (defun ramsay/delete-current-buffer-file ()
@@ -97,12 +97,12 @@ The buffer is not associated with a file."
   (interactive)
   (save-excursion
     (if (region-active-p)
-	(progn
-	  (indent-region (region-beginning) (region-end))
-	  (message "Indented selected region"))
+	    (progn
+	      (indent-region (region-beginning) (region-end))
+	      (message "Indented selected region"))
       (progn
-	(indent-region (point-min) (point-max))
-	(message "Indented buffer")))))
+	    (indent-region (point-min) (point-max))
+	    (message "Indented buffer")))))
 (message "loading init-misc")
 (provide 'init-misc)
 ;;; init-misc.el ends here

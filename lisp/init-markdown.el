@@ -12,7 +12,7 @@
          ("\\.markdown\\'" . markdown-mode))
 
   :init
-	(setq markdown-fontify-code-blocks-natively t))
+  (setq markdown-fontify-code-blocks-natively t))
 
 (message "loading init-markdown")
 (provide 'init-markdown)

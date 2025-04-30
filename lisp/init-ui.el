@@ -6,8 +6,6 @@
 (setq case-fold-search t)
 
 ;;; language
-;;; always split windows horizontally rather than vertically
-;; (setq split-height-threshold nil)
 (setq current-language-environment "English")
 
 ;; popwin is a popup window manager for Emacs which makes you free from the hell

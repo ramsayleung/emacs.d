@@ -47,7 +47,7 @@
 (defun ramsay/intercepted-by-gfw-p (&optional host)
   "Check if intercepted by GFW with HOST."
   (not (= 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1"
-			  (if host host "www.google.com")))))
+			              (if host host "www.google.com")))))
 
 (if (ramsay/intercepted-by-gfw-p)
     ;; Use mirror if it's in China.
@@ -55,7 +55,7 @@
                              ("melpa" . "http://1.15.88.122/melpa/")))
   (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                            ("melpa" . "https://melpa.org/packages/")
-			   ("nongnu" . "https://elpa.nongnu.org/nongnu/"))))
+			               ("nongnu" . "https://elpa.nongnu.org/nongnu/"))))
 
 (setq gc-cons-threshold (* 128 1024 1024))
 ;;; Prompt Emacs to GC whenever it loses focus

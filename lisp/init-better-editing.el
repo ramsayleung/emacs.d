@@ -15,7 +15,6 @@
   :diminish which-key-mode
   :init
   (setq which-key-idle-delay 0.3)
-  (setq which-key-enable-extended-define-key t)
   (which-key-mode t)
   )
 
@@ -68,25 +67,6 @@
   (split-window-below)
   (other-window 1)
   )
-
-;;; http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html
-;;; Copy and Paste in x system in all platform
-(use-package simpleclip
-  :ensure t
-  :config(progn
-	   (defun ramsay/copy-to-x-clipboard ()
-	     (interactive)
-	     (let ((thing (if (region-active-p)
-			      (buffer-substring-no-properties (region-beginning) (region-end))
-			    (thing-at-point 'symbol))))
-	       (simpleclip-set-contents thing)
-	       (message "thing => clipboard!")))
-
-	   (defun ramsay/paste-from-x-clipboard()
-	     "Paste string clipboard"
-	     (interactive)
-	     (insert (simpleclip-get-contents)))
-	   ))
 (message "loading init-better-editing")
 (provide 'init-better-editing)
 ;;; init-better-editing.el ends here

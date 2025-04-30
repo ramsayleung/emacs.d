@@ -1,7 +1,6 @@
 ;;; package --- Summary -*- lexical-binding: t -*-
 ;;; code:
 ;;; Commentary:
-;;; 智能中英文切换
 (use-package sis
   :ensure t
   ;; :hook
@@ -11,7 +10,7 @@
 
   :config
   ;; For Linux
-  (when  (ramsay/linux-p)
+  (when (ramsay/linux-p)
     (sis-ism-lazyman-config "1" "2" 'fcitx5))
   ;; For MacOS
   (when (ramsay/mac-os-p)
@@ -37,9 +36,6 @@
   ;; enable the /inline english/ mode for all buffers
   (sis-global-inline-mode t)
   )
-;;; Adds hook to find-files-hook
-(auto-insert-mode t)
-(setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
 
 (message "loading init-chinese")
 (provide 'init-chinese)

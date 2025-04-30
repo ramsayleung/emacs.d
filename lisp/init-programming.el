@@ -304,7 +304,6 @@
 
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode . " Yas")
   :commands (yas-expand-snippet yas-insert-snippet yas-new-snippet)
   :hook
   (org-mode . yas-minor-mode)
