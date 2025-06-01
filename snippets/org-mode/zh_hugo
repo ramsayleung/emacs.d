@@ -12,5 +12,6 @@
 #+TITLE: $1
 #+HUGO_TAGS: $2
 #+HUGO_CATEGORIES: 
+#+HUGO_CUSTOM_FRONT_MATTER: :showQuote true
 
 $0
