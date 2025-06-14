@@ -1,26 +1,50 @@
-* Introduction
-  I was a vimer before, I used the best editor in this planet. One day, a guy
-  told me that there is also an awesome editor here, which is better than Vim/Vi
-  (IMO, In some way, I don't want to start a holy war). What always convinced me
-  is that Vim is the best, but action is loader than words. I could only defeat
-  this guy that Vim is best after I try Emacs. Finally, I try Emacs for half of
-  a year and I turn to be an Emacser :)
-* Install
-  Before install this .emacs.d, make sure you have backup your configuration.
-  #+BEGIN_SRC shell
+#+TITLE: My Emacs.d: A Decade of Evil-Driven Productivity
+#+AUTHOR: Ramsay Leung
+#+EMAIL: ramsayleung@gmail.com
+#+DATE: 2017-02-08 Wed 02:05
+A personal Emacs configuration refined over nearly 10 years, combining Vim's modal editing efficiency with Emacs's unparalleled extensibility.
+
+* Philosophy & Background
+  - Starting as a Vim user, I was drawn to Emacs for its extensibility and have been refining this configuration for almost a decade. While I use IntelliJ IDEA and VS Code for professional Java/Rust work, Emacs remains my go-to for side projects (Rust, Python, Ruby, TypeScript) and all writing tasks.
+
+  - My workflow centers around =org-mode= for blogging (published to [[https://github.com/ramsayleung/ramsayleung.github.io][GitHub Pages]] via =ox-hugo= and Hugo) and =Magit= for version control—both have become indispensable extensions of my workflow. The configuration has evolved from vanilla Emacs to Spacemacs and back, ultimately embracing the philosophy: *keep it simple, usable, and productive.*
+
+* Key Features
+
+  - *Evil Mode*: Vim keybindings and modal editing at the core
+  - *Org-mode Mastery*: Complete blogging workflow from drafting to publishing
+  - *Magit Integration*: Seamless Git operations deeply integrated into the editing flow
+  - *Multi-language Support*: Robust development environment for various programming languages
+  - *Extensive Snippets*: =yasnippet= templates for 15+ languages (C++, Python, Rust, JavaScript, etc.)
+  - *Modular Architecture*: Organized into logical components covering:
+    - Auto-completion and syntax checking
+    - Ivy for efficient navigation
+    - Enhanced editing behaviors
+    - Shell integration (Eshell)
+    - Custom keybindings
+    - UI refinements
+
+* Quick Start
+
+  #+BEGIN_SRC bash
     git clone https://github.com/ramsayleung/emacs.d.git ~/.emacs.d
   #+END_SRC
-* Features
-** Evil
-   Even though I am an Emacser now, I have to admit that the way Vim edit file
-   is the most efficent way, so there is no need to give it up. By the way, it
-   is said that Emacs is "a great operating system, lacking only a decent
-   ediotr", now I have Evil, I have them both.
-** Company
-   As for the completion framework, my choice is company-mode. Althoug
-   auto-complete has better document, but company is easier to setup and less
-   brittle
-* ScreenShot
-  [[./images/emacs.png]]
-* Reference
-  [[http://coldnew.github.io/coldnew-emacs/]]
+
+  Launch Emacs—it will automatically set up the environment and download packages on first run.
+
+  *Note*: This is a personal configuration. Explore and adapt it to your needs!
+
+* Essential Keybindings
+
+  - =C-x C-f=: Open files (with Ivy completion)
+  - Vim keybindings via Evil mode, leader-key =Space=
+  - =C-x g=: Magit status
+  - Standard Org-mode workflows for =.org= files
+
+* Screenshot
+  [[file:images/emacs20250614.jpg]]
+
+  [[file:images/emacs-racket-mode.jpg]]
+
+  [[file:images/emacs-js-with-org-mode.jpg]]
+  
