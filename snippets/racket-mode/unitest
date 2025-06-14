@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: test
+# key: test
+# --
+
+(module+ test
+  (require rackunit)
+
+  (test-case "Test for $1"
+             ($2))
+  )

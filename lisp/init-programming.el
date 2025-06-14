@@ -66,6 +66,7 @@
 	     (go-ts-mode . lsp)
 	     (c-mode . lsp)
 	     (c-ts-mode . lsp)
+         (racket-mode . lsp)
          ;; if you want which-key integration
 	     (lsp-mode . lsp-enable-which-key-integration)
 	     )

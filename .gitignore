@@ -44,3 +44,4 @@ transient/
 history
 org-persist/
 /tree-sitter/
+/racket-mode/input-history-Racket-REPL
