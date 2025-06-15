@@ -48,3 +48,4 @@ A personal Emacs configuration refined over nearly 10 years, combining Vim's mod
 
   [[file:images/emacs-js-with-org-mode.jpg]]
   
+  [[file:images/emacs-eshell.jpg]]
