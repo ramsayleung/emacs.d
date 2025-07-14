@@ -1,19 +1,8 @@
 alias rmds find . -name '*.dSYM' -type d -print | xargs -I '{}' rm -rf '{}'
 alias fow find-file-other-window nil
-alias ff find-file-other-window $1
+alias ff find-file $1
 alias dow dired-other-window $1
 alias cbd cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug . $1
-alias dnfi sudo dnf install $1
-alias z ramsay/eshell-fasd-z $1
-alias zz fasd_cd -d -i # cd with interactive selection
-alias sf fasd -sif     # interactive file selection
-alias sd fasd -sid     # interactive directory selection
-alias f fasd -f        # file
-alias d fasd -d        # directory
-alias s fasd -si       # s'how / search / select
-alias a fasd -a        # any
-alias a fasd -a
-alias dnfu sudo dnf update
 alias ll ls -al
 alias cclean cmake --build . --target clean -j 4
 alias cbuild cmake --build . -j 8

@@ -6,6 +6,9 @@
 ;;; LSP
 (use-package lsp-mode
   :ensure t
+  :custom
+  (lsp-completion-filter-on-incomplete nil)  ; "LSP server, send me everything"
+  (lsp-completion-no-cache t)                ; "Don't cache, I want fresh results"
   :init
   (use-package lsp-pyright
     :ensure t
@@ -70,6 +73,15 @@
          ;; if you want which-key integration
 	     (lsp-mode . lsp-enable-which-key-integration)
 	     )
+  :config
+  ;; Configure strict prefix matching for LSP buffers
+  (defun ramsay-lsp-strict-completion ()
+    ;; "Emacs, filter with exact prefix"
+    (setq-local completion-styles '(basic))
+    (setq-local completion-category-overrides
+                '((lsp-capf (styles basic partial-completion)))))
+  
+  (add-hook 'lsp-completion-mode-hook #'ramsay-lsp-strict-completion)
   :commands lsp)
 
 ;;; C family

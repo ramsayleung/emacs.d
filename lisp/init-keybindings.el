@@ -6,7 +6,6 @@
   :config (progn
 	    (general-evil-setup t)
 	    (defvar ramsay/leader-key "SPC") ;
-	    (defvar ramsay/second-leader-key "/")
 	    (general-define-key :states '(normal visual motion )
 				:prefix ramsay/leader-key
 				"" nil
