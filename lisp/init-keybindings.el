@@ -122,7 +122,7 @@
 	     "C-c a" 'org-agenda
 	     "C-c c" 'compile
 	     "C-c l" 'org-store-link
-	     "C-c n" 'ramsay/empty-buffer
+         "C-c r" 'grep
 	     "C-c t d" 'gts-do-translate
 	     "C-c p" '(:ignore t :which-key "paredit")
 	     "C-c p (" 'paredit-wrap-round

@@ -36,12 +36,6 @@
 ;;; disable `ad-handle-definition: ‘bookmark-jump’ got redefined` warning.
 (setq ad-redefinition-action 'accept)
 
-(defun ramsay/empty-buffer ()
-  "Open a new clean window with a buffer named untitled<N>.
-The buffer is not associated with a file."
-  (interactive)
-  (switch-to-buffer-other-window (generate-new-buffer "untitled")))
-
 (defun ramsay/kill-other-buffers ()
   "Kill all other buffers but current one and *scratch*."
   (interactive)

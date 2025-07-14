@@ -129,6 +129,8 @@
 ;;; Pair with "rg --no-heading"
 (add-to-list 'compilation-error-regexp-alist-alist
              '(rg "^\\(.+?\\):\\([0-9]+\\):" 1 2))
+(setq grep-command "rg --no-heading --color=always ")
+(setq grep-use-null-device nil)
 
 ;;; Python
 ;; Code navigation,documentation lookup and completing for python
