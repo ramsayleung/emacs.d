@@ -195,7 +195,11 @@
 				                     suffix
 				                     "."
 				                     (file-name-extension (file-name-nondirectory md-path))))
-	       (link_mapping_path (concat (file-name-as-directory (file-name-directory buffer-file-name)) "link_mapping.txt")))
+           (global-link_mapping (expand-file-name "~/btsync/org/blog/link_mapping.txt"))
+	       (link_mapping_path
+            (if (file-exists-p global-link_mapping)
+                global-link_mapping
+              (concat (file-name-as-directory (file-name-directory buffer-file-name)) "link_mapping.txt"))))
       (message link_mapping_path)
       (shell-command-to-string (concat "sh " script-path " " md-path " " output-file-path " " link_mapping_path))
 
