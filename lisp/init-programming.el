@@ -336,8 +336,7 @@
 	      (daemonp))
   :init
   (setq exec-path-from-shell-debug t)
-  (setq exec-path-from-shell-variables '("RUST_SRC_PATH" "PATH" "PYTHONPATH" "GOPATH" "GOROOT"))
-  (setq exec-path-from-shell-arguments '("-l")) ;remove -i read form .zshenv
+  :config
   (exec-path-from-shell-initialize)
   )
 
