@@ -23,12 +23,12 @@
               ([remap evil-complete-previous] . corfu-previous)
               ("S-TAB"      . corfu-previous)
               ([backtab]    . corfu-previous)
-              ("RET" . corfu-insert)
-	          )  :init
+	          )
+  :init
   (global-corfu-mode)
   (corfu-history-mode)
-  ;; Popup completion info
-  (corfu-popupinfo-mode))
+  )
+
 
 (use-package corfu-terminal
   :init (ramsay/vc-install :fetcher "codeberg" :repo "akib/emacs-corfu-terminal")
