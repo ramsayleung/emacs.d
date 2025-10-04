@@ -207,6 +207,7 @@
   :ensure t
   :init
   (setq rust-mode-treesitter-derive t)
+  (setq rust-rustfmt-switches '("--edition" "2024"))
   )
 
 (use-package toml-mode
