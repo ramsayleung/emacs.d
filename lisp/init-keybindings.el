@@ -69,27 +69,6 @@
 			:keymaps 'org-mode-map
 				"TAB" 'org-cycle
 				"t" 'org-todo)
-	    ;; Rust mode
-	    (general-define-key :states '(normal visual motion)
-				:keymaps 'rust-mode-map
-				:prefix ramsay/leader-key
-				"m c ." 'cargo-process-repeat
-				"m c c" 'cargo-process-build
-				"m c C" 'cargo-process-clean
-				"m c d" 'cargo-process-doc
-				"m c f" 'cargo-process-current-test
-				"m c i" 'cargo-process-init
-				"m c k" 'cargo-process-check
-				"m c l" 'cargo-process-clippy
-				"m c n" 'cargo-process-new
-				"m c o" 'cargo-process-current-file-tests
-				"m c r" 'ramsay/cargo-process-script
-				"m c s" 'cargo-process-search
-				"m c u" 'cargo-process-update
-				"m c x" 'cargo-process-run
-				"m c X" 'ramsay/cargo-process-run-current-example
-				"m t" 'cargo-process-test
-				)
 
 	    (general-define-key :keymaps 'smerge-mode-map
 				"C-c ^" 'hydra-smerge/body)
@@ -254,8 +233,6 @@ _k_: down      _a_: combine       _q_: quit
 	      ("r" smerge-refine)
 	      ("u" undo)
 	      ("q" nil :exit t))
-
-	    (define-key Info-mode-map (kbd "?") #'hydra-info/body)
 
 (defhydra hydra-window (:color pink :hint nil :timeout 20)
 "

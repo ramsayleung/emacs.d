@@ -224,20 +224,6 @@
   :init (progn
 	      (add-hook 'rust-mode-hook 'cargo-minor-mode)))
 
-(defvar ramsay/cargo-process--command-script "script")
-(defun ramsay/cargo-process-script ()
-  "Run cargo script command to compile and run a single file."
-  (interactive)
-  (cargo-process--start (concat "Script " (buffer-file-name))
-                        (concat ramsay/cargo-process--command-script
-                                " "
-                                (buffer-file-name))))
-
-(defun ramsay/cargo-process-run-current-example ()
-  "Run current buffer/file as example."
-  (interactive)
-  (cargo-process-run-example (file-name-sans-extension (buffer-name))))
-
 ;;; Lisp and dialect
 (use-package scheme-mode
   ;; I am not sure why `:mode ("\\.rkt\\'" "\\.scm\\'")` doesn't work

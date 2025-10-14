@@ -127,7 +127,6 @@
       mac-command-modifier 'meta
       mac-option-modifier 'none)
 
-
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
   "Create parent directory if not exists while visiting file."
   (unless (file-exists-p filename)
