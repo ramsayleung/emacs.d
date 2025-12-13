@@ -6,6 +6,8 @@
   :ensure t
   :mode ("\\.org\\'" . org-mode)
   :init (progn
+          (use-package ob-mermaid
+            :ensure t)
 	      ;;each time you turn an entry from a TODO (not-done) state
 	      ;;into any of the DONE states, a line ‘CLOSED: [timestamp]’ will
 	      ;;be inserted just after the headline
@@ -120,6 +122,7 @@
 		         (shell . t)
 		         (python . t)
 		         (plantuml . t)
+                 (mermaid . t)
 		         (emacs-lisp . t)
 		         (awk . t)
 		         (sql . t)

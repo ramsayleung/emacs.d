@@ -10,7 +10,6 @@
 				:prefix ramsay/leader-key
 				"" nil
 				";" 'comment-dwim
-				"'" 'shell-pop
 				"." 'ramsay/python-send-repl-echo-switch
 				"a" '(:ignore t :which-key "applications")
 				"a t" '(:ignore t :which-key "translator")
@@ -86,7 +85,7 @@
 				"C-c h p" 'counsel-list-processes
 				)
 	    (general-define-key
-	     "C-`" 'shell-pop
+	     "C-`" 'ramsay/eat-toggle
 	     "C-s" 'swiper-isearch
 	     "C-x b" 'switch-to-buffer
 	     "C-x C-b" 'ibuffer
@@ -119,7 +118,6 @@
 	     "C-x 2" 'ramsay/split-window-below-and-move
 	     "C-x 3" 'ramsay/split-window-right-and-move
          "C-x w d" 'hydra-window/body
-	     "S-<f6>" 'eglot-rename
 	     )
 
 	    (general-define-key :states '(insert normal visual motion)

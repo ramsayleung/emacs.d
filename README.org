@@ -9,20 +9,12 @@ A personal Emacs configuration refined over nearly 10 years, combining Vim's mod
 
   - My workflow centers around =org-mode= for blogging (published to [[https://github.com/ramsayleung/ramsayleung.github.io][GitHub Pages]] via =ox-hugo= and Hugo) and =Magit= for version control—both have become indispensable extensions of my workflow. The configuration has evolved from vanilla Emacs to Spacemacs and back, ultimately embracing the philosophy: *keep it simple, usable, and productive.*
 
-* Key Features
-
-  - *Evil Mode*: Vim keybindings and modal editing at the core
-  - *Org-mode Mastery*: Complete blogging workflow from drafting to publishing
-  - *Magit Integration*: Seamless Git operations deeply integrated into the editing flow
-  - *Multi-language Support*: Robust development environment for various programming languages
-  - *Extensive Snippets*: =yasnippet= templates for 15+ languages (C++, Python, Rust, JavaScript, etc.)
-  - *Modular Architecture*: Organized into logical components covering:
-    - Auto-completion and syntax checking
-    - Ivy for efficient navigation
-    - Enhanced editing behaviors
-    - Shell integration (Eshell)
-    - Custom keybindings
-    - UI refinements
+* What's in the box?
+  - It acts like Vim: I can't live without modal editing, so that’s the foundation.
+  - A full blog publishing workflow: I use this to write and deploy my actual blog.
+  - Git without the pain: Version control is part of the flow, not a separate chore.
+  - Ready to code: I've pre-configured it for languages I use daily (Python, Rust, C++, etc.) with plenty of snippets to save keystrokes.
+  - It's tidy: I hate messy configs, so I've organized everything into logical chunks—from Ivy for navigation to UI tweaks and Eshell integration.
 
 * Quick Start
 

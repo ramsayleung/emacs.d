@@ -9,11 +9,14 @@
   :init
   (setq evil-respect-visual-line-mode t)
   (setq evil-want-C-u-scroll t)
+  (setq evil-default-state 'emacs)
   :config
   (evil-mode t)
-  (setq evil-default-state 'emacs)
   (dolist (mode '(mhtml-mode css-mode text-mode markdown-mode org-mode prog-mode fundamental-mode conf-unix-mode))
     (add-to-list 'evil-normal-state-modes mode))
+
+  (dolist (mode '(help-mode Info-mode))
+    (evil-set-initial-state mode 'emacs))
 
 ;;; modify evil-state-tag
   (setq evil-normal-state-tag   (propertize "[Normal]")

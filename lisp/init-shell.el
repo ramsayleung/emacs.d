@@ -2,12 +2,16 @@
 ;;; code:
 ;;; Commentary:
 
-(use-package shell-pop
+(use-package eat
   :ensure t
-  :custom
-  (shell-pop-shell-type '("eshell" "*eshell*" (lambda () (eshell))))
-  (shell-pop-term-shell "eshell")
-  (shell-pop-window-size 70))
+  :config
+  ;; for zsh-autosuggestions https://codeberg.org/akib/emacs-eat/issues/72
+  (setq eat-term-name "xterm-256color")
+  (defun ramsay/eat-toggle () (interactive)
+         (if (string= (buffer-name) "*eat*")
+             (delete-window)
+           (eat-other-window)))
+  :hook ((eshell-load . eat-eshell-mode)))
 
 (defvar ramsay/zsh-history-cache nil
   "Cache for zsh history commands.")
