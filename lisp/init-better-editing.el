@@ -47,8 +47,17 @@
 (put 'narrow-to-region 'disabled nil)
 
 (require 'recentf)
-(setq recentf-max-saved-items 1000
-      recentf-exclude '("/tmp/" "/ssh:"))
+(setq recentf-max-saved-items 1000)
+;; "Cleanup verification" is the process where recentf-mode checks
+;; whether files in its recent files list still exist on disk, and
+;; removes any that don't, which causes TRAMP to attempt remote connections
+;; Keep TRAMP files without verifying, verify local files normally
+(defun ramsay/recentf-keep-file (file)
+  "Keep TRAMP files without verification, verify local files exist."
+  (or (file-remote-p file)
+      (file-readable-p file)))
+
+(setq recentf-keep '(ramsay/recentf-keep-file))
 (recentf-mode 1)
 
 ;;; Auto-refresh buffers when files have changed on disk
