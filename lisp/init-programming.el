@@ -127,8 +127,9 @@
 (add-hook 'rust-ts-mode-hook 'ramsay/compile-rust)
 (add-to-list 'compilation-error-regexp-alist 'rg)
 ;;; Pair with "rg --no-heading"
+;;; Handle both "file:line:" and "file:line:col:" formats from ripgrep
 (add-to-list 'compilation-error-regexp-alist-alist
-             '(rg "^\\(.+?\\):\\([0-9]+\\):" 1 2))
+             '(rg "^\\([^:]+\\):\\([0-9]+\\):\\(?:\\([0-9]+\\):\\)?\\(.*\\)" 1 2 3))
 (setq grep-command "rg --no-heading --color=always ")
 (setq grep-use-null-device nil)
 

@@ -4,13 +4,18 @@
 
 (use-package eat
   :ensure t
-  :config
-  ;; for zsh-autosuggestions https://codeberg.org/akib/emacs-eat/issues/72
-  (setq eat-term-name "xterm-256color")
+  :init
   (defun ramsay/eat-toggle () (interactive)
          (if (string= (buffer-name) "*eat*")
              (delete-window)
            (eat-other-window)))
+  (setq eat-tramp-shells '(("docker" . "/bin/sh")
+                           ("ssh" . "/usr/bin/zsh")
+                           ("sshx" . "/usr/bin/zsh")
+                           ))
+  :config
+  ;; for zsh-autosuggestions https://codeberg.org/akib/emacs-eat/issues/72
+  (setq eat-term-name "xterm-256color")
   :hook ((eshell-load . eat-eshell-mode)))
 
 (defvar ramsay/zsh-history-cache nil
