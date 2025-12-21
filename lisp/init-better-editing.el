@@ -60,6 +60,12 @@
 (setq recentf-keep '(ramsay/recentf-keep-file))
 (recentf-mode 1)
 
+;; Prevent Tramp hangs
+(setq auto-revert-remote-files nil)           ; Don't auto-revert remote files
+(setq remote-file-name-inhibit-locks t)       ; Don't lock remote files
+(setq remote-file-name-inhibit-cache nil)     ; Cache remote file info
+(setq tramp-verbose 1)                        ; Less verbose (faster)
+
 ;;; Auto-refresh buffers when files have changed on disk
 (global-auto-revert-mode t)
 
