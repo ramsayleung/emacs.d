@@ -15,7 +15,8 @@
   :config
   (popwin-mode t)
   (push '(compilation-mode :noselect t) popwin:special-display-config)
-  (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
+  (push '("*Flycheck errors*" :noselect t) popwin:special-display-config)
+  (push '("*undo-tree*" :width 0.3 :position right) popwin:special-display-config)
   (push "*slime-apropos*" popwin:special-display-config)
   (push "*slime-macroexpansion*" popwin:special-display-config)
   (push "*slime-description*" popwin:special-display-config)
