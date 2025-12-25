@@ -127,17 +127,17 @@
       mac-command-modifier 'meta
       mac-option-modifier 'none)
 
-(defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
+(defun ramsay-create-parent-directory-maybe (orig-fun &rest args)
   "Create parent directory if not exists while visiting file."
-  (unless (file-exists-p filename)
-    (let ((dir (file-name-directory filename)))
-      (unless (file-exists-p dir)
-	(if (y-or-n-p (format "Directory %s does not exist,do you want you create it? " dir))
-	    (progn
-	      (make-directory dir)
-	      )
-	  (keyboard-quit))
-	))))
+  (let ((filename (car args)))
+    (unless (file-exists-p filename)
+      (let ((dir (file-name-directory filename)))
+        (unless (file-exists-p dir)
+          (when (y-or-n-p (format "Directory %s does not exist, do you want to create it? " dir))
+            (make-directory dir t))))))
+  (apply orig-fun args))
+
+(advice-add 'find-file :around #'ramsay-create-parent-directory-maybe)
 
 (use-package ibuffer
   :config

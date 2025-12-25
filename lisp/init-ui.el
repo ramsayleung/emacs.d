@@ -80,11 +80,14 @@
 	         '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-19-*-*-*-m-0-iso10646-1"))
 
 ;;; Apply text-scale-adjust for all buffer
-(defadvice text-scale-increase (around all-buffers (arg) activate)
-  "Text scale adjust for all buffer."
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      ad-do-it)))
+(defun ramsay-text-scale-increase-all-buffers (orig-fun &rest args)
+  "Apply text scale increase to all buffers."
+  (let ((arg (car args)))
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (apply orig-fun arg)))))
+
+(advice-add 'text-scale-increase :around #'ramsay-text-scale-increase-all-buffers)
 
 (defun ramsay/set-font-at-time ()
   "Set font with `run-at-time`."
@@ -157,11 +160,17 @@
 (setq visible-bell t)
 
 ;;; Disable theme before load a new theme
-(defadvice load-theme
-    (before theme-dont-propagate activate)
-  "Disable theme before load theme."
-  (mapc #'disable-theme custom-enabled-themes))
+(defun ramsay-disable-themes-before-load (orig-fun &rest args)
+  "Disable all themes before loading a new theme."
+  (mapc #'disable-theme custom-enabled-themes)
+  (apply orig-fun args))
 
+(advice-add 'load-theme :around #'ramsay-disable-themes-before-load)
+
+(use-package modus-themes
+  :ensure t
+  :demand t
+  :if (< emacs-major-version 28))
 (load-theme 'modus-operandi t)
 
 ;;; customize default mode line

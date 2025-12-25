@@ -27,13 +27,17 @@
 (require 'server)
 (unless (server-running-p) (server-start))
 
-(defadvice bookmark-jump (after bookmark-jump activate)
-  "Find frequently used bookmarks easily."
-  (let ((latest (bookmark-get-bookmark bookmark)))
-    (setq bookmark-alist (delq latest bookmark-alist))
-    (add-to-list 'bookmark-alist latest)))
+(defun ramsay-bookmark-jump-recent (orig-fun &rest args)
+  "Ensure bookmark-jump moves the jumped bookmark to the end of the list."
+  (let ((result (apply orig-fun args)))
+    (let ((latest (bookmark-get-bookmark bookmark)))
+      (setq bookmark-alist (delq latest bookmark-alist))
+      (add-to-list 'bookmark-alist latest))
+    result))
 
-;;; disable `ad-handle-definition: ‘bookmark-jump’ got redefined` warning.
+(advice-add 'bookmark-jump :around #'ramsay-bookmark-jump-recent)
+
+;;; disable `ad-handle-definition: 'bookmark-jump' got redefined` warning.
 (setq ad-redefinition-action 'accept)
 
 (defun ramsay/kill-other-buffers ()
