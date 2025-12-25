@@ -12,31 +12,30 @@
 ;; of annoying buffers such like *Help*, *Completions*, *compilation*, and etc.
 (use-package popwin
   :ensure t
-  :config (progn
-	    (popwin-mode t)
-	    (push '(compilation-mode :noselect t) popwin:special-display-config)
-	    ;; (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
-	    (push "*slime-apropos*" popwin:special-display-config)
-	    (push "*slime-macroexpansion*" popwin:special-display-config)
-	    (push "*slime-description*" popwin:special-display-config)
-	    (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
-	    (push "*slime-xref*" popwin:special-display-config)
-	    (push '(sldb-mode :stick t) popwin:special-display-config)
-	    (push 'slime-repl-mode popwin:special-display-config)
-	    (push 'slime-connection-list-mode popwin:special-display-config)
-	    (push "*vc-diff*" popwin:special-display-config)
-	    (push "*vc-change-log*" popwin:special-display-config)
-	    (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config)
-	    ))
+  :config
+  (popwin-mode t)
+  (push '(compilation-mode :noselect t) popwin:special-display-config)
+  (push '(" *undo-tree*" :width 0.3 :position right) popwin:special-display-config)
+  (push "*slime-apropos*" popwin:special-display-config)
+  (push "*slime-macroexpansion*" popwin:special-display-config)
+  (push "*slime-description*" popwin:special-display-config)
+  (push '("*slime-compilation*" :noselect t) popwin:special-display-config)
+  (push "*slime-xref*" popwin:special-display-config)
+  (push '(sldb-mode :stick t) popwin:special-display-config)
+  (push 'slime-repl-mode popwin:special-display-config)
+  (push 'slime-connection-list-mode popwin:special-display-config)
+  (push "*vc-diff*" popwin:special-display-config)
+  (push "*vc-change-log*" popwin:special-display-config)
+  (push '("*Help*" :position bottom :stick t :height 0.5) popwin:special-display-config))
 
 (use-package writeroom-mode
   :hook (emacs-startup . global-writeroom-mode)
   :ensure t
   :config
   (setq writeroom-width 128
-	writeroom-maximize-window nil
-	writeroom-fullscreen-effect 'maximized
-	writeroom-major-modes '(org-mode markdown-mode))
+	    writeroom-maximize-window nil
+	    writeroom-fullscreen-effect 'maximized
+	    writeroom-major-modes '(org-mode markdown-mode))
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
   )
 
@@ -56,7 +55,7 @@
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     (setq ns-use-proxy-icon nil)
     (setq frame-title-format nil)
-;;; Disable mouse scrolling
+    ;; Disable mouse scrolling
     (mouse-wheel-mode -1)
     ))
 (ramsay/hide-bar)
@@ -72,12 +71,12 @@
        (frame-parameter nil 'font)
        charset
        (font-spec :name "-WQYF-WenQuanYi Micro Hei-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-		  :weight 'normal
-		  :slant 'normal
-		  :height arg)))))
+		          :weight 'normal
+		          :slant 'normal
+		          :height arg)))))
 
 (add-to-list 'default-frame-alist
-	     '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-19-*-*-*-m-0-iso10646-1"))
+	         '(font . "-PfEd-Fantasque Sans Mono-regular-normal-normal-*-19-*-*-*-m-0-iso10646-1"))
 
 ;;; Apply text-scale-adjust for all buffer
 (defadvice text-scale-increase (around all-buffers (arg) activate)

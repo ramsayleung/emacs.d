@@ -39,7 +39,6 @@
 				"j l" 'avy-goto-line
 				"j j" 'avy-goto-char
 				"j w" 'avy-goto-word-1
-				"k" #'hydra-flymake/body
 				"m" '(:ignore t :which-key "major-mode-cmd")
 				"p" '(:ignore t :which-key "projects")
 				"p f" 'project-find-file
@@ -186,27 +185,7 @@
 	      ("y"  flycheck-copy-errors-as-kill                              "Yank/Copy")
 	      ("gg" flycheck-first-error                                      "First")
 	      ("G"  (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
-	      ("q"  nil))
-
-	    (defhydra hydra-flymake
-	      (:pre (progn (setq hydra-hint-display-type 'lv) (flymake-show-buffer-diagnostics))
-		    :post (progn
-			    (setq hydra-hint-display-type 'lv)
-			    (dolist (window (window-list))
-			      (let ((buffer (window-buffer window)))
-				(when (string-prefix-p "*Flymake" (buffer-name buffer))
-				  (quit-window nil window)))))		    :hint nil)
-	      "errors"
-	      ("j"  flymake-goto-next-error                                       "Next")
-	      ("k"  flymake-goto-prev-error                                   "Previous")
-	      ("q"  nil))
-
-	    (defhydra hydra-font-resize
-	      (global-map "C-M-=")
-	      "font-resize"
-	      ("-"   ramsay/font-size-decr  "Decrease")
-	      ("="   ramsay/font-size-incr  "Increase")
-	      ("0"   ramsay/font-size-reset "Reset to default size"))
+	      ("q"  nil)) 
 
 	    (defhydra hydra-smerge (:color red :hint nil)
 	      "
