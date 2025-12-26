@@ -2,11 +2,6 @@
 ;;; code:
 ;;; Commentary:
 
-(use-package ace-window
-  :ensure t
-  :commands (ace-window)
-  )
-
 (use-package wgrep
   :ensure t)
 
