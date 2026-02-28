@@ -218,16 +218,11 @@
     (interactive)
     (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-github.sh" (buffer-file-name) "github"))
 
-  (defun ramsay/hugo2md-gitea ()
-    "Replace image link to refer to gitea repository."
-    (interactive)
-    (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-gitea.sh" (buffer-file-name) "gitea"))
-
   (defun ramsay/org-hugo-export-to-std-md (orig-fun &rest args)
     "Generate standard markdown file base on the exported hugo markdown."
     (let ((res (apply orig-fun args)))
       (message "Generate the standard markdown from %S" res)
-      (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-gitea.sh" res "gitea")
+      (ramsay/hugo2md-base "~/btsync/tools/hugomd2md-github.sh" res "github")
       res))
 
   (advice-add 'org-hugo-export-to-md :around #'ramsay/org-hugo-export-to-std-md)
